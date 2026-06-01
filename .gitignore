@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 server.log
+# Dev ground-truth cache + logs (the distilled table lectionary_data.json is committed)
+dev/reference_data/
+dev/*.log
