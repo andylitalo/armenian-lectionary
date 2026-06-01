@@ -1,0 +1,22 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 883-927-024
+127.0.0.1 - - [31/May/2026 20:28:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [31/May/2026 20:28:47] "GET /readings?date=2026-04-05 HTTP/1.1" 200 -
+127.0.0.1 - - [31/May/2026 20:28:47] "GET /readings?date=2026-02-16 HTTP/1.1" 200 -
+127.0.0.1 - - [31/May/2026 20:28:47] "GET /readings?date=2026-05-01 HTTP/1.1" 200 -
+127.0.0.1 - - [31/May/2026 20:28:47] "GET /readings?date=2026-01-06 HTTP/1.1" 200 -
+127.0.0.1 - - [31/May/2026 20:28:47] "GET /readings?date=2026-06-01 HTTP/1.1" 200 -
+127.0.0.1 - - [31/May/2026 20:28:47] "[31m[1mGET /readings?date=banana HTTP/1.1[0m" 400 -
+127.0.0.1 - - [31/May/2026 20:28:47] "GET /readings HTTP/1.1" 200 -
+127.0.0.1 - - [31/May/2026 20:28:47] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/andylitalo/church/armenian_lectionary/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 883-927-024
+127.0.0.1 - - [31/May/2026 20:28:59] "GET /readings?date=2026-04-05 HTTP/1.1" 200 -
