@@ -73,12 +73,138 @@ def anchors(year: int) -> dict:
     }
 
 
+# --------------------------------------------------------------------------- #
+# Winter-hinge scheduler (Advent -> Nativity/Theophany -> pre-Lent)
+#
+# The winter ferial zone resisted the plain day-offset keying because saints are
+# laid onto the free Mon/Tue/Thu/Sat weekdays in a fixed order and a single
+# merge/drop shifts every downstream day. The fix is to give each winter day a
+# *stable grid coordinate* (window, week-relative-to-a-governing-feast, weekday)
+# plus forward/backward fast-track and numbered-Sunday coordinates. The same
+# saint then lands on the same key every year; the dev build/validate pipeline
+# strictly keeps only coordinates whose readings agree across all years.
+# --------------------------------------------------------------------------- #
+
+_WD = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+_SAINT_WD = (0, 1, 3, 5)   # Mon, Tue, Thu, Sat carry saints; Wed/Fri/Sun do not
+
+# Embedded fixed-date Marian feasts that float across the winter weekdays. Their
+# readings entangle with whatever ferial/Sunday slot they land on (so they can't
+# be shipped as a clean civil feast), but they MUST be excluded from the grid so
+# they don't pollute the fast/saint slots they happen to overlap.
+_EMBEDDED_FIXED = {(11, 21), (12, 9)}   # Presentation of Mary; Conception of Mary
+
+
+def _next_saint_weekday(d):
+    """First day on/after d whose weekday carries saints (Mon/Tue/Thu/Sat)."""
+    while d.weekday() not in _SAINT_WD:
+        d += datetime.timedelta(days=1)
+    return d
+
+
+def winter_window(year: int) -> dict:
+    """The two winter ferial windows (start, end inclusive) for a civil year.
+
+    - Advent:        day after this year's Heesnak Sunday (late Nov) .. Jan 5 of
+                     the *next* year (the eve of Theophany).
+    - Post-Nativity: Jan 14 (day after the octave) .. the Sunday that is the eve
+                     of the Fast of Catechumens (= Easter - 70 days).
+    """
+    he = sunday_closest_to(year, 11, 18)
+    return {
+        "ADV": (he + datetime.timedelta(days=1), datetime.date(year + 1, 1, 5)),
+        "PN": (datetime.date(year, 1, 14),
+               calculate_gregorian_easter(year) - datetime.timedelta(days=70)),
+    }
+
+
+def _count_wf(after: datetime.date, upto: datetime.date) -> int:
+    """Number of Wed/Fri days in (after, upto] (ordinal in the ferial track)."""
+    n = 0
+    d = after + datetime.timedelta(days=1)
+    while d <= upto:
+        if d.weekday() in (2, 4):
+            n += 1
+        d += datetime.timedelta(days=1)
+    return n
+
+
+def _advent_slot(d, he, out):
+    """Stable winter coordinates for an Advent day (he < d <= Jan 5)."""
+    wd = d.weekday()
+    days_from_he = (d - he).days          # >= 1
+    week = days_from_he // 7              # week 0 == the opening Fast-of-Advent week
+    nat = datetime.date(he.year + 1, 1, 6)
+    if wd == 6:                           # numbered Sunday of Advent
+        out["AdvSun"] = str(days_from_he // 7)
+        return
+    if week == 0 and wd in (0, 1, 2, 3, 4):   # opening Fast of Advent (Mon-Fri)
+        out["AoF"] = str(days_from_he)
+        return
+    if wd in (2, 4):                      # ferial Wed/Fri fast (lectio continua)
+        s1 = he + datetime.timedelta(days=7)   # 1st Sunday of Advent
+        out["AdvFer"] = str(_count_wf(s1, d))
+        return
+    # saint weekday (Mon/Tue/Thu/Sat): forward grid + backward grid
+    out["AdvSat"] = f"{week}:{_WD[wd]}"
+    out["AdvSatB"] = f"{(nat - d).days // 7}:{_WD[wd]}"
+
+
+def _postnat_slot(d, start, end, out):
+    """Stable winter coordinates for a post-Nativity day (Jan 14 .. eve of Fast)."""
+    wd = d.weekday()
+    nsun = sum(1 for k in range((d - start).days + 1)
+               if (start + datetime.timedelta(days=k)).weekday() == 6)
+    # John the Forerunner: Jan 14, transferred to the next saint weekday when
+    # Jan 14 is penitential (Wed/Fri) or a Sunday.
+    john = _next_saint_weekday(datetime.date(d.year, 1, 14))
+    if d == john:
+        out["PnJohn"] = "John"
+        return
+    if wd == 6:
+        if d == end:
+            out["PnEve"] = "0"            # eve of Fast of Catechumens (backward)
+        else:
+            out["PnSun"] = str(nsun)      # numbered Sunday after Nativity
+        return
+    if wd in (2, 4):                      # ferial Wed/Fri
+        out["PnFer"] = f"{nsun}:{_WD[wd]}"
+        return
+    # saint weekday: forward grid (week-from-Nativity). The post-Nativity window
+    # length swings from 1 to 4 weeks, so a backward saint grid never stabilises;
+    # only the forward grid is registered here.
+    out["PnSat"] = f"{nsun}:{_WD[wd]}"
+
+
+def winter_coords(d: datetime.date) -> dict:
+    """Winter-zone slot coordinates for a date (empty if outside both windows)."""
+    out = {}
+    if (d.month, d.day) in _EMBEDDED_FIXED:
+        return out                        # don't let floating feasts pollute the grid
+    # Advent: a January 1-5 date belongs to the *previous* civil year's Advent.
+    for y in (d.year, d.year - 1):
+        adv_start, adv_end = winter_window(y)["ADV"]
+        if adv_start <= d <= adv_end:
+            _advent_slot(d, adv_start - datetime.timedelta(days=1), out)
+            break
+    # Post-Nativity (Jan 14 .. eve of Fast of Catechumens).
+    start, end = winter_window(d.year)["PN"]
+    if start <= d <= end:
+        _postnat_slot(d, start, end, out)
+    return out
+
+
+# Winter keyspaces, most specific first (forward grids before backward grids).
+WINTER_KS = ["PnJohn", "PnEve", "AdvSun", "PnSun", "AoF", "AdvFer", "PnFer",
+             "AdvSat", "PnSat", "AdvSatB"]
+
+
 def coords_for(d: datetime.date) -> dict:
     """All candidate (keyspace -> key) liturgical coordinates for a date."""
     y = d.year
     a = anchors(y)
     a_prev = anchors(y - 1)
-    return {
+    cs = {
         "C": (d.month, d.day),                  # civil date (immovable feasts)
         "E": (d - a["E"]).days,                 # Easter-anchored core
         "AS": (d - a["AS"]).days,               # Assumption period
@@ -88,10 +214,14 @@ def coords_for(d: datetime.date) -> dict:
         "TH": (d - a["TH"]).days,               # weeks after Nativity
         "THp": (d - a_prev["TH"]).days,
     }
+    cs.update(winter_coords(d))                 # winter grid slots (string keys)
+    return cs
 
 
 # Date windows (days relative to anchor) where each keyspace may apply, to keep
-# far-away dates from matching an anchor by coincidence.
+# far-away dates from matching an anchor by coincidence. Winter keyspaces use
+# string grid keys and are self-guarded (only emitted inside their window), so
+# they carry no numeric guard (None).
 WINDOWS = {
     "C": None,
     "E": (-72, 116),
@@ -102,10 +232,15 @@ WINDOWS = {
     "TH": (-46, 40),
     "THp": (320, 380),
 }
+WINDOWS.update({ks: None for ks in WINTER_KS})
 
 # Resolution precedence (first match wins): immovable feasts, then the
-# solar/Easter anchored cycles, then the Theophany-season counts.
-PRECEDENCE = ["C", "AS", "EX", "E", "HE", "HEp", "TH", "THp"]
+# solar/Easter anchored cycles, then the winter grid slots, then the generic
+# Theophany/Heesnak season counts.
+PRECEDENCE = ["C", "AS", "EX", "E"] + WINTER_KS + ["HE", "HEp", "TH", "THp"]
+
+# Keyspaces whose keys are integers (day-offsets); all others are string keys.
+INT_KEYSPACES = {"E", "AS", "EX", "HE", "HEp", "TH", "THp"}
 
 # Human-readable season label per keyspace, refined by offset for the Easter core.
 _KS_SEASON = {
@@ -116,6 +251,18 @@ _KS_SEASON = {
     "HEp": "Advent (Heesnak)",
     "TH": "Season after Nativity",
     "THp": "Advent / Nativity Fast",
+    # Winter grid slots:
+    "AdvSun": "Advent (Heesnak)",
+    "AoF": "Fast of Advent",
+    "AdvFer": "Advent (Heesnak)",
+    "AdvSat": "Advent (Heesnak)",
+    "AdvSatB": "Advent (Heesnak)",
+    "PnJohn": "Season after Nativity",
+    "PnEve": "Eve of the Fast of Catechumens",
+    "PnSun": "Season after Nativity",
+    "PnFer": "Season after Nativity",
+    "PnSat": "Season after Nativity",
+    "PnSatB": "Season after Nativity",
 }
 
 
@@ -154,13 +301,14 @@ def _load_table():
     except FileNotFoundError:
         return {}
     tables = raw.get("tables", {})
-    # JSON object keys are strings; integer-keyed keyspaces need int keys.
+    # JSON object keys are strings; integer-keyed keyspaces need int keys, while
+    # civil-date and winter-grid keyspaces stay string-keyed.
     out = {}
     for ks, entries in tables.items():
-        if ks == "C":
-            out[ks] = entries
-        else:
+        if ks in INT_KEYSPACES:
             out[ks] = {int(k): v for k, v in entries.items()}
+        else:
+            out[ks] = entries
     return out
 
 
@@ -176,6 +324,8 @@ def _lookup(d: datetime.date):
             m, dd = cs["C"]
             key = f"{m:02d}-{dd:02d}"
         else:
+            if ks not in cs:           # winter keyspace not applicable to this date
+                continue
             key = cs[ks]
             win = WINDOWS[ks]
             if win is not None and not (win[0] <= key <= win[1]):
@@ -248,12 +398,15 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
     # Fallback: no validated entry (chiefly the winter hinge). Name the season
     # algorithmically and flag the readings as not-yet-modeled.
     cs = coords_for(target_date)
-    # Pick an in-window keyspace for a season label (post-Nativity before the
-    # previous year's Advent, so January reads as "after Nativity").
+    # Pick an in-window keyspace for a season label. Winter grid slots come first
+    # (they carry the right Advent / after-Nativity label even when their
+    # readings are withheld), then the Easter core, then the season counts.
     season = "Ordinary Time"
-    for kspace in ["E", "AS", "EX", "TH", "HE", "HEp", "THp"]:
+    for kspace in WINTER_KS + ["E", "AS", "EX", "TH", "HE", "HEp", "THp"]:
+        if kspace not in cs:
+            continue
         win = WINDOWS[kspace]
-        if win is not None and win[0] <= cs[kspace] <= win[1]:
+        if win is None or win[0] <= cs[kspace] <= win[1]:
             season = season_for(kspace, cs[kspace])
             break
     return {

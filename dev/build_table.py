@@ -81,6 +81,8 @@ def build(days):
             continue  # claimed by an immovable feast
         cs = coords_for(d)
         for ks in anchored:
+            if ks not in cs:        # winter keyspace not applicable to this date
+                continue
             key = cs[ks]
             win = WINDOWS[ks]
             if win is not None and not (win[0] <= key <= win[1]):
@@ -118,6 +120,8 @@ def lookup(d, tables):
             m, dd = cs["C"]
             key = f"{m:02d}-{dd:02d}"
         else:
+            if ks not in cs:
+                continue
             key = cs[ks]
             win = WINDOWS[ks]
             if win is not None and not (win[0] <= key <= win[1]):

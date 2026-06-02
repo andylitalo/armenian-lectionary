@@ -1,15 +1,20 @@
-"""DEV-ONLY: reverse-engineer & validate the post-Nativity slot-consumption model.
+"""DEV-ONLY: winter-hinge slot extractor & miss-diagnostic.
 
-Mechanism (see memory lectionary-winter-mechanism): in the window from the day
-after the Nativity octave (Jan 14) up to where the Easter-anchored Fast of
-Catechumens takes over (~Easter-70), days are filled as:
-  - Sunday            -> "Nth Sunday after Nativity"  (numbered track)
-  - Wednesday/Friday  -> "Fast day"                   (ferial fast track)
-  - Mon/Tue/Thu/Sat   -> next entry of an ordered saint list
+The winter ferial zone (Advent -> Nativity/Theophany -> pre-Lent) is keyed by a
+stable grid coordinate produced by the runtime scheduler in lectionary.py
+(winter_coords): numbered Sundays, forward/backward fast tracks, and a
+(week, weekday) saint grid. The dev build pipeline keeps only the coordinates
+whose readings agree across every supporting year; the rest stay "unavailable".
 
-This script extracts the ordered saint list and the numbered-Sunday readings
-from the years with the longest windows, then validates the consumption model
-(saints + Sundays) against every year, reporting match accuracy.
+This tool bins every historical winter day by its winter coordinate and reports,
+per keyspace, which slots are cross-year consistent (would be shipped) and which
+are dropped -- and for the dropped ones, the disagreeing occupants -- so the
+scheduler's merge/anchor/exclusion rules can be refined.
+
+Usage:
+  python dev/slot_model.py            # summary table of kept/dropped per keyspace
+  python dev/slot_model.py AdvSat     # detail the dropped buckets of one keyspace
+  python dev/slot_model.py all        # detail every dropped bucket
 """
 
 import collections
@@ -19,96 +24,73 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
-from lectionary import calculate_gregorian_easter  # noqa: E402
-
-SAINT_WEEKDAYS = {0, 1, 3, 5}   # Mon, Tue, Thu, Sat
-FAST_WEEKDAYS = {2, 4}          # Wed, Fri
+from lectionary import winter_coords, WINTER_KS  # noqa: E402
 
 
-def window(year):
-    """[start, end) of the post-Nativity ferial window for a civil year."""
-    start = datetime.date(year, 1, 14)          # day after the Nativity octave
-    end = calculate_gregorian_easter(year) + datetime.timedelta(days=-70)
-    return start, end
+def _fixed_dates(days):
+    """The civil (month,day) immovable feasts that build() claims (and so removes
+    from the winter buckets); mirror that here for an accurate diagnostic."""
+    import json
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                        "lectionary_data.json")
+    with open(path, encoding="utf-8") as f:
+        civ = json.load(f)["tables"]["C"]
+    return {(int(k[:2]), int(k[3:])) for k in civ}
 
 
-def walk(days, year):
-    """Yield (date, slot_kind, sunday_index, readings, feast) over the window."""
-    start, end = window(year)
-    d = start
-    sun = 0
-    while d < end:
-        day = days.get(d.isoformat())
-        wd = d.weekday()
-        if wd == 6:
-            sun += 1
-            kind = ("SUN", sun)
-        elif wd in FAST_WEEKDAYS:
-            kind = ("FAST", None)
-        else:
-            kind = ("SAINT", None)
-        if day and (day["readings"] or day["feast"]):
-            yield d, kind, day
-        d += datetime.timedelta(days=1)
+def bin_winter(days):
+    """keyspace -> {key -> list[(iso, feast, readings_tuple)]} over winter days."""
+    fixed = _fixed_dates(days)
+    bins = {ks: collections.defaultdict(list) for ks in WINTER_KS}
+    for iso, day in days.items():
+        if not (day["readings"] or day["feast"]):
+            continue
+        d = datetime.date.fromisoformat(iso)
+        if (d.month, d.day) in fixed:        # claimed by an immovable feast
+            continue
+        for ks, key in winter_coords(d).items():
+            bins[ks][key].append((iso, day["feast"].strip()[:34],
+                                  tuple(day["readings"])))
+    return bins
 
 
-def extract(days, years):
-    """Build ordered saint list and numbered-Sunday table from given years."""
-    # saint list: take the longest year's ordered saints.
-    best_saints = []
-    sundays = {}
-    for year in years:
-        saints = []
-        for d, (kind, idx), day in walk(days, year):
-            if kind == "SAINT":
-                saints.append((day["feast"].strip(), tuple(day["readings"])))
-            elif kind == "SUN":
-                sundays.setdefault(idx, (day["feast"].strip(),
-                                         tuple(day["readings"])))
-        if len(saints) > len(best_saints):
-            best_saints = saints
-    return best_saints, sundays
-
-
-def validate(days, years, saints, sundays):
-    ok = miss = 0
-    miss_kind = collections.Counter()
-    samples = []
-    for year in years:
-        si = 0
-        for d, (kind, idx), day in walk(days, year):
-            truth = tuple(day["readings"])
-            if kind == "SAINT":
-                pred = saints[si][1] if si < len(saints) else None
-                si += 1
-            elif kind == "SUN":
-                pred = sundays.get(idx, (None, None))[1]
-            else:  # FAST -- not modeled here
-                continue
-            if pred == truth:
-                ok += 1
+def summary(bins):
+    print(f"{'keyspace':9} {'kept':>5} {'dropped':>8} {'days_kept':>10}")
+    tot_kept = tot_days = 0
+    for ks in WINTER_KS:
+        kept = dropped = days_kept = 0
+        for key, items in bins[ks].items():
+            sigs = {r for _, _, r in items}
+            years = {iso[:4] for iso, _, _ in items}
+            if len(sigs) == 1 and len(years) >= 2:
+                kept += 1
+                days_kept += len(items)
             else:
-                miss += 1
-                miss_kind[kind[0]] += 1
-                if len(samples) < 20:
-                    samples.append((d.isoformat(), kind, day["feast"][:30],
-                                    pred, truth))
-    return ok, miss, miss_kind, samples
+                dropped += 1
+        tot_kept += kept
+        tot_days += days_kept
+        print(f"{ks:9} {kept:5} {dropped:8} {days_kept:10}")
+    print(f"{'TOTAL':9} {tot_kept:5} {'':8} {tot_days:10}")
+
+
+def detail(bins, which):
+    for ks in WINTER_KS:
+        if which != "all" and ks != which:
+            continue
+        print(f"\n=== {ks}: dropped buckets ===")
+        for key in sorted(bins[ks]):
+            items = bins[ks][key]
+            sigs = {r for _, _, r in items}
+            if len(sigs) == 1:
+                continue
+            print(f"  key={key!r}  ({len(items)} days, {len(sigs)} distinct)")
+            for iso, feast, r in sorted(items):
+                print(f"      {iso} {feast:34} :: {list(r)[:2]}")
 
 
 if __name__ == "__main__":
     days = load_all()
-    years = list(range(2014, 2027))
-    saints, sundays = extract(days, years)
-    print(f"Ordered saint list length: {len(saints)}")
-    for i, (f, r) in enumerate(saints):
-        print(f"  {i:2} {f[:42]:42} {list(r)}")
-    print(f"\nNumbered Sundays after Nativity: {sorted(sundays)}")
-    for n in sorted(sundays):
-        print(f"  Sun {n}: {sundays[n][0][:40]} {list(sundays[n][1])}")
-    ok, miss, mk, samples = validate(days, years, saints, sundays)
-    tot = ok + miss
-    print(f"\nConsumption model (saints+Sundays) over {tot} days: "
-          f"{ok} ok ({ok/tot*100:.1f}%), {miss} miss {dict(mk)}")
-    for s in samples:
-        print(f"  MISS {s[0]} {s[1]} {s[2]}\n     pred={s[3]}\n     true={s[4]}")
+    bins = bin_winter(days)
+    summary(bins)
+    if len(sys.argv) > 1:
+        detail(bins, sys.argv[1])
