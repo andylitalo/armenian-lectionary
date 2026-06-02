@@ -23,8 +23,9 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
-# Reuse the runtime calendar math so the table is keyed exactly as the app reads it.
-from lectionary import coords_for, WINDOWS, PRECEDENCE  # noqa: E402
+# Reuse the runtime calendar math (and key-resolution) so the table is built and
+# keyed exactly as the app reads it.
+from lectionary import coords_for, WINDOWS, PRECEDENCE, _lookup  # noqa: E402
 
 
 def rsig(day):
@@ -37,6 +38,13 @@ def modal_feast(items):
     """Most common feast label among items (list of (year, day))."""
     c = collections.Counter(day["feast"].strip() for _, day in items)
     return c.most_common(1)[0][0]
+
+
+def _consistent(items, min_years):
+    """True if all years agree on the readings and >= min_years support it."""
+    sigs = {rsig(day) for _, day in items}
+    years = {yr for yr, _ in items}
+    return len(sigs) == 1 and len(years) >= min_years
 
 
 CIVIL_MIN_YEARS = 5  # support needed to declare a civil date an immovable feast
@@ -61,14 +69,12 @@ def build(days):
     civil_table = {}
     fixed_dates = set()  # (month,day) that are immovable feasts
     for md, items in civ.items():
-        sigs = {rsig(day) for _, day in items}
-        years = {yr for yr, _ in items}
-        if len(sigs) == 1 and len(years) >= CIVIL_MIN_YEARS:
+        if _consistent(items, CIVIL_MIN_YEARS):
             day0 = items[0][1]
             civil_table[md] = {
                 "feast": modal_feast(items),
                 "readings": list(day0["readings"]),
-                "support_years": sorted(years),
+                "support_years": sorted({yr for yr, _ in items}),
             }
             fixed_dates.add(md)
 
@@ -95,41 +101,18 @@ def build(days):
         kept = dropped = 0
         tables[ks] = {}
         for key, items in buckets[ks].items():
-            sigs = {rsig(day) for _, day in items}
-            years = {yr for yr, _ in items}
-            if len(sigs) == 1 and len(years) >= 2:
+            if _consistent(items, 2):
                 day0 = items[0][1]
                 tables[ks][key] = {
                     "feast": modal_feast(items),
                     "readings": list(day0["readings"]),
-                    "support_years": sorted(years),
+                    "support_years": sorted({yr for yr, _ in items}),
                 }
                 kept += 1
             else:
                 dropped += 1
         stats[ks] = (kept, dropped)
     return tables, stats
-
-
-def lookup(d, tables):
-    cs = coords_for(d)
-    for ks in PRECEDENCE:
-        if ks not in tables:
-            continue
-        if ks == "C":
-            m, dd = cs["C"]
-            key = f"{m:02d}-{dd:02d}"
-        else:
-            if ks not in cs:
-                continue
-            key = cs[ks]
-            win = WINDOWS[ks]
-            if win is not None and not (win[0] <= key <= win[1]):
-                continue
-        entry = tables[ks].get(key)
-        if entry:
-            return ks, key, entry
-    return None, None, None
 
 
 def validate(days, tables):
@@ -139,7 +122,7 @@ def validate(days, tables):
         if not day["readings"] and not day["feast"]:
             continue
         d = datetime.date.fromisoformat(iso)
-        ks, key, entry = lookup(d, tables)
+        ks, key, entry = _lookup(d, tables)
         if entry is None:
             nodata += 1
             misses.append((iso, "NO-ENTRY", day["feast"][:40], day["readings"]))

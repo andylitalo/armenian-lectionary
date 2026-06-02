@@ -13,7 +13,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from lectionary import calculate_gregorian_easter  # noqa: E402
+from lectionary import calculate_gregorian_easter, sunday_closest_to  # noqa: E402
 
 REF_DIR = os.path.join(os.path.dirname(__file__), "reference_data")
 
@@ -25,16 +25,6 @@ def load_all():
             d = json.load(f)
         days[d["date"]] = d
     return days
-
-
-def sunday_closest_to(year, month, day):
-    target = datetime.date(year, month, day)
-    for i in range(4):
-        if (target + datetime.timedelta(days=i)).weekday() == 6:
-            return target + datetime.timedelta(days=i)
-        if (target - datetime.timedelta(days=i)).weekday() == 6:
-            return target - datetime.timedelta(days=i)
-    return target
 
 
 def easter_offset(date_iso):

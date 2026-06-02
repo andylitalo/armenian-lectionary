@@ -262,7 +262,6 @@ _KS_SEASON = {
     "PnSun": "Season after Nativity",
     "PnFer": "Season after Nativity",
     "PnSat": "Season after Nativity",
-    "PnSatB": "Season after Nativity",
 }
 
 
@@ -315,10 +314,12 @@ def _load_table():
 _TABLES = _load_table()
 
 
-def _lookup(d: datetime.date):
+def _lookup(d: datetime.date, tables=None):
+    if tables is None:
+        tables = _TABLES
     cs = coords_for(d)
     for ks in PRECEDENCE:
-        if ks not in _TABLES:
+        if ks not in tables:
             continue
         if ks == "C":
             m, dd = cs["C"]
@@ -330,7 +331,7 @@ def _lookup(d: datetime.date):
             win = WINDOWS[ks]
             if win is not None and not (win[0] <= key <= win[1]):
                 continue
-        entry = _TABLES[ks].get(key)
+        entry = tables[ks].get(key)
         if entry:
             return ks, key, entry
     return None, None, None
