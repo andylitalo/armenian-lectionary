@@ -348,6 +348,12 @@ def _postnat_slot(d, start, end, out):
             out["PnSun"] = str(nsun)      # numbered Sunday after Nativity
         return
     if wd in (2, 4):                      # ferial Wed/Fri
+        # Forward Wed/Fri continua index from the window start: the post-Nativity
+        # Wed/Fri fast is a sequential Epistle+Gospel march (Hebrews/Luke) that
+        # advances per FAST-DAY, not per Sunday, so the count of preceding Wed/Fri
+        # days is the stable coordinate (mirrors AdvFer). Keying it by Sunday count
+        # (PnFer) instead splits the same continua reading across years.
+        out["PnFerF"] = f"{_count_wf(start - datetime.timedelta(days=1), d)}:{_WD[wd]}"
         out["PnFerL"] = f"{pn_len}:{nsun}:{_WD[wd]}"
         out["PnFerB"] = f"{back_week}:{_WD[wd]}"
         out["PnFer"] = f"{nsun}:{_WD[wd]}"
@@ -391,7 +397,7 @@ WINTER_KS = ["PnJohn", "PnEve",
              "AdvSunL", "AdvSunB", "AdvSun",
              "PnSunL", "PnSunB", "PnSun", "AoF",
              "AdvFerL", "AdvFerB", "AdvFer",
-             "PnFerL", "PnFerB", "PnFer",
+             "PnFerF", "PnFerL", "PnFerB", "PnFer",
              "AdvSatL", "AdvSatBL", "AdvSat", "AdvSatB",
              "PnSaint",
              "PnSatL", "PnSatBL", "PnSat", "PnSatB"]
@@ -711,6 +717,7 @@ _KS_SEASON = {
     "PnSunL": "Season after Nativity",
     "PnSunB": "Season after Nativity",
     "PnFer": "Season after Nativity",
+    "PnFerF": "Season after Nativity",
     "PnFerL": "Season after Nativity",
     "PnFerB": "Season after Nativity",
     "PnSat": "Season after Nativity",

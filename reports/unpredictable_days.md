@@ -21,6 +21,23 @@ post-Nativity saint-identity replay (`PnSaint`).
 > the Fast-of-Nativity tail continua (`HEp`): runtime **9 199 → 9 252 (+53 days),
 > 96.9 % → 97.4 %**, estimate **296 → 243**, still **0 wrong**.
 >
+> **Update (post-Nativity Wed/Fri continua `PnFerF` chunk):** the post-Nativity
+> Wed/Fri fast (Hebrews/Luke) is a continua that marches per *fast-day*, but was
+> keyed by Sunday count (`PnFer`), splitting one continua reading across years. Fix:
+> a forward Wed/Fri index `PnFerF = "{count of Wed/Fri since Jan 14}:{weekday}"`
+> (the coordinate `AdvFer` already uses). Runtime **9 252 → 9 271 (+19 days),
+> 97.4 % → 97.6 %**, estimate **243 → 224**, still **0 wrong**.
+>
+> **Note (taxonomy correction):** the `AS=−9…−14` block this report called "the
+> single largest deep continua" is in fact the **summer saint-weekdays** (Athenogenes,
+> Andrew, Triphon, Twelve Prophets…) caught by the higher-precedence `AS` keyspace —
+> a *saint* zone, not a continua. It and the autumn `ExSatL` block both suffer a
+> one-slot **saint phase-shift / merge** that NO forward/backward/length key resolves
+> (verified: forward & backward saint-ordinal and span-classed variants all recover 0);
+> they need the deferred **bidirectional saint merge-folding** engine. The clean
+> banding/continua fruit (`EB`, `HEB`/`HEpB`, `PnFerF`) is now harvested; the
+> remaining ~95 hinge-saint days are the genuine deep tail.
+>
 > The numbers in the body below describe the *pre-`EB`* state and are retained for
 > the taxonomy; the live counts are in these banners.
 

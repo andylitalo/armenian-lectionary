@@ -20,6 +20,7 @@
    "AdvFerL": 78,
    "AdvFerB": 2,
    "AdvFer": 9,
+   "PnFerF": 14,
    "PnFerL": 35,
    "PnFerB": 1,
    "PnFer": 2,
@@ -16225,6 +16226,106 @@
     "readings": [
      "St. Paul's First Epistle to the Thessalonians 2.1-12",
      "Luke 12.41-48"
+    ]
+   }
+  },
+  "PnFerF": {
+   "1:Wed": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 2.8-3.13",
+     "John 2.12-22"
+    ]
+   },
+   "5:Fri": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 3.1-7",
+     "John 6.64-71"
+    ]
+   },
+   "7:Wed": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 7.25-35",
+     "Matthew 19.13-26"
+    ]
+   },
+   "2:Fri": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "6:Wed": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.20-26",
+     "John 6.48-54"
+    ]
+   },
+   "5:Wed": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.20-26",
+     "John 6.48-54"
+    ]
+   },
+   "3:Wed": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 5.17-6.5",
+     "John 3.22-36"
+    ]
+   },
+   "8:Fri": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 11.1-16",
+     "Mark 1.35-45"
+    ]
+   },
+   "6:Fri": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 3.1-7",
+     "John 6.64-71"
+    ]
+   },
+   "3:Fri": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.3-14",
+     "John 5.31-47"
+    ]
+   },
+   "4:Fri": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.3-14",
+     "John 5.31-47"
+    ]
+   },
+   "4:Wed": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 5.17-6.5",
+     "John 3.22-36"
+    ]
+   },
+   "1:Fri": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "2:Wed": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 2.8-3.13",
+     "John 2.12-22"
     ]
    }
   },
