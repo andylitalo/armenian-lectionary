@@ -1,5 +1,41 @@
 # Winter-hinge progress & next steps (handoff)
 
+> ## UPDATE (session 2026-06b): post-Nativity saint-identity replay → 95.3% → 95.7%, still 0 wrong
+>
+> Built idea #3 below (the merge-replay engine) for the **post-Nativity** zone.
+> The grid key `PnSatL = "{pn_len}:{nsun}:{weekday}"` split one saint across many
+> keys because saints are laid onto free weekdays in a canonical *order*, so a
+> merge/drop drifts every downstream saint to a different weekday. Fix: key each
+> day by the **senior saint's identity** instead of its grid position.
+>
+> - **`dev/saint_schedule.py`** (NEW) mines every PN free saint-weekday, clusters
+>   by `readings_tuple` (readings = identity; 22 reading-sets vs noisy labels),
+>   derives order / anchor-class / solar-window, and emits **`dev/postnat_schedule.json`**
+>   (ordering / pins / aliases ONLY — never readings, which is what preserves the
+>   0-wrong guarantee; readings stay in `lectionary_data.json` under `PnSaint`,
+>   learned by the normal strict filter).
+> - **`lectionary.py:_postnat_saint_replay(year)`** (lru_cached, pure-calendar)
+>   lays the schedule onto the year's actual free weekdays in 3 passes and emits a
+>   `PnSaint` coordinate, registered in `WINTER_KS` **above** the grid keys (clean
+>   grid buckets still ship; any mis-key falls through → never wrong).
+> - Three robust anchor classes beat pure forward-laydown drift: **pin:Sat**
+>   (athanasius/gregory_theologian/gregory_illuminator locked to the Saturday in
+>   their solar window); **head** (peter→…→eugenios laid forward from the window
+>   start — stable because optional minor saints only appear after it); **tail**
+>   (maccabees-Mon/twelve_prophets-Tue/sophia-Thu laid backward as last-free-
+>   weekday, **gated on the last pin being placed** — the tail block co-occurs in
+>   exactly the same 9 long years as gregory_illuminator).
+> - Ships **9 identities** (140 days_kept). **3 ids correctly auto-drop** (strict
+>   filter; not calendar-separable): `athanasius` (the 150-Fathers council shares
+>   its Jan-24 Saturday in 2015/2026), `gregory_theologian` (Sahak shares its
+>   Saturday in 2004/2009), `eugenios` (2004 eugenia-solo + 2019 triphon-solo
+>   splits where eugenios is absent — needs bidirectional merge/split modeling).
+>
+> Net **+42 days** (449→407 estimate; Jan 141→108, Feb 109→100), 0 wrong. Floor
+> 95.1→95.6. **Deferred:** full merge-folding (recovers the 3 dropped ids),
+> Stage-3 Easter-anchored national-saints cohort, and the Advent analogue.
+> Inspect with `python dev/saint_schedule.py` and `python dev/slot_model.py PnSaint`.
+
 > ## UPDATE (session 2026-06): 80.0% → 95.3% exact-match, still 0 wrong
 >
 > Over an expanded **2001–2026** cache (9495 days; absolute coverage 3798 → 9046).

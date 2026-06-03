@@ -24,8 +24,9 @@ from dev.analyze import load_all  # noqa: E402
 from lectionary import compute_armenian_lectionary  # noqa: E402
 
 # Raised per chunk as coverage climbs toward 100%. Chunk 4 (length-classed
-# summer/autumn/post-Exaltation hinge grids) reaches 9046/9495 = 95.3%.
-COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "95.1"))
+# summer/autumn/post-Exaltation hinge grids) reached 9046/9495 = 95.3%; chunk 5
+# (post-Nativity saint-identity replay, PnSaint keyspace) reaches 9088/9495 = 95.7%.
+COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "95.6"))
 # Lower bound on processed reference days; guards against silent data loss.
 EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
 
