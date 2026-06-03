@@ -58,7 +58,9 @@
    "TrSatB": 1,
    "AsSatB": 5,
    "ExSatB": 4,
+   "HEB": 294,
    "HE": 29,
+   "HEpB": 89,
    "HEp": 8,
    "TH": 0,
    "THp": 0
@@ -25408,6 +25410,2399 @@
     ]
    }
   },
+  "HEB": {
+   "51:7": {
+    "feast": "First Sunday of Advent",
+    "readings": [
+     "Isaiah 36.1-9",
+     "St. Paul's First Epistle to the Thessalonians 1.1-10",
+     "Luke 12.13-31"
+    ]
+   },
+   "47:20": {
+    "feast": "Saint Nicolas Wonderworker the Bishop of Myra",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "John 10.11-16"
+    ]
+   },
+   "52:3": {
+    "feast": "Third day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.24-2.7",
+     "Luke 11.33-42"
+    ]
+   },
+   "49:35": {
+    "feast": "Fifth Sunday of Advent",
+    "readings": [
+     "Isaiah 40.18-31",
+     "St. Paul's Epistle to the Hebrews 4.16-5.10",
+     "Luke 18.9-14"
+    ]
+   },
+   "46:27": {
+    "feast": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+    "readings": [
+     "Wisdom 7.12-20",
+     "Isaiah 44.1-5",
+     "St. Paul's Epistle to the Hebrews 13.17-21",
+     "John 9.39-10.10"
+    ]
+   },
+   "52:25": {
+    "feast": "Fast daySaints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "readings": [
+     "Proverbs 1.2-9",
+     "Nahum 2.1-6",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Matthew 5.1-12"
+    ]
+   },
+   "49:5": {
+    "feast": "Fifth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 4.5-18",
+     "Luke 12.1-12"
+    ]
+   },
+   "50:44": {
+    "feast": "Second day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 10.1-18",
+     "Luke 20.9-18"
+    ]
+   },
+   "52:23": {
+    "feast": "Fast daySaints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 1.12-14",
+     "Mark 6.6-13"
+    ]
+   },
+   "52:17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.1-11",
+     "Luke 13.10-17"
+    ]
+   },
+   "48:19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.12-28",
+     "Luke 14.1-11"
+    ]
+   },
+   "50:13": {
+    "feast": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "St. Paul's First Epistle to the Corinthians 12.26-13.10",
+     "Matthew 9.35-10.7"
+    ]
+   },
+   "46:12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.17-19",
+     "Luke 12.49-59"
+    ]
+   },
+   "51:25": {
+    "feast": "Fast daySaints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "readings": [
+     "Proverbs 1.2-9",
+     "Nahum 2.1-6",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Matthew 5.1-12"
+    ]
+   },
+   "50:33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 3.12-4.10",
+     "Luke 18.1-8"
+    ]
+   },
+   "47:8": {
+    "feast": "Saint Virgins Juliana and Basilla",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 8.1-3"
+    ]
+   },
+   "52:13": {
+    "feast": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "St. Paul's First Epistle to the Corinthians 12.26-13.10",
+     "Matthew 9.35-10.7"
+    ]
+   },
+   "49:34": {
+    "feast": "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 4.2-6",
+     "St. Paul's Epistle to the Colossians 1.21-29",
+     "John 10.11-16"
+    ]
+   },
+   "51:27": {
+    "feast": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+    "readings": [
+     "Wisdom 7.12-20",
+     "Isaiah 44.1-5",
+     "St. Paul's Epistle to the Hebrews 13.17-21",
+     "John 9.39-10.10"
+    ]
+   },
+   "48:39": {
+    "feast": "Saint James the Apostle and His Brother John the Evangelist",
+    "readings": [
+     "Wisdom 7.21-24",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 12.1-11",
+     "St. James General Epistle 1.1-10",
+     "St. John's First Epistle General 1.1-7",
+     "John 21.20-25"
+    ]
+   },
+   "50:9": {
+    "feast": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+    "readings": [
+     "Wisdom 9.9-12",
+     "Isaiah 41.15-19",
+     "St. Paul's Second Epistle to the Corinthians 2.14-17",
+     "Luke 6.13-20"
+    ]
+   },
+   "51:1": {
+    "feast": "First day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.1-11",
+     "Luke 11.14-23"
+    ]
+   },
+   "46:24": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 2.1-17",
+     "Luke 14.25-27"
+    ]
+   },
+   "49:6": {
+    "feast": "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
+    "readings": [
+     "Wisdom 10.9-12",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 10.11-16"
+    ]
+   },
+   "51:21": {
+    "feast": "Third Sunday of AdventEve of Fast of Saint James the bishop of Nisibis",
+    "readings": [
+     "Isaiah 37.14-38",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 14.12-24"
+    ]
+   },
+   "51:19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.12-28",
+     "Luke 14.1-11"
+    ]
+   },
+   "47:16": {
+    "feast": "Saint Abgar the Witness and the First Christian King",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-3",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "52:21": {
+    "feast": "Third Sunday of AdventEve of Fast of Saint James the bishop of Nisibis",
+    "readings": [
+     "Isaiah 37.14-38",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 14.12-24"
+    ]
+   },
+   "50:29": {
+    "feast": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Jeremiah 6.16-21",
+     "St. Paul's First Epistle to the Corinthians 4.9-16",
+     "Mark 9.32-36"
+    ]
+   },
+   "51:39": {
+    "feast": "Saint Stephen the Proto-Deacon and the First Martyr",
+    "readings": [
+     "Acts of the Apostles 6.8-8.2",
+     "John 12.24-26"
+    ]
+   },
+   "50:40": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 6.9-7.10",
+     "Luke 19.1-10"
+    ]
+   },
+   "49:37": {
+    "feast": "Saint Stephen the Proto-Deacon and the First Martyr",
+    "readings": [
+     "Acts of the Apostles 6.8-8.2",
+     "John 12.24-26"
+    ]
+   },
+   "52:1": {
+    "feast": "First day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.1-11",
+     "Luke 11.14-23"
+    ]
+   },
+   "52:29": {
+    "feast": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Jeremiah 6.16-21",
+     "St. Paul's First Epistle to the Corinthians 4.9-16",
+     "Mark 9.32-36"
+    ]
+   },
+   "49:7": {
+    "feast": "First Sunday of Advent",
+    "readings": [
+     "Isaiah 36.1-9",
+     "St. Paul's First Epistle to the Thessalonians 1.1-10",
+     "Luke 12.13-31"
+    ]
+   },
+   "47:41": {
+    "feast": "Second day of the Fast of NativitySaints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 4.2-6",
+     "St. Paul's Epistle to the Colossians 1.21-29",
+     "John 10.11-16"
+    ]
+   },
+   "47:12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.17-19",
+     "Luke 12.49-59"
+    ]
+   },
+   "49:30": {
+    "feast": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+    "readings": [
+     "Proverbs 24.1-12",
+     "Jeremiah 15.19-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Matthew 10.26-33"
+    ]
+   },
+   "46:8": {
+    "feast": "The Holy Virgins Juliana and Basilla, and Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 8.1-3"
+    ]
+   },
+   "46:30": {
+    "feast": "Saint Abgar the Witness and the First Christian King",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-3",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "51:43": {
+    "feast": "Saint James the Apostle and His Brother John the EvangelistEve of Fast of Nativity",
+    "readings": [
+     "Wisdom 7.21-24",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 12.1-11",
+     "St. James General Epistle 1.1-10",
+     "St. John's First Epistle General 1.1-7",
+     "John 21.20-25"
+    ]
+   },
+   "48:23": {
+    "feast": "Fast daySaints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 1.12-14",
+     "Mark 6.6-13"
+    ]
+   },
+   "47:31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 2.1-10",
+     "Luke 17.11-19"
+    ]
+   },
+   "49:31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 2.1-10",
+     "Luke 17.11-19"
+    ]
+   },
+   "46:31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 2.1-10",
+     "Luke 17.11-19"
+    ]
+   },
+   "48:3": {
+    "feast": "Third day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.24-2.7",
+     "Luke 11.33-42"
+    ]
+   },
+   "49:1": {
+    "feast": "First day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.1-11",
+     "Luke 11.14-23"
+    ]
+   },
+   "48:22": {
+    "feast": "Fast daySaints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Philippians 1.27-2.4",
+     "Matthew 10.37-42"
+    ]
+   },
+   "51:3": {
+    "feast": "Third day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.24-2.7",
+     "Luke 11.33-42"
+    ]
+   },
+   "52:7": {
+    "feast": "First Sunday of Advent",
+    "readings": [
+     "Isaiah 36.1-9",
+     "St. Paul's First Epistle to the Thessalonians 1.1-10",
+     "Luke 12.13-31"
+    ]
+   },
+   "49:13": {
+    "feast": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "St. Paul's First Epistle to the Corinthians 12.26-13.10",
+     "Matthew 9.35-10.7"
+    ]
+   },
+   "48:18": {
+    "feast": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "48:35": {
+    "feast": "Fifth Sunday of Advent",
+    "readings": [
+     "Isaiah 41.4-14",
+     "St. Paul's Epistle to the Hebrews 7.11-25",
+     "Luke 19.12-28"
+    ]
+   },
+   "46:3": {
+    "feast": "Third day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.24-2.7",
+     "Luke 11.33-42"
+    ]
+   },
+   "49:29": {
+    "feast": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Jeremiah 6.16-21",
+     "St. Paul's First Epistle to the Corinthians 4.9-16",
+     "Mark 9.32-36"
+    ]
+   },
+   "52:39": {
+    "feast": "Saints David the Prophet-King and James the Apostle",
+    "readings": [
+     "2 Samuel 5.1-10",
+     "1 Kings 2.1-11",
+     "Ezekiel 34.20-27",
+     "St. James General Epistle 1.1-12",
+     "Matthew 22.41-46"
+    ]
+   },
+   "46:6": {
+    "feast": "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
+    "readings": [
+     "Wisdom 10.9-12",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 10.11-16"
+    ]
+   },
+   "47:24": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 2.1-17",
+     "Luke 14.25-27"
+    ]
+   },
+   "47:7": {
+    "feast": "First Sunday of Advent",
+    "readings": [
+     "Isaiah 36.1-9",
+     "St. Paul's First Epistle to the Thessalonians 1.1-10",
+     "Luke 12.13-31"
+    ]
+   },
+   "47:37": {
+    "feast": "Saints Peter and Paul the Apostles",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Isaiah 28.16-19",
+     "St. Peter's Second Epistle General 1.12-19",
+     "St. Paul's Second Epistle to Timothy 4.1-8",
+     "John 21.15-22"
+    ]
+   },
+   "48:15": {
+    "feast": "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles",
+    "readings": [
+     "Isaiah 35.4-8",
+     "St. Paul's Second Epistle to the Corinthians 3.18-4.6",
+     "Luke 21.12-19"
+    ]
+   },
+   "52:19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.12-28",
+     "Luke 14.1-11"
+    ]
+   },
+   "49:9": {
+    "feast": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+    "readings": [
+     "Wisdom 9.9-12",
+     "Isaiah 41.15-19",
+     "St. Paul's Second Epistle to the Corinthians 2.14-17",
+     "Luke 6.13-20"
+    ]
+   },
+   "51:41": {
+    "feast": "Saints Peter and Paul the Apostles",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Isaiah 28.16-19",
+     "St. Peter's Second Epistle General 1.12-19",
+     "St. Paul's Second Epistle to Timothy 4.1-8",
+     "John 21.15-22"
+    ]
+   },
+   "48:38": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 5.11-6.8",
+     "Luke 18.18-27"
+    ]
+   },
+   "46:23": {
+    "feast": "Fast daySaints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 1.12-14",
+     "Mark 6.6-13"
+    ]
+   },
+   "47:4": {
+    "feast": "Fourth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 3.16-4.4",
+     "Luke 11.49-54"
+    ]
+   },
+   "47:27": {
+    "feast": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+    "readings": [
+     "Wisdom 7.12-20",
+     "Isaiah 44.1-5",
+     "St. Paul's Epistle to the Hebrews 13.17-21",
+     "John 9.39-10.10"
+    ]
+   },
+   "46:26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 3.1-18",
+     "Luke 15.1-7"
+    ]
+   },
+   "52:9": {
+    "feast": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+    "readings": [
+     "Wisdom 9.9-12",
+     "Isaiah 41.15-19",
+     "St. Paul's Second Epistle to the Corinthians 2.14-17",
+     "Luke 6.13-20"
+    ]
+   },
+   "47:17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.1-11",
+     "Luke 13.10-17"
+    ]
+   },
+   "47:11": {
+    "feast": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Isaiah 66.18-21",
+     "St. Paul's Epistle to the Philippians 4.1-7",
+     "Luke 9.1-6"
+    ]
+   },
+   "46:10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.1-12",
+     "Luke 12.41-48"
+    ]
+   },
+   "47:21": {
+    "feast": "Third Sunday of AdventEve of Fast of Saint James the bishop of Nisibis",
+    "readings": [
+     "Isaiah 37.14-38",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 14.12-24"
+    ]
+   },
+   "47:32": {
+    "feast": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+    "readings": [
+     "Wisdom 3.1-8",
+     "Jeremiah 30.18-22",
+     "St. Peter's First Epistle General 4.12-19",
+     "John 15.17-25"
+    ]
+   },
+   "49:10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.1-12",
+     "Luke 12.41-48"
+    ]
+   },
+   "52:37": {
+    "feast": "Saint Theodoron the Martyr",
+    "readings": [
+     "Proverbs 10.1-6",
+     "Isaiah 56.3-7",
+     "St. Paul's Second Epistle to Timothy 2.3-10",
+     "Matthew 10.16-22"
+    ]
+   },
+   "46:28": {
+    "feast": "Fourth Sunday of Advent",
+    "readings": [
+     "Isaiah 38.1-8",
+     "St. Paul's Epistle to the Hebrews 1.1-14",
+     "Luke 17.1-10"
+    ]
+   },
+   "52:27": {
+    "feast": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+    "readings": [
+     "Wisdom 7.12-20",
+     "Isaiah 44.1-5",
+     "St. Paul's Epistle to the Hebrews 13.17-21",
+     "John 9.39-10.10"
+    ]
+   },
+   "49:33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 3.12-4.10",
+     "Luke 18.1-8"
+    ]
+   },
+   "49:11": {
+    "feast": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Isaiah 66.18-21",
+     "St. Paul's Epistle to the Philippians 4.1-7",
+     "Luke 9.1-6"
+    ]
+   },
+   "52:33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 3.12-4.10",
+     "Luke 18.1-8"
+    ]
+   },
+   "49:41": {
+    "feast": "Saint James the Apostle and His Brother John the EvangelistEve of Fast of Nativity",
+    "readings": [
+     "Wisdom 7.21-24",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 12.1-11",
+     "St. James General Epistle 1.1-10",
+     "St. John's First Epistle General 1.1-7",
+     "John 21.20-25"
+    ]
+   },
+   "51:45": {
+    "feast": "Second day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 10.1-18",
+     "Luke 20.9-18"
+    ]
+   },
+   "46:11": {
+    "feast": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Isaiah 66.18-21",
+     "St. Paul's Epistle to the Philippians 4.1-7",
+     "Luke 9.1-6"
+    ]
+   },
+   "48:42": {
+    "feast": "Sixth Sunday of Advent",
+    "readings": [
+     "Isaiah 51.15-52.3",
+     "St. Paul's Epistle to the Hebrews 13.18-25",
+     "Luke 22.24-30"
+    ]
+   },
+   "46:4": {
+    "feast": "Fourth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 3.16-4.4",
+     "Luke 11.49-54"
+    ]
+   },
+   "49:26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 3.1-18",
+     "Luke 15.1-7"
+    ]
+   },
+   "49:17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.1-11",
+     "Luke 13.10-17"
+    ]
+   },
+   "50:20": {
+    "feast": "Saint Nicolas Wonderworker the Bishop of Myra",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "John 10.11-16"
+    ]
+   },
+   "52:41": {
+    "feast": "Saint Stephen the Proto-Deacon and the First Martyr",
+    "readings": [
+     "Acts of the Apostles 6.8-8.2",
+     "John 12.24-26"
+    ]
+   },
+   "49:27": {
+    "feast": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+    "readings": [
+     "Wisdom 7.12-20",
+     "Isaiah 44.1-5",
+     "St. Paul's Epistle to the Hebrews 13.17-21",
+     "John 9.39-10.10"
+    ]
+   },
+   "47:36": {
+    "feast": "Saint Stephen the Proto-Deacon and the First Martyr",
+    "readings": [
+     "Acts of the Apostles 6.8-8.2",
+     "John 12.24-26"
+    ]
+   },
+   "50:0": {
+    "feast": "Tenth Sunday after the Holy CrossEve of the Fast of Advent",
+    "readings": [
+     "Isaiah 25.9-26.7",
+     "St. Paul's Epistle to the Philippians 1.1-11",
+     "Luke 9.44-50"
+    ]
+   },
+   "46:7": {
+    "feast": "First Sunday of Advent",
+    "readings": [
+     "Isaiah 36.1-9",
+     "St. Paul's First Epistle to the Thessalonians 1.1-10",
+     "Luke 12.13-31"
+    ]
+   },
+   "52:5": {
+    "feast": "Fifth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 4.5-18",
+     "Luke 12.1-12"
+    ]
+   },
+   "49:25": {
+    "feast": "Fast daySaints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "readings": [
+     "Proverbs 1.2-9",
+     "Nahum 2.1-6",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Matthew 5.1-12"
+    ]
+   },
+   "50:24": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 2.1-17",
+     "Luke 14.25-27"
+    ]
+   },
+   "52:43": {
+    "feast": "Saints Peter and Paul the Apostles",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Isaiah 28.16-19",
+     "St. Peter's Second Epistle General 1.12-19",
+     "St. Paul's Second Epistle to Timothy 4.1-8",
+     "John 21.15-22"
+    ]
+   },
+   "47:0": {
+    "feast": "Eleventh Sunday after the Holy CrossEve of Fast of Advent",
+    "readings": [
+     "Isaiah 29.11-20",
+     "St. Paul's Epistle to the Philippians 4.8-23",
+     "Luke 11.1-13"
+    ]
+   },
+   "49:15": {
+    "feast": "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles",
+    "readings": [
+     "Isaiah 35.4-8",
+     "St. Paul's Second Epistle to the Corinthians 3.18-4.6",
+     "Luke 21.12-19"
+    ]
+   },
+   "52:45": {
+    "feast": "First day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 7.26-8.13",
+     "Luke 20.1-8"
+    ]
+   },
+   "47:40": {
+    "feast": "First day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 13.10-16",
+     "Luke 21.34-38"
+    ]
+   },
+   "49:14": {
+    "feast": "Second Sunday of Advent",
+    "readings": [
+     "Isaiah 36.22-37.11",
+     "St. Paul's First Epistle to the Thessalonians 4.1-11",
+     "Luke 13.1-9"
+    ]
+   },
+   "46:32": {
+    "feast": "Saints David the Prophet-King and James the Apostle",
+    "readings": [
+     "2 Samuel 5.1-10",
+     "1 Kings 2.1-11",
+     "Ezekiel 34.20-27",
+     "St. James General Epistle 1.1-12",
+     "Matthew 22.41-46"
+    ]
+   },
+   "47:28": {
+    "feast": "Fourth Sunday of Advent",
+    "readings": [
+     "Isaiah 38.1-8",
+     "St. Paul's Epistle to the Hebrews 1.1-14",
+     "Luke 17.1-10"
+    ]
+   },
+   "52:34": {
+    "feast": "Saint Abgar the Witness and the First Christian King",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-3",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "51:6": {
+    "feast": "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
+    "readings": [
+     "Wisdom 10.9-12",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 10.11-16"
+    ]
+   },
+   "48:0": {
+    "feast": "Tenth Sunday after the Holy CrossEve of the Fast of Advent",
+    "readings": [
+     "Isaiah 25.9-26.7",
+     "St. Paul's Epistle to the Philippians 1.1-11",
+     "Luke 9.44-50"
+    ]
+   },
+   "51:4": {
+    "feast": "Fourth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 3.16-4.4",
+     "Luke 11.49-54"
+    ]
+   },
+   "47:29": {
+    "feast": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Jeremiah 6.16-21",
+     "St. Paul's First Epistle to the Corinthians 4.9-16",
+     "Mark 9.32-36"
+    ]
+   },
+   "50:14": {
+    "feast": "Second Sunday of Advent",
+    "readings": [
+     "Isaiah 36.22-37.11",
+     "St. Paul's First Epistle to the Thessalonians 4.1-11",
+     "Luke 13.1-9"
+    ]
+   },
+   "51:44": {
+    "feast": "First day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 7.26-8.13",
+     "Luke 20.1-8"
+    ]
+   },
+   "52:46": {
+    "feast": "Second day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 10.1-18",
+     "Luke 20.9-18"
+    ]
+   },
+   "52:38": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 5.11-6.8",
+     "Luke 18.18-27"
+    ]
+   },
+   "48:40": {
+    "feast": "Fast dayEve of Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 6.9-7.10",
+     "Luke 19.1-10"
+    ]
+   },
+   "49:24": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 2.1-17",
+     "Luke 14.25-27"
+    ]
+   },
+   "50:23": {
+    "feast": "Fast daySaints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 1.12-14",
+     "Mark 6.6-13"
+    ]
+   },
+   "51:26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 3.1-18",
+     "Luke 15.1-7"
+    ]
+   },
+   "52:44": {
+    "feast": "Saint James the Apostle and His Brother John the EvangelistEve of Fast of Nativity",
+    "readings": [
+     "Wisdom 7.21-24",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 12.1-11",
+     "St. James General Epistle 1.1-10",
+     "St. John's First Epistle General 1.1-7",
+     "John 21.20-25"
+    ]
+   },
+   "50:34": {
+    "feast": "Saint Abgar the Witness and the First Christian King",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-3",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "52:42": {
+    "feast": "Sixth Sunday of Advent",
+    "readings": [
+     "Isaiah 41.4-14",
+     "St. Paul's Epistle to the Hebrews 7.11-25",
+     "Luke 19.12-28"
+    ]
+   },
+   "52:10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.1-12",
+     "Luke 12.41-48"
+    ]
+   },
+   "50:10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.1-12",
+     "Luke 12.41-48"
+    ]
+   },
+   "49:16": {
+    "feast": "Saint Abgar the Witness and the First Christian King",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-3",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "51:18": {
+    "feast": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "50:19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.12-28",
+     "Luke 14.1-11"
+    ]
+   },
+   "51:38": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 5.11-6.8",
+     "Luke 18.18-27"
+    ]
+   },
+   "50:30": {
+    "feast": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+    "readings": [
+     "Proverbs 24.1-12",
+     "Jeremiah 15.19-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Matthew 10.26-33"
+    ]
+   },
+   "51:40": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 6.9-7.10",
+     "Luke 19.1-10"
+    ]
+   },
+   "49:12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.17-19",
+     "Luke 12.49-59"
+    ]
+   },
+   "48:41": {
+    "feast": "First day of the Fast of NativitySaints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 4.2-6",
+     "St. Paul's Epistle to the Colossians 1.21-29",
+     "John 10.11-16"
+    ]
+   },
+   "51:42": {
+    "feast": "Sixth Sunday of Advent",
+    "readings": [
+     "Isaiah 41.4-14",
+     "St. Paul's Epistle to the Hebrews 7.11-25",
+     "Luke 19.12-28"
+    ]
+   },
+   "52:28": {
+    "feast": "Fourth Sunday of Advent",
+    "readings": [
+     "Isaiah 38.1-8",
+     "St. Paul's Epistle to the Hebrews 1.1-14",
+     "Luke 17.1-10"
+    ]
+   },
+   "49:32": {
+    "feast": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+    "readings": [
+     "Wisdom 3.1-8",
+     "Jeremiah 30.18-22",
+     "St. Peter's First Epistle General 4.12-19",
+     "John 15.17-25"
+    ]
+   },
+   "48:24": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 2.1-17",
+     "Luke 14.25-27"
+    ]
+   },
+   "49:40": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 6.9-7.10",
+     "Luke 19.1-10"
+    ]
+   },
+   "48:1": {
+    "feast": "First day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.1-11",
+     "Luke 11.14-23"
+    ]
+   },
+   "47:33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 3.12-4.10",
+     "Luke 18.1-8"
+    ]
+   },
+   "51:2": {
+    "feast": "Second day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.12-23",
+     "Luke 11.27-32"
+    ]
+   },
+   "48:4": {
+    "feast": "Fourth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 3.16-4.4",
+     "Luke 11.49-54"
+    ]
+   },
+   "51:22": {
+    "feast": "Fast daySaints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Philippians 1.27-2.4",
+     "Matthew 10.37-42"
+    ]
+   },
+   "47:5": {
+    "feast": "Fifth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 4.5-18",
+     "Luke 12.1-12"
+    ]
+   },
+   "47:26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 3.1-18",
+     "Luke 15.1-7"
+    ]
+   },
+   "48:36": {
+    "feast": "Saint Stephen the Proto-Deacon and the First Martyr",
+    "readings": [
+     "Acts of the Apostles 6.8-8.2",
+     "John 12.24-26"
+    ]
+   },
+   "46:25": {
+    "feast": "Fast daySaints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "readings": [
+     "Proverbs 1.2-9",
+     "Nahum 2.1-6",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Matthew 5.1-12"
+    ]
+   },
+   "49:8": {
+    "feast": "Saint Virgins Juliana and Basilla",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 8.1-3"
+    ]
+   },
+   "52:0": {
+    "feast": "Tenth Sunday after the Holy CrossEve of the Fast of Advent",
+    "readings": [
+     "Isaiah 25.9-26.7",
+     "St. Paul's Epistle to the Philippians 1.1-11",
+     "Luke 9.44-50"
+    ]
+   },
+   "48:37": {
+    "feast": "Saints Peter and Paul the Apostles",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Isaiah 28.16-19",
+     "St. Peter's Second Epistle General 1.12-19",
+     "St. Paul's Second Epistle to Timothy 4.1-8",
+     "John 21.15-22"
+    ]
+   },
+   "52:20": {
+    "feast": "Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop",
+    "readings": [
+     "Wisdom 10.9-12",
+     "John 10.11-16",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7"
+    ]
+   },
+   "48:16": {
+    "feast": "Saint Abgar the Witness and the First Christian King",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-3",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "46:5": {
+    "feast": "Fifth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 4.5-18",
+     "Luke 12.1-12"
+    ]
+   },
+   "52:30": {
+    "feast": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+    "readings": [
+     "Proverbs 24.1-12",
+     "Jeremiah 15.19-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Matthew 10.26-33"
+    ]
+   },
+   "47:25": {
+    "feast": "Fast daySaints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "readings": [
+     "Proverbs 1.2-9",
+     "Nahum 2.1-6",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Matthew 5.1-12"
+    ]
+   },
+   "47:6": {
+    "feast": "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
+    "readings": [
+     "Wisdom 10.9-12",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 10.11-16"
+    ]
+   },
+   "49:28": {
+    "feast": "Fourth Sunday of Advent",
+    "readings": [
+     "Isaiah 38.1-8",
+     "St. Paul's Epistle to the Hebrews 1.1-14",
+     "Luke 17.1-10"
+    ]
+   },
+   "52:40": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 6.9-7.10",
+     "Luke 19.1-10"
+    ]
+   },
+   "51:0": {
+    "feast": "Tenth Sunday after the Holy CrossEve of the Fast of Advent",
+    "readings": [
+     "Isaiah 25.9-26.7",
+     "St. Paul's Epistle to the Philippians 1.1-11",
+     "Luke 9.44-50"
+    ]
+   },
+   "48:17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.1-11",
+     "Luke 13.10-17"
+    ]
+   },
+   "51:20": {
+    "feast": "Saint Nicolas Wonderworker the Bishop of Myra",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "John 10.11-16"
+    ]
+   },
+   "49:20": {
+    "feast": "Saint Nicolas Wonderworker the Bishop of Myra",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "John 10.11-16"
+    ]
+   },
+   "52:14": {
+    "feast": "Second Sunday of Advent",
+    "readings": [
+     "Isaiah 36.22-37.11",
+     "St. Paul's First Epistle to the Thessalonians 4.1-11",
+     "Luke 13.1-9"
+    ]
+   },
+   "48:21": {
+    "feast": "Third Sunday of AdventEve of Fast of Saint James the bishop of Nisibis",
+    "readings": [
+     "Isaiah 37.14-38",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 14.12-24"
+    ]
+   },
+   "49:0": {
+    "feast": "Tenth Sunday after the Holy CrossEve of the Fast of Advent",
+    "readings": [
+     "Isaiah 25.9-26.7",
+     "St. Paul's Epistle to the Philippians 1.1-11",
+     "Luke 9.44-50"
+    ]
+   },
+   "51:24": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 2.1-17",
+     "Luke 14.25-27"
+    ]
+   },
+   "52:8": {
+    "feast": "Saint Virgins Juliana and Basilla",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 8.1-3"
+    ]
+   },
+   "46:29": {
+    "feast": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Jeremiah 6.16-21",
+     "St. Paul's First Epistle to the Corinthians 4.9-16",
+     "Mark 9.32-36"
+    ]
+   },
+   "47:30": {
+    "feast": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+    "readings": [
+     "Proverbs 24.1-12",
+     "Jeremiah 15.19-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Matthew 10.26-33"
+    ]
+   },
+   "52:18": {
+    "feast": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "46:9": {
+    "feast": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+    "readings": [
+     "Wisdom 9.9-12",
+     "Isaiah 41.15-19",
+     "St. Paul's Second Epistle to the Corinthians 2.14-17",
+     "Luke 6.13-20"
+    ]
+   },
+   "47:10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.1-12",
+     "Luke 12.41-48"
+    ]
+   },
+   "47:13": {
+    "feast": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "St. Paul's First Epistle to the Corinthians 12.26-13.10",
+     "Matthew 9.35-10.7"
+    ]
+   },
+   "50:39": {
+    "feast": "Saints Peter and Paul the Apostles",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Isaiah 28.16-19",
+     "St. Peter's Second Epistle General 1.12-19",
+     "St. Paul's Second Epistle to Timothy 4.1-8",
+     "John 21.15-22"
+    ]
+   },
+   "49:36": {
+    "feast": "Saints David the Prophet-King and James the Apostle",
+    "readings": [
+     "2 Samuel 5.1-10",
+     "1 Kings 2.1-11",
+     "Ezekiel 34.20-27",
+     "St. James General Epistle 1.1-12",
+     "Matthew 22.41-46"
+    ]
+   },
+   "52:2": {
+    "feast": "Second day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.12-23",
+     "Luke 11.27-32"
+    ]
+   },
+   "52:22": {
+    "feast": "Fast daySaints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Philippians 1.27-2.4",
+     "Matthew 10.37-42"
+    ]
+   },
+   "47:9": {
+    "feast": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+    "readings": [
+     "Wisdom 9.9-12",
+     "Isaiah 41.15-19",
+     "St. Paul's Second Epistle to the Corinthians 2.14-17",
+     "Luke 6.13-20"
+    ]
+   },
+   "50:43": {
+    "feast": "First day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 7.26-8.13",
+     "Luke 20.1-8"
+    ]
+   },
+   "50:3": {
+    "feast": "Third day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.24-2.7",
+     "Luke 11.33-42"
+    ]
+   },
+   "52:4": {
+    "feast": "Fourth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 3.16-4.4",
+     "Luke 11.49-54"
+    ]
+   },
+   "52:26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 3.1-18",
+     "Luke 15.1-7"
+    ]
+   },
+   "49:4": {
+    "feast": "Fourth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 3.16-4.4",
+     "Luke 11.49-54"
+    ]
+   },
+   "49:43": {
+    "feast": "Second day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 7.26-8.13",
+     "Luke 20.1-8"
+    ]
+   },
+   "48:13": {
+    "feast": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "St. Paul's First Epistle to the Corinthians 12.26-13.10",
+     "Matthew 9.35-10.7"
+    ]
+   },
+   "51:35": {
+    "feast": "Fifth Sunday of Advent",
+    "readings": [
+     "Isaiah 40.18-31",
+     "St. Paul's Epistle to the Hebrews 4.16-5.10",
+     "Luke 18.9-14"
+    ]
+   },
+   "51:13": {
+    "feast": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "St. Paul's First Epistle to the Corinthians 12.26-13.10",
+     "Matthew 9.35-10.7"
+    ]
+   },
+   "46:21": {
+    "feast": "Third Sunday of AdventEve of Fast of Saint James the bishop of Nisibis",
+    "readings": [
+     "Isaiah 37.14-38",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 14.12-24"
+    ]
+   },
+   "48:32": {
+    "feast": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+    "readings": [
+     "Wisdom 3.1-8",
+     "Jeremiah 30.18-22",
+     "St. Peter's First Epistle General 4.12-19",
+     "John 15.17-25"
+    ]
+   },
+   "47:2": {
+    "feast": "Second day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.12-23",
+     "Luke 11.27-32"
+    ]
+   },
+   "46:20": {
+    "feast": "Saint Nicolas Wonderworker the Bishop of Myra",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "John 10.11-16"
+    ]
+   },
+   "48:33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 3.12-4.10",
+     "Luke 18.1-8"
+    ]
+   },
+   "51:33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 3.12-4.10",
+     "Luke 18.1-8"
+    ]
+   },
+   "46:16": {
+    "feast": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "47:34": {
+    "feast": "Saints David the Prophet-King and James the Apostle",
+    "readings": [
+     "2 Samuel 5.1-10",
+     "1 Kings 2.1-11",
+     "Ezekiel 34.20-27",
+     "St. James General Epistle 1.1-12",
+     "Matthew 22.41-46"
+    ]
+   },
+   "48:5": {
+    "feast": "Fifth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 4.5-18",
+     "Luke 12.1-12"
+    ]
+   },
+   "49:39": {
+    "feast": "Saints Peter and Paul the Apostles",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Isaiah 28.16-19",
+     "St. Peter's Second Epistle General 1.12-19",
+     "St. Paul's Second Epistle to Timothy 4.1-8",
+     "John 21.15-22"
+    ]
+   },
+   "51:11": {
+    "feast": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Isaiah 66.18-21",
+     "St. Paul's Epistle to the Philippians 4.1-7",
+     "Luke 9.1-6"
+    ]
+   },
+   "48:25": {
+    "feast": "Fast daySaints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "readings": [
+     "Proverbs 1.2-9",
+     "Nahum 2.1-6",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Matthew 5.1-12"
+    ]
+   },
+   "48:8": {
+    "feast": "Saint Virgins Juliana and Basilla",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 8.1-3"
+    ]
+   },
+   "46:13": {
+    "feast": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "St. Paul's First Epistle to the Corinthians 12.26-13.10",
+     "Matthew 9.35-10.7"
+    ]
+   },
+   "46:2": {
+    "feast": "Second day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.12-23",
+     "Luke 11.27-32"
+    ]
+   },
+   "48:29": {
+    "feast": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Jeremiah 6.16-21",
+     "St. Paul's First Epistle to the Corinthians 4.9-16",
+     "Mark 9.32-36"
+    ]
+   },
+   "51:37": {
+    "feast": "Saints David the Prophet-King and James the Apostle",
+    "readings": [
+     "2 Samuel 5.1-10",
+     "1 Kings 2.1-11",
+     "Ezekiel 34.20-27",
+     "St. James General Epistle 1.1-12",
+     "Matthew 22.41-46"
+    ]
+   },
+   "47:18": {
+    "feast": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "52:15": {
+    "feast": "Saints Gennaro the Bishop and Mercurius the Warrior",
+    "readings": [
+     "Isaiah 35.4-8",
+     "St. Paul's Second Epistle to the Corinthians 3.18-4.6",
+     "Luke 21.12-19"
+    ]
+   },
+   "51:17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.1-11",
+     "Luke 13.10-17"
+    ]
+   },
+   "46:37": {
+    "feast": "Saint James the Apostle and His Brother John the Evangelist",
+    "readings": [
+     "Wisdom 7.21-24",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 12.1-11",
+     "St. James General Epistle 1.1-10",
+     "St. John's First Epistle General 1.1-7",
+     "John 21.20-25"
+    ]
+   },
+   "48:9": {
+    "feast": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+    "readings": [
+     "Wisdom 9.9-12",
+     "Isaiah 41.15-19",
+     "St. Paul's Second Epistle to the Corinthians 2.14-17",
+     "Luke 6.13-20"
+    ]
+   },
+   "52:35": {
+    "feast": "Fifth Sunday of Advent",
+    "readings": [
+     "Isaiah 40.18-31",
+     "St. Paul's Epistle to the Hebrews 4.16-5.10",
+     "Luke 18.9-14"
+    ]
+   },
+   "52:11": {
+    "feast": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Isaiah 66.18-21",
+     "St. Paul's Epistle to the Philippians 4.1-7",
+     "Luke 9.1-6"
+    ]
+   },
+   "51:29": {
+    "feast": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Jeremiah 6.16-21",
+     "St. Paul's First Epistle to the Corinthians 4.9-16",
+     "Mark 9.32-36"
+    ]
+   },
+   "51:9": {
+    "feast": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+    "readings": [
+     "Wisdom 9.9-12",
+     "Isaiah 41.15-19",
+     "St. Paul's Second Epistle to the Corinthians 2.14-17",
+     "Luke 6.13-20"
+    ]
+   },
+   "46:34": {
+    "feast": "Saint Stephen the Proto-Deacon and the First Martyr",
+    "readings": [
+     "Acts of the Apostles 6.8-8.2",
+     "John 12.24-26"
+    ]
+   },
+   "52:31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 2.1-10",
+     "Luke 17.11-19"
+    ]
+   },
+   "46:14": {
+    "feast": "Second Sunday of Advent",
+    "readings": [
+     "Isaiah 36.22-37.11",
+     "St. Paul's First Epistle to the Thessalonians 4.1-11",
+     "Luke 13.1-9"
+    ]
+   },
+   "51:31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 2.1-10",
+     "Luke 17.11-19"
+    ]
+   },
+   "47:38": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 5.11-6.8",
+     "Luke 18.18-27"
+    ]
+   },
+   "46:22": {
+    "feast": "Fast daySaints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Philippians 1.27-2.4",
+     "Matthew 10.37-42"
+    ]
+   },
+   "51:15": {
+    "feast": "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles",
+    "readings": [
+     "Isaiah 35.4-8",
+     "St. Paul's Second Epistle to the Corinthians 3.18-4.6",
+     "Luke 21.12-19"
+    ]
+   },
+   "46:17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.1-11",
+     "Luke 13.10-17"
+    ]
+   },
+   "47:14": {
+    "feast": "Second Sunday of Advent",
+    "readings": [
+     "Isaiah 36.22-37.11",
+     "St. Paul's First Epistle to the Thessalonians 4.1-11",
+     "Luke 13.1-9"
+    ]
+   },
+   "46:36": {
+    "feast": "Saints Peter and Paul the Apostles",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Isaiah 28.16-19",
+     "St. Peter's Second Epistle General 1.12-19",
+     "St. Paul's Second Epistle to Timothy 4.1-8",
+     "John 21.15-22"
+    ]
+   },
+   "48:28": {
+    "feast": "Fourth Sunday of Advent",
+    "readings": [
+     "Isaiah 38.1-8",
+     "St. Paul's Epistle to the Hebrews 1.1-14",
+     "Luke 17.1-10"
+    ]
+   },
+   "46:33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 6.9-7.10",
+     "Luke 19.1-10"
+    ]
+   },
+   "49:19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.12-28",
+     "Luke 14.1-11"
+    ]
+   },
+   "48:12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.17-19",
+     "Luke 12.49-59"
+    ]
+   },
+   "46:1": {
+    "feast": "First day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.1-11",
+     "Luke 11.14-23"
+    ]
+   },
+   "49:23": {
+    "feast": "Fast daySaints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 1.12-14",
+     "Mark 6.6-13"
+    ]
+   },
+   "46:38": {
+    "feast": "Fast dayEve of Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 5.11-6.8",
+     "Luke 18.18-27"
+    ]
+   },
+   "47:22": {
+    "feast": "Fast daySaints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Philippians 1.27-2.4",
+     "Matthew 10.37-42"
+    ]
+   },
+   "46:40": {
+    "feast": "Second day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 13.10-16",
+     "Luke 21.34-38"
+    ]
+   },
+   "46:39": {
+    "feast": "First day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 7.26-8.13",
+     "Luke 20.1-8"
+    ]
+   },
+   "48:14": {
+    "feast": "Second Sunday of Advent",
+    "readings": [
+     "Isaiah 36.22-37.11",
+     "St. Paul's First Epistle to the Thessalonians 4.1-11",
+     "Luke 13.1-9"
+    ]
+   },
+   "51:12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.17-19",
+     "Luke 12.49-59"
+    ]
+   },
+   "47:23": {
+    "feast": "Fast daySaints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 1.12-14",
+     "Mark 6.6-13"
+    ]
+   },
+   "48:34": {
+    "feast": "Saints David the Prophet-King and James the Apostle",
+    "readings": [
+     "2 Samuel 5.1-10",
+     "1 Kings 2.1-11",
+     "Ezekiel 34.20-27",
+     "St. James General Epistle 1.1-12",
+     "Matthew 22.41-46"
+    ]
+   },
+   "51:32": {
+    "feast": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+    "readings": [
+     "Wisdom 3.1-8",
+     "Jeremiah 30.18-22",
+     "St. Peter's First Epistle General 4.12-19",
+     "John 15.17-25"
+    ]
+   },
+   "49:22": {
+    "feast": "Fast daySaints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Philippians 1.27-2.4",
+     "Matthew 10.37-42"
+    ]
+   },
+   "49:18": {
+    "feast": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "48:6": {
+    "feast": "Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop",
+    "readings": [
+     "Wisdom 10.9-12",
+     "John 10.11-16",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7"
+    ]
+   },
+   "48:27": {
+    "feast": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+    "readings": [
+     "Wisdom 7.12-20",
+     "Isaiah 44.1-5",
+     "St. Paul's Epistle to the Hebrews 13.17-21",
+     "John 9.39-10.10"
+    ]
+   },
+   "51:30": {
+    "feast": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+    "readings": [
+     "Proverbs 24.1-12",
+     "Jeremiah 15.19-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Matthew 10.26-33"
+    ]
+   },
+   "48:26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 3.1-18",
+     "Luke 15.1-7"
+    ]
+   },
+   "46:35": {
+    "feast": "Fifth Sunday of Advent",
+    "readings": [
+     "Isaiah 41.4-14",
+     "St. Paul's Epistle to the Hebrews 7.11-25",
+     "Luke 19.12-28"
+    ]
+   },
+   "47:15": {
+    "feast": "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles",
+    "readings": [
+     "Isaiah 35.4-8",
+     "St. Paul's Second Epistle to the Corinthians 3.18-4.6",
+     "Luke 21.12-19"
+    ]
+   },
+   "51:36": {
+    "feast": "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
+    "readings": [
+     "Wisdom 5.15-17",
+     "Lamentations 3.22-56",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "Luke 12.32-40"
+    ]
+   },
+   "48:30": {
+    "feast": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+    "readings": [
+     "Proverbs 24.1-12",
+     "Jeremiah 15.19-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Matthew 10.26-33"
+    ]
+   },
+   "52:16": {
+    "feast": "Saints Jacoc and Themistocles",
+    "readings": [
+     "Proverbs 12.9-17",
+     "Lamentations 3.22-56",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Luke 12.2-9"
+    ]
+   },
+   "51:16": {
+    "feast": "Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 1.12-14",
+     "Mark 6.6-13"
+    ]
+   },
+   "47:39": {
+    "feast": "Saint James the Apostle and His Brother John the EvangelistEve of Fast of Nativity",
+    "readings": [
+     "Wisdom 7.21-24",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 12.1-11",
+     "St. James General Epistle 1.1-10",
+     "St. John's First Epistle General 1.1-7",
+     "John 21.20-25"
+    ]
+   },
+   "48:10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.1-12",
+     "Luke 12.41-48"
+    ]
+   },
+   "51:28": {
+    "feast": "Fourth Sunday of Advent",
+    "readings": [
+     "Isaiah 38.1-8",
+     "St. Paul's Epistle to the Hebrews 1.1-14",
+     "Luke 17.1-10"
+    ]
+   },
+   "51:8": {
+    "feast": "Saint Virgins Juliana and Basilla",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 8.1-3"
+    ]
+   },
+   "52:32": {
+    "feast": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+    "readings": [
+     "Wisdom 3.1-8",
+     "Jeremiah 30.18-22",
+     "St. Peter's First Epistle General 4.12-19",
+     "John 15.17-25"
+    ]
+   },
+   "51:10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.1-12",
+     "Luke 12.41-48"
+    ]
+   },
+   "52:12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.17-19",
+     "Luke 12.49-59"
+    ]
+   },
+   "52:36": {
+    "feast": "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian",
+    "readings": [
+     "Wisdom 5.15-17",
+     "Lamentations 3.22-56",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "Luke 12.32-40"
+    ]
+   },
+   "51:14": {
+    "feast": "Second Sunday of Advent",
+    "readings": [
+     "Isaiah 36.22-37.11",
+     "St. Paul's First Epistle to the Thessalonians 4.1-11",
+     "Luke 13.1-9"
+    ]
+   },
+   "51:34": {
+    "feast": "Saint Abgar the Witness and the First Christian King",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-3",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "49:38": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 5.11-6.8",
+     "Luke 18.18-27"
+    ]
+   },
+   "48:7": {
+    "feast": "First Sunday of Advent",
+    "readings": [
+     "Isaiah 36.1-9",
+     "St. Paul's First Epistle to the Thessalonians 1.1-10",
+     "Luke 12.13-31"
+    ]
+   },
+   "47:35": {
+    "feast": "Fifth Sunday of Advent",
+    "readings": [
+     "Isaiah 41.4-14",
+     "St. Paul's Epistle to the Hebrews 7.11-25",
+     "Luke 19.12-28"
+    ]
+   },
+   "46:15": {
+    "feast": "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles",
+    "readings": [
+     "Isaiah 35.4-8",
+     "St. Paul's Second Epistle to the Corinthians 3.18-4.6",
+     "Luke 21.12-19"
+    ]
+   },
+   "47:3": {
+    "feast": "Third day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.24-2.7",
+     "Luke 11.33-42"
+    ]
+   },
+   "46:19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.12-28",
+     "Luke 14.1-11"
+    ]
+   },
+   "49:2": {
+    "feast": "Second day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.12-23",
+     "Luke 11.27-32"
+    ]
+   },
+   "48:31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 2.1-10",
+     "Luke 17.11-19"
+    ]
+   },
+   "49:42": {
+    "feast": "Sixth Sunday of Advent",
+    "readings": [
+     "Isaiah 51.15-52.3",
+     "St. Paul's Epistle to the Hebrews 13.18-25",
+     "Luke 22.24-30"
+    ]
+   },
+   "48:11": {
+    "feast": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Isaiah 66.18-21",
+     "St. Paul's Epistle to the Philippians 4.1-7",
+     "Luke 9.1-6"
+    ]
+   },
+   "50:17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 5.1-11",
+     "Luke 13.10-17"
+    ]
+   },
+   "50:28": {
+    "feast": "Fourth Sunday of Advent",
+    "readings": [
+     "Isaiah 38.1-8",
+     "St. Paul's Epistle to the Hebrews 1.1-14",
+     "Luke 17.1-10"
+    ]
+   },
+   "50:37": {
+    "feast": "Saint Stephen the Proto-Deacon and the First Martyr",
+    "readings": [
+     "Acts of the Apostles 6.8-8.2",
+     "John 12.24-26"
+    ]
+   },
+   "50:5": {
+    "feast": "Fifth day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 4.5-18",
+     "Luke 12.1-12"
+    ]
+   },
+   "50:16": {
+    "feast": "Saints Menas, Hermongenes, Eugraphius and the poor mans John and Alexis",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Philippians 1.27-2.4",
+     "Matthew 10.37-42"
+    ]
+   },
+   "50:25": {
+    "feast": "Fast daySaints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "readings": [
+     "Proverbs 1.2-9",
+     "Nahum 2.1-6",
+     "St. Paul's Epistle to the Romans 5.1-5",
+     "Matthew 5.1-12"
+    ]
+   },
+   "50:41": {
+    "feast": "Saint James the Apostle and His Brother John the Evangelist",
+    "readings": [
+     "Wisdom 7.21-24",
+     "Jeremiah 16.16-21",
+     "Acts of the Apostles 12.1-11",
+     "St. James General Epistle 1.1-10",
+     "St. John's First Epistle General 1.1-7",
+     "John 21.20-25"
+    ]
+   },
+   "50:1": {
+    "feast": "First day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.1-11",
+     "Luke 11.14-23"
+    ]
+   },
+   "50:12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Thessalonians 2.17-19",
+     "Luke 12.49-59"
+    ]
+   },
+   "50:21": {
+    "feast": "Third Sunday of AdventEve of Fast of Saint James the bishop of Nisibis",
+    "readings": [
+     "Isaiah 37.14-38",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 14.12-24"
+    ]
+   },
+   "50:32": {
+    "feast": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+    "readings": [
+     "Wisdom 3.1-8",
+     "Jeremiah 30.18-22",
+     "St. Peter's First Epistle General 4.12-19",
+     "John 15.17-25"
+    ]
+   },
+   "50:36": {
+    "feast": "Saints David the Prophet-King and James the Apostle",
+    "readings": [
+     "2 Samuel 5.1-10",
+     "1 Kings 2.1-11",
+     "Ezekiel 34.20-27",
+     "St. James General Epistle 1.1-12",
+     "Matthew 22.41-46"
+    ]
+   },
+   "50:8": {
+    "feast": "The Holy Virgins Juliana and Basilla, and Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 8.1-3"
+    ]
+   },
+   "50:7": {
+    "feast": "First Sunday of Advent",
+    "readings": [
+     "Isaiah 36.1-9",
+     "St. Paul's First Epistle to the Thessalonians 1.1-10",
+     "Luke 12.13-31"
+    ]
+   },
+   "50:18": {
+    "feast": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "50:38": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 5.11-6.8",
+     "Luke 18.18-27"
+    ]
+   },
+   "50:6": {
+    "feast": "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
+    "readings": [
+     "Wisdom 10.9-12",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 10.11-16"
+    ]
+   },
+   "50:26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Thessalonians 3.1-18",
+     "Luke 15.1-7"
+    ]
+   },
+   "50:35": {
+    "feast": "Fifth Sunday of Advent",
+    "readings": [
+     "Isaiah 40.18-31",
+     "St. Paul's Epistle to the Hebrews 4.16-5.10",
+     "Luke 18.9-14"
+    ]
+   },
+   "50:42": {
+    "feast": "Sixth Sunday of AdventEve of Fast of Nativity",
+    "readings": [
+     "Isaiah 41.4-14",
+     "St. Paul's Epistle to the Hebrews 7.11-25",
+     "Luke 19.12-28"
+    ]
+   },
+   "50:31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 2.1-10",
+     "Luke 17.11-19"
+    ]
+   },
+   "50:2": {
+    "feast": "Second day of the Fast of Advent",
+    "readings": [
+     "St. Paul's Epistle to the Colossians 1.12-23",
+     "Luke 11.27-32"
+    ]
+   },
+   "50:11": {
+    "feast": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Isaiah 66.18-21",
+     "St. Paul's Epistle to the Philippians 4.1-7",
+     "Luke 9.1-6"
+    ]
+   },
+   "50:15": {
+    "feast": "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles",
+    "readings": [
+     "Isaiah 35.4-8",
+     "St. Paul's Second Epistle to the Corinthians 3.18-4.6",
+     "Luke 21.12-19"
+    ]
+   },
+   "50:27": {
+    "feast": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+    "readings": [
+     "Wisdom 7.12-20",
+     "Isaiah 44.1-5",
+     "St. Paul's Epistle to the Hebrews 13.17-21",
+     "John 9.39-10.10"
+    ]
+   }
+  },
   "HE": {
    "7": {
     "feast": "First Sunday of Advent",
@@ -25635,6 +28030,740 @@
     "readings": [
      "St. Paul's Epistle to the Colossians 1.12-23",
      "Luke 11.27-32"
+    ]
+   }
+  },
+  "HEpB": {
+   "50:67": {
+    "feast": "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs",
+    "readings": [
+     "Proverbs 7.1-7",
+     "Ezekiel 12.17-19",
+     "St. Paul's Epistle to the Romans 8.12-27",
+     "Luke 9.23-27"
+    ]
+   },
+   "50:62": {
+    "feast": "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "47:59": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 2.8-3.13",
+     "John 2.12-22"
+    ]
+   },
+   "47:64": {
+    "feast": "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris",
+    "readings": [
+     "Proverbs 14.1-6",
+     "Zechariah 8.4-5",
+     "Isaiah 60.8-9",
+     "St. Paul's Epistle to the Hebrews 2.14-18",
+     "Luke 9.44-48"
+    ]
+   },
+   "49:44": {
+    "feast": "Third day of the Fast of Nativity.",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 10.1-18",
+     "Luke 20.9-18"
+    ]
+   },
+   "50:47": {
+    "feast": "Fifth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 13.10-16",
+     "Luke 21.34-38"
+    ]
+   },
+   "52:59": {
+    "feast": "Еighth day of NativityFeast of Naming of Our Lord Jesus Christ",
+    "readings": [
+     "Luke 2.8-14",
+     "Luke 2.15-20",
+     "Luke 3.1-4.13",
+     "St. Paul's Epistle to the Colossians 2.8-15",
+     "Luke 2.21"
+    ]
+   },
+   "50:59": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 2.8-3.13",
+     "John 2.12-22"
+    ]
+   },
+   "51:49": {
+    "feast": "Seventh Sunday of Advent",
+    "readings": [
+     "Isaiah 51.15-52.3",
+     "St. Paul's Epistle to the Hebrews 13.18-25",
+     "Luke 22.24-30"
+    ]
+   },
+   "51:61": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "47:43": {
+    "feast": "Fourth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 7.26-8.13",
+     "Luke 20.1-8"
+    ]
+   },
+   "47:63": {
+    "feast": "Second Sunday after Nativity",
+    "readings": [
+     "Isaiah 58.13-59.7",
+     "St. Paul's First Epistle to Timothy 4.12-5.10",
+     "John 3.13-21"
+    ]
+   },
+   "47:60": {
+    "feast": "Saints Theodosius and the Children of Ephesus",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-2",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "50:63": {
+    "feast": "First Sunday after Nativity",
+    "readings": [
+     "Luke 4.14-30",
+     "Isaiah 54.1-13",
+     "St. Paul's First Epistle to Timothy 1.1-11",
+     "John 2.1-11"
+    ]
+   },
+   "50:66": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 5.17-6.5",
+     "John 3.22-36"
+    ]
+   },
+   "47:42": {
+    "feast": "Sixth Sunday of Advent",
+    "readings": [
+     "Isaiah 51.15-52.3",
+     "St. Paul's Epistle to the Hebrews 13.18-25",
+     "Luke 22.24-30"
+    ]
+   },
+   "50:45": {
+    "feast": "Third day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.5-17",
+     "Luke 20.41-21.4"
+    ]
+   },
+   "47:58": {
+    "feast": "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "50:61": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "47:55": {
+    "feast": "Feast of the Birth of St. John the Forerunner (Baptist)",
+    "readings": [
+     "Proverbs 8.4-11",
+     "Malachi 4.4-6",
+     "Isaiah 40.3-5",
+     "Acts of the Apostles 13.25-33",
+     "Luke 1.57-80"
+    ]
+   },
+   "46:44": {
+    "feast": "Sixth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.5-17",
+     "Luke 20.41-21.4"
+    ]
+   },
+   "50:58": {
+    "feast": "Feast of the Birth of St. John the Forerunner (Baptist)",
+    "readings": [
+     "Proverbs 8.4-11",
+     "Malachi 4.4-6",
+     "Isaiah 40.3-5",
+     "Acts of the Apostles 13.25-33",
+     "Luke 1.57-80"
+    ]
+   },
+   "46:41": {
+    "feast": "Third day of the Fast of NativitySaints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 4.2-6",
+     "St. Paul's Epistle to the Colossians 1.21-29",
+     "John 10.11-16"
+    ]
+   },
+   "50:65": {
+    "feast": "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris",
+    "readings": [
+     "Proverbs 14.1-6",
+     "Zechariah 8.4-5",
+     "Isaiah 60.8-9",
+     "St. Paul's Epistle to the Hebrews 2.14-18",
+     "Luke 9.44-48"
+    ]
+   },
+   "47:62": {
+    "feast": "Holy Fathers Saints Athanasius and Cyril of Alexandria",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 61.3-7",
+     "St. Paul's Epistle to the Hebrews 13.7-9",
+     "John 16.33-17.8"
+    ]
+   },
+   "50:46": {
+    "feast": "Fourth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.25-13.6",
+     "Luke 21.20-33"
+    ]
+   },
+   "48:46": {
+    "feast": "Sixth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.25-13.6",
+     "Luke 21.20-33"
+    ]
+   },
+   "47:56": {
+    "feast": "First Sunday after Nativity",
+    "readings": [
+     "Luke 4.14-30",
+     "Isaiah 54.1-13",
+     "St. Paul's First Epistle to Timothy 1.1-11",
+     "John 2.1-11"
+    ]
+   },
+   "51:65": {
+    "feast": "Saints Theodosius and the Children of Ephesus",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-2",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "48:55": {
+    "feast": "Еighth day of NativityFeast of Naming of Our Lord Jesus Christ",
+    "readings": [
+     "Luke 2.8-14",
+     "Luke 2.15-20",
+     "Luke 3.1-4.13",
+     "St. Paul's Epistle to the Colossians 2.8-15",
+     "Luke 2.21"
+    ]
+   },
+   "47:44": {
+    "feast": "Fifth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 10.1-18",
+     "Luke 20.9-18"
+    ]
+   },
+   "51:66": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 5.17-6.5",
+     "John 3.22-36"
+    ]
+   },
+   "50:64": {
+    "feast": "Saints Theodosius and the Children of Ephesus",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-2",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "47:61": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "51:58": {
+    "feast": "Еighth day of NativityFeast of Naming of Our Lord Jesus Christ",
+    "readings": [
+     "Luke 2.8-14",
+     "Luke 2.15-20",
+     "Luke 3.1-4.13",
+     "St. Paul's Epistle to the Colossians 2.8-15",
+     "Luke 2.21"
+    ]
+   },
+   "47:57": {
+    "feast": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Baruch 3.31-4.4",
+     "St. Paul's Epistle to the Romans 8.28-39",
+     "John 10.11-16"
+    ]
+   },
+   "50:60": {
+    "feast": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Baruch 3.31-4.4",
+     "St. Paul's Epistle to the Romans 8.28-39",
+     "John 10.11-16"
+    ]
+   },
+   "46:53": {
+    "feast": "Еighth day of NativityFeast of Naming of Our Lord Jesus Christ",
+    "readings": [
+     "Luke 2.8-14",
+     "Luke 2.15-20",
+     "Luke 3.1-4.13",
+     "St. Paul's Epistle to the Colossians 2.8-15",
+     "Luke 2.21"
+    ]
+   },
+   "51:62": {
+    "feast": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Baruch 3.31-4.4",
+     "St. Paul's Epistle to the Romans 8.28-39",
+     "John 10.11-16"
+    ]
+   },
+   "52:50": {
+    "feast": "Sixth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.5-17",
+     "Luke 20.41-21.4"
+    ]
+   },
+   "51:46": {
+    "feast": "Third day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.5-17",
+     "Luke 20.41-21.4"
+    ]
+   },
+   "50:75": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 3.1-7",
+     "John 6.64-71"
+    ]
+   },
+   "51:47": {
+    "feast": "Fourth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 13.10-16",
+     "Luke 21.34-38"
+    ]
+   },
+   "50:73": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.20-26",
+     "John 6.48-54"
+    ]
+   },
+   "51:63": {
+    "feast": "First Sunday after Nativity",
+    "readings": [
+     "Luke 4.14-30",
+     "Isaiah 54.1-13",
+     "St. Paul's First Epistle to Timothy 1.1-11",
+     "John 2.1-11"
+    ]
+   },
+   "51:67": {
+    "feast": "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+    "readings": [
+     "Proverbs 14.1-6",
+     "Zechariah 8.4-5",
+     "Isaiah 60.8-9",
+     "St. Paul's Epistle to the Hebrews 2.14-18",
+     "Luke 9.44-48"
+    ]
+   },
+   "52:47": {
+    "feast": "Third day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 13.10-16",
+     "Luke 21.34-38"
+    ]
+   },
+   "47:65": {
+    "feast": "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs",
+    "readings": [
+     "Proverbs 7.1-7",
+     "Ezekiel 12.17-19",
+     "St. Paul's Epistle to the Romans 8.12-27",
+     "Luke 9.23-27"
+    ]
+   },
+   "50:71": {
+    "feast": "Saints Eugenios, Makarios, Valerian, Candidus and Aquila",
+    "readings": [
+     "Zephaniah 3.19-20",
+     "St. Paul's Second Epistle to the Corinthians 10.3-6",
+     "Matthew 10.23-33"
+    ]
+   },
+   "51:59": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 2.8-3.13",
+     "John 2.12-22"
+    ]
+   },
+   "47:68": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.3-14",
+     "John 5.31-47"
+    ]
+   },
+   "50:48": {
+    "feast": "Sixth day of the Fast of NativitySaints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 4.2-6",
+     "St. Paul's Epistle to the Colossians 1.21-29",
+     "John 10.11-16"
+    ]
+   },
+   "47:45": {
+    "feast": "Sixth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.5-17",
+     "Luke 20.41-21.4"
+    ]
+   },
+   "48:44": {
+    "feast": "Fourth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 10.1-18",
+     "Luke 20.9-18"
+    ]
+   },
+   "48:45": {
+    "feast": "Fifth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.5-17",
+     "Luke 20.41-21.4"
+    ]
+   },
+   "47:54": {
+    "feast": "Еighth day of NativityFeast of Naming of Our Lord Jesus Christ",
+    "readings": [
+     "Luke 2.8-14",
+     "Luke 2.15-20",
+     "Luke 3.1-4.13",
+     "St. Paul's Epistle to the Colossians 2.8-15",
+     "Luke 2.21"
+    ]
+   },
+   "47:69": {
+    "feast": "Saint Gregory of Theologian",
+    "readings": [
+     "Proverbs 8.33-36",
+     "Hosea 10.12",
+     "Amos 5.10-14",
+     "Acts of the Apostles 2.25-32",
+     "John 10.11-16"
+    ]
+   },
+   "50:72": {
+    "feast": "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "readings": [
+     "Proverbs 4.10-27",
+     "Isaiah 48.17-21",
+     "St. Paul's Second Epistle to the Corinthians 10.3-6",
+     "Matthew 10.37-42"
+    ]
+   },
+   "50:57": {
+    "feast": "Еighth day of NativityFeast of Naming of Our Lord Jesus Christ",
+    "readings": [
+     "Luke 2.8-14",
+     "Luke 2.15-20",
+     "Luke 3.1-4.13",
+     "St. Paul's Epistle to the Colossians 2.8-15",
+     "Luke 2.21"
+    ]
+   },
+   "48:57": {
+    "feast": "Feast of the Birth of St. John the Forerunner (Baptist)",
+    "readings": [
+     "Proverbs 8.4-11",
+     "Malachi 4.4-6",
+     "Isaiah 40.3-5",
+     "Acts of the Apostles 13.25-33",
+     "Luke 1.57-80"
+    ]
+   },
+   "48:56": {
+    "feast": "First Sunday after Nativity",
+    "readings": [
+     "Luke 4.14-30",
+     "Isaiah 54.1-13",
+     "St. Paul's First Epistle to Timothy 1.1-11",
+     "John 2.1-11"
+    ]
+   },
+   "48:58": {
+    "feast": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Baruch 3.31-4.4",
+     "St. Paul's Epistle to the Romans 8.28-39",
+     "John 10.11-16"
+    ]
+   },
+   "50:69": {
+    "feast": "Holy Fathers Saints Athanasius and Cyril of Alexandria",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 61.3-7",
+     "St. Paul's Epistle to the Hebrews 13.7-9",
+     "John 16.33-17.8"
+    ]
+   },
+   "47:66": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 5.17-6.5",
+     "John 3.22-36"
+    ]
+   },
+   "52:61": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "48:62": {
+    "feast": "Saints Theodosius and the Children of Ephesus",
+    "readings": [
+     "Wisdom 6.1-9",
+     "Isaiah 45.1-2",
+     "St. Paul's First Epistle to Timothy 2.1-7",
+     "Luke 7.1-10"
+    ]
+   },
+   "52:49": {
+    "feast": "Seventh Sunday of Advent",
+    "readings": [
+     "Isaiah 51.15-52.3",
+     "St. Paul's Epistle to the Hebrews 13.18-25",
+     "Luke 22.24-30"
+    ]
+   },
+   "46:54": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "50:68": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.3-14",
+     "John 5.31-47"
+    ]
+   },
+   "48:59": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 2.8-3.13",
+     "John 2.12-22"
+    ]
+   },
+   "48:43": {
+    "feast": "Third day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 7.26-8.13",
+     "Luke 20.1-8"
+    ]
+   },
+   "48:61": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to Timothy 4.1-12",
+     "John 2.23-3.12"
+    ]
+   },
+   "48:60": {
+    "feast": "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "46:42": {
+    "feast": "Sixth Sunday of Advent",
+    "readings": [
+     "Isaiah 51.15-52.3",
+     "St. Paul's Epistle to the Hebrews 13.18-25",
+     "Luke 22.24-30"
+    ]
+   },
+   "51:48": {
+    "feast": "Fifth day of the Fast of NativitySaints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 4.2-6",
+     "St. Paul's Epistle to the Colossians 1.21-29",
+     "John 10.11-16"
+    ]
+   },
+   "46:43": {
+    "feast": "Fifth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 10.1-18",
+     "Luke 20.9-18"
+    ]
+   },
+   "51:68": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 2.3-14",
+     "John 5.31-47"
+    ]
+   },
+   "51:60": {
+    "feast": "Feast of the Birth of St. John the Forerunner (Baptist)",
+    "readings": [
+     "Proverbs 8.4-11",
+     "Malachi 4.4-6",
+     "Isaiah 40.3-5",
+     "Acts of the Apostles 13.25-33",
+     "Luke 1.57-80"
+    ]
+   },
+   "46:55": {
+    "feast": "Feast of the Birth of St. John the Forerunner (Baptist)",
+    "readings": [
+     "Proverbs 8.4-11",
+     "Malachi 4.4-6",
+     "Isaiah 40.3-5",
+     "Acts of the Apostles 13.25-33",
+     "Luke 1.57-80"
+    ]
+   },
+   "51:64": {
+    "feast": "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+    "readings": [
+     "Proverbs 21.15-24",
+     "Isaiah 19.19-21",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 10.37-42"
+    ]
+   },
+   "52:48": {
+    "feast": "Fourth day of the Fast of NativitySaints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 4.2-6",
+     "St. Paul's Epistle to the Colossians 1.21-29",
+     "John 10.11-16"
+    ]
+   },
+   "52:60": {
+    "feast": "Feast of the Birth of St. John the Forerunner (Baptist)",
+    "readings": [
+     "Proverbs 8.4-11",
+     "Malachi 4.4-6",
+     "Isaiah 40.3-5",
+     "Acts of the Apostles 13.25-33",
+     "Luke 1.57-80"
+    ]
+   },
+   "50:70": {
+    "feast": "Second Sunday after Nativity",
+    "readings": [
+     "Isaiah 58.13-59.7",
+     "St. Paul's First Epistle to Timothy 4.12-5.10",
+     "John 3.13-21"
+    ]
+   },
+   "47:67": {
+    "feast": "Saints Eugenios, Makarios, Valerian, Candidus and Aquila",
+    "readings": [
+     "Zephaniah 3.19-20",
+     "St. Paul's Second Epistle to the Corinthians 10.3-6",
+     "Matthew 10.23-33"
+    ]
+   },
+   "52:62": {
+    "feast": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Baruch 3.31-4.4",
+     "St. Paul's Epistle to the Romans 8.28-39",
+     "John 10.11-16"
+    ]
+   },
+   "50:74": {
+    "feast": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+    "readings": [
+     "Lamentations 3.22-56",
+     "St. Paul's Epistle to the Romans 8.18-27",
+     "John 16.1-4"
+    ]
+   },
+   "49:45": {
+    "feast": "Fourth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.5-17",
+     "Luke 20.41-21.4"
+    ]
+   },
+   "49:47": {
+    "feast": "Sixth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 13.10-16",
+     "Luke 21.34-38"
+    ]
+   },
+   "49:46": {
+    "feast": "Fifth day of the Fast of Nativity",
+    "readings": [
+     "St. Paul's Epistle to the Hebrews 12.25-13.6",
+     "Luke 21.20-33"
     ]
    }
   },

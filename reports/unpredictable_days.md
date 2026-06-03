@@ -11,8 +11,18 @@ post-Nativity saint-identity replay (`PnSaint`).
 > −61`), Easter Sunday (`E=0`) and the `E=−70…−72` boundary now ship for every
 > normal year; only the irreducible **single-sample extreme-Easter outliers**
 > (2008 Mar 23, 2011 Apr 24) remain estimate there — they cannot be cross-validated
-> with one observation. The numbers in the body below describe the *pre-`EB`* state
-> and are retained for the taxonomy; the live counts are in the banner.
+> with one observation.
+>
+> **Update (Advent-band `HEB`/`HEpB` chunk):** the Heesnak offset cycles got the same
+> treatment — an Advent-length-banded sub-key (`HEB`/`HEpB = "{adv_len}:{offset}"`,
+> placed at low precedence just above `HE`/`HEp` so the winter grid still wins).
+> `adv_len = Jan 6 − Heesnak` is the clean (no-leap-span) Advent-length scalar. This
+> zeroed the Heesnak-Sunday block (`HE=0` and the other Advent Sundays) and trimmed
+> the Fast-of-Nativity tail continua (`HEp`): runtime **9 199 → 9 252 (+53 days),
+> 96.9 % → 97.4 %**, estimate **296 → 243**, still **0 wrong**.
+>
+> The numbers in the body below describe the *pre-`EB`* state and are retained for
+> the taxonomy; the live counts are in these banners.
 
 ## Executive summary
 

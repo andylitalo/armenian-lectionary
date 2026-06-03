@@ -84,6 +84,17 @@ def _easter_band(year: int) -> int:
     return p // _EB_BIN if p >= 0 else -1   # earliest-Easter (pn_len<0) is its own band
 
 
+def _adv_len(year: int) -> int:
+    """Length (days) of Advent: this year's Heesnak Sunday -> next year's Theophany
+    (Jan 6). Heesnak = Sunday closest to Nov 18, so this swings ~46-52 days. Used
+    to band the Heesnak-anchored Advent keyspaces: the same Heesnak offset carries
+    different readings across Advent-length classes (the Hebrews/Luke continua
+    fast-forwards in short Advents), so banding by length separates them. The span
+    is Nov->Jan with no Feb-29 inside, so it needs no leap correction."""
+    he = sunday_closest_to(year, 11, 18)
+    return (datetime.date(year + 1, 1, 6) - he).days
+
+
 def anchors(year: int) -> dict:
     """The chain of governing feasts for a civil year."""
     e = calculate_gregorian_easter(year)
@@ -545,6 +556,15 @@ def coords_for(d: datetime.date) -> dict:
     # (emitted only inside the Easter-core window; string-keyed, self-guarded).
     if WINDOWS["E"][0] <= e_off <= WINDOWS["E"][1]:
         cs["EB"] = f"{_easter_band(y)}:{e_off}"
+    # Advent-length-band sub-keys for the Heesnak offset cycles (this year + the
+    # tail into early January), so the Heesnak Sunday and the Advent continua
+    # separate by Advent-length class the same way the winter grid keys do. Placed
+    # at low precedence (just above HE/HEp), so the winter grid still wins where it
+    # ships; these only catch days the grid leaves (chiefly Heesnak Sunday itself).
+    if WINDOWS["HE"][0] <= cs["HE"] <= WINDOWS["HE"][1]:
+        cs["HEB"] = f"{_adv_len(y)}:{cs['HE']}"
+    if WINDOWS["HEp"][0] <= cs["HEp"] <= WINDOWS["HEp"][1]:
+        cs["HEpB"] = f"{_adv_len(y - 1)}:{cs['HEp']}"
     cs.update(winter_coords(d))                 # winter grid slots (string keys)
     cs.update(hinge_coords(d))                  # summer/autumn grid slots
     return cs
@@ -643,6 +663,8 @@ WINDOWS = {
     "E": (-72, 116),
     "AS": (-14, 27),
     "EX": (-9, 60),
+    "HEB": None,
+    "HEpB": None,
     "HE": (0, 60),
     "HEp": (40, 75),
     "TH": (-46, 40),
@@ -655,7 +677,7 @@ WINDOWS.update({ks: None for ks in HINGE_KS})
 # solar/Easter anchored cycles, then the winter grid slots, then the generic
 # Theophany/Heesnak season counts.
 PRECEDENCE = (["C", "CF", "AS", "EX", "EB", "E"] + WINTER_KS + HINGE_KS
-              + ["HE", "HEp", "TH", "THp"])
+              + ["HEB", "HE", "HEpB", "HEp", "TH", "THp"])
 
 # Keyspaces whose keys are integers (day-offsets); all others are string keys.
 INT_KEYSPACES = {"E", "AS", "EX", "HE", "HEp", "TH", "THp"}
@@ -733,6 +755,8 @@ def season_for(keyspace: str, key) -> str:
         return _easter_season(key)
     if keyspace == "EB":                        # "band:offset" -> Easter season
         return _easter_season(int(str(key).split(":")[1]))
+    if keyspace in ("HEB", "HEpB"):
+        return "Advent (Heesnak)"
     return _KS_SEASON.get(keyspace, "Ordinary Time")
 
 

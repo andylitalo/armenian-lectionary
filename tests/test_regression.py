@@ -16,7 +16,7 @@ from lectionary import compute_armenian_lectionary  # noqa: E402
 
 # Current baseline; regressions below this fail. Overridable via env so a
 # pre-backfill checkout (smaller cache) can lower it without editing source.
-COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "9199"))
+COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "9252"))
 
 
 class TestRegression(unittest.TestCase):
