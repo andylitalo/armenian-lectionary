@@ -1,0 +1,1011 @@
+{
+ "PN": {
+  "meta": {
+   "source": "Mined from sacredtradition.am post-Nativity (Theophany octave -> eve of Fast of Catechumens) saint-weekdays (ordering/pins/aliases only; readings live in lectionary_data.json under the zone's Saint keyspace).",
+   "years_mined": [
+    "2001",
+    "2002",
+    "2003",
+    "2004",
+    "2005",
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026",
+    "2027"
+   ],
+   "head_tail_split": 9
+  },
+  "aliases": {
+   "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": "eugenia_the_virgin",
+   "Saint Sahak I the Parthian, Patriarch of Armenia": "sahak_i_the",
+   "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina": "cyprian_the_bishop",
+   "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs": "athenogenes_the_bishop",
+   "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": "forefathers_adam_abel",
+   "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin": "thaddeus_apostle_of",
+   "Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory of Theologian": "fathers_saints_athanasius",
+   "Holy Fathers Saints Athanasius and Cyril of Alexandria": "fathers_saints_athanasius",
+   "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": "vahan_of_goghtn",
+   "Saint Vahan of Goghtn": "vahan_of_goghtn",
+   "Saints Eugenios, Makarios, Valerian, Candidus and Aquila": "eugenios_makarios_valerian",
+   "Saints Eugenius, Marcarius, Alerius, Canditus and Aquila, and Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "eugenios_makarios_valerian",
+   "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius": "hermits_saints_anton",
+   "The Hermit Saints Anton": "hermits_saints_anton",
+   "Saints Theodosius and the Children of Ephesus": "theodosius_and_the",
+   "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
+   "Saints Cyricus and His Mother Julitta": "cyricus_and_his",
+   "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
+   "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
+   "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
+   "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape": "sophia_and_her",
+   "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel": "gregory_the_illuminator",
+   "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon": "peter_the_patriarch",
+   "Saint Gregory of Theologian": "gregory_of_theologian",
+   "The Hermits Saints Triphon, Barsauma and Onouphrius": "hermits_saints_triphon",
+   "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
+   "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)": "150_fathers_participating"
+  },
+  "sequence": [
+   {
+    "id": "peter_the_patriarch",
+    "label": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+    "order": 0,
+    "support_years": 24,
+    "anchor": "head"
+   },
+   {
+    "id": "hermits_saints_anton",
+    "label": "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+    "order": 1,
+    "support_years": 23,
+    "anchor": "head"
+   },
+   {
+    "id": "theodosius_and_the",
+    "label": "Saints Theodosius and the Children of Ephesus",
+    "order": 2,
+    "support_years": 23,
+    "anchor": "head"
+   },
+   {
+    "id": "cyricus_and_his",
+    "label": "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris",
+    "order": 3,
+    "support_years": 19,
+    "anchor": "head"
+   },
+   {
+    "id": "fathers_saints_athanasius",
+    "label": "Holy Fathers Saints Athanasius and Cyril of Alexandria",
+    "order": 4,
+    "support_years": 17,
+    "anchor": "pin:Sat",
+    "date_lo": "01-21",
+    "date_hi": "01-27"
+   },
+   {
+    "id": "150_fathers_participating",
+    "label": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
+    "order": 4,
+    "support_years": 2,
+    "anchor": "skip"
+   },
+   {
+    "id": "vahan_of_goghtn",
+    "label": "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs",
+    "order": 5,
+    "support_years": 15,
+    "anchor": "head"
+   },
+   {
+    "id": "hermits_saints_triphon",
+    "label": "The Hermits Saints Triphon, Barsauma and Onouphrius",
+    "order": 5,
+    "support_years": 1,
+    "anchor": "skip"
+   },
+   {
+    "id": "eugenios_makarios_valerian",
+    "label": "Saints Eugenios, Makarios, Valerian, Candidus and Aquila",
+    "order": 6,
+    "support_years": 15,
+    "anchor": "head"
+   },
+   {
+    "id": "eugenia_the_virgin",
+    "label": "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs",
+    "order": 6,
+    "support_years": 1,
+    "anchor": "skip"
+   },
+   {
+    "id": "gregory_of_theologian",
+    "label": "Saint Gregory of Theologian",
+    "order": 7,
+    "support_years": 11,
+    "anchor": "pin:Sat",
+    "date_lo": "01-28",
+    "date_hi": "02-02"
+   },
+   {
+    "id": "andrew_the_general",
+    "label": "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "order": 7,
+    "support_years": 5,
+    "anchor": "skip"
+   },
+   {
+    "id": "adrian_and_his",
+    "label": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+    "order": 8,
+    "support_years": 6,
+    "anchor": "skip"
+   },
+   {
+    "id": "sahak_i_the",
+    "label": "Saint Sahak I the Parthian, Patriarch of Armenia",
+    "order": 8,
+    "support_years": 2,
+    "anchor": "skip"
+   },
+   {
+    "id": "cyprian_the_bishop",
+    "label": "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
+    "order": 8,
+    "support_years": 1,
+    "anchor": "skip"
+   },
+   {
+    "id": "athenogenes_the_bishop",
+    "label": "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
+    "order": 9,
+    "support_years": 1,
+    "anchor": "skip"
+   },
+   {
+    "id": "maccabees_eleazar_the",
+    "label": "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
+    "order": 10,
+    "support_years": 9,
+    "anchor": "tail",
+    "weekday": "Mon"
+   },
+   {
+    "id": "forefathers_adam_abel",
+    "label": "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
+    "order": 10,
+    "support_years": 1,
+    "anchor": "skip"
+   },
+   {
+    "id": "twelve_prophets_hosea",
+    "label": "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
+    "order": 11,
+    "support_years": 9,
+    "anchor": "tail",
+    "weekday": "Tue"
+   },
+   {
+    "id": "gregory_the_illuminator",
+    "label": "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel",
+    "order": 11,
+    "support_years": 9,
+    "anchor": "pin:Sat",
+    "date_lo": "02-03",
+    "date_hi": "02-09"
+   },
+   {
+    "id": "sophia_and_her",
+    "label": "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
+    "order": 12,
+    "support_years": 9,
+    "anchor": "tail",
+    "weekday": "Thu"
+   },
+   {
+    "id": "thaddeus_apostle_of",
+    "label": "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin",
+    "order": 15,
+    "support_years": 1,
+    "anchor": "skip"
+   }
+  ]
+ },
+ "Tr": {
+  "meta": {
+   "source": "Mined from sacredtradition.am summer (Transfiguration -> eve of Fast of the Assumption) saint-weekdays (ordering/pins/aliases only; readings live in lectionary_data.json under the zone's Saint keyspace).",
+   "years_mined": [
+    "2001",
+    "2002",
+    "2003",
+    "2004",
+    "2005",
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026",
+    "2027"
+   ],
+   "head_tail_split": 13
+  },
+  "aliases": {
+   "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon": "peter_the_patriarch",
+   "The Hermit Saints Anton": "hermit_saints_anton",
+   "Saints Theodosius and the Children of Ephesus": "theodosius_and_the",
+   "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel": "gregory_the_illuminator",
+   "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
+   "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
+   "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape": "sophia_and_her",
+   "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
+   "Saints Cyricus and His Mother Julitta": "cyricus_and_his",
+   "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": "vahan_of_goghtn",
+   "Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": "vahan_of_goghtn",
+   "The Hermits Saints Triphon, Barsauma and Onouphrius": "hermits_saints_triphon",
+   "Saint Gregory of Theologian": "gregory_of_theologian",
+   "Saints Eugenios, Makarios, Valerian, Candidus and Aquila": "eugenios_makarios_valerian",
+   "Second day of TransfigurationRemembrance of the Dead": "second_day_of",
+   "Third day of Transfiguration": "third_day_of",
+   "Saint Isaiah the Prophet": "isaiah_the_prophet",
+   "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin": "thaddeus_apostle_of",
+   "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina": "cyprian_the_bishop",
+   "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs": "athenogenes_the_bishop",
+   "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": "forefathers_adam_abel",
+   "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)": "200_fathers_of",
+   "Holy Fathers Saints Athanasius and Cyril of Alexandria": "fathers_saints_athanasius",
+   "Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory of Theologian": "fathers_saints_athanasius",
+   "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": "eugenia_the_virgin",
+   "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila": "eugenia_the_virgin",
+   "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": "adrian_and_his"
+  },
+  "sequence": [
+   {
+    "id": "second_day_of",
+    "label": "Second day of TransfigurationRemembrance of the Dead",
+    "order": 0,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "third_day_of",
+    "label": "Third day of Transfiguration",
+    "order": 1,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "isaiah_the_prophet",
+    "label": "Saint Isaiah the Prophet",
+    "order": 2,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "thaddeus_apostle_of",
+    "label": "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin",
+    "order": 3,
+    "support_years": 25,
+    "anchor": "pin:Sat",
+    "date_lo": "07-05",
+    "date_hi": "08-03"
+   },
+   {
+    "id": "cyprian_the_bishop",
+    "label": "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
+    "order": 4,
+    "support_years": 25,
+    "anchor": "head"
+   },
+   {
+    "id": "athenogenes_the_bishop",
+    "label": "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
+    "order": 5,
+    "support_years": 25,
+    "anchor": "head"
+   },
+   {
+    "id": "forefathers_adam_abel",
+    "label": "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
+    "order": 6,
+    "support_years": 25,
+    "anchor": "head"
+   },
+   {
+    "id": "gregory_the_illuminator",
+    "label": "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel",
+    "order": 7,
+    "support_years": 17,
+    "anchor": "pin:Sat",
+    "date_lo": "07-12",
+    "date_hi": "08-01"
+   },
+   {
+    "id": "maccabees_eleazar_the",
+    "label": "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
+    "order": 8,
+    "support_years": 17,
+    "anchor": "head"
+   },
+   {
+    "id": "twelve_prophets_hosea",
+    "label": "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
+    "order": 9,
+    "support_years": 17,
+    "anchor": "head"
+   },
+   {
+    "id": "sophia_and_her",
+    "label": "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
+    "order": 10,
+    "support_years": 17,
+    "anchor": "head"
+   },
+   {
+    "id": "200_fathers_of",
+    "label": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)",
+    "order": 11,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "08-04",
+    "date_hi": "08-10"
+   },
+   {
+    "id": "fathers_saints_athanasius",
+    "label": "Holy Fathers Saints Athanasius and Cyril of Alexandria",
+    "order": 11,
+    "support_years": 9,
+    "anchor": "pin:Sat",
+    "date_lo": "07-23",
+    "date_hi": "08-01"
+   },
+   {
+    "id": "peter_the_patriarch",
+    "label": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+    "order": 11,
+    "support_years": 2,
+    "anchor": "skip"
+   },
+   {
+    "id": "cyricus_and_his",
+    "label": "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris",
+    "order": 12,
+    "support_years": 7,
+    "anchor": "head"
+   },
+   {
+    "id": "hermit_saints_anton",
+    "label": "The Hermit Saints Anton",
+    "order": 12,
+    "support_years": 3,
+    "anchor": "skip"
+   },
+   {
+    "id": "vahan_of_goghtn",
+    "label": "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs",
+    "order": 13,
+    "support_years": 9,
+    "anchor": "skip"
+   },
+   {
+    "id": "eugenia_the_virgin",
+    "label": "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs",
+    "order": 13,
+    "support_years": 5,
+    "anchor": "skip"
+   },
+   {
+    "id": "theodosius_and_the",
+    "label": "Saints Theodosius and the Children of Ephesus",
+    "order": 13,
+    "support_years": 3,
+    "anchor": "skip"
+   },
+   {
+    "id": "gregory_of_theologian",
+    "label": "Saint Gregory of Theologian",
+    "order": 15,
+    "support_years": 7,
+    "anchor": "pin:Sat",
+    "date_lo": "07-30",
+    "date_hi": "08-03"
+   },
+   {
+    "id": "eugenios_makarios_valerian",
+    "label": "Saints Eugenios, Makarios, Valerian, Candidus and Aquila",
+    "order": 16,
+    "support_years": 9,
+    "anchor": "skip"
+   },
+   {
+    "id": "hermits_saints_triphon",
+    "label": "The Hermits Saints Triphon, Barsauma and Onouphrius",
+    "order": 17,
+    "support_years": 6,
+    "anchor": "skip"
+   },
+   {
+    "id": "andrew_the_general",
+    "label": "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "order": 17,
+    "support_years": 6,
+    "anchor": "tail",
+    "weekday": "Tue"
+   },
+   {
+    "id": "adrian_and_his",
+    "label": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+    "order": 18,
+    "support_years": 6,
+    "anchor": "tail",
+    "weekday": "Thu"
+   }
+  ]
+ },
+ "As": {
+  "meta": {
+   "source": "Mined from sacredtradition.am autumn (Assumption -> eve of Fast of the Holy Cross) saint-weekdays (ordering/pins/aliases only; readings live in lectionary_data.json under the zone's Saint keyspace).",
+   "years_mined": [
+    "2001",
+    "2002",
+    "2003",
+    "2004",
+    "2005",
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026",
+    "2027"
+   ],
+   "head_tail_split": 13
+  },
+  "aliases": {
+   "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
+   "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": "abraham_and_khoren",
+   "Second day of the AssumptionRemembrance of the Dead": "second_day_of",
+   "Fifth day of the Assumption": "second_day_of",
+   "Third day of the Assumption": "third_day_of",
+   "Ninth day of Assumption": "third_day_of",
+   "Seventh day of the Assumption": "seventh_day_of",
+   "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores": "joachim_and_anna",
+   "Saint Jeremiah the Prophet": "jeremiah_the_prophet",
+   "Holy Apostles Thomas, James and Simon": "apostles_thomas_james",
+   "Holy Apostle Thomas": "apostles_thomas_james",
+   "Holy Apostles James and Simon": "apostles_thomas_james",
+   "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus": "stephen_of_oulnia",
+   "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist": "prophets_ezekiel_ezra",
+   "Saints John the Forerunner (Baptist) and Job the Righteous": "john_the_forerunner",
+   "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)": "318_fathers_of"
+  },
+  "sequence": [
+   {
+    "id": "second_day_of",
+    "label": "Second day of the AssumptionRemembrance of the Dead",
+    "order": 2,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "seventh_day_of",
+    "label": "Seventh day of the Assumption",
+    "order": 3,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "08-18",
+    "date_hi": "08-24"
+   },
+   {
+    "id": "third_day_of",
+    "label": "Third day of the Assumption",
+    "order": 4,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "joachim_and_anna",
+    "label": "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
+    "order": 5,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "jeremiah_the_prophet",
+    "label": "Saint Jeremiah the Prophet",
+    "order": 6,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "apostles_thomas_james",
+    "label": "Holy Apostles Thomas, James and Simon",
+    "order": 7,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "08-25",
+    "date_hi": "09-02"
+   },
+   {
+    "id": "stephen_of_oulnia",
+    "label": "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
+    "order": 8,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "prophets_ezekiel_ezra",
+    "label": "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist",
+    "order": 9,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "john_the_forerunner",
+    "label": "Saints John the Forerunner (Baptist) and Job the Righteous",
+    "order": 10,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "318_fathers_of",
+    "label": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
+    "order": 11,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "09-01",
+    "date_hi": "09-09"
+   },
+   {
+    "id": "andrew_the_general",
+    "label": "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "order": 12,
+    "support_years": 7,
+    "anchor": "head"
+   },
+   {
+    "id": "adrian_and_his",
+    "label": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+    "order": 13,
+    "support_years": 7,
+    "anchor": "tail",
+    "weekday": "Tue"
+   },
+   {
+    "id": "abraham_and_khoren",
+    "label": "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
+    "order": 14,
+    "support_years": 7,
+    "anchor": "tail",
+    "weekday": "Thu"
+   }
+  ]
+ },
+ "Ex": {
+  "meta": {
+   "source": "Mined from sacredtradition.am post-Exaltation (Exaltation -> eve of Advent / Heesnak) saint-weekdays (ordering/pins/aliases only; readings live in lectionary_data.json under the zone's Saint keyspace).",
+   "years_mined": [
+    "2001",
+    "2002",
+    "2003",
+    "2004",
+    "2005",
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026",
+    "2027"
+   ],
+   "head_tail_split": 37
+  },
+  "aliases": {
+   "Saints Severianus of Sebastia and Babylas and his 84 Disciples": "severianus_of_sebastia",
+   "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
+   "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": "abraham_and_khoren",
+   "Feast of the Holy CrossRemembrance of the Dead": "feast_of_the",
+   "Feast of the Holy Church": "feast_of_the_2",
+   "Feast of the Holy Cross": "feast_of_the_4",
+   "Fast daySaints Mamas, Philomenos and Simeon the Stylite": "fast_daysaints_mamas",
+   "Fast daySaints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan": "fast_daysaints_virgins",
+   "Fast daySaint Patriarchs Barlaam, Anthimus and Irenaeus": "fast_daysaint_patriarchs",
+   "Saints George the Warrior, Adauctus and Romanus the Melodist": "george_the_warrior",
+   "Saints David of Dvin and the Martyrs Eulampius and Eulampia": "david_of_dvin",
+   "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine": "eustachius_his_wife",
+   "The Saintly Princes Sahak and Hamazasp": "saintly_princes_sahak",
+   "Seventy Two Holy Disciples of Christ": "seventy_two_holy",
+   "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles": "phocas_the_patriarch",
+   "Saints Virgins Thecla, Barbara and Pelagia": "virgins_thecla_barbara",
+   "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin": "pantaleimon_the_physician",
+   "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful": "translators_mesrop_yeghishe",
+   "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits": "discovery_of_relics",
+   "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus": "apostles_ananias_matthias",
+   "Saints Dionysius the Areopagite and the Apostles Timothy and Titus": "dionysius_the_areopagite",
+   "Holy Evangelists Matthew, Mark, Luke and John": "evangelists_matthew_mark",
+   "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary": "longinus_the_centurion",
+   "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus": "theodoret_the_priest",
+   "Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina": "st_aret_and",
+   "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria": "twelve_holy_doctors",
+   "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her": "anastasius_the_priest",
+   "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples": "hipparchus_and_his",
+   "Saints Hipparchus and his Companions Who were Martyred in Samosata": "hipparchus_and_his",
+   "Saint John Chrysostom": "john_chrysostom",
+   "Feast of All Saints, the old and the new, the known and the unknown": "feast_of_all",
+   "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls": "stephen_bishop_of",
+   "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr": "akepsimas_the_bishop",
+   "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs": "metrophanes_alexander_and",
+   "Holy Archangels Gabriel and Michael and all the heavenly Angels": "archangels_gabriel_and",
+   "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon": "meletius_bishop_of",
+   "Saints Demetrios the Martyr and Basil the Priest": "demetrios_the_martyr",
+   "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier": "gurias_samonas_and",
+   "The Holy Apostles Andrew and Phillip": "apostles_andrew_and"
+  },
+  "sequence": [
+   {
+    "id": "feast_of_the",
+    "label": "Feast of the Holy CrossRemembrance of the Dead",
+    "order": 0,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "feast_of_the_2",
+    "label": "Feast of the Holy Church",
+    "order": 1,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "feast_of_the_3",
+    "label": "Feast of the Holy Church",
+    "order": 2,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "feast_of_the_4",
+    "label": "Feast of the Holy Cross",
+    "order": 3,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "09-17",
+    "date_hi": "09-23"
+   },
+   {
+    "id": "fast_daysaints_mamas",
+    "label": "Fast daySaints Mamas, Philomenos and Simeon the Stylite",
+    "order": 4,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "fast_daysaints_virgins",
+    "label": "Fast daySaints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
+    "order": 5,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "fast_daysaint_patriarchs",
+    "label": "Fast daySaint Patriarchs Barlaam, Anthimus and Irenaeus",
+    "order": 6,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "george_the_warrior",
+    "label": "Saints George the Warrior, Adauctus and Romanus the Melodist",
+    "order": 7,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "09-24",
+    "date_hi": "09-30"
+   },
+   {
+    "id": "david_of_dvin",
+    "label": "Saints David of Dvin and the Martyrs Eulampius and Eulampia",
+    "order": 8,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "eustachius_his_wife",
+    "label": "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
+    "order": 9,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "saintly_princes_sahak",
+    "label": "The Saintly Princes Sahak and Hamazasp",
+    "order": 10,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "seventy_two_holy",
+    "label": "Seventy Two Holy Disciples of Christ",
+    "order": 11,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "10-01",
+    "date_hi": "10-07"
+   },
+   {
+    "id": "phocas_the_patriarch",
+    "label": "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
+    "order": 12,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "virgins_thecla_barbara",
+    "label": "Saints Virgins Thecla, Barbara and Pelagia",
+    "order": 13,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "pantaleimon_the_physician",
+    "label": "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
+    "order": 14,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "translators_mesrop_yeghishe",
+    "label": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
+    "order": 15,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "10-08",
+    "date_hi": "10-14"
+   },
+   {
+    "id": "discovery_of_relics",
+    "label": "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "order": 16,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "apostles_ananias_matthias",
+    "label": "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus",
+    "order": 17,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "dionysius_the_areopagite",
+    "label": "Saints Dionysius the Areopagite and the Apostles Timothy and Titus",
+    "order": 18,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "evangelists_matthew_mark",
+    "label": "Holy Evangelists Matthew, Mark, Luke and John",
+    "order": 19,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "10-15",
+    "date_hi": "10-21"
+   },
+   {
+    "id": "longinus_the_centurion",
+    "label": "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
+    "order": 20,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "theodoret_the_priest",
+    "label": "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus",
+    "order": 21,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "st_aret_and",
+    "label": "Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
+    "order": 22,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "twelve_holy_doctors",
+    "label": "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria",
+    "order": 23,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "10-22",
+    "date_hi": "10-28"
+   },
+   {
+    "id": "anastasius_the_priest",
+    "label": "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
+    "order": 24,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "hipparchus_and_his",
+    "label": "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples",
+    "order": 25,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "john_chrysostom",
+    "label": "Saint John Chrysostom",
+    "order": 26,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "severianus_of_sebastia",
+    "label": "Saints Severianus of Sebastia and Babylas and his 84 Disciples",
+    "order": 26,
+    "support_years": 7,
+    "anchor": "head"
+   },
+   {
+    "id": "feast_of_all",
+    "label": "Feast of All Saints, the old and the new, the known and the unknown",
+    "order": 27,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "10-31",
+    "date_hi": "11-20"
+   },
+   {
+    "id": "stephen_bishop_of",
+    "label": "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls",
+    "order": 28,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "akepsimas_the_bishop",
+    "label": "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
+    "order": 29,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "metrophanes_alexander_and",
+    "label": "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
+    "order": 30,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "archangels_gabriel_and",
+    "label": "Holy Archangels Gabriel and Michael and all the heavenly Angels",
+    "order": 31,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "11-05",
+    "date_hi": "11-11"
+   },
+   {
+    "id": "meletius_bishop_of",
+    "label": "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
+    "order": 32,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "demetrios_the_martyr",
+    "label": "Saints Demetrios the Martyr and Basil the Priest",
+    "order": 33,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "gurias_samonas_and",
+    "label": "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
+    "order": 34,
+    "support_years": 26,
+    "anchor": "head"
+   },
+   {
+    "id": "apostles_andrew_and",
+    "label": "The Holy Apostles Andrew and Phillip",
+    "order": 35,
+    "support_years": 26,
+    "anchor": "pin:Sat",
+    "date_lo": "11-12",
+    "date_hi": "11-18"
+   },
+   {
+    "id": "andrew_the_general",
+    "label": "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "order": 36,
+    "support_years": 7,
+    "anchor": "head"
+   },
+   {
+    "id": "adrian_and_his",
+    "label": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+    "order": 37,
+    "support_years": 7,
+    "anchor": "skip"
+   },
+   {
+    "id": "abraham_and_khoren",
+    "label": "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
+    "order": 38,
+    "support_years": 7,
+    "anchor": "skip"
+   }
+  ]
+ }
+}

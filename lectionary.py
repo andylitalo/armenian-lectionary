@@ -223,102 +223,11 @@ def _advent_slot(d, he, out):
     out["AdvSatB"] = f"{back_week}:{_WD[wd]}"
 
 
-POSTNAT_SCHEDULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                     "dev", "postnat_schedule.json")
-
-
-def _load_postnat_schedule():
-    """The mined post-Nativity saint schedule (ordering / pins / weekday locks
-    only -- never readings). Absent in a thin checkout -> {}; then PnSaint is
-    simply not emitted and the grid keys behave exactly as before."""
-    try:
-        with open(POSTNAT_SCHEDULE_PATH, encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
-
-
-_POSTNAT_SCHEDULE = _load_postnat_schedule()
-
-
 def _civil_fixed_md():
     """(month, day) pairs the immovable-feast civil keyspace claims, so the saint
     replay drops them exactly as the build/mining layer does (keeping the laydown
     aligned with ground truth)."""
     return {tuple(int(x) for x in k.split("-")) for k in _TABLES.get("C", {})}
-
-
-@functools.lru_cache(maxsize=None)
-def _postnat_saint_replay(year):
-    """Lay the canonical post-Nativity saint schedule onto `year`'s actual free
-    saint-weekdays and return {date: saint_id}.
-
-    Pure calendar function -- emits identities (PnSaint coordinates) only, never
-    readings, so an imperfect replay can only lower coverage (a mis-keyed day
-    makes its bucket cross-year-inconsistent and the strict build filter drops
-    it), never ship a wrong reading.
-
-    Three anchor classes (see dev/saint_schedule.py):
-      * pin:Sat -- a high-rank Father locked to the Saturday in its solar window;
-      * head    -- the opening flow block, laid FORWARD from the window start
-                   (stable: optional minor saints only ever appear after it);
-      * tail    -- the closing block, each locked to one weekday and laid
-                   BACKWARD (last free <weekday>), since its forward ordinal
-                   drifts with the count of optional middle saints.
-    Middle / low-support saints are left unassigned (they keep falling through to
-    the grid keys or to estimate)."""
-    seq = _POSTNAT_SCHEDULE.get("sequence")
-    if not seq:
-        return {}
-    start, end = winter_window(year)["PN"]
-    john = _next_saint_weekday(datetime.date(year, 1, 14))
-    civil = _civil_fixed_md()
-    slots = []
-    d = start
-    while d <= end:
-        md = (d.month, d.day)
-        if (d.weekday() in _SAINT_WD and d != john
-                and md not in EMBEDDED_FIXED and md not in civil):
-            slots.append(d)
-        d += datetime.timedelta(days=1)
-
-    assigned, used = {}, set()
-
-    # Pass A -- pinned Saturdays claim the Saturday in their solar window.
-    pins = [e for e in seq if e["anchor"] == "pin:Sat"]
-    placed_pins = set()
-    for e in pins:
-        lo = tuple(int(x) for x in e["date_lo"].split("-"))
-        hi = tuple(int(x) for x in e["date_hi"].split("-"))
-        for dd in slots:
-            if (dd.weekday() == 5 and dd not in used
-                    and lo <= (dd.month, dd.day) <= hi):
-                assigned[dd] = e["id"]
-                used.add(dd)
-                placed_pins.add(e["id"])
-                break
-
-    # Pass B -- the head flow block fills the earliest free non-pinned slots.
-    free = [dd for dd in slots if dd not in used]
-    heads = [e for e in seq if e["anchor"] == "head"]
-    for e, dd in zip(heads, free):
-        assigned[dd] = e["id"]
-        used.add(dd)
-
-    # Pass C -- the closing block is laid backward (each tail saint takes the LAST
-    # still-free slot of its weekday), but ONLY in long windows: the tail block
-    # co-occurs exactly with the last pinned Saturday, so gate on it to avoid
-    # grabbing a middle saint's leftover weekday slot in a short year.
-    if pins and pins[-1]["id"] in placed_pins:
-        for e in seq:
-            if e["anchor"] != "tail":
-                continue
-            w = _WD.index(e["weekday"])
-            cands = [dd for dd in slots if dd.weekday() == w and dd not in used]
-            if cands:
-                assigned[cands[-1]] = e["id"]
-                used.add(cands[-1])
-    return assigned
 
 
 def _postnat_slot(d, start, end, out):
@@ -359,7 +268,7 @@ def _postnat_slot(d, start, end, out):
         out["PnFer"] = f"{nsun}:{_WD[wd]}"
         return
     # saint weekday: senior-saint identity (most specific) + forward/backward grid.
-    sid = _postnat_saint_replay(d.year).get(d)
+    sid = _zone_saint_replay("PN", d.year).get(d)
     if sid:
         out["PnSaint"] = sid
     out["PnSatL"] = f"{pn_len}:{nsun}:{_WD[wd]}"
@@ -419,6 +328,25 @@ WINTER_KS = ["PnJohn", "PnEve",
 # --------------------------------------------------------------------------- #
 
 
+def _hinge_anchors(year: int) -> dict:
+    """The summer/autumn/post-Exaltation anchor dates and ferial-window edges for a
+    civil year. Shared by the grid-coordinate builder (`_hinge_coords_raw`) and the
+    saint-replay window helpers so the two can never drift out of step."""
+    e = calculate_gregorian_easter(year)
+    tr = e + datetime.timedelta(days=98)              # Transfiguration (Vardavar)
+    asun = sunday_closest_to(year, 8, 15)             # Assumption
+    ex = sunday_closest_to(year, 9, 14)               # Exaltation
+    he = sunday_closest_to(year, 11, 18)              # Heesnak (Advent start)
+    as_fast_mon = asun - datetime.timedelta(days=6)   # Mon of Fast of Assumption
+    ex_fast_mon = ex - datetime.timedelta(days=6)     # Mon of Fast of Holy Cross
+    return {
+        "TR": tr, "AS": asun, "EX": ex, "HE": he,
+        "AS_FAST_MON": as_fast_mon, "EX_FAST_MON": ex_fast_mon,
+        "SUMMER_EVE": as_fast_mon - datetime.timedelta(days=1),
+        "AUTUMN_EVE": ex_fast_mon - datetime.timedelta(days=1),
+    }
+
+
 def _summer_slot(d, tr, fast_mon, eve, out):
     """Grid coordinates for a Transfiguration->Assumption day (tr < d <= eve).
 
@@ -442,6 +370,10 @@ def _summer_slot(d, tr, fast_mon, eve, out):
         out["TrFerL"] = f"{span}:{fer}"
         out["TrFer"] = str(fer)
         return
+    # saint weekday: senior-saint identity (most specific) + forward/backward grid.
+    sid = _zone_saint_replay("Tr", d.year).get(d)
+    if sid:
+        out["TrSaint"] = sid
     out["TrSatL"] = f"{span}:{week}:{_WD[wd]}"
     out["TrSatBL"] = f"{span}:{back_week}:{_WD[wd]}"
     out["TrSat"] = f"{week}:{_WD[wd]}"
@@ -468,6 +400,9 @@ def _autumn_slot(d, asun, exfast_mon, out):
         out["AsFerL"] = f"{span}:{fer}"
         out["AsFer"] = str(fer)
         return
+    sid = _zone_saint_replay("As", d.year).get(d)
+    if sid:
+        out["AsSaint"] = sid
     out["AsSatL"] = f"{span}:{week}:{_WD[wd]}"
     out["AsSatBL"] = f"{span}:{back_week}:{_WD[wd]}"
     out["AsSat"] = f"{week}:{_WD[wd]}"
@@ -490,6 +425,9 @@ def _postex_slot(d, ex, he, out):
         out["ExFerL"] = f"{span}:{fer}"
         out["ExFer"] = str(fer)
         return
+    sid = _zone_saint_replay("Ex", d.year).get(d)
+    if sid:
+        out["ExSaint"] = sid
     out["ExSatL"] = f"{span}:{week}:{_WD[wd]}"
     out["ExSatBL"] = f"{span}:{back_week}:{_WD[wd]}"
     out["ExSat"] = f"{week}:{_WD[wd]}"
@@ -499,25 +437,16 @@ def _postex_slot(d, ex, he, out):
 def _hinge_coords_raw(d: datetime.date) -> dict:
     """Summer/autumn grid coordinates (no embedded-fixed guard)."""
     out = {}
-    y = d.year
-    e = calculate_gregorian_easter(y)
-    tr = e + datetime.timedelta(days=98)              # Transfiguration
-    asun = sunday_closest_to(y, 8, 15)               # Assumption
-    ex = sunday_closest_to(y, 9, 14)                 # Exaltation
-    he = sunday_closest_to(y, 11, 18)                # Heesnak (Advent start)
-    as_fast_mon = asun - datetime.timedelta(days=6)  # Mon of Fast of Assumption
-    ex_fast_mon = ex - datetime.timedelta(days=6)    # Mon of Fast of Holy Cross
+    a = _hinge_anchors(d.year)
     # Summer: strictly after Transfiguration, up to the eve of Fast of Assumption.
-    summer_eve = as_fast_mon - datetime.timedelta(days=1)
-    if tr < d <= summer_eve:
-        _summer_slot(d, tr, as_fast_mon, summer_eve, out)
+    if a["TR"] < d <= a["SUMMER_EVE"]:
+        _summer_slot(d, a["TR"], a["AS_FAST_MON"], a["SUMMER_EVE"], out)
     # Autumn: strictly after Assumption, up to the eve of Fast of Holy Cross.
-    autumn_eve = ex_fast_mon - datetime.timedelta(days=1)
-    if asun < d <= autumn_eve:
-        _autumn_slot(d, asun, ex_fast_mon, out)
+    if a["AS"] < d <= a["AUTUMN_EVE"]:
+        _autumn_slot(d, a["AS"], a["EX_FAST_MON"], out)
     # Post-Exaltation: after Exaltation up to the start of Advent (Heesnak).
-    if ex < d < he:
-        _postex_slot(d, ex, he, out)
+    if a["EX"] < d < a["HE"]:
+        _postex_slot(d, a["EX"], a["HE"], out)
     return out
 
 
@@ -529,11 +458,152 @@ def hinge_coords(d: datetime.date) -> dict:
 
 
 # Summer/autumn keyspaces, most specific first (forward grids before backward).
+# Each {Zone}Saint identity coordinate sits immediately above its zone's grid
+# saint keys, mirroring how PnSaint outranks PnSat* in WINTER_KS.
 HINGE_KS = ["TrEve", "AsEve",
             "TrSunL", "AsSunL", "ExSunL", "TrSun", "AsSun", "ExSun",
             "TrFerL", "AsFerL", "ExFerL", "TrFer", "AsFer", "ExFer",
-            "TrSatL", "TrSatBL", "AsSatL", "AsSatBL", "ExSatL", "ExSatBL",
+            "TrSaint", "TrSatL", "TrSatBL",
+            "AsSaint", "AsSatL", "AsSatBL",
+            "ExSaint", "ExSatL", "ExSatBL",
             "TrSat", "AsSat", "ExSat", "TrSatB", "AsSatB", "ExSatB"]
+
+
+# --------------------------------------------------------------------------- #
+# Saint-identity replay (winter post-Nativity + summer / autumn / post-Exaltation)
+#
+# In every variable-gap zone the saints are laid in a CANONICAL ORDER onto the
+# free Mon/Tue/Thu/Sat slots, so a single merge/drop shifts every downstream saint
+# onto a different grid key and the strict cross-year filter drops it. The fix is
+# to key each physical day by the SENIOR SAINT'S IDENTITY ({Zone}Saint) rather than
+# its drifting grid position. The mined schedule (dev/saint_schedule.json) carries
+# ordering / pins / weekday-locks ONLY -- never readings -- so an imperfect replay
+# can only lower coverage (a mis-keyed day makes its bucket cross-year-inconsistent
+# and is dropped), never ship a wrong reading. Readings stay in the validated table
+# under the {Zone}Saint keyspace, learned by the existing strict pipeline.
+# --------------------------------------------------------------------------- #
+
+
+def _summer_saint_window(year: int):
+    """(start, end) free-slot window of the summer (Transfiguration->Assumption)
+    saint zone: the day after Transfiguration .. eve of the Fast of Assumption."""
+    a = _hinge_anchors(year)
+    return (a["TR"] + datetime.timedelta(days=1), a["SUMMER_EVE"])
+
+
+def _autumn_saint_window(year: int):
+    """(start, end) free-slot window of the autumn (Assumption->Exaltation) saint
+    zone: the day after Assumption .. eve of the Fast of the Holy Cross."""
+    a = _hinge_anchors(year)
+    return (a["AS"] + datetime.timedelta(days=1), a["AUTUMN_EVE"])
+
+
+def _postex_saint_window(year: int):
+    """(start, end) free-slot window of the post-Exaltation saint zone: the day
+    after Exaltation .. the eve of Advent (Heesnak)."""
+    a = _hinge_anchors(year)
+    return (a["EX"] + datetime.timedelta(days=1), a["HE"] - datetime.timedelta(days=1))
+
+
+SAINT_SCHEDULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "dev", "saint_schedule.json")
+
+
+def _load_saint_schedule():
+    """The mined per-zone saint schedules (ordering / pins / weekday locks only --
+    never readings), keyed by zone ("PN"/"Tr"/"As"/"Ex"). Absent in a thin checkout
+    -> {}; then no {Zone}Saint coordinate is emitted and the grid keys behave
+    exactly as before."""
+    try:
+        with open(SAINT_SCHEDULE_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+_SAINT_SCHEDULE = _load_saint_schedule()
+
+# Per-zone replay descriptor: the identity coordinate emitted, the free-slot
+# window, and whether the John-the-Forerunner Jan-14 slot is skipped (PN only).
+_SAINT_ZONES = {
+    "PN": {"coord": "PnSaint", "window": lambda y: winter_window(y)["PN"],
+           "skip_john": True},
+    "Tr": {"coord": "TrSaint", "window": _summer_saint_window, "skip_john": False},
+    "As": {"coord": "AsSaint", "window": _autumn_saint_window, "skip_john": False},
+    "Ex": {"coord": "ExSaint", "window": _postex_saint_window, "skip_john": False},
+}
+
+
+@functools.lru_cache(maxsize=None)
+def _zone_saint_replay(zone, year):
+    """Lay a zone's canonical saint schedule onto `year`'s actual free
+    saint-weekdays and return {date: saint_id}.
+
+    Pure calendar function -- emits identities ({Zone}Saint coordinates) only,
+    never readings, so an imperfect replay can only lower coverage, never ship a
+    wrong reading. Three anchor classes (see dev/saint_schedule.py):
+      * pin:Sat -- a high-rank Father locked to the Saturday in its solar window;
+      * head    -- the opening flow block, laid FORWARD from the window start
+                   (stable: optional minor saints only ever appear after it);
+      * tail    -- the closing block, each locked to one weekday and laid
+                   BACKWARD (last free <weekday>), since its forward ordinal
+                   drifts with the count of optional middle saints.
+    Middle / low-support saints are left unassigned (they keep falling through to
+    the grid keys or to estimate)."""
+    z = _SAINT_ZONES[zone]
+    seq = _SAINT_SCHEDULE.get(zone, {}).get("sequence")
+    if not seq:
+        return {}
+    start, end = z["window"](year)
+    john = (_next_saint_weekday(datetime.date(year, 1, 14))
+            if z["skip_john"] else None)
+    civil = _civil_fixed_md()
+    slots = []
+    d = start
+    while d <= end:
+        md = (d.month, d.day)
+        if (d.weekday() in _SAINT_WD and d != john
+                and md not in EMBEDDED_FIXED and md not in civil):
+            slots.append(d)
+        d += datetime.timedelta(days=1)
+
+    assigned, used = {}, set()
+
+    # Pass A -- pinned Saturdays claim the Saturday in their solar window.
+    pins = [e for e in seq if e["anchor"] == "pin:Sat"]
+    placed_pins = set()
+    for e in pins:
+        lo = tuple(int(x) for x in e["date_lo"].split("-"))
+        hi = tuple(int(x) for x in e["date_hi"].split("-"))
+        for dd in slots:
+            if (dd.weekday() == 5 and dd not in used
+                    and lo <= (dd.month, dd.day) <= hi):
+                assigned[dd] = e["id"]
+                used.add(dd)
+                placed_pins.add(e["id"])
+                break
+
+    # Pass B -- the head flow block fills the earliest free non-pinned slots.
+    free = [dd for dd in slots if dd not in used]
+    heads = [e for e in seq if e["anchor"] == "head"]
+    for e, dd in zip(heads, free):
+        assigned[dd] = e["id"]
+        used.add(dd)
+
+    # Pass C -- the closing block is laid backward (each tail saint takes the LAST
+    # still-free slot of its weekday), but ONLY in long windows: the tail block
+    # co-occurs exactly with the last pinned Saturday, so gate on it to avoid
+    # grabbing a middle saint's leftover weekday slot in a short year.
+    if pins and pins[-1]["id"] in placed_pins:
+        for e in seq:
+            if e["anchor"] != "tail":
+                continue
+            w = _WD.index(e["weekday"])
+            cands = [dd for dd in slots if dd.weekday() == w and dd not in used]
+            if cands:
+                assigned[cands[-1]] = e["id"]
+                used.add(cands[-1])
+    return assigned
 
 
 def coords_for(d: datetime.date) -> dict:
@@ -682,8 +752,8 @@ WINDOWS.update({ks: None for ks in HINGE_KS})
 # Resolution precedence (first match wins): immovable feasts, then the
 # solar/Easter anchored cycles, then the winter grid slots, then the generic
 # Theophany/Heesnak season counts.
-PRECEDENCE = (["C", "CF", "AS", "EX", "EB", "E"] + WINTER_KS + HINGE_KS
-              + ["HEB", "HE", "HEpB", "HEp", "TH", "THp"])
+PRECEDENCE = (["C", "CF", "EB", "E"] + WINTER_KS + HINGE_KS
+              + ["AS", "EX", "HEB", "HE", "HEpB", "HEp", "TH", "THp"])
 
 # Keyspaces whose keys are integers (day-offsets); all others are string keys.
 INT_KEYSPACES = {"E", "AS", "EX", "HE", "HEp", "TH", "THp"}
@@ -729,14 +799,14 @@ _KS_SEASON = {
     "AsEve": "Eve of the Fast of the Holy Cross",
 }
 _KS_SEASON.update({ks: "After Transfiguration"
-                   for ks in ("TrSun", "TrSunL", "TrFer", "TrFerL", "TrSat",
-                              "TrSatL", "TrSatB", "TrSatBL")})
+                   for ks in ("TrSun", "TrSunL", "TrFer", "TrFerL", "TrSaint",
+                              "TrSat", "TrSatL", "TrSatB", "TrSatBL")})
 _KS_SEASON.update({ks: "After the Assumption"
-                   for ks in ("AsSun", "AsSunL", "AsFer", "AsFerL", "AsSat",
-                              "AsSatL", "AsSatB", "AsSatBL")})
+                   for ks in ("AsSun", "AsSunL", "AsFer", "AsFerL", "AsSaint",
+                              "AsSat", "AsSatL", "AsSatB", "AsSatBL")})
 _KS_SEASON.update({ks: "After the Exaltation of the Cross"
-                   for ks in ("ExSun", "ExSunL", "ExFer", "ExFerL", "ExSat",
-                              "ExSatL", "ExSatB", "ExSatBL")})
+                   for ks in ("ExSun", "ExSunL", "ExFer", "ExFerL", "ExSaint",
+                              "ExSat", "ExSatL", "ExSatB", "ExSatBL")})
 
 
 def _easter_season(offset: int) -> str:

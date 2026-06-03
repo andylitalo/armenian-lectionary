@@ -4,8 +4,6 @@
   "entries_per_keyspace": {
    "C": 9,
    "CF": 0,
-   "AS": 28,
-   "EX": 67,
    "EB": 1299,
    "E": 169,
    "PnJohn": 1,
@@ -47,10 +45,13 @@
    "TrFer": 6,
    "AsFer": 8,
    "ExFer": 20,
+   "TrSaint": 12,
    "TrSatL": 44,
    "TrSatBL": 44,
+   "AsSaint": 11,
    "AsSatL": 27,
    "AsSatBL": 27,
+   "ExSaint": 29,
    "ExSatL": 73,
    "ExSatBL": 73,
    "TrSat": 9,
@@ -59,6 +60,8 @@
    "TrSatB": 1,
    "AsSatB": 5,
    "ExSatB": 4,
+   "AS": 28,
+   "EX": 67,
    "HEB": 294,
    "HE": 29,
    "HEpB": 89,
@@ -181,816 +184,6 @@
    }
   },
   "CF": {},
-  "AS": {
-   "-6": {
-    "feast": "First day of the Fast of Assumption",
-    "readings": [
-     "St. Paul's First Epistle to the Corinthians 14.18-25",
-     "Mark 2.13-20"
-    ]
-   },
-   "-3": {
-    "feast": "Fourth day of the Fast of Assumption",
-    "readings": [
-     "St. Paul's First Epistle to the Corinthians 15.34-49",
-     "Mark 3.20-30"
-    ]
-   },
-   "16": {
-    "feast": "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist",
-    "readings": [
-     "Ezekiel 18.30-32",
-     "St. Paul's First Epistle to the Corinthians 2.6-10",
-     "Matthew 23.34-39"
-    ]
-   },
-   "-4": {
-    "feast": "Third day of the Fast of Assumption",
-    "readings": [
-     "St. Paul's First Epistle to the Corinthians 15.20-33",
-     "Mark 3.6-12"
-    ]
-   },
-   "2": {
-    "feast": "Third day of the Assumption",
-    "readings": [
-     "Luke 1.26-38",
-     "Song of Solomon 6.3-8",
-     "Malachi 3.1-2",
-     "St. Paul's Epistle to the Galatians 3.24-29",
-     "Luke 2.1-7"
-    ]
-   },
-   "9": {
-    "feast": "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
-    "readings": [
-     "Wisdom 9.9-10.2",
-     "Esther 10.4-9",
-     "Judith 15.7-16.3",
-     "St. Paul's Epistle to the Ephesians 1.3-12",
-     "Matthew 1.17-21"
-    ]
-   },
-   "4": {
-    "feast": "Fifth day of the Assumption",
-    "readings": [
-     "Luke 2.1-7",
-     "Proverbs 11.30-12.4",
-     "Zechariah 2.10-13",
-     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
-     "Luke 1.39-56"
-    ]
-   },
-   "17": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 3.4-17",
-     "Mark 6.45-56"
-    ]
-   },
-   "8": {
-    "feast": "Ninth day of Assumption",
-    "readings": [
-     "Luke 1.26-38",
-     "Song of Solomon 6.3-8",
-     "Malachi 3.1-2",
-     "St. Paul's Epistle to the Galatians 3.24-29",
-     "Luke 2.1-7"
-    ]
-   },
-   "19": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 5.6-18",
-     "Mark 7.24-30"
-    ]
-   },
-   "-8": {
-    "feast": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)",
-    "readings": [
-     "Ezekiel 3.16-19",
-     "St. Paul's Second Epistle to Timothy 1.6-14",
-     "Luke 10.16-20"
-    ]
-   },
-   "15": {
-    "feast": "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
-    "readings": [
-     "Proverbs 10.1-7",
-     "Isaiah 44.24-26",
-     "St. Paul's Epistle to the Hebrews 4.11-15",
-     "Matthew 5.1-12"
-    ]
-   },
-   "-2": {
-    "feast": "Fifth day of the Fast of Assumption",
-    "readings": [
-     "St. Paul's First Epistle to the Corinthians 15.50-57",
-     "Mark 3.31-4.8"
-    ]
-   },
-   "1": {
-    "feast": "Second day of the AssumptionRemembrance of the Dead",
-    "readings": [
-     "Luke 2.1-7",
-     "Proverbs 11.30-12.4",
-     "Zechariah 2.10-13",
-     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
-     "Luke 1.39-56"
-    ]
-   },
-   "10": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's First Epistle to the Corinthians 15.58-16.11",
-     "Mark 4.10-20"
-    ]
-   },
-   "3": {
-    "feast": "Fourth day of the AssumptionFast day",
-    "readings": [
-     "Luke 1.26-38",
-     "Song of Solomon 4.9-15",
-     "Isaiah 7.10-16",
-     "St. Paul's Epistle to the Galatians 3.29-4.7",
-     "Luke 2.1-7"
-    ]
-   },
-   "-7": {
-    "feast": "Third Sunday after TransfigurationEve of Fast of Assumption of the Holy Mother of God",
-    "readings": [
-     "Isaiah 7.1-9",
-     "St. Paul's First Epistle to the Corinthians 13.11-14.5",
-     "Mark 2.1-12"
-    ]
-   },
-   "13": {
-    "feast": "Holy Apostles Thomas, James and Simon",
-    "readings": [
-     "Wisdom 9.13-10.3",
-     "Micah 7.18-20",
-     "St. Paul's First Epistle to the Corinthians 12.28-13.3",
-     "John 20.24-31"
-    ]
-   },
-   "6": {
-    "feast": "Seventh day of the Assumption",
-    "readings": [
-     "Luke 1.26-38",
-     "Song of Solomon 4.9-15",
-     "Isaiah 7.10-16",
-     "St. Paul's Epistle to the Galatians 3.29-4.7",
-     "Luke 2.1-7"
-    ]
-   },
-   "12": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's First Epistle to the Corinthians 16.12-24",
-     "Mark 4.26-34"
-    ]
-   },
-   "0": {
-    "feast": "ASSUMPTION OF THE HOLY MOTHER OF GOD",
-    "readings": [
-     "Song of Solomon 4.9-15",
-     "Isaiah 7.10-16",
-     "St. Paul's Epistle to the Galatians 3.29-4.7",
-     "Luke 1.26-38",
-     "John 11.1-46",
-     "Luke 2.1-7",
-     "Proverbs 3.9-10",
-     "Isaiah 65.8-10",
-     "St. Paul's Epistle to the Hebrews 6.18-7.7",
-     "John 15.1-8",
-     "Luke 1.39-56",
-     "John 19.25-30"
-    ]
-   },
-   "5": {
-    "feast": "Sixth day of the AssumptionFast day",
-    "readings": [
-     "Luke 1.26-38",
-     "Song of Solomon 6.3-8",
-     "Malachi 3.1-2",
-     "St. Paul's Epistle to the Galatians 3.24-29",
-     "Luke 2.1-7"
-    ]
-   },
-   "18": {
-    "feast": "Saints John the Forerunner (Baptist) and Job the Righteous",
-    "readings": [
-     "Proverbs 20.6-22",
-     "Job 42.12-17",
-     "Lamentations 3.22-56",
-     "Acts of the Apostles 13.25-33",
-     "St. James General Epistle 5.7-11",
-     "Matthew 14.1-12"
-    ]
-   },
-   "-1": {
-    "feast": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
-    "readings": [
-     "Proverbs 3.19-26",
-     "Ezekiel 40.3-10",
-     "St. Peter's First Epistle General 2.1-10",
-     "Matthew 16.13-19"
-    ]
-   },
-   "11": {
-    "feast": "Saint Jeremiah the Prophet",
-    "readings": [
-     "Jeremiah 1.1-10",
-     "Jeremiah 38.1-13",
-     "St. Peter's Second Epistle General 2.9-22",
-     "Matthew 2.16-18"
-    ]
-   },
-   "14": {
-    "feast": "Third Sunday after AssumptionFeast day of the Discovery of the Belt of the Holy Mother of God",
-    "readings": [
-     "Luke 1.39-56",
-     "Isaiah 9.8-19",
-     "St. Paul's Second Epistle to the Corinthians 1.1-11",
-     "Mark 4.35-41"
-    ]
-   },
-   "-5": {
-    "feast": "Second day of the Fast of Assumption",
-    "readings": [
-     "St. Paul's First Epistle to the Corinthians 14.26-40",
-     "Mark 2.23-3.5"
-    ]
-   },
-   "7": {
-    "feast": "Second Sunday after the Assumption",
-    "readings": [
-     "Luke 2.1-7",
-     "Proverbs 11.30-12.4",
-     "Zechariah 2.10-13",
-     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
-     "Luke 1.39-56"
-    ]
-   }
-  },
-  "EX": {
-   "32": {
-    "feast": "Saints Dionysius the Areopagite and the Apostles Timothy and Titus",
-    "readings": [
-     "Isaiah 33.2-6",
-     "Acts of the Apostles 17.16-34",
-     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
-     "Luke 10.1-7"
-    ]
-   },
-   "56": {
-    "feast": "Ninth Sunday after the Holy Cross",
-    "readings": [
-     "Isaiah 24.1-12",
-     "St. Paul's Epistle to the Ephesians 5.15-33",
-     "Luke 8.49-56"
-    ]
-   },
-   "-8": {
-    "feast": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
-    "readings": [
-     "Ezekiel 44.23-24",
-     "St. Paul's Epistle to the Hebrews 12.1-7",
-     "John 14.25-31"
-    ]
-   },
-   "60": {
-    "feast": "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
-    "readings": [
-     "Proverbs 28.10-18",
-     "Baruch 3.31-4.4",
-     "St. Paul's Second Epistle to Timothy 1.6-12",
-     "Matthew 19.27-29"
-    ]
-   },
-   "43": {
-    "feast": "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
-    "readings": [
-     "Proverbs 3.1-6",
-     "Jeremiah 17.7-8",
-     "St. Paul's Second Epistle to Timothy 2.3-10",
-     "Matthew 19.27-29"
-    ]
-   },
-   "29": {
-    "feast": "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
-    "readings": [
-     "Jeremiah 33.14-22",
-     "Isaiah 18.7",
-     "St. Paul's Epistle to the Hebrews 10.32-36",
-     "Luke 10.21-24"
-    ]
-   },
-   "20": {
-    "feast": "Seventy Two Holy Disciples of Christ",
-    "readings": [
-     "Wisdom 9.9-10.2",
-     "Exodus 15.27-16.1",
-     "St. Paul's Second Epistle to the Corinthians 2.14-3.3",
-     "Luke 10.1-9"
-    ]
-   },
-   "12": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 11.30-12.9",
-     "Mark 10.28-34"
-    ]
-   },
-   "57": {
-    "feast": "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
-    "readings": [
-     "Wisdom 4.7-15",
-     "Isaiah 12.1-6",
-     "St. John's First Epistle General 5.1-6",
-     "Luke 9.23-27"
-    ]
-   },
-   "0": {
-    "feast": "EXALTATION OF THE HOLY CROSS",
-    "readings": [
-     "Wisdom 14.1-8",
-     "Ezekiel 9.2-6",
-     "St. Paul's First Epistle to the Corinthians 1.18-24",
-     "Matthew 24.27-35",
-     "Isaiah 49.13-23",
-     "St. Paul's Epistle to the Galatians 6.14-18",
-     "John 3.13-21",
-     "John 12.28-33",
-     "Mark 15.20-26",
-     "John 14.1-13"
-    ]
-   },
-   "1": {
-    "feast": "Feast of the Holy CrossRemembrance of the Dead",
-    "readings": [
-     "Isaiah 65.22-25",
-     "St. Paul's First Epistle to the Corinthians 2.6-10",
-     "John 3.22-36"
-    ]
-   },
-   "24": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 1.1-10",
-     "Mark 12.1-12"
-    ]
-   },
-   "22": {
-    "feast": "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
-    "readings": [
-     "Proverbs 27.1-6",
-     "Isaiah 43.16-21",
-     "St. Paul's Second Epistle to the Corinthians 11.21-29",
-     "Mark 6.45-56"
-    ]
-   },
-   "50": {
-    "feast": "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls",
-    "readings": [
-     "Wisdom 5.1-8",
-     "Amos 3.12-15",
-     "St. Paul's Epistle to the Ephesians 3.1-10",
-     "John 10.11-16"
-    ]
-   },
-   "-2": {
-    "feast": "Fifth day of the Fast of the Holy Cross",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 10.7-17",
-     "Mark 9.38-50"
-    ]
-   },
-   "45": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 5.16-26",
-     "Luke 7.36-48"
-    ]
-   },
-   "44": {
-    "feast": "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples",
-    "readings": [
-     "Proverbs 12.8-13",
-     "Isaiah 49.8-11",
-     "St. Paul's Second Epistle to the Corinthians 4.6-14",
-     "Luke 10.21-24"
-    ]
-   },
-   "28": {
-    "feast": "Fifth Sunday after the Holy Cross",
-    "readings": [
-     "Isaiah 19.1-11",
-     "St. Paul's Epistle to the Galatians 2.1-10",
-     "Mark 12.35-44"
-    ]
-   },
-   "39": {
-    "feast": "Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
-    "readings": [
-     "Wisdom 3.11-17",
-     "Isaiah 51.22-52.3",
-     "St. Paul's First Epistle to the Thessalonians 2.13-16",
-     "John 15.11-16"
-    ]
-   },
-   "30": {
-    "feast": "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus",
-    "readings": [
-     "Zechariah 8.1-3",
-     "Acts of the Apostles 9.1-22",
-     "Luke 9.1-6"
-    ]
-   },
-   "49": {
-    "feast": "Eighth Sunday after the Holy Cross",
-    "readings": [
-     "Isaiah 22.15-24",
-     "St. Paul's Epistle to the Ephesians 1.1-14",
-     "Luke 8.17-21"
-    ]
-   },
-   "10": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 11.10-23",
-     "Mark 10.17-23"
-    ]
-   },
-   "16": {
-    "feast": "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
-    "readings": [
-     "Lamentations 3.22-56",
-     "St. Paul's Second Epistle to Timothy 3.10-15",
-     "Matthew 5.1-12"
-    ]
-   },
-   "8": {
-    "feast": "Fast daySaints Mamas, Philomenos and Simeon the Stylite",
-    "readings": [
-     "Proverbs 8.9-11",
-     "Isaiah 55.10-13",
-     "St. Paul's Second Epistle to the Corinthians 5.1-5",
-     "Luke 21.12-19"
-    ]
-   },
-   "54": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Ephesians 2.4-22",
-     "Luke 8.40-48"
-    ]
-   },
-   "17": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 12.10-18",
-     "Mark 10.35-45"
-    ]
-   },
-   "23": {
-    "feast": "Saints Virgins Thecla, Barbara and Pelagia",
-    "readings": [
-     "Song of Solomon 8.14",
-     "Isaiah 61.9-11",
-     "St. Peter's First Epistle General 5.8-11",
-     "Luke 12.32-40"
-    ]
-   },
-   "-4": {
-    "feast": "Third day of the Fast of the Holy Cross",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 9.1-9",
-     "Mark 8.22-26"
-    ]
-   },
-   "52": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Ephesians 1.15-2.3",
-     "Luke 8.22-25"
-    ]
-   },
-   "6": {
-    "feast": "Feast of the Holy Cross",
-    "readings": [
-     "Isaiah 51.4-11",
-     "St. Paul's First Epistle to Timothy 6.13-16",
-     "John 7.37-52"
-    ]
-   },
-   "2": {
-    "feast": "Feast of the Holy Church",
-    "readings": [
-     "Baruch 4.36-5.9",
-     "St. Paul's Epistle to the Hebrews 3.1-6",
-     "John 2.12-22"
-    ]
-   },
-   "-3": {
-    "feast": "Fourth day of the Fast of the Holy Cross",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 9.10-10.6",
-     "Mark 9.14-27"
-    ]
-   },
-   "40": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 5.2-15",
-     "Luke 5.17-26"
-    ]
-   },
-   "34": {
-    "feast": "Holy Evangelists Matthew, Mark, Luke and John",
-    "readings": [
-     "Wisdom 9.13-10.2",
-     "Ezekiel 1.3-11",
-     "Zechariah 6.1-8",
-     "St. Paul's Epistle to the Ephesians 4.7-13",
-     "Luke 6.13-19"
-    ]
-   },
-   "36": {
-    "feast": "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
-    "readings": [
-     "Proverbs 15.28-32",
-     "Joel 2.12-13",
-     "St. Paul's First Epistle to Timothy 1.12-17",
-     "Matthew 27.50-61"
-    ]
-   },
-   "53": {
-    "feast": "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
-    "readings": [
-     "Wisdom 6.21-24",
-     "Zechariah 12.6-10",
-     "St. Paul's Epistle to the Hebrews 13.7-9",
-     "Matthew 4.23-25"
-    ]
-   },
-   "42": {
-    "feast": "Seventh Sunday after the Holy CrossDiscovery of the Holy Cross.",
-    "readings": [
-     "Wisdom 14.1-8",
-     "Isaiah 33.22-34.1",
-     "St. Paul's First Epistle to the Corinthians 1.18-24",
-     "Matthew 24.27-36"
-    ]
-   },
-   "-7": {
-    "feast": "Fourth Sunday after AssumptionEve of Fast of Exaltation of Holy Cross",
-    "readings": [
-     "Isaiah 13.2-11",
-     "St. Paul's Second Epistle to the Corinthians 7.4-16",
-     "Mark 7.31-37"
-    ]
-   },
-   "38": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 4.19-5.1",
-     "Luke 4.31-41"
-    ]
-   },
-   "-6": {
-    "feast": "First day of the Fast of the Holy Cross",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 8.1-15",
-     "Mark 8.1-9"
-    ]
-   },
-   "-5": {
-    "feast": "Second day of the Fast of the Holy Cross",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 8.16-24",
-     "Mark 8.10-21"
-    ]
-   },
-   "5": {
-    "feast": "Fast dayFeast of the Holy Cross",
-    "readings": [
-     "Zechariah 14.5-11",
-     "St. Paul's Epistle to the Philippians 2.5-11",
-     "John 19.16-22"
-    ]
-   },
-   "14": {
-    "feast": "Third Sunday after the Holy CrossFeast of the Holy Cross of Varag",
-    "readings": [
-     "Proverbs 3.18-26",
-     "Isaiah 65.22-25",
-     "St. Paul's Epistle to the Galatians 6.14-18",
-     "Matthew 24.30-36"
-    ]
-   },
-   "4": {
-    "feast": "Feast of the Holy Church",
-    "readings": [
-     "Isaiah 2.1-6",
-     "St. Paul's Epistle to the Hebrews 12.18-27",
-     "Matthew 21.12-17"
-    ]
-   },
-   "18": {
-    "feast": "The Saintly Princes Sahak and Hamazasp",
-    "readings": [
-     "Wisdom 6.11-21",
-     "Jeremiah 17.7-8",
-     "St. Paul's Epistle to the Romans 8.18-26",
-     "John 16.1-4"
-    ]
-   },
-   "27": {
-    "feast": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
-    "readings": [
-     "Wisdom 8.7-10",
-     "Amos 5.10-14",
-     "St. Paul's First Epistle to the Corinthians 12.4-11",
-     "Matthew 7.6-12"
-    ]
-   },
-   "13": {
-    "feast": "Saints George the Warrior, Adauctus and Romanus the Melodist",
-    "readings": [
-     "Wisdom 8.19-9.5",
-     "Isaiah 42.1-8",
-     "St. Paul's Second Epistle to the Corinthians 1.3-7",
-     "Luke 12.2-9"
-    ]
-   },
-   "-1": {
-    "feast": "Feast of Holy Church in Dedication of Holy Cross",
-    "readings": [
-     "Proverbs 3.9-17",
-     "Isaiah 66.12-16",
-     "St. Paul's First Epistle to Timothy 3.14-16",
-     "John 10.22-42"
-    ]
-   },
-   "26": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 1.11-24",
-     "Mark 12.18-34"
-    ]
-   },
-   "35": {
-    "feast": "Sixth Sunday after the Holy Cross",
-    "readings": [
-     "Isaiah 20.2-21.6",
-     "St. Paul's Epistle to the Galatians 4.3-18",
-     "Luke 4.14-23"
-    ]
-   },
-   "58": {
-    "feast": "Saints Demetrios the Martyr and Basil the Priest",
-    "readings": [
-     "Proverbs 15.33-16.7",
-     "Hosea 14.9-10",
-     "St. Paul's Epistle to Titus 3.3-8",
-     "Mark 13.9-13"
-    ]
-   },
-   "3": {
-    "feast": "Fast dayFeast of the Holy Church",
-    "readings": [
-     "Zephaniah 3.14-17",
-     "St. Paul's Epistle to the Hebrews 9.11-15",
-     "Matthew 16.13-19"
-    ]
-   },
-   "9": {
-    "feast": "Fast daySaints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
-    "readings": [
-     "Proverbs 23.15-25",
-     "Hosea 14.6-7",
-     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
-     "Luke 6.20-23"
-    ]
-   },
-   "19": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Second Epistle to the Corinthians 12.19-13.4",
-     "Mark 11.15-26"
-    ]
-   },
-   "47": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 6.1-13",
-     "Luke 8.4-16"
-    ]
-   },
-   "51": {
-    "feast": "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
-    "readings": [
-     "Proverbs 8.12-21",
-     "Nahum 2.1-6",
-     "St. Paul's First Epistle to Timothy 5.17-21",
-     "Luke 9.23-27"
-    ]
-   },
-   "31": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 2.11-20",
-     "Mark 13.14-23"
-    ]
-   },
-   "15": {
-    "feast": "Saints David of Dvin and the Martyrs Eulampius and Eulampia",
-    "readings": [
-     "Proverbs 13.1-7",
-     "Micah 7.18-20",
-     "St. Paul's Epistle to the Hebrews 12.1-7",
-     "Luke 13.22-30"
-    ]
-   },
-   "33": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Galatians 2.20-3.12",
-     "Mark 13.24-37"
-    ]
-   },
-   "25": {
-    "feast": "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
-    "readings": [
-     "Proverbs 4.20-27",
-     "Jeremiah 15.19-20",
-     "St. Paul's First Epistle to the Corinthians 12.1-7",
-     "Matthew 9.35-10.1"
-    ]
-   },
-   "41": {
-    "feast": "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria",
-    "readings": [
-     "Proverbs 11.2-11",
-     "Isaiah 61.3-7",
-     "St. Paul's Epistle to the Hebrews 13.7-9",
-     "John 16.33-17.8"
-    ]
-   },
-   "59": {
-    "feast": "Fast day",
-    "readings": [
-     "St. Paul's Epistle to the Ephesians 6.1-9",
-     "Luke 9.10-17"
-    ]
-   },
-   "11": {
-    "feast": "Fast daySaint Patriarchs Barlaam, Anthimus and Irenaeus",
-    "readings": [
-     "Wisdom 10.9-12",
-     "Malachi 2.5-7",
-     "St. Peter's First Epistle General 5.1-7",
-     "John 10.11-16"
-    ]
-   },
-   "37": {
-    "feast": "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus",
-    "readings": [
-     "Wisdom 1.11-15",
-     "Lamentations 3.22-56",
-     "St. Paul's First Epistle to Timothy 5.17-21",
-     "Matthew 10.26-33"
-    ]
-   },
-   "7": {
-    "feast": "Second Sunday after the Holy CrossEve of Fast of the Holy Cross of Varag",
-    "readings": [
-     "Isaiah 14.3-17",
-     "St. Paul's Second Epistle to the Corinthians 10.18-11.10",
-     "Mark 10.1-12"
-    ]
-   },
-   "21": {
-    "feast": "Fourth Sunday after the Holy Cross",
-    "readings": [
-     "Isaiah 17.7-14",
-     "St. Paul's Second Epistle to the Corinthians 13.5-13",
-     "Mark 11.27-33"
-    ]
-   },
-   "55": {
-    "feast": "Holy Archangels Gabriel and Michael and all the heavenly Angels",
-    "readings": [
-     "Genesis 18.33-19.2",
-     "Job 38.4-7",
-     "Isaiah 6.1-7",
-     "Ezekiel 1.1-20",
-     "St. Paul's Epistle to the Hebrews 1.6-14",
-     "Matthew 18.10-14"
-    ]
-   }
-  },
   "EB": {
    "3:-23": {
     "feast": "Twenty Sixth day of Great Lent",
@@ -22107,6 +21300,136 @@
     ]
    }
   },
+  "TrSaint": {
+   "forefathers_adam_abel": {
+    "feast": "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
+    "readings": [
+     "Genesis 4.1-8",
+     "Genesis 5.3-11",
+     "Genesis 5.23-24",
+     "Genesis 5.32",
+     "Genesis 9.28-29",
+     "Genesis 14.14-20",
+     "Genesis 25.7-11",
+     "Genesis 35.27-29",
+     "Genesis 49.32-50.13",
+     "Genesis 50.24-26",
+     "Numbers 20.23-29",
+     "Deuteronomy 34.5-12",
+     "Joshua 24.29-33",
+     "1 Samuel 15.34-35",
+     "1 Samuel 25.1",
+     "St. Paul's Epistle to the Hebrews 11.1-31",
+     "Luke 20.34-40"
+    ]
+   },
+   "cyprian_the_bishop": {
+    "feast": "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
+    "readings": [
+     "Isaiah 46.12-13",
+     "St. Paul's Epistle to the Galatians 3.13-22",
+     "Luke 15.1-10"
+    ]
+   },
+   "200_fathers_of": {
+    "feast": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to Timothy 1.6-14",
+     "Luke 10.16-20"
+    ]
+   },
+   "isaiah_the_prophet": {
+    "feast": "Saint Isaiah the Prophet",
+    "readings": [
+     "Isaiah 6.1-10",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Luke 4.14-22"
+    ]
+   },
+   "maccabees_eleazar_the": {
+    "feast": "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
+    "readings": [
+     "Proverbs 29.2-7",
+     "2 Maccabees 6.18-7.42",
+     "St. Paul's Epistle to the Hebrews 11.32-40",
+     "Matthew 5.17-20"
+    ]
+   },
+   "second_day_of": {
+    "feast": "Second day of TransfigurationRemembrance of the Dead",
+    "readings": [
+     "Exodus 19.9-13",
+     "2 Kings 2.9-12",
+     "St. John's First Epistle General 5.9-12",
+     "John 1.1-17"
+    ]
+   },
+   "twelve_prophets_hosea": {
+    "feast": "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
+    "readings": [
+     "Hosea 10.12",
+     "Amos 5.10-14",
+     "Micah 7.7-9",
+     "Joel 2.12-13",
+     "Obadiah 1.21",
+     "Jonah 4.2",
+     "Nahum 1.7-9",
+     "Habakkuk 1.2-3",
+     "Zephaniah 1.7-8",
+     "Haggai 2.10",
+     "Zechariah 7.9-13",
+     "Malachi 1.6",
+     "St. Paul's Epistle to the Romans 11.2-5",
+     "Luke 13.31-35"
+    ]
+   },
+   "gregory_the_illuminator": {
+    "feast": "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel",
+    "readings": [
+     "Jeremiah 17.7-8",
+     "Isaiah 61.3-7",
+     "St. Paul's Second Epistle to Timothy 1.6-14",
+     "Luke 11.29-32"
+    ]
+   },
+   "athenogenes_the_bishop": {
+    "feast": "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
+    "readings": [
+     "Proverbs 8.1-4",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 16.33-17.8"
+    ]
+   },
+   "third_day_of": {
+    "feast": "Third day of Transfiguration",
+    "readings": [
+     "Exodus 19.16-20",
+     "1 Kings 19.11-16",
+     "St. Paul's Epistle to the Hebrews 12.18-27",
+     "Luke 9.27-36"
+    ]
+   },
+   "thaddeus_apostle_of": {
+    "feast": "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin",
+    "readings": [
+     "Wisdom 1.1-7",
+     "Jeremiah 16.16-21",
+     "St. Paul's First Epistle to the Corinthians 12.28-13.10",
+     "Luke 9.1-6"
+    ]
+   },
+   "sophia_and_her": {
+    "feast": "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
+    "readings": [
+     "Proverbs 11.30-12.4",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 4.6-14",
+     "Luke 12.2-10"
+    ]
+   }
+  },
   "TrSatL": {
    "28:1:Thu": {
     "feast": "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
@@ -23043,6 +22366,111 @@
     ]
    }
   },
+  "AsSaint": {
+   "andrew_the_general": {
+    "feast": "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist",
+    "readings": [
+     "Ezekiel 18.30-32",
+     "St. Paul's First Epistle to the Corinthians 2.6-10",
+     "Matthew 23.34-39"
+    ]
+   },
+   "third_day_of": {
+    "feast": "Third day of the Assumption",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 6.3-8",
+     "Malachi 3.1-2",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.1-7"
+    ]
+   },
+   "stephen_of_oulnia": {
+    "feast": "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
+    "readings": [
+     "Wisdom 9.9-10.2",
+     "Esther 10.4-9",
+     "Judith 15.7-16.3",
+     "St. Paul's Epistle to the Ephesians 1.3-12",
+     "Matthew 1.17-21"
+    ]
+   },
+   "joachim_and_anna": {
+    "feast": "Fifth day of the Assumption",
+    "readings": [
+     "Luke 2.1-7",
+     "Proverbs 11.30-12.4",
+     "Zechariah 2.10-13",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.39-56"
+    ]
+   },
+   "jeremiah_the_prophet": {
+    "feast": "Ninth day of Assumption",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 6.3-8",
+     "Malachi 3.1-2",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.1-7"
+    ]
+   },
+   "adrian_and_his": {
+    "feast": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+    "readings": [
+     "Lamentations 3.22-56",
+     "St. Paul's Epistle to the Romans 8.18-27",
+     "John 16.1-4"
+    ]
+   },
+   "john_the_forerunner": {
+    "feast": "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
+    "readings": [
+     "Proverbs 10.1-7",
+     "Isaiah 44.24-26",
+     "St. Paul's Epistle to the Hebrews 4.11-15",
+     "Matthew 5.1-12"
+    ]
+   },
+   "second_day_of": {
+    "feast": "Second day of the AssumptionRemembrance of the Dead",
+    "readings": [
+     "Luke 2.1-7",
+     "Proverbs 11.30-12.4",
+     "Zechariah 2.10-13",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.39-56"
+    ]
+   },
+   "apostles_thomas_james": {
+    "feast": "Holy Apostles Thomas, James and Simon",
+    "readings": [
+     "Wisdom 9.13-10.3",
+     "Micah 7.18-20",
+     "St. Paul's First Epistle to the Corinthians 12.28-13.3",
+     "John 20.24-31"
+    ]
+   },
+   "seventh_day_of": {
+    "feast": "Seventh day of the Assumption",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 4.9-15",
+     "Isaiah 7.10-16",
+     "St. Paul's Epistle to the Galatians 3.29-4.7",
+     "Luke 2.1-7"
+    ]
+   },
+   "prophets_ezekiel_ezra": {
+    "feast": "Saint Jeremiah the Prophet",
+    "readings": [
+     "Jeremiah 1.1-10",
+     "Jeremiah 38.1-13",
+     "St. Peter's Second Epistle General 2.9-22",
+     "Matthew 2.16-18"
+    ]
+   }
+  },
   "AsSatL": {
    "21:2:Sat": {
     "feast": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
@@ -23552,6 +22980,266 @@
      "Ezekiel 44.23-24",
      "St. Paul's Epistle to the Hebrews 12.1-7",
      "John 14.25-31"
+    ]
+   }
+  },
+  "ExSaint": {
+   "dionysius_the_areopagite": {
+    "feast": "Saints Dionysius the Areopagite and the Apostles Timothy and Titus",
+    "readings": [
+     "Isaiah 33.2-6",
+     "Acts of the Apostles 17.16-34",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 10.1-7"
+    ]
+   },
+   "anastasius_the_priest": {
+    "feast": "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
+    "readings": [
+     "Proverbs 3.1-6",
+     "Jeremiah 17.7-8",
+     "St. Paul's Second Epistle to Timothy 2.3-10",
+     "Matthew 19.27-29"
+    ]
+   },
+   "apostles_andrew_and": {
+    "feast": "The Holy Apostles Andrew and Phillip",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Jeremiah 16.16-19",
+     "Acts of the Apostles 8.26-40",
+     "John 1.35-51"
+    ]
+   },
+   "discovery_of_relics": {
+    "feast": "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "readings": [
+     "Jeremiah 33.14-22",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Hebrews 10.32-36",
+     "Luke 10.21-24"
+    ]
+   },
+   "seventy_two_holy": {
+    "feast": "Seventy Two Holy Disciples of Christ",
+    "readings": [
+     "Wisdom 9.9-10.2",
+     "Exodus 15.27-16.1",
+     "St. Paul's Second Epistle to the Corinthians 2.14-3.3",
+     "Luke 10.1-9"
+    ]
+   },
+   "feast_of_the": {
+    "feast": "Feast of the Holy CrossRemembrance of the Dead",
+    "readings": [
+     "Isaiah 65.22-25",
+     "St. Paul's First Epistle to the Corinthians 2.6-10",
+     "John 3.22-36"
+    ]
+   },
+   "phocas_the_patriarch": {
+    "feast": "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
+    "readings": [
+     "Proverbs 27.1-6",
+     "Isaiah 43.16-21",
+     "St. Paul's Second Epistle to the Corinthians 11.21-29",
+     "Mark 6.45-56"
+    ]
+   },
+   "hipparchus_and_his": {
+    "feast": "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples",
+    "readings": [
+     "Proverbs 12.8-13",
+     "Isaiah 49.8-11",
+     "St. Paul's Second Epistle to the Corinthians 4.6-14",
+     "Luke 10.21-24"
+    ]
+   },
+   "st_aret_and": {
+    "feast": "Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
+    "readings": [
+     "Wisdom 3.11-17",
+     "Isaiah 51.22-52.3",
+     "St. Paul's First Epistle to the Thessalonians 2.13-16",
+     "John 15.11-16"
+    ]
+   },
+   "apostles_ananias_matthias": {
+    "feast": "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus",
+    "readings": [
+     "Zechariah 8.1-3",
+     "Acts of the Apostles 9.1-22",
+     "Luke 9.1-6"
+    ]
+   },
+   "eustachius_his_wife": {
+    "feast": "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
+    "readings": [
+     "Lamentations 3.22-56",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "Matthew 5.1-12"
+    ]
+   },
+   "fast_daysaints_mamas": {
+    "feast": "Fast daySaints Mamas, Philomenos and Simeon the Stylite",
+    "readings": [
+     "Proverbs 8.9-11",
+     "Isaiah 55.10-13",
+     "St. Paul's Second Epistle to the Corinthians 5.1-5",
+     "Luke 21.12-19"
+    ]
+   },
+   "virgins_thecla_barbara": {
+    "feast": "Saints Virgins Thecla, Barbara and Pelagia",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Isaiah 61.9-11",
+     "St. Peter's First Epistle General 5.8-11",
+     "Luke 12.32-40"
+    ]
+   },
+   "feast_of_the_4": {
+    "feast": "Feast of the Holy Cross",
+    "readings": [
+     "Isaiah 51.4-11",
+     "St. Paul's First Epistle to Timothy 6.13-16",
+     "John 7.37-52"
+    ]
+   },
+   "feast_of_the_2": {
+    "feast": "Feast of the Holy Church",
+    "readings": [
+     "Baruch 4.36-5.9",
+     "St. Paul's Epistle to the Hebrews 3.1-6",
+     "John 2.12-22"
+    ]
+   },
+   "evangelists_matthew_mark": {
+    "feast": "Holy Evangelists Matthew, Mark, Luke and John",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Ezekiel 1.3-11",
+     "Zechariah 6.1-8",
+     "St. Paul's Epistle to the Ephesians 4.7-13",
+     "Luke 6.13-19"
+    ]
+   },
+   "longinus_the_centurion": {
+    "feast": "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
+    "readings": [
+     "Proverbs 15.28-32",
+     "Joel 2.12-13",
+     "St. Paul's First Epistle to Timothy 1.12-17",
+     "Matthew 27.50-61"
+    ]
+   },
+   "feast_of_the_3": {
+    "feast": "Feast of the Holy Church",
+    "readings": [
+     "Isaiah 2.1-6",
+     "St. Paul's Epistle to the Hebrews 12.18-27",
+     "Matthew 21.12-17"
+    ]
+   },
+   "saintly_princes_sahak": {
+    "feast": "The Saintly Princes Sahak and Hamazasp",
+    "readings": [
+     "Wisdom 6.11-21",
+     "Jeremiah 17.7-8",
+     "St. Paul's Epistle to the Romans 8.18-26",
+     "John 16.1-4"
+    ]
+   },
+   "translators_mesrop_yeghishe": {
+    "feast": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
+    "readings": [
+     "Wisdom 8.7-10",
+     "Amos 5.10-14",
+     "St. Paul's First Epistle to the Corinthians 12.4-11",
+     "Matthew 7.6-12"
+    ]
+   },
+   "george_the_warrior": {
+    "feast": "Saints George the Warrior, Adauctus and Romanus the Melodist",
+    "readings": [
+     "Wisdom 8.19-9.5",
+     "Isaiah 42.1-8",
+     "St. Paul's Second Epistle to the Corinthians 1.3-7",
+     "Luke 12.2-9"
+    ]
+   },
+   "fast_daysaints_virgins": {
+    "feast": "Fast daySaints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
+    "readings": [
+     "Proverbs 23.15-25",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 6.20-23"
+    ]
+   },
+   "gurias_samonas_and": {
+    "feast": "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
+    "readings": [
+     "Proverbs 28.10-18",
+     "Baruch 3.31-4.4",
+     "St. Paul's Second Epistle to Timothy 1.6-12",
+     "Matthew 19.27-29"
+    ]
+   },
+   "david_of_dvin": {
+    "feast": "Saints David of Dvin and the Martyrs Eulampius and Eulampia",
+    "readings": [
+     "Proverbs 13.1-7",
+     "Micah 7.18-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Luke 13.22-30"
+    ]
+   },
+   "pantaleimon_the_physician": {
+    "feast": "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
+    "readings": [
+     "Proverbs 4.20-27",
+     "Jeremiah 15.19-20",
+     "St. Paul's First Epistle to the Corinthians 12.1-7",
+     "Matthew 9.35-10.1"
+    ]
+   },
+   "twelve_holy_doctors": {
+    "feast": "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 61.3-7",
+     "St. Paul's Epistle to the Hebrews 13.7-9",
+     "John 16.33-17.8"
+    ]
+   },
+   "fast_daysaint_patriarchs": {
+    "feast": "Fast daySaint Patriarchs Barlaam, Anthimus and Irenaeus",
+    "readings": [
+     "Wisdom 10.9-12",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 10.11-16"
+    ]
+   },
+   "theodoret_the_priest": {
+    "feast": "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus",
+    "readings": [
+     "Wisdom 1.11-15",
+     "Lamentations 3.22-56",
+     "St. Paul's First Epistle to Timothy 5.17-21",
+     "Matthew 10.26-33"
+    ]
+   },
+   "archangels_gabriel_and": {
+    "feast": "Holy Archangels Gabriel and Michael and all the heavenly Angels",
+    "readings": [
+     "Genesis 18.33-19.2",
+     "Job 38.4-7",
+     "Isaiah 6.1-7",
+     "Ezekiel 1.1-20",
+     "St. Paul's Epistle to the Hebrews 1.6-14",
+     "Matthew 18.10-14"
     ]
    }
   },
@@ -25508,6 +25196,816 @@
      "Isaiah 2.1-6",
      "St. Paul's Epistle to the Hebrews 12.18-27",
      "Matthew 21.12-17"
+    ]
+   }
+  },
+  "AS": {
+   "-6": {
+    "feast": "First day of the Fast of Assumption",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 14.18-25",
+     "Mark 2.13-20"
+    ]
+   },
+   "-3": {
+    "feast": "Fourth day of the Fast of Assumption",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 15.34-49",
+     "Mark 3.20-30"
+    ]
+   },
+   "16": {
+    "feast": "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist",
+    "readings": [
+     "Ezekiel 18.30-32",
+     "St. Paul's First Epistle to the Corinthians 2.6-10",
+     "Matthew 23.34-39"
+    ]
+   },
+   "-4": {
+    "feast": "Third day of the Fast of Assumption",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 15.20-33",
+     "Mark 3.6-12"
+    ]
+   },
+   "2": {
+    "feast": "Third day of the Assumption",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 6.3-8",
+     "Malachi 3.1-2",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.1-7"
+    ]
+   },
+   "9": {
+    "feast": "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
+    "readings": [
+     "Wisdom 9.9-10.2",
+     "Esther 10.4-9",
+     "Judith 15.7-16.3",
+     "St. Paul's Epistle to the Ephesians 1.3-12",
+     "Matthew 1.17-21"
+    ]
+   },
+   "4": {
+    "feast": "Fifth day of the Assumption",
+    "readings": [
+     "Luke 2.1-7",
+     "Proverbs 11.30-12.4",
+     "Zechariah 2.10-13",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.39-56"
+    ]
+   },
+   "17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 3.4-17",
+     "Mark 6.45-56"
+    ]
+   },
+   "8": {
+    "feast": "Ninth day of Assumption",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 6.3-8",
+     "Malachi 3.1-2",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.1-7"
+    ]
+   },
+   "19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 5.6-18",
+     "Mark 7.24-30"
+    ]
+   },
+   "-8": {
+    "feast": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to Timothy 1.6-14",
+     "Luke 10.16-20"
+    ]
+   },
+   "15": {
+    "feast": "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
+    "readings": [
+     "Proverbs 10.1-7",
+     "Isaiah 44.24-26",
+     "St. Paul's Epistle to the Hebrews 4.11-15",
+     "Matthew 5.1-12"
+    ]
+   },
+   "-2": {
+    "feast": "Fifth day of the Fast of Assumption",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 15.50-57",
+     "Mark 3.31-4.8"
+    ]
+   },
+   "1": {
+    "feast": "Second day of the AssumptionRemembrance of the Dead",
+    "readings": [
+     "Luke 2.1-7",
+     "Proverbs 11.30-12.4",
+     "Zechariah 2.10-13",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.39-56"
+    ]
+   },
+   "10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 15.58-16.11",
+     "Mark 4.10-20"
+    ]
+   },
+   "3": {
+    "feast": "Fourth day of the AssumptionFast day",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 4.9-15",
+     "Isaiah 7.10-16",
+     "St. Paul's Epistle to the Galatians 3.29-4.7",
+     "Luke 2.1-7"
+    ]
+   },
+   "-7": {
+    "feast": "Third Sunday after TransfigurationEve of Fast of Assumption of the Holy Mother of God",
+    "readings": [
+     "Isaiah 7.1-9",
+     "St. Paul's First Epistle to the Corinthians 13.11-14.5",
+     "Mark 2.1-12"
+    ]
+   },
+   "13": {
+    "feast": "Holy Apostles Thomas, James and Simon",
+    "readings": [
+     "Wisdom 9.13-10.3",
+     "Micah 7.18-20",
+     "St. Paul's First Epistle to the Corinthians 12.28-13.3",
+     "John 20.24-31"
+    ]
+   },
+   "6": {
+    "feast": "Seventh day of the Assumption",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 4.9-15",
+     "Isaiah 7.10-16",
+     "St. Paul's Epistle to the Galatians 3.29-4.7",
+     "Luke 2.1-7"
+    ]
+   },
+   "12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 16.12-24",
+     "Mark 4.26-34"
+    ]
+   },
+   "0": {
+    "feast": "ASSUMPTION OF THE HOLY MOTHER OF GOD",
+    "readings": [
+     "Song of Solomon 4.9-15",
+     "Isaiah 7.10-16",
+     "St. Paul's Epistle to the Galatians 3.29-4.7",
+     "Luke 1.26-38",
+     "John 11.1-46",
+     "Luke 2.1-7",
+     "Proverbs 3.9-10",
+     "Isaiah 65.8-10",
+     "St. Paul's Epistle to the Hebrews 6.18-7.7",
+     "John 15.1-8",
+     "Luke 1.39-56",
+     "John 19.25-30"
+    ]
+   },
+   "5": {
+    "feast": "Sixth day of the AssumptionFast day",
+    "readings": [
+     "Luke 1.26-38",
+     "Song of Solomon 6.3-8",
+     "Malachi 3.1-2",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.1-7"
+    ]
+   },
+   "18": {
+    "feast": "Saints John the Forerunner (Baptist) and Job the Righteous",
+    "readings": [
+     "Proverbs 20.6-22",
+     "Job 42.12-17",
+     "Lamentations 3.22-56",
+     "Acts of the Apostles 13.25-33",
+     "St. James General Epistle 5.7-11",
+     "Matthew 14.1-12"
+    ]
+   },
+   "-1": {
+    "feast": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
+    "readings": [
+     "Proverbs 3.19-26",
+     "Ezekiel 40.3-10",
+     "St. Peter's First Epistle General 2.1-10",
+     "Matthew 16.13-19"
+    ]
+   },
+   "11": {
+    "feast": "Saint Jeremiah the Prophet",
+    "readings": [
+     "Jeremiah 1.1-10",
+     "Jeremiah 38.1-13",
+     "St. Peter's Second Epistle General 2.9-22",
+     "Matthew 2.16-18"
+    ]
+   },
+   "14": {
+    "feast": "Third Sunday after AssumptionFeast day of the Discovery of the Belt of the Holy Mother of God",
+    "readings": [
+     "Luke 1.39-56",
+     "Isaiah 9.8-19",
+     "St. Paul's Second Epistle to the Corinthians 1.1-11",
+     "Mark 4.35-41"
+    ]
+   },
+   "-5": {
+    "feast": "Second day of the Fast of Assumption",
+    "readings": [
+     "St. Paul's First Epistle to the Corinthians 14.26-40",
+     "Mark 2.23-3.5"
+    ]
+   },
+   "7": {
+    "feast": "Second Sunday after the Assumption",
+    "readings": [
+     "Luke 2.1-7",
+     "Proverbs 11.30-12.4",
+     "Zechariah 2.10-13",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.39-56"
+    ]
+   }
+  },
+  "EX": {
+   "32": {
+    "feast": "Saints Dionysius the Areopagite and the Apostles Timothy and Titus",
+    "readings": [
+     "Isaiah 33.2-6",
+     "Acts of the Apostles 17.16-34",
+     "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+     "Luke 10.1-7"
+    ]
+   },
+   "56": {
+    "feast": "Ninth Sunday after the Holy Cross",
+    "readings": [
+     "Isaiah 24.1-12",
+     "St. Paul's Epistle to the Ephesians 5.15-33",
+     "Luke 8.49-56"
+    ]
+   },
+   "-8": {
+    "feast": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
+    "readings": [
+     "Ezekiel 44.23-24",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "John 14.25-31"
+    ]
+   },
+   "60": {
+    "feast": "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
+    "readings": [
+     "Proverbs 28.10-18",
+     "Baruch 3.31-4.4",
+     "St. Paul's Second Epistle to Timothy 1.6-12",
+     "Matthew 19.27-29"
+    ]
+   },
+   "43": {
+    "feast": "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
+    "readings": [
+     "Proverbs 3.1-6",
+     "Jeremiah 17.7-8",
+     "St. Paul's Second Epistle to Timothy 2.3-10",
+     "Matthew 19.27-29"
+    ]
+   },
+   "29": {
+    "feast": "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "readings": [
+     "Jeremiah 33.14-22",
+     "Isaiah 18.7",
+     "St. Paul's Epistle to the Hebrews 10.32-36",
+     "Luke 10.21-24"
+    ]
+   },
+   "20": {
+    "feast": "Seventy Two Holy Disciples of Christ",
+    "readings": [
+     "Wisdom 9.9-10.2",
+     "Exodus 15.27-16.1",
+     "St. Paul's Second Epistle to the Corinthians 2.14-3.3",
+     "Luke 10.1-9"
+    ]
+   },
+   "12": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 11.30-12.9",
+     "Mark 10.28-34"
+    ]
+   },
+   "57": {
+    "feast": "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
+    "readings": [
+     "Wisdom 4.7-15",
+     "Isaiah 12.1-6",
+     "St. John's First Epistle General 5.1-6",
+     "Luke 9.23-27"
+    ]
+   },
+   "0": {
+    "feast": "EXALTATION OF THE HOLY CROSS",
+    "readings": [
+     "Wisdom 14.1-8",
+     "Ezekiel 9.2-6",
+     "St. Paul's First Epistle to the Corinthians 1.18-24",
+     "Matthew 24.27-35",
+     "Isaiah 49.13-23",
+     "St. Paul's Epistle to the Galatians 6.14-18",
+     "John 3.13-21",
+     "John 12.28-33",
+     "Mark 15.20-26",
+     "John 14.1-13"
+    ]
+   },
+   "1": {
+    "feast": "Feast of the Holy CrossRemembrance of the Dead",
+    "readings": [
+     "Isaiah 65.22-25",
+     "St. Paul's First Epistle to the Corinthians 2.6-10",
+     "John 3.22-36"
+    ]
+   },
+   "24": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 1.1-10",
+     "Mark 12.1-12"
+    ]
+   },
+   "22": {
+    "feast": "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
+    "readings": [
+     "Proverbs 27.1-6",
+     "Isaiah 43.16-21",
+     "St. Paul's Second Epistle to the Corinthians 11.21-29",
+     "Mark 6.45-56"
+    ]
+   },
+   "50": {
+    "feast": "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls",
+    "readings": [
+     "Wisdom 5.1-8",
+     "Amos 3.12-15",
+     "St. Paul's Epistle to the Ephesians 3.1-10",
+     "John 10.11-16"
+    ]
+   },
+   "-2": {
+    "feast": "Fifth day of the Fast of the Holy Cross",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 10.7-17",
+     "Mark 9.38-50"
+    ]
+   },
+   "45": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 5.16-26",
+     "Luke 7.36-48"
+    ]
+   },
+   "44": {
+    "feast": "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples",
+    "readings": [
+     "Proverbs 12.8-13",
+     "Isaiah 49.8-11",
+     "St. Paul's Second Epistle to the Corinthians 4.6-14",
+     "Luke 10.21-24"
+    ]
+   },
+   "28": {
+    "feast": "Fifth Sunday after the Holy Cross",
+    "readings": [
+     "Isaiah 19.1-11",
+     "St. Paul's Epistle to the Galatians 2.1-10",
+     "Mark 12.35-44"
+    ]
+   },
+   "39": {
+    "feast": "Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
+    "readings": [
+     "Wisdom 3.11-17",
+     "Isaiah 51.22-52.3",
+     "St. Paul's First Epistle to the Thessalonians 2.13-16",
+     "John 15.11-16"
+    ]
+   },
+   "30": {
+    "feast": "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus",
+    "readings": [
+     "Zechariah 8.1-3",
+     "Acts of the Apostles 9.1-22",
+     "Luke 9.1-6"
+    ]
+   },
+   "49": {
+    "feast": "Eighth Sunday after the Holy Cross",
+    "readings": [
+     "Isaiah 22.15-24",
+     "St. Paul's Epistle to the Ephesians 1.1-14",
+     "Luke 8.17-21"
+    ]
+   },
+   "10": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 11.10-23",
+     "Mark 10.17-23"
+    ]
+   },
+   "16": {
+    "feast": "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
+    "readings": [
+     "Lamentations 3.22-56",
+     "St. Paul's Second Epistle to Timothy 3.10-15",
+     "Matthew 5.1-12"
+    ]
+   },
+   "8": {
+    "feast": "Fast daySaints Mamas, Philomenos and Simeon the Stylite",
+    "readings": [
+     "Proverbs 8.9-11",
+     "Isaiah 55.10-13",
+     "St. Paul's Second Epistle to the Corinthians 5.1-5",
+     "Luke 21.12-19"
+    ]
+   },
+   "54": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Ephesians 2.4-22",
+     "Luke 8.40-48"
+    ]
+   },
+   "17": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 12.10-18",
+     "Mark 10.35-45"
+    ]
+   },
+   "23": {
+    "feast": "Saints Virgins Thecla, Barbara and Pelagia",
+    "readings": [
+     "Song of Solomon 8.14",
+     "Isaiah 61.9-11",
+     "St. Peter's First Epistle General 5.8-11",
+     "Luke 12.32-40"
+    ]
+   },
+   "-4": {
+    "feast": "Third day of the Fast of the Holy Cross",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 9.1-9",
+     "Mark 8.22-26"
+    ]
+   },
+   "52": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Ephesians 1.15-2.3",
+     "Luke 8.22-25"
+    ]
+   },
+   "6": {
+    "feast": "Feast of the Holy Cross",
+    "readings": [
+     "Isaiah 51.4-11",
+     "St. Paul's First Epistle to Timothy 6.13-16",
+     "John 7.37-52"
+    ]
+   },
+   "2": {
+    "feast": "Feast of the Holy Church",
+    "readings": [
+     "Baruch 4.36-5.9",
+     "St. Paul's Epistle to the Hebrews 3.1-6",
+     "John 2.12-22"
+    ]
+   },
+   "-3": {
+    "feast": "Fourth day of the Fast of the Holy Cross",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 9.10-10.6",
+     "Mark 9.14-27"
+    ]
+   },
+   "40": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 5.2-15",
+     "Luke 5.17-26"
+    ]
+   },
+   "34": {
+    "feast": "Holy Evangelists Matthew, Mark, Luke and John",
+    "readings": [
+     "Wisdom 9.13-10.2",
+     "Ezekiel 1.3-11",
+     "Zechariah 6.1-8",
+     "St. Paul's Epistle to the Ephesians 4.7-13",
+     "Luke 6.13-19"
+    ]
+   },
+   "36": {
+    "feast": "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
+    "readings": [
+     "Proverbs 15.28-32",
+     "Joel 2.12-13",
+     "St. Paul's First Epistle to Timothy 1.12-17",
+     "Matthew 27.50-61"
+    ]
+   },
+   "53": {
+    "feast": "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
+    "readings": [
+     "Wisdom 6.21-24",
+     "Zechariah 12.6-10",
+     "St. Paul's Epistle to the Hebrews 13.7-9",
+     "Matthew 4.23-25"
+    ]
+   },
+   "42": {
+    "feast": "Seventh Sunday after the Holy CrossDiscovery of the Holy Cross.",
+    "readings": [
+     "Wisdom 14.1-8",
+     "Isaiah 33.22-34.1",
+     "St. Paul's First Epistle to the Corinthians 1.18-24",
+     "Matthew 24.27-36"
+    ]
+   },
+   "-7": {
+    "feast": "Fourth Sunday after AssumptionEve of Fast of Exaltation of Holy Cross",
+    "readings": [
+     "Isaiah 13.2-11",
+     "St. Paul's Second Epistle to the Corinthians 7.4-16",
+     "Mark 7.31-37"
+    ]
+   },
+   "38": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 4.19-5.1",
+     "Luke 4.31-41"
+    ]
+   },
+   "-6": {
+    "feast": "First day of the Fast of the Holy Cross",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 8.1-15",
+     "Mark 8.1-9"
+    ]
+   },
+   "-5": {
+    "feast": "Second day of the Fast of the Holy Cross",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 8.16-24",
+     "Mark 8.10-21"
+    ]
+   },
+   "5": {
+    "feast": "Fast dayFeast of the Holy Cross",
+    "readings": [
+     "Zechariah 14.5-11",
+     "St. Paul's Epistle to the Philippians 2.5-11",
+     "John 19.16-22"
+    ]
+   },
+   "14": {
+    "feast": "Third Sunday after the Holy CrossFeast of the Holy Cross of Varag",
+    "readings": [
+     "Proverbs 3.18-26",
+     "Isaiah 65.22-25",
+     "St. Paul's Epistle to the Galatians 6.14-18",
+     "Matthew 24.30-36"
+    ]
+   },
+   "4": {
+    "feast": "Feast of the Holy Church",
+    "readings": [
+     "Isaiah 2.1-6",
+     "St. Paul's Epistle to the Hebrews 12.18-27",
+     "Matthew 21.12-17"
+    ]
+   },
+   "18": {
+    "feast": "The Saintly Princes Sahak and Hamazasp",
+    "readings": [
+     "Wisdom 6.11-21",
+     "Jeremiah 17.7-8",
+     "St. Paul's Epistle to the Romans 8.18-26",
+     "John 16.1-4"
+    ]
+   },
+   "27": {
+    "feast": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
+    "readings": [
+     "Wisdom 8.7-10",
+     "Amos 5.10-14",
+     "St. Paul's First Epistle to the Corinthians 12.4-11",
+     "Matthew 7.6-12"
+    ]
+   },
+   "13": {
+    "feast": "Saints George the Warrior, Adauctus and Romanus the Melodist",
+    "readings": [
+     "Wisdom 8.19-9.5",
+     "Isaiah 42.1-8",
+     "St. Paul's Second Epistle to the Corinthians 1.3-7",
+     "Luke 12.2-9"
+    ]
+   },
+   "-1": {
+    "feast": "Feast of Holy Church in Dedication of Holy Cross",
+    "readings": [
+     "Proverbs 3.9-17",
+     "Isaiah 66.12-16",
+     "St. Paul's First Epistle to Timothy 3.14-16",
+     "John 10.22-42"
+    ]
+   },
+   "26": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 1.11-24",
+     "Mark 12.18-34"
+    ]
+   },
+   "35": {
+    "feast": "Sixth Sunday after the Holy Cross",
+    "readings": [
+     "Isaiah 20.2-21.6",
+     "St. Paul's Epistle to the Galatians 4.3-18",
+     "Luke 4.14-23"
+    ]
+   },
+   "58": {
+    "feast": "Saints Demetrios the Martyr and Basil the Priest",
+    "readings": [
+     "Proverbs 15.33-16.7",
+     "Hosea 14.9-10",
+     "St. Paul's Epistle to Titus 3.3-8",
+     "Mark 13.9-13"
+    ]
+   },
+   "3": {
+    "feast": "Fast dayFeast of the Holy Church",
+    "readings": [
+     "Zephaniah 3.14-17",
+     "St. Paul's Epistle to the Hebrews 9.11-15",
+     "Matthew 16.13-19"
+    ]
+   },
+   "9": {
+    "feast": "Fast daySaints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
+    "readings": [
+     "Proverbs 23.15-25",
+     "Hosea 14.6-7",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 6.20-23"
+    ]
+   },
+   "19": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to the Corinthians 12.19-13.4",
+     "Mark 11.15-26"
+    ]
+   },
+   "47": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 6.1-13",
+     "Luke 8.4-16"
+    ]
+   },
+   "51": {
+    "feast": "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
+    "readings": [
+     "Proverbs 8.12-21",
+     "Nahum 2.1-6",
+     "St. Paul's First Epistle to Timothy 5.17-21",
+     "Luke 9.23-27"
+    ]
+   },
+   "31": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 2.11-20",
+     "Mark 13.14-23"
+    ]
+   },
+   "15": {
+    "feast": "Saints David of Dvin and the Martyrs Eulampius and Eulampia",
+    "readings": [
+     "Proverbs 13.1-7",
+     "Micah 7.18-20",
+     "St. Paul's Epistle to the Hebrews 12.1-7",
+     "Luke 13.22-30"
+    ]
+   },
+   "33": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Galatians 2.20-3.12",
+     "Mark 13.24-37"
+    ]
+   },
+   "25": {
+    "feast": "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
+    "readings": [
+     "Proverbs 4.20-27",
+     "Jeremiah 15.19-20",
+     "St. Paul's First Epistle to the Corinthians 12.1-7",
+     "Matthew 9.35-10.1"
+    ]
+   },
+   "41": {
+    "feast": "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria",
+    "readings": [
+     "Proverbs 11.2-11",
+     "Isaiah 61.3-7",
+     "St. Paul's Epistle to the Hebrews 13.7-9",
+     "John 16.33-17.8"
+    ]
+   },
+   "59": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to the Ephesians 6.1-9",
+     "Luke 9.10-17"
+    ]
+   },
+   "11": {
+    "feast": "Fast daySaint Patriarchs Barlaam, Anthimus and Irenaeus",
+    "readings": [
+     "Wisdom 10.9-12",
+     "Malachi 2.5-7",
+     "St. Peter's First Epistle General 5.1-7",
+     "John 10.11-16"
+    ]
+   },
+   "37": {
+    "feast": "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus",
+    "readings": [
+     "Wisdom 1.11-15",
+     "Lamentations 3.22-56",
+     "St. Paul's First Epistle to Timothy 5.17-21",
+     "Matthew 10.26-33"
+    ]
+   },
+   "7": {
+    "feast": "Second Sunday after the Holy CrossEve of Fast of the Holy Cross of Varag",
+    "readings": [
+     "Isaiah 14.3-17",
+     "St. Paul's Second Epistle to the Corinthians 10.18-11.10",
+     "Mark 10.1-12"
+    ]
+   },
+   "21": {
+    "feast": "Fourth Sunday after the Holy Cross",
+    "readings": [
+     "Isaiah 17.7-14",
+     "St. Paul's Second Epistle to the Corinthians 13.5-13",
+     "Mark 11.27-33"
+    ]
+   },
+   "55": {
+    "feast": "Holy Archangels Gabriel and Michael and all the heavenly Angels",
+    "readings": [
+     "Genesis 18.33-19.2",
+     "Job 38.4-7",
+     "Isaiah 6.1-7",
+     "Ezekiel 1.1-20",
+     "St. Paul's Epistle to the Hebrews 1.6-14",
+     "Matthew 18.10-14"
     ]
    }
   },

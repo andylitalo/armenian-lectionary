@@ -1,26 +1,34 @@
-"""DEV-ONLY: mine the post-Nativity saint schedule into a static artifact.
+"""DEV-ONLY: mine the per-zone saint schedules into one static artifact.
 
-The winter post-Nativity saint-weekdays (Mon/Tue/Thu/Sat between the Theophany
-octave and the eve of the Fast of Catechumens) carry a CANONICAL ORDERED list of
-saints that is laid onto whichever free weekdays a given year offers. A single
-merge or drop shifts every downstream saint to a different weekday, so the
-calendar-grid coordinate (PnSatL = "{pn_len}:{nsun}:{weekday}") splits one saint
-across many grid keys -- the same reading-set lands on Thu one year and Tue the
-next, each key seeing only one year of support and therefore dropped by the
-strict cross-year filter.
+Every variable-gap ferial zone lays a CANONICAL ORDERED list of saints onto
+whichever free Mon/Tue/Thu/Sat weekdays a given year offers:
 
-This tool reverse-engineers the schedule so the runtime can key each physical
-day by the SENIOR SAINT'S IDENTITY instead of its drifting grid position:
+  * PN -- post-Nativity (Theophany octave -> eve of the Fast of Catechumens),
+  * Tr -- summer (Transfiguration -> eve of the Fast of the Assumption),
+  * As -- autumn (Assumption -> eve of the Fast of the Holy Cross),
+  * Ex -- post-Exaltation (Exaltation -> eve of Advent / Heesnak).
 
-  1. Collect every post-Nativity free saint-weekday with non-empty readings.
+A single merge or drop shifts every downstream saint to a different weekday, so
+the calendar-grid coordinate ({Zone}SatL = "{span}:{week}:{weekday}") splits one
+saint across many grid keys -- the same reading-set lands on Thu one year and Tue
+the next, each key seeing only one year of support and dropped by the strict
+cross-year filter.
+
+This tool reverse-engineers each zone's schedule so the runtime can key each
+physical day by the SENIOR SAINT'S IDENTITY instead of its drifting grid position:
+
+  1. Collect every free saint-weekday in the zone with non-empty readings.
   2. Cluster by readings_tuple -- the readings ARE the identity (label spellings
      are noisy: "Eugenios"/"Eugenius"/"Eugenia"). Each distinct reading-set is a
      candidate saint id; an alias map records every observed label -> id.
   3. Derive, per id: forward order (median ordinal), whether it pins to Saturday,
      its solar date window (for pins), and an optional flag (rare tail saints).
-  4. Emit dev/postnat_schedule.json -- ordering / pins / aliases ONLY, never
-     readings. Readings stay in lectionary_data.json under the PnSaint keyspace,
-     learned by the existing strict pipeline (this keeps the 0-wrong guarantee).
+     The head/tail order split is re-derived PER ZONE from that zone's own free-
+     slot distribution (median slots + 1), not a winter-tuned constant.
+  4. Emit dev/saint_schedule.json keyed by zone -- ordering / pins / aliases ONLY,
+     never readings. Readings stay in lectionary_data.json under the {Zone}Saint
+     keyspaces, learned by the existing strict pipeline (keeps the 0-wrong
+     guarantee).
 
 Usage:
   python dev/saint_schedule.py          # regenerate artifact + print diagnostics
@@ -31,16 +39,19 @@ import datetime
 import json
 import os
 import re
+import statistics
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from dev.slot_model import _fixed_dates  # noqa: E402
 from lectionary import (  # noqa: E402
-    winter_window, _SAINT_WD, _next_saint_weekday, EMBEDDED_FIXED,
+    _SAINT_ZONES, _SAINT_WD, _next_saint_weekday, EMBEDDED_FIXED,
 )
 
-ARTIFACT = os.path.join(os.path.dirname(__file__), "postnat_schedule.json")
+ZONES = ("PN", "Tr", "As", "Ex")
+
+ARTIFACT = os.path.join(os.path.dirname(__file__), "saint_schedule.json")
 
 # Ids whose reading-set genuinely pins to a particular Saturday (high-rank
 # fathers). Detected automatically (weekday==Sat in >= N-1 of N years) but a
@@ -58,16 +69,21 @@ def _slug(label):
     return "_".join(label.split("_")[:3]) or "saint"
 
 
-def collect(days):
-    """year-keyed list of (date, weekday, label, readings_tuple) for every
-    post-Nativity free saint-weekday with readings (John/embedded/civil removed)."""
+def collect(days, zone):
+    """year-keyed list of (date, weekday, label, readings_tuple) for every free
+    saint-weekday with readings in `zone` (John/embedded/civil removed).
+
+    Window and the John-the-Forerunner skip come from the runtime zone descriptor
+    so the mined slots match the replay's slots exactly."""
     fixed = _fixed_dates(days)
+    z = _SAINT_ZONES[zone]
     years = sorted({iso[:4] for iso in days})
     per_year = {}
     for y in years:
         yr = int(y)
-        start, end = winter_window(yr)["PN"]
-        john = _next_saint_weekday(datetime.date(yr, 1, 14))
+        start, end = z["window"](yr)
+        john = (_next_saint_weekday(datetime.date(yr, 1, 14))
+                if z["skip_john"] else None)
         rows = []
         d = start
         while d <= end:
@@ -135,13 +151,23 @@ _WDNAME = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 #   skip     low-support / middle saints (Andrew, Adrian, one-offs) -- left
 #            unassigned for now (they stay on the grid keys / estimate).
 HEAD_MIN_YEARS = 7      # support to trust a saint in the forward head block
-HEAD_MAX_ORDER = 9      # head saints sit before the first pinned Saturday tail
 TAIL_MIN_YEARS = 5      # support to trust a backward-anchored tail saint
-TAIL_MIN_ORDER = 9      # tail saints come after the mid-window pinned Saturday
 
 
-def derive(ids):
-    """Per id, derive order / anchor class / solar window / weekday."""
+def _zone_split(per_year):
+    """The head/tail order boundary for a zone, re-derived from that zone's own
+    free-slot distribution: head saints sit at order < split (laid forward from
+    the window start), tail saints at order >= split (laid backward). The boundary
+    is (median free-slots per year) + 1, which reproduces the winter-tuned 9 for
+    PN (median 8) and scales to the wider summer/autumn/post-Exaltation zones.
+    Falls back to 9 if the zone has no populated years."""
+    counts = [len(r) for r in per_year.values() if r]
+    return int(statistics.median(counts)) + 1 if counts else 9
+
+
+def derive(ids, split):
+    """Per id, derive order / anchor class / solar window / weekday, using the
+    zone's own head/tail order `split`."""
     sched = []
     for sid, info in ids.items():
         occ = info["occ"]
@@ -158,10 +184,10 @@ def derive(ids):
             entry["anchor"] = "pin:Sat"
             entry["date_lo"] = f"{lo[0]:02d}-{lo[1]:02d}"
             entry["date_hi"] = f"{hi[0]:02d}-{hi[1]:02d}"
-        elif len(wds) == 1 and n >= TAIL_MIN_YEARS and order >= TAIL_MIN_ORDER:
+        elif len(wds) == 1 and n >= TAIL_MIN_YEARS and order >= split:
             entry["anchor"] = "tail"
             entry["weekday"] = _WDNAME[next(iter(wds))]
-        elif n >= HEAD_MIN_YEARS and order < HEAD_MAX_ORDER:
+        elif n >= HEAD_MIN_YEARS and order < split:
             entry["anchor"] = "head"
         else:
             entry["anchor"] = "skip"
@@ -170,26 +196,46 @@ def derive(ids):
     return sched
 
 
-def emit(per_year, ids, aliases, sched):
-    years = sorted(per_year)
-    artifact = {
+_ZONE_DESC = {
+    "PN": "post-Nativity (Theophany octave -> eve of Fast of Catechumens)",
+    "Tr": "summer (Transfiguration -> eve of Fast of the Assumption)",
+    "As": "autumn (Assumption -> eve of Fast of the Holy Cross)",
+    "Ex": "post-Exaltation (Exaltation -> eve of Advent / Heesnak)",
+}
+
+
+def build_zone(days, zone):
+    """Mine one zone -> its artifact section {meta, aliases, sequence}."""
+    per_year = collect(days, zone)
+    ids, aliases = canonicalize(per_year)
+    split = _zone_split(per_year)
+    sched = derive(ids, split)
+    section = {
         "meta": {
-            "source": "Mined from sacredtradition.am post-Nativity saint-weekdays "
+            "source": "Mined from sacredtradition.am %s saint-weekdays "
                       "(ordering/pins/aliases only; readings live in "
-                      "lectionary_data.json under PnSaint).",
-            "years_mined": years,
+                      "lectionary_data.json under the zone's Saint keyspace)."
+                      % _ZONE_DESC[zone],
+            "years_mined": sorted(per_year),
+            "head_tail_split": split,
         },
         "aliases": aliases,
         "sequence": sched,
     }
+    return section, per_year, ids
+
+
+def emit(combined):
     with open(ARTIFACT, "w", encoding="utf-8") as f:
-        json.dump(artifact, f, ensure_ascii=False, indent=1)
+        json.dump(combined, f, ensure_ascii=False, indent=1)
     return ARTIFACT
 
 
-def _report(per_year, ids, sched):
+def _report(zone, per_year, ids, sched, split):
+    print(f"\n========== zone {zone}: {_ZONE_DESC[zone]} ==========")
     print(f"Mined {sum(len(r) for r in per_year.values())} saint-days over "
-          f"{len(per_year)} years -> {len(ids)} reading-set identities.\n")
+          f"{len([y for y in per_year if per_year[y]])} populated years -> "
+          f"{len(ids)} reading-set identities (head/tail split = {split}).\n")
     print(f"{'id':28} {'ord':>3} {'yrs':>3} {'anchor':9} detail")
     for e in sched:
         if e["anchor"] == "pin:Sat":
@@ -212,9 +258,14 @@ def _report(per_year, ids, sched):
 
 if __name__ == "__main__":
     days = load_all()
-    per_year = collect(days)
-    ids, aliases = canonicalize(per_year)
-    sched = derive(ids)
-    path = emit(per_year, ids, aliases, sched)
-    _report(per_year, ids, sched)
-    print(f"\nEmitted artifact -> {path}")
+    combined = {}
+    for zone in ZONES:
+        section, per_year, ids = build_zone(days, zone)
+        combined[zone] = section
+        _report(zone, per_year, ids, section["sequence"],
+                section["meta"]["head_tail_split"])
+    path = emit(combined)
+    n_anchored = sum(1 for z in combined.values() for e in z["sequence"]
+                     if e["anchor"] != "skip")
+    print(f"\nEmitted combined artifact ({n_anchored} anchored ids across "
+          f"{len(ZONES)} zones) -> {path}")
