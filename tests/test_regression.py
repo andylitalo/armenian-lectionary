@@ -14,7 +14,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from lectionary import compute_armenian_lectionary  # noqa: E402
 
-COVERAGE_RATCHET = 3798  # current baseline; regressions below this fail
+# Current baseline; regressions below this fail. Overridable via env so a
+# pre-backfill checkout (smaller cache) can lower it without editing source.
+COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "3798"))
 
 
 class TestRegression(unittest.TestCase):

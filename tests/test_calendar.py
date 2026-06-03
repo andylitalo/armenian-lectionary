@@ -42,14 +42,18 @@ class TestAnchors(unittest.TestCase):
 
 class TestWinterCoords(unittest.TestCase):
     def test_advent_saint_weekday(self):
-        # Nov 22 2025 is a Saturday in the opening week of Advent (he = Nov 16).
+        # Nov 22 2025 is a Saturday in the opening week of Advent (he = Nov 16,
+        # Advent length 51 days, back-week 6 from Theophany). Plain + length-classed
+        # + backward grid coordinates are all emitted.
         self.assertEqual(L.winter_coords(datetime.date(2025, 11, 22)),
-                         {"AdvSat": "0:Sat", "AdvSatB": "6:Sat"})
+                         {"AdvSatL": "51:0:Sat", "AdvSatBL": "51:6:Sat",
+                          "AdvSat": "0:Sat", "AdvSatB": "6:Sat"})
 
     def test_postnativity_sunday(self):
-        # Jan 19 2025 is the 1st Sunday after Nativity.
+        # Jan 19 2025 is the 1st Sunday after Nativity (post-Nat length 26 days,
+        # 3 Sundays remaining before the eve of the Fast of Catechumens).
         self.assertEqual(L.winter_coords(datetime.date(2025, 1, 19)),
-                         {"PnSun": "1"})
+                         {"PnSunL": "26:1", "PnSunB": "3", "PnSun": "1"})
 
     def test_embedded_fixed_dates_excluded(self):
         # Presentation of Mary (Nov 21) and Conception of Mary (Dec 9) must not

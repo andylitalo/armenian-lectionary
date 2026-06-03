@@ -1,5 +1,35 @@
 # Winter-hinge progress & next steps (handoff)
 
+> ## UPDATE (session 2026-06): 80.0% → 95.3% exact-match, still 0 wrong
+>
+> Over an expanded **2001–2026** cache (9495 days; absolute coverage 3798 → 9046).
+> Source serves data back to **2001** (2000- empty); 2001–2013 backfilled. New
+> comprehensive lock `tests/test_full_dataset.py` (0-wrong + % floor + total-day
+> guard). The work generalized this doc's ideas across the whole year:
+>
+> 1. **Embedded-feast de-contamination** — generalized `_EMBEDDED_FIXED` →
+>    `EMBEDDED_FIXED` {(4,7),(2,13),(9,8),(11,21),(12,9)}. `coords_for` emits only
+>    `C`+`CF` for these dates so they leave every anchored learning bucket
+>    automatically; the feasts themselves ship as runtime composites
+>    (`_embedded_composite`: proper readings DISPLACE a saint-weekday slot but
+>    CO-CELEBRATE a Sunday/fast/continua slot). Annunciation (4/7) & eve (2/13)
+>    stay estimate (irregular). (≈+850 + 72 composite days.)
+> 2. **Summer/autumn/post-Exaltation hinges** (`_summer_slot`, `_autumn_slot`,
+>    `_postex_slot`, `HINGE_KS`) mirror the winter scheduler. (≈+370.)
+> 3. **Length-classed grid keys (the big win).** The Advent / post-Nativity / hinge
+>    window LENGTH varies ~a week and the lectio-continua fast-forwards in short
+>    windows, so the same forward ordinal carries different readings across length
+>    classes. Emitting a length-classed variant (`AdvSatL`, `PnSatL`, `TrSatL`, …
+>    prefixed by window-length-in-days) + a backward index lets the strict filter
+>    ship the split sub-buckets. Winter 87.6→93.9% (Dec→0), hinges →95.3% (Oct→0).
+>
+> **Remaining ≈449 days (4.7%):** 288 "conflict" (one anomaly year drops an
+> otherwise-unanimous bucket — saint displacement/merge, e.g. Sargis 2008; the
+> Easter-2011/Apr-24-Genocide collision), 106 low-support length classes, 55
+> no-coord. The 288 need the **saint-identity merge-replay engine** (still
+> unbuilt — see "Ideas" #3 below). New dev probes: `dev/embedded_diag.py`,
+> `dev/composite_probe.py`, `dev/continua_probe.py`.
+
 Status as of branch `winter-hinge-scheduler` (commit "Crack winter hinge…").
 Audience: the next agent continuing the Armenian lectionary engine.
 
