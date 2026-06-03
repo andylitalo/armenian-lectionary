@@ -61,6 +61,29 @@ def sunday_closest_to(year: int, month: int, day: int) -> datetime.date:
     return target
 
 
+def _pn_len(year: int) -> int:
+    """Length (days) of the post-Nativity window Jan 14 -> eve of the Fast of
+    Catechumens (Easter-70). This is the *leap-correct* paschal-run-up scalar: it
+    moves with the date of Easter but also picks up the Feb-29 shift in the
+    Jan 14 -> Easter span, which a raw Easter date misses (cf. the Mar-31 years
+    2002/2013 vs 2024). Used to band the pre-Lent / boundary Easter-core days."""
+    e = calculate_gregorian_easter(year)
+    return ((e - datetime.timedelta(days=70)) - datetime.date(year, 1, 14)).days
+
+
+# Bin width (days of pn_len) for the Easter-band sub-key. Wider = more support per
+# band but coarser; narrower = isolates extreme-Easter outlier years more sharply.
+_EB_BIN = 4
+
+
+def _easter_band(year: int) -> int:
+    """Ordinal pn_len band for a civil year (extreme-Easter years fall in their
+    own bands, isolating the single-outlier readings the plain Easter-offset key
+    cannot separate)."""
+    p = _pn_len(year)
+    return p // _EB_BIN if p >= 0 else -1   # earliest-Easter (pn_len<0) is its own band
+
+
 def anchors(year: int) -> dict:
     """The chain of governing feasts for a civil year."""
     e = calculate_gregorian_easter(year)
@@ -506,9 +529,10 @@ def coords_for(d: datetime.date) -> dict:
     y = d.year
     a = anchors(y)
     a_prev = anchors(y - 1)
+    e_off = (d - a["E"]).days
     cs = {
         "C": (d.month, d.day),                  # civil date (immovable feasts)
-        "E": (d - a["E"]).days,                 # Easter-anchored core
+        "E": e_off,                             # Easter-anchored core
         "AS": (d - a["AS"]).days,               # Assumption period
         "EX": (d - a["EX"]).days,               # Exaltation period
         "HE": (d - a["HE"]).days,               # Advent (this year)
@@ -516,6 +540,11 @@ def coords_for(d: datetime.date) -> dict:
         "TH": (d - a["TH"]).days,               # weeks after Nativity
         "THp": (d - a_prev["TH"]).days,
     }
+    # Easter-band sub-key: same Easter offset, prefixed by the year's pn_len band,
+    # so single-outlier extreme-Easter years separate from the cross-year consensus
+    # (emitted only inside the Easter-core window; string-keyed, self-guarded).
+    if WINDOWS["E"][0] <= e_off <= WINDOWS["E"][1]:
+        cs["EB"] = f"{_easter_band(y)}:{e_off}"
     cs.update(winter_coords(d))                 # winter grid slots (string keys)
     cs.update(hinge_coords(d))                  # summer/autumn grid slots
     return cs
@@ -610,6 +639,7 @@ def _embedded_composite(d, tables):
 WINDOWS = {
     "C": None,
     "CF": None,
+    "EB": None,
     "E": (-72, 116),
     "AS": (-14, 27),
     "EX": (-9, 60),
@@ -624,7 +654,7 @@ WINDOWS.update({ks: None for ks in HINGE_KS})
 # Resolution precedence (first match wins): immovable feasts, then the
 # solar/Easter anchored cycles, then the winter grid slots, then the generic
 # Theophany/Heesnak season counts.
-PRECEDENCE = (["C", "CF", "AS", "EX", "E"] + WINTER_KS + HINGE_KS
+PRECEDENCE = (["C", "CF", "AS", "EX", "EB", "E"] + WINTER_KS + HINGE_KS
               + ["HE", "HEp", "TH", "THp"])
 
 # Keyspaces whose keys are integers (day-offsets); all others are string keys.
@@ -701,6 +731,8 @@ def _easter_season(offset: int) -> str:
 def season_for(keyspace: str, key) -> str:
     if keyspace == "E":
         return _easter_season(key)
+    if keyspace == "EB":                        # "band:offset" -> Easter season
+        return _easter_season(int(str(key).split(":")[1]))
     return _KS_SEASON.get(keyspace, "Ordinary Time")
 
 

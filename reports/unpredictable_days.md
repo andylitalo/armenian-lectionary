@@ -3,6 +3,17 @@
 **Generated:** 2026-06 · branch `winter-hinge-scheduler` · engine commit after the
 post-Nativity saint-identity replay (`PnSaint`).
 
+> **Update (Easter-band `EB` chunk):** the Easter core has since been given a
+> `pn_len`-banded sub-key (`EB = "{band}:{offset}"`, precedence just above plain
+> `E`; bin width 4 days). This delivered **Priority 1 (Class A / bucket-1 Easter
+> core)**: runtime exact-match rose **9 088 → 9 199 (+111 days), 95.7 % → 96.9 %**,
+> estimate **407 → 296**, still **0 wrong**. The pre-Lent saint days (`E=−64/−62/
+> −61`), Easter Sunday (`E=0`) and the `E=−70…−72` boundary now ship for every
+> normal year; only the irreducible **single-sample extreme-Easter outliers**
+> (2008 Mar 23, 2011 Apr 24) remain estimate there — they cannot be cross-validated
+> with one observation. The numbers in the body below describe the *pre-`EB`* state
+> and are retained for the taxonomy; the live counts are in the banner.
+
 ## Executive summary
 
 Over the full cross-year ground-truth cache (**9 495 days, civil years 2001–2026**),
