@@ -28,8 +28,10 @@ from lectionary import compute_armenian_lectionary  # noqa: E402
 # (post-Nativity saint-identity replay, PnSaint keyspace) reaches 9088/9495 = 95.7%;
 # chunk 6 (Easter-band sub-key EB, pn_len-banded Easter core) reaches 9199/9495 = 96.9%;
 # chunk 7 (Advent-length-banded Heesnak keys HEB/HEpB) reaches 9252/9495 = 97.4%;
-# chunk 8 (post-Nativity Wed/Fri forward continua index PnFerF) reaches 9271/9495 = 97.6%.
-COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "97.5"))
+# chunk 8 (post-Nativity Wed/Fri forward continua index PnFerF) reaches 9271/9495 = 97.6%;
+# chunk 9 (Stage A: hinge saint-identity replay TrSaint/AsSaint/ExSaint) reaches 9273/9495 = 97.7%;
+# chunk 10 (Stage B: Easter-band saint sub-keys {Zone}SaintB) reaches 9310/9495 = 98.0%.
+COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "98.0"))
 # Lower bound on processed reference days; guards against silent data loss.
 EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
 
