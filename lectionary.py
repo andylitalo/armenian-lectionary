@@ -250,6 +250,14 @@ def _postnat_slot(d, start, end, out):
         return
     if wd == 6:
         if d == end:
+            # Eve of the Fast of Catechumens (Easter-70). It is simultaneously a
+            # numbered Sunday-after-Nativity, and its readings follow that Sunday
+            # number (First Sunday carries an extra Luke 4.14-30 the later Sundays
+            # drop), which the Easter-band+offset EB key conflates. Band the eve by
+            # the Sunday count so First vs Second separate; the extreme-Easter
+            # singletons (nsun 0/5: Jan-13 octave collision, Presentation overlap)
+            # fall to their own unsupported keys and stay estimate.
+            out["PnEveN"] = str(nsun)
             out["PnEve"] = "0"            # eve of Fast of Catechumens (backward)
         else:
             out["PnSunL"] = f"{pn_len}:{nsun}"
@@ -304,7 +312,7 @@ def winter_coords(d: datetime.date) -> dict:
 
 
 # Winter keyspaces, most specific first (forward grids before backward grids).
-WINTER_KS = ["PnJohn", "PnEve",
+WINTER_KS = ["PnOct", "PnJohn", "PnEveN", "PnEve",
              "AdvSunL", "AdvSunB", "AdvSun",
              "PnSunL", "PnSunB", "PnSun", "AoF",
              "AdvFerL", "AdvFerB", "AdvFer",
@@ -409,6 +417,8 @@ def _autumn_slot(d, asun, exfast_mon, out):
         out["AsSaintMD"] = f"{sid}:{d.month:02d}-{d.day:02d}"  # identity x civil date
         out["AsSaintB"] = f"{_easter_band(d.year)}:{sid}"   # Easter-banded variant
         out["AsSaint"] = sid
+    # Weekday x civil-date saint-grid key (solar-anchored zone; see ExSatMD).
+    out["AsSatMD"] = f"{_WD[wd]}:{d.month:02d}-{d.day:02d}"
     out["AsSatL"] = f"{span}:{week}:{_WD[wd]}"
     out["AsSatBL"] = f"{span}:{back_week}:{_WD[wd]}"
     out["AsSat"] = f"{week}:{_WD[wd]}"
@@ -436,6 +446,13 @@ def _postex_slot(d, ex, he, out):
         out["ExSaintMD"] = f"{sid}:{d.month:02d}-{d.day:02d}"  # identity x civil date
         out["ExSaintB"] = f"{_easter_band(d.year)}:{sid}"   # Easter-banded variant
         out["ExSaint"] = sid
+    # Weekday x civil-date saint-grid key: the post-Exaltation zone is doubly
+    # solar-anchored (Exaltation = Sunday nearest Sep 14), so its saint-weekday
+    # slots sit on near-fixed civil dates. A single phase-shift year (the saint
+    # laid one weekday earlier) drops the otherwise-unanimous span:week grid for
+    # all years; keying the bare slot by (weekday, civil-date) clusters the
+    # consistent years and isolates the shifted one. Solar zones only (not Tr).
+    out["ExSatMD"] = f"{_WD[wd]}:{d.month:02d}-{d.day:02d}"
     out["ExSatL"] = f"{span}:{week}:{_WD[wd]}"
     out["ExSatBL"] = f"{span}:{back_week}:{_WD[wd]}"
     out["ExSat"] = f"{week}:{_WD[wd]}"
@@ -472,8 +489,8 @@ HINGE_KS = ["TrEve", "AsEve",
             "TrSunL", "AsSunL", "ExSunL", "TrSun", "AsSun", "ExSun",
             "TrFerL", "AsFerL", "ExFerL", "TrFer", "AsFer", "ExFer",
             "TrSaintMD", "TrSaintB", "TrSaint", "TrSatL", "TrSatBL",
-            "AsSaintMD", "AsSaintB", "AsSaint", "AsSatL", "AsSatBL",
-            "ExSaintMD", "ExSaintB", "ExSaint", "ExSatL", "ExSatBL",
+            "AsSaintMD", "AsSaintB", "AsSaint", "AsSatMD", "AsSatL", "AsSatBL",
+            "ExSaintMD", "ExSaintB", "ExSaint", "ExSatMD", "ExSatL", "ExSatBL",
             "TrSat", "AsSat", "ExSat", "TrSatB", "AsSatB", "ExSatB"]
 
 
@@ -649,6 +666,14 @@ def coords_for(d: datetime.date) -> dict:
         cs["HEB"] = f"{_adv_len(y)}:{cs['HE']}"
     if WINDOWS["HEp"][0] <= cs["HEp"] <= WINDOWS["HEp"][1]:
         cs["HEpB"] = f"{_adv_len(y - 1)}:{cs['HEp']}"
+    # Naming octave (Jan 13, the eighth day of Nativity): a fixed-date feast with
+    # cross-year-invariant proper readings that the civil pass cannot claim because
+    # in the rare extreme-Easter year where Jan 13 coincides with the eve of the
+    # Fast of Catechumens (Easter-70) the movable eve displaces the octave. Emit a
+    # dedicated constant key for every year EXCEPT that collision, so the octave
+    # ships and the eve year falls through to its Easter-anchored slot / estimate.
+    if md == (1, 13) and e_off != -70:
+        cs["PnOct"] = "01-13"
     cs.update(winter_coords(d))                 # winter grid slots (string keys)
     cs.update(hinge_coords(d))                  # summer/autumn grid slots
     return cs
@@ -788,10 +813,12 @@ _KS_SEASON = {
     "AdvSatB": "Advent (Heesnak)",
     "AdvSatL": "Advent (Heesnak)",
     "AdvSatBL": "Advent (Heesnak)",
+    "PnOct": "Feast of the Naming of the Lord",
     "PnJohn": "Season after Nativity",
     "PnSaint": "Season after Nativity",
     "PnSaintB": "Season after Nativity",
     "PnSaintMD": "Season after Nativity",
+    "PnEveN": "Eve of the Fast of Catechumens",
     "PnEve": "Eve of the Fast of Catechumens",
     "PnSun": "Season after Nativity",
     "PnSunL": "Season after Nativity",
@@ -814,12 +841,12 @@ _KS_SEASON.update({ks: "After Transfiguration"
                               "TrSatBL")})
 _KS_SEASON.update({ks: "After the Assumption"
                    for ks in ("AsSun", "AsSunL", "AsFer", "AsFerL", "AsSaintMD",
-                              "AsSaintB", "AsSaint", "AsSat", "AsSatL", "AsSatB",
-                              "AsSatBL")})
+                              "AsSaintB", "AsSaint", "AsSatMD", "AsSat", "AsSatL",
+                              "AsSatB", "AsSatBL")})
 _KS_SEASON.update({ks: "After the Exaltation of the Cross"
                    for ks in ("ExSun", "ExSunL", "ExFer", "ExFerL", "ExSaintMD",
-                              "ExSaintB", "ExSaint", "ExSat", "ExSatL", "ExSatB",
-                              "ExSatBL")})
+                              "ExSaintB", "ExSaint", "ExSatMD", "ExSat", "ExSatL",
+                              "ExSatB", "ExSatBL")})
 
 
 def _easter_season(offset: int) -> str:
