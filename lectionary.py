@@ -270,6 +270,7 @@ def _postnat_slot(d, start, end, out):
     # saint weekday: senior-saint identity (most specific) + forward/backward grid.
     sid = _zone_saint_replay("PN", d.year).get(d)
     if sid:
+        out["PnSaintMD"] = f"{sid}:{d.month:02d}-{d.day:02d}"  # identity x civil date
         out["PnSaintB"] = f"{_easter_band(d.year)}:{sid}"   # Easter-banded variant
         out["PnSaint"] = sid
     out["PnSatL"] = f"{pn_len}:{nsun}:{_WD[wd]}"
@@ -309,7 +310,7 @@ WINTER_KS = ["PnJohn", "PnEve",
              "AdvFerL", "AdvFerB", "AdvFer",
              "PnFerF", "PnFerL", "PnFerB", "PnFer",
              "AdvSatL", "AdvSatBL", "AdvSat", "AdvSatB",
-             "PnSaintB", "PnSaint",
+             "PnSaintMD", "PnSaintB", "PnSaint",
              "PnSatL", "PnSatBL", "PnSat", "PnSatB"]
 
 
@@ -374,6 +375,7 @@ def _summer_slot(d, tr, fast_mon, eve, out):
     # saint weekday: senior-saint identity (most specific) + forward/backward grid.
     sid = _zone_saint_replay("Tr", d.year).get(d)
     if sid:
+        out["TrSaintMD"] = f"{sid}:{d.month:02d}-{d.day:02d}"  # identity x civil date
         out["TrSaintB"] = f"{_easter_band(d.year)}:{sid}"   # Easter-banded variant
         out["TrSaint"] = sid
     out["TrSatL"] = f"{span}:{week}:{_WD[wd]}"
@@ -404,6 +406,7 @@ def _autumn_slot(d, asun, exfast_mon, out):
         return
     sid = _zone_saint_replay("As", d.year).get(d)
     if sid:
+        out["AsSaintMD"] = f"{sid}:{d.month:02d}-{d.day:02d}"  # identity x civil date
         out["AsSaintB"] = f"{_easter_band(d.year)}:{sid}"   # Easter-banded variant
         out["AsSaint"] = sid
     out["AsSatL"] = f"{span}:{week}:{_WD[wd]}"
@@ -430,6 +433,7 @@ def _postex_slot(d, ex, he, out):
         return
     sid = _zone_saint_replay("Ex", d.year).get(d)
     if sid:
+        out["ExSaintMD"] = f"{sid}:{d.month:02d}-{d.day:02d}"  # identity x civil date
         out["ExSaintB"] = f"{_easter_band(d.year)}:{sid}"   # Easter-banded variant
         out["ExSaint"] = sid
     out["ExSatL"] = f"{span}:{week}:{_WD[wd]}"
@@ -467,9 +471,9 @@ def hinge_coords(d: datetime.date) -> dict:
 HINGE_KS = ["TrEve", "AsEve",
             "TrSunL", "AsSunL", "ExSunL", "TrSun", "AsSun", "ExSun",
             "TrFerL", "AsFerL", "ExFerL", "TrFer", "AsFer", "ExFer",
-            "TrSaintB", "TrSaint", "TrSatL", "TrSatBL",
-            "AsSaintB", "AsSaint", "AsSatL", "AsSatBL",
-            "ExSaintB", "ExSaint", "ExSatL", "ExSatBL",
+            "TrSaintMD", "TrSaintB", "TrSaint", "TrSatL", "TrSatBL",
+            "AsSaintMD", "AsSaintB", "AsSaint", "AsSatL", "AsSatBL",
+            "ExSaintMD", "ExSaintB", "ExSaint", "ExSatL", "ExSatBL",
             "TrSat", "AsSat", "ExSat", "TrSatB", "AsSatB", "ExSatB"]
 
 
@@ -787,6 +791,7 @@ _KS_SEASON = {
     "PnJohn": "Season after Nativity",
     "PnSaint": "Season after Nativity",
     "PnSaintB": "Season after Nativity",
+    "PnSaintMD": "Season after Nativity",
     "PnEve": "Eve of the Fast of Catechumens",
     "PnSun": "Season after Nativity",
     "PnSunL": "Season after Nativity",
@@ -804,14 +809,17 @@ _KS_SEASON = {
     "AsEve": "Eve of the Fast of the Holy Cross",
 }
 _KS_SEASON.update({ks: "After Transfiguration"
-                   for ks in ("TrSun", "TrSunL", "TrFer", "TrFerL", "TrSaintB",
-                              "TrSaint", "TrSat", "TrSatL", "TrSatB", "TrSatBL")})
+                   for ks in ("TrSun", "TrSunL", "TrFer", "TrFerL", "TrSaintMD",
+                              "TrSaintB", "TrSaint", "TrSat", "TrSatL", "TrSatB",
+                              "TrSatBL")})
 _KS_SEASON.update({ks: "After the Assumption"
-                   for ks in ("AsSun", "AsSunL", "AsFer", "AsFerL", "AsSaintB",
-                              "AsSaint", "AsSat", "AsSatL", "AsSatB", "AsSatBL")})
+                   for ks in ("AsSun", "AsSunL", "AsFer", "AsFerL", "AsSaintMD",
+                              "AsSaintB", "AsSaint", "AsSat", "AsSatL", "AsSatB",
+                              "AsSatBL")})
 _KS_SEASON.update({ks: "After the Exaltation of the Cross"
-                   for ks in ("ExSun", "ExSunL", "ExFer", "ExFerL", "ExSaintB",
-                              "ExSaint", "ExSat", "ExSatL", "ExSatB", "ExSatBL")})
+                   for ks in ("ExSun", "ExSunL", "ExFer", "ExFerL", "ExSaintMD",
+                              "ExSaintB", "ExSaint", "ExSat", "ExSatL", "ExSatB",
+                              "ExSatBL")})
 
 
 def _easter_season(offset: int) -> str:
