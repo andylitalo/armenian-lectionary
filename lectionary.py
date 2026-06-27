@@ -139,6 +139,18 @@ EMBEDDED_FIXED = {
     (12, 9),   # Conception of the Holy Theotokos by Anna
 }
 
+# The Annunciation (Apr 7) and its eve (Apr 6) are fixed-date feasts whose
+# readings are reordered by their collision with the movable Lent / Holy Week /
+# Eastertide cycle. The reorder is fully DETERMINISTIC in the Easter offset: for
+# each (civil-date, Easter-offset) bucket the reading-set is cross-year identical
+# (verified over 2001-2026). So they get a dedicated Easter-offset keyspace
+# (AnnE), learned by the strict pipeline -- they ship VALIDATED, not best-guess.
+# The feast (Apr 7) is also in EMBEDDED_FIXED (it must not contaminate the E
+# ferial buckets); the eve (Apr 6) is left on the normal path and merely gains an
+# extra AnnE coordinate, so its single-sample extreme-Easter years still fall
+# through to E exactly as before (no coverage regression).
+_ANNUNCIATION_MD = {(4, 7), (4, 6)}
+
 
 def _next_saint_weekday(d):
     """First day on/after d whose weekday carries saints (Mon/Tue/Thu/Sat)."""
@@ -548,6 +560,48 @@ def _load_saint_schedule():
 
 _SAINT_SCHEDULE = _load_saint_schedule()
 
+SAINT_READINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "dev", "saint_readings.json")
+
+
+def _load_saint_readings():
+    """The intrinsic reading-set per saint identity ({zone: {sid: [readings]}}),
+    mined alongside the schedule. Consumed ONLY by the labeled generative
+    best-guess tier; absent in a thin checkout -> {} -> no generative saint
+    readings (days stay estimate, exactly as before)."""
+    try:
+        with open(SAINT_READINGS_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+_SAINT_READINGS = _load_saint_readings()
+
+CONTINUA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "dev", "continua_sequence.json")
+
+
+def _load_continua():
+    """Modal reading per (span, index, weekday) for the Fast-of-Assumption Wed/Fri
+    continua. Consumed ONLY by the labeled generative best-guess tier; absent in a
+    thin checkout -> {} -> those days stay estimate, exactly as before."""
+    try:
+        with open(CONTINUA_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+_CONTINUA = _load_continua()
+
+# id -> human label per zone, for the generative tier's feast name.
+_SAINT_LABEL = {
+    zone: {e["id"]: e.get("label", e["id"])
+           for e in sec.get("sequence", [])}
+    for zone, sec in _SAINT_SCHEDULE.items()
+}
+
 # Per-zone replay descriptor: the identity coordinate emitted, the free-slot
 # window, and whether the John-the-Forerunner Jan-14 slot is skipped (PN only).
 _SAINT_ZONES = {
@@ -560,7 +614,7 @@ _SAINT_ZONES = {
 
 
 @functools.lru_cache(maxsize=None)
-def _zone_saint_replay(zone, year):
+def _zone_saint_replay(zone, year, full=False):
     """Lay a zone's canonical saint schedule onto `year`'s actual free
     saint-weekdays and return {date: saint_id}.
 
@@ -573,8 +627,14 @@ def _zone_saint_replay(zone, year):
       * tail    -- the closing block, each locked to one weekday and laid
                    BACKWARD (last free <weekday>), since its forward ordinal
                    drifts with the count of optional middle saints.
-    Middle / low-support saints are left unassigned (they keep falling through to
-    the grid keys or to estimate)."""
+
+    `full=False` (the validated default used by `coords_for`) leaves middle /
+    low-support saints UNASSIGNED -- they fall through to the grid keys or to
+    estimate, and the strict cross-year filter governs shipping. `full=True` adds
+    a fourth middle-fill pass that places every remaining free slot from the
+    canonical order; it is consumed ONLY by the labeled generative best-guess
+    tier (`_generative_saint`), never by `coords_for`, so the validated build is
+    byte-identical regardless."""
     z = _SAINT_ZONES[zone]
     seq = _SAINT_SCHEDULE.get(zone, {}).get("sequence")
     if not seq:
@@ -628,7 +688,59 @@ def _zone_saint_replay(zone, year):
             if cands:
                 assigned[cands[-1]] = e["id"]
                 used.add(cands[-1])
+
+    # Pass D (generative best-guess only) -- fill every still-free slot from the
+    # canonical order. `seq` is order-sorted, so zipping the remaining entries
+    # onto the remaining slots in calendar order lays the middle/minor saints
+    # deterministically. Unvalidated by construction (these are the single-sample
+    # / floating days), so it is gated behind `full` and never feeds coords_for.
+    if full:
+        placed = set(assigned.values())
+        free_slots = sorted(dd for dd in slots if dd not in used)
+        remaining = [e for e in seq if e["id"] not in placed]
+        for e, dd in zip(remaining, free_slots):
+            assigned[dd] = e["id"]
+            used.add(dd)
     return assigned
+
+
+def _generative_saint(d: datetime.date):
+    """Labeled best-guess for a saint-weekday the validated table can't cover:
+    run the FULL laydown for d's zone and ship the placed saint's intrinsic
+    readings (from dev/saint_readings.json). Returns (zone, sid, label, readings)
+    or None. Unvalidated by construction -- the caller tags it generative-saint."""
+    if d.weekday() not in _SAINT_WD or not _SAINT_READINGS:
+        return None
+    for zone in ("PN", "Tr", "As", "Ex"):
+        start, end = _SAINT_ZONES[zone]["window"](d.year)
+        if not (start <= d <= end):
+            continue
+        sid = _zone_saint_replay(zone, d.year, full=True).get(d)
+        if not sid:
+            return None
+        refs = _SAINT_READINGS.get(zone, {}).get(sid)
+        if not refs:
+            return None
+        label = _SAINT_LABEL.get(zone, {}).get(sid, sid)
+        return zone, sid, label, list(refs)
+    return None
+
+
+def _generative_continua(d: datetime.date):
+    """Labeled best-guess for a Fast-of-the-Assumption Wed/Fri day the validated
+    table can't cover: the post-Transfiguration lectio-continua's deep tail. Ship
+    the modal reading for this (summer-span, forward-Wed/Fri-index, weekday)
+    bucket. Returns a readings list or None. ~85% correct on the cache."""
+    if d.weekday() not in (2, 4) or not _CONTINUA:
+        return None
+    a = _hinge_anchors(d.year)
+    if not (a["TR"] < d < a["AS"]):             # Transfiguration -> Assumption
+        return None
+    span = (a["SUMMER_EVE"] - a["TR"]).days
+    idx = _count_wf(a["TR"], d)
+    refs = _CONTINUA.get("TrFast", {}).get("buckets", {}).get(
+        f"{span}:{idx}:{d.weekday()}")
+    return list(refs) if refs else None
 
 
 def coords_for(d: datetime.date) -> dict:
@@ -637,7 +749,14 @@ def coords_for(d: datetime.date) -> dict:
     if md in EMBEDDED_FIXED:
         # Floating fixed-feast: resolve ONLY via civil date -> CF, never through
         # an anchored cycle whose cleaned ferial bucket it would otherwise grab.
-        return {"C": md, "CF": f"{d.month:02d}-{d.day:02d}"}
+        out = {"C": md, "CF": f"{d.month:02d}-{d.day:02d}"}
+        if md in _ANNUNCIATION_MD:
+            # ...except the Annunciation, whose Holy-Week reorder IS computable:
+            # key it by (civil-date, Easter-offset) so the strict build learns
+            # each reorder bucket and ships it validated.
+            e_off = (d - anchors(d.year)["E"]).days
+            out["AnnE"] = f"{d.month:02d}-{d.day:02d}:{e_off}"
+        return out
     y = d.year
     a = anchors(y)
     a_prev = anchors(y - 1)
@@ -674,6 +793,11 @@ def coords_for(d: datetime.date) -> dict:
     # ships and the eve year falls through to its Easter-anchored slot / estimate.
     if md == (1, 13) and e_off != -70:
         cs["PnOct"] = "01-13"
+    # Annunciation eve (Apr 6): an extra Easter-offset coordinate so its Holy-Week
+    # reorder buckets ship validated, while leaving its normal E coordinate intact
+    # (single-sample extreme years fall through to E exactly as before).
+    if md in _ANNUNCIATION_MD:
+        cs["AnnE"] = f"{d.month:02d}-{d.day:02d}:{e_off}"
     cs.update(winter_coords(d))                 # winter grid slots (string keys)
     cs.update(hinge_coords(d))                  # summer/autumn grid slots
     return cs
@@ -748,8 +872,62 @@ def _embedded_composite(d, tables):
     if d.weekday() == 5 or any(ks in cs for ks in _REPLACE_KS):
         return list(proper)
     # Otherwise co-celebrate: proper ++ the resolved movable slot's readings.
+    slot = _movable_slot_readings(d, tables, with_band=False)
+    if slot is not None:
+        return list(proper) + slot
+    return None
+
+
+# --------------------------------------------------------------------------- #
+# Annunciation (Apr 7) collision composite
+#
+# The Annunciation is a fixed-date feast (Apr 7) whose readings the Tonatsooyts
+# prescribes by COMBINING a fixed proper with the movable Lent / Holy Week /
+# Eastertide day it lands on, ordered by the rank of that day. Source rubric:
+# Tonatsooyts pp. 482-483 (see docs/sources/tonatsooyts-annunciation-canon.md).
+#
+# The strict pipeline already learns the cross-year-consistent buckets via the
+# AnnE keyspace (keyed on the civil date + Easter offset) and ships them VALIDATED
+# for every offset observed in >=2 agreeing years. This composite is the BEST-GUESS
+# fallback for the offsets AnnE cannot validate -- single-sample collisions and
+# Easter offsets never seen in 2001-2026 (e.g. 2027, where Apr 7 = Easter+10). It
+# is labeled generative/best-guess, never validated: the reading ORDER follows the
+# rubric deterministically (verified to reproduce 25/26 cached years), but the exact
+# day-portion is sometimes liturgically reduced (e.g. Eastertide appends only the
+# Gospel cycle), so byte-exactness is not guaranteed for an unseen offset.
+# --------------------------------------------------------------------------- #
+
+_ANNUNCIATION_PROPER = (
+    "Song of Solomon 1.2-11", "Proverbs 11.30-12.4", "Isaiah 52.7-10",
+    "Zechariah 2.10-13", "Malachi 3.1-2",
+    "St. Paul's Second Epistle to the Corinthians 6.16-7.1", "Luke 1.26-38",
+)
+
+# Easter offset of Apr 7 -> combination order (Tonatsooyts pp. 482-483):
+#   day -> proper : Lazarus Saturday (-8), Great Mon/Tue/Wed (-6/-5/-4).
+#   proper -> day : Palm Sunday (-7), Great Thu/Fri (-3/-2), Holy Sat (-1), Easter (0),
+#                   and all of Eastertide / Yinants (offset >= +1).
+#   proper alone  : aliturgical deep-Lent ferias (offset <= -9), where the feast
+#                   supersedes the minor Lenten ferial readings.
+_ANN_DAY_FIRST = frozenset({-8, -6, -5, -4})
+_ANN_PROPER_FIRST = frozenset({-7, -3, -2, -1, 0})
+
+
+def _movable_slot_readings(d, tables=None, with_band=True):
+    """Readings of the movable ferial/Sunday slot a fixed-date feast lands on (the
+    validated EB/E/season-count entry), or None. Excludes the civil/Annunciation
+    keyspaces and the dedicated saint-weekday slots a feast displaces. When
+    ``with_band`` is set, the leap-corrected Easter-band sub-key (EB) is tried first,
+    matching the runtime precedence for the underlying paschal day."""
+    if tables is None:
+        tables = _TABLES
+    cs = dict(_movable_coords(d))
+    if with_band:
+        e_off = cs.get("E")
+        if e_off is not None and WINDOWS["E"][0] <= e_off <= WINDOWS["E"][1]:
+            cs["EB"] = f"{_easter_band(d.year)}:{e_off}"
     for ks in PRECEDENCE:
-        if ks in ("C", "CF") or ks in _REPLACE_KS or ks not in cs:
+        if ks in ("C", "CF", "AnnE") or ks in _REPLACE_KS or ks not in cs:
             continue
         key = cs[ks]
         win = WINDOWS[ks]
@@ -757,8 +935,24 @@ def _embedded_composite(d, tables):
             continue
         entry = tables.get(ks, {}).get(key)
         if entry:
-            return list(proper) + list(entry["readings"])
+            return list(entry["readings"])
     return None
+
+
+def _annunciation_composite(d, tables=None):
+    """Best-guess Annunciation (Apr 7) readings via the Tonatsooyts collision rule,
+    for offsets the validated AnnE keyspace does not cover. Returns a list of refs
+    or None (None only if the date is not Apr 7)."""
+    if (d.month, d.day) != (4, 7):
+        return None
+    proper = list(_ANNUNCIATION_PROPER)
+    e_off = (d - calculate_gregorian_easter(d.year)).days
+    if e_off <= -9:
+        return proper                                   # deep Lent: proper supersedes
+    day = _movable_slot_readings(d, tables) or []
+    if e_off in _ANN_DAY_FIRST:
+        return day + proper                             # day -> proper
+    return proper + day                                 # proper -> day (incl. Eastertide)
 
 
 # Date windows (days relative to anchor) where each keyspace may apply, to keep
@@ -768,6 +962,7 @@ def _embedded_composite(d, tables):
 WINDOWS = {
     "C": None,
     "CF": None,
+    "AnnE": None,
     "EB": None,
     "E": (-72, 116),
     "AS": (-14, 27),
@@ -785,7 +980,7 @@ WINDOWS.update({ks: None for ks in HINGE_KS})
 # Resolution precedence (first match wins): immovable feasts, then the
 # solar/Easter anchored cycles, then the winter grid slots, then the generic
 # Theophany/Heesnak season counts.
-PRECEDENCE = (["C", "CF", "EB", "E"] + WINTER_KS + HINGE_KS
+PRECEDENCE = (["C", "CF", "AnnE", "EB", "E"] + WINTER_KS + HINGE_KS
               + ["AS", "EX", "HEB", "HE", "HEpB", "HEp", "TH", "THp"])
 
 # Keyspaces whose keys are integers (day-offsets); all others are string keys.
@@ -795,6 +990,7 @@ INT_KEYSPACES = {"E", "AS", "EX", "HE", "HEp", "TH", "THp"}
 _KS_SEASON = {
     "C": "Immovable Feast",
     "CF": "Feast",
+    "AnnE": "Annunciation",
     "AS": "Assumption Cycle",
     "EX": "Exaltation of the Cross Cycle",
     "HE": "Advent (Heesnak)",
@@ -999,6 +1195,71 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
                 "ReadingsList": refs,
                 "Source": "validated-composite",
             }
+
+    # Generative best-guess tier (labeled, NEVER validated): a saint-weekday the
+    # strict table can't cover (single-sample extreme-Easter year / floating
+    # summer saint). The full laydown places the canonical saint and we ship its
+    # intrinsic readings. Deterministic and offline, but unvalidated cross-year,
+    # so it is tagged distinctly and a consumer can filter it out.
+    gs = _generative_saint(target_date)
+    if gs is not None:
+        zone, sid, label, refs = gs
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": label or "(commemoration)",
+            "Season": season_for(zone + "Saint", sid),
+            "Readings": _group_readings(refs),
+            "ReadingsList": refs,
+            "Source": "generative-saint",
+            "Confidence": "best-guess",
+            "Note": ("Best-guess readings from the canonical saint laydown; not "
+                     "cross-year validated (this saint-weekday is under-sampled "
+                     "in the reference data). Filter on Source/Confidence if you "
+                     "need only provably-validated readings."),
+        }
+
+    # Generative continua best-guess: the Fast-of-the-Assumption Wed/Fri continua
+    # tail (a window no grid slot covers, whose deep positions carry long-summer
+    # variants the strict filter cannot ship). Labeled, never validated.
+    gc = _generative_continua(target_date)
+    if gc is not None:
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": "Fast day",
+            "Season": "Fast of the Assumption",
+            "Readings": _group_readings(gc),
+            "ReadingsList": gc,
+            "Source": "generative-continua",
+            "Confidence": "best-guess",
+            "Note": ("Best-guess readings from the Fast-of-the-Assumption "
+                     "lectio-continua (modal reading for this fast-day position); "
+                     "not cross-year validated. Filter on Source/Confidence if "
+                     "you need only provably-validated readings."),
+        }
+
+    # Annunciation (Apr 7) collision composite best-guess: the validated AnnE
+    # keyspace had no entry for this year's Easter offset (a single-sample or unseen
+    # collision). The Tonatsooyts canon (pp. 482-483) prescribes the readings
+    # deterministically by combining the fixed proper with the movable day it lands
+    # on; we ship that, labeled best-guess. See _annunciation_composite.
+    ac = _annunciation_composite(target_date)
+    if ac is not None:
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": "Annunciation to the Holy Theotokos",
+            "Season": "Annunciation",
+            "Readings": _group_readings(ac),
+            "ReadingsList": ac,
+            "Source": "generative-composite",
+            "Confidence": "best-guess",
+            "Note": ("Best-guess readings from the Annunciation collision rule "
+                     "(Tonatsooyts pp. 482-483): the fixed Annunciation proper "
+                     "combined with the movable Lent/Holy-Week/Eastertide day it "
+                     "falls on, ordered by that day's rank. The reading order is "
+                     "rubric-deterministic but the day-portion may be liturgically "
+                     "reduced, so this is not cross-year validated. Filter on "
+                     "Source/Confidence if you need only validated readings."),
+        }
 
     # Fallback: no validated entry (chiefly the winter hinge). Name the season
     # algorithmically and flag the readings as not-yet-modeled.

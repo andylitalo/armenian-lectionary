@@ -4,6 +4,7 @@
   "entries_per_keyspace": {
    "C": 9,
    "CF": 0,
+   "AnnE": 16,
    "EB": 1299,
    "E": 170,
    "PnOct": 1,
@@ -196,6 +197,243 @@
    }
   },
   "CF": {},
+  "AnnE": {
+   "04-07:2": {
+    "feast": "Third day of EasterAnnunciation to the Virgin Mary",
+    "readings": [
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38",
+     "Luke 24.13-35",
+     "Luke 24.1-12"
+    ]
+   },
+   "04-06:2": {
+    "feast": "Third day of Easter",
+    "readings": [
+     "Acts of the Apostles 2.42-3.21",
+     "Luke 24.13-35",
+     "Luke 24.1-12"
+    ]
+   },
+   "04-07:-5": {
+    "feast": "Great TuesdayFast day, Remembrance of the Ten VirginsAnnunciation to the Virgin Mary",
+    "readings": [
+     "Mark 12.13-44",
+     "Genesis 6.9-9.17",
+     "Proverbs 9.1-10.6",
+     "Isaiah 40.9-17",
+     "Matthew 24.1-26.2",
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38"
+    ]
+   },
+   "04-06:-6": {
+    "feast": "Great MondayFast day",
+    "readings": [
+     "Matthew 21.18-22.14",
+     "Genesis 1.1-3.24",
+     "Proverbs 1.2-9",
+     "Isaiah 40.1-8",
+     "Matthew 20.17-28"
+    ]
+   },
+   "04-07:3": {
+    "feast": "Fourth day of EasterAnnunciation to the Virgin Mary",
+    "readings": [
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38",
+     "Luke 24.36-40",
+     "Luke 24.13-35"
+    ]
+   },
+   "04-06:1": {
+    "feast": "Second day of EasterRemembrance of the Dead",
+    "readings": [
+     "Acts of the Apostles 2.22-41",
+     "Luke 24.1-12",
+     "Mark 16.2-8"
+    ]
+   },
+   "04-06:-14": {
+    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "readings": [
+     "Luke 21.5-38",
+     "Isaiah 66.1-24",
+     "St. Paul's Epistle to the Colossians 2.8-3.17",
+     "Matthew 22.34-23.39"
+    ]
+   },
+   "04-06:-2": {
+    "feast": "Great FridayFast dayRemembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ",
+    "readings": [
+     "John 13.16-18.1",
+     "Luke 22.1-65",
+     "Mark 14.27-72",
+     "Matthew 26.31-56",
+     "Matthew 26.57-75",
+     "John 18.2-27",
+     "John 18.28-19.16",
+     "Zechariah 11.11-14",
+     "St. Paul's Epistle to the Galatians 6.14-18",
+     "Isaiah 3.9-15",
+     "St. Paul's Epistle to the Philippians 2.5-11",
+     "Isaiah 50.4-9",
+     "St. Paul's Epistle to the Romans 5.6-11",
+     "Amos 8.9-12",
+     "St. Paul's First Epistle to the Corinthians 1.18-31",
+     "Isaiah 52.13-53.12",
+     "St. Paul's Epistle to the Hebrews 2.11-18",
+     "Matthew 27.1-56",
+     "Isaiah 63.1-6",
+     "St. Paul's Epistle to the Hebrews  9.11-28",
+     "Mark 15.1-41",
+     "Jeremiah 11.18-12.8",
+     "St. Paul's Epistle to the Hebrews 10.19-31",
+     "Luke 22.66-23.49",
+     "Zechariah 14.5-11",
+     "St. Paul's First Epistle to Timothy 6.13-16",
+     "John 19.17-37",
+     "Jeremiah 11.18-12.8",
+     "Isaiah 52.13-53.12",
+     "Wisdom 2.1-22",
+     "Zechariah 12.8-14",
+     "St. Peter's First Epistle General  3.17-20",
+     "Matthew 27.57-61"
+    ]
+   },
+   "04-07:-9": {
+    "feast": "Fortieth day of Great LentAnnunciation to the Virgin Mary",
+    "readings": [
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38"
+    ]
+   },
+   "04-07:-13": {
+    "feast": "Thirty Sixth day of Great LentAnnunciation to the Virgin Mary",
+    "readings": [
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38"
+    ]
+   },
+   "04-06:-10": {
+    "feast": "Thirty Ninth day of Great Lent",
+    "readings": [
+     "Ezekiel 37.1-14",
+     "St. Paul's First Epistle to Timothy 3.14-16"
+    ]
+   },
+   "04-07:-1": {
+    "feast": "Great SaturdayFast dayEve of the Resurrection of our Lord Jesus ChristAnnunciation to the Virgin Mary",
+    "readings": [
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38",
+     "Matthew 27.62-66",
+     "Genesis 1.1-3.24",
+     "Genesis 22.1-18",
+     "Exodus 12.1-24",
+     "Jonah 1.1-4.11",
+     "Exodus 14.24-15.21",
+     "Isaiah 60.1-13",
+     "Job 38.2-29",
+     "Joshua 1.1-9",
+     "2 Kings 2.1-22",
+     "Jeremiah 31.31-34",
+     "Ezekiel 37.1-14",
+     "Daniel 3.1-23, Azariah. 1-68",
+     "St. Paul's First Epistle to the Corinthians 15.1-11",
+     "Matthew 28.1-20"
+    ]
+   },
+   "04-06:10": {
+    "feast": "Eleventh day of Eastertide",
+    "readings": [
+     "Luke 5.12-16",
+     "Acts of the Apostles 8.3-13",
+     "St. James General Epistle 5.1-11",
+     "John 1.35-42",
+     "Matthew 5.17-48",
+     "Mark 1.35-45"
+    ]
+   },
+   "04-07:11": {
+    "feast": "Twelfth day of EastertideAnnunciation to the Virgin Mary",
+    "readings": [
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38",
+     "Luke 5.17-26",
+     "John 1.43-51",
+     "Matthew 6.1-21",
+     "Mark 2.1-12"
+    ]
+   },
+   "04-07:7": {
+    "feast": "Octave of Easter (New Sunday)Annunciation to the Virgin Mary",
+    "readings": [
+     "Song of Solomon 1.2-11",
+     "Proverbs 11.30-12.4",
+     "Isaiah 52.7-10",
+     "Zechariah 2.10-13",
+     "Malachi 3.1-2",
+     "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+     "Luke 1.26-38",
+     "Luke 4.14-30",
+     "Acts of the Apostles 5.34-6.7",
+     "St. James General Epistle 3.1-12",
+     "John 1.1-17",
+     "John 21.15-25",
+     "Matthew 27.50-61",
+     "John 20.26-31"
+    ]
+   },
+   "04-06:6": {
+    "feast": "Seventh day of EasterBeheading of St. John the Forerunner (the Baptist)",
+    "readings": [
+     "Proverbs 8.4-11",
+     "Isaiah 40.3-8",
+     "Malachi 4.4-6",
+     "Acts of the Apostles 13.25-33",
+     "Mark 6.14-29",
+     "Acts of the Apostles 5.12-33",
+     "St. James General Epistle 2.14-20",
+     "John 21.15-25"
+    ]
+   }
+  },
   "EB": {
    "3:-23": {
     "feast": "Twenty Sixth day of Great Lent",

@@ -53,6 +53,14 @@ ZONES = ("PN", "Tr", "As", "Ex")
 
 ARTIFACT = os.path.join(os.path.dirname(__file__), "saint_schedule.json")
 
+# Sibling artifact carrying the readings the clustering already computes, keyed
+# {zone: {saint_id: [readings]}}. Kept SEPARATE from saint_schedule.json so the
+# schedule stays readings-free and the strict cross-year build path is untouched.
+# Consumed only by the runtime's labeled generative best-guess tier (never the
+# validated table), where a placed saint ships its intrinsic readings even when
+# its coordinate has <2 cross-year support (extreme-Easter / floating saints).
+READINGS_ARTIFACT = os.path.join(os.path.dirname(__file__), "saint_readings.json")
+
 # Ids whose reading-set genuinely pins to a particular Saturday (high-rank
 # fathers). Detected automatically (weekday==Sat in >= N-1 of N years) but a
 # minimum support keeps two-year noise (Sahak, the 150 Fathers) out of the pin
@@ -132,6 +140,7 @@ def canonicalize(per_year):
             "label": modal,
             "occ": [(y, d, wd, ordinal) for y, d, wd, _, ordinal in occ],
             "labels": dict(labels),
+            "readings": list(readings),   # the reading-set that DEFINES this id
         }
         for lab in labels:
             aliases.setdefault(lab, sid)
@@ -231,6 +240,12 @@ def emit(combined):
     return ARTIFACT
 
 
+def emit_readings(readings_combined):
+    with open(READINGS_ARTIFACT, "w", encoding="utf-8") as f:
+        json.dump(readings_combined, f, ensure_ascii=False, indent=1)
+    return READINGS_ARTIFACT
+
+
 def _report(zone, per_year, ids, sched, split):
     print(f"\n========== zone {zone}: {_ZONE_DESC[zone]} ==========")
     print(f"Mined {sum(len(r) for r in per_year.values())} saint-days over "
@@ -259,13 +274,19 @@ def _report(zone, per_year, ids, sched, split):
 if __name__ == "__main__":
     days = load_all()
     combined = {}
+    readings_combined = {}
     for zone in ZONES:
         section, per_year, ids = build_zone(days, zone)
         combined[zone] = section
+        readings_combined[zone] = {sid: info["readings"]
+                                   for sid, info in ids.items()}
         _report(zone, per_year, ids, section["sequence"],
                 section["meta"]["head_tail_split"])
     path = emit(combined)
+    rpath = emit_readings(readings_combined)
     n_anchored = sum(1 for z in combined.values() for e in z["sequence"]
                      if e["anchor"] != "skip")
+    n_ids = sum(len(z) for z in readings_combined.values())
     print(f"\nEmitted combined artifact ({n_anchored} anchored ids across "
           f"{len(ZONES)} zones) -> {path}")
+    print(f"Emitted saint-readings artifact ({n_ids} reading-sets) -> {rpath}")

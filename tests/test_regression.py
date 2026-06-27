@@ -14,9 +14,15 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from lectionary import compute_armenian_lectionary  # noqa: E402
 
+# The structurally-validated tiers: a mismatch here breaks the strict-shipping
+# 0-wrong contract. The generative/resolved tiers are labeled best-guesses,
+# tracked separately and NOT bound by 0-wrong.
+VALIDATED = {"validated-table", "validated-composite"}
+
 # Current baseline; regressions below this fail. Overridable via env so a
 # pre-backfill checkout (smaller cache) can lower it without editing source.
-COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "9346"))
+# Counts VALIDATED-tier exact matches only (the provably-safe core).
+COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "9364"))
 
 
 class TestRegression(unittest.TestCase):
@@ -25,29 +31,28 @@ class TestRegression(unittest.TestCase):
         cls.days = load_all()
 
     def test_no_wrong_full_accuracy_and_coverage(self):
-        ok = wrong = est = 0
-        reference = 0
+        validated_exact = validated_wrong = other = reference = 0
         for iso, day in self.days.items():
             if not day["readings"] and not day["feast"]:
                 continue
             reference += 1
             res = compute_armenian_lectionary(datetime.date.fromisoformat(iso))
-            if res["Source"] == "algorithmic-estimate":
-                est += 1
-            elif res["ReadingsList"] == list(day["readings"]):
-                ok += 1
+            match = res["ReadingsList"] == list(day["readings"])
+            if res["Source"] in VALIDATED:
+                if match:
+                    validated_exact += 1
+                else:
+                    validated_wrong += 1
             else:
-                wrong += 1
+                other += 1
 
-        covered = ok + wrong
-        # Hard invariant: every table hit matches truth.
-        self.assertEqual(wrong, 0, "engine produced a wrong table hit")
-        # Accuracy where covered must be exactly 100%.
-        self.assertEqual(ok, covered)
-        # Coverage ratchet: legitimate gains pass, regressions fail.
-        self.assertGreaterEqual(covered, COVERAGE_RATCHET)
+        # Hard invariant: the validated tier NEVER ships a wrong reading.
+        self.assertEqual(validated_wrong, 0,
+                         "engine produced a wrong VALIDATED reading")
+        # Coverage ratchet on the validated core: gains pass, regressions fail.
+        self.assertGreaterEqual(validated_exact, COVERAGE_RATCHET)
         # No silent data loss: every reference day was processed.
-        self.assertEqual(ok + wrong + est, reference)
+        self.assertEqual(validated_exact + validated_wrong + other, reference)
 
 
 if __name__ == "__main__":

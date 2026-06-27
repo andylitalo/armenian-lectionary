@@ -23,6 +23,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from lectionary import compute_armenian_lectionary  # noqa: E402
 
+# Structurally-validated tiers (bound by the 0-wrong contract) vs. the labeled
+# generative best-guess tier (tracked separately, not 0-wrong-bound).
+VALIDATED = {"validated-table", "validated-composite"}
+GENERATIVE = {"generative-saint", "generative-continua"}
+
 # Raised per chunk as coverage climbs toward 100%. Chunk 4 (length-classed
 # summer/autumn/post-Exaltation hinge grids) reached 9046/9495 = 95.3%; chunk 5
 # (post-Nativity saint-identity replay, PnSaint keyspace) reaches 9088/9495 = 95.7%;
@@ -34,9 +39,21 @@ from lectionary import compute_armenian_lectionary  # noqa: E402
 # chunk 11 (Stage C: saint-identity x civil-date sub-keys {Zone}SaintMD) reaches 9329/9495 = 98.25%;
 # chunk 12 (residual-tail quick wins: 2011 Easter order, PnOct Naming octave, PnEveN
 # eve-of-Fast Sunday-number, As/ExSatMD weekday x civil-date saint grid) reaches 9346/9495 = 98.43%.
-COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "98.4"))
+# chunk 13 (generative best-guess saint laydown over the residual floating /
+# extreme-Easter saint-weekdays) lifts non-blank COVERAGE to ~99.1%; chunk 14
+# (Annunciation Easter-offset keyspace AnnE -- the Holy-Week reorder is
+# deterministic in the Easter offset) raises VALIDATED-tier exact 9346 -> 9364 /
+# 9495 = 98.62% (0-wrong frozen) and coverage to ~99.3%.
+COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "98.6"))
 # Lower bound on processed reference days; guards against silent data loss.
 EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
+# Floor on the fraction of all days that ship ANY readings (validated + best-guess).
+# chunk 15 (generative-continua: Fast-of-Assumption Wed/Fri lectio-continua tail)
+# lifts coverage to ~99.4%.
+COVERAGE_ANY_PCT_FLOOR = float(os.environ.get("COVERAGE_ANY_PCT_FLOOR", "99.4"))
+# Floor on generative best-guess days that turn out exact on the cache (monotonic
+# up; guards the saint-laydown + continua tiers from regressing).
+GENERATIVE_EXACT_FLOOR = int(os.environ.get("GENERATIVE_EXACT_FLOOR", "24"))
 
 
 class TestFullDataset(unittest.TestCase):
@@ -45,31 +62,50 @@ class TestFullDataset(unittest.TestCase):
         cls.days = load_all()
 
     def test_no_wrong_and_coverage_floor(self):
-        ok = wrong = est = 0
+        validated_exact = validated_wrong = blank = nonblank = 0
+        generative_exact = 0
         for iso, day in self.days.items():
             if not day["readings"] and not day["feast"]:
                 continue
             res = compute_armenian_lectionary(datetime.date.fromisoformat(iso))
-            if res["Source"] == "algorithmic-estimate":
-                est += 1
-            elif res["ReadingsList"] == list(day["readings"]):
-                ok += 1
-            else:
-                wrong += 1
+            src = res["Source"]
+            if src == "algorithmic-estimate":
+                blank += 1
+                continue
+            nonblank += 1
+            match = res["ReadingsList"] == list(day["readings"])
+            if src in VALIDATED:
+                if match:
+                    validated_exact += 1
+                else:
+                    validated_wrong += 1
+            elif src in GENERATIVE and match:
+                generative_exact += 1
 
-        total = ok + wrong + est
-        pct = ok / total * 100 if total else 0.0
+        total = blank + nonblank
+        val_pct = validated_exact / total * 100 if total else 0.0
+        any_pct = nonblank / total * 100 if total else 0.0
 
-        # 0-wrong contract: every shipped reading matches truth.
-        self.assertEqual(wrong, 0, "engine produced a wrong table hit")
+        # 0-wrong contract: the VALIDATED tier never ships a wrong reading.
+        self.assertEqual(validated_wrong, 0,
+                         "engine produced a wrong VALIDATED reading")
         # No silent data loss.
         self.assertGreaterEqual(
             total, EXPECTED_TOTAL_DAYS,
             f"only {total} reference days processed (< {EXPECTED_TOTAL_DAYS})")
-        # Coverage percentage floor (monotonic upward).
+        # Validated exact-match floor (monotonic upward, structurally safe).
         self.assertGreaterEqual(
-            pct, COVERAGE_PCT_FLOOR,
-            f"exact-match {pct:.2f}% fell below floor {COVERAGE_PCT_FLOOR}%")
+            val_pct, COVERAGE_PCT_FLOOR,
+            f"validated exact-match {val_pct:.2f}% below floor {COVERAGE_PCT_FLOOR}%")
+        # Any-readings coverage floor (the generative tier fills the blanks).
+        self.assertGreaterEqual(
+            any_pct, COVERAGE_ANY_PCT_FLOOR,
+            f"coverage {any_pct:.2f}% below floor {COVERAGE_ANY_PCT_FLOOR}%")
+        # Generative best-guess exact-on-cache floor (monotonic up).
+        self.assertGreaterEqual(
+            generative_exact, GENERATIVE_EXACT_FLOOR,
+            f"generative exact {generative_exact} below floor "
+            f"{GENERATIVE_EXACT_FLOOR}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,641 @@
+{
+ "PN": {
+  "eugenia_the_virgin": [
+   "Proverbs 1.20-25",
+   "Isaiah 55.10-13",
+   "St. Paul's Epistle to the Romans 15.30-33",
+   "Luke 12.32-40"
+  ],
+  "sahak_i_the": [
+   "Wisdom 7.12-18",
+   "Isaiah 61.3-7",
+   "St. Paul's Epistle to the Hebrews 13.17-21",
+   "John 10.11-16"
+  ],
+  "cyprian_the_bishop": [
+   "Isaiah 46.12-13",
+   "St. Paul's Epistle to the Galatians 3.13-22",
+   "Luke 15.1-10"
+  ],
+  "athenogenes_the_bishop": [
+   "Proverbs 8.1-4",
+   "Malachi 2.5-7",
+   "St. Peter's First Epistle General 5.1-7",
+   "John 16.33-17.8"
+  ],
+  "forefathers_adam_abel": [
+   "Genesis 4.1-8",
+   "Genesis 5.3-11",
+   "Genesis 5.23-24",
+   "Genesis 5.32",
+   "Genesis 9.28-29",
+   "Genesis 14.14-20",
+   "Genesis 25.7-11",
+   "Genesis 35.27-29",
+   "Genesis 49.32-50.13",
+   "Genesis 50.24-26",
+   "Numbers 20.23-29",
+   "Deuteronomy 34.5-12",
+   "Joshua 24.29-33",
+   "1 Samuel 15.34-35",
+   "1 Samuel 25.1",
+   "St. Paul's Epistle to the Hebrews 11.1-31",
+   "Luke 20.34-40"
+  ],
+  "thaddeus_apostle_of": [
+   "Wisdom 1.1-7",
+   "Jeremiah 16.16-21",
+   "St. Paul's First Epistle to the Corinthians 12.28-13.10",
+   "Luke 9.1-6"
+  ],
+  "fathers_saints_athanasius": [
+   "Proverbs 11.2-11",
+   "Isaiah 61.3-7",
+   "St. Paul's Epistle to the Hebrews 13.7-9",
+   "John 16.33-17.8"
+  ],
+  "vahan_of_goghtn": [
+   "Proverbs 7.1-7",
+   "Ezekiel 12.17-19",
+   "St. Paul's Epistle to the Romans 8.12-27",
+   "Luke 9.23-27"
+  ],
+  "eugenios_makarios_valerian": [
+   "Zephaniah 3.19-20",
+   "St. Paul's Second Epistle to the Corinthians 10.3-6",
+   "Matthew 10.23-33"
+  ],
+  "hermits_saints_anton": [
+   "Proverbs 21.15-24",
+   "Isaiah 19.19-21",
+   "St. Paul's Epistle to the Hebrews 11.32-40",
+   "Matthew 10.37-42"
+  ],
+  "theodosius_and_the": [
+   "Wisdom 6.1-9",
+   "Isaiah 45.1-2",
+   "St. Paul's First Epistle to Timothy 2.1-7",
+   "Luke 7.1-10"
+  ],
+  "cyricus_and_his": [
+   "Proverbs 14.1-6",
+   "Zechariah 8.4-5",
+   "Isaiah 60.8-9",
+   "St. Paul's Epistle to the Hebrews 2.14-18",
+   "Luke 9.44-48"
+  ],
+  "maccabees_eleazar_the": [
+   "Proverbs 29.2-7",
+   "2 Maccabees 6.18-7.42",
+   "St. Paul's Epistle to the Hebrews 11.32-40",
+   "Matthew 5.17-20"
+  ],
+  "twelve_prophets_hosea": [
+   "Hosea 10.12",
+   "Amos 5.10-14",
+   "Micah 7.7-9",
+   "Joel 2.12-13",
+   "Obadiah 1.21",
+   "Jonah 4.2",
+   "Nahum 1.7-9",
+   "Habakkuk 1.2-3",
+   "Zephaniah 1.7-8",
+   "Haggai 2.10",
+   "Zechariah 7.9-13",
+   "Malachi 1.6",
+   "St. Paul's Epistle to the Romans 11.2-5",
+   "Luke 13.31-35"
+  ],
+  "sophia_and_her": [
+   "Proverbs 11.30-12.4",
+   "Hosea 14.6-7",
+   "St. Paul's Second Epistle to the Corinthians 4.6-14",
+   "Luke 12.2-10"
+  ],
+  "gregory_the_illuminator": [
+   "Jeremiah 17.7-8",
+   "Isaiah 61.3-7",
+   "St. Paul's Second Epistle to Timothy 1.6-14",
+   "Luke 11.29-32"
+  ],
+  "peter_the_patriarch": [
+   "Wisdom 5.1-8",
+   "Baruch 3.31-4.4",
+   "St. Paul's Epistle to the Romans 8.28-39",
+   "John 10.11-16"
+  ],
+  "gregory_of_theologian": [
+   "Proverbs 8.33-36",
+   "Hosea 10.12",
+   "Amos 5.10-14",
+   "Acts of the Apostles 2.25-32",
+   "John 10.11-16"
+  ],
+  "hermits_saints_triphon": [
+   "Isaiah 41.15-20",
+   "St. Peter's Second Epistle General 2.9-15",
+   "John 9.39-10.10"
+  ],
+  "andrew_the_general": [
+   "Proverbs 4.10-27",
+   "Isaiah 48.17-21",
+   "St. Paul's Second Epistle to the Corinthians 10.3-6",
+   "Matthew 10.37-42"
+  ],
+  "adrian_and_his": [
+   "Lamentations 3.22-56",
+   "St. Paul's Epistle to the Romans 8.18-27",
+   "John 16.1-4"
+  ],
+  "150_fathers_participating": [
+   "Ezekiel 3.16-19",
+   "St. Paul's Second Epistle to the Corinthians 6.1-14",
+   "Matthew 12.22-32"
+  ]
+ },
+ "Tr": {
+  "peter_the_patriarch": [
+   "Wisdom 5.1-8",
+   "Baruch 3.31-4.4",
+   "St. Paul's Epistle to the Romans 8.28-39",
+   "John 10.11-16"
+  ],
+  "hermit_saints_anton": [
+   "Proverbs 21.15-24",
+   "Isaiah 19.19-21",
+   "St. Paul's Epistle to the Hebrews 11.32-40",
+   "Matthew 10.37-42"
+  ],
+  "theodosius_and_the": [
+   "Wisdom 6.1-9",
+   "Isaiah 45.1-2",
+   "St. Paul's First Epistle to Timothy 2.1-7",
+   "Luke 7.1-10"
+  ],
+  "gregory_the_illuminator": [
+   "Jeremiah 17.7-8",
+   "Isaiah 61.3-7",
+   "St. Paul's Second Epistle to Timothy 1.6-14",
+   "Luke 11.29-32"
+  ],
+  "maccabees_eleazar_the": [
+   "Proverbs 29.2-7",
+   "2 Maccabees 6.18-7.42",
+   "St. Paul's Epistle to the Hebrews 11.32-40",
+   "Matthew 5.17-20"
+  ],
+  "twelve_prophets_hosea": [
+   "Hosea 10.12",
+   "Amos 5.10-14",
+   "Micah 7.7-9",
+   "Joel 2.12-13",
+   "Obadiah 1.21",
+   "Jonah 4.2",
+   "Nahum 1.7-9",
+   "Habakkuk 1.2-3",
+   "Zephaniah 1.7-8",
+   "Haggai 2.10",
+   "Zechariah 7.9-13",
+   "Malachi 1.6",
+   "St. Paul's Epistle to the Romans 11.2-5",
+   "Luke 13.31-35"
+  ],
+  "sophia_and_her": [
+   "Proverbs 11.30-12.4",
+   "Hosea 14.6-7",
+   "St. Paul's Second Epistle to the Corinthians 4.6-14",
+   "Luke 12.2-10"
+  ],
+  "cyricus_and_his": [
+   "Proverbs 14.1-6",
+   "Zechariah 8.4-5",
+   "Isaiah 60.8-9",
+   "St. Paul's Epistle to the Hebrews 2.14-18",
+   "Luke 9.44-48"
+  ],
+  "vahan_of_goghtn": [
+   "Proverbs 7.1-7",
+   "Ezekiel 12.17-19",
+   "St. Paul's Epistle to the Romans 8.12-27",
+   "Luke 9.23-27"
+  ],
+  "hermits_saints_triphon": [
+   "Isaiah 41.15-20",
+   "St. Peter's Second Epistle General 2.9-15",
+   "John 9.39-10.10"
+  ],
+  "gregory_of_theologian": [
+   "Proverbs 8.33-36",
+   "Hosea 10.12",
+   "Amos 5.10-14",
+   "Acts of the Apostles 2.25-32",
+   "John 10.11-16"
+  ],
+  "eugenios_makarios_valerian": [
+   "Zephaniah 3.19-20",
+   "St. Paul's Second Epistle to the Corinthians 10.3-6",
+   "Matthew 10.23-33"
+  ],
+  "second_day_of": [
+   "Exodus 19.9-13",
+   "2 Kings 2.9-12",
+   "St. John's First Epistle General 5.9-12",
+   "John 1.1-17"
+  ],
+  "third_day_of": [
+   "Exodus 19.16-20",
+   "1 Kings 19.11-16",
+   "St. Paul's Epistle to the Hebrews 12.18-27",
+   "Luke 9.27-36"
+  ],
+  "isaiah_the_prophet": [
+   "Isaiah 6.1-10",
+   "St. Paul's Epistle to the Hebrews 11.32-40",
+   "Luke 4.14-22"
+  ],
+  "thaddeus_apostle_of": [
+   "Wisdom 1.1-7",
+   "Jeremiah 16.16-21",
+   "St. Paul's First Epistle to the Corinthians 12.28-13.10",
+   "Luke 9.1-6"
+  ],
+  "cyprian_the_bishop": [
+   "Isaiah 46.12-13",
+   "St. Paul's Epistle to the Galatians 3.13-22",
+   "Luke 15.1-10"
+  ],
+  "athenogenes_the_bishop": [
+   "Proverbs 8.1-4",
+   "Malachi 2.5-7",
+   "St. Peter's First Epistle General 5.1-7",
+   "John 16.33-17.8"
+  ],
+  "forefathers_adam_abel": [
+   "Genesis 4.1-8",
+   "Genesis 5.3-11",
+   "Genesis 5.23-24",
+   "Genesis 5.32",
+   "Genesis 9.28-29",
+   "Genesis 14.14-20",
+   "Genesis 25.7-11",
+   "Genesis 35.27-29",
+   "Genesis 49.32-50.13",
+   "Genesis 50.24-26",
+   "Numbers 20.23-29",
+   "Deuteronomy 34.5-12",
+   "Joshua 24.29-33",
+   "1 Samuel 15.34-35",
+   "1 Samuel 25.1",
+   "St. Paul's Epistle to the Hebrews 11.1-31",
+   "Luke 20.34-40"
+  ],
+  "200_fathers_of": [
+   "Ezekiel 3.16-19",
+   "St. Paul's Second Epistle to Timothy 1.6-14",
+   "Luke 10.16-20"
+  ],
+  "fathers_saints_athanasius": [
+   "Proverbs 11.2-11",
+   "Isaiah 61.3-7",
+   "St. Paul's Epistle to the Hebrews 13.7-9",
+   "John 16.33-17.8"
+  ],
+  "eugenia_the_virgin": [
+   "Proverbs 1.20-25",
+   "Isaiah 55.10-13",
+   "St. Paul's Epistle to the Romans 15.30-33",
+   "Luke 12.32-40"
+  ],
+  "andrew_the_general": [
+   "Proverbs 4.10-27",
+   "Isaiah 48.17-21",
+   "St. Paul's Second Epistle to the Corinthians 10.3-6",
+   "Matthew 10.37-42"
+  ],
+  "adrian_and_his": [
+   "Lamentations 3.22-56",
+   "St. Paul's Epistle to the Romans 8.18-27",
+   "John 16.1-4"
+  ]
+ },
+ "As": {
+  "andrew_the_general": [
+   "Proverbs 4.10-27",
+   "Isaiah 48.17-21",
+   "St. Paul's Second Epistle to the Corinthians 10.3-6",
+   "Matthew 10.37-42"
+  ],
+  "adrian_and_his": [
+   "Lamentations 3.22-56",
+   "St. Paul's Epistle to the Romans 8.18-27",
+   "John 16.1-4"
+  ],
+  "abraham_and_khoren": [
+   "Wisdom 5.15-17",
+   "Lamentations 3.22-56",
+   "St. Paul's Second Epistle to Timothy 3.10-15",
+   "Luke 12.32-40"
+  ],
+  "second_day_of": [
+   "Luke 2.1-7",
+   "Proverbs 11.30-12.4",
+   "Zechariah 2.10-13",
+   "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+   "Luke 1.39-56"
+  ],
+  "third_day_of": [
+   "Luke 1.26-38",
+   "Song of Solomon 6.3-8",
+   "Malachi 3.1-2",
+   "St. Paul's Epistle to the Galatians 3.24-29",
+   "Luke 2.1-7"
+  ],
+  "seventh_day_of": [
+   "Luke 1.26-38",
+   "Song of Solomon 4.9-15",
+   "Isaiah 7.10-16",
+   "St. Paul's Epistle to the Galatians 3.29-4.7",
+   "Luke 2.1-7"
+  ],
+  "joachim_and_anna": [
+   "Wisdom 9.9-10.2",
+   "Esther 10.4-9",
+   "Judith 15.7-16.3",
+   "St. Paul's Epistle to the Ephesians 1.3-12",
+   "Matthew 1.17-21"
+  ],
+  "jeremiah_the_prophet": [
+   "Jeremiah 1.1-10",
+   "Jeremiah 38.1-13",
+   "St. Peter's Second Epistle General 2.9-22",
+   "Matthew 2.16-18"
+  ],
+  "apostles_thomas_james": [
+   "Wisdom 9.13-10.3",
+   "Micah 7.18-20",
+   "St. Paul's First Epistle to the Corinthians 12.28-13.3",
+   "John 20.24-31"
+  ],
+  "stephen_of_oulnia": [
+   "Proverbs 10.1-7",
+   "Isaiah 44.24-26",
+   "St. Paul's Epistle to the Hebrews 4.11-15",
+   "Matthew 5.1-12"
+  ],
+  "prophets_ezekiel_ezra": [
+   "Ezekiel 18.30-32",
+   "St. Paul's First Epistle to the Corinthians 2.6-10",
+   "Matthew 23.34-39"
+  ],
+  "john_the_forerunner": [
+   "Proverbs 20.6-22",
+   "Job 42.12-17",
+   "Lamentations 3.22-56",
+   "Acts of the Apostles 13.25-33",
+   "St. James General Epistle 5.7-11",
+   "Matthew 14.1-12"
+  ],
+  "318_fathers_of": [
+   "Ezekiel 44.23-24",
+   "St. Paul's Epistle to the Hebrews 12.1-7",
+   "John 14.25-31"
+  ]
+ },
+ "Ex": {
+  "severianus_of_sebastia": [
+   "Proverbs 15.28-32",
+   "Isaiah 66.18-21",
+   "St. John's First Epistle General 2.7-11",
+   "John 16.1-4"
+  ],
+  "andrew_the_general": [
+   "Proverbs 4.10-27",
+   "Isaiah 48.17-21",
+   "St. Paul's Second Epistle to the Corinthians 10.3-6",
+   "Matthew 10.37-42"
+  ],
+  "adrian_and_his": [
+   "Lamentations 3.22-56",
+   "St. Paul's Epistle to the Romans 8.18-27",
+   "John 16.1-4"
+  ],
+  "abraham_and_khoren": [
+   "Wisdom 5.15-17",
+   "Lamentations 3.22-56",
+   "St. Paul's Second Epistle to Timothy 3.10-15",
+   "Luke 12.32-40"
+  ],
+  "feast_of_the": [
+   "Isaiah 65.22-25",
+   "St. Paul's First Epistle to the Corinthians 2.6-10",
+   "John 3.22-36"
+  ],
+  "feast_of_the_2": [
+   "Baruch 4.36-5.9",
+   "St. Paul's Epistle to the Hebrews 3.1-6",
+   "John 2.12-22"
+  ],
+  "feast_of_the_3": [
+   "Isaiah 2.1-6",
+   "St. Paul's Epistle to the Hebrews 12.18-27",
+   "Matthew 21.12-17"
+  ],
+  "feast_of_the_4": [
+   "Isaiah 51.4-11",
+   "St. Paul's First Epistle to Timothy 6.13-16",
+   "John 7.37-52"
+  ],
+  "fast_daysaints_mamas": [
+   "Proverbs 8.9-11",
+   "Isaiah 55.10-13",
+   "St. Paul's Second Epistle to the Corinthians 5.1-5",
+   "Luke 21.12-19"
+  ],
+  "fast_daysaints_virgins": [
+   "Proverbs 23.15-25",
+   "Hosea 14.6-7",
+   "St. Paul's Second Epistle to the Corinthians 6.16-7.1",
+   "Luke 6.20-23"
+  ],
+  "fast_daysaint_patriarchs": [
+   "Wisdom 10.9-12",
+   "Malachi 2.5-7",
+   "St. Peter's First Epistle General 5.1-7",
+   "John 10.11-16"
+  ],
+  "george_the_warrior": [
+   "Wisdom 8.19-9.5",
+   "Isaiah 42.1-8",
+   "St. Paul's Second Epistle to the Corinthians 1.3-7",
+   "Luke 12.2-9"
+  ],
+  "david_of_dvin": [
+   "Proverbs 13.1-7",
+   "Micah 7.18-20",
+   "St. Paul's Epistle to the Hebrews 12.1-7",
+   "Luke 13.22-30"
+  ],
+  "eustachius_his_wife": [
+   "Lamentations 3.22-56",
+   "St. Paul's Second Epistle to Timothy 3.10-15",
+   "Matthew 5.1-12"
+  ],
+  "saintly_princes_sahak": [
+   "Wisdom 6.11-21",
+   "Jeremiah 17.7-8",
+   "St. Paul's Epistle to the Romans 8.18-26",
+   "John 16.1-4"
+  ],
+  "seventy_two_holy": [
+   "Wisdom 9.9-10.2",
+   "Exodus 15.27-16.1",
+   "St. Paul's Second Epistle to the Corinthians 2.14-3.3",
+   "Luke 10.1-9"
+  ],
+  "phocas_the_patriarch": [
+   "Proverbs 27.1-6",
+   "Isaiah 43.16-21",
+   "St. Paul's Second Epistle to the Corinthians 11.21-29",
+   "Mark 6.45-56"
+  ],
+  "virgins_thecla_barbara": [
+   "Song of Solomon 8.14",
+   "Isaiah 61.9-11",
+   "St. Peter's First Epistle General 5.8-11",
+   "Luke 12.32-40"
+  ],
+  "pantaleimon_the_physician": [
+   "Proverbs 4.20-27",
+   "Jeremiah 15.19-20",
+   "St. Paul's First Epistle to the Corinthians 12.1-7",
+   "Matthew 9.35-10.1"
+  ],
+  "translators_mesrop_yeghishe": [
+   "Wisdom 8.7-10",
+   "Amos 5.10-14",
+   "St. Paul's First Epistle to the Corinthians 12.4-11",
+   "Matthew 7.6-12"
+  ],
+  "discovery_of_relics": [
+   "Jeremiah 33.14-22",
+   "Isaiah 18.7",
+   "St. Paul's Epistle to the Hebrews 10.32-36",
+   "Luke 10.21-24"
+  ],
+  "apostles_ananias_matthias": [
+   "Zechariah 8.1-3",
+   "Acts of the Apostles 9.1-22",
+   "Luke 9.1-6"
+  ],
+  "dionysius_the_areopagite": [
+   "Isaiah 33.2-6",
+   "Acts of the Apostles 17.16-34",
+   "St. Paul's Second Epistle to the Thessalonians 1.1-12",
+   "Luke 10.1-7"
+  ],
+  "evangelists_matthew_mark": [
+   "Wisdom 9.13-10.2",
+   "Ezekiel 1.3-11",
+   "Zechariah 6.1-8",
+   "St. Paul's Epistle to the Ephesians 4.7-13",
+   "Luke 6.13-19"
+  ],
+  "longinus_the_centurion": [
+   "Proverbs 15.28-32",
+   "Joel 2.12-13",
+   "St. Paul's First Epistle to Timothy 1.12-17",
+   "Matthew 27.50-61"
+  ],
+  "theodoret_the_priest": [
+   "Wisdom 1.11-15",
+   "Lamentations 3.22-56",
+   "St. Paul's First Epistle to Timothy 5.17-21",
+   "Matthew 10.26-33"
+  ],
+  "st_aret_and": [
+   "Wisdom 3.11-17",
+   "Isaiah 51.22-52.3",
+   "St. Paul's First Epistle to the Thessalonians 2.13-16",
+   "John 15.11-16"
+  ],
+  "twelve_holy_doctors": [
+   "Proverbs 11.2-11",
+   "Isaiah 61.3-7",
+   "St. Paul's Epistle to the Hebrews 13.7-9",
+   "John 16.33-17.8"
+  ],
+  "anastasius_the_priest": [
+   "Proverbs 3.1-6",
+   "Jeremiah 17.7-8",
+   "St. Paul's Second Epistle to Timothy 2.3-10",
+   "Matthew 19.27-29"
+  ],
+  "hipparchus_and_his": [
+   "Proverbs 12.8-13",
+   "Isaiah 49.8-11",
+   "St. Paul's Second Epistle to the Corinthians 4.6-14",
+   "Luke 10.21-24"
+  ],
+  "john_chrysostom": [
+   "Isaiah 49.1-6",
+   "Acts of the Apostles 20.25-38",
+   "John 15.17-25"
+  ],
+  "feast_of_all": [
+   "Wisdom 3.1-8",
+   "Isaiah 33.5-8",
+   "St. Paul's Epistle to the Hebrews 11.32-12.2",
+   "Luke 12.4-9"
+  ],
+  "stephen_bishop_of": [
+   "Wisdom 5.1-8",
+   "Amos 3.12-15",
+   "St. Paul's Epistle to the Ephesians 3.1-10",
+   "John 10.11-16"
+  ],
+  "akepsimas_the_bishop": [
+   "Proverbs 8.12-21",
+   "Nahum 2.1-6",
+   "St. Paul's First Epistle to Timothy 5.17-21",
+   "Luke 9.23-27"
+  ],
+  "metrophanes_alexander_and": [
+   "Wisdom 6.21-24",
+   "Zechariah 12.6-10",
+   "St. Paul's Epistle to the Hebrews 13.7-9",
+   "Matthew 4.23-25"
+  ],
+  "archangels_gabriel_and": [
+   "Genesis 18.33-19.2",
+   "Job 38.4-7",
+   "Isaiah 6.1-7",
+   "Ezekiel 1.1-20",
+   "St. Paul's Epistle to the Hebrews 1.6-14",
+   "Matthew 18.10-14"
+  ],
+  "meletius_bishop_of": [
+   "Wisdom 4.7-15",
+   "Isaiah 12.1-6",
+   "St. John's First Epistle General 5.1-6",
+   "Luke 9.23-27"
+  ],
+  "demetrios_the_martyr": [
+   "Proverbs 15.33-16.7",
+   "Hosea 14.9-10",
+   "St. Paul's Epistle to Titus 3.3-8",
+   "Mark 13.9-13"
+  ],
+  "gurias_samonas_and": [
+   "Proverbs 28.10-18",
+   "Baruch 3.31-4.4",
+   "St. Paul's Second Epistle to Timothy 1.6-12",
+   "Matthew 19.27-29"
+  ],
+  "apostles_andrew_and": [
+   "Wisdom 9.13-10.2",
+   "Jeremiah 16.16-19",
+   "Acts of the Apostles 8.26-40",
+   "John 1.35-51"
+  ]
+ }
+}

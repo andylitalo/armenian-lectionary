@@ -148,7 +148,7 @@ Canonical examples (modal = how many years agree):
   *Sahak the Parthian* on that Saturday) and `PnSaint=eugenios_makarios` (13/15;
   **2004** splits off *Eugenia* and **2019** inserts *Triphon*).
 - **`ExSatL=69:9:{Mon,Tue,Thu}`** (post-Exaltation saint grid, November): 6/7
-  agree; the lone outlier is **2020** (Apr 11 leap) — 21 November days lost to one
+  agree; the lone outlier is **2004** (Apr 11 leap) — 21 November days lost to one
   year.
 
 > **Interpretation:** these are *not* one-off random misses. Each is a coordinate
@@ -242,8 +242,8 @@ story:
    coincides with the Apr 24 Genocide Remembrance commemoration, perturbing
    `E=0`, `E=104`, `E=111` and the late-April ferials.
 
-3. **Leap years are over-represented among the outliers** (2008, 2004, 2016, 2020
-   all leap) — but this is a *correlation with extreme Easters*, not an independent
+3. **Leap years are over-represented among the outliers** (2008, 2004, 2016 all
+   leap) — but this is a *correlation with extreme Easters*, not an independent
    leap effect. The Feb-29 shift only matters where it co-occurs with an early
    Easter; a leap year with a central Easter (e.g. 2012, Apr 8 — 10 estimate days)
    is unremarkable.

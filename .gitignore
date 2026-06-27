@@ -1,6 +1,7 @@
 venv/
 __pycache__/
 *.pyc
+.DS_Store
 .env
 server.log
 # Dev ground-truth cache + logs (the distilled table lectionary_data.json is committed)
