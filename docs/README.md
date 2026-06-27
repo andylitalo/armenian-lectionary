@@ -18,6 +18,7 @@ that governs it.
 | [`sources/tonatsooyts-nativity-octave.md`](sources/tonatsooyts-nativity-octave.md) | Տօնացոյց, p. 464 | The Nativity octave (Jan 6→13) and its 1–2-day encroachment on the following fast by Dominical letter — the principle behind the Jan-13 / Eve-of-Fast collision (`PnOct`). |
 | [`sources/tonatsooyts-low-sunday-antasdan.md`](sources/tonatsooyts-low-sunday-antasdan.md) | Տօնացոյց, pp. 487, 462–463 | Low Sunday (Easter+7) and its Antasdan (Blessing of the Fields) four-corners Gospels — source for the validated `E` reading-block. |
 | [`sources/tonatsooyts-eastertide-gospels.md`](sources/tonatsooyts-eastertide-gospels.md) | Տօնացոյց, p. 488 | The Eastertide four-Gospel continua (Luke·John·Matthew·Mark, Easter+8→Pentecost) — confirms the validated `E`/`EB` Eastertide output. |
+| [`sources/great_paschal_cycle_index.md`](sources/great_paschal_cycle_index.md) | Տօնացոյց, p. 637 | The 532-year year-letter table: Taregir decoded as a **Julian** Easter-date code (closed form in `dev/paschal_index.py`, validated 171/171). Why it is not a Gregorian year-key, and how a Julian source transfers to the Gregorian engine via Easter-offset. |
 
 > **Citation convention.** Each canon quotes the English (`gemini-flash` translation,
 > `translated.md`) immediately followed by the page-aligned grabar (classical Armenian)
