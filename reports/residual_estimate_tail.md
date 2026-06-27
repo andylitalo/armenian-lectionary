@@ -293,3 +293,32 @@ recovers 0 or fragments an existing win) — it is the **generative laydown/cont
 model**, a single design decision that would address §2 and §3 together but trades
 the strict 0-wrong guarantee for coverage of the under-sampled days. Out of scope
 here; the engine is left at **98.43%, 0 wrong**.
+
+---
+
+## Deferred — pending Տօնացոյց translation (2026 resolution pass)
+
+A separate effort resolved the *low-hanging* ambiguities by reading rules directly
+out of the Տօնացոյց (see `docs/sources/`), using only the **partial** `gemini-flash`
+translation (pp. ~458–641, with gaps). Four canons were written —
+`tonatsooyts-fast-suppression.md`, `tonatsooyts-nativity-octave.md`,
+`tonatsooyts-low-sunday-antasdan.md`, `tonatsooyts-eastertide-gospels.md` — three of
+which **confirmed** the engine already encodes the rule (no code change) and one
+(octave/year-letter) is blocked below.
+
+The ambiguities below were left **out of scope** because the rules needed to resolve
+them fall in **untranslated** pages. This list is the standing record so a future
+effort (once more of the Տօնացոյց is translated) knows exactly what is unblocked:
+
+| Deferred ambiguity | Maps to block | Blocked on (untranslated) |
+|---|---|---|
+| **Presentation of the Lord (Feb 14) + eve (Feb 13) collision rules** | §1 (embedded irregular, the Feb-13 half) | The Տօնացոյց names Tearnndaraj as one of only two movable exceptions (p. 467) but its *collision rubric* (the Annunciation-style reorder table) is not in the translated pages — only its date/rank. |
+| **Octave→fast encroachment by Dominical letter (Ա→2 days, Ը→1)** | §8 (Jan-13 Naming octave) | Rule is fully stated (p. 464) but applying it needs the **letter of the year**, whose derivation is in the 532-year Paschal tables (pp. ~538–641) — present in OCR, *application* not yet translated. See `tonatsooyts-nativity-octave.md`. |
+| **Extreme-Easter phase (2008 Mar 23, 2011 Apr 24)** | §2 (single-sample) | Data-limited, not rule-limited: the Paschal-cycle *tables* are present but their use to phase the whole movable year is untranslated; engine already computes Gregorian Easter, so this stays a data/coverage problem, not a rubric one. |
+| **Summer floating-saint identities & ordering (Transfiguration→Assumption)** | §3 (the real ceiling) | The per-saint commemoration order for this zone lives in the untranslated gaps (≈ pp. 489–531). The fast *boundaries* are now justified (`tonatsooyts-fast-suppression.md`), but the saint sequence inside the zone is not. |
+| **John the Forerunner (Jan 14) transfer rule** | §5 (after-Nativity) | The transfer-to-next-saint-weekday rule is implemented empirically (`PnJohn`) but no governing rubric was located in the translated pages. |
+
+**Confirmed (no code change, justification added):** the Fast-of-Assumption and
+Fast-of-Holy-Cross "no feasts" boundary (the cut at `SUMMER_EVE`/`AUTUMN_EVE`), Low
+Sunday's Antasdan reading-block, and the Eastertide four-Gospel continua — all already
+shipped validated; the canons supply the primary-source basis (see `docs/README.md`).
