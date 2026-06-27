@@ -1,9 +1,8 @@
 # Canon of the Annunciation to the Holy Virgin Mary
 
 > **Source / provenance:** Տօնացոյց (*Tōnats'oyts'*, the Armenian Church
-> Calendar/Typikon), **pp. 482–483**. Transcribed/translated text supplied by the
-> project owner. One inline page break ("Page 487") appears in the received text and
-> is preserved below as it was given.
+> Calendar/Typikon), **pp. 486–488**. The inline page break ("Page 487") preserved
+> below falls naturally in the middle of this range.
 >
 > **Feast:** Annunciation to the Theotokos — fixed date **April 7** (eve **April 6**,
 > the Նախատօնակ / pre-festive). Celebrated for **seven days**.

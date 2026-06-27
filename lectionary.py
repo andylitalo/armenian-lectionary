@@ -884,7 +884,7 @@ def _embedded_composite(d, tables):
 # The Annunciation is a fixed-date feast (Apr 7) whose readings the Tonatsooyts
 # prescribes by COMBINING a fixed proper with the movable Lent / Holy Week /
 # Eastertide day it lands on, ordered by the rank of that day. Source rubric:
-# Tonatsooyts pp. 482-483 (see docs/sources/tonatsooyts-annunciation-canon.md).
+# Tonatsooyts pp. 486-488 (see docs/sources/tonatsooyts-annunciation-canon.md).
 #
 # The strict pipeline already learns the cross-year-consistent buckets via the
 # AnnE keyspace (keyed on the civil date + Easter offset) and ships them VALIDATED
@@ -903,7 +903,7 @@ _ANNUNCIATION_PROPER = (
     "St. Paul's Second Epistle to the Corinthians 6.16-7.1", "Luke 1.26-38",
 )
 
-# Easter offset of Apr 7 -> combination order (Tonatsooyts pp. 482-483):
+# Easter offset of Apr 7 -> combination order (Tonatsooyts pp. 486-488):
 #   day -> proper : Lazarus Saturday (-8), Great Mon/Tue/Wed (-6/-5/-4).
 #   proper -> day : Palm Sunday (-7), Great Thu/Fri (-3/-2), Holy Sat (-1), Easter (0),
 #                   and all of Eastertide / Yinants (offset >= +1).
@@ -1239,7 +1239,7 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
 
     # Annunciation (Apr 7) collision composite best-guess: the validated AnnE
     # keyspace had no entry for this year's Easter offset (a single-sample or unseen
-    # collision). The Tonatsooyts canon (pp. 482-483) prescribes the readings
+    # collision). The Tonatsooyts canon (pp. 486-488) prescribes the readings
     # deterministically by combining the fixed proper with the movable day it lands
     # on; we ship that, labeled best-guess. See _annunciation_composite.
     ac = _annunciation_composite(target_date)
@@ -1253,7 +1253,7 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
             "Source": "generative-composite",
             "Confidence": "best-guess",
             "Note": ("Best-guess readings from the Annunciation collision rule "
-                     "(Tonatsooyts pp. 482-483): the fixed Annunciation proper "
+                     "(Tonatsooyts pp. 486-488): the fixed Annunciation proper "
                      "combined with the movable Lent/Holy-Week/Eastertide day it "
                      "falls on, ordered by that day's rank. The reading order is "
                      "rubric-deterministic but the day-portion may be liturgically "

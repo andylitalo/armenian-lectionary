@@ -13,7 +13,7 @@ that governs it.
 
 | File | Source | What it governs |
 |------|--------|-----------------|
-| [`sources/tonatsooyts-annunciation-canon.md`](sources/tonatsooyts-annunciation-canon.md) | Տօնացոյց, pp. 482–483 | The Annunciation (Apr 7) + its eve (Apr 6): the deterministic collision rule by which the feast's readings combine with the movable Lent / Holy Week / Eastertide day it lands on. |
+| [`sources/tonatsooyts-annunciation-canon.md`](sources/tonatsooyts-annunciation-canon.md) | Տօնացոյց, pp. 486–488 | The Annunciation (Apr 7) + its eve (Apr 6): the deterministic collision rule by which the feast's readings combine with the movable Lent / Holy Week / Eastertide day it lands on. |
 | [`sources/tonatsooyts-fast-suppression.md`](sources/tonatsooyts-fast-suppression.md) | Տօնացոյց, pp. 512, 519, 549 | "No feasts are held" during the Fasts of the Transfiguration, the Assumption, and the Nativity/Theophany — justifies cutting the summer/autumn saint zones at the fast boundary. |
 | [`sources/tonatsooyts-nativity-octave.md`](sources/tonatsooyts-nativity-octave.md) | Տօնացոյց, p. 464 | The Nativity octave (Jan 6→13) and its 1–2-day encroachment on the following fast by Dominical letter — the principle behind the Jan-13 / Eve-of-Fast collision (`PnOct`). |
 | [`sources/tonatsooyts-low-sunday-antasdan.md`](sources/tonatsooyts-low-sunday-antasdan.md) | Տօնացոյց, pp. 487, 462–463 | Low Sunday (Easter+7) and its Antasdan (Blessing of the Fields) four-corners Gospels — source for the validated `E` reading-block. |

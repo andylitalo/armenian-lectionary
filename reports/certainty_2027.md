@@ -70,7 +70,7 @@ blocks (no *new* unpredictability appears for 2027):
 
 | Day | Tier | Source | Why — cross-reference |
 |---|---|---|---|
-| **Apr 7** (Annunciation) | BEST-GUESS | generative-composite | Embedded feast reordered into the movable cycle. Now **computed** from the Tonatsooyts collision rule (pp. 482–483): the fixed Annunciation proper combined with the movable day it lands on (Easter+10 = 11th day of Eastertide in 2027). Rubric-deterministic in order, but the day-portion may be liturgically reduced, so it ships labeled best-guess, not validated. See `docs/sources/tonatsooyts-annunciation-canon.md`. (Was `algorithmic-estimate`/NONE before this rule; `predictability_classification.md` bucket 5.) |
+| **Apr 7** (Annunciation) | BEST-GUESS | generative-composite | Embedded feast reordered into the movable cycle. Now **computed** from the Tonatsooyts collision rule (pp. 486–488): the fixed Annunciation proper combined with the movable day it lands on (Easter+10 = 11th day of Eastertide in 2027). Rubric-deterministic in order, but the day-portion may be liturgically reduced, so it ships labeled best-guess, not validated. See `docs/sources/tonatsooyts-annunciation-canon.md`. (Was `algorithmic-estimate`/NONE before this rule; `predictability_classification.md` bucket 5.) |
 | **Feb 13** (Eve of the Presentation) | NONE | algorithmic-estimate | Embedded-irregular block (no rubric modeled yet). |
 | **Nov 21** (Presentation of the Theotokos) | NONE | algorithmic-estimate | Usually a validated composite; estimate only when its **landing slot is itself unresolved**, as in 2027 (`residual_estimate_tail.md` §1 note). |
 | **Jul 24 – Aug 2** (5 days: Athanasius/Cyril, Peter/Blaise, Anton, Gregory the Theologian, Vahan/Eugenia) | BEST-GUESS | generative-saint | Summer mid-week floating saints — Transfiguration-anchored, the saint floats off the civil date, so no cross-year key is stable (`residual_estimate_tail.md` §3). Shipped as labeled best-guess from the canonical laydown. |
@@ -159,7 +159,7 @@ case explicitly.
 ## The Annunciation composite (Apr 7): from NONE to a rubric-derived best-guess
 
 The Annunciation was the single largest residual estimate block. It is **not**
-arbitrary: the **Տօնացոյց (pp. 482–483)** prescribes its readings as a deterministic
+arbitrary: the **Տօնացոյց (pp. 486–488)** prescribes its readings as a deterministic
 *collision rule* — the fixed Annunciation proper combined with the movable Lent /
 Holy Week / Eastertide day Apr 7 lands on, ordered by that day's rank. The engine now
 implements this (`_annunciation_composite`), so Apr 7 ships **`generative-composite`
