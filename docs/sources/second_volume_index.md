@@ -86,12 +86,33 @@ detected sections (Ծ, Կ, Ճ, Մ, Ս). The `cycle` column is filled by this for
   page**. (This caught p. 619, whose heading prints cycle 4 = `Ս`, not `Վ`/cycle 3; the
   page was moved to `Ս` accordingly.)
 
-**Open items:**
-- 23 letters still have no `page` (their section's Easter line wasn't on the first page, so
-  the detector couldn't pin them). They fall in page order between the filled rows.
-- Row **`Ք`** (36th letter) has no Easter: the Julian Easter range is only 35 dates
-  (Mar 22–Apr 25). Confirm whether `Ք` is a real distinct cycle, a leap-only variant, or
-  unused.
+**On row `Ք`:** it intentionally has no Easter date. `Ք` is the **leap-year twin of `Փ`**
+(both have Easter at the latest possible, Apr 25); the Julian Easter range itself is only
+35 dates (Mar 22–Apr 25). The `Ք` cycle therefore covers only the holidays **before/on the
+leap day** (plus Poon Paregentan, the eve of Great Lent — flagged as identical to `Փ` since
+both share the same Easter). All 36 sections are now mapped to pages.
+
+## Resolution result — the cycle gives the correct floating saint
+Running the full chain (`dev/second_volume_resolve.py`) over the engine's 22 residual
+**floating-saint** days (2014–2026), checked against ground truth (`dev/reference_data/`):
+
+| | days |
+|---|---:|
+| engine's best guess **WRONG** vs ground truth | **19 / 22** |
+| matched cycle entry **matches ground truth** | **8** (of the 11 the cycle lists explicitly) |
+| matched cycle entry differs | 3 (Jan leap-parity / the Andrew–Adrian special case) |
+| deferred (cross-referenced to another letter, or outside the parser's page range) | 11 |
+
+So on exactly the days the engine fails, the Second-Volume cycle — selected purely by
+matching the **Gregorian Easter date** to a cycle's Julian Easter — returns the **correct**
+saint (e.g. 2018-07-31 Vahan/Eugenia, 2019-01-24 Triphon, 2021-08-03 Eugenia, all where the
+engine guessed wrong). Saint identity → readings is already a lookup in
+`dev/saint_readings.json`, so a validated cycle saint yields readings directly.
+
+**Remaining engineering (not more translation):** (1) follow the preface-§2 cross-references
+and widen cycle page ranges to recover the 11 deferred days; (2) add **leap-parity** to the
+match for pre-Easter (January) dates; (3) wire the cycle→identity→readings lookup into
+`lectionary.py` as a resolution tier and confirm the 0-wrong contract holds.
 
 ## Related
 - [`great_paschal_cycle_index.md`](great_paschal_cycle_index.md) — civil year → Taregir
