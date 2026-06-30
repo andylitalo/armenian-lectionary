@@ -47,39 +47,57 @@ non-validated day it is *supposed* to.
 > Easter-offset). Those are engineering, not more translation.
 
 ## The section-index — how to verify and label
-`second_volume_index.csv` maps each printed Second-Volume section ("Roman cycle …") to
-its calendar-letter. Columns:
+`second_volume_index.csv` has **one row per calendar letter Ա..Ք (36)** — the full
+year-type space. Each row's identity is its letter and the Julian Easter date that letter
+encodes; the Second-Volume section that teaches that year-type is attached **by matching
+Easter date**. Columns:
 
 | column | filled by | meaning |
 |---|---|---|
-| `page`, `header` | tool | where the section starts |
-| `easter_md_inferred` | tool | the Julian Easter date stated inside the section |
-| `taregir_inferred` | tool | the Taregir that Julian Easter implies (Ա=Mar22 … Փ=Apr25) |
-| **`letter_printed`** | **human** | the Armenian letter **printed at the section head** |
+| `taregir` | tool | the calendar letter (row key), Ա..Ք |
+| `easter_md_julian` | tool | the Julian Easter date that letter encodes (Ա=Mar22 … Փ=Apr25) |
+| `page`, `header` | tool | the detected Second-Volume section whose Easter matches (12 of 36 so far) |
+| **`letter_printed`** | **human** | the Armenian letter **printed at that section's head** |
 | **`verified`** | **human** | `y` once checked |
 | **`notes`** | **human** | leap-variant, "see letter X" cross-refs, OCR issues |
 
-**Where to verify:** read the Armenian letter from the **page scan** named in the `page`
-column (the authoritative source), or the human-corrected grabar `merged.md`
-`## page_NNNN_human` header as a secondary check. **Do not** read it from the English
-translation — that is regenerable OCR.
+**Sections are attached by Easter date, not by the printed header letter — deliberately.**
+The printed labels may be **offset** from the paschal-table convention: p. 557's section
+puts Easter on **March 22** (= `Ա` here) yet is **headed `Գ`**. Whether the Second Volume's
+lettering is shifted from the paschal table is the key thing to settle; until then,
+Easter-date attachment is convention-independent and correct.
 
-**Source of truth to edit:** this CSV (in the repo, version-controlled). **Never** hand-
-edit the translation files for labels — the OCR pipeline can regenerate them and clobber
-your work. Humans touch only `letter_printed` / `verified` / `notes`.
+**Where to verify the printed letter:** read it from the **page scan** named in the `page`
+column (authoritative), or the human-corrected grabar `merged.md` `## page_NNNN_human`
+header as a secondary check. **Do not** read it from the English translation — regenerable
+OCR.
+
+**Source of truth to edit:** this CSV (repo, version-controlled). **Never** hand-edit the
+translation files for labels — the OCR pipeline can regenerate and clobber them. Humans
+touch only `letter_printed` / `verified` / `notes`.
 
 **Keeping it from getting lost:**
-1. `python dev/second_volume_index.py scaffold` refreshes the tool columns **without**
-   touching your verified columns (merge-safe, keyed by page+header) — safe to re-run.
-2. `python dev/second_volume_index.py validate` cross-checks every `letter_printed`
-   against `taregir_inferred` and flags disagreements — the same closed-form check that
-   caught the 2034 error in `great_paschal_cycle_index.csv`. A mismatch means either the
-   printed letter or the Easter OCR is wrong; resolve before trusting that row.
+1. `python dev/second_volume_index.py scaffold` rebuilds the 36 rows and re-attaches
+   sections **without** touching your human columns (merge-safe, keyed by `taregir`) —
+   safe to re-run after the translation is corrected/extended.
+2. `python dev/second_volume_index.py validate` reports every row where `letter_printed`
+   differs from `taregir`, **with the offset**. A *constant* offset across rows is the
+   smoking gun for the labeling convention (then we shift once and reconcile); a *one-off*
+   offset means that row's page or Easter is misread.
 3. The `verified` column is the progress tracker; this note + `docs/README.md` are the
    durable pointers so the scheme survives context loss.
 
-> First discrepancy to resolve: p. 557's header reads **Գ**, but its first Easter line
-> infers **Ա** — verify which is correct against the scan.
+**Open items to resolve while verifying:**
+- The `Գ`-vs-`Ա` offset at p. 557 (above) — fill a few `letter_printed` and run `validate`
+  to see whether the shift is constant.
+- Row **`Ք`** (36th letter) has no Easter: the Julian Easter range is only 35 dates
+  (Mar 22–Apr 25). Confirm whether `Ք` is a real distinct cycle, a leap-only variant, or
+  unused.
+- 24 letters still have no `page`: their sections were among the ones the detector
+  couldn't pin (Easter line not on the section's first page). The detected-but-unattached
+  section pages are 566, 568, 573, 575, 590, 592, 601, 605, 607, 624, 627, 630, 632, 635
+  — candidates to slot into the empty letters (they fall in page order between the
+  attached ones).
 
 ## Related
 - [`great_paschal_cycle_index.md`](great_paschal_cycle_index.md) — civil year → Taregir
