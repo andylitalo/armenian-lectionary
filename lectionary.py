@@ -578,6 +578,26 @@ def _load_saint_readings():
 
 _SAINT_READINGS = _load_saint_readings()
 
+SECOND_VOLUME_CYCLES_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "dev", "second_volume_cycles.json")
+
+
+def _load_cycle_saints():
+    """Per-year-type saint placements distilled from the Tonatsoyts Second Volume,
+    keyed by Julian Easter date -> {"MM-DD": [zone, saint_id]} (see
+    dev/build_second_volume_cycles.py). A Gregorian year is matched to the cycle whose
+    Julian Easter equals its Gregorian Easter date -- valid because Easter (a Sunday)
+    fixes the year's weekday grid for post-Feb-29 dates. Absent in a thin checkout ->
+    {} -> the cycle tier is inert and the engine behaves exactly as before."""
+    try:
+        with open(SECOND_VOLUME_CYCLES_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+_CYCLE_SAINTS = _load_cycle_saints()
+
 CONTINUA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              "dev", "continua_sequence.json")
 
@@ -723,6 +743,40 @@ def _generative_saint(d: datetime.date):
             return None
         label = _SAINT_LABEL.get(zone, {}).get(sid, sid)
         return zone, sid, label, list(refs)
+    return None
+
+
+def _cycle_saint(d: datetime.date):
+    """Authoritative saint for a saint-weekday from the Tonatsoyts Second Volume cycle
+    matched to this year's Easter. Returns (zone, sid, label, readings) or None.
+
+    Unlike `_generative_saint` (a fixed-order laydown that is systematically wrong on
+    the floating-saint days), this reads the per-year-type calendar directly: the year's
+    Gregorian Easter date selects the cycle, and the cycle gives the saint identity for
+    d's civil date. Identity -> readings reuses dev/saint_readings.json. Validated
+    against ground truth (dev/second_volume_resolve.py)."""
+    if d.weekday() not in _SAINT_WD or not _CYCLE_SAINTS or not _SAINT_READINGS:
+        return None
+    e = calculate_gregorian_easter(d.year)
+    cyc = _CYCLE_SAINTS.get(f"{e.month:02d}-{e.day:02d}")
+    if not cyc:
+        return None
+    rec = cyc.get(f"{d.month:02d}-{d.day:02d}")
+    if not rec:
+        return None
+    stored_zone, sid = rec
+    # Fire only inside an actual saint zone (PN/Tr/As/Ex), where d's saint readings live.
+    runtime_zone = next((z for z, zd in _SAINT_ZONES.items()
+                         if zd["window"](d.year)[0] <= d <= zd["window"](d.year)[1]),
+                        None)
+    if runtime_zone is None:
+        return None
+    for z in (runtime_zone, stored_zone):
+        refs = _SAINT_READINGS.get(z, {}).get(sid)
+        if refs:
+            label = _SAINT_LABEL.get(z, {}).get(sid) or _SAINT_LABEL.get(
+                stored_zone, {}).get(sid, sid)
+            return z, sid, label, list(refs)
     return None
 
 
@@ -1195,6 +1249,28 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
                 "ReadingsList": refs,
                 "Source": "validated-composite",
             }
+
+    # Second-Volume cycle tier: for a floating saint-weekday, read the authoritative
+    # saint from the Tonatsoyts Second Volume calendar of this year's year-type
+    # (selected by Gregorian Easter date) and ship that identity's readings. Directory-
+    # derived and deterministic; it sits ABOVE the generative laydown because it is
+    # correct where the laydown is systematically wrong (see docs/sources/
+    # second_volume_index.md). Distinct Source so a consumer can still gate on it.
+    cy = _cycle_saint(target_date)
+    if cy is not None:
+        zone, sid, label, refs = cy
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": label or "(commemoration)",
+            "Season": season_for(zone + "Saint", sid),
+            "Readings": _group_readings(refs),
+            "ReadingsList": refs,
+            "Source": "second-volume-cycle",
+            "Confidence": "directory-derived",
+            "Note": ("Saint resolved from the Tonatsoyts Second Volume per-year-type "
+                     "calendar (matched by this year's Easter date); readings are that "
+                     "saint's proper. Directory-derived, not cross-year cache-validated."),
+        }
 
     # Generative best-guess tier (labeled, NEVER validated): a saint-weekday the
     # strict table can't cover (single-sample extreme-Easter year / floating

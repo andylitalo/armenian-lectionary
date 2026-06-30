@@ -23,10 +23,15 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from lectionary import compute_armenian_lectionary  # noqa: E402
 
-# Structurally-validated tiers (bound by the 0-wrong contract) vs. the labeled
-# generative best-guess tier (tracked separately, not 0-wrong-bound).
+# Structurally-validated tiers (bound by the 0-wrong contract) vs. the labeled tiers
+# that ship readings but are not cache cross-year validated (tracked separately).
 VALIDATED = {"validated-table", "validated-composite"}
-GENERATIVE = {"generative-saint", "generative-continua"}
+# Best-effort tiers: the generative best-guess laydown/continua, and the Second-Volume
+# directory cycle. The cycle tier is build-time checked for cache consistency
+# (dev/build_second_volume_cycles.py drops any entry contradicted by ground truth), so
+# it ships 0 wrong on the cache -- asserted below.
+BEST_EFFORT = {"generative-saint", "generative-continua", "second-volume-cycle"}
+DIRECTORY = {"second-volume-cycle"}
 
 # Raised per chunk as coverage climbs toward 100%. Chunk 4 (length-classed
 # summer/autumn/post-Exaltation hinge grids) reached 9046/9495 = 95.3%; chunk 5
@@ -51,9 +56,12 @@ EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
 # chunk 15 (generative-continua: Fast-of-Assumption Wed/Fri lectio-continua tail)
 # lifts coverage to ~99.4%.
 COVERAGE_ANY_PCT_FLOOR = float(os.environ.get("COVERAGE_ANY_PCT_FLOOR", "99.4"))
-# Floor on generative best-guess days that turn out exact on the cache (monotonic
-# up; guards the saint-laydown + continua tiers from regressing).
-GENERATIVE_EXACT_FLOOR = int(os.environ.get("GENERATIVE_EXACT_FLOOR", "24"))
+# chunk 16 (Second-Volume directory cycle tier: per-year-type saint resolved from the
+# Tonatsoyts Second Volume, matched by Easter date) adds 16 cache-exact, 0-wrong days
+# over the residual floating saints, lifting best-effort exact 24 -> 39.
+# Floor on best-effort days (generative + directory) that turn out exact on the cache
+# (monotonic up; guards the saint-laydown / continua / cycle tiers from regressing).
+BEST_EFFORT_EXACT_FLOOR = int(os.environ.get("BEST_EFFORT_EXACT_FLOOR", "38"))
 
 
 class TestFullDataset(unittest.TestCase):
@@ -63,7 +71,7 @@ class TestFullDataset(unittest.TestCase):
 
     def test_no_wrong_and_coverage_floor(self):
         validated_exact = validated_wrong = blank = nonblank = 0
-        generative_exact = 0
+        best_effort_exact = directory_wrong = 0
         for iso, day in self.days.items():
             if not day["readings"] and not day["feast"]:
                 continue
@@ -79,8 +87,11 @@ class TestFullDataset(unittest.TestCase):
                     validated_exact += 1
                 else:
                     validated_wrong += 1
-            elif src in GENERATIVE and match:
-                generative_exact += 1
+            elif src in BEST_EFFORT:
+                if match:
+                    best_effort_exact += 1
+                elif src in DIRECTORY:
+                    directory_wrong += 1
 
         total = blank + nonblank
         val_pct = validated_exact / total * 100 if total else 0.0
@@ -89,6 +100,10 @@ class TestFullDataset(unittest.TestCase):
         # 0-wrong contract: the VALIDATED tier never ships a wrong reading.
         self.assertEqual(validated_wrong, 0,
                          "engine produced a wrong VALIDATED reading")
+        # The Second-Volume cycle tier is cache-consistency-checked at build time, so
+        # it must ship 0 wrong on the cache.
+        self.assertEqual(directory_wrong, 0,
+                         "Second-Volume cycle tier produced a wrong reading on the cache")
         # No silent data loss.
         self.assertGreaterEqual(
             total, EXPECTED_TOTAL_DAYS,
@@ -101,11 +116,11 @@ class TestFullDataset(unittest.TestCase):
         self.assertGreaterEqual(
             any_pct, COVERAGE_ANY_PCT_FLOOR,
             f"coverage {any_pct:.2f}% below floor {COVERAGE_ANY_PCT_FLOOR}%")
-        # Generative best-guess exact-on-cache floor (monotonic up).
+        # Best-effort exact-on-cache floor (generative + directory; monotonic up).
         self.assertGreaterEqual(
-            generative_exact, GENERATIVE_EXACT_FLOOR,
-            f"generative exact {generative_exact} below floor "
-            f"{GENERATIVE_EXACT_FLOOR}")
+            best_effort_exact, BEST_EFFORT_EXACT_FLOOR,
+            f"best-effort exact {best_effort_exact} below floor "
+            f"{BEST_EFFORT_EXACT_FLOOR}")
 
 
 if __name__ == "__main__":

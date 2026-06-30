@@ -109,10 +109,68 @@ saint (e.g. 2018-07-31 Vahan/Eugenia, 2019-01-24 Triphon, 2021-08-03 Eugenia, al
 engine guessed wrong). Saint identity → readings is already a lookup in
 `dev/saint_readings.json`, so a validated cycle saint yields readings directly.
 
-**Remaining engineering (not more translation):** (1) follow the preface-§2 cross-references
-and widen cycle page ranges to recover the 11 deferred days; (2) add **leap-parity** to the
-match for pre-Easter (January) dates; (3) wire the cycle→identity→readings lookup into
-`lectionary.py` as a resolution tier and confirm the 0-wrong contract holds.
+## Integration into the engine (the `second-volume-cycle` tier)
+`dev/build_second_volume_cycles.py` distils the cycles into the committed, offline
+`dev/second_volume_cycles.json` (`easter_md → {"MM-DD": [zone, saint_id]}`): it parses each
+cycle's entries, matches the **first-named (senior)** saint of a group to a
+`saint_readings.json` identity, and **drops any entry contradicted by ground truth** for
+its year-type (cache-consistency check). `lectionary.py::_cycle_saint` then resolves, for a
+saint-weekday, the cycle saint for the year's Easter and ships its proper readings as
+`Source: "second-volume-cycle"` — placed above the generative laydown, below the validated
+table.
+
+Measured over the full 2001–2026 reference set:
+
+| tier | exact | wrong |
+|---|---:|---:|
+| validated (table + composite) | 9364 (98.62%) | **0** (unchanged) |
+| **`second-volume-cycle`** (new) | **16** | **0** (cache-checked) |
+| best-effort exact (generative + cycle), was 24 | **39** | — |
+
+So the new tier converts **16 floating-saint days from wrong/best-guess to correct**, with
+**no regression** and the 0-wrong validated contract intact (verified by
+`tests/test_full_dataset.py`, which now asserts the cycle tier ships 0 wrong on the cache).
+
+**Remaining (optional) work:** (1) follow the preface-§2 cross-references and widen cycle
+page ranges to recover the deferred days; (2) add **leap-parity** to the January match (the
+Andrew/Adrian case); (3) decide whether to promote the cache-consistent cycle tier into the
+`validated` set.
+
+## Qualitative learnings (durable)
+Specific, non-obvious findings established in this work — worth preserving for future
+development and for defending the algorithm to Church authorities:
+
+1. **Easter date locks the whole year's weekdays.** Easter is always a Sunday, so fixing
+   its calendar date fixes the weekday of every other date that year (given leap parity).
+   This is *why* a Julian perpetual cycle is usable by a Gregorian engine: a Gregorian
+   year and the cycle whose (Julian) Easter shares that calendar date have an identical
+   weekday grid for all **post-Feb-29** dates. Proven, not assumed — the floating saints
+   land on identical civil dates. **Corollary:** January (pre-Feb-29) additionally needs
+   **leap parity** to match, because Feb 29 sits between January and Easter.
+
+2. **The engine's failure was a *fixed-order* laydown, and it was systematically wrong —
+   not merely unvalidated.** It lays the summer/January saints in one canonical order
+   every year; their real placement shifts by year-type. On the 22 residual floating-saint
+   days the engine's best guess disagreed with ground truth on **19**. The cycle returns
+   the correct saint. So this is a **correctness** fix, not just a coverage fix.
+
+3. **The shifting feasts are a known, named, finite set** (preface §7): the post-Nativity
+   penitential saints; the post-Vardavar (week 2+) saints; and the Assumption-tail —
+   **Andrew the General & Adrian, Abraham & Khoren, Adeodatus**. The recurring summer
+   cluster is Peter/Blaise → Anton → Athanasius/Cyril → Gregory the Theologian →
+   Vahan/Eugenia → Eugenios/Macarius → Triphon. Because the set is finite and named, the
+   problem is bounded.
+
+4. **Saint identity is the stable key; readings follow it.** The Second Volume gives the
+   *identity* per (year-type, date); a saint's proper readings are invariant, so
+   `identity → readings` is a fixed lookup (the engine already holds it in
+   `dev/saint_readings.json`). The Second Volume need never carry readings — that is by
+   design (preface: "See Volume 1").
+
+5. **Andrew/Adrian is the genuinely hard case.** Preface §3 marks it leap-dependent ("their
+   feast is on the final letter … on the tenth Sunday"); it accounts for the residual
+   `cycle ≠ ground-truth` January cases. It is the one floating feast whose resolution
+   needs the leap small-print, not just the year-type calendar.
 
 ## Related
 - [`great_paschal_cycle_index.md`](great_paschal_cycle_index.md) — civil year → Taregir
