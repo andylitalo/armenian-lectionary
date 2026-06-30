@@ -46,58 +46,52 @@ non-validated day it is *supposed* to.
 > year, and (b) the **Julian→Gregorian** laydown (saints by civil-date, movable by
 > Easter-offset). Those are engineering, not more translation.
 
-## The section-index — how to verify and label
+## The section-index
 `second_volume_index.csv` has **one row per calendar letter Ա..Ք (36)** — the full
-year-type space. Each row's identity is its letter and the Julian Easter date that letter
-encodes; the Second-Volume section that teaches that year-type is attached **by matching
-Easter date**. Columns:
+year-type space. The calendar letter (`taregir`) is taken as correct; each row records
+where that year-type's Second-Volume section is and which "Cycle of the Romans" it is.
 
-| column | filled by | meaning |
-|---|---|---|
-| `taregir` | tool | the calendar letter (row key), Ա..Ք |
-| `easter_md_julian` | tool | the Julian Easter date that letter encodes (Ա=Mar22 … Փ=Apr25) |
-| `page`, `header` | tool | the detected Second-Volume section whose Easter matches (12 of 36 so far) |
-| **`letter_printed`** | **human** | the Armenian letter **printed at that section's head** |
-| **`verified`** | **human** | `y` once checked |
-| **`notes`** | **human** | leap-variant, "see letter X" cross-refs, OCR issues |
+| column | meaning |
+|---|---|
+| `taregir` | the calendar letter (row key), Ա..Ք |
+| `easter_md_julian` | the Julian Easter date that letter encodes (Ա=Mar22 … Փ=Apr25) |
+| `page` | page where that letter's Second-Volume section begins |
+| `cycle` | the **Cycle of the Romans** number (1–7) printed in the section heading |
 
-**Sections are attached by Easter date, not by the printed header letter — deliberately.**
-The printed labels may be **offset** from the paschal-table convention: p. 557's section
-puts Easter on **March 22** (= `Ա` here) yet is **headed `Գ`**. Whether the Second Volume's
-lettering is shifted from the paschal table is the key thing to settle; until then,
-Easter-date attachment is convention-independent and correct.
+### The section heading and the cycle number
+The heading printed at each section is **ԵՕԹՆԵՐԵԱԿ ՀՌՈՄԱՅԵՑՒՈՑ #** — *"Septenary of the
+Romans #"* (the English OCR renders the word inconsistently as "Seven-**year** / Seven-**day**
+/ Seven-**week** cycle of the Romans" — they are all the **same Armenian phrase**). The
+number `#` runs **1..7 descending** as the letter advances, wrapping 1→7, so it is a closed
+form of the letter position:
 
-**Where to verify the printed letter:** read it from the **page scan** named in the `page`
-column (authoritative), or the human-corrected grabar `merged.md` `## page_NNNN_human`
-header as a secondary check. **Do not** read it from the English translation — regenerable
-OCR.
+```
+cycle(pos) = ((11 - pos) % 7) + 1          # anchored on Ի (pos 11) = 1
+```
 
-**Source of truth to edit:** this CSV (repo, version-controlled). **Never** hand-edit the
-translation files for labels — the OCR pipeline can regenerate and clobber them. Humans
-touch only `letter_printed` / `verified` / `notes`.
+Verified against every printed heading Ա..Ի (4, 3, 2, 1, 7, 6, 5, 4, 3, 2, 1) and the later
+detected sections (Ծ, Կ, Ճ, Մ, Ս). The `cycle` column is filled by this formula for all 36.
 
-**Keeping it from getting lost:**
-1. `python dev/second_volume_index.py scaffold` rebuilds the 36 rows and re-attaches
-   sections **without** touching your human columns (merge-safe, keyed by `taregir`) —
-   safe to re-run after the translation is corrected/extended.
-2. `python dev/second_volume_index.py validate` reports every row where `letter_printed`
-   differs from `taregir`, **with the offset**. A *constant* offset across rows is the
-   smoking gun for the labeling convention (then we shift once and reconcile); a *one-off*
-   offset means that row's page or Easter is misread.
-3. The `verified` column is the progress tracker; this note + `docs/README.md` are the
-   durable pointers so the scheme survives context loss.
+### Verifying / maintaining it
+- **Read pages from the scan, not the translation.** The `page` column points to the page
+  scan; the grabar `merged.md` `## page_NNNN_human` heading is a secondary check. The
+  English translation is regenerable OCR — never the source of truth.
+- **Source of truth:** this CSV (repo, version-controlled). Never hand-edit the translation
+  files for these labels.
+- `python dev/second_volume_index.py scaffold` rebuilds the 36 rows (cycle = closed form;
+  existing `page` values preserved, blanks filled from the translation by Easter match) —
+  safe to re-run as the translation is corrected/extended.
+- `python dev/second_volume_index.py validate` parses the cycle number printed at each
+  filled `page` and flags any that disagree with the row's `cycle` — i.e. a **misattached
+  page**. (This caught p. 619, whose heading prints cycle 4 = `Ս`, not `Վ`/cycle 3; the
+  page was moved to `Ս` accordingly.)
 
-**Open items to resolve while verifying:**
-- The `Գ`-vs-`Ա` offset at p. 557 (above) — fill a few `letter_printed` and run `validate`
-  to see whether the shift is constant.
+**Open items:**
+- 23 letters still have no `page` (their section's Easter line wasn't on the first page, so
+  the detector couldn't pin them). They fall in page order between the filled rows.
 - Row **`Ք`** (36th letter) has no Easter: the Julian Easter range is only 35 dates
   (Mar 22–Apr 25). Confirm whether `Ք` is a real distinct cycle, a leap-only variant, or
   unused.
-- 24 letters still have no `page`: their sections were among the ones the detector
-  couldn't pin (Easter line not on the section's first page). The detected-but-unattached
-  section pages are 566, 568, 573, 575, 590, 592, 601, 605, 607, 624, 627, 630, 632, 635
-  — candidates to slot into the empty letters (they fall in page order between the
-  attached ones).
 
 ## Related
 - [`great_paschal_cycle_index.md`](great_paschal_cycle_index.md) — civil year → Taregir

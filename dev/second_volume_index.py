@@ -1,21 +1,26 @@
 """Maintain docs/sources/second_volume_index.csv -- one row per Tonatsoyts calendar
-letter (Ա..Ք, 36) mapping that year-type to its Second-Volume "Roman cycle" section.
+letter (Ա..Ք, 36), mapping that year-type to its Second-Volume cycle.
 
-Row identity = the calendar letter and its Julian Easter date (`easter_md_julian`),
-derived closed-form from the paschal-table convention validated 171/171 in
-great_paschal_cycle_index (Ա = Mar 22 ... Փ = Apr 25). Detected Second-Volume sections
-are attached to a row by MATCHING THAT EASTER DATE -- not by the printed header letter,
-because the printed labels may be offset from the paschal convention (e.g. p557's
-Mar-22 section is headed `Գ`, which is `Ա`'s date here). That offset is the thing to
-resolve during verification; until then, attaching by Easter is convention-independent.
+Columns
+-------
+  taregir           the calendar letter (row key), Ա..Ք
+  easter_md_julian  the Julian Easter date that letter encodes (Ա=Mar22 .. Փ=Apr25)
+  page              page where that letter's Second-Volume section begins
+  cycle             the "Cycle of the Romans" number printed in the section heading
 
-Humans fill `letter_printed` (the glyph printed at the section head, read from the PAGE
-SCAN -- not the regenerable translation), `verified`, and `notes`. The tool fills
-`taregir`, `easter_md_julian`, and -- where a section's Easter matches -- `page`/`header`.
+The heading printed at each section is **ԵՕԹՆԵՐԵԱԿ ՀՌՈՄԱՅԵՑՒՈՑ #** ("Septenary of the
+Romans #"); the English OCR renders the word inconsistently as "Seven-year / Seven-day /
+Seven-week cycle of the Romans". The number # runs **1..7 descending** as the letter
+advances, so it is a closed form of the letter position:
 
-  scaffold  (re)build the 36 rows, preserving human columns (merge-safe by taregir)
-  validate  for rows with letter_printed set, report where it != taregir
-            (a CONSISTENT offset across rows reveals the labeling convention)
+    cycle(pos) = ((11 - pos) % 7) + 1          # anchored Ի(pos 11) = 1
+
+verified against every printed heading Ա..Ի (4,3,2,1,7,6,5,4,3,2,1) and Ծ,Կ,Ճ,Մ.
+
+  scaffold  rebuild the 36 rows; cycle = closed form; page preserved from the existing
+            CSV (curated by hand), else filled from the translation by Easter match.
+  validate  for each row with a page, parse that page's printed cycle number from the
+            translation and flag where it != the row's cycle (= a misattached page).
 """
 import csv
 import datetime
@@ -30,28 +35,28 @@ TRANSLATION = os.path.expanduser(
     "~/church/grabar-ocr/runs/human__proj__tess__gemini-min/"
     "translations/gemini-flash/translated.md")
 
-# Classical Armenian alphabet, 36 letters Ա..Ք (the year-letter range).
-ALPHA = "ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿՀՁՂՃՄՅՆՇՈՉՊՋՌՍՎՏՐՑՒՓՔ"
+ALPHA = "ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿՀՁՂՃՄՅՆՇՈՉՊՋՌՍՎՏՐՑՒՓՔ"   # 36 letters
 MONTHS = {m: i for i, m in enumerate(
     ["January", "February", "March", "April", "May", "June", "July", "August",
      "September", "October", "November", "December"], 1)}
-_HDR = re.compile(r"(CYCLE OF THE ROMANS|ROMAN.*CYCLE|YEARLY LETTER|ROMAN CALENDAR|"
-                  r"ROMAN.*WEEKS|Roman.*Cycle|Roman Weekly|Roman Calendar)", re.I)
-FIELDS = ["taregir", "easter_md_julian", "page", "header",
-          "letter_printed", "verified", "notes"]
-HUMAN = ("letter_printed", "verified", "notes")
+_HDR = re.compile(r"CYCLE OF THE ROMANS|ROMAN.*CYCLE|ROMAN CALENDAR|ROMAN.*WEEKS|"
+                  r"Roman.*Cycle|Roman Weekly|Roman Calendar", re.I)
+FIELDS = ["taregir", "easter_md_julian", "page", "cycle"]
 
 
-def _easter_md(pos):
-    """Julian Easter (MM-DD) for letter position pos (1..35); '' beyond the range."""
-    if not 1 <= pos <= 35:           # Julian Easter spans only Mar 22..Apr 25 (35 days)
+def cycle_for(pos):                       # pos is 1-based letter index
+    return ((11 - pos) % 7) + 1
+
+
+def easter_md(pos):
+    if not 1 <= pos <= 35:                # Julian Easter spans Mar 22..Apr 25 only
         return ""
     d = datetime.date(2001, 3, 21) + datetime.timedelta(days=pos)
     return f"{d.month:02d}-{d.day:02d}"
 
 
-def _detect():
-    """{easter_md -> (page, header)} for sections whose own Easter line we can read."""
+def _detect_pages_by_easter():
+    """{easter_md -> page} from sections whose own Easter line is on the page."""
     page = month = None
     out, cur = {}, None
     for ln in open(TRANSLATION, encoding="utf-8"):
@@ -64,59 +69,67 @@ def _detect():
         if mm and mm.group(1) in MONTHS:
             month = MONTHS[mm.group(1)]
         if _HDR.search(s) and len(s) < 70:
-            cur = {"page": page, "header": s, "done": False}
+            cur = page
             month = None
-        if cur and not cur["done"] and re.search(
-                r"\bEaster\b|Resurrection of Christ", s, re.I):
+        if cur and re.search(r"\bEaster\b|Resurrection of Christ", s, re.I):
             dm = re.match(r"(\d+)\.", s)
             if dm and month in (3, 4):
-                md = f"{month:02d}-{int(dm.group(1)):02d}"
-                out.setdefault(md, (cur["page"], cur["header"]))
-                cur["done"] = True
+                out.setdefault(f"{month:02d}-{int(dm.group(1)):02d}", cur)
+                cur = None
     return out
 
 
-def _load_human():
+def _existing_pages():
     if not os.path.exists(CSV_PATH):
         return {}
     with open(CSV_PATH, encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
-    if not rows or "taregir" not in rows[0]:
-        return {}                                  # old/foreign format: nothing to keep
-    return {r["taregir"]: {k: r.get(k, "") for k in HUMAN} for r in rows}
+    if rows and "taregir" in rows[0]:
+        return {r["taregir"]: r.get("page", "") for r in rows}
+    return {}
 
 
 def scaffold():
-    keep = _load_human()
-    det = _detect()
+    keep = _existing_pages()
+    det = _detect_pages_by_easter()
     with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         for i, letter in enumerate(ALPHA, 1):
-            md = _easter_md(i)
-            page, header = det.get(md, ("", ""))
-            row = {"taregir": letter, "easter_md_julian": md,
-                   "page": page, "header": header,
-                   **{k: "" for k in HUMAN}}
-            row.update(keep.get(letter, {}))
-            w.writerow(row)
-    n_sec = sum(1 for L in ALPHA if _easter_md(ALPHA.index(L) + 1) in det)
-    print(f"wrote 36 letter rows; attached {n_sec} detected sections; "
-          f"preserved {sum(1 for v in keep.values() if v.get('letter_printed'))} verified")
+            md = easter_md(i)
+            page = keep.get(letter) or det.get(md, "")
+            w.writerow({"taregir": letter, "easter_md_julian": md,
+                        "page": page, "cycle": cycle_for(i)})
+    print("wrote 36 letter rows (cycle = closed form; pages preserved)")
+
+
+def _printed_cycle_by_page():
+    page, out = None, {}
+    for ln in open(TRANSLATION, encoding="utf-8"):
+        s = ln.strip()
+        pm = re.match(r"## page_(\d+)", s)
+        if pm:
+            page = int(pm.group(1))
+        elif _HDR.search(s) and len(s) < 70:
+            m = re.search(r"\b([1-7])\b", s)
+            if m and page not in out:
+                out[page] = int(m.group(1))
+    return out
 
 
 def validate():
+    printed = _printed_cycle_by_page()
     bad = 0
     with open(CSV_PATH, encoding="utf-8") as f:
         for r in csv.DictReader(f):
-            lp = r["letter_printed"].strip()
-            if lp and lp != r["taregir"]:
+            if not r["page"]:
+                continue
+            p = int(r["page"])
+            if p in printed and printed[p] != int(r["cycle"]):
                 bad += 1
-                off = (ALPHA.find(lp) - ALPHA.find(r["taregir"]))
-                print(f"  {r['taregir']} (Easter {r['easter_md_julian']}, p{r['page']}): "
-                      f"printed {lp!r}  offset {off:+d}")
-    print(f"validate: {bad} row(s) where printed letter != row taregir "
-          f"(a constant offset = the convention shift)")
+                print(f"  {r['taregir']} p{p}: row cycle {r['cycle']} but page "
+                      f"heading prints cycle {printed[p]} -> page likely misattached")
+    print(f"validate: {bad} page/cycle mismatch(es)")
 
 
 if __name__ == "__main__":
