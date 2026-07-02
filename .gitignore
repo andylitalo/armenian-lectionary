@@ -4,6 +4,8 @@ __pycache__/
 .DS_Store
 .env
 server.log
+# Apple Numbers spreadsheets (source-of-truth CSVs are committed instead)
+*.numbers
 # Dev ground-truth cache + logs (the distilled table lectionary_data.json is committed)
 dev/reference_data/
 dev/*.log
