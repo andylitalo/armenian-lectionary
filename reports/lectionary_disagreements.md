@@ -2,18 +2,20 @@
 
 > Working record for resolution. Engine state at time of writing: **0 wrong**
 > (validated contract intact), all 15 tests green. Residue = **42 best-effort misses
-> + 29 blanks** (was 46; the co-celebration resolvers below recovered 17). Reproduce
+> + 26 blanks** (was 46; the co-celebration resolvers below recovered 20). Reproduce
 > any figure with the commands noted per section (`dev/residue_classifier.py`).
 >
 > **Co-celebration recovery (2026-07-03).** The Presentation eve (Feb 13) now ships
 > VALIDATED via a dedicated Easter-offset keyspace `PrLE` (the exact analog of `AnnE`
 > for the Annunciation eve): 17 days across 8 cross-validated offset buckets, 0 wrong;
 > the remaining 9 single-sample offsets stay honest blanks. The Presentation of the
-> Theotokos (Nov 21) already ships `validated-composite` for 23/26 years; the band fix
-> in `_movable_coords` (emit `HEB`/`HEpB`, mirroring `coords_for`) was applied, but the
-> 3 collision years (2004/2010/2021) stay blank: they all have Advent-length band 46,
-> whose band-0 Advent Sunday only ever falls on the embedded feast itself, so that slot
-> is never learnable. Net: BLANK 46 → 29, MATCH +17, WRONG still 0.
+> Theotokos (Nov 21) — already `validated-composite` for 23/26 years — now also resolves
+> its 3 Advent-Sunday collision years (2004/2010/2021, Advent-length band 46). Band 46's
+> Advent Sunday is always Nov 21 and thus structurally unlearnable, but the Tōnats'oyts
+> names it the "Eleventh Sunday after the Holy Cross" — identical to band 47, whose
+> readings are validated — so the co-celebration composite (proper ++ 11th-Sunday) ships
+> validated, exact-matching GT. See `docs/sources/tonatsooyts-presentation-theotokos.md`.
+> Net: BLANK 46 → 26, MATCH +20, WRONG still 0.
 >
 > Sources referenced:
 > - Human-corrected OCR run: `grabar-ocr/runs/human__proj__tess__gemini-min/` (the run

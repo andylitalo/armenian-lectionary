@@ -895,7 +895,18 @@ def _movable_coords(d: datetime.date) -> dict:
     # Heesnak-Sunday-collision embedded feast lands on lives in the HEB band, which
     # _movable_slot_readings can only reach if we emit it here the same way.
     if WINDOWS["HE"][0] <= cs["HE"] <= WINDOWS["HE"][1]:
-        cs["HEB"] = f"{_adv_len(d.year)}:{cs['HE']}"
+        band = _adv_len(d.year)
+        # The band-46 Advent (Heesnak) Sunday is ALWAYS Nov 21 -- the Presentation
+        # of the Theotokos -- so its own slot is never learnable (it is only ever an
+        # embedded feast). But the Tonats'oyts assigns Nov 21 the "Eleventh Sunday
+        # after the Holy Cross," which is exactly band 47's Advent Sunday (both bands
+        # share that numbered Sunday; confirmed over the band-47 years 2005/2011/2016/
+        # 2022 and the band-46 years 2004/2010/2021). So resolve the offset-0 slot of
+        # the shortest Advent through band 47's validated reading-set. See
+        # docs/sources/tonatsooyts-presentation-theotokos.md.
+        if band == 46 and cs["HE"] == 0:
+            band = 47
+        cs["HEB"] = f"{band}:{cs['HE']}"
     if WINDOWS["HEp"][0] <= cs["HEp"] <= WINDOWS["HEp"][1]:
         cs["HEpB"] = f"{_adv_len(d.year - 1)}:{cs['HEp']}"
     cs.update(_winter_coords_raw(d))
