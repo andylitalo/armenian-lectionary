@@ -1,8 +1,19 @@
 # Lectionary Disagreements & Open Data Items (2001–2026)
 
 > Working record for resolution. Engine state at time of writing: **0 wrong**
-> (validated contract intact), all 12 tests green. Residue = **42 best-effort misses
-> + 46 blanks**. Reproduce any figure with the commands noted per section.
+> (validated contract intact), all 15 tests green. Residue = **42 best-effort misses
+> + 29 blanks** (was 46; the co-celebration resolvers below recovered 17). Reproduce
+> any figure with the commands noted per section (`dev/residue_classifier.py`).
+>
+> **Co-celebration recovery (2026-07-03).** The Presentation eve (Feb 13) now ships
+> VALIDATED via a dedicated Easter-offset keyspace `PrLE` (the exact analog of `AnnE`
+> for the Annunciation eve): 17 days across 8 cross-validated offset buckets, 0 wrong;
+> the remaining 9 single-sample offsets stay honest blanks. The Presentation of the
+> Theotokos (Nov 21) already ships `validated-composite` for 23/26 years; the band fix
+> in `_movable_coords` (emit `HEB`/`HEpB`, mirroring `coords_for`) was applied, but the
+> 3 collision years (2004/2010/2021) stay blank: they all have Advent-length band 46,
+> whose band-0 Advent Sunday only ever falls on the embedded feast itself, so that slot
+> is never learnable. Net: BLANK 46 → 29, MATCH +17, WRONG still 0.
 >
 > Sources referenced:
 > - Human-corrected OCR run: `grabar-ocr/runs/human__proj__tess__gemini-min/` (the run
@@ -99,8 +110,10 @@ call, not resolvable from the files.
 2026-08-06  generative-saint         Adrian & Natalia …
 ```
 
-(The 46 blanks are separate: mostly February Class-D embedded feasts — Presentation
-eve, Annunciation-in-Lent — out of scope under exact-match.)
+(The remaining 29 blanks are separate: mostly February Class-D embedded feasts —
+single-sample Presentation-eve offsets, Annunciation-in-Lent — out of scope under
+exact-match. The cross-validatable Presentation-eve offsets were recovered via `PrLE`;
+see the co-celebration recovery note in the header.)
 
 ---
 

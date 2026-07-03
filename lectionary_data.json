@@ -5,6 +5,7 @@
    "C": 9,
    "CF": 0,
    "AnnE": 16,
+   "PrLE": 8,
    "EB": 1299,
    "E": 170,
    "PnOct": 1,
@@ -431,6 +432,111 @@
      "Acts of the Apostles 5.12-33",
      "St. James General Epistle 2.14-20",
      "John 21.15-25"
+    ]
+   }
+  },
+  "PrLE": {
+   "02-13:-66": {
+    "feast": "Fourth day of the Fast of the CatechumensRemembrance of the Prophet Jonah",
+    "readings": [
+     "Jonah 1.1-4.11",
+     "Leviticus 12.6-8",
+     "Proverbs 8.22-34",
+     "Ezekiel 44.1-2",
+     "Malach 3.1-4",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.22-40"
+    ]
+   },
+   "02-13:-55": {
+    "feast": "Saints Ghevond the Priest and His Companions",
+    "readings": [
+     "Wisdom 5.15-22",
+     "Isaiah 35.1-2",
+     "Isaiah 61.6-7",
+     "St. Peter's First Epistle General 1.3-9",
+     "Luke 12.4-10",
+     "Leviticus 12.6-8"
+    ]
+   },
+   "02-13:-62": {
+    "feast": "Saints Atom and his soldiers, and Saints Sukiasians the Martyrs",
+    "readings": [
+     "Wisdom 6.11-20",
+     "Isaiah 18.7-19.7",
+     "St. Paul's Second Epistle to the Corinthians 4.10-5.5",
+     "John 16.1-4",
+     "Leviticus 12.6-8",
+     "Proverbs 8.22-34",
+     "Ezekiel 44.1-2",
+     "Malach 3.1-4",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.22-40"
+    ]
+   },
+   "02-13:-50": {
+    "feast": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
+    "readings": [
+     "Ezekiel 3.16-19",
+     "St. Paul's Second Epistle to the Corinthians 6.1-14",
+     "Matthew 12.22-32",
+     "Leviticus 12.6-8",
+     "Proverbs 8.22-34",
+     "Ezekiel 44.1-2",
+     "Malach 3.1-4",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.22-40"
+    ]
+   },
+   "02-13:-51": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Epistle to Titus 3.1-15",
+     "John 8.21-30",
+     "Leviticus 12.6-8",
+     "Proverbs 8.22-34",
+     "Ezekiel 44.1-2",
+     "Malach 3.1-4",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.22-40"
+    ]
+   },
+   "02-13:-58": {
+    "feast": "Fast day",
+    "readings": [
+     "St. Paul's Second Epistle to Timothy 4.9-22",
+     "John 7.14-23",
+     "Leviticus 12.6-8",
+     "Proverbs 8.22-34",
+     "Ezekiel 44.1-2",
+     "Malach 3.1-4",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.22-40"
+    ]
+   },
+   "02-13:-47": {
+    "feast": "Second day of Great Lent",
+    "readings": [
+     "Ezekiel 18.20-23",
+     "Leviticus 12.6-8",
+     "Proverbs 8.22-34",
+     "Ezekiel 44.1-2",
+     "Malach 3.1-4",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.22-40"
+    ]
+   },
+   "02-13:-46": {
+    "feast": "Third day of Great Lent",
+    "readings": [
+     "Exodus 1.1-2.10",
+     "Joel 1.14-20",
+     "Leviticus 12.6-8",
+     "Proverbs 8.22-34",
+     "Ezekiel 44.1-2",
+     "Malach 3.1-4",
+     "St. Paul's Epistle to the Galatians 3.24-29",
+     "Luke 2.22-40"
     ]
    }
   },

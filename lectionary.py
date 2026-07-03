@@ -151,6 +151,14 @@ EMBEDDED_FIXED = {
 # through to E exactly as before (no coverage regression).
 _ANNUNCIATION_MD = {(4, 7), (4, 6)}
 
+# The eve of the Presentation of the Lord (Feb 13) is the exact analog of the
+# Annunciation eve (Apr 6): a fixed-date eve whose reading-set is reordered by its
+# collision with the movable pre-Lent / Lent cycle, DETERMINISTIC in the Easter
+# offset. It gets its own dedicated Easter-offset keyspace (PrLE), learned by the
+# strict pipeline and shipped VALIDATED -- keeping it out of the generic ferial
+# buckets (no pollution). Single-sample extreme-Easter offsets stay honest blanks.
+_PRESENTATION_EVE_MD = {(2, 13)}
+
 
 def _next_saint_weekday(d):
     """First day on/after d whose weekday carries saints (Mon/Tue/Thu/Sat)."""
@@ -810,6 +818,14 @@ def coords_for(d: datetime.date) -> dict:
             # each reorder bucket and ships it validated.
             e_off = (d - anchors(d.year)["E"]).days
             out["AnnE"] = f"{d.month:02d}-{d.day:02d}:{e_off}"
+        if md in _PRESENTATION_EVE_MD:
+            # ...and the Presentation eve, whose pre-Lent reorder is likewise
+            # computable: key it by (civil-date, Easter-offset) so the strict
+            # build learns each reorder bucket and ships it validated. (PrLE is a
+            # distinct keyspace from the winter-grid PnEve = eve of the Fast of
+            # Catechumens; do not conflate them.)
+            e_off = (d - anchors(d.year)["E"]).days
+            out["PrLE"] = f"{d.month:02d}-{d.day:02d}:{e_off}"
         return out
     y = d.year
     a = anchors(y)
@@ -875,6 +891,13 @@ def _movable_coords(d: datetime.date) -> dict:
         "TH": (d - a["TH"]).days,
         "THp": (d - a_prev["TH"]).days,
     }
+    # Advent-length-band sub-keys (mirroring coords_for): the movable slot that a
+    # Heesnak-Sunday-collision embedded feast lands on lives in the HEB band, which
+    # _movable_slot_readings can only reach if we emit it here the same way.
+    if WINDOWS["HE"][0] <= cs["HE"] <= WINDOWS["HE"][1]:
+        cs["HEB"] = f"{_adv_len(d.year)}:{cs['HE']}"
+    if WINDOWS["HEp"][0] <= cs["HEp"] <= WINDOWS["HEp"][1]:
+        cs["HEpB"] = f"{_adv_len(d.year - 1)}:{cs['HEp']}"
     cs.update(_winter_coords_raw(d))
     cs.update(_hinge_coords_raw(d))
     return cs
@@ -1017,6 +1040,7 @@ WINDOWS = {
     "C": None,
     "CF": None,
     "AnnE": None,
+    "PrLE": None,
     "EB": None,
     "E": (-72, 116),
     "AS": (-14, 27),
@@ -1034,7 +1058,7 @@ WINDOWS.update({ks: None for ks in HINGE_KS})
 # Resolution precedence (first match wins): immovable feasts, then the
 # solar/Easter anchored cycles, then the winter grid slots, then the generic
 # Theophany/Heesnak season counts.
-PRECEDENCE = (["C", "CF", "AnnE", "EB", "E"] + WINTER_KS + HINGE_KS
+PRECEDENCE = (["C", "CF", "AnnE", "PrLE", "EB", "E"] + WINTER_KS + HINGE_KS
               + ["AS", "EX", "HEB", "HE", "HEpB", "HEp", "TH", "THp"])
 
 # Keyspaces whose keys are integers (day-offsets); all others are string keys.
@@ -1045,6 +1069,7 @@ _KS_SEASON = {
     "C": "Immovable Feast",
     "CF": "Feast",
     "AnnE": "Annunciation",
+    "PrLE": "Eve of the Presentation of the Lord",
     "AS": "Assumption Cycle",
     "EX": "Exaltation of the Cross Cycle",
     "HE": "Advent (Heesnak)",
