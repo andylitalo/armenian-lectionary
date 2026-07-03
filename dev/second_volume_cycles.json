@@ -15,9 +15,69 @@
 "04-07": [
 "Ex",
 "seventy_two_holy"
+],
+"07-18": [
+"Tr",
+"peter_the_patriarch"
+],
+"07-20": [
+"Tr",
+"hermit_saints_anton"
+],
+"07-21": [
+"Tr",
+"theodosius_and_the"
+],
+"07-23": [
+"Tr",
+"cyricus_and_his"
+],
+"07-25": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"07-27": [
+"Tr",
+"vahan_of_goghtn"
+],
+"07-28": [
+"Tr",
+"hermits_saints_triphon"
+],
+"07-30": [
+"Tr",
+"eugenios_makarios_valerian"
 ]
 },
 "03-23": {
+"07-19": [
+"Tr",
+"peter_the_patriarch"
+],
+"07-21": [
+"Tr",
+"hermit_saints_anton"
+],
+"07-22": [
+"Tr",
+"theodosius_and_the"
+],
+"07-24": [
+"Tr",
+"cyricus_and_his"
+],
+"07-26": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"07-28": [
+"Tr",
+"vahan_of_goghtn"
+],
+"07-29": [
+"Tr",
+"hermits_saints_triphon"
+],
 "12-22": [
 "As",
 "abraham_and_khoren"
@@ -35,6 +95,38 @@
 "05-12": [
 "Ex",
 "seventy_two_holy"
+],
+"07-20": [
+"Tr",
+"peter_the_patriarch"
+],
+"07-22": [
+"Tr",
+"hermit_saints_anton"
+],
+"07-23": [
+"Tr",
+"theodosius_and_the"
+],
+"07-25": [
+"Tr",
+"cyricus_and_his"
+],
+"07-27": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"07-29": [
+"Tr",
+"vahan_of_goghtn"
+],
+"07-30": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-01": [
+"Tr",
+"eugenios_makarios_valerian"
 ],
 "08-11": [
 "As",
@@ -81,6 +173,38 @@
 "03-30": [
 "Tr",
 "second_day_of"
+],
+"07-21": [
+"Tr",
+"peter_the_patriarch"
+],
+"07-23": [
+"Tr",
+"hermit_saints_anton"
+],
+"07-24": [
+"Tr",
+"theodosius_and_the"
+],
+"07-26": [
+"Tr",
+"cyricus_and_his"
+],
+"07-28": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"07-30": [
+"Tr",
+"vahan_of_goghtn"
+],
+"07-31": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-02": [
+"Tr",
+"eugenios_makarios_valerian"
 ],
 "09-02": [
 "Tr",
@@ -188,6 +312,114 @@
 "Ex",
 "seventy_two_holy"
 ],
+"02-07": [
+"Ex",
+"seventy_two_holy"
+],
+"05-01": [
+"PN",
+"hermits_saints_triphon"
+],
+"05-03": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"05-05": [
+"Ex",
+"seventy_two_holy"
+],
+"05-07": [
+"Ex",
+"seventy_two_holy"
+],
+"05-13": [
+"Ex",
+"seventy_two_holy"
+],
+"05-14": [
+"Ex",
+"seventy_two_holy"
+],
+"05-22": [
+"PN",
+"peter_the_patriarch"
+],
+"05-24": [
+"PN",
+"hermits_saints_anton"
+],
+"05-25": [
+"PN",
+"theodosius_and_the"
+],
+"05-26": [
+"As",
+"apostles_thomas_james"
+],
+"05-29": [
+"Ex",
+"fast_daysaint_patriarchs"
+],
+"05-31": [
+"PN",
+"vahan_of_goghtn"
+],
+"07-22": [
+"Tr",
+"peter_the_patriarch"
+],
+"07-24": [
+"Tr",
+"hermit_saints_anton"
+],
+"07-25": [
+"Tr",
+"theodosius_and_the"
+],
+"07-27": [
+"Tr",
+"cyricus_and_his"
+],
+"07-29": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"07-31": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-01": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-03": [
+"Tr",
+"eugenios_makarios_valerian"
+],
+"09-02": [
+"As",
+"apostles_thomas_james"
+],
+"09-04": [
+"PN",
+"andrew_the_general"
+],
+"09-05": [
+"PN",
+"adrian_and_his"
+],
+"09-07": [
+"As",
+"abraham_and_khoren"
+],
+"09-08": [
+"Ex",
+"seventy_two_holy"
+],
+"09-09": [
+"Ex",
+"seventy_two_holy"
+],
 "09-22": [
 "Ex",
 "seventy_two_holy"
@@ -213,7 +445,32 @@
 "third_day_of"
 ]
 },
-"03-27": {},
+"03-27": {
+"07-26": [
+"PN",
+"theodosius_and_the"
+],
+"07-28": [
+"Tr",
+"cyricus_and_his"
+],
+"08-01": [
+"PN",
+"vahan_of_goghtn"
+],
+"08-02": [
+"PN",
+"hermits_saints_triphon"
+],
+"08-04": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"11-14": [
+"PN",
+"andrew_the_general"
+]
+},
 "03-28": {
 "01-06": [
 "PN",
@@ -238,6 +495,10 @@
 "07-04": [
 "Tr",
 "second_day_of"
+],
+"07-24": [
+"Tr",
+"peter_the_patriarch"
 ],
 "07-26": [
 "PN",
@@ -309,9 +570,29 @@
 "Ex",
 "david_of_dvin"
 ],
+"07-25": [
+"Tr",
+"peter_the_patriarch"
+],
+"07-27": [
+"Tr",
+"hermit_saints_anton"
+],
+"07-28": [
+"Tr",
+"theodosius_and_the"
+],
+"07-30": [
+"Tr",
+"cyricus_and_his"
+],
 "08-01": [
 "PN",
 "fathers_saints_athanasius"
+],
+"08-03": [
+"Tr",
+"vahan_of_goghtn"
 ],
 "08-04": [
 "PN",
@@ -383,9 +664,41 @@
 "PN",
 "peter_the_patriarch"
 ],
+"07-26": [
+"Tr",
+"peter_the_patriarch"
+],
+"07-28": [
+"Tr",
+"hermit_saints_anton"
+],
+"07-29": [
+"Tr",
+"theodosius_and_the"
+],
+"07-31": [
+"Tr",
+"cyricus_and_his"
+],
+"08-02": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-04": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-05": [
+"Tr",
+"hermits_saints_triphon"
+],
 "08-06": [
 "Tr",
 "third_day_of"
+],
+"08-07": [
+"Tr",
+"eugenios_makarios_valerian"
 ],
 "08-09": [
 "Ex",
@@ -517,6 +830,26 @@
 "PN",
 "vahan_of_goghtn"
 ],
+"08-03": [
+"Tr",
+"cyricus_and_his"
+],
+"08-05": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-07": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-08": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-10": [
+"Tr",
+"eugenios_makarios_valerian"
+],
 "08-23": [
 "Tr",
 "second_day_of"
@@ -570,6 +903,34 @@
 "07-30": [
 "PN",
 "gregory_of_theologian"
+],
+"08-01": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-02": [
+"Tr",
+"theodosius_and_the"
+],
+"08-04": [
+"Tr",
+"cyricus_and_his"
+],
+"08-06": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-08": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-09": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-11": [
+"Tr",
+"eugenios_makarios_valerian"
 ]
 },
 "04-04": {
@@ -644,6 +1005,38 @@
 "01-29": [
 "Tr",
 "second_day_of"
+],
+"08-02": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-04": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-05": [
+"Tr",
+"theodosius_and_the"
+],
+"08-07": [
+"Tr",
+"cyricus_and_his"
+],
+"08-09": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-11": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-12": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-14": [
+"Tr",
+"eugenios_makarios_valerian"
 ],
 "12-05": [
 "PN",
@@ -723,6 +1116,38 @@
 "Tr",
 "second_day_of"
 ],
+"08-03": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-05": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-06": [
+"Tr",
+"theodosius_and_the"
+],
+"08-08": [
+"Tr",
+"cyricus_and_his"
+],
+"08-10": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-12": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-13": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-15": [
+"Tr",
+"eugenios_makarios_valerian"
+],
 "12-02": [
 "Ex",
 "longinus_the_centurion"
@@ -792,6 +1217,38 @@
 "05-29": [
 "Ex",
 "seventy_two_holy"
+],
+"08-06": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-08": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-09": [
+"Tr",
+"theodosius_and_the"
+],
+"08-11": [
+"Tr",
+"cyricus_and_his"
+],
+"08-13": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-15": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-16": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-18": [
+"Tr",
+"eugenios_makarios_valerian"
 ]
 },
 "04-11": {},
@@ -825,6 +1282,38 @@
 "01-29": [
 "Tr",
 "second_day_of"
+],
+"08-09": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-11": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-12": [
+"Tr",
+"theodosius_and_the"
+],
+"08-14": [
+"Tr",
+"cyricus_and_his"
+],
+"08-16": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-18": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-19": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-21": [
+"Tr",
+"eugenios_makarios_valerian"
 ],
 "12-05": [
 "PN",
@@ -915,6 +1404,38 @@
 "01-30": [
 "Tr",
 "second_day_of"
+],
+"08-10": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-12": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-13": [
+"Tr",
+"theodosius_and_the"
+],
+"08-15": [
+"Tr",
+"cyricus_and_his"
+],
+"08-17": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-19": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-20": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-22": [
+"Tr",
+"eugenios_makarios_valerian"
 ],
 "11-21": [
 "Ex",
@@ -1099,6 +1620,38 @@
 "06-06": [
 "Ex",
 "seventy_two_holy"
+],
+"08-14": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-16": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-17": [
+"Tr",
+"theodosius_and_the"
+],
+"08-19": [
+"Tr",
+"cyricus_and_his"
+],
+"08-21": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-23": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-24": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-26": [
+"Tr",
+"eugenios_makarios_valerian"
 ]
 },
 "04-19": {
@@ -1193,6 +1746,38 @@
 "03-29": [
 "Tr",
 "second_day_of"
+],
+"08-15": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-17": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-18": [
+"Tr",
+"theodosius_and_the"
+],
+"08-20": [
+"Tr",
+"cyricus_and_his"
+],
+"08-22": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-24": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-25": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-27": [
+"Tr",
+"eugenios_makarios_valerian"
 ]
 },
 "04-20": {
@@ -1343,6 +1928,38 @@
 "01-29": [
 "PN",
 "cyprian_the_bishop"
+],
+"08-18": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-20": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-21": [
+"Tr",
+"theodosius_and_the"
+],
+"08-23": [
+"Tr",
+"cyricus_and_his"
+],
+"08-25": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-27": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-28": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-30": [
+"Tr",
+"eugenios_makarios_valerian"
 ]
 },
 "04-23": {
@@ -1417,6 +2034,38 @@
 "08-11": [
 "PN",
 "thaddeus_apostle_of"
+],
+"08-19": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-21": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-22": [
+"Tr",
+"theodosius_and_the"
+],
+"08-24": [
+"Tr",
+"cyricus_and_his"
+],
+"08-26": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-28": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-29": [
+"Tr",
+"hermits_saints_triphon"
+],
+"08-31": [
+"Tr",
+"eugenios_makarios_valerian"
 ]
 },
 "04-24": {},
@@ -1480,6 +2129,38 @@
 "02-04": [
 "PN",
 "forefathers_adam_abel"
+],
+"08-21": [
+"Tr",
+"peter_the_patriarch"
+],
+"08-23": [
+"Tr",
+"hermit_saints_anton"
+],
+"08-24": [
+"Tr",
+"theodosius_and_the"
+],
+"08-26": [
+"Tr",
+"cyricus_and_his"
+],
+"08-28": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-30": [
+"Tr",
+"vahan_of_goghtn"
+],
+"08-31": [
+"Tr",
+"hermits_saints_triphon"
+],
+"09-02": [
+"Tr",
+"eugenios_makarios_valerian"
 ],
 "11-21": [
 "Ex",

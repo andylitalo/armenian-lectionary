@@ -59,9 +59,13 @@ COVERAGE_ANY_PCT_FLOOR = float(os.environ.get("COVERAGE_ANY_PCT_FLOOR", "99.4"))
 # chunk 16 (Second-Volume directory cycle tier: per-year-type saint resolved from the
 # Tonatsoyts Second Volume, matched by Easter date) adds 16 cache-exact, 0-wrong days
 # over the residual floating saints, lifting best-effort exact 24 -> 39.
+# chunk 17 (Vardavar-anchored summer saint march: the canonical post-Transfiguration
+# weekday laydown, anchored to each year's Vardavar and validated by the drop-guard)
+# fills the summer floating-saint gaps, lifting best-effort exact 39 -> 49 (summer
+# misses 21 -> 14; 0-wrong frozen).
 # Floor on best-effort days (generative + directory) that turn out exact on the cache
 # (monotonic up; guards the saint-laydown / continua / cycle tiers from regressing).
-BEST_EFFORT_EXACT_FLOOR = int(os.environ.get("BEST_EFFORT_EXACT_FLOOR", "38"))
+BEST_EFFORT_EXACT_FLOOR = int(os.environ.get("BEST_EFFORT_EXACT_FLOOR", "49"))
 
 
 class TestFullDataset(unittest.TestCase):

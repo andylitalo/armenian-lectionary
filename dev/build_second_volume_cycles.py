@@ -74,6 +74,63 @@ def _match(entry, identities):
     return best
 
 
+# --- Vardavar-anchored summer (post-Transfiguration) saint laydown ---------------
+# The Second-Volume canons place the summer floating saints on a fixed weekday march
+# after Transfiguration's octave: the Saturday of the third week begins it, then
+# Mon/Tue/Thu/Sat step through the canonical order below. That order is invariant
+# across canons (only the anchor date moves), so rather than parse each canon body --
+# whose two-column OCR reading-order is scrambled and whose day-numbers are noisy --
+# we anchor the canonical sequence to the served year's own Vardavar (Gregorian
+# Easter + 98, always a Sunday). Per-year leap shifts (a leap year advances the first
+# Saturday) are absorbed by the cache drop-guard, which ships only the placements every
+# cached year of the Easter-date agrees on. Sequence verified against 2005/2016 ground
+# truth; saint_ids are the Tr-zone keys of dev/saint_readings.json.
+_SUMMER_SEQUENCE = [
+    (5, "peter_the_patriarch"),         # Saturday  (Peter, Blaise, Absalom)
+    (0, "hermit_saints_anton"),         # Monday    (Anton the Hermit)
+    (1, "theodosius_and_the"),          # Tuesday   (Theodosius & Children of Ephesus)
+    (3, "cyricus_and_his"),             # Thursday  (Cyricus & Julitta, Gordius ...)
+    (5, "fathers_saints_athanasius"),   # Saturday  (Athanasius, Cyril, Gregory Theol.)
+    (0, "vahan_of_goghtn"),             # Monday    (Vahan of Goghtn, Eugenia ...)
+    (1, "hermits_saints_triphon"),      # Tuesday   (Tryphon, Barsauma, Onuphrius)
+    (3, "eugenios_makarios_valerian"),  # Thursday  (Eugenios, Makarios ...)
+]
+
+
+def _rep_easter(easter_md):
+    """A representative Gregorian date on which this Easter month-day is a Sunday,
+    for weekday anchoring. Post-March walk arithmetic is year-independent, so any
+    such year serves every Gregorian year with this Easter date."""
+    m, d = (int(x) for x in easter_md.split("-"))
+    for y in range(2001, 2101):
+        try:
+            dt = datetime.date(y, m, d)
+        except ValueError:
+            return None
+        if dt.weekday() == 6:      # Sunday
+            return dt
+    return None
+
+
+def _summer_entries(easter_md):
+    """{ "MM-DD": ["Tr", sid] } for the post-Transfiguration saints of the canon whose
+    Easter is `easter_md`, from the canonical weekday march anchored to that year's
+    Vardavar. The march starts on the Saturday of Transfiguration's third week
+    (Vardavar + 20; cursor seeded at the preceding Friday)."""
+    easter = _rep_easter(easter_md)
+    if easter is None:
+        return {}
+    cursor = easter + datetime.timedelta(days=98 + 19)   # Vardavar + 19 = Friday, wk 3
+    out = {}
+    for wd, sid in _SUMMER_SEQUENCE:
+        nd = cursor + datetime.timedelta(days=1)
+        while nd.weekday() != wd:
+            nd += datetime.timedelta(days=1)
+        cursor = nd
+        out[f"{nd.month:02d}-{nd.day:02d}"] = ["Tr", sid]
+    return out
+
+
 def _cycle_pages():
     rows = [r for r in csv.DictReader(open(INDEX, encoding="utf-8")) if r["page"]]
     pages = sorted(int(r["page"]) for r in rows)
@@ -88,7 +145,7 @@ def _cycle_pages():
 def main():
     identities = _identities()
     spans = _cycle_pages()
-    # page -> list of (month, day, text)
+    # page -> list of (month, day, text) [dated entries]
     by_page = {}
     cur = month = None
     for ln in open(TR, encoding="utf-8"):
@@ -117,6 +174,16 @@ def main():
                     day_map.setdefault(f"{m:02d}-{dd:02d}", list(hit))
         if day_map:
             out[easter_md] = day_map
+
+    # Summer floating saints: canonical Vardavar-anchored march per Easter-date,
+    # filling only days the dated-line parser left uncovered (setdefault, so a
+    # correct dated entry is never displaced). The drop-guard validates each.
+    for easter_md in spans:
+        if not easter_md:
+            continue
+        dm = out.setdefault(easter_md, {})
+        for md, rec in _summer_entries(easter_md).items():
+            dm.setdefault(md, rec)
 
     dropped = _drop_cache_contradicted(out)
     json.dump(out, open(OUT, "w", encoding="utf-8"),

@@ -216,3 +216,82 @@ only outside the window (past/future extreme-early-Easter years). It is a
 (`auto__proj__tess__gemini-min/.../page_0560.txt`, `page_0561.txt`), so the Բ cycle can
 be built from auto-OCR, or by human-correcting those two plates into the human run and
 re-running `dev/build_second_volume_cycles.py`.
+
+---
+
+## RESOLUTION (2026-07-02): Disagreement A is not scholarly — it's a fixable placement bug
+
+Investigation of `2005-07-26` (Theodosius) and the full 42 proved there is **no
+source-vs-modern conflict**. Each saint has one canonical reading-set (unanimous across
+26 cache years); the feast identity per day is agreed. The engine's `generative-saint`
+tier merely **mis-orders the saint chain** in compressed years. Reclassification of the 42:
+
+- **35 — Class A, weekday-anchored floating saints (FIXABLE, 0-wrong):** 21 summer,
+  8 winter, 6 autumn. Deterministic from the Second-Volume canon.
+- **4 — Class D, Annunciation-in-Lent:** editorial / out-of-scope.
+- **3 — Class B, Assumption continua:** needs the continua-index engine.
+
+### Root cause of the empty 03-27 (Զ) cycle — three compounding errors
+
+1. **Missing pages in the human run.** The Զ canon spans manuscript pages 566–570, but
+   the human run has only **566 and 568** (567, 569, 570 absent). The **auto run has all
+   three**. The summer section is on **page 567**.
+2. **Summer saints are weekday-anchored, not dated.** On page 567 the post-Transfiguration
+   saints are listed by weekday with **no leading day-number** (`Saturday. Peter/Blaise`,
+   `Tuesday. Theodosius`, `Thursday. Cyricus`, `Saturday. Athanasius/Cyril/Gregory`). The
+   build's parser requires a leading `NN.` date, so it captures **none** of them — this is
+   why every canon's summer section yields zero entries.
+3. **Parser bugs on the inline autumn/winter entries:** month value inherits stale across
+   page breaks (Sept "Exaltation" tagged month 02), and `_match` false-positives
+   ("Gregory **and Nicholas**"→`gregory_the_illuminator`; "**David the prophet**"→
+   `david_of_dvin`; "Conception…"→`seventy_two_holy`). The cache drop-guard then correctly
+   discards the whole corrupted cycle → 0 entries.
+
+### The fix (verified end-to-end on 2005)
+
+Anchor the summer chain to Transfiguration: `Vardavar = Gregorian Easter + 98d`; the canon
+says start "on the Saturday after Friday of the 3rd week" = **Vardavar + 19d → next Sat**.
+Then walk the canon's weekday list. For 2005 (Easter 03-27 → Vardavar 07-03 → +19 = 07-22
+Fri): Sat **07-23 Peter/Blaise**, Mon 07-25 Anthony, Tue **07-26 Theodosius**, Thu **07-28
+Cyricus**, Sat **07-30 Athanasius/Cyril/Gregory** — matches GT exactly (same for 2016, also
+03-27).
+
+**Build required (gated on green-light):** (a) fall back to the auto run for pages the
+human run lacks (or human-correct 567/569/570); (b) extend `build_second_volume_cycles.py`
+to parse weekday-anchored post-Transfiguration/Assumption entries and assign dates via the
+Vardavar+19d walk; (c) fix the month-inheritance and false-positive-match bugs. The cache
+drop-guard keeps every step 0-wrong. Expected: ~35 of the 42 misses convert to validated.
+
+---
+
+## Follow-ups / TODO
+
+Status after the summer pass (2026-07-03, shipped): **0 wrong**, best-effort-exact
+39 → 49, summer misses 21 → 14, 12 tests green. Implemented in
+`dev/build_second_volume_cycles.py` as the canonical Vardavar-anchored summer march
+(`_SUMMER_SEQUENCE`), merged with `setdefault`; runtime unchanged; drop-guard validates.
+
+Remaining, in rough priority for lectionary accuracy:
+
+1. **Winter (PN, post-octave) + autumn (As, post-Assumption) marches** — same
+   canonical-weekday mechanism as summer; targets the 8 winter + 6 autumn floating-saint
+   misses. Highest-value next step.
+2. **Leap-shift exceptions** — the 14 remaining summer misses are Easter-dates served by
+   both a leap and a non-leap year that place the first Saturday differently (e.g.
+   2005-07-23 Peter vs 2016-07-23 Athanasius). Needs leap-aware placement to recover; the
+   drop-guard currently leaves them best-effort (0-wrong).
+3. **Parser hygiene** — the `_match` false-positive (`Anthony`≠`anton` normalization; also
+   "Gregory and Nicholas"→Illuminator, "David the prophet"→David of Dvin) and the
+   month-header inheritance across page breaks; recovers dated-entry coverage.
+4. **Un-scramble the two-column OCR reading order (LOW priority for accuracy).** The
+   Second-Volume canon pages are two-column, and the layout step concatenates the columns
+   back-to-front (right column emitted before left), so the flat text puts the Easter
+   marker mid-page and breaks calendar order (see the Զ canon, page_0569: `region_01_right`
+   holds Jul28→Sept, `region_02_left` holds the winter tail + Easter + summer start; each
+   column is internally ordered). The summer fix sidesteps this (the canonical march never
+   reads page order), and it does **not** affect the summer or leap-shift misses. Value is:
+   (a) cleaner dated-line parser for fixed-date autumn/winter saints, and (b) it would let
+   the build **derive** the summer/winter/autumn sequences (and any per-canon leap
+   exceptions) from source instead of the hardcoded `_SUMMER_SEQUENCE` — better provenance,
+   not better cache numbers. Suggested fix: reorder lines by `(page, column, index)` when
+   reading the lines-JSON. Sequence this **after** items 1–3.
