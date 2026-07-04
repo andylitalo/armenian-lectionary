@@ -39,6 +39,18 @@
 "07-30": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-09": [
+"Ex",
+"andrew_the_general"
+],
+"11-10": [
+"Ex",
+"adrian_and_his"
+],
+"11-12": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "03-23": {
@@ -119,6 +131,18 @@
 "08-11": [
 "As",
 "seventh_day_of"
+],
+"11-11": [
+"Ex",
+"andrew_the_general"
+],
+"11-12": [
+"Ex",
+"adrian_and_his"
+],
+"11-14": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "03-25": {
@@ -213,6 +237,14 @@
 "11-12": [
 "Tr",
 "third_day_of"
+],
+"11-13": [
+"Ex",
+"adrian_and_his"
+],
+"11-15": [
+"Ex",
+"abraham_and_khoren"
 ],
 "11-22": [
 "Tr",
@@ -330,6 +362,18 @@
 ],
 "09-07": [
 "As",
+"abraham_and_khoren"
+],
+"11-13": [
+"Ex",
+"andrew_the_general"
+],
+"11-14": [
+"Ex",
+"adrian_and_his"
+],
+"11-16": [
+"Ex",
 "abraham_and_khoren"
 ],
 "12-02": [
@@ -463,6 +507,18 @@
 "08-05": [
 "PN",
 "eugenios_makarios_valerian"
+],
+"11-15": [
+"Ex",
+"andrew_the_general"
+],
+"11-16": [
+"Ex",
+"adrian_and_his"
+],
+"11-18": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "03-29": {
@@ -541,6 +597,18 @@
 "10-31": [
 "Tr",
 "third_day_of"
+],
+"11-09": [
+"Ex",
+"andrew_the_general"
+],
+"11-10": [
+"Ex",
+"adrian_and_his"
+],
+"11-12": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "03-30": {
@@ -610,6 +678,18 @@
 "Tr",
 "eugenios_makarios_valerian"
 ],
+"11-10": [
+"Ex",
+"andrew_the_general"
+],
+"11-11": [
+"Ex",
+"adrian_and_his"
+],
+"11-13": [
+"Ex",
+"abraham_and_khoren"
+],
 "11-29": [
 "Tr",
 "second_day_of"
@@ -638,17 +718,73 @@
 "theodosius_and_the"
 ]
 },
+"07-13": [
+"Tr",
+"thaddeus_apostle_of"
+],
+"07-15": [
+"Tr",
+"cyprian_the_bishop"
+],
+"07-16": [
+"Tr",
+"athenogenes_the_bishop"
+],
+"07-18": [
+"Tr",
+"forefathers_adam_abel"
+],
+"07-20": [
+"Tr",
+"gregory_the_illuminator"
+],
+"07-22": [
+"Tr",
+"maccabees_eleazar_the"
+],
+"07-23": [
+"Tr",
+"twelve_prophets_hosea"
+],
+"07-25": [
+"Tr",
+"sophia_and_her"
+],
+"07-27": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"07-29": [
+"Tr",
+"cyricus_and_his"
+],
 "07-30": [
-"PN",
+"Tr",
 "vahan_of_goghtn"
 ],
 "08-01": [
-"PN",
+"Tr",
 "hermits_saints_triphon"
 ],
 "08-03": [
-"PN",
+"Tr",
 "gregory_of_theologian"
+],
+"08-05": [
+"Tr",
+"eugenios_makarios_valerian"
+],
+"08-06": [
+"Tr",
+"andrew_the_general"
+],
+"08-08": [
+"Tr",
+"adrian_and_his"
+],
+"08-10": [
+"Tr",
+"200_fathers_of"
 ],
 "09-23": [
 "Ex",
@@ -795,6 +931,18 @@
 "08-10": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-13": [
+"Ex",
+"andrew_the_general"
+],
+"11-14": [
+"Ex",
+"adrian_and_his"
+],
+"11-16": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-03": {
@@ -857,6 +1005,18 @@
 "08-11": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-14": [
+"Ex",
+"andrew_the_general"
+],
+"11-15": [
+"Ex",
+"adrian_and_his"
+],
+"11-17": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-04": {
@@ -891,6 +1051,18 @@
 "08-05": [
 "PN",
 "eugenios_makarios_valerian"
+],
+"11-15": [
+"Ex",
+"andrew_the_general"
+],
+"11-16": [
+"Ex",
+"adrian_and_his"
+],
+"11-18": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-05": {
@@ -933,7 +1105,59 @@
 "PN",
 "vahan_of_goghtn"
 ]
-}
+},
+"07-18": [
+"Tr",
+"thaddeus_apostle_of"
+],
+"07-20": [
+"Tr",
+"cyprian_the_bishop"
+],
+"07-21": [
+"Tr",
+"athenogenes_the_bishop"
+],
+"07-23": [
+"Tr",
+"forefathers_adam_abel"
+],
+"07-25": [
+"Tr",
+"gregory_the_illuminator"
+],
+"07-27": [
+"Tr",
+"maccabees_eleazar_the"
+],
+"07-28": [
+"Tr",
+"twelve_prophets_hosea"
+],
+"07-30": [
+"Tr",
+"sophia_and_her"
+],
+"08-01": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"08-03": [
+"Tr",
+"eugenia_the_virgin"
+],
+"08-04": [
+"Tr",
+"andrew_the_general"
+],
+"08-06": [
+"Tr",
+"adrian_and_his"
+],
+"08-08": [
+"Tr",
+"200_fathers_of"
+]
 },
 "04-06": {
 "01-03": [
@@ -1041,6 +1265,18 @@
 "08-14": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-10": [
+"Ex",
+"andrew_the_general"
+],
+"11-11": [
+"Ex",
+"adrian_and_his"
+],
+"11-13": [
+"Ex",
+"abraham_and_khoren"
 ],
 "12-06": [
 "Tr",
@@ -1193,6 +1429,18 @@
 "08-15": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-11": [
+"Ex",
+"andrew_the_general"
+],
+"11-12": [
+"Ex",
+"adrian_and_his"
+],
+"11-14": [
+"Ex",
+"abraham_and_khoren"
 ],
 "12-02": [
 "Ex",
@@ -1405,6 +1653,18 @@
 "08-18": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-14": [
+"Ex",
+"andrew_the_general"
+],
+"11-15": [
+"Ex",
+"adrian_and_his"
+],
+"11-17": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-11": {
@@ -1606,6 +1866,18 @@
 "Tr",
 "eugenios_makarios_valerian"
 ],
+"11-10": [
+"Ex",
+"andrew_the_general"
+],
+"11-11": [
+"Ex",
+"adrian_and_his"
+],
+"11-13": [
+"Ex",
+"abraham_and_khoren"
+],
 "12-05": [
 "Ex",
 "fast_daysaint_patriarchs"
@@ -1711,6 +1983,18 @@
 "08-22": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-11": [
+"Ex",
+"andrew_the_general"
+],
+"11-12": [
+"Ex",
+"adrian_and_his"
+],
+"11-14": [
+"Ex",
+"abraham_and_khoren"
 ],
 "11-25": [
 "As",
@@ -2235,6 +2519,18 @@
 "08-26": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-15": [
+"Ex",
+"andrew_the_general"
+],
+"11-16": [
+"Ex",
+"adrian_and_his"
+],
+"11-18": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-19": {
@@ -2429,6 +2725,18 @@
 "08-27": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-09": [
+"Ex",
+"andrew_the_general"
+],
+"11-10": [
+"Ex",
+"adrian_and_his"
+],
+"11-12": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-20": {
@@ -2781,6 +3089,18 @@
 "08-30": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-12": [
+"Ex",
+"andrew_the_general"
+],
+"11-13": [
+"Ex",
+"adrian_and_his"
+],
+"11-15": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-23": {
@@ -2923,6 +3243,18 @@
 "08-31": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-13": [
+"Ex",
+"andrew_the_general"
+],
+"11-14": [
+"Ex",
+"adrian_and_his"
+],
+"11-16": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-24": {
@@ -2985,6 +3317,18 @@
 "02-12": [
 "PN",
 "thaddeus_apostle_of"
+],
+"11-14": [
+"Ex",
+"andrew_the_general"
+],
+"11-15": [
+"Ex",
+"adrian_and_his"
+],
+"11-17": [
+"Ex",
+"abraham_and_khoren"
 ]
 },
 "04-25": {
@@ -3095,6 +3439,18 @@
 "09-02": [
 "Tr",
 "eugenios_makarios_valerian"
+],
+"11-15": [
+"Ex",
+"andrew_the_general"
+],
+"11-16": [
+"Ex",
+"adrian_and_his"
+],
+"11-18": [
+"Ex",
+"abraham_and_khoren"
 ],
 "11-29": [
 "Ex",

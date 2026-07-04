@@ -2,223 +2,543 @@
  "TrFast": {
   "meta": {
    "source": "Mined from sacredtradition.am Transfiguration->Assumption Wed/Fri continua; MODAL reading per (summer-span, forward Wed/Fri index, weekday). Best-guess only -- consumed by the generative-continua tier, never the validated table.",
-   "buckets": 54,
-   "ambiguous_buckets": 2
+   "buckets": 134,
+   "ambiguous_buckets": 0
   },
   "buckets": {
-   "14:1:2": [
+   "04-15:14:1:2": [
     "St. Paul's First Epistle to the Corinthians 1.1-9",
     "Matthew 17.21-18.4"
    ],
-   "14:2:4": [
+   "04-15:14:2:4": [
     "St. Paul's First Epistle to the Corinthians 1.10-18",
     "Matthew 18.2-9"
    ],
-   "14:3:2": [
+   "04-15:14:3:2": [
     "St. Paul's First Epistle to the Corinthians 2.12-3.10",
     "Matthew 18.15-22"
    ],
-   "14:4:4": [
+   "04-15:14:4:4": [
     "St. Paul's First Epistle to the Corinthians 5.9-6.10",
     "Matthew 18.23-35"
    ],
-   "14:5:2": [
+   "04-15:14:5:2": [
     "St. Paul's First Epistle to the Corinthians 15.20-33",
     "Mark 3.6-12"
    ],
-   "14:6:4": [
+   "04-15:14:6:4": [
     "St. Paul's First Epistle to the Corinthians 15.50-57",
     "Mark 3.31-4.8"
    ],
-   "35:1:2": [
+   "03-31:35:1:2": [
     "St. Paul's First Epistle to the Corinthians 1.1-9",
     "Matthew 17.21-18.4"
    ],
-   "35:2:4": [
+   "03-31:35:2:4": [
     "St. Paul's First Epistle to the Corinthians 1.10-18",
     "Matthew 18.2-9"
    ],
-   "35:3:2": [
+   "03-31:35:3:2": [
     "St. Paul's First Epistle to the Corinthians 2.12-3.10",
     "Matthew 18.15-22"
    ],
-   "35:4:4": [
+   "03-31:35:4:4": [
     "St. Paul's First Epistle to the Corinthians 5.9-6.10",
     "Matthew 18.23-35"
    ],
-   "35:5:2": [
+   "03-31:35:5:2": [
     "St. Paul's First Epistle to the Corinthians 7.25-35",
     "Matthew 19.13-26"
    ],
-   "35:6:4": [
+   "03-31:35:6:4": [
     "St. Paul's First Epistle to the Corinthians 11.1-16",
     "Mark 1.35-45"
    ],
-   "35:7:2": [
+   "03-31:35:7:2": [
     "St. Paul's First Epistle to Timothy 5.17-6.5",
     "John 3.22-36"
    ],
-   "35:8:4": [
+   "03-31:35:8:4": [
     "St. Paul's Second Epistle to Timothy 2.3-14",
     "John 5.31-47"
    ],
-   "35:9:2": [
+   "03-31:35:9:2": [
     "St. Paul's Second Epistle to Timothy 2.20-26",
     "John 6.48-54"
    ],
-   "35:10:4": [
+   "03-31:35:10:4": [
     "St. Paul's Second Epistle to Timothy 3.1-7",
     "John 6.64-71"
    ],
-   "35:11:2": [
+   "03-31:35:11:2": [
     "St. Paul's First Epistle to the Corinthians 15.20-33",
     "Mark 3.6-12"
    ],
-   "35:12:4": [
+   "03-31:35:12:4": [
     "St. Paul's First Epistle to the Corinthians 15.50-57",
     "Mark 3.31-4.8"
    ],
-   "21:1:2": [
+   "04-20:14:1:2": [
     "St. Paul's First Epistle to the Corinthians 1.1-9",
     "Matthew 17.21-18.4"
    ],
-   "21:2:4": [
+   "04-20:14:2:4": [
     "St. Paul's First Epistle to the Corinthians 1.10-18",
     "Matthew 18.2-9"
    ],
-   "21:3:2": [
+   "04-20:14:3:2": [
     "St. Paul's First Epistle to the Corinthians 2.12-3.10",
     "Matthew 18.15-22"
    ],
-   "21:4:4": [
+   "04-20:14:4:4": [
     "St. Paul's First Epistle to the Corinthians 5.9-6.10",
     "Matthew 18.23-35"
    ],
-   "21:5:2": [
-    "St. Paul's First Epistle to the Corinthians 7.25-35",
-    "Matthew 19.13-26"
-   ],
-   "21:6:4": [
-    "St. Paul's First Epistle to the Corinthians 11.1-16",
-    "Mark 1.35-45"
-   ],
-   "21:7:2": [
+   "04-20:14:5:2": [
     "St. Paul's First Epistle to the Corinthians 15.20-33",
     "Mark 3.6-12"
    ],
-   "21:8:4": [
+   "04-20:14:6:4": [
     "St. Paul's First Epistle to the Corinthians 15.50-57",
     "Mark 3.31-4.8"
    ],
-   "42:1:2": [
+   "04-11:21:1:2": [
     "St. Paul's First Epistle to the Corinthians 1.1-9",
     "Matthew 17.21-18.4"
    ],
-   "42:2:4": [
+   "04-11:21:2:4": [
     "St. Paul's First Epistle to the Corinthians 1.10-18",
     "Matthew 18.2-9"
    ],
-   "42:3:2": [
+   "04-11:21:3:2": [
     "St. Paul's First Epistle to the Corinthians 2.12-3.10",
     "Matthew 18.15-22"
    ],
-   "42:4:4": [
+   "04-11:21:4:4": [
     "St. Paul's First Epistle to the Corinthians 5.9-6.10",
     "Matthew 18.23-35"
    ],
-   "42:5:2": [
+   "04-11:21:5:2": [
     "St. Paul's First Epistle to the Corinthians 7.25-35",
     "Matthew 19.13-26"
    ],
-   "42:6:4": [
+   "04-11:21:6:4": [
     "St. Paul's First Epistle to the Corinthians 11.1-16",
     "Mark 1.35-45"
    ],
-   "42:7:2": [
+   "04-11:21:7:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-11:21:8:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "03-27:35:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "03-27:35:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "03-27:35:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "03-27:35:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "03-27:35:5:2": [
+    "St. Paul's First Epistle to the Corinthians 7.25-35",
+    "Matthew 19.13-26"
+   ],
+   "03-27:35:6:4": [
+    "St. Paul's First Epistle to the Corinthians 11.1-16",
+    "Mark 1.35-45"
+   ],
+   "03-27:35:7:2": [
+    "St. Paul's First Epistle to Timothy 5.17-6.5",
+    "John 3.22-36"
+   ],
+   "03-27:35:8:4": [
+    "St. Paul's Second Epistle to Timothy 2.3-14",
+    "John 5.31-47"
+   ],
+   "03-27:35:9:2": [
+    "St. Paul's Second Epistle to Timothy 2.20-26",
+    "John 6.48-54"
+   ],
+   "03-27:35:10:4": [
+    "St. Paul's Second Epistle to Timothy 3.1-7",
+    "John 6.64-71"
+   ],
+   "03-27:35:11:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "03-27:35:12:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-16:14:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-16:14:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-16:14:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-16:14:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-16:14:5:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-16:14:6:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-08:21:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-08:21:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-08:21:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-08:21:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-08:21:5:2": [
+    "St. Paul's First Epistle to the Corinthians 7.25-35",
+    "Matthew 19.13-26"
+   ],
+   "04-08:21:6:4": [
+    "St. Paul's First Epistle to the Corinthians 11.1-16",
+    "Mark 1.35-45"
+   ],
+   "04-08:21:7:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-08:21:8:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "03-23:42:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "03-23:42:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "03-23:42:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "03-23:42:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "03-23:42:5:2": [
+    "St. Paul's First Epistle to the Corinthians 7.25-35",
+    "Matthew 19.13-26"
+   ],
+   "03-23:42:6:4": [
+    "St. Paul's First Epistle to the Corinthians 11.1-16",
+    "Mark 1.35-45"
+   ],
+   "03-23:42:7:2": [
     "St. Paul's First Epistle to Timothy 2.8-3.13",
     "John 2.12-22"
    ],
-   "42:8:4": [
+   "03-23:42:8:4": [
     "St. Paul's First Epistle to Timothy 4.1-12",
     "John 2.23-3.12"
    ],
-   "42:9:2": [
+   "03-23:42:9:2": [
     "St. Paul's First Epistle to Timothy 5.17-6.5",
     "John 3.22-36"
    ],
-   "42:10:4": [
+   "03-23:42:10:4": [
     "St. Paul's Second Epistle to Timothy 2.3-14",
     "John 5.31-47"
    ],
-   "42:11:2": [
+   "03-23:42:11:2": [
     "St. Paul's Second Epistle to Timothy 2.20-26",
     "John 6.48-54"
    ],
-   "42:12:4": [
+   "03-23:42:12:4": [
     "St. Paul's Second Epistle to Timothy 3.1-7",
     "John 6.64-71"
    ],
-   "42:13:2": [
+   "03-23:42:13:2": [
     "St. Paul's First Epistle to the Corinthians 15.20-33",
     "Mark 3.6-12"
    ],
-   "42:14:4": [
+   "03-23:42:14:4": [
     "St. Paul's First Epistle to the Corinthians 15.50-57",
     "Mark 3.31-4.8"
    ],
-   "28:1:2": [
+   "04-12:21:1:2": [
     "St. Paul's First Epistle to the Corinthians 1.1-9",
     "Matthew 17.21-18.4"
    ],
-   "28:2:4": [
+   "04-12:21:2:4": [
     "St. Paul's First Epistle to the Corinthians 1.10-18",
     "Matthew 18.2-9"
    ],
-   "28:3:2": [
+   "04-12:21:3:2": [
     "St. Paul's First Epistle to the Corinthians 2.12-3.10",
     "Matthew 18.15-22"
    ],
-   "28:4:4": [
+   "04-12:21:4:4": [
     "St. Paul's First Epistle to the Corinthians 5.9-6.10",
     "Matthew 18.23-35"
    ],
-   "28:5:2": [
+   "04-12:21:5:2": [
     "St. Paul's First Epistle to the Corinthians 7.25-35",
     "Matthew 19.13-26"
    ],
-   "28:6:4": [
+   "04-12:21:6:4": [
     "St. Paul's First Epistle to the Corinthians 11.1-16",
     "Mark 1.35-45"
    ],
-   "28:7:2": [
-    "St. Paul's First Epistle to Timothy 5.17-6.5",
-    "John 3.22-36"
-   ],
-   "28:8:4": [
-    "St. Paul's Second Epistle to Timothy 3.1-7",
-    "John 6.64-71"
-   ],
-   "28:9:2": [
+   "04-12:21:7:2": [
     "St. Paul's First Epistle to the Corinthians 15.20-33",
     "Mark 3.6-12"
    ],
-   "28:10:4": [
+   "04-12:21:8:4": [
     "St. Paul's First Epistle to the Corinthians 15.50-57",
     "Mark 3.31-4.8"
    ],
-   "7:1:2": [
+   "04-04:28:1:2": [
     "St. Paul's First Epistle to the Corinthians 1.1-9",
     "Matthew 17.21-18.4"
    ],
-   "7:2:4": [
+   "04-04:28:2:4": [
     "St. Paul's First Epistle to the Corinthians 1.10-18",
     "Matthew 18.2-9"
    ],
-   "7:3:2": [
+   "04-04:28:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-04:28:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-04:28:5:2": [
+    "St. Paul's First Epistle to the Corinthians 7.25-35",
+    "Matthew 19.13-26"
+   ],
+   "04-04:28:6:4": [
+    "St. Paul's First Epistle to the Corinthians 11.1-16",
+    "Mark 1.35-45"
+   ],
+   "04-04:28:7:2": [
+    "St. Paul's First Epistle to Timothy 5.17-6.5",
+    "John 3.22-36"
+   ],
+   "04-04:28:8:4": [
+    "St. Paul's Second Epistle to Timothy 3.1-7",
+    "John 6.64-71"
+   ],
+   "04-04:28:9:2": [
     "St. Paul's First Epistle to the Corinthians 15.20-33",
     "Mark 3.6-12"
    ],
-   "7:4:4": [
+   "04-04:28:10:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-24:7:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-24:7:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-24:7:3:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-24:7:4:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-05:28:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-05:28:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-05:28:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-05:28:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-05:28:5:2": [
+    "St. Paul's First Epistle to the Corinthians 7.25-35",
+    "Matthew 19.13-26"
+   ],
+   "04-05:28:6:4": [
+    "St. Paul's First Epistle to the Corinthians 11.1-16",
+    "Mark 1.35-45"
+   ],
+   "04-05:28:7:2": [
+    "St. Paul's Second Epistle to Timothy 2.20-26",
+    "John 6.48-54"
+   ],
+   "04-05:28:8:4": [
+    "St. Paul's Second Epistle to Timothy 3.1-7",
+    "John 6.64-71"
+   ],
+   "04-05:28:9:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-05:28:10:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-01:28:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-01:28:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-01:28:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-01:28:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-01:28:5:2": [
+    "St. Paul's First Epistle to the Corinthians 7.25-35",
+    "Matthew 19.13-26"
+   ],
+   "04-01:28:6:4": [
+    "St. Paul's First Epistle to the Corinthians 11.1-16",
+    "Mark 1.35-45"
+   ],
+   "04-01:28:7:2": [
+    "St. Paul's First Epistle to Timothy 5.17-6.5",
+    "John 3.22-36"
+   ],
+   "04-01:28:8:4": [
+    "St. Paul's Second Epistle to Timothy 2.3-14",
+    "John 5.31-47"
+   ],
+   "04-01:28:9:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-01:28:10:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-21:14:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-21:14:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-21:14:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-21:14:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-21:14:5:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-21:14:6:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-17:14:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-17:14:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-17:14:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-17:14:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-17:14:5:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-17:14:6:4": [
+    "St. Paul's First Epistle to the Corinthians 15.50-57",
+    "Mark 3.31-4.8"
+   ],
+   "04-09:21:1:2": [
+    "St. Paul's First Epistle to the Corinthians 1.1-9",
+    "Matthew 17.21-18.4"
+   ],
+   "04-09:21:2:4": [
+    "St. Paul's First Epistle to the Corinthians 1.10-18",
+    "Matthew 18.2-9"
+   ],
+   "04-09:21:3:2": [
+    "St. Paul's First Epistle to the Corinthians 2.12-3.10",
+    "Matthew 18.15-22"
+   ],
+   "04-09:21:4:4": [
+    "St. Paul's First Epistle to the Corinthians 5.9-6.10",
+    "Matthew 18.23-35"
+   ],
+   "04-09:21:5:2": [
+    "St. Paul's First Epistle to the Corinthians 7.25-35",
+    "Matthew 19.13-26"
+   ],
+   "04-09:21:6:4": [
+    "St. Paul's First Epistle to the Corinthians 11.1-16",
+    "Mark 1.35-45"
+   ],
+   "04-09:21:7:2": [
+    "St. Paul's First Epistle to the Corinthians 15.20-33",
+    "Mark 3.6-12"
+   ],
+   "04-09:21:8:4": [
     "St. Paul's First Epistle to the Corinthians 15.50-57",
     "Mark 3.31-4.8"
    ]
