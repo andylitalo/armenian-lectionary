@@ -81,7 +81,9 @@ def _gt(d):
 
 
 def _norm(t):
-    t = (t or "").lower().replace("ph", "f").replace("ios", "ius").replace("y", "i")
+    t = re.sub(r"\[Note:[^\]]*\]", " ", t or "")
+    t = t.lower().replace("ph", "f").replace("ios", "ius").replace("ie", "ia").replace("y", "i")
+    t = t.replace("anthoni", "anton")   # Anthony/Anton translit unify
     return set(re.findall(r"[a-z]{4,}", t)) - {
         "saint", "saints", "holy", "bishop", "virgin", "feast", "tone", "sunday",
         "monday", "tuesday", "thursday", "others", "their", "general", "martyrs",

@@ -100,5 +100,52 @@ class TestCocelebrationResolvers(unittest.TestCase):
                              f"{year}-11-21 should exact-match ground truth")
 
 
+class TestLeapSummerParity(unittest.TestCase):
+    """Locks the Second-Volume leap-parity summer split: the same Easter date (03-27)
+    ships a distinct saint on the shared civil date in a leap vs a non-leap year, per the
+    documented ՍՌ rubric. Before the split the drop-guard had to withhold both, leaving the
+    days best-effort; now each ships exact from the cycle tier."""
+
+    def _readings(self, y, m, d):
+        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
+                           "reference_data", f"{y:04d}-{m:02d}-{d:02d}.json")
+        with open(ref) as fh:
+            return json.load(fh)["readings"]
+
+    def test_2005_common_vs_2016_leap_diverge_and_match(self):
+        # 2005 (common) and 2016 (leap) share Gregorian Easter 03-27.
+        for y, iso_days in ((2005, ((7, 23), (7, 30))), (2016, ((7, 23), (7, 30)))):
+            for m, d in iso_days:
+                res = compute_armenian_lectionary(datetime.date(y, m, d))
+                self.assertEqual(res["Source"], "second-volume-cycle",
+                                 f"{y}-{m:02d}-{d:02d} should ship from the cycle tier")
+                self.assertEqual(res["ReadingsList"], list(self._readings(y, m, d)),
+                                 f"{y}-{m:02d}-{d:02d} should exact-match ground truth")
+        # The first summer Saturday genuinely differs by leap parity (Peter vs Athanasius).
+        self.assertNotEqual(
+            compute_armenian_lectionary(datetime.date(2005, 7, 23))["ReadingsList"],
+            compute_armenian_lectionary(datetime.date(2016, 7, 23))["ReadingsList"])
+
+
+class TestWinterMarch(unittest.TestCase):
+    """Locks the post-Nativity winter march: the long-window (2011) tail saints that the
+    generative laydown mis-placed now ship exact from the cycle tier."""
+
+    def _readings(self, y, m, d):
+        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
+                           "reference_data", f"{y:04d}-{m:02d}-{d:02d}.json")
+        with open(ref) as fh:
+            return json.load(fh)["readings"]
+
+    def test_2011_winter_tail_saints_exact(self):
+        # Cyprian / Athenogenes / Forefathers / Thaddeus, previously generative misses.
+        for m, d in ((1, 31), (2, 1), (2, 3), (2, 12)):
+            res = compute_armenian_lectionary(datetime.date(2011, m, d))
+            self.assertEqual(res["Source"], "second-volume-cycle",
+                             f"2011-{m:02d}-{d:02d} should ship from the cycle tier")
+            self.assertEqual(res["ReadingsList"], list(self._readings(2011, m, d)),
+                             f"2011-{m:02d}-{d:02d} should exact-match ground truth")
+
+
 if __name__ == "__main__":
     unittest.main()

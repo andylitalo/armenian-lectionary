@@ -18,6 +18,7 @@ The calendar math (anchors, coordinates, windows, precedence) lives here so the
 runtime owns it; the dev table-builder imports these helpers.
 """
 
+import calendar
 import datetime
 import functools
 import json
@@ -770,6 +771,10 @@ def _cycle_saint(d: datetime.date):
     if not cyc:
         return None
     rec = cyc.get(f"{d.month:02d}-{d.day:02d}")
+    if isinstance(rec, dict):
+        # Leap-conditional placement: a leap year advances the summer Saturday chain, so
+        # the same Easter date ships a distinct leap-parity saint (build-time keyed).
+        rec = rec.get("leap" if calendar.isleap(d.year) else "common")
     if not rec:
         return None
     stored_zone, sid = rec

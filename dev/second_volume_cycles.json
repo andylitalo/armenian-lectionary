@@ -4,17 +4,9 @@
 "As",
 "seventh_day_of"
 ],
-"01-16": [
-"Tr",
-"isaiah_the_prophet"
-],
 "01-17": [
 "As",
 "john_the_forerunner"
-],
-"04-07": [
-"Ex",
-"seventy_two_holy"
 ],
 "07-18": [
 "Tr",
@@ -85,16 +77,12 @@
 },
 "03-24": {
 "01-19": [
-"Ex",
-"seventy_two_holy"
+"As",
+"john_the_forerunner"
 ],
 "04-07": [
 "Tr",
 "third_day_of"
-],
-"05-12": [
-"Ex",
-"seventy_two_holy"
 ],
 "07-20": [
 "Tr",
@@ -131,49 +119,9 @@
 "08-11": [
 "As",
 "seventh_day_of"
-],
-"08-12": [
-"Ex",
-"seventy_two_holy"
-],
-"08-18": [
-"Ex",
-"seventy_two_holy"
 ]
 },
 "03-25": {
-"03-08": [
-"Ex",
-"seventy_two_holy"
-],
-"03-09": [
-"Ex",
-"seventy_two_holy"
-],
-"03-10": [
-"Ex",
-"seventy_two_holy"
-],
-"03-16": [
-"Tr",
-"second_day_of"
-],
-"03-23": [
-"Tr",
-"third_day_of"
-],
-"03-24": [
-"Ex",
-"fast_daysaints_mamas"
-],
-"03-26": [
-"Tr",
-"third_day_of"
-],
-"03-30": [
-"Tr",
-"second_day_of"
-],
 "07-21": [
 "Tr",
 "peter_the_patriarch"
@@ -304,18 +252,6 @@
 "As",
 "john_the_forerunner"
 ],
-"01-21": [
-"Ex",
-"seventy_two_holy"
-],
-"01-26": [
-"Ex",
-"seventy_two_holy"
-],
-"02-07": [
-"Ex",
-"seventy_two_holy"
-],
 "05-01": [
 "PN",
 "hermits_saints_triphon"
@@ -323,22 +259,6 @@
 "05-03": [
 "PN",
 "eugenios_makarios_valerian"
-],
-"05-05": [
-"Ex",
-"seventy_two_holy"
-],
-"05-07": [
-"Ex",
-"seventy_two_holy"
-],
-"05-13": [
-"Ex",
-"seventy_two_holy"
-],
-"05-14": [
-"Ex",
-"seventy_two_holy"
 ],
 "05-22": [
 "PN",
@@ -412,26 +332,6 @@
 "As",
 "abraham_and_khoren"
 ],
-"09-08": [
-"Ex",
-"seventy_two_holy"
-],
-"09-09": [
-"Ex",
-"seventy_two_holy"
-],
-"09-22": [
-"Ex",
-"seventy_two_holy"
-],
-"09-24": [
-"Ex",
-"david_of_dvin"
-],
-"09-29": [
-"As",
-"apostles_thomas_james"
-],
 "12-02": [
 "Tr",
 "second_day_of"
@@ -446,6 +346,26 @@
 ]
 },
 "03-27": {
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"07-23": {
+"common": [
+"PN",
+"peter_the_patriarch"
+],
+"leap": [
+"Tr",
+"fathers_saints_athanasius"
+]
+},
+"07-25": [
+"PN",
+"hermits_saints_anton"
+],
 "07-26": [
 "PN",
 "theodosius_and_the"
@@ -454,6 +374,16 @@
 "Tr",
 "cyricus_and_his"
 ],
+"07-30": {
+"common": [
+"Tr",
+"fathers_saints_athanasius"
+],
+"leap": [
+"Tr",
+"gregory_of_theologian"
+]
+},
 "08-01": [
 "PN",
 "vahan_of_goghtn"
@@ -469,6 +399,10 @@
 "11-14": [
 "PN",
 "andrew_the_general"
+],
+"11-17": [
+"As",
+"abraham_and_khoren"
 ]
 },
 "03-28": {
@@ -481,32 +415,34 @@
 "john_the_forerunner"
 ],
 "01-16": [
-"Ex",
-"seventy_two_holy"
+"PN",
+"peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "02-14": [
 "Tr",
 "second_day_of"
-],
-"04-07": [
-"Ex",
-"seventy_two_holy"
 ],
 "07-04": [
 "Tr",
 "second_day_of"
 ],
 "07-24": [
-"Tr",
-"peter_the_patriarch"
+"PN",
+"hermits_saints_anton"
 ],
 "07-26": [
 "PN",
 "theodosius_and_the"
 ],
 "07-27": [
-"Ex",
-"seventy_two_holy"
+"Tr",
+"theodosius_and_the"
 ],
 "07-29": [
 "PN",
@@ -530,10 +466,6 @@
 ]
 },
 "03-29": {
-"01-07": [
-"Ex",
-"seventy_two_holy"
-],
 "01-15": [
 "As",
 "john_the_forerunner"
@@ -541,34 +473,6 @@
 "01-17": [
 "PN",
 "peter_the_patriarch"
-],
-"02-10": [
-"Ex",
-"seventy_two_holy"
-],
-"02-16": [
-"Ex",
-"seventy_two_holy"
-],
-"05-09": [
-"Ex",
-"seventy_two_holy"
-],
-"05-12": [
-"Tr",
-"third_day_of"
-],
-"05-17": [
-"Ex",
-"seventy_two_holy"
-],
-"05-20": [
-"Ex",
-"fast_daysaint_patriarchs"
-],
-"05-23": [
-"Ex",
-"david_of_dvin"
 ],
 "07-25": [
 "Tr",
@@ -604,19 +508,11 @@
 ],
 "08-08": [
 "Ex",
-"seventy_two_holy"
-],
-"09-06": [
-"Ex",
-"seventy_two_holy"
-],
-"09-07": [
-"Ex",
-"seventy_two_holy"
+"fast_daysaint_patriarchs"
 ],
 "09-08": [
-"Ex",
-"seventy_two_holy"
+"As",
+"joachim_and_anna"
 ],
 "09-20": [
 "Tr",
@@ -635,12 +531,8 @@
 "seventh_day_of"
 ],
 "10-27": [
-"Ex",
-"seventy_two_holy"
-],
-"10-28": [
-"Ex",
-"seventy_two_holy"
+"PN",
+"theodosius_and_the"
 ],
 "10-30": [
 "PN",
@@ -660,10 +552,32 @@
 "As",
 "john_the_forerunner"
 ],
+"01-15": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "01-16": [
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-18": [
+"PN",
+"hermits_saints_anton"
+],
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "07-26": [
 "Tr",
 "peter_the_patriarch"
@@ -692,48 +606,38 @@
 "Tr",
 "hermits_saints_triphon"
 ],
-"08-06": [
-"Tr",
-"third_day_of"
-],
 "08-07": [
 "Tr",
 "eugenios_makarios_valerian"
-],
-"08-09": [
-"Ex",
-"seventy_two_holy"
-],
-"08-21": [
-"As",
-"abraham_and_khoren"
-],
-"08-22": [
-"Ex",
-"demetrios_the_martyr"
-],
-"08-24": [
-"Ex",
-"david_of_dvin"
-],
-"11-21": [
-"Ex",
-"seventy_two_holy"
 ],
 "11-29": [
 "Tr",
 "second_day_of"
 ],
 "12-05": [
-"PN",
-"gregory_the_illuminator"
+"Ex",
+"fast_daysaint_patriarchs"
 ]
 },
 "03-31": {
-"02-30": [
-"Tr",
-"second_day_of"
-],
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "07-30": [
 "PN",
 "vahan_of_goghtn"
@@ -756,10 +660,32 @@
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-18": [
+"PN",
+"hermits_saints_anton"
+],
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "01-20": [
 "PN",
 "theodosius_and_the"
 ],
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
 "07-28": [
 "PN",
 "fathers_saints_athanasius"
@@ -786,18 +712,42 @@
 "PN",
 "peter_the_patriarch"
 ],
-"01-17": [
+"01-17": {
+"common": [
 "PN",
 "hermits_saints_anton"
 ],
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-19": [
 "PN",
 "theodosius_and_the"
 ],
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "01-21": [
 "PN",
 "fathers_saints_athanasius"
 ],
+"01-22": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
 "02-12": [
 "Tr",
 "second_day_of"
@@ -805,10 +755,6 @@
 "04-07": [
 "Tr",
 "second_day_of"
-],
-"05-21": [
-"Ex",
-"seventy_two_holy"
 ],
 "07-09": [
 "Tr",
@@ -823,8 +769,8 @@
 "second_day_of"
 ],
 "07-31": [
-"Ex",
-"seventy_two_holy"
+"Tr",
+"hermit_saints_anton"
 ],
 "08-01": [
 "PN",
@@ -849,18 +795,6 @@
 "08-10": [
 "Tr",
 "eugenios_makarios_valerian"
-],
-"08-23": [
-"Tr",
-"second_day_of"
-],
-"08-24": [
-"Tr",
-"second_day_of"
-],
-"08-31": [
-"Tr",
-"second_day_of"
 ]
 },
 "04-03": {
@@ -887,14 +821,6 @@
 "01-23": [
 "Tr",
 "second_day_of"
-],
-"04-07": [
-"Ex",
-"seventy_two_holy"
-],
-"05-22": [
-"Ex",
-"seventy_two_holy"
 ],
 "07-10": [
 "Tr",
@@ -950,10 +876,6 @@
 "PN",
 "fathers_saints_athanasius"
 ],
-"01-28": [
-"Ex",
-"seventy_two_holy"
-],
 "07-31": [
 "PN",
 "gregory_of_theologian"
@@ -972,10 +894,46 @@
 ]
 },
 "04-05": {
-"01-17": [
+"01-16": {
+"leap": [
 "PN",
 "peter_the_patriarch"
 ]
+},
+"01-17": [
+"PN",
+"peter_the_patriarch"
+],
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-23": {
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-25": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+}
 },
 "04-06": {
 "01-03": [
@@ -986,26 +944,72 @@
 "As",
 "john_the_forerunner"
 ],
+"01-15": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "01-16": [
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-18": [
 "PN",
-"hermits_saints_triphon"
+"hermits_saints_anton"
 ],
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "01-20": [
 "PN",
 "theodosius_and_the"
 ],
-"01-21": [
-"Ex",
-"seventy_two_holy"
+"01-21": {
+"common": [
+"PN",
+"gregory_the_illuminator"
 ],
-"01-29": [
-"Tr",
-"second_day_of"
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-22": {
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-23": [
+"PN",
+"cyricus_and_his"
 ],
+"01-24": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-25": [
+"PN",
+"vahan_of_goghtn"
+],
+"01-26": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
 "08-02": [
 "Tr",
 "peter_the_patriarch"
@@ -1038,25 +1042,21 @@
 "Tr",
 "eugenios_makarios_valerian"
 ],
-"12-05": [
-"PN",
-"gregory_the_illuminator"
-],
 "12-06": [
 "Tr",
 "third_day_of"
 ],
 "12-09": [
-"Ex",
-"seventy_two_holy"
+"As",
+"joachim_and_anna"
 ],
 "12-21": [
 "As",
 "abraham_and_khoren"
 ],
 "12-24": [
-"Ex",
-"david_of_dvin"
+"As",
+"apostles_thomas_james"
 ]
 },
 "04-07": {
@@ -1084,37 +1084,83 @@
 "PN",
 "peter_the_patriarch"
 ],
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "01-17": [
 "PN",
 "hermits_saints_anton"
 ],
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-19": [
 "PN",
 "theodosius_and_the"
 ],
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "01-21": [
 "PN",
 "gregory_the_illuminator"
 ],
-"01-22": [
+"01-22": {
+"common": [
 "PN",
 "vahan_of_goghtn"
 ],
-"01-23": [
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-23": {
+"common": [
 "Ex",
 "fast_daysaints_mamas"
 ],
-"01-27": [
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-24": [
+"PN",
+"vahan_of_goghtn"
+],
+"01-25": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-26": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"01-27": {
+"common": [
 "As",
 "seventh_day_of"
 ],
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
 "01-29": [
 "Tr",
 "third_day_of"
-],
-"01-30": [
-"Tr",
-"second_day_of"
 ],
 "08-03": [
 "Tr",
@@ -1157,16 +1203,16 @@
 "third_day_of"
 ],
 "12-09": [
-"Ex",
-"seventy_two_holy"
+"As",
+"joachim_and_anna"
 ],
 "12-22": [
 "As",
 "abraham_and_khoren"
 ],
 "12-23": [
-"Ex",
-"david_of_dvin"
+"As",
+"apostles_thomas_james"
 ],
 "12-29": [
 "As",
@@ -1177,16 +1223,64 @@
 "01-16": [
 "PN",
 "peter_the_patriarch"
+],
+"01-17": {
+"leap": [
+"PN",
+"hermits_saints_anton"
 ]
+},
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-24": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-26": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
+"01-28": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+}
 },
 "04-09": {
 "01-16": [
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": [
+"PN",
+"hermits_saints_anton"
+],
 "01-19": [
 "PN",
 "theodosius_and_the"
+],
+"01-24": [
+"PN",
+"vahan_of_goghtn"
+],
+"01-26": [
+"PN",
+"eugenios_makarios_valerian"
 ],
 "01-28": [
 "PN",
@@ -1198,25 +1292,87 @@
 "As",
 "john_the_forerunner"
 ],
-"01-23": [
-"Ex",
-"david_of_dvin"
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"01-17": [
+"PN",
+"peter_the_patriarch"
 ],
-"01-30": [
+"01-18": [
+"PN",
+"hermits_saints_anton"
+],
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-20": [
+"PN",
+"theodosius_and_the"
+],
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-22": [
+"PN",
+"fathers_saints_athanasius"
+],
+"01-23": {
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-24": [
+"PN",
+"cyricus_and_his"
+],
+"01-25": [
+"PN",
+"vahan_of_goghtn"
+],
+"01-26": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
+"01-27": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"01-28": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
+"01-29": [
+"PN",
+"gregory_of_theologian"
+],
+"01-30": {
+"common": [
 "Tr",
 "third_day_of"
 ],
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
 "02-07": [
 "Ex",
 "evangelists_matthew_mark"
-],
-"04-07": [
-"Ex",
-"seventy_two_holy"
-],
-"05-29": [
-"Ex",
-"seventy_two_holy"
 ],
 "08-06": [
 "Tr",
@@ -1251,8 +1407,65 @@
 "eugenios_makarios_valerian"
 ]
 },
-"04-11": {},
+"04-11": {
+"01-17": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"01-19": {
+"common": [
+"PN",
+"theodosius_and_the"
+],
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-24": [
+"Tr",
+"second_day_of"
+],
+"01-26": {
+"common": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-31": [
+"Tr",
+"third_day_of"
+]
+},
 "04-12": {
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-20": [
+"PN",
+"theodosius_and_the"
+],
 "01-27": [
 "PN",
 "eugenios_makarios_valerian"
@@ -1267,22 +1480,100 @@
 "As",
 "john_the_forerunner"
 ],
+"01-15": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "01-16": [
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-18": [
 "PN",
-"hermits_saints_triphon"
+"hermits_saints_anton"
+],
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-20": [
+"PN",
+"theodosius_and_the"
 ],
 "01-21": [
-"Ex",
-"seventy_two_holy"
+"PN",
+"fathers_saints_athanasius"
 ],
-"01-29": [
-"Tr",
-"second_day_of"
+"01-22": {
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-23": [
+"PN",
+"cyricus_and_his"
 ],
+"01-24": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-25": [
+"PN",
+"vahan_of_goghtn"
+],
+"01-26": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
+"01-27": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"01-28": [
+"PN",
+"gregory_of_theologian"
+],
+"01-29": {
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
+"01-30": [
+"PN",
+"cyprian_the_bishop"
+],
+"01-31": {
+"leap": [
+"PN",
+"athenogenes_the_bishop"
+]
+},
+"02-01": [
+"PN",
+"athenogenes_the_bishop"
+],
+"02-02": {
+"leap": [
+"PN",
+"forefathers_adam_abel"
+]
+},
 "08-09": [
 "Tr",
 "peter_the_patriarch"
@@ -1316,28 +1607,24 @@
 "eugenios_makarios_valerian"
 ],
 "12-05": [
-"PN",
-"gregory_the_illuminator"
+"Ex",
+"fast_daysaint_patriarchs"
 ],
 "12-06": [
 "As",
 "apostles_thomas_james"
 ],
 "12-09": [
-"Ex",
-"seventy_two_holy"
-],
-"12-20": [
-"Ex",
-"seventy_two_holy"
+"As",
+"joachim_and_anna"
 ],
 "12-21": [
 "As",
 "abraham_and_khoren"
 ],
 "12-24": [
-"Ex",
-"david_of_dvin"
+"As",
+"apostles_thomas_james"
 ],
 "12-29": [
 "As",
@@ -1345,29 +1632,9 @@
 ]
 },
 "04-14": {
-"01-02": [
-"Ex",
-"longinus_the_centurion"
-],
-"01-04": [
-"As",
-"seventh_day_of"
-],
 "01-05": [
 "As",
 "seventh_day_of"
-],
-"01-07": [
-"Tr",
-"third_day_of"
-],
-"01-09": [
-"Ex",
-"seventy_two_holy"
-],
-"01-14": [
-"As",
-"john_the_forerunner"
 ],
 "01-15": [
 "PN",
@@ -1382,28 +1649,36 @@
 "theodosius_and_the"
 ],
 "01-21": [
-"Ex",
-"seventy_two_holy"
+"PN",
+"fathers_saints_athanasius"
 ],
 "01-22": [
-"As",
-"abraham_and_khoren"
+"PN",
+"cyricus_and_his"
 ],
-"01-23": [
-"Ex",
-"david_of_dvin"
+"01-24": [
+"PN",
+"vahan_of_goghtn"
 ],
-"01-27": [
-"As",
-"seventh_day_of"
+"01-26": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"01-28": [
+"PN",
+"gregory_of_theologian"
 ],
 "01-29": [
-"Ex",
-"severianus_of_sebastia"
+"PN",
+"cyprian_the_bishop"
 ],
-"01-30": [
-"Tr",
-"second_day_of"
+"01-31": [
+"PN",
+"athenogenes_the_bishop"
+],
+"02-02": [
+"PN",
+"forefathers_adam_abel"
 ],
 "08-10": [
 "Tr",
@@ -1437,10 +1712,6 @@
 "Tr",
 "eugenios_makarios_valerian"
 ],
-"11-21": [
-"Ex",
-"seventy_two_holy"
-],
 "11-25": [
 "As",
 "abraham_and_khoren"
@@ -1458,16 +1729,12 @@
 "third_day_of"
 ],
 "12-09": [
-"Ex",
-"seventy_two_holy"
-],
-"12-22": [
-"Ex",
-"seventy_two_holy"
+"As",
+"joachim_and_anna"
 ],
 "12-23": [
-"Ex",
-"david_of_dvin"
+"As",
+"apostles_thomas_james"
 ]
 },
 "04-15": {
@@ -1475,78 +1742,316 @@
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-18": [
+"PN",
+"hermits_saints_anton"
+],
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "01-20": [
 "PN",
 "theodosius_and_the"
 ],
-"01-23": [
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-23": {
+"common": [
 "PN",
 "vahan_of_goghtn"
 ],
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-24": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
 "01-25": [
 "PN",
 "eugenios_makarios_valerian"
 ],
+"01-26": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
+"01-28": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
 "01-29": [
 "PN",
 "maccabees_eleazar_the"
 ],
-"01-30": [
+"01-30": {
+"common": [
 "PN",
 "twelve_prophets_hosea"
 ],
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
+"01-31": {
+"leap": [
+"PN",
+"athenogenes_the_bishop"
+]
+},
 "02-01": [
 "PN",
 "sophia_and_her"
+],
+"02-02": {
+"leap": [
+"PN",
+"forefathers_adam_abel"
 ]
+},
+"02-04": {
+"leap": [
+"PN",
+"gregory_the_illuminator"
+]
+}
 },
 "04-16": {
 "01-16": [
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"common": [
+"PN",
+"hermits_saints_anton"
+],
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-19": [
 "PN",
 "theodosius_and_the"
 ],
-"01-24": [
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-22": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-23": [
+"PN",
+"cyricus_and_his"
+],
+"01-24": {
+"common": [
 "PN",
 "vahan_of_goghtn"
 ],
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-25": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-26": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"01-27": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
 "01-28": [
 "PN",
 "gregory_of_theologian"
 ],
+"01-29": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
 "01-30": [
 "PN",
 "maccabees_eleazar_the"
 ],
-"01-31": [
+"01-31": {
+"common": [
 "PN",
 "twelve_prophets_hosea"
 ],
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
+"02-01": {
+"leap": [
+"PN",
+"athenogenes_the_bishop"
+]
+},
 "02-02": [
 "PN",
 "sophia_and_her"
+],
+"02-03": {
+"leap": [
+"PN",
+"forefathers_adam_abel"
 ]
 },
+"02-04": [
+"PN",
+"gregory_the_illuminator"
+],
+"02-05": {
+"leap": [
+"PN",
+"gregory_the_illuminator"
+]
+}
+},
 "04-17": {
-"02-08": [
-"Ex",
-"seventy_two_holy"
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
+"01-17": [
+"PN",
+"peter_the_patriarch"
 ],
-"02-09": [
-"Ex",
-"seventy_two_holy"
+"01-18": [
+"PN",
+"hermits_saints_anton"
 ],
-"02-10": [
-"Tr",
-"third_day_of"
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-20": [
+"PN",
+"theodosius_and_the"
 ],
-"02-30": [
-"Ex",
-"fast_daysaint_patriarchs"
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-22": [
+"PN",
+"fathers_saints_athanasius"
 ],
+"01-23": {
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
+"01-24": [
+"PN",
+"cyricus_and_his"
+],
+"01-25": [
+"PN",
+"vahan_of_goghtn"
+],
+"01-26": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
+"01-27": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"01-28": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
+"01-29": [
+"PN",
+"gregory_of_theologian"
+],
+"01-30": {
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
+"02-02": {
+"leap": [
+"PN",
+"forefathers_adam_abel"
+]
+},
+"02-04": {
+"leap": [
+"PN",
+"gregory_the_illuminator"
+]
+},
+"02-05": [
+"PN",
+"gregory_the_illuminator"
+],
+"02-06": {
+"leap": [
+"PN",
+"maccabees_eleazar_the"
+]
+},
 "11-14": [
 "PN",
 "andrew_the_general"
@@ -1565,62 +2070,140 @@
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "01-18": [
 "PN",
 "hermits_saints_anton"
 ],
-"01-19": [
+"01-19": {
+"common": [
 "PN",
 "theodosius_and_the"
 ],
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
+"01-21": [
+"PN",
+"fathers_saints_athanasius"
+],
+"01-22": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
 "01-23": [
 "Ex",
 "fast_daysaint_patriarchs"
 ],
-"01-24": [
+"01-24": {
+"common": [
 "Tr",
 "second_day_of"
 ],
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
 "01-25": [
 "PN",
 "vahan_of_goghtn"
 ],
-"01-26": [
+"01-26": {
+"common": [
 "PN",
 "hermits_saints_triphon"
 ],
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-27": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
 "01-28": [
 "PN",
 "eugenios_makarios_valerian"
 ],
+"01-29": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
 "01-30": [
 "PN",
 "gregory_of_theologian"
 ],
-"01-31": [
+"01-31": {
+"common": [
 "Tr",
 "third_day_of"
 ],
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
 "02-01": [
 "PN",
 "maccabees_eleazar_the"
 ],
-"02-02": [
+"02-02": {
+"common": [
 "PN",
 "twelve_prophets_hosea"
 ],
+"leap": [
+"PN",
+"athenogenes_the_bishop"
+]
+},
+"02-03": {
+"leap": [
+"PN",
+"forefathers_adam_abel"
+]
+},
 "02-04": [
 "PN",
 "sophia_and_her"
 ],
-"04-07": [
-"Ex",
-"seventy_two_holy"
+"02-05": {
+"leap": [
+"PN",
+"gregory_the_illuminator"
+]
+},
+"02-06": [
+"PN",
+"maccabees_eleazar_the"
 ],
-"06-06": [
-"Ex",
-"seventy_two_holy"
-],
+"02-07": {
+"leap": [
+"PN",
+"maccabees_eleazar_the"
+]
+},
 "08-14": [
 "Tr",
 "peter_the_patriarch"
@@ -1659,30 +2242,60 @@
 "As",
 "john_the_forerunner"
 ],
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "01-17": [
 "PN",
 "peter_the_patriarch"
 ],
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-19": [
 "PN",
-"hermits_saints_triphon"
+"hermits_saints_anton"
 ],
 "01-20": [
 "PN",
 "theodosius_and_the"
 ],
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
 "01-22": [
 "PN",
 "gregory_the_illuminator"
 ],
+"01-23": {
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
 "01-24": [
 "Ex",
 "fast_daysaint_patriarchs"
 ],
-"01-25": [
+"01-25": {
+"common": [
 "Tr",
 "second_day_of"
 ],
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
 "01-26": [
 "PN",
 "vahan_of_goghtn"
@@ -1691,57 +2304,95 @@
 "PN",
 "eugenios_makarios_valerian"
 ],
+"01-28": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
 "01-29": [
 "PN",
 "adrian_and_his"
 ],
+"01-30": {
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
 "01-31": [
 "PN",
 "gregory_of_theologian"
 ],
-"02-01": [
+"02-01": {
+"common": [
 "Tr",
 "third_day_of"
 ],
+"leap": [
+"PN",
+"athenogenes_the_bishop"
+]
+},
 "02-02": [
 "PN",
 "maccabees_eleazar_the"
 ],
-"02-03": [
+"02-03": {
+"common": [
 "PN",
 "twelve_prophets_hosea"
 ],
+"leap": [
+"PN",
+"forefathers_adam_abel"
+]
+},
+"02-04": {
+"leap": [
+"PN",
+"gregory_the_illuminator"
+]
+},
 "02-05": [
 "PN",
 "sophia_and_her"
 ],
+"02-06": {
+"leap": [
+"PN",
+"maccabees_eleazar_the"
+]
+},
+"02-07": [
+"PN",
+"maccabees_eleazar_the"
+],
+"02-08": {
+"leap": [
+"PN",
+"twelve_prophets_hosea"
+]
+},
 "03-03": [
 "As",
 "seventh_day_of"
-],
-"03-05": [
-"PN",
-"gregory_the_illuminator"
 ],
 "03-06": [
 "Tr",
 "third_day_of"
 ],
 "03-09": [
-"Ex",
-"seventy_two_holy"
+"As",
+"joachim_and_anna"
 ],
 "03-21": [
-"Ex",
-"seventy_two_holy"
-],
-"03-22": [
-"Ex",
-"demetrios_the_martyr"
+"As",
+"abraham_and_khoren"
 ],
 "03-24": [
-"Ex",
-"david_of_dvin"
+"As",
+"apostles_thomas_james"
 ],
 "03-29": [
 "Tr",
@@ -1831,104 +2482,274 @@
 "PN",
 "peter_the_patriarch"
 ],
+"01-16": {
+"leap": [
+"PN",
+"peter_the_patriarch"
+]
+},
 "01-17": [
 "PN",
 "hermits_saints_anton"
 ],
+"01-18": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-19": [
 "PN",
 "theodosius_and_the"
 ],
+"01-20": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "01-21": [
 "PN",
 "cyricus_and_his"
 ],
+"01-22": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-23": {
+"leap": [
+"PN",
+"cyricus_and_his"
+]
+},
 "01-24": [
 "PN",
 "hermits_saints_triphon"
 ],
+"01-25": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
 "01-26": [
 "PN",
 "fathers_saints_athanasius"
 ],
+"01-27": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
 "01-28": [
 "PN",
 "eugenios_makarios_valerian"
 ],
+"01-29": {
+"common": [
+"PN",
+"andrew_the_general"
+],
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
+"01-30": {
+"leap": [
+"PN",
+"cyprian_the_bishop"
+]
+},
 "01-31": [
 "PN",
 "adrian_and_his"
 ],
+"02-01": {
+"leap": [
+"PN",
+"athenogenes_the_bishop"
+]
+},
 "02-02": [
 "PN",
 "gregory_of_theologian"
 ],
+"02-03": {
+"leap": [
+"PN",
+"forefathers_adam_abel"
+]
+},
 "02-04": [
 "PN",
 "maccabees_eleazar_the"
 ],
-"02-05": [
+"02-05": {
+"common": [
+"PN",
+"twelve_prophets_hosea"
+],
+"leap": [
+"PN",
+"gregory_the_illuminator"
+]
+},
+"02-06": {
+"leap": [
+"PN",
+"maccabees_eleazar_the"
+]
+},
+"02-08": {
+"leap": [
 "PN",
 "twelve_prophets_hosea"
 ]
 },
-"04-22": {
-"01-01": [
-"PN",
-"forefathers_adam_abel"
-],
-"01-05": [
-"PN",
-"maccabees_eleazar_the"
-],
-"01-06": [
-"PN",
-"twelve_prophets_hosea"
-],
-"01-08": [
+"02-10": {
+"leap": [
 "PN",
 "sophia_and_her"
-],
-"01-15": [
-"As",
-"john_the_forerunner"
-],
+]
+}
+},
+"04-22": {
 "01-16": [
 "PN",
 "peter_the_patriarch"
 ],
+"01-17": {
+"leap": [
+"PN",
+"hermits_saints_anton"
+]
+},
 "01-18": [
 "PN",
-"hermits_saints_triphon"
+"hermits_saints_anton"
 ],
+"01-19": {
+"leap": [
+"PN",
+"theodosius_and_the"
+]
+},
 "01-20": [
 "PN",
 "theodosius_and_the"
 ],
-"01-21": [
-"Tr",
-"second_day_of"
+"01-21": {
+"leap": [
+"PN",
+"fathers_saints_athanasius"
+]
+},
+"01-22": [
+"PN",
+"fathers_saints_athanasius"
 ],
 "01-23": [
 "PN",
+"cyricus_and_his"
+],
+"01-24": {
+"leap": [
+"PN",
+"vahan_of_goghtn"
+]
+},
+"01-25": [
+"PN",
 "vahan_of_goghtn"
 ],
-"01-25": [
+"01-26": {
+"leap": [
+"PN",
+"eugenios_makarios_valerian"
+]
+},
+"01-27": [
 "PN",
 "eugenios_makarios_valerian"
 ],
-"01-27": [
-"Ex",
-"fast_daysaint_patriarchs"
-],
-"01-28": [
-"Tr",
-"third_day_of"
-],
+"01-28": {
+"leap": [
+"PN",
+"gregory_of_theologian"
+]
+},
 "01-29": [
+"PN",
+"gregory_of_theologian"
+],
+"01-30": [
 "PN",
 "cyprian_the_bishop"
 ],
+"01-31": {
+"leap": [
+"PN",
+"athenogenes_the_bishop"
+]
+},
+"02-01": [
+"PN",
+"athenogenes_the_bishop"
+],
+"02-02": {
+"leap": [
+"PN",
+"forefathers_adam_abel"
+]
+},
+"02-03": [
+"PN",
+"forefathers_adam_abel"
+],
+"02-04": {
+"leap": [
+"PN",
+"gregory_the_illuminator"
+]
+},
+"02-05": [
+"PN",
+"gregory_the_illuminator"
+],
+"02-06": [
+"PN",
+"maccabees_eleazar_the"
+],
+"02-07": {
+"leap": [
+"PN",
+"twelve_prophets_hosea"
+]
+},
+"02-08": [
+"PN",
+"twelve_prophets_hosea"
+],
+"02-09": {
+"leap": [
+"PN",
+"sophia_and_her"
+]
+},
+"02-10": [
+"PN",
+"sophia_and_her"
+],
+"02-11": {
+"leap": [
+"PN",
+"thaddeus_apostle_of"
+]
+},
 "08-18": [
 "Tr",
 "peter_the_patriarch"
@@ -1973,7 +2794,7 @@
 ],
 "01-17": [
 "PN",
-"hermits_saints_triphon"
+"hermits_saints_anton"
 ],
 "01-19": [
 "PN",
@@ -1986,6 +2807,10 @@
 "01-22": [
 "Tr",
 "second_day_of"
+],
+"01-23": [
+"PN",
+"cyricus_and_his"
 ],
 "01-24": [
 "PN",
@@ -2003,6 +2828,38 @@
 "Tr",
 "third_day_of"
 ],
+"01-30": [
+"PN",
+"cyprian_the_bishop"
+],
+"01-31": [
+"PN",
+"athenogenes_the_bishop"
+],
+"02-02": [
+"PN",
+"forefathers_adam_abel"
+],
+"02-04": [
+"PN",
+"gregory_the_illuminator"
+],
+"02-06": [
+"PN",
+"maccabees_eleazar_the"
+],
+"02-07": [
+"PN",
+"twelve_prophets_hosea"
+],
+"02-09": [
+"PN",
+"sophia_and_her"
+],
+"02-11": [
+"PN",
+"thaddeus_apostle_of"
+],
 "07-30": [
 "PN",
 "cyprian_the_bishop"
@@ -2012,8 +2869,8 @@
 "athenogenes_the_bishop"
 ],
 "08-02": [
-"Ex",
-"seventy_two_holy"
+"PN",
+"forefathers_adam_abel"
 ],
 "08-04": [
 "PN",
@@ -2068,7 +2925,68 @@
 "eugenios_makarios_valerian"
 ]
 },
-"04-24": {},
+"04-24": {
+"01-17": [
+"PN",
+"peter_the_patriarch"
+],
+"01-20": [
+"PN",
+"theodosius_and_the"
+],
+"01-22": [
+"PN",
+"fathers_saints_athanasius"
+],
+"01-24": [
+"PN",
+"cyricus_and_his"
+],
+"01-25": [
+"PN",
+"vahan_of_goghtn"
+],
+"01-27": [
+"PN",
+"eugenios_makarios_valerian"
+],
+"01-29": [
+"PN",
+"gregory_of_theologian"
+],
+"01-31": [
+"PN",
+"cyprian_the_bishop"
+],
+"02-01": [
+"PN",
+"athenogenes_the_bishop"
+],
+"02-03": [
+"PN",
+"forefathers_adam_abel"
+],
+"02-05": [
+"PN",
+"gregory_the_illuminator"
+],
+"02-07": [
+"PN",
+"maccabees_eleazar_the"
+],
+"02-08": [
+"PN",
+"twelve_prophets_hosea"
+],
+"02-10": [
+"PN",
+"sophia_and_her"
+],
+"02-12": [
+"PN",
+"thaddeus_apostle_of"
+]
+},
 "04-25": {
 "01-14": [
 "As",
@@ -2078,25 +2996,25 @@
 "PN",
 "peter_the_patriarch"
 ],
+"01-18": [
+"PN",
+"hermits_saints_anton"
+],
 "01-19": [
 "PN",
 "theodosius_and_the"
 ],
-"01-20": [
-"Ex",
-"demetrios_the_martyr"
-],
 "01-21": [
-"Ex",
-"seventy_two_holy"
+"PN",
+"theodosius_and_the"
 ],
 "01-23": [
 "PN",
 "fathers_saints_athanasius"
 ],
 "01-24": [
-"Ex",
-"david_of_dvin"
+"Tr",
+"second_day_of"
 ],
 "01-25": [
 "PN",
@@ -2115,8 +3033,8 @@
 "gregory_of_theologian"
 ],
 "01-31": [
-"Ex",
-"fast_daysaint_patriarchs"
+"Tr",
+"third_day_of"
 ],
 "02-01": [
 "PN",
@@ -2129,6 +3047,22 @@
 "02-04": [
 "PN",
 "forefathers_adam_abel"
+],
+"02-06": [
+"PN",
+"maccabees_eleazar_the"
+],
+"02-08": [
+"PN",
+"twelve_prophets_hosea"
+],
+"02-09": [
+"PN",
+"sophia_and_her"
+],
+"02-11": [
+"PN",
+"thaddeus_apostle_of"
 ],
 "08-21": [
 "Tr",
@@ -2162,10 +3096,6 @@
 "Tr",
 "eugenios_makarios_valerian"
 ],
-"11-21": [
-"Ex",
-"seventy_two_holy"
-],
 "11-29": [
 "Ex",
 "fast_daysaints_virgins"
@@ -2175,8 +3105,8 @@
 "second_day_of"
 ],
 "12-09": [
-"Ex",
-"seventy_two_holy"
+"As",
+"joachim_and_anna"
 ],
 "12-12": [
 "Tr",

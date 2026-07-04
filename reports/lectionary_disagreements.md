@@ -286,19 +286,42 @@ Status after the summer pass (2026-07-03, shipped): **0 wrong**, best-effort-exa
 `dev/build_second_volume_cycles.py` as the canonical Vardavar-anchored summer march
 (`_SUMMER_SEQUENCE`), merged with `setdefault`; runtime unchanged; drop-guard validates.
 
+Update (2026-07-03, parser-hygiene + leap-parity + winter-march pass, shipped): **0 wrong**,
+best-effort-exact 49 → 56, 28 tests green.
+- **Parser hygiene — done.** `_match` now aliases Anthony/Anton, excludes normalized
+  generic folds (the stray `holi` collision that made every "Holy …" entry hit
+  `seventy_two_holy`), guards name collisions (David-the-Prophet, Gregory+Nicholas), strips
+  `[Note: …]`, and derives month context per canon span (no cross-canon leak). Unit tests in
+  `tests/test_parser.py`.
+- **Leap-shift — done for the one in-window divergence.** The cycle tier is now
+  leap-conditional (`{ "common": …, "leap": … }` records; `_LEAP_SUMMER` override + parity-
+  partitioned drop-guard). Easter 03-27 ships **Peter in 2005 (non-leap)** and **Athanasius
+  in 2016 (leap)** — both exact — via the documented ՍՌ rubric. Locked by
+  `tests/test_regression.py::TestLeapSummerParity`.
+- **Winter (PN) march — done; autumn (As) already clean (0 misses).** A post-Nativity
+  consecutive-saint-weekday march (`_WINTER_SEQUENCE`, generated per leap parity since the
+  January weekdays shift with Feb-29, shipped through the leap-conditional records) fixes
+  the long-window (2011) tail saints — winter misses 7 → 3. Locked by
+  `tests/test_regression.py::TestWinterMarch`.
+
+**Reclassification:** the summer misses were *not* all leap-shift. Only the 2005/2016 pair
+(Easter 03-27) genuinely diverged by leap parity, and that is now fixed. The remaining ~9
+summer misses are **sequence-compression** on tail saints (Eugenios/Eugenia/Andrew/Adrian
+in long or late-Easter windows) and hit **non-leap** years too (2002, 2013, 2015, 2026) —
+a fixed weekday-march can't model the variable spacing. No documented leap rule addresses
+them.
+
 Remaining, in rough priority for lectionary accuracy:
 
-1. **Winter (PN, post-octave) + autumn (As, post-Assumption) marches** — same
-   canonical-weekday mechanism as summer; targets the 8 winter + 6 autumn floating-saint
-   misses. Highest-value next step.
-2. **Leap-shift exceptions** — the 14 remaining summer misses are Easter-dates served by
-   both a leap and a non-leap year that place the first Saturday differently (e.g.
-   2005-07-23 Peter vs 2016-07-23 Athanasius). Needs leap-aware placement to recover; the
-   drop-guard currently leaves them best-effort (0-wrong).
-3. **Parser hygiene** — the `_match` false-positive (`Anthony`≠`anton` normalization; also
-   "Gregory and Nicholas"→Illuminator, "David the prophet"→David of Dvin) and the
-   month-header inheritance across page breaks; recovers dated-entry coverage.
-4. **Un-scramble the two-column OCR reading order (LOW priority for accuracy).** The
+1. **Summer + winter tail-compression misses (~9 summer, 3 winter)** —
+   Eugenios/Eugenia/Andrew/Adrian (and, in winter, Eugenia/Eugenios/Adrian for 2004/2009)
+   placed on the wrong civil date in **short (early-Easter) or over-long windows**, where
+   the laydown compresses/merges saints (leap and non-leap alike). A fixed march can't model
+   the variable spacing. Close either by pinning a per-(Easter-date, leap-parity) summer/
+   winter directory from ground truth, or — more faithfully — via the deferred two-column
+   canon-section parse (#2), which recovers the
+   real per-taregir summer sequence from the source. Not a leap rubric.
+2. **Un-scramble the two-column OCR reading order (LOW priority for accuracy).** The
    Second-Volume canon pages are two-column, and the layout step concatenates the columns
    back-to-front (right column emitted before left), so the flat text puts the Easter
    marker mid-page and breaks calendar order (see the Զ canon, page_0569: `region_01_right`
@@ -309,4 +332,4 @@ Remaining, in rough priority for lectionary accuracy:
    the build **derive** the summer/winter/autumn sequences (and any per-canon leap
    exceptions) from source instead of the hardcoded `_SUMMER_SEQUENCE` — better provenance,
    not better cache numbers. Suggested fix: reorder lines by `(page, column, index)` when
-   reading the lines-JSON. Sequence this **after** items 1–3.
+   reading the lines-JSON. Sequence this **after** item 1.

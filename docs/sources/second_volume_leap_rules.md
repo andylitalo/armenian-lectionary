@@ -6,7 +6,14 @@
 > translation. Codes resolved against `great_paschal_cycle_index.csv` (year→taregir)
 > and `second_volume_index.csv` (taregir→page).
 >
-> **Status: reference only — NOT wired into the engine.** See "Why not encoded" below.
+> **Status: partially wired (2026-07-03).** The one in-window leap taregir that produces a
+> genuine leap/non-leap *divergence* on a shared Gregorian Easter date — **ՍՌ** (Easter
+> 03-27, served by leap 2016 and non-leap 2005) — is now encoded as a leap-parity summer
+> override in `dev/build_second_volume_cycles.py` (`_LEAP_SUMMER`), shipped through the
+> cycle tier's leap-conditional `{ "common": …, "leap": … }` records. The other rules
+> govern leap-*only* Easter dates in-window (no non-leap counterpart to diverge from) or
+> out-of-window taregirs, so they create no cache divergence to resolve and remain
+> reference-only. See "Why not encoded" below for the residual analysis.
 
 ## The system (preface §Third, p.555)
 
@@ -45,15 +52,22 @@ Rules that therefore *could* fire in-cache: ԹԸ(2004), ՉՈ(2008), ՍՌ(2016).
 No rule exists for ԽԼ(2012), ՁՀ(2020), or **ՑՐ(2024)** — the p.627 Ր-canon governs leap
 taregir **ՐՏ** (an out-of-window year), not ՑՐ; confirmed from the plate 2026-07-02.
 
-## Why NOT encoded into the engine
+## Why the rest are NOT encoded into the engine
 
 Verified against ground truth and the live engine:
 
-1. **Redundant.** The engine's movable-season frame (Transfiguration/Assumption/
-   Exaltation "closest-Sunday" anchors, Easter-offset keying) + the Second-Volume
-   cycle tier **already reproduce these leap placements**. Every day the ՍՌ(2016) and
-   ՑՐ(2024) rules govern already matches GT exactly; the ՉՈ(2008) target days largely
-   match. Encoding the rules adds ~0 exact-match.
+1. **Only ՍՌ needed wiring; the rest are redundant or non-divergent.** The 2016 leap year
+   and the 2005 non-leap year share Gregorian Easter **03-27**, so a cycle tier keyed by
+   Easter date alone could ship only one saint on the shared civil dates 07-23/07-30 — and
+   the drop-guard therefore *withheld both*, leaving 2005 best-effort. The leap-parity split
+   (a distinct `"leap"` record for 03-27) fixes this: 2005 ships Peter, 2016 ships
+   Athanasius, both exact. The other rules do **not** create such a divergence: ԹԸ(2004),
+   ՉՈ(2008), ՑՐ(2024) govern Easter dates that in-window are served by leap years *only*
+   (no non-leap counterpart to conflict with), so the common march already serves them and
+   encoding a leap variant adds ~0 exact-match. The remaining summer misses in those years
+   are **sequence-compression** on tail saints (Eugenios/Eugenia/Andrew/Adrian in long or
+   late-Easter windows), affecting non-leap years equally — not a leap rubric; see
+   `reports/lectionary_disagreements.md`.
 2. ~~One rule appears to contradict GT.~~ **Resolved (2026-07-02).** The p.627 code was
    garbled (`ԸծՏ`); the plate reads **ՐՏ** (feasts move to last-letter **Տ**). The rule
    therefore governs leap taregir **ՐՏ**, not ՑՐ(2024) — so 2024 correctly celebrates

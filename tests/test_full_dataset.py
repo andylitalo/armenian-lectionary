@@ -63,9 +63,21 @@ COVERAGE_ANY_PCT_FLOOR = float(os.environ.get("COVERAGE_ANY_PCT_FLOOR", "99.4"))
 # weekday laydown, anchored to each year's Vardavar and validated by the drop-guard)
 # fills the summer floating-saint gaps, lifting best-effort exact 39 -> 49 (summer
 # misses 21 -> 14; 0-wrong frozen).
+# chunk 18 (parser hygiene -- Anthony/Anton aliasing, normalized generic-token exclusion,
+# name-collision guards, per-canon month reset; plus the leap-parity summer split: the
+# same Easter date ships a distinct leap-year Saturday chain via the documented Second-
+# Volume rubric, e.g. Easter 03-27 -> Peter in 2005, Athanasius in 2016) lifts best-effort
+# exact 49 -> 52 (the genuine leap-shift summer misses resolved; 0-wrong frozen).
+# chunk 19 (post-Nativity winter march: the canonical floating-saint sequence laid on
+# consecutive saint-weekdays of the Theophany-octave window, generated per leap parity --
+# January weekdays shift with Feb-29 -- and shipped through the same leap-conditional cycle
+# records) lifts best-effort exact 52 -> 56 (winter floating-saint misses 7 -> 3; autumn
+# already clean). The residual summer/winter misses are sequence-compression on tail saints
+# in short (early-Easter) windows -- a separate follow-up, see
+# reports/lectionary_disagreements.md.
 # Floor on best-effort days (generative + directory) that turn out exact on the cache
 # (monotonic up; guards the saint-laydown / continua / cycle tiers from regressing).
-BEST_EFFORT_EXACT_FLOOR = int(os.environ.get("BEST_EFFORT_EXACT_FLOOR", "49"))
+BEST_EFFORT_EXACT_FLOOR = int(os.environ.get("BEST_EFFORT_EXACT_FLOOR", "56"))
 
 
 class TestFullDataset(unittest.TestCase):
