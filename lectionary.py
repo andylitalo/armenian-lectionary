@@ -805,8 +805,10 @@ def _generative_continua(d: datetime.date):
         return None
     span = (a["SUMMER_EVE"] - a["TR"]).days
     idx = _count_wf(a["TR"], d)
+    e = calculate_gregorian_easter(d.year)
+    emd = f"{e.month:02d}-{e.day:02d}"
     refs = _CONTINUA.get("TrFast", {}).get("buckets", {}).get(
-        f"{span}:{idx}:{d.weekday()}")
+        f"{emd}:{span}:{idx}:{d.weekday()}")
     return list(refs) if refs else None
 
 

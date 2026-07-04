@@ -176,15 +176,92 @@ _LEAP_SUMMER = {
 }
 
 
-def _summer_entries(easter_md, sequence=_SUMMER_SEQUENCE):
+# --- Source-derived per-canon summer marches (Tonatsoyts Second Volume) ------------
+# The generic `_SUMMER_SEQUENCE` above is a truncated 8-saint approximation that is wrong
+# for the long/compressed year-types. Two canons are transcribed here directly from the
+# grabar-ocr source, keyed by the GREGORIAN Easter md the canon's taregir-years actually
+# query at runtime (`_cycle_saint` selects by Gregorian Easter; the CSV/`spans` julian
+# label of the same md is vestigial). Each march opens on the first saint-Saturday after
+# Vardavar (`start_off` = 5) and runs Sat/Mon/Tue/Thu to the Fast of the Assumption; the
+# drop-guard validates every placement against the cached years of the type.
+#
+#   03-31  <- taregir Ր (Julian Easter 04-22; cache years 2002/2013/2024). The full
+#            17-saint march. Summer saint lines: winter section p.627 (human) + the
+#            post-Assumption p.628 (auto) naming Andrew/Adrian/Abraham; the leap rubric on
+#            p.627 names "Andrew the Commander ... and Adrian" in this canon. Reproduces
+#            GT 2002 exactly, incl. Eugenios/Makarios/Valerian on 08-05 (the miss day).
+#   04-05  <- taregir Թ (Julian Easter 03-30; cache years 2015/2026). The COMPRESSED
+#            march: p.576 (auto) jumps Sat-Athanasius -> Mon-Eugenia -> Tue-Andrew ->
+#            Thu-Adrian, dropping the Cyricus/Vahan/Triphon/Gregory-Theologian middle that
+#            the long Ր march carries. Reproduces GT 2015 (Andrew 08-04, Adrian 08-06).
+# Weekday codes: Mon=0 Tue=1 Thu=3 Sat=5.
+_SUMMER_R = [
+    (5, "thaddeus_apostle_of"), (0, "cyprian_the_bishop"), (1, "athenogenes_the_bishop"),
+    (3, "forefathers_adam_abel"), (5, "gregory_the_illuminator"), (0, "maccabees_eleazar_the"),
+    (1, "twelve_prophets_hosea"), (3, "sophia_and_her"), (5, "fathers_saints_athanasius"),
+    (0, "cyricus_and_his"), (1, "vahan_of_goghtn"), (3, "hermits_saints_triphon"),
+    (5, "gregory_of_theologian"), (0, "eugenios_makarios_valerian"), (1, "andrew_the_general"),
+    (3, "adrian_and_his"), (5, "200_fathers_of"),
+]
+_SUMMER_T = [
+    (5, "thaddeus_apostle_of"), (0, "cyprian_the_bishop"), (1, "athenogenes_the_bishop"),
+    (3, "forefathers_adam_abel"), (5, "gregory_the_illuminator"), (0, "maccabees_eleazar_the"),
+    (1, "twelve_prophets_hosea"), (3, "sophia_and_her"), (5, "fathers_saints_athanasius"),
+    (0, "eugenia_the_virgin"), (1, "andrew_the_general"), (3, "adrian_and_his"),
+    (5, "200_fathers_of"),
+]
+_SOURCE_SUMMER = {
+    "03-31": (_SUMMER_R, 5),
+    "04-05": (_SUMMER_T, 5),
+}
+
+
+# --- Solar-anchored autumn march (Andrew / Adrian / Abraham & Khoren) ----------------
+# These three commemorations are SOLAR-anchored, not Easter-keyed: they cross-validate
+# across DIFFERENT taregirs that share a Gregorian Easter (2010 Ա == 2021 Ս, both Greg
+# Easter 04-04). The canons place them "after the last feasts of the fourth week of the
+# Assumption" in most years, but the Ս leap rubric (p.619) states they move to "after the
+# tenth Sunday [of the Cross]" -- the pre-Advent week. Anchored to the engine's Heesnak
+# (Advent-eve) Sunday = sunday_closest_to(y, 11, 18): Andrew = Mon (HE-6), Adrian = Tue
+# (HE-5), Abraham & Khoren = Thu (HE-3). Reproduces GT 2010/2021 (Nov 15/16/18) exactly.
+# Applied to every cycle (solar, calendar-derived); the drop-guard ships it only where the
+# cached years of the type agree -- August placements (e.g. taregir Ր) drop the Nov copy.
+# Readings resolve in the Ex (post-Exaltation) zone at runtime.
+_AUTUMN_MARCH = [
+    (6, "Ex", "andrew_the_general"),        # Heesnak - 6 = Monday
+    (5, "Ex", "adrian_and_his"),            # Heesnak - 5 = Tuesday
+    (3, "Ex", "abraham_and_khoren"),        # Heesnak - 3 = Thursday
+]
+
+
+def _autumn_entries(easter_md):
+    """{ "MM-DD": [zone, sid] } for the solar autumn triplet of the year-type with Gregorian
+    Easter `easter_md`, anchored to that type's Heesnak (Advent-eve) Sunday. Solar, so it
+    depends only on the November weekday grid (identical across leap parity); a
+    representative year of the Easter date fixes it."""
+    ref = _rep_easter(easter_md)
+    if ref is None:
+        return {}
+    he = L.sunday_closest_to(ref.year, 11, 18)
+    out = {}
+    for back, zone, sid in _AUTUMN_MARCH:
+        nd = he - datetime.timedelta(days=back)
+        out[f"{nd.month:02d}-{nd.day:02d}"] = [zone, sid]
+    return out
+
+
+def _summer_entries(easter_md, sequence=_SUMMER_SEQUENCE, start_off=19):
     """{ "MM-DD": ["Tr", sid] } for the post-Transfiguration saints of the canon whose
     Easter is `easter_md`, from a canonical weekday march anchored to that year's Vardavar.
-    The march starts on the Saturday of Transfiguration's third week (Vardavar + 20; cursor
-    seeded at the preceding Friday). Pass a leap-override `sequence` for a leap taregir."""
+    The generic march starts on the Saturday of Transfiguration's third week (Vardavar + 20;
+    cursor seeded at the preceding Friday, `start_off` = 19). A source-derived per-canon
+    sequence (see `_SOURCE_SUMMER`) supplies its own `start_off` -- the full Ր / Թ marches
+    open on the first saint-Saturday after Vardavar (`start_off` = 5). Pass a leap-override
+    `sequence` for a leap taregir."""
     easter = _rep_easter(easter_md)
     if easter is None:
         return {}
-    cursor = easter + datetime.timedelta(days=98 + 19)   # Vardavar + 19 = Friday, wk 3
+    cursor = easter + datetime.timedelta(days=98 + start_off)
     out = {}
     for wd, sid in sequence:
         nd = cursor + datetime.timedelta(days=1)
@@ -306,7 +383,20 @@ def main():
         if not easter_md:
             continue
         dm = out.setdefault(easter_md, {})
-        for md, rec in _summer_entries(easter_md).items():
+        # Summer march: a source-derived per-canon sequence where one is transcribed
+        # (`_SOURCE_SUMMER`, keyed by Gregorian Easter), else the generic approximation.
+        # The transcribed march is authoritative for its year-type and OVERRIDES any dated
+        # line the parser lifted from the (mis-keyed) canon sharing this md's Julian label
+        # -- that canon governs a different taregir, so its summer saints are wrong here.
+        src = _SOURCE_SUMMER.get(easter_md)
+        if src:
+            for md, rec in _summer_entries(easter_md, src[0], src[1]).items():
+                dm[md] = rec
+        else:
+            for md, rec in _summer_entries(easter_md).items():
+                dm.setdefault(md, rec)
+        # Solar autumn triplet (Andrew / Adrian / Abraham & Khoren), Heesnak-anchored.
+        for md, rec in _autumn_entries(easter_md).items():
             dm.setdefault(md, rec)
         # Leap-year summer override: a distinct placement for the leap parity of this
         # Easter date (only the days that differ from the common march).

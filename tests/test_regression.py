@@ -147,5 +147,75 @@ class TestWinterMarch(unittest.TestCase):
                              f"2011-{m:02d}-{d:02d} should exact-match ground truth")
 
 
+def _ref_readings(y, m, d):
+    ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
+                       "reference_data", f"{y:04d}-{m:02d}-{d:02d}.json")
+    with open(ref) as fh:
+        return json.load(fh)["readings"]
+
+
+class TestSummerSourceMarch(unittest.TestCase):
+    """Locks the source-derived per-canon summer marches (Tonatsoyts Second Volume canons
+    Ր and Թ) that replace the truncated generic sequence. These are the cross-validatable
+    saint days the disagreements report mis-labeled as unpredictable tail saints; each ships
+    exact from the cycle tier now that the full/compressed canon order is transcribed and
+    keyed by the Gregorian Easter its taregir-years actually query."""
+
+    def test_canon_R_08_05_eugenios(self):
+        # Cluster 1 -- taregir Ր (Greg Easter 03-31): the full 17-saint march lands
+        # Eugenios/Makarios/Valerian on 08-05, cross-validated across 2002/2013/2024.
+        for y in (2002, 2013, 2024):
+            res = compute_armenian_lectionary(datetime.date(y, 8, 5))
+            self.assertEqual(res["Source"], "second-volume-cycle",
+                             f"{y}-08-05 should ship from the cycle tier")
+            self.assertEqual(res["ReadingsList"], list(_ref_readings(y, 8, 5)),
+                             f"{y}-08-05 should exact-match ground truth")
+
+    def test_canon_T_andrew_adrian(self):
+        # Cluster 2 -- taregir Թ (Greg Easter 04-05): the COMPRESSED march lands Andrew the
+        # General on 08-04 and Adrian on 08-06, cross-validated across 2015/2026.
+        for y in (2015, 2026):
+            for (m, d) in ((8, 4), (8, 6)):
+                res = compute_armenian_lectionary(datetime.date(y, m, d))
+                self.assertEqual(res["Source"], "second-volume-cycle",
+                                 f"{y}-{m:02d}-{d:02d} should ship from the cycle tier")
+                self.assertEqual(res["ReadingsList"], list(_ref_readings(y, m, d)),
+                                 f"{y}-{m:02d}-{d:02d} should exact-match ground truth")
+
+
+class TestAutumnSolarMarch(unittest.TestCase):
+    """Locks the solar-anchored autumn triplet (Andrew / Adrian / Abraham & Khoren). These
+    cross-validate across DIFFERENT taregirs that share a Gregorian Easter (2010 Ա, 2021 Ս),
+    confirming they are solar- not Easter-keyed; anchored to the Heesnak (Advent-eve) Sunday
+    per the Ս 'after the tenth Sunday' rubric, they land Nov 16 (Adrian) / Nov 18 (Abraham &
+    Khoren) and ship exact from the cycle tier."""
+
+    def test_2010_2021_adrian_abraham_exact(self):
+        for y in (2010, 2021):
+            for (m, d) in ((11, 16), (11, 18)):
+                res = compute_armenian_lectionary(datetime.date(y, m, d))
+                self.assertEqual(res["Source"], "second-volume-cycle",
+                                 f"{y}-{m:02d}-{d:02d} should ship from the cycle tier")
+                self.assertEqual(res["ReadingsList"], list(_ref_readings(y, m, d)),
+                                 f"{y}-{m:02d}-{d:02d} should exact-match ground truth")
+
+
+class TestAssumptionFastContinua(unittest.TestCase):
+    """Locks the Easter-md banding of the Fast-of-the-Assumption Wed/Fri continua: at span-28
+    index 7 the same (span, idx, wd) bucket conflated 2Tim 2.20-26 (Easter 04-05, taregir Թ)
+    with 1Tim 5.17-6.5 (Easter 04-04); the modal shipped the wrong one to 2015/2026. Banding
+    by Gregorian Easter date separates them."""
+
+    def test_2015_2026_08_05_continua(self):
+        expected = ["St. Paul's Second Epistle to Timothy 2.20-26", "John 6.48-54"]
+        for y in (2015, 2026):
+            res = compute_armenian_lectionary(datetime.date(y, 8, 5))
+            self.assertEqual(res["Source"], "generative-continua",
+                             f"{y}-08-05 should ship from the continua tier")
+            self.assertEqual(res["ReadingsList"], expected)
+            self.assertEqual(res["ReadingsList"], list(_ref_readings(y, 8, 5)),
+                             f"{y}-08-05 should exact-match ground truth")
+
+
 if __name__ == "__main__":
     unittest.main()

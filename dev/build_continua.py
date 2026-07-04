@@ -41,20 +41,28 @@ def _summer_span(year):
 
 
 def collect(days):
-    """{ (span, idx, wd): Counter(readings_tuple) } over every Transfiguration->
-    Assumption Wed/Fri day (summer grid + the Fast-of-Assumption tail)."""
+    """{ (easter_md, span, idx, wd): Counter(readings_tuple) } over every
+    Transfiguration->Assumption Wed/Fri day (summer grid + the Fast-of-Assumption tail).
+
+    The bucket is banded by the year's Gregorian Easter date as well as the summer span:
+    at a few tail indices the continua carries a genuine per-year-type variant that the
+    same (span, idx) conflates -- e.g. idx 7 of span 28 splits 2Tim 2.20-26 (Easter 04-05,
+    the Թ type) from 1Tim 5.17-6.5 (Easter 04-04), where a span-only modal shipped the
+    wrong one to 2015/2026. Easter-md banding separates them; unambiguous buckets are
+    unaffected (they just carry the Easter tag too)."""
     grp = collections.defaultdict(collections.Counter)
     for y in sorted({int(iso[:4]) for iso in days}):
         a = anchors(y)
         tr = a["E"] + datetime.timedelta(days=98)
         asun = a["AS"]
         span = _summer_span(y)
+        emd = f"{a['E'].month:02d}-{a['E'].day:02d}"
         d = tr + datetime.timedelta(days=1)
         while d < asun:
             day = days.get(d.isoformat())
             if day and day["readings"] and d.weekday() in (2, 4):
                 idx = _count_wf(tr, d)
-                grp[(span, idx, d.weekday())][tuple(day["readings"])] += 1
+                grp[(emd, span, idx, d.weekday())][tuple(day["readings"])] += 1
             d += datetime.timedelta(days=1)
     return grp
 
@@ -63,11 +71,11 @@ def build(days):
     grp = collect(days)
     buckets = {}
     multi = 0
-    for (span, idx, wd), counter in grp.items():
+    for (emd, span, idx, wd), counter in grp.items():
         if len(counter) > 1:
             multi += 1
         readings, _ = counter.most_common(1)[0]
-        buckets[f"{span}:{idx}:{wd}"] = list(readings)
+        buckets[f"{emd}:{span}:{idx}:{wd}"] = list(readings)
     section = {
         "meta": {
             "source": "Mined from sacredtradition.am Transfiguration->Assumption "

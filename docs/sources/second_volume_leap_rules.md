@@ -14,6 +14,13 @@
 > govern leap-*only* Easter dates in-window (no non-leap counterpart to diverge from) or
 > out-of-window taregirs, so they create no cache divergence to resolve and remain
 > reference-only. See "Why not encoded" below for the residual analysis.
+>
+> **Update (2026-07-04) — source-derived floating-saint marches.** The *non-leap*
+> sequence-compression misses that §1 below deferred are now sourced too: see
+> "Source-derived floating-saint marches" at the foot of this doc. The Ր and Թ summer
+> marches and the solar autumn triplet (Andrew / Adrian / Abraham & Khoren) ship exact
+> from the cycle tier, converting the 13 cross-validatable saint/continua misses to
+> MATCH (`WRONG 0`, `MISS 25→11`).
 
 ## The system (preface §Third, p.555)
 
@@ -87,3 +94,33 @@ Verified against ground truth and the live engine:
 - (d) **NEW:** the Ն-canon leap code (p.603, `region_05_single/line_004`) OCRs as `Ն3`
   (with a digit `3`); intended **ՆՅ** (reverse-consecutive, out-of-window). Confirm from
   the plate.
+
+## Source-derived floating-saint marches (2026-07-04)
+
+Three clusters of the §1 "sequence-compression" residue turned out to be
+**cross-validatable** (multiple ground-truth years of one type carry byte-identical
+readings), so they are not unpredictable — the correct laydown *repeats*. All three are
+now derived from the canon source and shipped through the cycle tier
+(`dev/build_second_volume_cycles.py`), validated by the parity-partitioned drop-guard.
+Keying note: the cycle tier selects by **Gregorian** Easter, so each canon's march is
+stored under the Gregorian Easter md its taregir-years query — *not* the canon's own
+Julian label (they differ; e.g. taregir Ր = Julian 04-22 = Gregorian 03-31).
+
+| Cluster | Cycle key (Greg.) | Canon / source | Encoded as | Fixes |
+|---|---|---|---|---|
+| Summer Ր | `03-31` | Ր, p.627 (winter saints, human) + p.628 (post-Assumption, auto); leap rubric p.627 names Andrew/Adrian | `_SUMMER_R` (full 17-saint march, `start_off=5`) | 08-05 Eugenios · 2002 ≡ 2013 ≡ 2024 |
+| Summer Թ | `04-05` | Թ, p.576 (auto): Sat-Athanasius → Mon-Eugenia → **Tue-Andrew → Thu-Adrian**, dropping the Cyricus/Vahan/Triphon/Gregory-Theol middle | `_SUMMER_T` (compressed 13-saint march) | 08-04 Andrew, 08-06 Adrian · 2015 ≡ 2026 |
+| Autumn (solar) | `04-04` | Ր p.628 weekday pattern (Mon-Andrew / Tue-Adrian / Thu-Abraham&Khoren); anchor from the **"after the tenth Sunday [of the Cross]"** rubric (Ս p.619, Ն p.603 above) | `_AUTUMN_MARCH`, anchored `Heesnak − {6, 5, 3}` | 11-16 Adrian, 11-18 Abraham & Khoren · 2010 (Ա) ≡ 2021 (Ս) |
+
+The autumn triplet **cross-validates across different taregirs** (2010 Ա, 2021 Ս share
+Gregorian Easter 04-04), which is the proof it is solar-anchored, not Easter-keyed: it is
+laid on the engine's Heesnak (Advent-eve) Sunday = `sunday_closest_to(y, 11, 18)`, Andrew
+on the Monday (HE−6), Adrian Tuesday (HE−5), Abraham & Khoren Thursday (HE−3). Applied to
+every cycle; the drop-guard withholds the November copy wherever a type keeps these saints
+in August/September (e.g. taregir Ր), so it ships only where the cache agrees.
+
+Separately, the two continua misses (2015/2026-08-05) were a **bucket collision**, not a
+saint march: the Fast-of-the-Assumption Wed/Fri continua at span-28 index 7 carries a
+genuine per-type variant (`2Tim 2.20-26` for Easter 04-05 vs `1Tim 5.17-6.5` for 04-04)
+that the old `(span, idx, wd)` modal shipped wrong. `dev/build_continua.py` now bands the
+bucket by Gregorian Easter md as well, separating them (0 ambiguous buckets).
