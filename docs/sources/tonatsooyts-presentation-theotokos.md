@@ -1,15 +1,21 @@
 # Canon of the Presentation of the Holy Mother of God to the Temple (Nov 21)
 
 > **Source / provenance:** Տօնացոյց (*Tōnats'oyts'*, the Armenian Church
-> Calendar/Typikon), as distilled and cross-year-validated from **sacredtradition.am**
-> (2001–2026 daily lectionary; the same corpus the whole engine is built from —
-> `lectionary_data.json` `source`). The feast's day-by-day readings, and the
-> co-celebration behaviour documented below, are read directly off that ground truth;
-> the numbered-Sunday identity that closes the gap is proved from it (evidence table
-> below), not assumed.
+> Calendar/Typikon):
+> - **p. 543** — the full canon of the feast (proper readings + the Sunday-collision
+>   rubric), laid out immediately after the **Eleventh Sunday after the Holy Cross**.
+> - **p. 551** — a brief note listing the Presentation (Ընծայմանն) among the three
+>   feasts of the Theotokos kept at Sunday rank.
 >
-> **Feast:** Presentation of the Holy Mother of God to the Temple (Տաճար ածումն
-> Ս. Աստուածածնի) — fixed date **November 21**. A feast of the Theotokos.
+> Both pages are digitized in this project's OCR corpus (human-corrected gold):
+> `grabar-ocr/runs/human__proj__tess__gemini-min/pages/page_0543_human.lines.json`
+> and `…/page_0551_human.lines.json`. The engine's runtime table is independently
+> distilled and cross-year-validated from the **sacredtradition.am** Tōnats'oyts
+> (2001–2026; `lectionary_data.json` `source`); the printed pages below confirm the
+> proper, the fixed Nov-21 date, and the numbered-Sunday placement that closes the gap.
+>
+> **Feast:** Presentation of the Holy Theotokos to the Temple (Տօն Ընծայման
+> Ս. Աստուածածնի ՚ի տաճար) — fixed date **November 21**. A feast of the Theotokos.
 
 ---
 
@@ -45,6 +51,64 @@ parallel Annunciation case):
 The ground truth confirms this directly: for the 23 of 26 cached years where Nov 21 is
 an ordinary weekday or Sunday, the engine already ships `validated-composite` =
 `proper ++ slot`, exact-matching the cache.
+
+---
+
+## The printed canon (Tōnats'oyts p. 543)
+
+Page 543 lays out the **Eleventh Sunday after the Holy Cross** and then, on the same page,
+inserts the fixed Presentation — the printed book itself places Nov 21 right after that
+numbered Sunday. Transcribed from the human-corrected OCR (`page_0543_human.lines.json`),
+with the reading identifications:
+
+**Eleventh Sunday after the Holy Cross** — *Մետասաներորդ Կիւրակէ։ Հարց Յարութեան։*
+(the Resurrection lections):
+
+| Grabar | Reading |
+|---|---|
+| Մարգարէ Եսայ. **ԻԹ. 11** … վ. **20** | **Isaiah 29.11-20** |
+| Առաքեալն Փիլիպ. **Դ. 8** … վ. **24** (excl.) | **Philippians 4.8-23** |
+| Աւետարան Ղուկ. **ԺԱ. 1** … վ. **13** | **Luke 11.1-13** |
+
+**The Presentation, inserted here** — *Իսկ Տօն Ընծայման՝ երից ամաց սուրբ Կուսին ՚ի
+տաճարն… **որ կատարի միշտ ՚ի նոյեմբերի 21*** ("And the Feast of the Presentation of the
+three-year-old holy Virgin to the Temple … **which is always celebrated on November
+21**"). Its Chashou (Midday Liturgy) proper:
+
+| Grabar | Reading |
+|---|---|
+| Գիրք Երգ երգոց **Ա. 1** … վ. **11** | **Song of Solomon 1.2-11** |
+| Առակ. **ԺԱ. 30** … վ. **ԺԲ. 4** | **Proverbs 11.30-12.4** |
+| Մարգարէ Եսայ. **ԾԲ. 7** … վ. **10** | **Isaiah 52.7-10** |
+| Մարգարէ Զաքար. **Բ. 10** … վ. **13** | **Zechariah 2.10-13** |
+| Մարգարէ Մաղաք. **Գ. 1** … վ. **2** | **Malachi 3.1-2** |
+| Առաքեալն բ. Կորն. **Զ. 16** … վ. **Է. 1** | **2 Corinthians 6.16-7.1** |
+| Աւետարան Ղուկ. **Ա. 39** … վ. **56** | **Luke 1.39-56** |
+
+The seven match the engine's fixed proper byte-for-byte. And the page carries the
+**explicit Sunday-collision rubric**:
+
+> *Արարչական, ըստ պատշաճին. **եթէ ՚ի Կիւրակէի հանդիպիցի՝ Նորաստեղծեալ**։*
+> ("The Creation hymn, as fitting; **but if it falls on a Sunday — [sing] 'Newly
+> Created' (Նորաստեղծեալ)**.")
+
+— the same clause the Annunciation canon uses for its own Sunday collision (p. 486,
+"if it coincides with a Sunday … say 'Newly Created'"), confirming the feast is written
+to *anticipate* landing on a Sunday and to be observed *together with* it.
+
+## The Sunday rank of the feast (Tōnats'oyts p. 551)
+
+Page 551 groups the Presentation with the other Theotokos feasts kept at Sunday rank —
+i.e. observed with a full Liturgy, which is *why* it co-celebrates instead of being
+suppressed:
+
+> *Սուրբ Աստուածածնի երից տօնից աւուրքն. այսինքն՝ Յղութեանն, եւ Ծնընդեանն, եւ **Ընծայմանն**։*
+> ("The days of the three feasts of the Holy Theotokos: the Conception, the Nativity,
+> and the **Presentation**.")
+
+These are exactly the three embedded Theotokos feasts the engine already carries
+(`EMBEDDED_PROPER`): Conception (Dec 9), Nativity of the Theotokos (Sep 8), and the
+Presentation (Nov 21).
 
 ---
 
@@ -95,7 +159,10 @@ cached year agrees, with no counterexample:
 
 Removing the fixed proper from any band-46 ground-truth day leaves **exactly** the band-47
 "Eleventh Sunday" reading-set — confirming the co-celebration decomposition is the correct
-one, not an accidental fit.
+one, not an accidental fit. The printed Tōnats'oyts corroborates this independently: on
+p. 543 it inserts the Nov-21 canon **directly after the Eleventh Sunday after the Holy
+Cross**, i.e. at exactly the point in the movable Sunday sequence where Nov 21 falls when
+it is itself a Sunday.
 
 ---
 

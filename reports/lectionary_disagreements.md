@@ -14,7 +14,9 @@
 > Advent Sunday is always Nov 21 and thus structurally unlearnable, but the Tōnats'oyts
 > names it the "Eleventh Sunday after the Holy Cross" — identical to band 47, whose
 > readings are validated — so the co-celebration composite (proper ++ 11th-Sunday) ships
-> validated, exact-matching GT. See `docs/sources/tonatsooyts-presentation-theotokos.md`.
+> validated, exact-matching GT. Confirmed against the printed Tōnats'oyts (pp. 543, 551;
+> digitized in `grabar-ocr/runs/human__proj__tess__gemini-min/pages/page_0543,0551`):
+> see `docs/sources/tonatsooyts-presentation-theotokos.md`.
 > Net: BLANK 46 → 26, MATCH +20, WRONG still 0.
 >
 > Sources referenced:
