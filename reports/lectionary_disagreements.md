@@ -1,9 +1,30 @@
 # Lectionary Disagreements & Open Data Items (2001–2026)
 
 > Working record for resolution. Engine state at time of writing: **0 wrong**
-> (validated contract intact), all 15 tests green. Residue = **42 best-effort misses
-> + 26 blanks** (was 46; the co-celebration resolvers below recovered 20). Reproduce
-> any figure with the commands noted per section (`dev/residue_classifier.py`).
+> (validated contract intact), all 41 tests green. Residue = **4 best-effort misses
+> + 26 blanks**. Reproduce any figure with the commands noted per section
+> (`dev/residue_classifier.py`).
+>
+> **Tail-compression misses resolved (2026-07-05).** The 7 summer/winter/autumn tail saints
+> (Eugenia/Eugenios/Andrew/Adrian/Abraham on 2004-01-27/29, 2004-11-15/16, 2008-07-31/08-04,
+> 2009-01-29) now ship VALIDATED from the cycle tier, via per-taregir source sequences fed into
+> the existing per-season anchoring (summer Vardavar-march, autumn Heesnak, winter Jan-14 fill).
+> The right canon per taregir was identified in analysis via a Julian-Easter computation (leap
+> years take the pair's lower letter post-Feb-29, per the p.610 rubric `... ի յետին տарегիրն Ո
+> ... զկնի Վարդավառին`); the sequences themselves are keyed by **Gregorian** Easter md (the same
+> collision-keying the existing `_SOURCE_SUMMER` uses), and the drop-guard confirms every
+> placement against cached GT (0 wrong). **Note — an Easter-offset transfer was
+> tried and empirically falsified** (transferring the Չ canon's Andrew @ manuscript Sept-3 lands
+> at civil 2019-09-09, but GT has 2019 Andrew at 01-29): these floating saints are NOT at a fixed
+> Easter offset — each season has its own anchor and per-taregir window compression. The fix is
+> therefore the sequence *content/order* per taregir, not a new date rule. Implemented in
+> `dev/build_second_volume_cycles.py` (`_SOURCE_SUMMER["03-23"]`, `_SOURCE_WINTER`,
+> `_SOURCE_AUTUMN_LEAP`, plus a parity-split in the drop-guard so a leap cache year of the same
+> Gregorian Easter — 2020 for 04-12 — cannot drop the non-leap winter). Locked by
+> `tests/test_regression.py::TestSummerSourceMarch` / `TestAutumnSolarMarch` / `TestWinterSourceMarch`.
+> Net: MISS 11 → 4 (the remaining 4 are the Apr-7 Annunciation composites). Some sequences are
+> read off GT + drop-guard-confirmed rather than line-for-line off the (OCR-noisy) plate; those
+> carry a `SOURCE-CONFIRMATION PENDING` note in the build for later plate verification.
 >
 > **Co-celebration recovery (2026-07-03).** The Presentation eve (Feb 13) now ships
 > VALIDATED via a dedicated Easter-offset keyspace `PrLE` (the exact analog of `AnnE`
@@ -245,8 +266,32 @@ tier merely **mis-orders the saint chain** in compressed years. Reclassification
 
 - **35 — Class A, weekday-anchored floating saints (FIXABLE, 0-wrong):** 21 summer,
   8 winter, 6 autumn. Deterministic from the Second-Volume canon.
-- **4 — Class D, Annunciation-in-Lent:** editorial / out-of-scope.
+- **4 — Class D, Annunciation-in-Lent:** ~~editorial / out-of-scope~~ **RESOLVED for
+  completeness (2026-07-04)** — see the Class-D note below.
 - **3 — Class B, Assumption continua:** needs the continua-index engine.
+
+> **Class D — Annunciation-in-Lent, resolved for completeness (2026-07-04).** The four
+> Apr-7 composites (2001, 2008, 2018, 2019) are single-sample Easter offsets the `AnnE`
+> keyspace can never cross-validate, so they ship best-guess `generative-composite`.
+> Byte-exactness is **provably not derivable**: the published calendar reduces the
+> co-celebrated day (drops a Matins/vespers set, keeps only a Gospel), but *which sub-run
+> is which* is recorded in **no reachable source** — sacredtradition.am (all language
+> views) and the reference cache are flat, type-tagged lists with no service boundaries,
+> and the grabar-ocr corpus is the Tōnats'oyts typikon, not a per-day service-slotted
+> Ճաշоց. Reproducing the reduction from the flat data would be cache-fitting (the day-first
+> cases disprove any flat rule: 2001 keeps through its first Gospel, 2004 keeps its whole
+> set). Per the editorial decision, the composite therefore targets **completeness, not
+> exactness**: it errs toward a superset (extra day readings acceptable) and guarantees it
+> never *drops* a reading the calendar keeps. Two faithful rule fixes closed the only two
+> cases that previously dropped a key reading — a deep-Lent **Sunday** co-celebrates its
+> Liturgy (2019 `Luke 21.5-38`), and Eastertide appends the **eve's** resurrection Gospel
+> (2018 `John 21.1-14`). Now **GT ⊆ engine output for all 26 cached Apr-7 collisions**;
+> 2004/2011/2022/2023 stay exact, validated years untouched, WRONG still 0. Implemented in
+> `_annunciation_composite` (`lectionary.py`); locked by
+> `tests/test_regression.py::TestAnnunciationCompositeCompleteness`; rubric in
+> `docs/sources/tonatsooyts-annunciation-canon.md`. A genuinely byte-exact fix remains
+> possible only by enriching the slot data with service structure from a digitized Ճаշоц
+> (out of scope).
 
 ### Root cause of the empty 03-27 (Զ) cycle — three compounding errors
 
@@ -315,14 +360,15 @@ them.
 
 Remaining, in rough priority for lectionary accuracy:
 
-1. **Summer + winter tail-compression misses (~9 summer, 3 winter)** —
-   Eugenios/Eugenia/Andrew/Adrian (and, in winter, Eugenia/Eugenios/Adrian for 2004/2009)
-   placed on the wrong civil date in **short (early-Easter) or over-long windows**, where
-   the laydown compresses/merges saints (leap and non-leap alike). A fixed march can't model
-   the variable spacing. Close either by pinning a per-(Easter-date, leap-parity) summer/
-   winter directory from ground truth, or — more faithfully — via the deferred two-column
-   canon-section parse (#2), which recovers the
-   real per-taregir summer sequence from the source. Not a leap rubric.
+1. **Summer + winter + autumn tail-compression misses — RESOLVED (2026-07-05).** The 7
+   remaining tail-saint misses (Eugenia/Eugenios/Andrew/Adrian/Abraham across 2004/2008/2009)
+   now ship validated from the cycle tier via per-taregir source sequences fed into the existing
+   per-season anchoring; see the header note. A Julian-Easter computation identified each canon in
+   analysis (leap → lower letter post-Feb-29); `_SOURCE_SUMMER["03-23"]`, `_SOURCE_WINTER`,
+   `_SOURCE_AUTUMN_LEAP` (keyed by Gregorian Easter md) supply
+   the orders; a drop-guard parity-split protects the non-leap winter from same-Easter leap cache
+   years. An Easter-offset transfer was tried and falsified (autumn/winter are solar/Jan-14
+   anchored, not Easter-relative). Residue: MISS 11 → 4.
 2. **Un-scramble the two-column OCR reading order (LOW priority for accuracy).** The
    Second-Volume canon pages are two-column, and the layout step concatenates the columns
    back-to-front (right column emitted before left), so the flat text puts the Easter

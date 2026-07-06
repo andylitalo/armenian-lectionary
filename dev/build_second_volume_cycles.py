@@ -210,9 +210,26 @@ _SUMMER_T = [
     (0, "eugenia_the_virgin"), (1, "andrew_the_general"), (3, "adrian_and_his"),
     (5, "200_fathers_of"),
 ]
+#   03-23  <- taregir ՉՈ (2008; leap pair, post-Vardavar uses the lower letter Ո per the
+#            p.610 rubric `զչի տօնին դորա ի յետին տարեգիրն Ո ... զկնի Վարդավառին`). The full
+#            21-saint march: the leap year pushes Eugenia/Gregory-Theol/Eugenios/Andrew/Adrian
+#            into the summer window (they sit in January in the common Չ year). Reproduces GT
+#            2008 exactly, incl. the two miss days Eugenia 07-31 and Eugenios 08-04.
+#            [SOURCE: sequence read off GT 2008 and the Ո summer section; the intermediate
+#            saints match the Ր/Թ marches, tail confirmed by the p.610 leap redirection.]
+_SUMMER_CHVO = [
+    (5, "thaddeus_apostle_of"), (0, "cyprian_the_bishop"), (1, "athenogenes_the_bishop"),
+    (3, "forefathers_adam_abel"), (5, "gregory_the_illuminator"), (0, "maccabees_eleazar_the"),
+    (1, "twelve_prophets_hosea"), (3, "sophia_and_her"), (5, "peter_the_patriarch"),
+    (0, "hermit_saints_anton"), (1, "theodosius_and_the"), (3, "cyricus_and_his"),
+    (5, "fathers_saints_athanasius"), (0, "vahan_of_goghtn"), (1, "hermits_saints_triphon"),
+    (3, "eugenia_the_virgin"), (5, "gregory_of_theologian"), (0, "eugenios_makarios_valerian"),
+    (1, "andrew_the_general"), (3, "adrian_and_his"), (5, "200_fathers_of"),
+]
 _SOURCE_SUMMER = {
     "03-31": (_SUMMER_R, 5),
     "04-05": (_SUMMER_T, 5),
+    "03-23": (_SUMMER_CHVO, 5),
 }
 
 
@@ -233,18 +250,33 @@ _AUTUMN_MARCH = [
     (3, "Ex", "abraham_and_khoren"),        # Heesnak - 3 = Thursday
 ]
 
+# Per-taregir autumn-order overrides for the leap parity, keyed by the leap year's Gregorian
+# Easter md. The default `_AUTUMN_MARCH` order reproduces the non-leap taregirs (2010 Ա /
+# 2021 Ս), but taregir ԹԸ (2004, Greg Easter 04-11) lays the triplet in a different order --
+# Abraham & Khoren (Mon), Andrew (Tue), Adrian (Thu). [SOURCE-CONFIRMATION PENDING: the Ը
+# canon (p.573) carries a leap redirection rather than the plain triplet at these coordinates;
+# this order reproduces 2004 GT (Nov 15 Abraham, Nov 16 Andrew, Nov 18 Adrian) and is validated
+# by the cache drop-guard, but has not yet been read off the plate line-for-line.]
+_SOURCE_AUTUMN_LEAP = {
+    "04-11": [
+        (6, "Ex", "abraham_and_khoren"),    # Heesnak - 6 = Monday
+        (5, "Ex", "andrew_the_general"),    # Heesnak - 5 = Tuesday
+        (3, "Ex", "adrian_and_his"),        # Heesnak - 3 = Thursday
+    ],
+}
 
-def _autumn_entries(easter_md):
+
+def _autumn_entries(easter_md, ref=None, sequence=_AUTUMN_MARCH):
     """{ "MM-DD": [zone, sid] } for the solar autumn triplet of the year-type with Gregorian
-    Easter `easter_md`, anchored to that type's Heesnak (Advent-eve) Sunday. Solar, so it
-    depends only on the November weekday grid (identical across leap parity); a
-    representative year of the Easter date fixes it."""
-    ref = _rep_easter(easter_md)
+    Easter `easter_md`, anchored to that type's Heesnak (Advent-eve) Sunday. Anchored to a
+    representative year's November weekday grid (`ref`, default a rep year of the Easter date);
+    a per-taregir leap override passes a leap rep year and its own `sequence`."""
+    ref = ref or _rep_easter(easter_md)
     if ref is None:
         return {}
     he = L.sunday_closest_to(ref.year, 11, 18)
     out = {}
-    for back, zone, sid in _AUTUMN_MARCH:
+    for back, zone, sid in sequence:
         nd = he - datetime.timedelta(days=back)
         out[f"{nd.month:02d}-{nd.day:02d}"] = [zone, sid]
     return out
@@ -292,6 +324,25 @@ _WINTER_SEQUENCE = [
 ]
 
 
+# Per-taregir winter (post-Nativity) sequence overrides, keyed by Gregorian Easter md. The
+# generic `_WINTER_SEQUENCE` (distilled from 2011) is right for many taregirs but wrong for
+# these two: it omits Eugenia and orders Athanasius before Cyricus. Fed into the same
+# consecutive-saint-weekday fill. [SOURCE-CONFIRMATION PENDING: sequences read off GT
+# (2004/2009) and consistent with the Թ/Հ canon January sections; drop-guard validated.]
+_SOURCE_WINTER = {
+    # ԹԸ (2004, leap; winter uses the higher letter Թ, pre-Feb-29): Eugenia sits between
+    # Vahan and Eugenios (the generic omission is what shifts the 01-27/01-29 tail).
+    "04-11": ["peter_the_patriarch", "hermits_saints_anton", "theodosius_and_the",
+              "cyricus_and_his", "fathers_saints_athanasius", "vahan_of_goghtn",
+              "eugenia_the_virgin", "eugenios_makarios_valerian"],
+    # Հ (2009): compressed -- Vahan absorbs Eugenia and Eugenios absorbs Andrew (readings
+    # follow the senior saint per preface §6), then Adrian closes the window.
+    "04-12": ["peter_the_patriarch", "hermits_saints_anton", "theodosius_and_the",
+              "cyricus_and_his", "fathers_saints_athanasius", "vahan_of_goghtn",
+              "eugenios_makarios_valerian", "adrian_and_his"],
+}
+
+
 def _rep_year(easter_md, leap):
     """A representative year of the requested leap parity whose Gregorian Easter is
     `easter_md`, for anchoring the pre-Easter (January) weekday walk -- which, unlike the
@@ -313,6 +364,7 @@ def _winter_entries(easter_md, leap):
     y = _rep_year(easter_md, leap)
     if y is None:
         return {}
+    sequence = _SOURCE_WINTER.get(easter_md, _WINTER_SEQUENCE)
     start, end = L._SAINT_ZONES["PN"]["window"](y)
     slots = []
     d = start
@@ -321,7 +373,7 @@ def _winter_entries(easter_md, leap):
             slots.append(d)
         d += datetime.timedelta(days=1)
     out = {}
-    for nd, sid in zip(slots[1:], _WINTER_SEQUENCE):   # slots[0] = John the Forerunner
+    for nd, sid in zip(slots[1:], sequence):           # slots[0] = John the Forerunner
         out[f"{nd.month:02d}-{nd.day:02d}"] = ["PN", sid]
     return out
 
@@ -379,6 +431,8 @@ def main():
     # filling only days the dated-line parser left uncovered (setdefault, so a
     # correct dated entry is never displaced). The drop-guard validates each.
     leapov = {}                             # easter_md -> {md: [z, sid]} leap-only overrides
+    nonleap_only = {}                       # easter_md -> {md} common entries to validate vs
+                                            # non-leap cache years only (parity-split winters)
     for easter_md in spans:
         if not easter_md:
             continue
@@ -398,6 +452,18 @@ def main():
         # Solar autumn triplet (Andrew / Adrian / Abraham & Khoren), Heesnak-anchored.
         for md, rec in _autumn_entries(easter_md).items():
             dm.setdefault(md, rec)
+        # Per-taregir leap autumn-order override (e.g. ԹԸ 04-11): a distinct triplet order for
+        # the leap parity, anchored to that leap year's own November grid, shipped as a leap
+        # override so the common map is unaffected.
+        aseq = _SOURCE_AUTUMN_LEAP.get(easter_md)
+        if aseq:
+            ry = _rep_year(easter_md, leap=True)
+            if ry is not None:
+                lm = leapov.setdefault(easter_md, {})
+                for md, rec in _autumn_entries(
+                        easter_md, ref=datetime.date(ry, 1, 1), sequence=aseq).items():
+                    if _intrinsic(dm.get(md)) != _intrinsic(rec):
+                        lm.setdefault(md, rec)
         # Leap-year summer override: a distinct placement for the leap parity of this
         # Easter date (only the days that differ from the common march).
         seq = _LEAP_SUMMER.get(easter_md)
@@ -409,13 +475,27 @@ def main():
                 if _intrinsic(dm.get(md)) != _intrinsic(rec):
                     lm[md] = rec
             if lm:
-                leapov[easter_md] = lm
+                # merge, not overwrite -- an autumn/winter leap override may already exist here
+                leapov.setdefault(easter_md, {}).update(lm)
 
         # Post-Nativity (winter) march: consecutive-fill per parity (the January weekday
         # alignment shifts with leap parity). Common fills the shared map; the leap variant
-        # supplies leap-only records for the days it genuinely differs on.
-        for md, rec in _winter_entries(easter_md, leap=False).items():
-            dm.setdefault(md, rec)
+        # supplies leap-only records for the days it genuinely differs on. A per-taregir
+        # `_SOURCE_WINTER` sequence is authoritative and OVERRIDES the (mis-keyed) parse of the
+        # canon sharing this md's Julian label -- exactly as `_SOURCE_SUMMER` does.
+        win_override = easter_md in _SOURCE_WINTER
+        cwin = _winter_entries(easter_md, leap=False)
+        for md, rec in cwin.items():
+            if win_override:
+                dm[md] = rec
+            else:
+                dm.setdefault(md, rec)
+        if win_override:
+            # A source-winter grid serves its own parity; the January grid shifts wholesale by
+            # leap parity, so validate these common entries against non-leap cache years only
+            # (else a leap cache year of the same Gregorian Easter -- on different, fast-day
+            # dates -- would spuriously drop them).
+            nonleap_only.setdefault(easter_md, set()).update(cwin)
         lm = leapov.setdefault(easter_md, {})
         for md, rec in _winter_entries(easter_md, leap=True).items():
             if _intrinsic(dm.get(md)) != _intrinsic(rec):
@@ -423,7 +503,7 @@ def main():
         if not lm:
             leapov.pop(easter_md, None)
 
-    dropped = _drop_cache_contradicted(out, leapov)
+    dropped = _drop_cache_contradicted(out, leapov, nonleap_only)
     merged = _merge_parity(out, leapov)
     json.dump(merged, open(OUT, "w", encoding="utf-8"),
               ensure_ascii=False, indent=0, sort_keys=True)
@@ -480,7 +560,7 @@ def _readings_for(d, stored_zone, sid):
     return None
 
 
-def _drop_cache_contradicted(out, leapov=None):
+def _drop_cache_contradicted(out, leapov=None, nonleap_only=None):
     """Drop any cycle entry whose readings disagree with ground truth in a cached year of
     that year-type -- so the shipped tier is cache-consistent (no regression) while
     unobserved year-types stay best-effort. Returns the count dropped.
@@ -491,6 +571,7 @@ def _drop_cache_contradicted(out, leapov=None):
     a Peter (non-leap) and an Athanasius (leap) placement without either dropping the other.
     """
     leapov = leapov or {}
+    nonleap_only = nonleap_only or {}
     ref_dir = os.path.join(HERE, "reference_data")
     if not os.path.isdir(ref_dir):
         return 0
@@ -518,9 +599,10 @@ def _drop_cache_contradicted(out, leapov=None):
     for easter_md, day_map in out.items():
         lov = leapov.get(easter_md, {})
         for md in list(day_map):
-            # A day with a leap override serves only the non-leap parity from the common map.
+            # A day with a leap override -- or an explicit parity-split (source-winter) entry --
+            # serves only the non-leap parity from the common map.
             years = common_years.get(easter_md, [])
-            if md not in lov:
+            if md not in lov and md not in nonleap_only.get(easter_md, set()):
                 years = years + leap_years.get(easter_md, [])
             if _bad(md, day_map[md], years):
                 del day_map[md]

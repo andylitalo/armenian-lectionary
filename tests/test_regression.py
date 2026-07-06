@@ -182,6 +182,17 @@ class TestSummerSourceMarch(unittest.TestCase):
                 self.assertEqual(res["ReadingsList"], list(_ref_readings(y, m, d)),
                                  f"{y}-{m:02d}-{d:02d} should exact-match ground truth")
 
+    def test_canon_ChVo_2008_eugenia_eugenios(self):
+        # Cluster 3 -- taregir ՉՈ (2008, Greg Easter 03-23): the leap year pushes Eugenia and
+        # Eugenios into the summer window (the p.610 rubric moves them to the lower letter Ո,
+        # after Vardavar). The full 21-saint march lands Eugenia 07-31 and Eugenios 08-04.
+        for (m, d) in ((7, 31), (8, 4)):
+            res = compute_armenian_lectionary(datetime.date(2008, m, d))
+            self.assertEqual(res["Source"], "second-volume-cycle",
+                             f"2008-{m:02d}-{d:02d} should ship from the cycle tier")
+            self.assertEqual(res["ReadingsList"], list(_ref_readings(2008, m, d)),
+                             f"2008-{m:02d}-{d:02d} should exact-match ground truth")
+
 
 class TestAutumnSolarMarch(unittest.TestCase):
     """Locks the solar-anchored autumn triplet (Andrew / Adrian / Abraham & Khoren). These
@@ -199,6 +210,41 @@ class TestAutumnSolarMarch(unittest.TestCase):
                 self.assertEqual(res["ReadingsList"], list(_ref_readings(y, m, d)),
                                  f"{y}-{m:02d}-{d:02d} should exact-match ground truth")
 
+    def test_2004_leap_autumn_order(self):
+        # taregir ԹԸ (2004, leap, Greg Easter 04-11): the triplet order differs from the
+        # non-leap taregirs -- Abraham & Khoren 11-15 then Andrew 11-16 (vs Andrew first).
+        for (m, d) in ((11, 15), (11, 16)):
+            res = compute_armenian_lectionary(datetime.date(2004, m, d))
+            self.assertEqual(res["Source"], "second-volume-cycle",
+                             f"2004-{m:02d}-{d:02d} should ship from the cycle tier")
+            self.assertEqual(res["ReadingsList"], list(_ref_readings(2004, m, d)),
+                             f"2004-{m:02d}-{d:02d} should exact-match ground truth")
+
+
+class TestWinterSourceMarch(unittest.TestCase):
+    """Locks the per-taregir post-Nativity (winter) sequences that replace the generic march
+    for taregirs whose January laydown differs: ԹԸ (2004) inserts Eugenia between Vahan and
+    Eugenios, and Հ (2009) compresses (Vahan absorbs Eugenia, Eugenios absorbs Andrew) then
+    closes with Adrian. Each ships exact from the cycle tier; the parity-split validation keeps
+    the leap cache year of the same Gregorian Easter (2020 for 04-12) from dropping them."""
+
+    def test_2004_eugenia_eugenios(self):
+        # ԹԸ (2004, Greg Easter 04-11): Eugenia 01-27, Eugenios 01-29.
+        for (m, d) in ((1, 27), (1, 29)):
+            res = compute_armenian_lectionary(datetime.date(2004, m, d))
+            self.assertEqual(res["Source"], "second-volume-cycle",
+                             f"2004-{m:02d}-{d:02d} should ship from the cycle tier")
+            self.assertEqual(res["ReadingsList"], list(_ref_readings(2004, m, d)),
+                             f"2004-{m:02d}-{d:02d} should exact-match ground truth")
+
+    def test_2009_adrian_exact(self):
+        # Հ (2009, Greg Easter 04-12): Adrian & Natalia closes the compressed window on 01-29.
+        res = compute_armenian_lectionary(datetime.date(2009, 1, 29))
+        self.assertEqual(res["Source"], "second-volume-cycle",
+                         "2009-01-29 should ship from the cycle tier")
+        self.assertEqual(res["ReadingsList"], list(_ref_readings(2009, 1, 29)),
+                         "2009-01-29 should exact-match ground truth")
+
 
 class TestAssumptionFastContinua(unittest.TestCase):
     """Locks the Easter-md banding of the Fast-of-the-Assumption Wed/Fri continua: at span-28
@@ -215,6 +261,57 @@ class TestAssumptionFastContinua(unittest.TestCase):
             self.assertEqual(res["ReadingsList"], expected)
             self.assertEqual(res["ReadingsList"], list(_ref_readings(y, 8, 5)),
                              f"{y}-08-05 should exact-match ground truth")
+
+
+class TestAnnunciationCompositeCompleteness(unittest.TestCase):
+    """Locks the Apr-7 Annunciation collision composite. The flat E/EB slots carry no
+    service structure, so the published calendar's co-celebration REDUCTIONS cannot be
+    reproduced; the composite instead guarantees COMPLETENESS -- it never drops a reading
+    the calendar keeps (GT is a subset of the output), erring toward a superset. Two
+    faithful rule fixes close the only two cases that previously dropped a key reading:
+    a deep-Lent SUNDAY co-celebrates its Liturgy (2019, Luke 21.5-38), and Eastertide
+    appends the eve's resurrection Gospel (2018, John 21.1-14)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.days = load_all()
+
+    def test_no_apr7_collision_drops_a_reading(self):
+        # Core invariant: every cached Apr-7 has GT as a subset of the engine output.
+        for y in range(2001, 2027):
+            iso = f"{y}-04-07"
+            day = self.days.get(iso)
+            if not day or not day["readings"]:
+                continue
+            out = set(compute_armenian_lectionary(datetime.date(y, 4, 7))["ReadingsList"])
+            missing = [r for r in day["readings"] if r not in out]
+            self.assertEqual(missing, [], f"{iso} dropped calendar reading(s): {missing}")
+
+    def test_2019_lenten_sunday_keeps_its_gospel(self):
+        # Deep-Lent SUNDAY: the day has a Liturgy, so it co-celebrates (was: proper alone).
+        out = compute_armenian_lectionary(datetime.date(2019, 4, 7))["ReadingsList"]
+        self.assertIn("Luke 21.5-38", out)
+
+    def test_2018_eastertide_keeps_eve_resurrection_gospel(self):
+        # Bright-week eve (Apr 6 = 6th day of Easter) resurrection Gospel co-read.
+        out = compute_armenian_lectionary(datetime.date(2018, 4, 7))["ReadingsList"]
+        self.assertIn("John 21.1-14", out)
+
+    def test_deep_lent_weekday_ferias_stay_proper_only(self):
+        # The Sunday exception must NOT fire for aliturgical weekday ferias, which stay
+        # exact proper-only matches (2011 offset -17, 2022 offset -10).
+        for y in (2011, 2022):
+            res = compute_armenian_lectionary(datetime.date(y, 4, 7))
+            self.assertEqual(res["ReadingsList"], list(_ref_readings(y, 4, 7)),
+                             f"{y}-04-07 should stay an exact proper-only match")
+
+    def test_previously_exact_composites_unregressed(self):
+        # Great Wednesday (2004) and Great Friday (2023) already exact-matched; the new
+        # branches must not disturb them.
+        for y in (2004, 2023):
+            res = compute_armenian_lectionary(datetime.date(y, 4, 7))
+            self.assertEqual(res["ReadingsList"], list(_ref_readings(y, 4, 7)),
+                             f"{y}-04-07 should remain an exact match")
 
 
 if __name__ == "__main__":
