@@ -215,8 +215,11 @@ _SUMMER_T = [
 #            21-saint march: the leap year pushes Eugenia/Gregory-Theol/Eugenios/Andrew/Adrian
 #            into the summer window (they sit in January in the common Չ year). Reproduces GT
 #            2008 exactly, incl. the two miss days Eugenia 07-31 and Eugenios 08-04.
-#            [SOURCE: sequence read off GT 2008 and the Ո summer section; the intermediate
-#            saints match the Ր/Թ marches, tail confirmed by the p.610 leap redirection.]
+#            [SOURCE: exact civil dates derived from GT 2008; the leap redirection of Eugenia /
+#            Gregory-Theol / Andrew / Adrian OUT of the winter slots and into the post-Assumption
+#            summer is confirmed by the p.610 rubric (`Այլ տօնեսցես յերկուշաբաթին զԵւգինէ կոյսն
+#            ... զԱնդրէ զօրավարն և զԱդրիանոսն, որք ի վայրդ եդեալ են զկնի Աստուածածնին`, verified
+#            2026-07-05); intermediate saints match the Ր/Թ marches.]
 _SUMMER_CHVO = [
     (5, "thaddeus_apostle_of"), (0, "cyprian_the_bishop"), (1, "athenogenes_the_bishop"),
     (3, "forefathers_adam_abel"), (5, "gregory_the_illuminator"), (0, "maccabees_eleazar_the"),
@@ -252,11 +255,14 @@ _AUTUMN_MARCH = [
 
 # Per-taregir autumn-order overrides for the leap parity, keyed by the leap year's Gregorian
 # Easter md. The default `_AUTUMN_MARCH` order reproduces the non-leap taregirs (2010 Ա /
-# 2021 Ս), but taregir ԹԸ (2004, Greg Easter 04-11) lays the triplet in a different order --
-# Abraham & Khoren (Mon), Andrew (Tue), Adrian (Thu). [SOURCE-CONFIRMATION PENDING: the Ը
-# canon (p.573) carries a leap redirection rather than the plain triplet at these coordinates;
-# this order reproduces 2004 GT (Nov 15 Abraham, Nov 16 Andrew, Nov 18 Adrian) and is validated
-# by the cache drop-guard, but has not yet been read off the plate line-for-line.]
+# 2021 Ս); 2004 (Greg Easter 04-11) is the leap pair ՆՅ and needs Abraham & Khoren (Mon),
+# Andrew (Tue), Adrian (Thu) -> +1 leap shift -> GT Nov 15/16/18. [SOURCE-CONFIRMED (2026-07-05,
+# plate read): the ՆՅ leap rubric on the Ն canon (p.603) sends Andrew & Adrian OUT of the
+# January window to Yeghem's (Յ) autumn "after the tenth Sunday" -- i.e. November -- joining the
+# native Abraham & Khoren: `... զԱնդրէ զօրավարն և զԱդրիանոսն մի՛ տօնեսցես, զի տօնին սոքա ի յետին
+# գիրն Յ, զկնի տասներորդ կիւրակէին`. The order is witnessed in the neighbouring Մ canon (p.600:
+# Abraham 14 Mon / Andrew 15 Tue / Adrian 17 Thu). NOT a divergence -- an earlier draft wrongly
+# compared against Ը, the true-Julian taregir the modern Gregorian calendar does not use.]
 _SOURCE_AUTUMN_LEAP = {
     "04-11": [
         (6, "Ex", "abraham_and_khoren"),    # Heesnak - 6 = Monday
@@ -327,15 +333,22 @@ _WINTER_SEQUENCE = [
 # Per-taregir winter (post-Nativity) sequence overrides, keyed by Gregorian Easter md. The
 # generic `_WINTER_SEQUENCE` (distilled from 2011) is right for many taregirs but wrong for
 # these two: it omits Eugenia and orders Athanasius before Cyricus. Fed into the same
-# consecutive-saint-weekday fill. [SOURCE-CONFIRMATION PENDING: sequences read off GT
-# (2004/2009) and consistent with the Թ/Հ canon January sections; drop-guard validated.]
+# consecutive-saint-weekday fill. NB the engine keys cycles by GREGORIAN Easter md, so a year
+# uses the canon whose JULIAN Easter equals its Gregorian Easter (2004 -> Յ / 04-11, 2009 -> Ն /
+# 04-12), NOT its true-Julian taregir. [SOURCE-CONFIRMED (2026-07-05, plate read):
+#   04-11 (2004): Յ canon (p.601) has Eugenia Jan 26 / Eugenios Jan 28; the +1 leap shift lands
+#     them on civil 01-27 / 01-29. 2004 is the leap pair ՆՅ, whose rubric (p.603) prescribes
+#     exactly this January -- Mon Vahan, Tue Eugenia, Thu Eugenios -- with Andrew & Adrian moved
+#     to autumn (see `_SOURCE_AUTUMN_LEAP`).
+#   04-12 (2009): Ն canon (p.603) has Eugenios+Andrew merged on the 27th, Adrian on the 29th --
+#     an exact (non-leap) match. Drop-guard validated.]
 _SOURCE_WINTER = {
-    # ԹԸ (2004, leap; winter uses the higher letter Թ, pre-Feb-29): Eugenia sits between
-    # Vahan and Eugenios (the generic omission is what shifts the 01-27/01-29 tail).
+    # ՆՅ (2004, leap; Greg Easter 04-11 = Yeghem/Յ): Eugenia (Tue) sits between Vahan (Mon) and
+    # Eugenios (Thu); Andrew/Adrian are absent here (moved to autumn by the ՆՅ rule, p.603).
     "04-11": ["peter_the_patriarch", "hermits_saints_anton", "theodosius_and_the",
               "cyricus_and_his", "fathers_saints_athanasius", "vahan_of_goghtn",
               "eugenia_the_virgin", "eugenios_makarios_valerian"],
-    # Հ (2009): compressed -- Vahan absorbs Eugenia and Eugenios absorbs Andrew (readings
+    # Ն (2009): compressed -- Vahan absorbs Eugenia and Eugenios absorbs Andrew (readings
     # follow the senior saint per preface §6), then Adrian closes the window.
     "04-12": ["peter_the_patriarch", "hermits_saints_anton", "theodosius_and_the",
               "cyricus_and_his", "fathers_saints_athanasius", "vahan_of_goghtn",

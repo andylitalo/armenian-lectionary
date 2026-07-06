@@ -22,9 +22,22 @@
 > `_SOURCE_AUTUMN_LEAP`, plus a parity-split in the drop-guard so a leap cache year of the same
 > Gregorian Easter — 2020 for 04-12 — cannot drop the non-leap winter). Locked by
 > `tests/test_regression.py::TestSummerSourceMarch` / `TestAutumnSolarMarch` / `TestWinterSourceMarch`.
-> Net: MISS 11 → 4 (the remaining 4 are the Apr-7 Annunciation composites). Some sequences are
-> read off GT + drop-guard-confirmed rather than line-for-line off the (OCR-noisy) plate; those
-> carry a `SOURCE-CONFIRMATION PENDING` note in the build for later plate verification.
+> Net: MISS 11 → 4 (the remaining 4 are the Apr-7 Annunciation composites).
+>
+> **Provenance closed (2026-07-05, plate read).** All four sequences are now line-for-line
+> source-confirmed — no divergence. The crux is a **Julian/Gregorian taregir-selection** rule:
+> the engine keys cycles by *Gregorian* Easter md, so a year uses the canon whose *Julian* Easter
+> equals its Gregorian Easter (2004 → Յ/04-11, 2009 → Ն/04-12), **not** its true-Julian taregir
+> (ԹԸ, Հ). Under the correct canon the source matches GT exactly:
+> - **Winter 2004** — Յ canon (p.601): Eugenia Jan 26 / Eugenios Jan 28, +1 leap shift → 01-27/29.
+> - **Winter 2009** — Ն canon (p.603): Eugenios+Andrew merged on 27, Adrian on 29 (exact).
+> - **Autumn 2004** — the **ՆՅ leap rubric** (p.603) *sends* Andrew & Adrian out of January to
+>   Yeghem's (Յ) November "after the tenth Sunday" (`... տօնին սոքա ի յետին գիրն Յ, զկնի
+>   տասներորդ կիւրակէին`), joining native Abraham & Khoren; order witnessed in Մ (p.600).
+> - **Summer 2008** — the ՉՈ rubric (p.610) moves the same saints past Vardavar to letter Ո.
+>
+> An earlier draft wrongly called autumn 2004 a "source-vs-modern divergence" by reading Ը (the
+> true-Julian taregir, an August outlier the modern calendar does not use) instead of the ՆՅ rule.
 >
 > **Co-celebration recovery (2026-07-03).** The Presentation eve (Feb 13) now ships
 > VALIDATED via a dedicated Easter-offset keyspace `PrLE` (the exact analog of `AnnE`
