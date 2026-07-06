@@ -119,16 +119,31 @@ the colliding day — exactly as the cached ground truth shows:
 |---|---|---|
 | **Palm Sunday (−7), Great Thursday (−3), Great Friday (−2), Holy Saturday (−1), Easter (0)** | "read the Scripture and the Gospel [of the Annunciation] … then begin the proper office of the day" | **proper → day** |
 | **Lazarus Saturday (−8), Great Monday (−6), Great Tuesday (−5), Great Wednesday (−4)** | "Read the Scripture and Gospel of the day … Then begin the celebration of the Annunciation" | **day → proper** |
-| **Yinants / Eastertide (≥ +1)** | "the Psalms, Scriptures, and Gospels are of the Resurrection … read the Gospel of the day after the Annunciation book and Gospel" | **proper → day** |
-| **Lenten Sunday with its own readings** (e.g. the Sunday of the Coming) | the day has a Liturgy, so its readings co-celebrate | **day → proper** |
-| **Aliturgical Lenten weekday** (no proper Liturgy readings) | nothing to combine | **proper only** |
+| **Yinants / Eastertide (≥ +1)** | "the Psalms, Scriptures, and Gospels are of the Resurrection … read the Gospel of the day after the Annunciation book and Gospel" | **proper → day**, plus the eve's resurrection Gospel (see below) |
+| **Lenten Sunday with its own readings** (offset ≤ −9 and offset % 7 == 0, e.g. the Sunday of the Coming) | the day has a Liturgy, so its readings co-celebrate | **day → proper** |
+| **Aliturgical Lenten *weekday* feria** (offset ≤ −9, non-Sunday; no proper Liturgy readings) | nothing to combine | **proper only** |
 
 The movable day's readings are taken from the engine's already-validated Easter-core
 table (`E` / `EB`), so the composite is computable even for Easter offsets never seen
 in 2001–2026 (e.g. **2027**, where Apr 7 = Easter + 10, the 11th day of Eastertide).
 
-> **Residual subtleties not fully fixed by this rubric:** (1) the exact concatenation
-> on the supreme days where the day's office dominates, and (2) the **eve, April 6**
-> (Նախատօնակ), which the data shows largely takes the *day's own* readings — the
-> pre-festive does not override them — consistent with the rubric's "perform the
-> Pre-festive service after the proper office of the day."
+> **Completeness, not byte-exactness.** The published calendar liturgically *reduces*
+> the day portion in co-celebration — e.g. an Eastertide day contributes only its
+> Gospel; a Lenten day drops its trailing vespers set. Which sub-run is Matins vs.
+> Liturgy vs. vespers is **not recorded** in any reachable source: sacredtradition.am
+> (in every language view) and the reference cache are flat, type-tagged reading lists
+> with no service boundaries, and the Tōnats'oyts is the typikon, not a per-movable-day
+> service-slotted lectionary (that would need the Ճաշоց). So the engine does **not**
+> attempt the reduction. It errs toward a **superset** — a few extra day readings are
+> acceptable — and only guarantees it never *drops* a reading the calendar keeps
+> (verified: GT ⊆ engine output for every cached Apr-7 collision, 2001–2026).
+>
+> **Two faithful completeness fixes** (both close a case that previously dropped a key
+> reading, without cache-fitting):
+> - **Lenten Sunday (2019).** A deep-Lent *Sunday* has a Divine Liturgy, so its readings
+>   co-celebrate; only aliturgical *weekdays* leave the proper standing alone. Previously
+>   the engine suppressed the whole day and dropped `Luke 21.5-38`.
+> - **Eastertide eve (2018).** The eve (April 6, the Նախатонак pre-festive) is celebrated
+>   the day before, and in the Easter octave its resurrection Gospel is co-read; the
+>   composite appends any eve Gospel the day slot lacks. Previously the engine dropped
+>   `John 21.1-14` (the 6th-day-of-Easter Gospel).

@@ -988,9 +988,12 @@ def _embedded_composite(d, tables):
 # fallback for the offsets AnnE cannot validate -- single-sample collisions and
 # Easter offsets never seen in 2001-2026 (e.g. 2027, where Apr 7 = Easter+10). It
 # is labeled generative/best-guess, never validated: the reading ORDER follows the
-# rubric deterministically (verified to reproduce 25/26 cached years), but the exact
-# day-portion is sometimes liturgically reduced (e.g. Eastertide appends only the
-# Gospel cycle), so byte-exactness is not guaranteed for an unseen offset.
+# rubric deterministically, but the published calendar liturgically REDUCES the day
+# portion (e.g. Eastertide keeps only a Gospel; a Lenten day drops its vespers set) in
+# a way the flat E/EB slots cannot express -- which sub-run is Matins vs Liturgy vs
+# vespers is not recorded anywhere reachable. So the composite does not attempt that
+# reduction: it errs toward a SUPERSET (extra day readings are acceptable) and only
+# guarantees it never DROPS a reading the calendar keeps. See _annunciation_composite.
 # --------------------------------------------------------------------------- #
 
 _ANNUNCIATION_PROPER = (
@@ -1000,11 +1003,12 @@ _ANNUNCIATION_PROPER = (
 )
 
 # Easter offset of Apr 7 -> combination order (Tonatsooyts pp. 486-488):
-#   day -> proper : Lazarus Saturday (-8), Great Mon/Tue/Wed (-6/-5/-4).
+#   day -> proper : Lazarus Saturday (-8), Great Mon/Tue/Wed (-6/-5/-4), and deep-Lent
+#                   SUNDAYS (offset <= -9 and offset % 7 == 0), which have a Liturgy.
 #   proper -> day : Palm Sunday (-7), Great Thu/Fri (-3/-2), Holy Sat (-1), Easter (0),
 #                   and all of Eastertide / Yinants (offset >= +1).
-#   proper alone  : aliturgical deep-Lent ferias (offset <= -9), where the feast
-#                   supersedes the minor Lenten ferial readings.
+#   proper alone  : aliturgical deep-Lent WEEKDAY ferias (offset <= -9, non-Sunday),
+#                   which have no Liturgy readings, so the feast proper stands alone.
 _ANN_DAY_FIRST = frozenset({-8, -6, -5, -4})
 _ANN_PROPER_FIRST = frozenset({-7, -3, -2, -1, 0})
 
@@ -1038,17 +1042,36 @@ def _movable_slot_readings(d, tables=None, with_band=True):
 def _annunciation_composite(d, tables=None):
     """Best-guess Annunciation (Apr 7) readings via the Tonatsooyts collision rule,
     for offsets the validated AnnE keyspace does not cover. Returns a list of refs
-    or None (None only if the date is not Apr 7)."""
+    or None (None only if the date is not Apr 7).
+
+    The flat E/EB slots carry no service structure, so the co-celebration reductions
+    the printed calendar applies (dropping a day's Matins/vespers set, keeping only a
+    Gospel) cannot be reproduced from the data. Rather than risk DROPPING a reading the
+    calendar keeps, this best-guess errs toward a superset: it may carry a few extra day
+    readings the published calendar omits, but it never omits one the calendar keeps
+    (verified: GT is a subset of the output for every cached Apr-7 collision, 2001-2026)."""
     if (d.month, d.day) != (4, 7):
         return None
     proper = list(_ANNUNCIATION_PROPER)
     e_off = (d - calculate_gregorian_easter(d.year)).days
-    if e_off <= -9:
-        return proper                                   # deep Lent: proper supersedes
     day = _movable_slot_readings(d, tables) or []
+    if e_off <= -9:
+        # Deep Lent: an aliturgical WEEKDAY feria has no Liturgy readings, so the feast
+        # proper stands alone. A Lenten SUNDAY (offset % 7 == 0) has a Divine Liturgy
+        # whose readings co-celebrate -- do not suppress them.
+        return (day + proper) if e_off % 7 == 0 else proper
     if e_off in _ANN_DAY_FIRST:
         return day + proper                             # day -> proper
-    return proper + day                                 # proper -> day (incl. Eastertide)
+    if e_off >= 1:
+        # Eastertide: readings are "of the Resurrection" (Tonatsooyts p.487) and the eve
+        # (Apr 6, the Nakhatonak pre-festive) is celebrated the day before, so in the
+        # Easter octave its resurrection Gospel is co-read. Append any eve Gospel not
+        # already carried by the day slot so it is not missed.
+        eve = _movable_slot_readings(d - datetime.timedelta(days=1), tables) or []
+        extra = [r for r in eve if _classify_reading(r) == "Gospel"
+                 and r not in day and r not in proper]
+        return proper + day + extra
+    return proper + day                                 # proper -> day (Holy Week supreme days)
 
 
 # Date windows (days relative to anchor) where each keyspace may apply, to keep
