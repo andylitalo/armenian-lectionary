@@ -1074,6 +1074,85 @@ def _annunciation_composite(d, tables=None):
     return proper + day                                 # proper -> day (Holy Week supreme days)
 
 
+def _fast_of_catechumens_eve(year: int) -> datetime.date:
+    """Eve of the Fast of Catechumens (Aṙaǰawor) -- the Sunday at Easter-70 that opens
+    the aliturgical fast week (Mon-Fri, Easter-69..-65) before Great Lent's Sunday."""
+    return anchors(year)["E"] - datetime.timedelta(days=70)
+
+
+def _john_forerunner_date(year: int) -> datetime.date:
+    """Civil date the Nativity of John the Forerunner (nominal Jan 14) is actually
+    celebrated. Besides the ordinary transfer off penitential weekdays (Wed/Fri/Sun),
+    in an extreme-early-Easter year the Fast of Catechumens (Easter-70 eve) reaches
+    back to Jan 14; the fast is aliturgical, so a Liturgy feast falling inside it is
+    displaced to the first saint-weekday after the fast week (Tonats'oyts p. 464: the
+    octave/fast boundary tracks Easter, so the fast can encroach on mid-January)."""
+    jan14 = datetime.date(year, 1, 14)
+    eve = _fast_of_catechumens_eve(year)
+    fast_end = eve + datetime.timedelta(days=5)          # Friday of the fast week
+    start = fast_end + datetime.timedelta(days=1) if eve < jan14 <= fast_end else jan14
+    return _next_saint_weekday(start)
+
+
+def _john_forerunner_composite(d, tables=None):
+    """Nativity of John the Forerunner readings when its feast is transferred INTO an
+    extreme-early-Easter January by the Fast of Catechumens encroachment (the winter
+    grid's post-Nativity window is empty in that year, so its PnJohn slot never fires).
+    Byte-exact: it ships the same cross-year-validated PnJohn proper on the transferred
+    date. Returns the reading list or None."""
+    if tables is None:
+        tables = _TABLES
+    jan14 = datetime.date(d.year, 1, 14)
+    eve = _fast_of_catechumens_eve(d.year)
+    fast_end = eve + datetime.timedelta(days=5)
+    # Only fires in the encroachment year, where Jan 14 lands inside the aliturgical
+    # fast week so the feast is displaced out of it; a normal year's Jan 14 is handled
+    # by the winter grid and must be left untouched.
+    if eve < jan14 <= fast_end and d == _john_forerunner_date(d.year):
+        entry = tables.get("PnJohn", {}).get("John")
+        if entry:
+            return list(entry["readings"])
+    return None
+
+
+def _nativity_octave_readings(tables) -> list:
+    """The eighth-day Nativity octave (Naming, Jan 13) proper (PnOct '01-13')."""
+    entry = tables.get("PnOct", {}).get("01-13")
+    return list(entry["readings"]) if entry else []
+
+
+def _eve_of_fast_readings(tables) -> list:
+    """The cross-year-validated Liturgy of the eve of the Fast of Catechumens, taken as
+    the modal PnEveN reading-set (identical across the 2nd/3rd/4th-Sunday keys; the
+    1st-Sunday key merely prepends an extra Luke 4.14-30, which we do not assume)."""
+    from collections import Counter
+    sets = [tuple(v["readings"]) for v in tables.get("PnEveN", {}).values()]
+    if not sets:
+        return []
+    return list(Counter(sets).most_common(1)[0][0])
+
+
+def _nativity_octave_composite(d, tables=None):
+    """Best-guess Jan-13 readings for the extreme-early-Easter year where the octave of
+    the Nativity (Naming, Jan 13) coincides with the eve of the Fast of Catechumens
+    (Easter-70). Both feasts are celebrated with Liturgy (Tonats'oyts p. 464: the octave
+    is kept 'with services and Liturgy' even as it encroaches on the fast), so the day
+    is a co-celebration. The flat slots carry no Matins/Liturgy structure, so which part
+    of each proper the printed calendar reduces is not derivable; like the Annunciation
+    composite this errs toward a SUPERSET (octave proper ++ eve Liturgy) that never drops
+    a reading the calendar keeps -- verified GT is a subset for the one cached collision
+    (2008). Returns the reading list or None (None unless Jan 13 at Easter-70)."""
+    if tables is None:
+        tables = _TABLES
+    if (d.month, d.day) != (1, 13):
+        return None
+    if (d - anchors(d.year)["E"]).days != -70:
+        return None
+    octave = _nativity_octave_readings(tables)
+    eve = _eve_of_fast_readings(tables)
+    return octave + [r for r in eve if r not in octave]
+
+
 # Date windows (days relative to anchor) where each keyspace may apply, to keep
 # far-away dates from matching an anchor by coincidence. Winter keyspaces use
 # string grid keys and are self-guarded (only emitted inside their window), so
@@ -1402,6 +1481,47 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
                      "rubric-deterministic but the day-portion may be liturgically "
                      "reduced, so this is not cross-year validated. Filter on "
                      "Source/Confidence if you need only validated readings."),
+        }
+
+    # John the Forerunner (Jan 14) transferred into an extreme-early-Easter January by
+    # the Fast of Catechumens encroachment: the winter grid's post-Nativity window is
+    # empty that year, so its PnJohn slot never fires. Ship the same validated PnJohn
+    # proper on the transferred date -- byte-exact, calendar-derived. See p. 464.
+    jf = _john_forerunner_composite(target_date)
+    if jf is not None:
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": "Nativity of St. John the Forerunner",
+            "Season": "Nativity Octave",
+            "Readings": _group_readings(jf),
+            "ReadingsList": jf,
+            "Source": "validated-composite",
+            "Note": ("Nativity of John the Forerunner (nominal Jan 14) transferred to "
+                     "this saint-weekday because the Fast of Catechumens (Easter-70) "
+                     "reaches Jan 14 in this extreme-early-Easter year; readings are the "
+                     "cross-year-validated PnJohn proper (Tonats'oyts p. 464)."),
+        }
+
+    # Nativity octave (Jan 13) co-celebrating with the eve of the Fast of Catechumens
+    # in an extreme-early-Easter year (Easter-70 falls on Jan 13). Best-guess superset
+    # (never drops a GT reading); labeled generative, never validated.
+    no = _nativity_octave_composite(target_date)
+    if no is not None:
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": "Octave of the Nativity (Naming of the Lord)",
+            "Season": "Nativity Octave",
+            "Readings": _group_readings(no),
+            "ReadingsList": no,
+            "Source": "generative-composite",
+            "Confidence": "best-guess",
+            "Note": ("Best-guess readings: in this extreme-early-Easter year the eighth-"
+                     "day Nativity octave (Jan 13) coincides with the eve of the Fast of "
+                     "Catechumens (Easter-70) and both are celebrated with Liturgy "
+                     "(Tonats'oyts p. 464). The octave proper is combined with the eve's "
+                     "validated Liturgy; the flat slots carry no Matins/Liturgy structure "
+                     "so this errs toward a superset and is not cross-year validated. "
+                     "Filter on Source/Confidence if you need only validated readings."),
         }
 
     # Fallback: no validated entry (chiefly the winter hinge). Name the season

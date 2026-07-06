@@ -314,5 +314,36 @@ class TestAnnunciationCompositeCompleteness(unittest.TestCase):
                              f"{y}-04-07 should remain an exact match")
 
 
+class TestNativityOctaveEncroachment(unittest.TestCase):
+    """Locks the p.464 Fast-of-Catechumens encroachment on the mid-January octave, the
+    extreme-early-Easter case (2008, Easter Mar 23) where the fast reaches back to Jan 14.
+    Two days that previously blanked (the winter grid's post-Nativity window is empty that
+    year) are now served:
+      * Jan 19 -- Nativity of John the Forerunner (nominal Jan 14) transferred out of the
+        aliturgical fast week; byte-EXACT vs GT via the validated PnJohn proper.
+      * Jan 13 -- octave/eve co-celebration; a COMPLETENESS superset (GT is a subset)."""
+
+    def test_2008_john_forerunner_transferred_exact(self):
+        res = compute_armenian_lectionary(datetime.date(2008, 1, 19))
+        self.assertEqual(res["Source"], "validated-composite")
+        self.assertEqual(res["ReadingsList"], list(_ref_readings(2008, 1, 19)))
+
+    def test_2008_octave_eve_superset_covers_gt(self):
+        out = compute_armenian_lectionary(datetime.date(2008, 1, 13))
+        self.assertEqual(out["Source"], "generative-composite")
+        missing = [r for r in _ref_readings(2008, 1, 13)
+                   if r not in out["ReadingsList"]]
+        self.assertEqual(missing, [], f"octave composite dropped GT reading(s): {missing}")
+
+    def test_normal_year_january_untouched(self):
+        # The encroachment rule must fire ONLY in the extreme year: a normal-Easter year
+        # (2019, Easter Apr 21) has its full post-Nativity window, so neither Jan 13 nor
+        # Jan 19 may be claimed by these composites.
+        for dd in (13, 19):
+            res = compute_armenian_lectionary(datetime.date(2019, 1, dd))
+            self.assertNotIn(res["Source"], {"generative-composite"},
+                             f"2019-01-{dd:02d} wrongly claimed by an octave composite")
+
+
 if __name__ == "__main__":
     unittest.main()
