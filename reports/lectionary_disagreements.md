@@ -1,9 +1,32 @@
 # Lectionary Disagreements & Open Data Items (2001–2026)
 
 > Working record for resolution. Engine state at time of writing: **0 wrong**
-> (validated contract intact), all 41 tests green. Residue = **4 best-effort misses
-> + 26 blanks**. Reproduce any figure with the commands noted per section
+> (validated contract intact), all 49 tests green. Residue = **5 best-effort misses
+> + 17 blanks** (was 4 + 26). Reproduce any figure with the commands noted per section
 > (`dev/residue_classifier.py`).
+>
+> **Nativity-octave January encroachment resolved (2026-07-05, G2).** The 2008
+> extreme-early-Easter year (eve of the Fast of Catechumens on Jan 13) empties the
+> winter grid's post-Nativity window, blanking two days. Both now ship: **Jan 19**
+> (John the Forerunner, transferred out of the aliturgical fast week) byte-EXACT via
+> the validated PnJohn proper; **Jan 13** (octave co-celebrating with the eve) as a
+> completeness superset (GT ⊆ output). See `docs/sources/tonatsooyts-nativity-octave.md`,
+> `tests/…::TestNativityOctaveEncroachment`.
+>
+> **Pre-Lent martyr cohort source-derived (2026-07-06, G1).** Sargis/Atom/Sukias/
+> Voskian/Ghevond — the seven remaining winter-hinge blanks — are now served from the
+> Tōnatsʿoyts **First Volume pp.464-465** (the propers the Second Volume defers to via
+> "see the First Volume up to Vardavar, keeping the order of this place"; captured in the
+> auto OCR + hand-transcribed grabar, since the human run skips those pages). Placed by a
+> fixed-Easter-offset laydown with rank-based displacement (senior Generals shift off a
+> blocking John/Presentation and win the merge), served as a new source-authoritative tier
+> `first-volume-cohort` that also carries forward years. Verse ranges follow the source;
+> four differ from the cache by a versification convention (recorded/reviewed in
+> `dev/source_corrections.py`). MATCH 9466→9473; the 7 cohort blanks are gone. See
+> `docs/sources/tonatsooyts-prelent-cohort.md`, `tests/…::TestPreLentCohort`. **The residue
+> is now 5 misses (4 Apr-7 Annunciation composites + 1 Jan-13 octave superset) + 17 blanks
+> (G3 Feb-13 Presentation-eve collisions and G4 Assumption continua, both First-Volume-
+> deferred for their reading-sets).**
 >
 > **Tail-compression misses resolved (2026-07-05).** The 7 summer/winter/autumn tail saints
 > (Eugenia/Eugenios/Andrew/Adrian/Abraham on 2004-01-27/29, 2004-11-15/16, 2008-07-31/08-04,
