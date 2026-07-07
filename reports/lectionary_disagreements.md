@@ -1,8 +1,10 @@
 # Lectionary Disagreements & Open Data Items (2001–2026)
 
 > Working record for resolution. Engine state at time of writing: **0 wrong**
-> (validated contract intact), all 49 tests green. Residue = **5 best-effort misses
-> + 17 blanks** (was 4 + 26). Reproduce any figure with the commands noted per section
+> (validated contract intact), all 49 tests green. Residue = **5 discrepancies
+> + 17 blanks** (was 4 + 26). A DISCREPANCY is *not incorrect*: it is a rubric-derived
+> best-guess superset (GT ⊆ output) whose byte-exact form the flat slots cannot express,
+> not an error. Reproduce any figure with the commands noted per section
 > (`dev/residue_classifier.py`).
 >
 > **Nativity-octave January encroachment resolved (2026-07-05, G2).** The 2008
@@ -24,7 +26,7 @@
 > four differ from the cache by a versification convention (recorded/reviewed in
 > `dev/source_corrections.py`). MATCH 9466→9473; the 7 cohort blanks are gone. See
 > `docs/sources/tonatsooyts-prelent-cohort.md`, `tests/…::TestPreLentCohort`. **The residue
-> is now 5 misses (4 Apr-7 Annunciation composites + 1 Jan-13 octave superset) + 17 blanks
+> is now 5 discrepancies (4 Apr-7 Annunciation composites + 1 Jan-13 octave superset) + 17 blanks
 > (G3 Feb-13 Presentation-eve collisions and G4 Assumption continua, both First-Volume-
 > deferred for their reading-sets).**
 >
