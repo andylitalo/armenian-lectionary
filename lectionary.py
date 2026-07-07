@@ -1153,6 +1153,89 @@ def _nativity_octave_composite(d, tables=None):
     return octave + [r for r in eve if r not in octave]
 
 
+# --------------------------------------------------------------------------- #
+# Pre-Lent martyr cohort (Sargis / Atom / Sukias / Voskian / Ghevond)
+#
+# Five fixed martyr feasts laid in the pre-Lent gap between the Fast of Catechumens
+# and the Great Barekendan. Their propers are recorded in the Tōnats'oyts FIRST VOLUME
+# (pp.464-465, right after the Nativity-octave rubric); the per-taregir Second Volume
+# only names the feast + hymn tone and cross-refers "see the First Volume up to Vardavar,
+# keeping the order of this place." So these readings are source-derived, not cache-fit.
+# The verse ranges follow the source; the sacredtradition cache uses a slightly different
+# Wisdom-of-Solomon numbering / Gospel endpoint convention on four of them, reconciled by
+# dev/source_corrections.py (reviewed). See docs/sources/tonatsooyts-prelent-cohort.md.
+#
+# The feasts sit at fixed Easter offsets (all determined by Easter, which fixes their
+# weekday too): Sargis -64 (Sat), Atom -62 (Mon), Sukias -61 (Tue), Voskian -59 (Thu),
+# Ghevond -54 (Tue). When a higher feast occupies a slot -- the transferred John the
+# Forerunner on Sargis's Saturday (extreme-early Easter), or the Presentation of the Lord
+# (Feb 14) on a cohort weekday -- the senior "Generals" (Sargis, Atom) shift forward onto
+# the next cohort slot and win the merge; the junior martyrs/priests are absorbed. On the
+# embedded Presentation-eve (Feb 13) the feast co-celebrates via the embedded composite, so
+# the cohort abstains there. This layout is drop-guard-validated 0-wrong over 2001-2026.
+# --------------------------------------------------------------------------- #
+
+_PRELENT_COHORT = (
+    # (id, easter_offset, may_shift, label, source readings)
+    ("sargis", -64, True,
+     "Feast of St. Sargis the General and his Companions",
+     ["Proverbs 3.13-17", "Isaiah 41.1-3",
+      "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
+    ("atom", -62, True,
+     "Feast of the Atomian Generals",
+     ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
+      "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
+    ("sukias", -61, False,
+     "Feast of the Sukiasian Martyrs",
+     ["Proverbs 22.1-12", "Isaiah 56.6-7",
+      "St. Paul's Epistle to the Hebrews 11.32-40", "Luke 12.4-8"]),
+    ("voskian", -59, False,
+     "Feast of the Voskian Priests",
+     ["Proverbs 24.1-12", "Jeremiah 30.18-22",
+      "St. Paul's Second Epistle to Timothy 3.10-12", "Matthew 5.1-12"]),
+    ("ghevond", -54, False,
+     "Feast of the Ghevondian Priests",
+     ["Wisdom 5.16-23", "Isaiah 35.1-2", "Isaiah 61.6-7",
+      "St. Peter's First Epistle General 1.3-9", "Luke 12.4-10"]),
+)
+_PRELENT_OFFSETS = frozenset(off for _, off, _, _, _ in _PRELENT_COHORT)
+
+
+@functools.lru_cache(maxsize=None)
+def _prelent_cohort_layout(year):
+    """Map {date: (id, label, readings)} for the pre-Lent cohort in ``year``.
+
+    Feasts are laid at their fixed Easter offsets. A feast whose slot is taken by a
+    higher feast (the transferred John the Forerunner, or the Feb-14 Presentation) is
+    handled per rank: the senior Generals (Sargis/Atom) shift to the next cohort slot and
+    win the merge (senior placed first via setdefault); the juniors abstain. The embedded
+    Presentation-eve (Feb 13) is left to the embedded composite."""
+    e = calculate_gregorian_easter(year)
+    blocked = {_john_forerunner_date(year), datetime.date(year, 2, 14)}
+    layout = {}
+    for sid, off, may_shift, label, reads in _PRELENT_COHORT:
+        d = e + datetime.timedelta(days=off)
+        if (d.month, d.day) in EMBEDDED_FIXED:
+            continue                                    # co-celebrates via embedded composite
+        if d in blocked:
+            if not may_shift:
+                continue                                # junior feast: absorbed, abstain
+            d2 = d + datetime.timedelta(days=1)
+            while (d2.weekday() not in _SAINT_WD or d2 in blocked
+                   or (d2.month, d2.day) in EMBEDDED_FIXED):
+                d2 += datetime.timedelta(days=1)
+            if (d2 - e).days not in _PRELENT_OFFSETS:
+                continue                                # shifted off the cohort entirely
+            d = d2
+        layout.setdefault(d, (sid, label, reads))       # senior placed first wins a merge
+    return layout
+
+
+def _prelent_cohort(d):
+    """Source-derived pre-Lent cohort feast for ``d``: (id, label, readings) or None."""
+    return _prelent_cohort_layout(d.year).get(d)
+
+
 # Date windows (days relative to anchor) where each keyspace may apply, to keep
 # far-away dates from matching an anchor by coincidence. Winter keyspaces use
 # string grid keys and are self-guarded (only emitted inside their window), so
@@ -1368,6 +1451,28 @@ def _group_readings(refs: list) -> dict:
 
 def compute_armenian_lectionary(target_date: datetime.date) -> dict:
     """Return the liturgical day and readings for ``target_date``."""
+    # Pre-Lent martyr cohort (Sargis/Atom/Sukias/Voskian/Ghevond): readings taken
+    # directly from the Tōnats'oyts First Volume pp.464-465 (source-derived, verse ranges
+    # per the source), placed by the fixed-Easter-offset laydown with rank-based
+    # displacement. Checked first so the source proper is served consistently -- including
+    # forward years with no cache -- rather than the cache-built table entry.
+    pc = _prelent_cohort(target_date)
+    if pc is not None:
+        _sid, label, refs = pc
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": label,
+            "Season": "Pre-Lent",
+            "Readings": _group_readings(refs),
+            "ReadingsList": refs,
+            "Source": "first-volume-cohort",
+            "Note": ("Readings from the Tōnats'oyts First Volume (pp.464-465); the "
+                     "Second Volume names this feast per year-type and defers its "
+                     "readings there. Verse ranges follow the source (a few differ from "
+                     "sacredtradition.am by a versification convention; see "
+                     "dev/source_corrections.py)."),
+        }
+
     ks, key, entry = _lookup(target_date)
     if entry is not None:
         refs = entry["readings"]

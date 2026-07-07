@@ -15,8 +15,12 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from lectionary import compute_armenian_lectionary  # noqa: E402
+from dev.source_corrections import apply_cohort_corrections  # noqa: E402
 
-_VALIDATED = {"validated-table", "validated-composite"}
+# Source-derived tiers held to the 0-wrong contract. first-volume-cohort ships the
+# Tōnats'oyts First-Volume propers directly (source-authoritative), reconciled with the
+# cache oracle via the reviewed cohort corrections below.
+_VALIDATED = {"validated-table", "validated-composite", "first-volume-cohort"}
 _REF_DIR = pathlib.Path(__file__).resolve().parent / "reference_data"
 # The build cross-year-validates over this cache range (dev/build_table.py); 2027+
 # are deliberately held-out future years, so the residue tally scopes to it.
@@ -37,7 +41,12 @@ def main() -> None:
             continue
         got = compute_armenian_lectionary(d)
         refs = got["ReadingsList"]
-        if _norm(refs) == _norm(gt["readings"]):
+        gt_readings = gt["readings"]
+        if got["Source"] == "first-volume-cohort":
+            # The engine serves the source verse-ranges; apply the reviewed source-vs-cache
+            # corrections to the oracle before comparing (scoped to the cohort tier).
+            gt_readings = apply_cohort_corrections(gt_readings)
+        if _norm(refs) == _norm(gt_readings):
             # Exact agreement -- including the case where both are empty (a day
             # GT itself carries no readings), which is a correct match, not a
             # blank abstention.

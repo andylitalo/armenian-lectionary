@@ -13,17 +13,28 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
+from dev.source_corrections import apply_cohort_corrections  # noqa: E402
 from lectionary import compute_armenian_lectionary  # noqa: E402
 
 # The structurally-validated tiers: a mismatch here breaks the strict-shipping
 # 0-wrong contract. The generative/resolved tiers are labeled best-guesses,
-# tracked separately and NOT bound by 0-wrong.
-VALIDATED = {"validated-table", "validated-composite"}
+# tracked separately and NOT bound by 0-wrong. first-volume-cohort ships the
+# Tōnats'oyts First-Volume propers directly (source-authoritative).
+VALIDATED = {"validated-table", "validated-composite", "first-volume-cohort"}
+
+
+def _expected(res, readings):
+    """Cache readings normalized for comparison: on a first-volume-cohort day the engine
+    serves the source verse-ranges, so apply the reviewed source-vs-cache corrections to
+    the oracle first (scoped to that tier)."""
+    if res["Source"] == "first-volume-cohort":
+        return apply_cohort_corrections(list(readings))
+    return list(readings)
 
 # Current baseline; regressions below this fail. Overridable via env so a
 # pre-backfill checkout (smaller cache) can lower it without editing source.
 # Counts VALIDATED-tier exact matches only (the provably-safe core).
-COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "9384"))
+COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "9392"))
 
 
 class TestRegression(unittest.TestCase):
@@ -38,7 +49,7 @@ class TestRegression(unittest.TestCase):
                 continue
             reference += 1
             res = compute_armenian_lectionary(datetime.date.fromisoformat(iso))
-            match = res["ReadingsList"] == list(day["readings"])
+            match = res["ReadingsList"] == _expected(res, day["readings"])
             if res["Source"] in VALIDATED:
                 if match:
                     validated_exact += 1
@@ -343,6 +354,57 @@ class TestNativityOctaveEncroachment(unittest.TestCase):
             res = compute_armenian_lectionary(datetime.date(2019, 1, dd))
             self.assertNotIn(res["Source"], {"generative-composite"},
                              f"2019-01-{dd:02d} wrongly claimed by an octave composite")
+
+
+class TestPreLentCohort(unittest.TestCase):
+    """Locks the pre-Lent martyr cohort (Sargis/Atom/Sukias/Voskian/Ghevond) served from
+    the Tōnats'oyts First Volume pp.464-465. Readings follow the SOURCE verse-ranges (a few
+    differ from the cache by a versification convention, reconciled via source_corrections).
+    Covers the two rank-based displacement collisions and the source-faithful ranges."""
+
+    def test_all_cohort_days_match_source_corrected_cache(self):
+        # Every cohort-tier day over the cache equals the source-corrected oracle, 0 wrong.
+        days = load_all()
+        wrong = []
+        for iso, day in days.items():
+            if not day["readings"]:
+                continue                      # held-out/empty day: no oracle to compare
+            res = compute_armenian_lectionary(datetime.date.fromisoformat(iso))
+            if res["Source"] != "first-volume-cohort":
+                continue
+            if res["ReadingsList"] != _expected(res, day["readings"]):
+                wrong.append(iso)
+        self.assertEqual(wrong, [], f"cohort tier disagreed with source-corrected cache: {wrong}")
+
+    def test_2008_john_collision_sargis_wins(self):
+        # Extreme-early Easter: John (transferred to Sargis's Saturday, Jan 19) pushes
+        # Sargis onto Atom's Monday (Jan 21); the senior general wins the merge.
+        res = compute_armenian_lectionary(datetime.date(2008, 1, 21))
+        self.assertEqual(res["Source"], "first-volume-cohort")
+        self.assertIn("St. Sargis", res["Liturgical Day"])
+        self.assertEqual(res["ReadingsList"], list(_ref_readings(2008, 1, 21)))
+
+    def test_2022_presentation_collision_atom_wins(self):
+        # The Presentation of the Lord (Feb 14) takes Atom's Monday; Atom shifts to
+        # Sukias's Tuesday (Feb 15) and wins the merge.
+        res = compute_armenian_lectionary(datetime.date(2022, 2, 15))
+        self.assertEqual(res["Source"], "first-volume-cohort")
+        self.assertIn("Atomian", res["Liturgical Day"])
+
+    def test_source_verse_ranges_served(self):
+        # The engine serves the SOURCE ranges, not the cache's (Atom Wisdom 6.12-21 /
+        # John 16.1-5), per the reviewed corrections.
+        res = compute_armenian_lectionary(datetime.date(2011, 2, 21))  # Atom, clean year
+        self.assertIn("Wisdom 6.12-21", res["ReadingsList"])
+        self.assertIn("John 16.1-5", res["ReadingsList"])
+
+    def test_forward_year_served_without_oracle(self):
+        # The whole point of source-derivation: a forward year (no cache) still ships the
+        # cohort. 2027 Sargis is the Saturday at Easter-64 (2027 Easter = Mar 28 → Jan 23),
+        # shipped from the fixed offset regardless of any cache.
+        res = compute_armenian_lectionary(datetime.date(2027, 1, 23))  # Sargis 2027 (E-64)
+        self.assertEqual(res["Source"], "first-volume-cohort")
+        self.assertIn("St. Sargis", res["Liturgical Day"])
 
 
 if __name__ == "__main__":

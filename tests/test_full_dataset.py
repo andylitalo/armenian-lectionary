@@ -21,11 +21,12 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
+from dev.source_corrections import apply_cohort_corrections  # noqa: E402
 from lectionary import compute_armenian_lectionary  # noqa: E402
 
 # Structurally-validated tiers (bound by the 0-wrong contract) vs. the labeled tiers
 # that ship readings but are not cache cross-year validated (tracked separately).
-VALIDATED = {"validated-table", "validated-composite"}
+VALIDATED = {"validated-table", "validated-composite", "first-volume-cohort"}
 # Best-effort tiers: the generative best-guess laydown/continua, and the Second-Volume
 # directory cycle. The cycle tier is build-time checked for cache consistency
 # (dev/build_second_volume_cycles.py drops any entry contradicted by ground truth), so
@@ -49,7 +50,7 @@ DIRECTORY = {"second-volume-cycle"}
 # (Annunciation Easter-offset keyspace AnnE -- the Holy-Week reorder is
 # deterministic in the Easter offset) raises VALIDATED-tier exact 9346 -> 9364 /
 # 9495 = 98.62% (0-wrong frozen) and coverage to ~99.3%.
-COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "98.6"))
+COVERAGE_PCT_FLOOR = float(os.environ.get("COVERAGE_PCT_FLOOR", "98.9"))
 # Lower bound on processed reference days; guards against silent data loss.
 EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
 # Floor on the fraction of all days that ship ANY readings (validated + best-guess).
@@ -97,7 +98,12 @@ class TestFullDataset(unittest.TestCase):
                 blank += 1
                 continue
             nonblank += 1
-            match = res["ReadingsList"] == list(day["readings"])
+            expected = list(day["readings"])
+            if src == "first-volume-cohort":
+                # Engine serves the source verse-ranges; reconcile the cache oracle with
+                # the reviewed source-vs-cache corrections (scoped to this tier).
+                expected = apply_cohort_corrections(expected)
+            match = res["ReadingsList"] == expected
             if src in VALIDATED:
                 if match:
                     validated_exact += 1
