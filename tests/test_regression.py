@@ -111,6 +111,89 @@ class TestCocelebrationResolvers(unittest.TestCase):
                              f"{year}-11-21 should exact-match ground truth")
 
 
+class TestPresentationEveComposite(unittest.TestCase):
+    """Locks Fix A: the Presentation-eve (Feb 13) composite best-guess for single-sample
+    Easter offsets the PrLE keyspace cannot validate. Base proper (movable slot or
+    pre-Lent cohort) ++ the fixed Presentation-eve block; labeled generative-composite,
+    never validated. See reports/blank_sourcing.md."""
+
+    _EVE = [
+        "Leviticus 12.6-8", "Proverbs 8.22-34", "Ezekiel 44.1-2", "Malach 3.1-4",
+        "St. Paul's Epistle to the Galatians 3.24-29", "Luke 2.22-40",
+    ]
+    # Days whose base resolves and whose GT carries the full eve block -> exact match.
+    _EXACT = ("2005-02-13", "2008-02-13", "2016-02-13", "2019-02-13",
+              "2020-02-13", "2022-02-13")
+
+    def _gt(self, iso):
+        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
+                           "reference_data", f"{iso}.json")
+        with open(ref) as fh:
+            return json.load(fh)["readings"]
+
+    def test_exact_matches_ship_best_guess(self):
+        for iso in self._EXACT:
+            res = compute_armenian_lectionary(datetime.date.fromisoformat(iso))
+            # Never validated -> can never count against the 0-wrong contract.
+            self.assertNotIn(res["Source"], VALIDATED, iso)
+            self.assertEqual(res["Source"], "generative-composite", iso)
+            self.assertEqual(res["ReadingsList"], self._gt(iso),
+                             f"{iso} should exact-match ground truth")
+
+    def test_2019_is_eve_block_only(self):
+        # 3rd day of the Fast of the Catechumens: no base proper, just the eve block.
+        res = compute_armenian_lectionary(datetime.date(2019, 2, 13))
+        self.assertEqual(res["ReadingsList"], self._EVE)
+
+    def test_composites_never_drop_a_gt_reading(self):
+        # The two non-exact days stay best-guess and remain superset-safe: 2007 (GT eve
+        # tail truncated to Lev 12.6-8, engine ships the full block) keeps every GT
+        # reading; 2001 differs only by the known source-versification variant
+        # (Luke 12.4-8 vs 12.4-9), so exclude that one reading.
+        res07 = compute_armenian_lectionary(datetime.date(2007, 2, 13))
+        self.assertNotIn(res07["Source"], VALIDATED)
+        for r in self._gt("2007-02-13"):
+            self.assertIn(r, res07["ReadingsList"], f"2007-02-13 dropped GT reading {r}")
+
+    def test_2011_02_13_composes_arajawor_base_plus_eve(self):
+        # Its base is the Aṙajawor Barekendan proper (First Vol p.462), resolved via the
+        # winter continua; Fix A composes it with the eve block -> exact match.
+        res = compute_armenian_lectionary(datetime.date(2011, 2, 13))
+        self.assertEqual(res["ReadingsList"], self._gt("2011-02-13"))
+        self.assertEqual(res["ReadingsList"][:3],
+                         ["Isaiah 61.10-62.9",
+                          "St. Paul's Second Epistle to Timothy 2.15-26",
+                          "John 6.15-21"])
+        self.assertEqual(res["ReadingsList"][3:], self._EVE)
+
+
+class TestFirstVolumeContinua(unittest.TestCase):
+    """Locks the interim 'A' wiring of the First-Volume movable winter continua
+    (source-derived, best-guess) for the latest-Easter single-sample days."""
+
+    _DAYS = ("2011-02-04", "2011-02-06", "2011-02-09", "2011-02-11", "2022-02-04")
+
+    def _gt(self, iso):
+        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
+                           "reference_data", f"{iso}.json")
+        with open(ref) as fh:
+            return json.load(fh)["readings"]
+
+    def test_winter_continua_days_exact_and_best_guess(self):
+        for iso in self._DAYS:
+            res = compute_armenian_lectionary(datetime.date.fromisoformat(iso))
+            self.assertEqual(res["Source"], "first-volume-continua", iso)
+            self.assertNotIn(res["Source"], VALIDATED, iso)   # never validated -> never WRONG
+            self.assertEqual(res["ReadingsList"], self._gt(iso),
+                             f"{iso} should match source-confirmed GT")
+
+    def test_does_not_misfire_on_nativity_octave(self):
+        # In earliest-Easter 2008, offset -70 falls on Jan 13 (the octave); the continua
+        # resolver must NOT claim it -- the octave composite does.
+        res = compute_armenian_lectionary(datetime.date(2008, 1, 13))
+        self.assertNotEqual(res["Source"], "first-volume-continua")
+
+
 class TestLeapSummerParity(unittest.TestCase):
     """Locks the Second-Volume leap-parity summer split: the same Easter date (03-27)
     ships a distinct saint on the shared civil date in a leap vs a non-leap year, per the

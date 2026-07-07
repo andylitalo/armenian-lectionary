@@ -173,10 +173,13 @@ call, not resolvable from the files.
 2026-08-06  generative-saint         Adrian & Natalia …
 ```
 
-(The remaining 29 blanks are separate: mostly February Class-D embedded feasts —
-single-sample Presentation-eve offsets, Annunciation-in-Lent — out of scope under
-exact-match. The cross-validatable Presentation-eve offsets were recovered via `PrLE`;
-see the co-celebration recovery note in the header.)
+(The remaining **17** blanks are separate and fully enumerated in
+`reports/blank_sourcing.md`: 9 Feb-13 Presentation-eve composites (single-sample `PrLE`
+offsets) + 8 extreme-Easter movable Sundays/fast days (2008/2011/2022). None are
+Second-Volume floating saints or Assumption continua, and none need transcription — the
+readings are already digitized; the residue is engine composition/coverage. The
+cross-validatable Presentation-eve offsets were already recovered via `PrLE`; see the
+co-celebration recovery note in the header.)
 
 ---
 
