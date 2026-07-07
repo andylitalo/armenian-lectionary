@@ -1074,6 +1074,116 @@ def _annunciation_composite(d, tables=None):
     return proper + day                                 # proper -> day (Holy Week supreme days)
 
 
+# --------------------------------------------------------------------------- #
+# Presentation-eve (Feb 13) collision composite
+#
+# Feb 14 is the Presentation of the Lord (Tearnndaraj); its eve (Feb 13) co-celebrates
+# the day's own base proper with a FIXED Presentation-eve block -- the Feb-14 feast
+# readings, laid out in the Tōnats'oyts First Volume p.462, whose rubric there directs
+# that when Feb 14 falls in the Fast of Catechumens / Great Lent the day's own Scriptures
+# are read on Feb 13 at Midday and the eve service follows. The strict pipeline learns the
+# cross-year-consistent buckets via the
+# PrLE keyspace (civil date + Easter offset) and ships them VALIDATED. This composite
+# is the BEST-GUESS fallback for the offsets PrLE cannot validate -- single-sample
+# near-Easter years where Feb 13 lands on a coordinate seen in no other cache year.
+# Like _annunciation_composite it composes deterministically and errs toward a
+# SUPERSET (it never drops a reading GT keeps), so it is labeled best-guess, never
+# validated.
+# --------------------------------------------------------------------------- #
+
+_PRESENTATION_EVE_BLOCK = (
+    "Leviticus 12.6-8", "Proverbs 8.22-34", "Ezekiel 44.1-2", "Malach 3.1-4",
+    "St. Paul's Epistle to the Galatians 3.24-29", "Luke 2.22-40",
+)
+
+
+def _presentation_eve_composite(d, tables=None):
+    """Best-guess Presentation-eve (Feb 13) readings via the co-celebration rule, for
+    offsets the validated PrLE keyspace does not cover. Returns a list of refs, or None
+    (None if the date is not Feb 13, or its movable base cannot be resolved).
+
+    Base = the day's own movable/saint proper (the readings it would carry without the
+    eve); the fixed Presentation-eve block is appended. The base resolves via the movable
+    slot for a Sunday/ferial/saint the strict table already carries; when that is a
+    single-sample coordinate it falls back to the pre-Lent cohort martyr co-celebrating
+    the eve (Easter-offset-keyed). If neither resolves (an extreme-Easter movable Sunday
+    the table cannot reach, e.g. the Easter-70 Fast-of-Catechumens eve) it returns None
+    and the day stays an honest blank rather than shipping a subset."""
+    if (d.month, d.day) != (2, 13):
+        return None
+    if tables is None:
+        tables = _TABLES
+    base = _movable_slot_readings(d, tables)
+    if base is None:
+        # A pre-Lent cohort martyr (Sargis/Atom/Sukias/Voskian/Ghevond) co-celebrating
+        # the eve: its proper is Easter-offset-keyed (its movable slot is single-sample
+        # here). Uses the source versification, which may differ from the cache by a
+        # verse convention -- so this ships best-guess, not validated.
+        e_off = (d - calculate_gregorian_easter(d.year)).days
+        for _sid, off, _ms, _label, reads in _PRELENT_COHORT:
+            if off == e_off:
+                base = list(reads)
+                break
+    if base is None:
+        # The Aṙajawor Barekendan (Feb 13 = Easter-70): its Sunday proper is the
+        # First-Volume movable continua base (p.462), onto which the eve block appends.
+        base = _first_volume_continua(d)
+    if base is None:
+        return None
+    # Superset-safe append: keep GT order (base, then the eve block) without duplicating
+    # a reading the base already carries.
+    return list(base) + [r for r in _PRESENTATION_EVE_BLOCK if r not in base]
+
+
+# --------------------------------------------------------------------------- #
+# First-Volume movable ordinary-time continua (winter arc)
+#
+# The after-Theophany winter continua (Tōnats'oyts First Volume pp.457-460, reading
+# 1-2 Timothy + John) and its line-75 bridge into the after-Vardavar continua (pp.517-519,
+# reading 1 Corinthians + Matthew/Mark), plus the Aṙajawor Barekendan proper (p.462). These
+# positions are reached only in the latest-Easter winters (2011, 2022), so they are
+# single-sample in the 2001-2026 cache and the strict learner leaves them blank. The
+# readings here are taken from the First Volume directly (source-confirmed byte-for-byte;
+# see reports/blank_sourcing.md) and ship best-guess. Keyed by Easter offset -- the
+# coordinate that fixes the position within the fixed-length (70-day) pre-Lent interval;
+# offsets -79..-70 always fall in this Jan/Feb window. This is the interim "A" wiring: the
+# general continua model (a dual-anchor walk of the source laydown that also covers the
+# summer after-Transfiguration arc, e.g. 2008) is left to a later source-modeling pass.
+# --------------------------------------------------------------------------- #
+
+_FV_WINTER_CONTINUA = {
+    # Easter offset -> First-Volume movable readings (verbatim, GT-format)
+    -79: ["St. Paul's First Epistle to the Corinthians 5.9-6.10",     # p.518 (Friday)
+          "Matthew 18.23-35"],
+    -77: ["Isaiah 3.16-4.1",                                          # p.517 (2nd Sun. a. Vardavar)
+          "St. Paul's First Epistle to the Corinthians 1.25-30",
+          "Matthew 18.10-14"],
+    -74: ["St. Paul's First Epistle to the Corinthians 7.25-35",      # p.519 (Wednesday)
+          "Matthew 19.13-26"],
+    -72: ["St. Paul's First Epistle to the Corinthians 11.1-16",      # p.519 (Friday; 2011+2022)
+          "Mark 1.35-45"],
+    -70: ["Isaiah 61.10-62.9",                                        # p.462 Aṙajawor Barekendan
+          "St. Paul's Second Epistle to Timothy 2.15-26",
+          "John 6.15-21"],
+}
+
+
+def _first_volume_continua(d):
+    """Source-derived readings for a First-Volume movable ordinary-time day in the
+    after-Theophany winter interval that the strict table leaves single-sample. Keyed by
+    Easter offset (the fixed-length pre-Lent interval fixes the continua position). Returns
+    a list of refs or None. Best-guess, never validated -- so it can never break the
+    0-wrong contract."""
+    # Only after the Nativity octave: in the earliest-Easter years the same offsets fall on
+    # early-January feasts (e.g. offset -70 = Jan 13, the octave, when Easter is Mar 23),
+    # which have their own resolvers -- the winter continua proper begins after the octave.
+    if d <= datetime.date(d.year, 1, 13):
+        return None
+    e_off = (d - calculate_gregorian_easter(d.year)).days
+    refs = _FV_WINTER_CONTINUA.get(e_off)
+    return list(refs) if refs else None
+
+
 def _fast_of_catechumens_eve(year: int) -> datetime.date:
     """Eve of the Fast of Catechumens (Aṙaǰawor) -- the Sunday at Easter-70 that opens
     the aliturgical fast week (Mon-Fri, Easter-69..-65) before Great Lent's Sunday."""
@@ -1586,6 +1696,52 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
                      "rubric-deterministic but the day-portion may be liturgically "
                      "reduced, so this is not cross-year validated. Filter on "
                      "Source/Confidence if you need only validated readings."),
+        }
+
+    # Presentation-eve (Feb 13) collision composite best-guess: the validated PrLE
+    # keyspace had no entry for this year's Easter offset (a single-sample near-Easter
+    # year). Compose the day's base proper with the fixed Presentation-eve block
+    # (Tonats'oyts First Vol p.464/467); labeled best-guess. See _presentation_eve_composite.
+    pe = _presentation_eve_composite(target_date)
+    if pe is not None:
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": "Eve of the Presentation of the Lord",
+            "Season": "Presentation",
+            "Readings": _group_readings(pe),
+            "ReadingsList": pe,
+            "Source": "generative-composite",
+            "Confidence": "best-guess",
+            "Note": ("Best-guess readings for the eve of the Presentation of the Lord "
+                     "(Feb 14): the day's own base proper combined with the fixed "
+                     "Presentation-eve block (Tonats'oyts First Vol p.462). This "
+                     "year's Easter offset is single-sample, so the strict PrLE keyspace "
+                     "could not validate it; the composite errs toward a superset and is "
+                     "not cross-year validated. Filter on Source/Confidence if you need "
+                     "only validated readings."),
+        }
+
+    # First-Volume movable ordinary-time continua (winter arc): a single-sample
+    # after-Theophany day (latest-Easter winters 2011/2022) the strict table can't cover.
+    # Source-derived from the First Volume (pp.458-460/462/517-519); best-guess, never
+    # validated. See _first_volume_continua.
+    fv = _first_volume_continua(target_date)
+    if fv is not None:
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": "(movable ordinary-time reading)",
+            "Season": "After Theophany",
+            "Readings": _group_readings(fv),
+            "ReadingsList": fv,
+            "Source": "first-volume-continua",
+            "Confidence": "best-guess",
+            "Note": ("Source-derived readings from the Tōnats'oyts First-Volume movable "
+                     "ordinary-time continua (after-Theophany winter arc, pp.458-460, with "
+                     "the p.460 bridge into the after-Vardavar continua pp.517-519). This "
+                     "position is reached only in the latest-Easter winters, so it is "
+                     "single-sample in the cache and not cross-year validated; the readings "
+                     "are taken from the source directly. Filter on Source/Confidence if "
+                     "you need only validated readings."),
         }
 
     # John the Forerunner (Jan 14) transferred into an extreme-early-Easter January by
