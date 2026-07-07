@@ -4,8 +4,14 @@
 > Calendar/Typikon), **pp. 486–488**. The inline page break ("Page 487") preserved
 > below falls naturally in the middle of this range.
 >
+> **Digitized text:** pp. 486–487 are auto-OCR'd in the `grabar-ocr` pipeline —
+> `runs/auto__proj__trocr500__gemini-min/pages/page_0486_auto.lines.json` and
+> `page_0487_auto.lines.json` (fine-tuned TrOCR + Gemini minimal-edit), with the English
+> reading in the same run's `translations/gemini/`. The Eastertide collision clause quoted
+> below is transcribed from **page_0487**.
+>
 > **Feast:** Annunciation to the Theotokos — fixed date **April 7** (eve **April 6**,
-> the Նախատօնակ / pre-festive). Celebrated for **seven days**.
+> the Նախатонак / pre-festive). Celebrated for **seven days**.
 
 ---
 
@@ -119,7 +125,7 @@ the colliding day — exactly as the cached ground truth shows:
 |---|---|---|
 | **Palm Sunday (−7), Great Thursday (−3), Great Friday (−2), Holy Saturday (−1), Easter (0)** | "read the Scripture and the Gospel [of the Annunciation] … then begin the proper office of the day" | **proper → day** |
 | **Lazarus Saturday (−8), Great Monday (−6), Great Tuesday (−5), Great Wednesday (−4)** | "Read the Scripture and Gospel of the day … Then begin the celebration of the Annunciation" | **day → proper** |
-| **Yinants / Eastertide (≥ +1)** | "the Psalms, Scriptures, and Gospels are of the Resurrection … read the Gospel of the day after the Annunciation book and Gospel" | **proper → day**, plus the eve's resurrection Gospel (see below) |
+| **Yinants / Eastertide (≥ +1)** | "the Psalms, Scriptures, and Gospels are of the Resurrection … read the Gospel of the day after the Annunciation book and Gospel" | **proper → day**; the eve's resurrection Gospel is added **only inside the Easter octave** (offset ≤ +8) — see below |
 | **Lenten Sunday with its own readings** (offset ≤ −9 and offset % 7 == 0, e.g. the Sunday of the Coming) | the day has a Liturgy, so its readings co-celebrate | **day → proper** |
 | **Aliturgical Lenten *weekday* feria** (offset ≤ −9, non-Sunday; no proper Liturgy readings) | nothing to combine | **proper only** |
 
@@ -147,3 +153,34 @@ in 2001–2026 (e.g. **2027**, where Apr 7 = Easter + 10, the 11th day of Easter
 >   the day before, and in the Easter octave its resurrection Gospel is co-read; the
 >   composite appends any eve Gospel the day slot lacks. Previously the engine dropped
 >   `John 21.1-14` (the 6th-day-of-Easter Gospel).
+
+### Eastertide eve-Gospel folding is octave-only (source-corrected via page_0487)
+
+The digitized rubric (page_0487) says only that in Eastertide you read the Annunciation
+book+Gospel, then *"the Gospel of the day,"* and that *"the Midday and Evening … are of the
+Resurrection"* — i.e. the day keeps its own Eastertide readings. It says **nothing** about
+re-reading the **eve's** Gospels on April 7. The eve is celebrated on April 6 alone. Folding
+the eve Gospels into April 7 is justified **only inside the Easter octave** (offset ≤ +8),
+where the octave repeats the feast-day resurrection Gospel. For a **non-octave** Eastertide
+year the composite therefore returns `proper ++ day` and takes nothing from the eve
+(`_annunciation_composite`, the `e_off >= 1` branch, gated on `e_off <= 8`).
+
+**Empirical validation against the cache** (Apr 7 in non-octave Eastertide):
+
+| Year | Apr 7 offset | GT readings | Engine now | Result |
+|---|---|---|---|---|
+| 2005 | Easter + 11 | 11 | 11 | **exact match** (byte-for-byte) |
+| 2016 | Easter + 11 | 11 | 11 | **exact match** (byte-for-byte) |
+| 2008 | Easter + 15 | 11 | 13 | superset-safe (2 extra day readings, 0 dropped) |
+
+The two Easter+11 years reproduce ground truth exactly — confirming that non-octave
+Eastertide GT carries **no eve readings** — while the octave path (2018, Easter+6) is
+unchanged and still superset-safe. Before this correction the engine folded the eve Gospels
+unconditionally, over-reading in every non-octave Eastertide year.
+
+**2027 (Easter + 10, the 11th day of Eastertide, non-octave).** The engine now ships the
+reduced 13-reading set `proper(7) ++ day(6)` instead of the earlier 17 (which had 4 spurious
+eve Gospels). The true published set is likely ~11 (as in 2005/2016: proper + a ~4-Gospel day
+subset); the composite stops at the superset-safe reduction rather than guessing the exact
+day-subset, because GT shows that subset varies per-offset in a way the flat `E`/`EB` slot
+cannot express (e.g. 2008 keeps its `Acts 9.32-43` but drops a Catholic epistle).

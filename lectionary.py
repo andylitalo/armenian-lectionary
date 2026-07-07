@@ -1063,14 +1063,22 @@ def _annunciation_composite(d, tables=None):
     if e_off in _ANN_DAY_FIRST:
         return day + proper                             # day -> proper
     if e_off >= 1:
-        # Eastertide: readings are "of the Resurrection" (Tonatsooyts p.487) and the eve
-        # (Apr 6, the Nakhatonak pre-festive) is celebrated the day before, so in the
-        # Easter octave its resurrection Gospel is co-read. Append any eve Gospel not
-        # already carried by the day slot so it is not missed.
-        eve = _movable_slot_readings(d - datetime.timedelta(days=1), tables) or []
-        extra = [r for r in eve if _classify_reading(r) == "Gospel"
-                 and r not in day and r not in proper]
-        return proper + day + extra
+        # Eastertide. The digitized Tonatsooyts collision rubric (pp.486-488; auto-OCR
+        # in grabar-ocr runs/auto__proj__trocr500__gemini-min page_0487) prescribes:
+        # read the Annunciation Book+Gospel, then "the Gospel of the day"; and "in the
+        # Midday and in the Evening the Psalm, Book, and Gospels are of the Resurrection"
+        # -- i.e. the day keeps its own Eastertide readings. So the day's readings are
+        # proper ++ the day's movable slot, and NOTHING is taken from the eve: Apr 6 (the
+        # Nakhatonak pre-festive) is celebrated on Apr 6 alone. The one exception is the
+        # Easter OCTAVE (e_off <= 8), where the octave repeats the feast-day resurrection
+        # Gospel, so the eve's Gospel is co-read; outside the octave (e.g. 2027, where
+        # Apr 7 = Easter+10) folding the eve Gospels in over-reads, so we drop them.
+        if e_off <= 8:
+            eve = _movable_slot_readings(d - datetime.timedelta(days=1), tables) or []
+            extra = [r for r in eve if _classify_reading(r) == "Gospel"
+                     and r not in day and r not in proper]
+            return proper + day + extra
+        return proper + day
     return proper + day                                 # proper -> day (Holy Week supreme days)
 
 
