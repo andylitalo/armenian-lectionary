@@ -61,7 +61,9 @@ Regenerate these figures with `python dev/compare_app.py`.
 The engine treats the printed Տօնացոյց (Tōnatsooyts) as the **primary source** and
 sacredtradition.am as a **test oracle** (see `dev/source_corrections.py`). Systematic
 versification-convention differences are corrected on the source-derived tiers; confirmed
-**typographical errors** in the printed source are catalogued in [`TYPOS.md`](TYPOS.md),
+**typographical errors** in the printed source are catalogued in the digitization repo,
+next to the source, at
+[`grabar-ocr` `corpus/TYPOS.md`](https://github.com/andylitalo/grabar-ocr/blob/main/corpus/TYPOS.md),
 and where a source typo would yield a wrong reading the engine ships the corrected value.
 
 For example, the **eve of the Presentation of the Lord (Feb 13)** Proverbs reading is
@@ -70,7 +72,9 @@ printed in the Tōnatsooyts (First Volume p. 462) as `Առակ. Ը. 22 … վ. 2
 close of **Proverbs 8:34** (the singular «պահիցէ» distinguishes it from the near-identical
 8:32) — a transposed digit, `24` for `34`. The engine ships the corrected
 `Proverbs 8.22-34`, which sacredtradition renders unanimously (23/23 Feb-13 eve years,
-26/26 Feb-14 feast years). See [`TYPOS.md`](TYPOS.md) for the full analysis.
+26/26 Feb-14 feast years). See
+[`grabar-ocr` `corpus/TYPOS.md`](https://github.com/andylitalo/grabar-ocr/blob/main/corpus/TYPOS.md)
+for the full analysis.
 
 ### Roadmap
 
