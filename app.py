@@ -8,6 +8,7 @@ import datetime
 import os
 
 from flask import Flask, jsonify, request
+from flask_limiter import Limiter
 
 from lectionary import compute_armenian_lectionary
 
@@ -16,9 +17,49 @@ from lectionary import compute_armenian_lectionary
 MIN_YEAR = int(os.environ.get("LECTIONARY_MIN_YEAR", "2001"))
 MAX_YEAR = int(os.environ.get("LECTIONARY_MAX_YEAR", "2027"))
 
+# Per-client rate limits (abuse protection). Semicolon-separated, env-overridable.
+RATE_LIMITS = [
+    part.strip()
+    for part in os.environ.get(
+        "LECTIONARY_RATE_LIMITS", "60 per minute;600 per hour"
+    ).split(";")
+    if part.strip()
+]
+# Storage for the limiter's counters. Defaults to per-process memory, which keeps
+# hosting cost at ~$0. Counters are NOT shared across gunicorn workers or Cloud Run
+# instances, so effective limits scale with (workers x instances) -- acceptable for
+# basic abuse protection at low volume. For exact global limits, set this to a shared
+# backend, e.g. LECTIONARY_RATELIMIT_STORAGE_URI=redis://<memorystore-host>:6379.
+RATE_LIMIT_STORAGE_URI = os.environ.get("LECTIONARY_RATELIMIT_STORAGE_URI", "memory://")
+
 app = Flask(__name__)
 # Emit Armenian script natively instead of \uXXXX escapes.
 app.json.ensure_ascii = False
+
+
+def _client_ip():
+    """Real client IP. Cloud Run / proxies put it first in X-Forwarded-For."""
+    forwarded = request.headers.get("X-Forwarded-For", "")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.remote_addr or "127.0.0.1"
+
+
+limiter = Limiter(
+    key_func=_client_ip,
+    default_limits=RATE_LIMITS,
+    storage_uri=RATE_LIMIT_STORAGE_URI,
+    app=app,
+)
+
+
+@app.errorhandler(429)
+def ratelimit_exceeded(exc):
+    """Return the rate-limit rejection as JSON, consistent with other errors."""
+    return jsonify({
+        "error": "Rate limit exceeded.",
+        "detail": str(getattr(exc, "description", exc)),
+    }), 429
 
 
 @app.route("/")
@@ -34,6 +75,7 @@ def index():
 
 
 @app.route("/health")
+@limiter.exempt
 def health():
     """Liveness/readiness check."""
     return jsonify({"status": "ok"})
