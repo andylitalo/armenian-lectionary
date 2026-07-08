@@ -1,0 +1,15 @@
+# Keep the image small and avoid shipping dev-only / git-ignored assets.
+venv/
+dev/
+tests/
+reports/
+docs/
+.git/
+.gitignore
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+*.log
+*.pyc
+.DS_Store
+README.md

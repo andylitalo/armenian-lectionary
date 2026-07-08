@@ -57,7 +57,9 @@ python app.py        # serves http://127.0.0.1:5001
 
 ### `GET /readings?date=YYYY-MM-DD`
 
-`date` is optional (defaults to today). Example:
+`date` is optional (defaults to today). Supported range is **2001–2027**
+(env-overridable via `LECTIONARY_MIN_YEAR` / `LECTIONARY_MAX_YEAR`); a date
+outside it returns HTTP 400 with a message explaining the current range. Example:
 
 ```bash
 curl "http://127.0.0.1:5001/readings?date=2026-06-01"
@@ -80,7 +82,21 @@ curl "http://127.0.0.1:5001/readings?date=2026-06-01"
 }
 ```
 
-An unparseable date returns HTTP 400. `GET /` returns usage JSON.
+An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
+`GET /health` returns `{"status": "ok"}` for liveness checks.
+
+## Deploy (Google Cloud Run)
+
+The app is containerized (`Dockerfile`) and runs under gunicorn. Deploy from
+source (Cloud Build builds the image):
+
+```bash
+gcloud run deploy lectionary --source . --region us-central1 \
+  --allow-unauthenticated --memory 512Mi --min-instances 0 --max-instances 3
+```
+
+Scales to zero (~$0/month at < 1000 req/day). A custom domain is attached via
+`gcloud run domain-mappings create`.
 
 ## Project layout
 
