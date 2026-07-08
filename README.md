@@ -6,6 +6,14 @@ Armenian Church (Տօնացոյց / Ճաշոց) scripture readings for any day.
 No network is used at runtime. The readings are produced by a calendar
 **algorithm** combined with an embedded, cross-year-validated **data table**.
 
+**Live:** the service is hosted on Google Cloud Run at
+**https://lectionary.andylitalo.com** — try it:
+
+```bash
+curl "https://lectionary.andylitalo.com/readings"                 # today
+curl "https://lectionary.andylitalo.com/readings?date=2026-04-05" # any date, 2001–2027
+```
+
 ## How it works
 
 The Armenian lectionary is one of the oldest in Christendom, and most of its
@@ -29,20 +37,24 @@ year). The engine therefore works in two steps:
 
 ### Accuracy
 
-Validated against all ~4,700 historical days:
+Validated against every day of **2001–2026** (9,495 days) from the authoritative
+Tōnatsooyts. 2027 is also served and was validated separately as a held-out
+forward year.
 
 | Metric | Result |
 |--------|--------|
-| Exact reading match | **76%** of all days |
-| Wrong (table hit but mismatched) | **0** |
-| Accuracy *where the table has data* | **100%** |
-| Flagged estimate (no data yet) | 24% |
+| Exact reading match | **99.18%** (9,417 / 9,495) |
+| Coverage (any readings shipped) | **99.97%** (9,492 / 9,495) |
+| Wrong (validated table hit but mismatched) | **0** |
+| Best-guess (generative) days correct | **100%** (16 / 16) |
+| Blank (no readings available) | **3 days** |
 
-Every covered day is exactly correct; days without a validated entry are
-clearly flagged (`"Source": "algorithmic-estimate"`) rather than guessed. The
-uncovered days are chiefly the **winter "hinge"** (Advent → Theophany →
-pre-Lent), whose ferial saint/fast tracks are governed by an ordered
-slot-consumption rule that is still being modeled (see `dev/`).
+The hard invariant holds: a **validated** entry is never wrong (0 across all
+9,495 days). Only **3** days remain blank — all in the summer (Jul–Aug) —
+where no reading is confidently derivable yet; those are clearly flagged
+(`"Source": "algorithmic-estimate"`) rather than guessed. This reflects the
+resolution of the former winter "hinge" (Advent → Theophany → pre-Lent) gap.
+Regenerate these figures with `python dev/compare_app.py`.
 
 ## Setup & run
 
@@ -62,7 +74,7 @@ python app.py        # serves http://127.0.0.1:5001
 outside it returns HTTP 400 with a message explaining the current range. Example:
 
 ```bash
-curl "http://127.0.0.1:5001/readings?date=2026-06-01"
+curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
 ```
 
 ```json
@@ -84,6 +96,10 @@ curl "http://127.0.0.1:5001/readings?date=2026-06-01"
 
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.
+
+Requests are rate-limited per client IP (default **60/min, 600/hour**);
+exceeding a limit returns HTTP 429. Limits are configurable via
+`LECTIONARY_RATE_LIMITS`.
 
 ## Deploy (Google Cloud Run)
 
