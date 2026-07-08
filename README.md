@@ -117,3 +117,21 @@ python dev/compare_app.py                        # runtime accuracy report
 
 `sacredtradition.am` is used **only** as the development ground-truth source;
 the shipped app never contacts it.
+
+## Data provenance & attribution
+
+The readings in `lectionary_data.json` are **distilled and cross-year validated**
+from the authoritative Tōnatsooyts (Տօնացոյց) and Ճաշոց of the Armenian Church.
+[sacredtradition.am](https://www.sacredtradition.am/) was used **only during
+development** as the ground-truth source for building and validating the table; it
+is never contacted at runtime, and its raw cache (`dev/reference_data/`) is not
+distributed with this repository. The distilled table is provided for reference and
+study — for liturgical use, verify against authoritative published sources.
+
+## License
+
+Code and configuration in this repository are licensed under the
+**Apache License 2.0** — see [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE). The
+underlying liturgical calendar and scripture readings are traditional works of the
+Armenian Church and are not claimed as original authorship here; see *Data
+provenance & attribution* above.

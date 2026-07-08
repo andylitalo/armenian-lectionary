@@ -1,0 +1,13 @@
+Armenian Lectionary API
+Copyright 2026 Andy Litalo
+
+This product includes software developed by Andy Litalo.
+Licensed under the Apache License, Version 2.0.
+
+The liturgical calendar and scripture readings represented in
+lectionary_data.json are traditional works of the Armenian Church
+(Տօնացոյց / Ճաշոց) and are not claimed as original authorship. The
+readings table was distilled and cross-year validated during development
+using sacredtradition.am (https://www.sacredtradition.am/) as a
+ground-truth reference; that source is not contacted at runtime and its
+raw cache is not distributed with this repository.
