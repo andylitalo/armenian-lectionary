@@ -56,6 +56,16 @@ where no reading is confidently derivable yet; those are clearly flagged
 resolution of the former winter "hinge" (Advent → Theophany → pre-Lent) gap.
 Regenerate these figures with `python dev/compare_app.py`.
 
+### Roadmap
+
+A complete engine covering the **entire 532-year Great Paschal Cycle** — the full
+period after which the Armenian movable calendar repeats — is forthcoming. It
+awaits validation against the Տօնացոյց (Tōnatsooyts), currently being transcribed
+and translated in the [grabar-ocr](https://github.com/andylitalo/grabar-ocr)
+repository (a pipeline for digitizing Grabar / Classical Armenian texts). Until
+that validation lands, the served range stays within the tested **2001–2027**
+window.
+
 ## Setup & run
 
 ```bash
