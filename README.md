@@ -111,6 +111,40 @@ Requests are rate-limited per client IP (default **60/min, 600/hour**);
 exceeding a limit returns HTTP 429. Limits are configurable via
 `LECTIONARY_RATE_LIMITS`.
 
+## Embedding the engine (offline, no API)
+
+Don't want to depend on the hosted API — e.g. for a fully offline app? You can
+drop the engine straight into your own project. It has **no third-party
+dependencies** (Python 3 standard library only), so you need just **two files**:
+
+| File | Role |
+|------|------|
+| `lectionary.py` | The engine + all calendar math. |
+| `lectionary_data.json` | The validated readings table. **Must sit in the same directory as `lectionary.py`** (it is loaded from the module's own directory). |
+
+Nothing else is required — `app.py`, `requirements.txt`, `Dockerfile`, `dev/`,
+and `tests/` are all for serving/building and can be left behind.
+
+```python
+import datetime
+from lectionary import compute_armenian_lectionary   # loads the table once at import
+
+reading = compute_armenian_lectionary(datetime.date(2026, 4, 5))
+print(reading["Liturgical Day"])   # RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)
+print(reading["ReadingsList"])     # ['John 20.1-18', 'Acts of the Apostles 1.1-8', ...]
+```
+
+`compute_armenian_lectionary(date)` always returns a `dict` and never raises or
+makes a network call. Notes for embedders:
+
+- The **2001–2027 range check is a property of the API layer** (`app.py`), not the
+  engine — the engine will compute *any* date. Outside the validated window (or for
+  the few uncovered days) it returns `"Source": "algorithmic-estimate"` with an
+  empty `"ReadingsList"`, so gate on `Source` / an empty list rather than expecting
+  an error. See the `Source` values under [Accuracy](#accuracy) to distinguish
+  validated readings from best-guesses.
+- The command line works the same way: `python lectionary.py 2026-04-05`.
+
 ## Deploy (Google Cloud Run)
 
 The app is containerized (`Dockerfile`) and runs under gunicorn. Deploy from
