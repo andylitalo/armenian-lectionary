@@ -25,7 +25,7 @@ import json
 import os
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                         "lectionary_data.json")
+                         "data", "lectionary_data.json")
 
 
 # --------------------------------------------------------------------------- #
@@ -552,7 +552,7 @@ def _postex_saint_window(year: int):
 
 
 SAINT_SCHEDULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "saint_schedule.json")
+                                   "data", "saint_schedule.json")
 
 
 def _load_saint_schedule():
@@ -570,7 +570,7 @@ def _load_saint_schedule():
 _SAINT_SCHEDULE = _load_saint_schedule()
 
 SAINT_READINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "saint_readings.json")
+                                   "data", "saint_readings.json")
 
 
 def _load_saint_readings():
@@ -588,7 +588,7 @@ def _load_saint_readings():
 _SAINT_READINGS = _load_saint_readings()
 
 SECOND_VOLUME_CYCLES_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "second_volume_cycles.json")
+    os.path.dirname(os.path.abspath(__file__)), "data", "second_volume_cycles.json")
 
 
 def _load_cycle_saints():
@@ -608,7 +608,7 @@ def _load_cycle_saints():
 _CYCLE_SAINTS = _load_cycle_saints()
 
 CONTINUA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             "continua_sequence.json")
+                             "data", "continua_sequence.json")
 
 
 def _load_continua():
@@ -1887,8 +1887,5 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
 
 
 if __name__ == "__main__":
-    import sys
-    d = (datetime.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1
-         else datetime.date.today())
-    import pprint
-    pprint.pprint(compute_armenian_lectionary(d))
+    from .cli import main
+    main()

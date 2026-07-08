@@ -1,27 +1,39 @@
 # CLAUDE.md
 
-Guidance for working in this repo. The app is a self-contained, **offline** Flask
-API that returns Armenian Church (Տօնացոյց / Ճաշոց) scripture readings for a date.
-No network is used at runtime — readings come from a calendar algorithm
-(`lectionary.py`) plus an embedded validated table (`lectionary_data.json`).
+Guidance for working in this repo. The core is a self-contained, **offline**
+engine that returns Armenian Church (Տօնացոյց / Ճաշոց) scripture readings for a
+date. It is packaged for PyPI as **`armenian-lectionary`** (import name
+`armenian_lectionary`) and also served by a thin Flask API on Cloud Run. No
+network is used at runtime — readings come from a calendar algorithm
+(`armenian_lectionary/engine.py`) plus an embedded validated table
+(`armenian_lectionary/data/lectionary_data.json`).
+
+The layout is **flat** (package at repo root), so the dev/test
+`sys.path.insert(repo_root)` bootstrap resolves `import armenian_lectionary.engine`
+with no install step.
 
 ## Layout
 
 | Path | Purpose |
 |------|---------|
-| `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Range guard + rate limiting live here. |
-| `lectionary.py` | Offline engine. Public entry: `compute_armenian_lectionary(datetime.date) -> dict`. |
-| `lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
-| `second_volume_cycles.json` / `saint_readings.json` / `saint_schedule.json` / `continua_sequence.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `Dockerfile` / `.dockerignore` | Container image for Cloud Run (gunicorn on `0.0.0.0:$PORT`). |
-| `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image. |
+| `pyproject.toml` | Hatchling build config + metadata; `armenian-lectionary` dist, dynamic version from `armenian_lectionary/__init__.py`, `armenian-lectionary` console script. |
+| `armenian_lectionary/__init__.py` | Package init: re-exports the public API and `__version__`. |
+| `armenian_lectionary/engine.py` | Offline engine. Public entry: `compute_armenian_lectionary(datetime.date) -> dict`. Internal helpers/constants importable from here. |
+| `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
+| `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
+| `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
+| `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
+| `Dockerfile` / `.dockerignore` | Container image for Cloud Run (`pip install .` + gunicorn on `0.0.0.0:$PORT`). |
+| `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image and package. Writes the shipped JSON via the engine's PATH constants. |
 | `tests/` | `unittest` suite. |
+| `.github/workflows/release.yml` | Builds and publishes to PyPI (Trusted Publishing) on a `v*` tag. |
 
 ## Local development
 
 ```bash
 python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt     # web layer
+pip install -e .                    # engine package (editable)
 python app.py                       # http://127.0.0.1:5001
 curl "http://127.0.0.1:5001/readings?date=2026-04-05"
 ```
@@ -94,6 +106,25 @@ These were needed once on the fresh project and persist:
 - Custom domain: `gcloud beta run domain-mappings create --service=lectionary
   --domain=lectionary.andylitalo.com --region=us-central1`, then add the returned
   A/AAAA records at the DNS host (Squarespace). Google issues managed TLS once DNS resolves.
+
+## Packaging & release (PyPI)
+
+The engine ships as the `armenian-lectionary` wheel (stdlib-only, all JSON data
+bundled under `armenian_lectionary/data/`). Build and check locally:
+
+```bash
+pip install build twine
+python -m build                       # -> dist/*.whl, dist/*.tar.gz
+python -m zipfile -l dist/*.whl       # confirm all five data/*.json are bundled
+twine check dist/*
+```
+
+Releases are automated: pushing a `v*` tag runs `.github/workflows/release.yml`,
+which builds and publishes via **PyPI Trusted Publishing (OIDC)** — no stored
+tokens. `__version__` in `armenian_lectionary/__init__.py` is the single source of
+truth for the version; bump it and tag to match (e.g. `v1.0.0`). One-time setup:
+register this repo as a Trusted Publisher on PyPI for the `armenian-lectionary`
+project.
 
 ## Conventions
 

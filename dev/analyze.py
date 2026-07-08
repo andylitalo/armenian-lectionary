@@ -13,7 +13,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from lectionary import calculate_gregorian_easter, sunday_closest_to  # noqa: E402
+from armenian_lectionary.engine import calculate_gregorian_easter, sunday_closest_to  # noqa: E402
 
 REF_DIR = os.path.join(os.path.dirname(__file__), "reference_data")
 

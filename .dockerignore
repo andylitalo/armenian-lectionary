@@ -12,4 +12,6 @@ __pycache__/
 *.log
 *.pyc
 .DS_Store
-README.md
+# NOTE: README.md is intentionally NOT ignored — pyproject.toml's `readme` field
+# references it, so `pip install .` needs it in the build context.
+# The armenian_lectionary/ package (engine + bundled data) must also be shipped.

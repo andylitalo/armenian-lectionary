@@ -1,0 +1,62 @@
+name: Release to PyPI
+
+# Publishes the armenian-lectionary package to PyPI when a version tag is pushed.
+# Uses PyPI Trusted Publishing (OIDC) — no API tokens are stored in the repo.
+#
+# One-time setup on PyPI: add this repository as a Trusted Publisher for the
+# `armenian-lectionary` project, with workflow `release.yml` and environment
+# `release`. Then bump __version__ in armenian_lectionary/__init__.py and push a
+# matching tag, e.g.:  git tag v1.0.0 && git push origin v1.0.0
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run pure-engine tests
+        # These need no ground-truth cache (self-contained).
+        run: python -m unittest tests.test_calendar tests.test_parser
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install --upgrade build twine
+          python -m build
+          twine check dist/*
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment: release  # Must match the environment name configured on PyPI.
+    permissions:
+      id-token: write   # Mandatory: lets the job mint the OIDC token PyPI verifies.
+      contents: read    # Least-privilege: read the repo; no write access needed.
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

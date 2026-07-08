@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
 from dev.source_corrections import apply_cohort_corrections  # noqa: E402
-from lectionary import compute_armenian_lectionary  # noqa: E402
+from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
 
 # The structurally-validated tiers: a mismatch here breaks the strict-shipping
 # 0-wrong contract. The generative/resolved tiers are labeled best-guesses,

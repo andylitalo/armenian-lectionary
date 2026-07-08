@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "armenian-lectionary"
+dynamic = ["version"]
+description = "Offline Armenian Church (Տօնացոյց / Ճաշոց) lectionary engine: scripture readings for any date, standard library only."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Andy Litalo", email = "ylitaand@gmail.com" }]
+keywords = [
+    "armenian",
+    "lectionary",
+    "liturgical",
+    "calendar",
+    "church",
+    "tonatsoyts",
+    "readings",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Religion",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Religion",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Natural Language :: Armenian",
+]
+
+# The engine is pure standard library — no runtime dependencies.
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/andylitalo/armenian-lectionary"
+Repository = "https://github.com/andylitalo/armenian-lectionary"
+"Live API" = "https://lectionary.andylitalo.com/readings"
+
+[project.scripts]
+armenian-lectionary = "armenian_lectionary.cli:main"
+
+[tool.hatch.version]
+path = "armenian_lectionary/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["armenian_lectionary"]
+# The bundled JSON data lives inside the package dir and is included in the wheel.
+artifacts = ["armenian_lectionary/data/*.json"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/armenian_lectionary",
+    "/README.md",
+    "/LICENSE",
+    "/NOTICE",
+    "/pyproject.toml",
+]

@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
 from dev.build_table import build, validate  # noqa: E402
-from lectionary import DATA_PATH  # noqa: E402
+from armenian_lectionary.engine import DATA_PATH  # noqa: E402
 
 
 def _slim(tables):

@@ -17,7 +17,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import lectionary as L  # noqa: E402
+import armenian_lectionary.engine as L  # noqa: E402
 
 # Second Volume English translation (human-corrected OCR run). Adjust if relocated.
 SECOND_VOLUME = os.path.expanduser(

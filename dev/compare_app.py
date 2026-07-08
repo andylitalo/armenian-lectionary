@@ -20,7 +20,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
-from lectionary import compute_armenian_lectionary  # noqa: E402
+from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
 
 VALIDATED = {"validated-table", "validated-composite"}
 RESOLVED = {"holy-week-composite"}

@@ -1,7 +1,12 @@
-# Armenian Lectionary API
+# Armenian Lectionary
 
-A self-contained, **offline** web service with one endpoint that returns the
-Armenian Church (Տօնացոյց / Ճաշոց) scripture readings for any day.
+A self-contained, **offline** engine that returns the Armenian Church
+(Տօնացոյց / Ճաշոց) scripture readings for any day. Use it two ways:
+
+- **`pip install armenian-lectionary`** — import the engine into any Python app
+  and generate readings offline (see [Use the engine offline](#use-the-engine-offline-python-package)).
+- **Hosted API** — one HTTP endpoint on Google Cloud Run for network-tolerant or
+  non-Python callers.
 
 No network is used at runtime. The readings are produced by a calendar
 **algorithm** combined with an embedded, cross-year-validated **data table**.
@@ -21,8 +26,8 @@ sanctoral is **movable** — commemorations are anchored to feasts, not civil
 dates (e.g. Sts. Hripsime always falls on Easter + 57, so it drifts year to
 year). The engine therefore works in two steps:
 
-1. **Calendar framework** (`lectionary.py`) computes each date's *liturgical
-   coordinates* from the feast chain:
+1. **Calendar framework** (`armenian_lectionary/engine.py`) computes each date's
+   *liturgical coordinates* from the feast chain:
    - **Easter** (Meeus/Jones/Butcher, Gregorian as the Armenian Church uses
      since 1923) anchors Pre-Lent → Lent → Holy Week → Eastertide → Pentecost →
      post-Pentecost → Transfiguration (Easter + 98).
@@ -91,8 +96,9 @@ window.
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
-python app.py        # serves http://127.0.0.1:5001
+pip install -r requirements.txt   # web layer (Flask, gunicorn)
+pip install -e .                  # the lectionary engine package
+python app.py                     # serves http://127.0.0.1:5001
 ```
 
 ## Endpoint
@@ -131,45 +137,67 @@ Requests are rate-limited per client IP (default **60/min, 600/hour**);
 exceeding a limit returns HTTP 429. Limits are configurable via
 `LECTIONARY_RATE_LIMITS`.
 
-## Embedding the engine (offline, no API)
+## Use the engine offline (Python package)
 
-Don't want to depend on the hosted API — e.g. for a fully offline app? You can
-drop the engine straight into your own project. It has **no third-party
-dependencies** (Python 3 standard library only), so you need just **two files**:
+Don't want to depend on the hosted API — e.g. for a fully offline app? Install
+the engine as a package. It has **no third-party dependencies** (Python 3.9+
+standard library only), and all the readings data (the validated table plus the
+source-derived saint & continua data) ships **inside the wheel**, so nothing is
+fetched at runtime:
 
-| File | Role |
-|------|------|
-| `lectionary.py` | The engine + all calendar math. |
-| `lectionary_data.json` | The validated readings table. **Must sit in the same directory as `lectionary.py`** (it is loaded from the module's own directory). |
-
-For fuller coverage, also copy the source-derived saint & continua data —
-`second_volume_cycles.json`, `saint_readings.json`, `saint_schedule.json`,
-`continua_sequence.json` — into the same directory; they power the
-`second-volume-cycle` and `generative-continua` tiers and each degrades to `{}`
-(those saint-weekdays / fast days return empty) if omitted.
-
-Nothing else is required — `app.py`, `requirements.txt`, `Dockerfile`, `dev/`,
-and `tests/` are all for serving/building and can be left behind.
+```bash
+pip install armenian-lectionary
+```
 
 ```python
 import datetime
-from lectionary import compute_armenian_lectionary   # loads the table once at import
+import armenian_lectionary
 
-reading = compute_armenian_lectionary(datetime.date(2026, 4, 5))
+reading = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4, 5))
 print(reading["Liturgical Day"])   # RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)
 print(reading["ReadingsList"])     # ['John 20.1-18', 'Acts of the Apostles 1.1-8', ...]
 ```
 
-`compute_armenian_lectionary(date)` always returns a `dict` and never raises or
-makes a network call. Notes for embedders:
+The distribution name is **`armenian-lectionary`**; the import name is
+**`armenian_lectionary`**. The public API is intentionally small —
+`compute_armenian_lectionary(date)` and `calculate_gregorian_easter(year)`.
+(Internal calendar helpers and constants remain importable from
+`armenian_lectionary.engine` if you need them.)
 
-- The **2001–2027 range check is a property of the API layer** (`app.py`), not the
-  engine — the engine will compute *any* date. Outside the validated window (or for
-  the few uncovered days) it returns `"Source": "algorithmic-estimate"` with an
-  empty `"ReadingsList"`, so gate on `Source` / an empty list rather than expecting
-  an error. See the `Source` values under [Accuracy](#accuracy) to distinguish
-  validated readings from best-guesses.
-- The command line works the same way: `python lectionary.py 2026-04-05`.
+### Command line
+
+The package installs an `armenian-lectionary` console script that prints the
+readings as JSON in native Armenian script:
+
+```bash
+armenian-lectionary                # today
+armenian-lectionary 2026-04-05     # any date
+python -m armenian_lectionary.cli 2026-04-05   # equivalent
+```
+
+### Gating on `Source` / `Confidence`
+
+`compute_armenian_lectionary(date)` always returns a `dict` and never raises or
+makes a network call. It will compute **any** date — the 2001–2027 range check is
+a property of the API layer (`app.py`), not the engine. Because the output blends
+tiers of differing certainty, **gate on the `Source` field** (and `Confidence`
+where present) rather than assuming every result is authoritative:
+
+- `validated-*` — cross-year-validated against the authoritative Tōnatsooyts;
+  never wrong across all 9,495 tested days.
+- `second-volume-cycle` / `generative-continua` / other generative tiers —
+  best-guess readings derived from the source laydown, flagged as such.
+- `algorithmic-estimate` — no readings confidently derivable; `"ReadingsList"`
+  is empty. Gate on an empty list rather than expecting an error.
+
+See the `Source` values under [Accuracy](#accuracy) for the full picture.
+
+### License & data provenance
+
+The package ships `LICENSE` (Apache-2.0) and `NOTICE` in its distribution
+metadata. The bundled readings are traditional works of the Armenian Church and
+are not claimed as original authorship — see
+[Data provenance & attribution](#data-provenance--attribution) below.
 
 ## Deploy (Google Cloud Run)
 
@@ -188,17 +216,21 @@ Scales to zero (~$0/month at < 1000 req/day). A custom domain is attached via
 
 | Path | Purpose |
 |------|---------|
-| `app.py` | Flask app (one endpoint) |
-| `lectionary.py` | Offline engine: calendar coordinates + table lookup |
-| `lectionary_data.json` | Embedded, validated readings table (shipped) |
-| `second_volume_cycles.json` / `saint_readings.json` / `saint_schedule.json` / `continua_sequence.json` | Shipped source-derived saint & continua data (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua) feeding the `second-volume-cycle` and `generative-continua` tiers |
-| `dev/` | **Dev-only** tooling: ground-truth fetcher, analysis, table builder, comparison harness. Not used at runtime. |
+| `pyproject.toml` | Package metadata + build config (hatchling); defines the `armenian-lectionary` distribution and console script. |
+| `armenian_lectionary/` | The installable Python package. |
+| `armenian_lectionary/engine.py` | Offline engine: calendar coordinates + table lookup. Public entry: `compute_armenian_lectionary`. |
+| `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point. |
+| `armenian_lectionary/data/lectionary_data.json` | Embedded, validated readings table (shipped in the wheel). |
+| `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua) feeding the `second-volume-cycle` and `generative-continua` tiers. |
+| `app.py` | Flask app (one endpoint); imports the package. |
+| `Dockerfile` | Container image for Cloud Run (`pip install .` + gunicorn). |
+| `dev/` | **Dev-only** tooling: ground-truth fetcher, analysis, table builder, comparison harness. Not used at runtime; not shipped in the package. |
 
 ### Rebuilding / extending the table (dev)
 
 ```bash
 python dev/bulk_fetch.py 2014-01-01 2027-12-31   # cache ground truth (network)
-python dev/build_table.py                        # rebuild & validate -> lectionary_data.json
+python dev/build_table.py                        # rebuild & validate -> armenian_lectionary/data/lectionary_data.json
 python dev/compare_app.py                        # runtime accuracy report
 ```
 
