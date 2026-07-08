@@ -45,13 +45,14 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from dev.slot_model import _fixed_dates  # noqa: E402
-from lectionary import (  # noqa: E402
+from armenian_lectionary.engine import (  # noqa: E402
     _SAINT_ZONES, _SAINT_WD, _next_saint_weekday, EMBEDDED_FIXED,
+    SAINT_SCHEDULE_PATH, SAINT_READINGS_PATH,
 )
 
 ZONES = ("PN", "Tr", "As", "Ex")
 
-ARTIFACT = os.path.join(os.path.dirname(__file__), os.pardir, "saint_schedule.json")  # shipped at repo root
+ARTIFACT = SAINT_SCHEDULE_PATH  # shipped package data (armenian_lectionary/data/)
 
 # Sibling artifact carrying the readings the clustering already computes, keyed
 # {zone: {saint_id: [readings]}}. Kept SEPARATE from saint_schedule.json so the
@@ -59,7 +60,7 @@ ARTIFACT = os.path.join(os.path.dirname(__file__), os.pardir, "saint_schedule.js
 # Consumed only by the runtime's labeled generative best-guess tier (never the
 # validated table), where a placed saint ships its intrinsic readings even when
 # its coordinate has <2 cross-year support (extreme-Easter / floating saints).
-READINGS_ARTIFACT = os.path.join(os.path.dirname(__file__), os.pardir, "saint_readings.json")  # shipped at repo root
+READINGS_ARTIFACT = SAINT_READINGS_PATH  # shipped package data (armenian_lectionary/data/)
 
 # Ids whose reading-set genuinely pins to a particular Saturday (high-rank
 # fathers). Detected automatically (weekday==Sat in >= N-1 of N years) but a

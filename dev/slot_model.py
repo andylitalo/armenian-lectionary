@@ -28,7 +28,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
-from lectionary import winter_coords, WINTER_KS, hinge_coords, HINGE_KS  # noqa: E402
+from armenian_lectionary.engine import winter_coords, WINTER_KS, hinge_coords, HINGE_KS  # noqa: E402
 
 
 def _fixed_dates(days):

@@ -21,7 +21,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from dev.build_table import build, rsig  # noqa: E402
-from lectionary import (  # noqa: E402
+from armenian_lectionary.engine import (  # noqa: E402
     compute_armenian_lectionary, coords_for, WINDOWS, PRECEDENCE,
     calculate_gregorian_easter, EMBEDDED_FIXED,
 )

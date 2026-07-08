@@ -17,7 +17,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from lectionary import compute_armenian_lectionary  # noqa: E402
+from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
 from dev.source_corrections import apply_cohort_corrections  # noqa: E402
 
 # Source-derived tiers held to the 0-wrong contract. first-volume-cohort ships the

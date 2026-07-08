@@ -1,7 +1,8 @@
 """Armenian Lectionary web app.
 
 A single-endpoint Flask service that returns the Armenian Church lectionary
-readings for a given day, computed by ``lectionary.compute_armenian_lectionary``.
+readings for a given day, computed by
+``armenian_lectionary.compute_armenian_lectionary``.
 """
 
 import datetime
@@ -10,7 +11,7 @@ import os
 from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 
-from lectionary import compute_armenian_lectionary
+from armenian_lectionary import compute_armenian_lectionary
 
 # Supported date range. Readings are validated for 2001-2027 so far; the range
 # is env-overridable so it can widen later without a code change.

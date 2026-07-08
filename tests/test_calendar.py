@@ -7,7 +7,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import lectionary as L  # noqa: E402
+import armenian_lectionary.engine as L  # noqa: E402
 
 
 class TestEaster(unittest.TestCase):

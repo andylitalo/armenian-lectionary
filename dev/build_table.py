@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 # Reuse the runtime calendar math (and key-resolution) so the table is built and
 # keyed exactly as the app reads it.
-from lectionary import coords_for, WINDOWS, PRECEDENCE, _lookup  # noqa: E402
+from armenian_lectionary.engine import coords_for, WINDOWS, PRECEDENCE, _lookup, DATA_PATH  # noqa: E402
 
 
 def rsig(day):
@@ -137,10 +137,10 @@ def validate(days, tables):
 
 
 def export_table(tables, stats, path=None):
-    """Write the validated tables to ../lectionary_data.json for the runtime."""
+    """Write the validated tables to the runtime's shipped data file
+    (armenian_lectionary/data/lectionary_data.json)."""
     if path is None:
-        path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                            "lectionary_data.json")
+        path = DATA_PATH
     # Strip support_years from shipped entries to keep the file lean.
     slim = {}
     for ks, entries in tables.items():
