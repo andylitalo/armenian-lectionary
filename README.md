@@ -56,6 +56,26 @@ where no reading is confidently derivable yet; those are clearly flagged
 resolution of the former winter "hinge" (Advent → Theophany → pre-Lent) gap.
 Regenerate these figures with `python dev/compare_app.py`.
 
+### Known source discrepancies (under investigation)
+
+Cases where the digitized Տօնացոյց (Tōnatsooyts) and the sacredtradition.am ground
+truth disagree and the discrepancy is **not yet resolved**. Unlike the settled
+versification-convention corrections applied on source-derived tiers (see
+`dev/source_corrections.py`), these remain open, and **the engine currently follows
+the cache / published practice** pending review:
+
+- **Eve of the Presentation of the Lord (Feb 13) — Proverbs reading endpoint.** The
+  printed source (Tōnatsooyts First Volume p. 462, auto-OCR'd in `grabar-ocr`
+  `page_0462`) reads **Proverbs 8:22-24**, ending «որ զճանապարհս իմ պահիցէ» ("who
+  keeps my ways"). sacredtradition.am renders **Proverbs 8:22-34** unanimously —
+  23/23 Feb-13 eve years and 26/26 Feb-14 feast years. This is not a ±1 numbering
+  offset: the source pericope's endpoint *text* is ~2 verses shorter than the
+  cache's (which ends at 8:34, "Blessed is the man that heareth me"), and the
+  source's printed verse number (24) does not cleanly match either the "keep my
+  ways" text (≈ v. 32) or the cache's v. 34. Until the versification is
+  reconciled, the engine ships the cache value (`Proverbs 8.22-34`) in
+  `_PRESENTATION_EVE_BLOCK` for consistency with the validated same-feast years.
+
 ### Roadmap
 
 A complete engine covering the **entire 532-year Great Paschal Cycle** — the full
