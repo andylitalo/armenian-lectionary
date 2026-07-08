@@ -11,7 +11,7 @@ Internal helpers and constants remain importable from
 
 from .engine import compute_armenian_lectionary, calculate_gregorian_easter
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __all__ = [
     "compute_armenian_lectionary",
     "calculate_gregorian_easter",

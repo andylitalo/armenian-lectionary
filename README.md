@@ -48,18 +48,23 @@ forward year.
 
 | Metric | Result |
 |--------|--------|
-| Exact reading match | **99.18%** (9,417 / 9,495) |
-| Coverage (any readings shipped) | **99.97%** (9,492 / 9,495) |
-| Wrong (validated table hit but mismatched) | **0** |
-| Best-guess (generative) days correct | **100%** (16 / 16) |
-| Blank (no readings available) | **3 days** |
+| Coverage (any readings shipped) | **100.00%** (9,495 / 9,495) |
+| Exact reading match | **99.21%** (9,420 / 9,495) |
+| Wrong (validated tier hit but mismatched) | **0** |
+| Validated-tier days (`validated-*`) | **9,273** (all exact) |
+| Blank (no readings available) | **0 days** |
 
-The hard invariant holds: a **validated** entry is never wrong (0 across all
-9,495 days). Only **3** days remain blank — all in the summer (Jul–Aug) —
-where no reading is confidently derivable yet; those are clearly flagged
-(`"Source": "algorithmic-estimate"`) rather than guessed. This reflects the
-resolution of the former winter "hinge" (Advent → Theophany → pre-Lent) gap.
-Regenerate these figures with `python dev/compare_app.py`.
+The hard invariant holds: a **validated** entry (`Source` `validated-table` /
+`validated-composite`) is never wrong — 0 mismatches across all 9,495 days.
+**Coverage is now complete**: every day 2001–2026 ships readings, and there are no
+blank (`algorithmic-estimate`) days — the former summer gaps and winter "hinge"
+(Advent → Theophany → pre-Lent) gap are resolved. The remaining ~0.8% that aren't
+byte-exact all fall on the **labeled best-guess / source-derived tiers** (e.g.
+`first-volume-cohort`, `generative-composite`), where the engine's reading differs
+from the sacredtradition.am **test-oracle** — typically a versification /
+verse-boundary convention on the same pericope, not a missing reading. Gate on
+`Source` to include or exclude these. Regenerate these figures with
+`python dev/compare_app.py`.
 
 ### Source fidelity & known typos
 
