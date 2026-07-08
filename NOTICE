@@ -6,8 +6,13 @@ Licensed under the Apache License, Version 2.0.
 
 The liturgical calendar and scripture readings represented in
 lectionary_data.json are traditional works of the Armenian Church
-(Տօնացոյց / Ճաշոց) and are not claimed as original authorship. The
-readings table was distilled and cross-year validated during development
-using sacredtradition.am (https://www.sacredtradition.am/) as a
-ground-truth reference; that source is not contacted at runtime and its
-raw cache is not distributed with this repository.
+(Տօնացոյց / Ճաշոց) and are not claimed as original authorship.
+
+Primary source: the Տօնացոյց (Tōnatsooyts), 4th edition, St. James Press
+(Tparan Srbots Hakobeants), Jerusalem, 1915. The readings table was
+distilled and cross-year validated during development, with
+sacredtradition.am (https://www.sacredtradition.am/) used as a
+development test-oracle only; that source is not contacted at runtime and
+its raw cache is not distributed with this repository. Where the two
+disagree, the printed Տօնացոյց is treated as authoritative (see
+dev/source_corrections.py).

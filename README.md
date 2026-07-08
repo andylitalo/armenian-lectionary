@@ -181,12 +181,29 @@ the shipped app never contacts it.
 ## Data provenance & attribution
 
 The readings in `lectionary_data.json` are **distilled and cross-year validated**
-from the authoritative Tōnatsooyts (Տօնացոյց) and Ճաշոց of the Armenian Church.
-[sacredtradition.am](https://www.sacredtradition.am/) was used **only during
-development** as the ground-truth source for building and validating the table; it
-is never contacted at runtime, and its raw cache (`dev/reference_data/`) is not
-distributed with this repository. The distilled table is provided for reference and
-study — for liturgical use, verify against authoritative published sources.
+against the authoritative Տօնացոյց (Tōnatsooyts) and Ճաշոց of the Armenian Church.
+
+**Sources:**
+
+- **Primary — the Տօնացոյց itself:** the *4th edition*, printed at the **St. James
+  Press (Tparan Srbots Hakobeants), Jerusalem, 1915**. This is the canonical rubric
+  the readings must be derivable from.
+- **Development test-oracle — [sacredtradition.am](https://www.sacredtradition.am/):**
+  used **only during development** to build and validate the table. It is never
+  contacted at runtime, and its raw cache (`dev/reference_data/`) is not distributed
+  with this repository.
+
+**Discrepancy policy.** A few slight discrepancies have been found between
+sacredtradition.am and the printed Տօնացոյց (mostly versification / verse-boundary
+conventions on the same pericope). Where a discrepancy is confirmed, the engine
+**defaults to the Տօնացոյց** as the authoritative source and treats the scrape as a
+test oracle only. These corrections are recorded, with per-reading rationale, in
+[`dev/source_corrections.py`](dev/source_corrections.py) (see also the working
+record in [`reports/lectionary_disagreements.md`](reports/lectionary_disagreements.md)).
+**Further investigation of these discrepancies is in progress.**
+
+The distilled table is provided for reference and study — for liturgical use, verify
+against authoritative published sources.
 
 ## License
 
