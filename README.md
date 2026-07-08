@@ -142,6 +142,12 @@ dependencies** (Python 3 standard library only), so you need just **two files**:
 | `lectionary.py` | The engine + all calendar math. |
 | `lectionary_data.json` | The validated readings table. **Must sit in the same directory as `lectionary.py`** (it is loaded from the module's own directory). |
 
+For fuller coverage, also copy the source-derived saint & continua data —
+`second_volume_cycles.json`, `saint_readings.json`, `saint_schedule.json`,
+`continua_sequence.json` — into the same directory; they power the
+`second-volume-cycle` and `generative-continua` tiers and each degrades to `{}`
+(those saint-weekdays / fast days return empty) if omitted.
+
 Nothing else is required — `app.py`, `requirements.txt`, `Dockerfile`, `dev/`,
 and `tests/` are all for serving/building and can be left behind.
 
@@ -185,6 +191,7 @@ Scales to zero (~$0/month at < 1000 req/day). A custom domain is attached via
 | `app.py` | Flask app (one endpoint) |
 | `lectionary.py` | Offline engine: calendar coordinates + table lookup |
 | `lectionary_data.json` | Embedded, validated readings table (shipped) |
+| `second_volume_cycles.json` / `saint_readings.json` / `saint_schedule.json` / `continua_sequence.json` | Shipped source-derived saint & continua data (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua) feeding the `second-volume-cycle` and `generative-continua` tiers |
 | `dev/` | **Dev-only** tooling: ground-truth fetcher, analysis, table builder, comparison harness. Not used at runtime. |
 
 ### Rebuilding / extending the table (dev)

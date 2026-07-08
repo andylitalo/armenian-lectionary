@@ -552,7 +552,7 @@ def _postex_saint_window(year: int):
 
 
 SAINT_SCHEDULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "dev", "saint_schedule.json")
+                                   "saint_schedule.json")
 
 
 def _load_saint_schedule():
@@ -570,7 +570,7 @@ def _load_saint_schedule():
 _SAINT_SCHEDULE = _load_saint_schedule()
 
 SAINT_READINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "dev", "saint_readings.json")
+                                   "saint_readings.json")
 
 
 def _load_saint_readings():
@@ -588,7 +588,7 @@ def _load_saint_readings():
 _SAINT_READINGS = _load_saint_readings()
 
 SECOND_VOLUME_CYCLES_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "dev", "second_volume_cycles.json")
+    os.path.dirname(os.path.abspath(__file__)), "second_volume_cycles.json")
 
 
 def _load_cycle_saints():
@@ -608,7 +608,7 @@ def _load_cycle_saints():
 _CYCLE_SAINTS = _load_cycle_saints()
 
 CONTINUA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             "dev", "continua_sequence.json")
+                             "continua_sequence.json")
 
 
 def _load_continua():
@@ -1192,6 +1192,34 @@ def _first_volume_continua(d):
     return list(refs) if refs else None
 
 
+# The summer counterpart: the after-Transfiguration Sundays reached as a blank only in the
+# earliest-Easter years (Easter Mar 23 -> 2008), where the winter continua overflows its
+# grid and the source bridges it forward onto the "Nth Sunday after Transfiguration" via the
+# p.460/line-75 rubric (see reports/blank_sourcing.md lines 171-173). Normal-Easter years
+# cover these offsets in the validated summer grid, so this tier is reached only when the
+# strict table has no entry. Single-sample -> source-derived best-guess, byte-matching GT.
+# Keyed by Easter offset -> (liturgical-day label, First-Volume movable readings, verbatim).
+_FV_SUMMER_CONTINUA = {
+    119: ("Fourth Sunday after Transfiguration",
+          ["Luke 4.14-30", "Isaiah 54.1-13",
+           "St. Paul's First Epistle to Timothy 1.1-11", "John 2.1-11"]),
+    126: ("Fifth Sunday after Transfiguration",
+          ["Isaiah 58.13-59.7",
+           "St. Paul's First Epistle to Timothy 4.12-5.10", "John 3.13-21"]),
+    133: ("Sixth Sunday after Transfiguration",
+          ["Isaiah 62.1-11",
+           "St. Paul's Second Epistle to Timothy 2.15-19", "John 6.39-47"]),
+}
+
+
+def _first_volume_summer_continua(d):
+    """Source-derived readings for an after-Transfiguration summer Sunday the strict table
+    leaves single-sample (only the earliest-Easter years reach these positions as a blank).
+    Keyed by Easter offset. Returns (label, refs) or None. Best-guess, never validated."""
+    entry = _FV_SUMMER_CONTINUA.get((d - calculate_gregorian_easter(d.year)).days)
+    return (entry[0], list(entry[1])) if entry else None
+
+
 def _fast_of_catechumens_eve(year: int) -> datetime.date:
     """Eve of the Fast of Catechumens (Aṙaǰawor) -- the Sunday at Easter-70 that opens
     the aliturgical fast week (Mon-Fri, Easter-69..-65) before Great Lent's Sunday."""
@@ -1594,7 +1622,7 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
     ks, key, entry = _lookup(target_date)
     if entry is not None:
         refs = entry["readings"]
-        return {
+        result = {
             "Date": target_date.isoformat(),
             "Liturgical Day": entry["feast"] or "(commemoration)",
             "Season": season_for(ks, key),
@@ -1602,6 +1630,19 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
             "ReadingsList": refs,
             "Source": "validated-table",
         }
+        if not refs:
+            # A validated *aliturgical* day: the ground truth appoints no scripture
+            # readings (the ferial Mon-Thu of the Fast of the Catechumens -- kept as a
+            # penitential fast without a Divine Liturgy). The empty reading set is a
+            # validated fact, not an unresolved gap, so flag it explicitly: consumers
+            # must not read the emptiness as missing/not-yet-modeled data.
+            result["Confidence"] = "validated"
+            result["Note"] = ("No scripture readings are appointed for this day; it is "
+                              "kept as a penitential fast without a Divine Liturgy (an "
+                              "aliturgical day -- the ferial days of the Fast of the "
+                              "Catechumens). The empty reading set is intentional and "
+                              "validated against the Tōnats'oyts, not missing data.")
+        return result
 
     # Embedded fixed-feast composite (proper readings combined with the movable
     # slot the feast lands on). Deterministic and validated; ships as a feast.
@@ -1635,10 +1676,10 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
             "Readings": _group_readings(refs),
             "ReadingsList": refs,
             "Source": "second-volume-cycle",
-            "Confidence": "directory-derived",
+            "Confidence": "source-derived",
             "Note": ("Saint resolved from the Tonatsoyts Second Volume per-year-type "
                      "calendar (matched by this year's Easter date); readings are that "
-                     "saint's proper. Directory-derived, not cross-year cache-validated."),
+                     "saint's proper. Source-derived, not cross-year cache-validated."),
         }
 
     # Generative best-guess tier (labeled, NEVER validated): a saint-weekday the
@@ -1750,6 +1791,31 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
                      "single-sample in the cache and not cross-year validated; the readings "
                      "are taken from the source directly. Filter on Source/Confidence if "
                      "you need only validated readings."),
+        }
+
+    # First-Volume movable ordinary-time continua (summer arc): the after-Transfiguration
+    # Sundays reached as a blank only in the earliest-Easter years (2008). Source-derived
+    # from the First Volume (winter 1-2 Timothy + John continua bridged forward per the
+    # p.460/line-75 rubric); best-guess, never validated. See _first_volume_summer_continua.
+    sv = _first_volume_summer_continua(target_date)
+    if sv is not None:
+        label, refs = sv
+        return {
+            "Date": target_date.isoformat(),
+            "Liturgical Day": label,
+            "Season": "After Transfiguration",
+            "Readings": _group_readings(refs),
+            "ReadingsList": refs,
+            "Source": "first-volume-continua",
+            "Confidence": "best-guess",
+            "Note": ("Source-derived readings from the Tōnats'oyts First-Volume movable "
+                     "ordinary-time continua (after-Transfiguration summer arc: the winter "
+                     "1-2 Timothy + John continua bridged forward per the p.460/line-75 "
+                     "rubric, pp.458-460). This position is reached only in the earliest-"
+                     "Easter years (e.g. 2008), so it is single-sample in the cache and not "
+                     "cross-year validated; the readings are taken from the source directly "
+                     "and byte-match the ground truth. Filter on Source/Confidence if you "
+                     "need only validated readings."),
         }
 
     # John the Forerunner (Jan 14) transferred into an extreme-early-Easter January by

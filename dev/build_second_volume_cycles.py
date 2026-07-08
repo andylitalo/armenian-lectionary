@@ -24,7 +24,7 @@ import lectionary as L  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 INDEX = os.path.join(HERE, os.pardir, "docs", "sources", "second_volume_index.csv")
-OUT = os.path.join(HERE, "second_volume_cycles.json")
+OUT = os.path.join(HERE, os.pardir, "second_volume_cycles.json")  # shipped at repo root
 TR = os.path.expanduser("~/church/grabar-ocr/runs/human__proj__tess__gemini-min/"
                         "translations/gemini-flash/translated.md")
 MONTHS = {m: i for i, m in enumerate(

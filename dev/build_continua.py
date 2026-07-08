@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from lectionary import anchors, _count_wf  # noqa: E402
 
-ARTIFACT = os.path.join(os.path.dirname(__file__), "continua_sequence.json")
+ARTIFACT = os.path.join(os.path.dirname(__file__), os.pardir, "continua_sequence.json")  # shipped at repo root
 
 
 def _summer_span(year):

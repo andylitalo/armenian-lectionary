@@ -90,7 +90,7 @@ ships labeled best-guess (never WRONG).
 
 ## Resolution map
 
-**Engine state: BLANK 17 → 3, WRONG 0, MATCH +12 (9473 → 9485), 55 tests green.**
+**Engine state: BLANK 17 → 0, WRONG 0, MATCH +15 (9473 → 9488), 58 tests green.**
 
 | Blank | Fix | Status |
 |-------|-----|--------|
@@ -99,13 +99,21 @@ ships labeled best-guess (never WRONG).
 | 2007-02-13 | **Fix A** | ⚠ best-guess MISS (GT eve tail truncated to `Lev 12.6-8`; engine ships superset) |
 | 2011-02-04/06/09/11, 2022-02-04 | **`_first_volume_continua`** (winter arc, source-derived best-guess) | ✅ MATCH (shipped) |
 | 2011-02-13 | **`_first_volume_continua`** base + Fix A eve block | ✅ MATCH (shipped) |
-| 2008-07-20/27, 08-03 | summer after-Transfiguration arc | ⛔ BLANK — deferred to next source-modeling pass |
+| 2008-07-20/27, 08-03 | **`_first_volume_summer_continua`** (after-Transfiguration arc, source-derived best-guess) | ✅ MATCH (shipped 2026-07; byte-matches GT) |
+
+**No blank remains.** Every day the ground-truth cache carries readings is now served
+(MATCH or a labeled best-guess superset). The remaining empty-served days in 2001–2027 are
+the **aliturgical Fast-of-the-Catechumens ferial days** (Mon–Thu, Easter offsets −69…−66),
+which the source appoints no readings for by design — served `validated-table` with an
+explicit `Confidence: "validated"` + aliturgical note (see
+`docs/sources/tonatsooyts-fast-of-catechumens.md`), never as a gap.
 
 ---
 
 # Fix B — the 9 movable blanks are the First-Volume lectio-continua
 
-**Status: all 9 source-confirmed; 6 wired (winter arc), 3 deferred (summer arc).**
+**Status: all 9 source-confirmed and wired — 6 winter arc (`_first_volume_continua`),
+3 summer arc (`_first_volume_summer_continua`). No blank remains.**
 
 **Finding.** Fix B as originally planned (cross-validate by position from the cache) is
 **not achievable** — the movable readings are a continuous *lectio-continua* whose

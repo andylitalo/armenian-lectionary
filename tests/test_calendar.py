@@ -80,5 +80,50 @@ class TestReadingClassification(unittest.TestCase):
         self.assertEqual(list(grouped), ["Old Testament", "Epistle", "Gospel"])
 
 
+class TestFastOfCatechumensAliturgical(unittest.TestCase):
+    """The Mon-Thu ferial days of the Fast of the Catechumens are kept without a
+    Liturgy: the Tōnats'oyts appoints no readings. The API must serve them empty but
+    flag that emptiness as validated/intentional, never as a not-yet-modeled gap."""
+
+    def test_aliturgical_days_are_validated_empty(self):
+        # 2010: Fast-of-Catechumens Mon-Thu = Jan 25-28 (Easter offsets -69..-66).
+        for day in (25, 26, 27, 28):
+            r = L.compute_armenian_lectionary(datetime.date(2010, 1, day))
+            self.assertEqual(r["ReadingsList"], [], day)
+            self.assertEqual(r["Source"], "validated-table", day)
+            self.assertEqual(r["Confidence"], "validated", day)
+            self.assertIn("aliturgical", r["Note"], day)
+            self.assertIn("Fast of the Catechumens", r["Liturgical Day"], day)
+
+
+class TestSummerSundayContinua(unittest.TestCase):
+    """The after-Transfiguration Sundays reached as a blank only in the earliest-Easter
+    years (2008) ship source-derived readings byte-matching the ground truth."""
+
+    def test_2008_summer_sundays(self):
+        expected = {
+            datetime.date(2008, 7, 20): [
+                "Luke 4.14-30", "Isaiah 54.1-13",
+                "St. Paul's First Epistle to Timothy 1.1-11", "John 2.1-11"],
+            datetime.date(2008, 7, 27): [
+                "Isaiah 58.13-59.7",
+                "St. Paul's First Epistle to Timothy 4.12-5.10", "John 3.13-21"],
+            datetime.date(2008, 8, 3): [
+                "Isaiah 62.1-11",
+                "St. Paul's Second Epistle to Timothy 2.15-19", "John 6.39-47"],
+        }
+        for d, refs in expected.items():
+            r = L.compute_armenian_lectionary(d)
+            self.assertEqual(r["ReadingsList"], refs, d)
+            self.assertEqual(r["Source"], "first-volume-continua", d)
+            self.assertEqual(r["Season"], "After Transfiguration", d)
+
+    def test_summer_tier_does_not_overfire(self):
+        # A normal-Easter year's same civil dates must NOT be claimed by the summer tier
+        # (they are covered by the validated grid, or fall elsewhere).
+        for d in (datetime.date(2015, 7, 20), datetime.date(2020, 8, 3)):
+            self.assertIsNone(L._first_volume_summer_continua(d), d)
+
+
 if __name__ == "__main__":
     unittest.main()

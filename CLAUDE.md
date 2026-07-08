@@ -12,6 +12,7 @@ No network is used at runtime — readings come from a calendar algorithm
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Range guard + rate limiting live here. |
 | `lectionary.py` | Offline engine. Public entry: `compute_armenian_lectionary(datetime.date) -> dict`. |
 | `lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
+| `second_volume_cycles.json` / `saint_readings.json` / `saint_schedule.json` / `continua_sequence.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
 | `Dockerfile` / `.dockerignore` | Container image for Cloud Run (gunicorn on `0.0.0.0:$PORT`). |
 | `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image. |
 | `tests/` | `unittest` suite. |

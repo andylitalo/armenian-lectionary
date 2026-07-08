@@ -51,7 +51,7 @@ from lectionary import (  # noqa: E402
 
 ZONES = ("PN", "Tr", "As", "Ex")
 
-ARTIFACT = os.path.join(os.path.dirname(__file__), "saint_schedule.json")
+ARTIFACT = os.path.join(os.path.dirname(__file__), os.pardir, "saint_schedule.json")  # shipped at repo root
 
 # Sibling artifact carrying the readings the clustering already computes, keyed
 # {zone: {saint_id: [readings]}}. Kept SEPARATE from saint_schedule.json so the
@@ -59,7 +59,7 @@ ARTIFACT = os.path.join(os.path.dirname(__file__), "saint_schedule.json")
 # Consumed only by the runtime's labeled generative best-guess tier (never the
 # validated table), where a placed saint ships its intrinsic readings even when
 # its coordinate has <2 cross-year support (extreme-Easter / floating saints).
-READINGS_ARTIFACT = os.path.join(os.path.dirname(__file__), "saint_readings.json")
+READINGS_ARTIFACT = os.path.join(os.path.dirname(__file__), os.pardir, "saint_readings.json")  # shipped at repo root
 
 # Ids whose reading-set genuinely pins to a particular Saturday (high-rank
 # fathers). Detected automatically (weekday==Sat in >= N-1 of N years) but a
