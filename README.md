@@ -276,3 +276,6 @@ Code and configuration in this repository are licensed under the
 underlying liturgical calendar and scripture readings are traditional works of the
 Armenian Church and are not claimed as original authorship here; see *Data
 provenance & attribution* above.
+
+<!-- Test change to verify PR merge flow with CODEOWNERS in place. -->
+
