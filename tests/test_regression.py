@@ -464,7 +464,7 @@ class TestPreLentCohort(unittest.TestCase):
         # Sargis onto Atom's Monday (Jan 21); the senior general wins the merge.
         res = compute_armenian_lectionary(datetime.date(2008, 1, 21))
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn("St. Sargis", res["Liturgical Day"])
+        self.assertIn("Sargis", res["Liturgical Day"])
         self.assertEqual(res["ReadingsList"], list(_ref_readings(2008, 1, 21)))
 
     def test_2022_presentation_collision_atom_wins(self):
@@ -472,7 +472,7 @@ class TestPreLentCohort(unittest.TestCase):
         # Sukias's Tuesday (Feb 15) and wins the merge.
         res = compute_armenian_lectionary(datetime.date(2022, 2, 15))
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn("Atomian", res["Liturgical Day"])
+        self.assertIn("Atom", res["Liturgical Day"])
 
     def test_source_verse_ranges_served(self):
         # The engine serves the SOURCE ranges, not the cache's (Atom Wisdom 6.12-21 /
@@ -487,7 +487,7 @@ class TestPreLentCohort(unittest.TestCase):
         # shipped from the fixed offset regardless of any cache.
         res = compute_armenian_lectionary(datetime.date(2027, 1, 23))  # Sargis 2027 (E-64)
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn("St. Sargis", res["Liturgical Day"])
+        self.assertIn("Sargis", res["Liturgical Day"])
 
 
 if __name__ == "__main__":

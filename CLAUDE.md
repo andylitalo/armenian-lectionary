@@ -48,9 +48,16 @@ PORT=8090 gunicorn --bind "0.0.0.0:$PORT" --workers 2 --threads 4 --timeout 60 a
 python -m unittest tests.test_calendar tests.test_parser   # self-contained, no cache
 ```
 The full-dataset regression tests (`test_regression`, `test_full_dataset`,
-`test_table_build`) need the git-ignored `dev/reference_data/` ground-truth cache;
-without it they fail their coverage floors. Rebuild the cache with
+`test_table_build`, `test_feast`) need the git-ignored `dev/reference_data/`
+ground-truth cache; without it they fail their coverage floors. Rebuild the cache with
 `python dev/bulk_fetch.py` (see README).
+
+`test_feast` locks the engine's feast/fast NAME (`"Liturgical Day"`) against the
+scraped `feast` field — the value bahk uses for AI context. It compares only the
+*commemoration component* (`dev/feast_names.commemoration_of`, canonicalized by
+`dev/source_corrections.canonical_commem`), since the scrape mashes a year-varying
+"Nth day of <Season>" position label onto the name. Audit residual mismatches with
+`python dev/feast_audit.py`.
 
 ## Configuration (env vars)
 

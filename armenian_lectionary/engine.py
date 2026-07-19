@@ -948,9 +948,9 @@ EMBEDDED_PROPER = {
 }
 
 _EMBEDDED_FEAST = {
-    (9, 8): "Feast of the Nativity of the Holy Theotokos",
+    (9, 8): "Feast of the Birth of Holy Virgin Mary from Anna",
     (11, 21): "Presentation of the Holy Mother of God to the Temple",
-    (12, 9): "Feast of the Conception of the Holy Theotokos by Anna",
+    (12, 9): "Feast of the Conception of the Holy Virgin Mary by Anna",
 }
 
 # Dedicated saint-weekday slots a floating feast displaces (proper only).
@@ -1324,23 +1324,23 @@ def _nativity_octave_composite(d, tables=None):
 _PRELENT_COHORT = (
     # (id, easter_offset, may_shift, label, source readings)
     ("sargis", -64, True,
-     "Feast of St. Sargis the General and his Companions",
+     "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     "Feast of the Atomian Generals",
+     "Saints Atom and his soldiers",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,
-     "Feast of the Sukiasian Martyrs",
+     "Saints Sukiasians the Martyrs",
      ["Proverbs 22.1-12", "Isaiah 56.6-7",
       "St. Paul's Epistle to the Hebrews 11.32-40", "Luke 12.4-8"]),
     ("voskian", -59, False,
-     "Feast of the Voskian Priests",
+     "Saints Voskians the Priests",
      ["Proverbs 24.1-12", "Jeremiah 30.18-22",
       "St. Paul's Second Epistle to Timothy 3.10-12", "Matthew 5.1-12"]),
     ("ghevond", -54, False,
-     "Feast of the Ghevondian Priests",
+     "Saints Ghevond the Priest and His Companions",
      ["Wisdom 5.16-23", "Isaiah 35.1-2", "Isaiah 61.6-7",
       "St. Peter's First Epistle General 1.3-9", "Luke 12.4-10"]),
 )
@@ -1595,8 +1595,37 @@ def _group_readings(refs: list) -> dict:
 # Public API
 # --------------------------------------------------------------------------- #
 
+# The Remembrance of the Armenian Genocide (1915) is a fixed CIVIL-date
+# commemoration kept on April 24. The cross-year-validated table keys days by their
+# *liturgical* (Easter-offset) coordinate, so a genocide note baked into one key's
+# label floats onto whatever civil date that coordinate hits in another year. Re-anchor
+# it to April 24: strip it wherever it was baked, and append it iff the date is Apr 24.
+_GENOCIDE_REMEMBRANCE = "Remembrance of the Armenian Genocide (1915)"
+
+
+def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
+    """Return ``label`` with the Genocide Remembrance note anchored to April 24."""
+    stripped = label.replace(_GENOCIDE_REMEMBRANCE, "").strip()
+    if (d.month, d.day) == (4, 24):
+        return (stripped + _GENOCIDE_REMEMBRANCE) if stripped else _GENOCIDE_REMEMBRANCE
+    return stripped
+
+
 def compute_armenian_lectionary(target_date: datetime.date) -> dict:
-    """Return the liturgical day and readings for ``target_date``."""
+    """Return the liturgical day and readings for ``target_date``.
+
+    Thin wrapper over :func:`_compute_lectionary` that re-anchors fixed civil-date
+    commemorations (Genocide Remembrance -> April 24) which the Easter-keyed table
+    would otherwise misplace.
+    """
+    result = _compute_lectionary(target_date)
+    result["Liturgical Day"] = _anchor_genocide_remembrance(
+        result["Liturgical Day"], target_date)
+    return result
+
+
+def _compute_lectionary(target_date: datetime.date) -> dict:
+    """Resolve the liturgical day and readings for ``target_date`` (pre-overlay)."""
     # Pre-Lent martyr cohort (Sargis/Atom/Sukias/Voskian/Ghevond): readings taken
     # directly from the Tōnats'oyts First Volume pp.464-465 (source-derived, verse ranges
     # per the source), placed by the fixed-Easter-offset laydown with rank-based
@@ -1732,7 +1761,7 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
     if ac is not None:
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Annunciation to the Holy Theotokos",
+            "Liturgical Day": "Annunciation to the Virgin Mary",
             "Season": "Annunciation",
             "Readings": _group_readings(ac),
             "ReadingsList": ac,
@@ -1826,7 +1855,7 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
     if jf is not None:
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Nativity of St. John the Forerunner",
+            "Liturgical Day": "Feast of the Birth of St. John the Forerunner (Baptist)",
             "Season": "Nativity Octave",
             "Readings": _group_readings(jf),
             "ReadingsList": jf,
@@ -1844,7 +1873,7 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
     if no is not None:
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Octave of the Nativity (Naming of the Lord)",
+            "Liturgical Day": "Feast of Naming of Our Lord Jesus Christ",
             "Season": "Nativity Octave",
             "Readings": _group_readings(no),
             "ReadingsList": no,
