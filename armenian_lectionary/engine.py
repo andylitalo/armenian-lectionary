@@ -1013,10 +1013,10 @@ _ANN_DAY_FIRST = frozenset({-8, -6, -5, -4})
 _ANN_PROPER_FIRST = frozenset({-7, -3, -2, -1, 0})
 
 
-def _movable_slot_readings(d, tables=None, with_band=True):
-    """Readings of the movable ferial/Sunday slot a fixed-date feast lands on (the
-    validated EB/E/season-count entry), or None. Excludes the civil/Annunciation
-    keyspaces and the dedicated saint-weekday slots a feast displaces. When
+def _movable_slot_entry(d, tables=None, with_band=True):
+    """The validated table entry (dict with "feast"/"readings") of the movable
+    ferial/Sunday slot a fixed-date feast lands on, or None. Excludes the civil/
+    Annunciation keyspaces and the dedicated saint-weekday slots a feast displaces. When
     ``with_band`` is set, the leap-corrected Easter-band sub-key (EB) is tried first,
     matching the runtime precedence for the underlying paschal day."""
     if tables is None:
@@ -1035,8 +1035,48 @@ def _movable_slot_readings(d, tables=None, with_band=True):
             continue
         entry = tables.get(ks, {}).get(key)
         if entry:
-            return list(entry["readings"])
+            return entry
     return None
+
+
+def _movable_slot_readings(d, tables=None, with_band=True):
+    """Readings of the movable slot a fixed-date feast lands on, or None."""
+    entry = _movable_slot_entry(d, tables, with_band)
+    return list(entry["readings"]) if entry is not None else None
+
+
+def _collision_base_feast(d, tables=None):
+    """The NAME of the movable/base commemoration a fixed-date feast co-celebrates on
+    ``d``: the pre-Lent cohort martyr keyed to this Easter offset, else the movable
+    slot's feast string, else None. The source calendar headlines a fixed/movable
+    collision day by this movable day (adding the fixed feast alongside), so the engine
+    names it the same way instead of by the fixed feast alone."""
+    e_off = (d - calculate_gregorian_easter(d.year)).days
+    for _sid, off, _may_shift, label, _reads in _PRELENT_COHORT:
+        if off == e_off:
+            return label
+    entry = _movable_slot_entry(d, tables)
+    return entry["feast"] if entry is not None else None
+
+
+def _split_eastertide_position(feast):
+    """Split a leading Eastertide day-count prefix ("Nth day of Easter[tide]", "Octave of
+    Easter (New Sunday)") off ``feast`` -> (prefix, remainder). Lets a co-celebrated feast
+    be inserted AFTER the calendar position while keeping the position at the front, the
+    way the source calendar orders an Eastertide collision."""
+    if feast.startswith("Octave of Easter (New Sunday)"):
+        n = len("Octave of Easter (New Sunday)")
+        return feast[:n], feast[n:]
+    # "<Ordinal> day of Eastertide|Easter" then (mashed, no separator) the commemoration.
+    marker = " day of "
+    idx = feast.find(marker)
+    if idx != -1:
+        after = feast[idx + len(marker):]
+        for season in ("Eastertide", "Easter"):     # Eastertide first (Easter is a prefix)
+            if after.startswith(season):
+                cut = idx + len(marker) + len(season)
+                return feast[:cut], feast[cut:]
+    return "", feast
 
 
 def _annunciation_composite(d, tables=None):
@@ -1759,9 +1799,24 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     # on; we ship that, labeled best-guess. See _annunciation_composite.
     ac = _annunciation_composite(target_date)
     if ac is not None:
+        # Name the day the way the source does: the movable Lent/Holy-Week/Eastertide day
+        # it collides with, plus the Annunciation. In Lent/Holy Week the movable day
+        # outranks and leads; in Eastertide the Annunciation leads.
+        _annun = "Annunciation to the Virgin Mary"
+        _base = _collision_base_feast(target_date) or ""
+        _e_off = (target_date - calculate_gregorian_easter(target_date.year)).days
+        if not _base:
+            _name = _annun
+        elif _e_off >= 1:
+            # Eastertide: the Annunciation leads the commemorations, but the calendar
+            # day-count stays at the front -- position + Annunciation + any saint.
+            _pos, _rest = _split_eastertide_position(_base)
+            _name = _pos + _annun + _rest
+        else:
+            _name = _base + _annun       # Lent/Holy Week: the movable day leads
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Annunciation to the Virgin Mary",
+            "Liturgical Day": _name,
             "Season": "Annunciation",
             "Readings": _group_readings(ac),
             "ReadingsList": ac,
@@ -1782,9 +1837,14 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     # (Tonats'oyts First Vol p.464/467); labeled best-guess. See _presentation_eve_composite.
     pe = _presentation_eve_composite(target_date)
     if pe is not None:
+        # Name the day by its movable/base commemoration (the pre-Lent cohort martyr, or
+        # the Lenten day it falls on) the way the source does -- the Presentation eve is
+        # a co-celebrated reading block, not the day's headline. Fall back to the eve name
+        # only when no base commemoration resolves (an extreme-Easter ferial).
+        _name = _collision_base_feast(target_date) or "Eve of the Presentation of the Lord"
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Eve of the Presentation of the Lord",
+            "Liturgical Day": _name,
             "Season": "Presentation",
             "Readings": _group_readings(pe),
             "ReadingsList": pe,

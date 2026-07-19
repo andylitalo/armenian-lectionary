@@ -57,6 +57,11 @@ _EVES = sorted([
     "Eve of Fast of the Holy Cross of Varag",
     "Eve of the Resurrection of our Lord Jesus Christ", "Eve of Great Lent",
     "Eve of the Fast of Advent", "Eve of Fast of Advent",
+    # Vigil designations (temporal markers, not a commemoration): the eve of the
+    # Presentation is a co-celebrated reading block, so the day is headlined by its own
+    # commemoration, not "Eve of the Presentation".
+    "Eve of the Presentation of the Lord to the Temple",
+    "Eve of the Presentation of the Lord",
 ], key=len, reverse=True)
 
 # Engine placeholders that are NOT a commemoration name -> normalize to empty.

@@ -15,10 +15,10 @@ position label. So -- per design -- this compares only the COMMEMORATION compone
 (dev/source_corrections.canonical_commem) to reconcile reviewed companion-enumeration
 variants. The contract is:
 
-  * every day's engine commemoration equals the scraped commemoration, EXCEPT the
-    enumerated KNOWN_FEAST_DIVERGENCES (a small generative-best-guess residue), and
-  * that allowlist is exact -- a listed day that stops diverging also fails, so the
-    allowlist can't rot.
+  * every day's engine commemoration equals the scraped commemoration (2001-2026); the
+    KNOWN_FEAST_DIVERGENCES allowlist is currently EMPTY, and
+  * that allowlist is exact -- any entry that stops diverging also fails -- so should a
+    future change re-introduce a documented divergence, it can't silently rot.
 """
 
 import datetime

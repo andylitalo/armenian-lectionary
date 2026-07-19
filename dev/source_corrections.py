@@ -78,6 +78,10 @@ _FEAST_CANON_RULES = (
      lambda c: c.startswith("Saints Atom and his soldiers")),
     ("PRESENTATION OF OUR LORD TO THE TEMPLE",
      lambda c: "PRESENTATION OF OUR LORD TO THE TEMPLE" in c),
+    # St. Theodore the Recruit: the scrape says "the General", the Tonats'oyts table
+    # "the Tyron" (Greek Tiron/Recruit) -- the same soldier-martyr.
+    ("Saint Theodore the General",
+     lambda c: "Theodore the Tyron" in c or "Theodore the General" in c),
 )
 
 
@@ -94,19 +98,8 @@ def canonical_commem(commem):
 
 
 # Days where the engine's commemoration genuinely differs from the scrape and is NOT a
-# reviewed equivalence -- the generative best-guess tier, which the "bugs + wording"
-# scope does not resolve. Enumerated (not ratcheted) so any NEW divergence fails the
-# test, and a stale entry that stops diverging also fails (keeping the allowlist honest).
-# Each is a structural limitation of a best-guess tier, not a wording miss:
-#   * Feb-13 (Presentation eve): a year-varying pre-Lent floating martyr (or Lenten
-#     Sunday, or nothing) falls here; the generative composite ships the fixed "Eve of
-#     the Presentation of the Lord" identity, not the year's floating saint.
-#   * Apr-7 (Annunciation): the fixed Annunciation collides with the movable Holy
-#     Week/Lent day; the scrape co-lists that day (2018/2019 name both) or transfers the
-#     Annunciation away entirely (2023 = Great Friday). The generative composite ships
-#     the Annunciation identity regardless.
-KNOWN_FEAST_DIVERGENCES = {
-    "2001-02-13", "2005-02-13", "2007-02-13", "2008-02-13", "2011-02-13",
-    "2016-02-13", "2019-02-13", "2020-02-13", "2022-02-13",
-    "2001-04-07", "2004-04-07", "2018-04-07", "2019-04-07", "2023-04-07",
-}
+# reviewed equivalence. The fixed/movable collision days (Feb-13 Presentation eve, Apr-7
+# Annunciation) are now named by their movable commemoration (_collision_base_feast), so
+# this is empty. Enumerated (not ratcheted): a NEW unaccounted divergence fails the test,
+# and a stale entry that stops diverging also fails, keeping the allowlist honest.
+KNOWN_FEAST_DIVERGENCES = set()
