@@ -66,6 +66,22 @@ verse-boundary convention on the same pericope, not a missing reading. Gate on
 `Source` to include or exclude these. Regenerate these figures with
 `python dev/compare_app.py`.
 
+### Feast-name accuracy
+
+Every result also carries the **feast/fast name of the day** in the `"Liturgical Day"`
+field. As of **1.1.0** this name is locked against the same authoritative ground truth:
+the engine's commemoration matches the source on **all 9,495 days of 2001–2026 (100%)**,
+with no exceptions and no allowlist (`tests/test_feast.py`). The engine always serves a
+concrete, source-matched name — never a placeholder.
+
+The match is checked on the **commemoration component** — the saint/feast identity. The
+source string also prepends a *year-varying* calendar-position label ("Nth day of
+&lt;Season&gt;", "Nth Sunday after &lt;Anchor&gt;") that a static engine cannot
+byte-reproduce, so that positional prefix is normalized out on **both** sides before
+comparison (`dev/feast_names.py`); a small set of reviewed companion-enumeration and
+transliteration variants are reconciled symmetrically (`dev/source_corrections.canonical_commem`).
+Naming nuances may still be refined as experts review. Audit with `python dev/feast_audit.py`.
+
 ### Source fidelity & known typos
 
 The engine treats the printed Տօնացոյց (Tōnatsooyts) as the **primary source** and
