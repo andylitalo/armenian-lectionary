@@ -13,12 +13,8 @@ separatorless string, and a static engine cannot byte-reproduce the year-varying
 position label. So -- per design -- this compares only the COMMEMORATION component
 (dev/feast_names.commemoration_of), canonicalized on BOTH sides
 (dev/source_corrections.canonical_commem) to reconcile reviewed companion-enumeration
-variants. The contract is:
-
-  * every day's engine commemoration equals the scraped commemoration (2001-2026); the
-    KNOWN_FEAST_DIVERGENCES allowlist is currently EMPTY, and
-  * that allowlist is exact -- any entry that stops diverging also fails -- so should a
-    future change re-introduce a documented divergence, it can't silently rot.
+variants. The contract is simple: every day's engine commemoration equals the scraped
+commemoration across 2001-2026, with no exceptions.
 """
 
 import datetime
@@ -30,8 +26,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                        # noqa: E402
 from dev.feast_names import commemoration_of                           # noqa: E402
-from dev.source_corrections import (                                    # noqa: E402
-    canonical_commem, KNOWN_FEAST_DIVERGENCES)
+from dev.source_corrections import canonical_commem                     # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary      # noqa: E402
 
 # Lower bound on processed reference days; guards against silent data loss.
@@ -50,8 +45,7 @@ class TestFeastCommemoration(unittest.TestCase):
 
     def test_commemoration_matches_source(self):
         total = 0
-        unlisted = []             # engine != scrape and NOT an accounted divergence
-        listed_but_matching = []  # in KNOWN_FEAST_DIVERGENCES yet actually matches
+        mismatches = []           # engine commemoration != scrape commemoration
         unsegmented = []          # extractor left an unrecognized-prefix sentinel
         for iso in sorted(self.days):
             feast = (self.days[iso].get("feast") or "").strip()
@@ -63,12 +57,8 @@ class TestFeastCommemoration(unittest.TestCase):
                 unsegmented.append((iso, feast))
             got = compute_armenian_lectionary(
                 datetime.date.fromisoformat(iso))["Liturgical Day"]
-            matches = _commem(feast) == _commem(got)
-            if iso in KNOWN_FEAST_DIVERGENCES:
-                if matches:
-                    listed_but_matching.append(iso)
-            elif not matches:
-                unlisted.append((iso, src, canonical_commem(commemoration_of(got))))
+            if _commem(feast) != _commem(got):
+                mismatches.append((iso, src, canonical_commem(commemoration_of(got))))
 
         # No silent data loss.
         self.assertGreaterEqual(
@@ -78,16 +68,11 @@ class TestFeastCommemoration(unittest.TestCase):
         self.assertEqual(
             unsegmented, [],
             f"{len(unsegmented)} feast strings did not segment: {unsegmented[:5]}")
-        # The allowlist must be exact: no stale entries that no longer diverge.
+        # The contract: every engine feast name matches the scrape (2001-2026).
         self.assertEqual(
-            listed_but_matching, [],
-            "KNOWN_FEAST_DIVERGENCES entries that now match (remove them): "
-            f"{listed_but_matching}")
-        # The contract: no unaccounted-for feast-name mismatch.
-        self.assertEqual(
-            unlisted, [],
-            f"{len(unlisted)} engine feast names disagree with the scrape "
-            f"(first 10): {unlisted[:10]}")
+            mismatches, [],
+            f"{len(mismatches)} engine feast names disagree with the scrape "
+            f"(first 10): {mismatches[:10]}")
 
 
 class TestCommemorationExtractor(unittest.TestCase):

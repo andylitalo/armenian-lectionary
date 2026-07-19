@@ -95,11 +95,3 @@ def canonical_commem(commem):
         if pred(commem):
             return canonical
     return commem
-
-
-# Days where the engine's commemoration genuinely differs from the scrape and is NOT a
-# reviewed equivalence. The fixed/movable collision days (Feb-13 Presentation eve, Apr-7
-# Annunciation) are now named by their movable commemoration (_collision_base_feast), so
-# this is empty. Enumerated (not ratcheted): a NEW unaccounted divergence fails the test,
-# and a stale entry that stops diverging also fails, keeping the allowlist honest.
-KNOWN_FEAST_DIVERGENCES = set()
