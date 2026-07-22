@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from dev.build_table import build, validate  # noqa: E402
 from armenian_lectionary.engine import DATA_PATH  # noqa: E402
+from tests._reference_cache import requires_reference_cache  # noqa: E402
 
 
 def _slim(tables):
@@ -28,6 +29,7 @@ def _slim(tables):
     return out
 
 
+@requires_reference_cache
 class TestTableBuild(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

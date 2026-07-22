@@ -9,11 +9,16 @@ Internal helpers and constants remain importable from
 ``armenian_lectionary.engine``; the public surface is kept deliberately small.
 """
 
-from .engine import compute_armenian_lectionary, calculate_gregorian_easter
+from .engine import (
+    compute_armenian_lectionary,
+    calculate_gregorian_easter,
+    SUPPORTED_LANGUAGES,
+)
 
-__version__ = "1.1.1"
+__version__ = "1.2.0"
 __all__ = [
     "compute_armenian_lectionary",
     "calculate_gregorian_easter",
+    "SUPPORTED_LANGUAGES",
     "__version__",
 ]

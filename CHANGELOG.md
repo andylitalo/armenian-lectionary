@@ -4,6 +4,32 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] — 2026-07-22
+
+### Added
+- **Armenian (`hy`) output.** `compute_armenian_lectionary(date, language="hy")` (and
+  `GET /readings?date=…&language=hy`, and `armenian-lectionary --language hy`) now returns
+  the feast (`"Liturgical Day"`) and the scripture book names in Classical Armenian.
+  `language` defaults to `"en"`; an unsupported value raises `ValueError` (HTTP 400 in the
+  API). Provenance fields (`Season`, `Source`, `Confidence`, `Note`) stay in English — they
+  are engine annotations, not scraped source data. Every result now carries a
+  `"Language"` key (`"en"` or `"hy"`) naming the language of its names. Any feast
+  component or book with no known Armenian form is left in English rather than dropped.
+- The names ship as two static maps under `armenian_lectionary/data/`
+  (`feast_names_hy.json`, `book_names_hy.json`), so the runtime stays fully offline. They are
+  scraped once from sacredtradition.am (`iL=0`, Classical Armenian) by the new dev tool
+  `dev/fetch_translations.py`, which pairs each English reading with its Armenian counterpart
+  by matching the language-independent `chapter.verse` tail and votes the most common
+  rendering per feast/book (including per-`FEAST_SEP`-component feast votes so
+  engine-composed labels translate too).
+- **Traditional (Mashtots) orthography.** The source enters feast titles in Mashtots
+  orthography but the book/reading names in Modern-Eastern reformed ("Soviet"/Abeghyan)
+  orthography; `dev/fetch_translations.py` reverses the reform on the book names
+  (orthography only, preserving the source's words) — e.g. `Ավետարան ըստ Հովհաննեսի` →
+  `Աւետարան ըստ Յովհաննէսի`, `…մարգարեությունը` → `…մարգարէութիւնը`. A data-contract test
+  guards that both shipped maps are pure Armenian script (no Cyrillic/Latin lookalikes) and
+  that the book names carry no reformed markers.
+
 ## [1.1.1] — 2026-07-22
 
 ### Fixed

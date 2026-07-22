@@ -12,4 +12,6 @@ build/
 *.numbers
 # Dev ground-truth cache + logs (the distilled table lectionary_data.json is committed)
 dev/reference_data/
+# Dev Armenian-name scrape cache (the distilled *_names_hy.json maps are committed)
+dev/reference_data_hy/
 dev/*.log

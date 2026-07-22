@@ -28,6 +28,7 @@ from dev.analyze import load_all                                        # noqa: 
 from dev.feast_names import commemoration_of                           # noqa: E402
 from dev.source_corrections import canonical_commem                     # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary      # noqa: E402
+from tests._reference_cache import requires_reference_cache             # noqa: E402
 
 # Lower bound on processed reference days; guards against silent data loss.
 EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
@@ -38,6 +39,7 @@ def _commem(feast_str):
     return canonical_commem(commemoration_of(feast_str)).casefold()
 
 
+@requires_reference_cache
 class TestFeastCommemoration(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

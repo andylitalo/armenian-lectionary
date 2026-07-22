@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from dev.source_corrections import apply_cohort_corrections  # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
+from tests._reference_cache import requires_reference_cache  # noqa: E402
 
 # Structurally-validated tiers (bound by the 0-wrong contract) vs. the labeled tiers
 # that ship readings but are not cache cross-year validated (tracked separately).
@@ -81,6 +82,7 @@ COVERAGE_ANY_PCT_FLOOR = float(os.environ.get("COVERAGE_ANY_PCT_FLOOR", "99.4"))
 BEST_EFFORT_EXACT_FLOOR = int(os.environ.get("BEST_EFFORT_EXACT_FLOOR", "56"))
 
 
+@requires_reference_cache
 class TestFullDataset(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

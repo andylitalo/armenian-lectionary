@@ -23,9 +23,21 @@ import datetime
 import functools
 import json
 import os
+import re
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                          "data", "lectionary_data.json")
+
+# Armenian ("hy") name maps, scraped from sacredtradition.am by
+# dev/fetch_translations.py. Each degrades to {} if absent; language="hy" then falls
+# back to the English name. FEAST maps a whole scraped feast string OR a single
+# FEAST_SEP component -> its Armenian form; BOOK maps an English book head -> Armenian.
+FEAST_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "data", "feast_names_hy.json")
+BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "data", "book_names_hy.json")
+
+SUPPORTED_LANGUAGES = ("en", "hy")
 
 
 # --------------------------------------------------------------------------- #
@@ -1620,6 +1632,79 @@ def _group_readings(refs: list) -> dict:
 
 
 # --------------------------------------------------------------------------- #
+# Localization (English -> Armenian names)
+# --------------------------------------------------------------------------- #
+
+def _load_json_map(path):
+    """Load a {str: str} name map, degrading to {} if the file is absent."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+_FEAST_NAMES_HY = _load_json_map(FEAST_NAMES_HY_PATH)
+_BOOK_NAMES_HY = _load_json_map(BOOK_NAMES_HY_PATH)
+
+# Split a reading citation into (book head, "chapter.verse" tail). The tail is
+# language-independent, so translating a reading is just swapping the head.
+_READING_SPLIT_RE = re.compile(r"^(.*?)(\d+[.:]\d.*)$")
+
+
+def _translate_reading(ref: str, book_map: dict) -> str:
+    """Return ``ref`` with its book name in the target language (unchanged if the
+    book head is not in ``book_map`` or the ref carries no chapter.verse tail)."""
+    m = _READING_SPLIT_RE.match(ref.strip())
+    if not m:
+        return ref
+    head, tail = m.group(1).strip(), m.group(2).strip()
+    hy = book_map.get(head)
+    return f"{hy} {tail}" if hy else ref
+
+
+def _translate_feast(label: str, feast_map: dict) -> str:
+    """Return ``label`` (a possibly FEAST_SEP-composite feast name) in the target
+    language. Try the whole string first; else translate each component individually,
+    leaving any component with no known translation in English."""
+    if not label:
+        return label
+    whole = feast_map.get(label)
+    if whole is not None:
+        return whole
+    parts = label.split(_FEAST_SEP)
+    if len(parts) > 1:
+        return _FEAST_SEP.join(feast_map.get(p, p) for p in parts)
+    return label
+
+
+def _localize(result: dict, language: str) -> dict:
+    """Translate the human-readable feast and reading names of ``result`` in place.
+
+    Only the *scraped* values are localized -- the feast (``Liturgical Day``) and the
+    book names inside ``Readings``/``ReadingsList``. Provenance/metadata fields
+    (``Season``, ``Source``, ``Confidence``, ``Note``) stay in English; they are engine
+    annotations, not source data, and have no scraped Armenian form. The result always
+    carries a ``Language`` key naming the language its names are in.
+    """
+    result["Language"] = language
+    if language == "en":
+        return result
+    result["Liturgical Day"] = _translate_feast(
+        result.get("Liturgical Day", ""), _FEAST_NAMES_HY)
+    result["ReadingsList"] = [
+        _translate_reading(r, _BOOK_NAMES_HY) for r in result.get("ReadingsList", [])]
+    # Translate within the existing groups: the OT/Epistle/Gospel classification was
+    # already computed on the English heads in _group_readings, so we keep that grouping
+    # and only localize each reading's text (the section keys stay English metadata).
+    result["Readings"] = {
+        section: [_translate_reading(r, _BOOK_NAMES_HY) for r in refs]
+        for section, refs in result.get("Readings", {}).items()
+    }
+    return result
+
+
+# --------------------------------------------------------------------------- #
 # Public API
 # --------------------------------------------------------------------------- #
 
@@ -1643,17 +1728,29 @@ def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
     return _FEAST_SEP.join(parts)
 
 
-def compute_armenian_lectionary(target_date: datetime.date) -> dict:
+def compute_armenian_lectionary(target_date: datetime.date,
+                                language: str = "en") -> dict:
     """Return the liturgical day and readings for ``target_date``.
 
     Thin wrapper over :func:`_compute_lectionary` that re-anchors fixed civil-date
     commemorations (Genocide Remembrance -> April 24) which the Easter-keyed table
     would otherwise misplace.
+
+    ``language`` selects the language of the human-readable names: ``"en"`` (default)
+    or ``"hy"`` for Classical Armenian. In ``"hy"`` the feast (``Liturgical Day``) and
+    the book names in ``Readings``/``ReadingsList`` come from sacredtradition.am
+    (scraped offline into ``data/{feast,book}_names_hy.json``); any name with no known
+    Armenian form is left in English. Provenance fields stay English (see
+    :func:`_localize`).
     """
+    if language not in SUPPORTED_LANGUAGES:
+        raise ValueError(
+            f"unsupported language {language!r}; expected one of "
+            f"{', '.join(SUPPORTED_LANGUAGES)}")
     result = _compute_lectionary(target_date)
     result["Liturgical Day"] = _anchor_genocide_remembrance(
         result["Liturgical Day"], target_date)
-    return result
+    return _localize(result, language)
 
 
 def _compute_lectionary(target_date: datetime.date) -> dict:

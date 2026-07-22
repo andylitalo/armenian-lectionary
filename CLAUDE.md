@@ -22,6 +22,7 @@ with no install step.
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
+| `armenian_lectionary/data/{feast_names_hy,book_names_hy}.json` | Shipped English→Armenian name maps for `language="hy"` (feast strings/components and Bible book heads). Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, each degrades to `{}` if absent (→ English fallback). |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
 | `Dockerfile` / `.dockerignore` | Container image for Cloud Run (`pip install .` + gunicorn on `0.0.0.0:$PORT`). |
 | `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image and package. Writes the shipped JSON via the engine's PATH constants. |
@@ -122,7 +123,7 @@ bundled under `armenian_lectionary/data/`). Build and check locally:
 ```bash
 pip install build twine
 python -m build                       # -> dist/*.whl, dist/*.tar.gz
-python -m zipfile -l dist/*.whl       # confirm all five data/*.json are bundled
+python -m zipfile -l dist/*.whl       # confirm all seven data/*.json are bundled
 twine check dist/*
 ```
 
