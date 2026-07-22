@@ -4,6 +4,19 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] — 2026-07-21
+
+### Changed
+- **Readability separator in feast names.** The `"Liturgical Day"` name now joins a
+  leading calendar-position label ("Nth day of \<Season\>", "Nth Sunday after/of
+  \<Anchor\>", bare "Nth Sunday", "Octave of Easter (New Sunday)") to the commemoration
+  the source mashes onto it with a ` — ` separator — e.g. `Twentieth day of Eastertide —
+  Remembrance of the Armenian Genocide (1915)` instead of the previously run-together
+  `Twentieth day of EastertideRemembrance of the Armenian Genocide (1915)`. This is a
+  **presentation-only** change: the internal source-matched labels and the feast-name
+  accuracy contract (`test_feast`, canonicalization blind to the separator) are unchanged,
+  as are all readings.
+
 ## [1.1.0] — 2026-07-19
 
 ### Added

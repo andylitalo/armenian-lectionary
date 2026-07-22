@@ -107,7 +107,12 @@ def commemoration_of(feast_str):
     """
     if not feast_str:
         return ""
-    s = feast_str.replace("Е", "E")            # Cyrillic 'Е' glitch -> Latin 'E'
+    # The engine joins position/commemoration components with " — " for readability
+    # (a presentation-only separator); the scrape mashes them with no separator. Re-mash
+    # so both sides canonicalize identically -- the accuracy contract is blind to the
+    # separator, which carries no commemoration content.
+    s = feast_str.replace(" — ", "")
+    s = s.replace("Е", "E")                    # Cyrillic 'Е' glitch -> Latin 'E'
     for p in _PLACEHOLDERS:
         s = s.replace(p, "")
     s = _strip_leading_position(s)

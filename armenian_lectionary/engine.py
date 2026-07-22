@@ -23,6 +23,7 @@ import datetime
 import functools
 import json
 import os
+import re
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                          "data", "lectionary_data.json")
@@ -1079,6 +1080,86 @@ def _split_eastertide_position(feast):
     return "", feast
 
 
+# Presentation-only separator inserted between a leading calendar-position label
+# ("Nth day of <Season>", "Nth Sunday after/of <Anchor>", bare "Nth Sunday", "Octave of
+# Easter (New Sunday)") and the commemoration the source calendar mashes directly onto it.
+# The validated table and the collision composites store these labels mashed (byte-faithful
+# to the scraped source, which uses no separator); this joins the two components at the
+# public API boundary so they read as distinct, without altering the internal
+# source-matched labels the accuracy contract validates.
+_FEAST_SEP = " — "
+
+# Position-label vocabulary. Mirrors dev/feast_names.py (the test-side canonicalizer);
+# kept here because the runtime package ships without dev/. Ordinal head, then the season
+# names that follow "Nth day of ..." and the anchor names that follow "Nth Sunday
+# after/of ..." -- both longest-first so the most specific match wins.
+_POS_ORD = (r"(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|"
+            r"Eleventh|Twelfth|Thirteenth|Fourteenth|Fifteenth|Sixteenth|Seventeenth|"
+            r"Eighteenth|Nineteenth|Twentieth|Twenty [A-Z][a-z]+|Thirtieth|"
+            r"Thirty [A-Z][a-z]+|Fortieth|Forty [A-Z][a-z]+|Fiftieth)")
+_POS_SEASONS = sorted([
+    "Great Lent", "Eastertide", "Advent", "Pentecost", "Transfiguration",
+    "Assumption", "Nativity", "Easter",
+    "the Fast of the Catechumens", "the Fast of Catechumens",
+    "the Fast of the Holy Cross", "the Fast of the Transfiguration",
+    "the Fast of the Transifiguration",           # sacredtradition.am spelling variant
+    "the Fast of Assumption", "the Fast of Nativity", "the Fast of Advent",
+    "the Assumption",
+], key=len, reverse=True)
+_POS_ANCHORS = sorted([
+    "Holy Cross of Varag", "the Exaltation of the Holy Cross", "the Holy Cross",
+    "Holy Cross", "Holy Etchmiadzin", "Holy Nativity", "the Assumption",
+    "the Great Barekendan", "Great Barekendan", "Advent", "Pentecost", "Great Lent",
+    "Nativity", "Transfiguration", "Assumption", "Eastertide", "Exaltation", "Holy",
+], key=len, reverse=True)
+_RE_POS_DAYOF = re.compile(rf"^{_POS_ORD} day of ")
+_RE_POS_SUNAO = re.compile(rf"^{_POS_ORD} Sunday (?:after|of) ")
+_RE_POS_SUN = re.compile(rf"^{_POS_ORD} Sunday")
+_OCTAVE_POS = "Octave of Easter (New Sunday)"
+
+
+def _split_position(label):
+    """Split a leading calendar-position label off ``label`` -> (position, remainder).
+    Returns ("", label) when no position prefix is recognized (so the whole label is
+    treated as the commemoration). The season/anchor after the ordinal head must be a
+    known name; an unrecognized one is left unsplit rather than guessed."""
+    if label.startswith(_OCTAVE_POS):
+        return _OCTAVE_POS, label[len(_OCTAVE_POS):]
+    m = _RE_POS_DAYOF.match(label)
+    if m:
+        rest = label[m.end():]
+        for sea in _POS_SEASONS:
+            if rest.startswith(sea):
+                cut = m.end() + len(sea)
+                return label[:cut], label[cut:]
+        return "", label
+    m = _RE_POS_SUNAO.match(label)
+    if m:
+        rest = label[m.end():]
+        for anc in _POS_ANCHORS:
+            if rest.startswith(anc):
+                cut = m.end() + len(anc)
+                return label[:cut], label[cut:]
+        return "", label
+    m = _RE_POS_SUN.match(label)
+    if m:
+        return label[:m.end()], label[m.end():]
+    return "", label
+
+
+def _insert_position_separator(label):
+    """Insert ``_FEAST_SEP`` between a leading calendar-position label and the
+    commemoration mashed onto it. Idempotent: a label with no position prefix, no trailing
+    commemoration, or a remainder already carrying a separator/punctuation/parenthetical
+    (e.g. ". Sunday of the Judge", " (Red Sunday)") is returned unchanged."""
+    pos, rest = _split_position(label)
+    if not pos or not rest:
+        return label
+    if rest.lstrip()[:1] in "—-,.(":                 # already separated / punctuated
+        return label
+    return pos + _FEAST_SEP + rest
+
+
 def _annunciation_composite(d, tables=None):
     """Best-guess Annunciation (Apr 7) readings via the Tonatsooyts collision rule,
     for offsets the validated AnnE keyspace does not cover. Returns a list of refs
@@ -1645,9 +1726,9 @@ _GENOCIDE_REMEMBRANCE = "Remembrance of the Armenian Genocide (1915)"
 
 def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
     """Return ``label`` with the Genocide Remembrance note anchored to April 24."""
-    stripped = label.replace(_GENOCIDE_REMEMBRANCE, "").strip()
+    stripped = label.replace(_GENOCIDE_REMEMBRANCE, "").rstrip("— ").strip()
     if (d.month, d.day) == (4, 24):
-        return (stripped + _GENOCIDE_REMEMBRANCE) if stripped else _GENOCIDE_REMEMBRANCE
+        return (stripped + _FEAST_SEP + _GENOCIDE_REMEMBRANCE) if stripped else _GENOCIDE_REMEMBRANCE
     return stripped
 
 
@@ -1659,8 +1740,8 @@ def compute_armenian_lectionary(target_date: datetime.date) -> dict:
     would otherwise misplace.
     """
     result = _compute_lectionary(target_date)
-    result["Liturgical Day"] = _anchor_genocide_remembrance(
-        result["Liturgical Day"], target_date)
+    label = _anchor_genocide_remembrance(result["Liturgical Day"], target_date)
+    result["Liturgical Day"] = _insert_position_separator(label)
     return result
 
 
@@ -1813,7 +1894,7 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
             _pos, _rest = _split_eastertide_position(_base)
             _name = _pos + _annun + _rest
         else:
-            _name = _base + _annun       # Lent/Holy Week: the movable day leads
+            _name = _base + _FEAST_SEP + _annun   # Lent/Holy Week: the movable day leads
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": _name,
