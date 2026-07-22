@@ -25,6 +25,12 @@ def main(argv=None):
         nargs="?",
         help="Target date as YYYY-MM-DD (default: today).",
     )
+    parser.add_argument(
+        "-l", "--language", "--lang",
+        default="en",
+        choices=["en", "hy"],
+        help="Language for feast and book names: 'en' (default) or 'hy' (Armenian).",
+    )
     args = parser.parse_args(argv)
 
     if args.date:
@@ -35,7 +41,7 @@ def main(argv=None):
     else:
         target = datetime.date.today()
 
-    result = compute_armenian_lectionary(target)
+    result = compute_armenian_lectionary(target, language=args.language)
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

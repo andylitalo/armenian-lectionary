@@ -127,11 +127,16 @@ python app.py                     # serves http://127.0.0.1:5001
 
 ## Endpoint
 
-### `GET /readings?date=YYYY-MM-DD`
+### `GET /readings?date=YYYY-MM-DD&language=en`
 
 `date` is optional (defaults to today). Supported range is **2001–2027**
 (env-overridable via `LECTIONARY_MIN_YEAR` / `LECTIONARY_MAX_YEAR`); a date
-outside it returns HTTP 400 with a message explaining the current range. Example:
+outside it returns HTTP 400 with a message explaining the current range.
+`language` is optional — `en` (default) or `hy` for Classical Armenian (alias
+`lang`); an unsupported value returns HTTP 400. In `hy` the feast name and the
+scripture book names come back in Armenian (`?date=2026-04-05&language=hy` →
+`"ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)"`, `"Ավետարան ըստ Հովհաննեսի
+20.1-18"`); provenance fields stay English. Example:
 
 ```bash
 curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
@@ -180,11 +185,17 @@ import armenian_lectionary
 reading = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4, 5))
 print(reading["Liturgical Day"])   # RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)
 print(reading["ReadingsList"])     # ['John 20.1-18', 'Acts of the Apostles 1.1-8', ...]
+
+# Armenian names: pass language="hy" (default "en").
+hy = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4, 5), language="hy")
+print(hy["Liturgical Day"])        # ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)
+print(hy["ReadingsList"][0])       # Ավետարան ըստ Հովհաննեսի 20.1-18
 ```
 
 The distribution name is **`armenian-lectionary`**; the import name is
 **`armenian_lectionary`**. The public API is intentionally small —
-`compute_armenian_lectionary(date)` and `calculate_gregorian_easter(year)`.
+`compute_armenian_lectionary(date, language="en")` and
+`calculate_gregorian_easter(year)`.
 (Internal calendar helpers and constants remain importable from
 `armenian_lectionary.engine` if you need them.)
 

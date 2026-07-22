@@ -69,9 +69,12 @@ def index():
     return jsonify({
         "service": "Armenian Lectionary API",
         "endpoint": "/readings",
-        "query_params": {"date": "YYYY-MM-DD (optional; defaults to today)"},
+        "query_params": {
+            "date": "YYYY-MM-DD (optional; defaults to today)",
+            "language": "en (default) or hy for Armenian (optional; alias: lang)",
+        },
         "supported_range": {"min_year": MIN_YEAR, "max_year": MAX_YEAR},
-        "example": "/readings?date=2026-04-05"
+        "example": "/readings?date=2026-04-05&language=hy"
     })
 
 
@@ -105,7 +108,14 @@ def readings():
                      "the range is planned to expand in the future.")
         }), 400
 
-    return jsonify(compute_armenian_lectionary(target_date))
+    language = request.args.get("language", request.args.get("lang", "en"))
+    if language not in ("en", "hy"):
+        return jsonify({
+            "error": f"Unsupported language {language!r}.",
+            "supported_languages": ["en", "hy"],
+        }), 400
+
+    return jsonify(compute_armenian_lectionary(target_date, language=language))
 
 
 if __name__ == "__main__":
