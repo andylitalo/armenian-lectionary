@@ -4,6 +4,19 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.1] — 2026-07-22
+
+### Fixed
+- **Cyrillic homoglyphs in English feast names.** The source typed a few English feast
+  strings with Cyrillic look-alike letters (Cyrillic `Е` in `Eighth day of Nativity`,
+  Cyrillic `о` in `…Tatoul…`); these had propagated into the shipped English table
+  (`lectionary_data.json`) and thus into the `"Liturgical Day"` output, so the text looked
+  correct but carried the wrong code points. They are now folded to their Latin twins.
+  A new `dev/source_corrections.normalize_confusables()` is applied at scrape ingestion
+  (`dev/fetch_reference.py`) and symmetrically inside `canonical_commem`, so the whole
+  pipeline stays clean; the shipped `hy` feast-map keys are cleaned in lockstep so those
+  feasts still translate. No reading, date, or feast wording changes.
+
 ## [1.2.0] — 2026-07-22
 
 ### Added

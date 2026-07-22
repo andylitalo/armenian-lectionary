@@ -116,11 +116,34 @@ _FEAST_CANON_RULES = (
 )
 
 
+# The scrape mixes a few Cyrillic homoglyphs into the *English* feast text (the source
+# was evidently typed with a Cyrillic keyboard): Cyrillic Е/о in "Еighth day of Nativity"
+# and "Tatоul". They read identically but are the wrong code points, so map them back to
+# their Latin twins. Only homoglyphs observed in the data are listed (deliberately
+# conservative -- we never want to fold a genuinely non-Latin character).
+_CYRILLIC_HOMOGLYPHS = {
+    "Е": "E",   # CYRILLIC CAPITAL LETTER IE -> LATIN E
+    "о": "o",   # CYRILLIC SMALL LETTER O    -> LATIN o
+}
+
+
+def normalize_confusables(text):
+    """Replace the Cyrillic homoglyphs the source mixes into English feast names with
+    their Latin equivalents. Idempotent; leaves everything else untouched."""
+    if not text:
+        return text
+    for cyr, lat in _CYRILLIC_HOMOGLYPHS.items():
+        text = text.replace(cyr, lat)
+    return text
+
+
 def canonical_commem(commem):
     """Collapse reviewed companion-enumeration variants to a primary commemoration.
 
     Applied symmetrically to the scraped and engine commemorations before comparison.
-    Also repairs the "Fiest" -> "Feast" scrape typo."""
+    Also repairs the "Fiest" -> "Feast" scrape typo and the Cyrillic-homoglyph
+    contamination (Cyrillic Е/о) in the source's English feast text."""
+    commem = normalize_confusables(commem)
     commem = commem.replace("Fiest of", "Feast of")     # sacredtradition.am typo
     for canonical, pred in _FEAST_CANON_RULES:
         if pred(commem):

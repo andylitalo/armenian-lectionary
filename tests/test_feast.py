@@ -113,5 +113,30 @@ class TestCommemorationExtractor(unittest.TestCase):
         self.assertEqual(commemoration_of("(commemoration)"), "")
 
 
+class TestConfusables(unittest.TestCase):
+    def test_folds_cyrillic_homoglyphs(self):
+        from dev.source_corrections import normalize_confusables
+        # Cyrillic Е (U+0415) and о (U+043E) -> Latin E / o.
+        self.assertEqual(normalize_confusables("Еighth day of Nativity"),
+                         "Eighth day of Nativity")
+        self.assertEqual(normalize_confusables("Tatоul"), "Tatoul")
+
+    def test_idempotent_and_pure_ascii_result(self):
+        from dev.source_corrections import normalize_confusables
+        once = normalize_confusables("Еighth day, Tatоul")
+        self.assertEqual(once, normalize_confusables(once))
+        self.assertTrue(once.isascii(), f"residual non-ASCII in {once!r}")
+
+    def test_shipped_table_feasts_have_no_cyrillic(self):
+        import json
+        from armenian_lectionary.engine import DATA_PATH
+        tables = json.load(open(DATA_PATH, encoding="utf-8"))["tables"]
+        for ks, entries in tables.items():
+            for key, entry in entries.items():
+                for ch in entry.get("feast", ""):
+                    self.assertFalse(0x0400 <= ord(ch) <= 0x04FF,
+                                     f"Cyrillic {ch!r} in {ks}/{key} feast")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -33,12 +33,16 @@ FEAST_SEP = " — "
 
 def _strip(s: str) -> str:
     import html as _html
+    from source_corrections import normalize_confusables
     # Preserve component boundaries before deleting tags: the previous version mapped
     # <br> to "" (re.sub of every tag), silently mashing the components together. Map
     # <br> to a sentinel first, drop the remaining tags, then rejoin on FEAST_SEP.
     s = re.sub(r"\s*<br\s*/?>\s*", "\x00", s)
     s = re.sub(r"<[^>]+>", "", s)
     s = _html.unescape(s)
+    # The source occasionally types English feast text with Cyrillic homoglyphs
+    # (Cyrillic Е/о); fold them to Latin at ingestion so the whole pipeline stays clean.
+    s = normalize_confusables(s)
     parts = [p.strip() for p in s.split("\x00") if p.strip()]
     return FEAST_SEP.join(parts)
 

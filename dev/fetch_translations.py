@@ -39,9 +39,12 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # reconciliation to the map keys so those labels resolve. Optional: degrade to identity
 # if the dev module is unavailable.
 try:
-    from dev.source_corrections import canonical_commem
+    from dev.source_corrections import canonical_commem, normalize_confusables
 except Exception:  # pragma: no cover - dev-only convenience
     def canonical_commem(c):
+        return c
+
+    def normalize_confusables(c):
         return c
 
 HERE = os.path.dirname(__file__)
@@ -202,14 +205,17 @@ def build(force: bool = False):
         hy = fetch_hy(d, force=force)
         en = en_by_date[date]
 
-        if en.get("feast") and hy.get("feast"):
-            feast_votes[en["feast"]][hy["feast"]] += 1
+        # The English keys must match the engine's output; fold the source's Cyrillic
+        # homoglyphs (Cyrillic Е/о) to Latin, matching the cleaned shipped table.
+        en_feast = normalize_confusables(en.get("feast", ""))
+        if en_feast and hy.get("feast"):
+            feast_votes[en_feast][hy["feast"]] += 1
             # Also vote per component. The engine composes some labels itself
             # (Annunciation collisions, the Genocide-Remembrance note, ...) by joining
             # FEAST_SEP components, so a per-component map lets those translate even
             # when the exact composite was never scraped as one string. Only pair when
             # both sides split into the same number of components (same structure).
-            en_parts = en["feast"].split(FEAST_SEP)
+            en_parts = en_feast.split(FEAST_SEP)
             hy_parts = hy["feast"].split(FEAST_SEP)
             if len(en_parts) == len(hy_parts) > 1:
                 for ep, hp in zip(en_parts, hy_parts):
