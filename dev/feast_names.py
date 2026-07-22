@@ -107,7 +107,12 @@ def commemoration_of(feast_str):
     """
     if not feast_str:
         return ""
-    s = feast_str.replace("Е", "E")            # Cyrillic 'Е' glitch -> Latin 'E'
+    # The fetch layer now joins the source's <br>-delimited components with " — " (see
+    # fetch_reference.FEAST_SEP); the engine emits the same. Re-mash to the separatorless
+    # form this extractor's position/eve stripping expects -- and so a legacy mashed string
+    # (no separator) canonicalizes identically. The separator carries no commemoration.
+    s = feast_str.replace(" — ", "")
+    s = s.replace("Е", "E")                    # Cyrillic 'Е' glitch -> Latin 'E'
     for p in _PLACEHOLDERS:
         s = s.replace(p, "")
     s = _strip_leading_position(s)

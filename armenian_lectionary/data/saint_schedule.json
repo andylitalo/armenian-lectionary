@@ -278,7 +278,7 @@
    "The Hermits Saints Triphon, Barsauma and Onouphrius": "hermits_saints_triphon",
    "Saint Gregory of Theologian": "gregory_of_theologian",
    "Saints Eugenios, Makarios, Valerian, Candidus and Aquila": "eugenios_makarios_valerian",
-   "Second day of TransfigurationRemembrance of the Dead": "second_day_of",
+   "Second day of Transfiguration — Remembrance of the Dead": "second_day_of",
    "Third day of Transfiguration": "third_day_of",
    "Saint Isaiah the Prophet": "isaiah_the_prophet",
    "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin": "thaddeus_apostle_of",
@@ -296,7 +296,7 @@
   "sequence": [
    {
     "id": "second_day_of",
-    "label": "Second day of TransfigurationRemembrance of the Dead",
+    "label": "Second day of Transfiguration — Remembrance of the Dead",
     "order": 0,
     "support_years": 26,
     "anchor": "head"
@@ -514,7 +514,7 @@
    "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
    "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
    "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": "abraham_and_khoren",
-   "Second day of the AssumptionRemembrance of the Dead": "second_day_of",
+   "Second day of the Assumption — Remembrance of the Dead": "second_day_of",
    "Fifth day of the Assumption": "second_day_of",
    "Third day of the Assumption": "third_day_of",
    "Ninth day of Assumption": "third_day_of",
@@ -532,7 +532,7 @@
   "sequence": [
    {
     "id": "second_day_of",
-    "label": "Second day of the AssumptionRemembrance of the Dead",
+    "label": "Second day of the Assumption — Remembrance of the Dead",
     "order": 2,
     "support_years": 26,
     "anchor": "head"
@@ -670,12 +670,12 @@
    "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
    "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
    "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": "abraham_and_khoren",
-   "Feast of the Holy CrossRemembrance of the Dead": "feast_of_the",
+   "Feast of the Holy Cross — Remembrance of the Dead": "feast_of_the",
    "Feast of the Holy Church": "feast_of_the_2",
    "Feast of the Holy Cross": "feast_of_the_4",
-   "Fast daySaints Mamas, Philomenos and Simeon the Stylite": "fast_daysaints_mamas",
-   "Fast daySaints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan": "fast_daysaints_virgins",
-   "Fast daySaint Patriarchs Barlaam, Anthimus and Irenaeus": "fast_daysaint_patriarchs",
+   "Fast day — Saints Mamas, Philomenos and Simeon the Stylite": "fast_daysaints_mamas",
+   "Fast day — Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan": "fast_daysaints_virgins",
+   "Fast day — Saint Patriarchs Barlaam, Anthimus and Irenaeus": "fast_daysaint_patriarchs",
    "Saints George the Warrior, Adauctus and Romanus the Melodist": "george_the_warrior",
    "Saints David of Dvin and the Martyrs Eulampius and Eulampia": "david_of_dvin",
    "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine": "eustachius_his_wife",
@@ -710,7 +710,7 @@
   "sequence": [
    {
     "id": "feast_of_the",
-    "label": "Feast of the Holy CrossRemembrance of the Dead",
+    "label": "Feast of the Holy Cross — Remembrance of the Dead",
     "order": 0,
     "support_years": 26,
     "anchor": "head"
@@ -740,21 +740,21 @@
    },
    {
     "id": "fast_daysaints_mamas",
-    "label": "Fast daySaints Mamas, Philomenos and Simeon the Stylite",
+    "label": "Fast day — Saints Mamas, Philomenos and Simeon the Stylite",
     "order": 4,
     "support_years": 26,
     "anchor": "head"
    },
    {
     "id": "fast_daysaints_virgins",
-    "label": "Fast daySaints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
+    "label": "Fast day — Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
     "order": 5,
     "support_years": 26,
     "anchor": "head"
    },
    {
     "id": "fast_daysaint_patriarchs",
-    "label": "Fast daySaint Patriarchs Barlaam, Anthimus and Irenaeus",
+    "label": "Fast day — Saint Patriarchs Barlaam, Anthimus and Irenaeus",
     "order": 6,
     "support_years": 26,
     "anchor": "head"

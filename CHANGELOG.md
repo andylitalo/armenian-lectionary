@@ -4,6 +4,30 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] — 2026-07-22
+
+### Fixed
+- **Feast names no longer run their components together.** The source packs a day's
+  calendar-position label, commemoration, and any eve/status note into one field separated
+  by `<br>`; the reference fetcher (`dev/fetch_reference.py`) was stripping every tag —
+  including `<br>` — to the empty string, mashing them (e.g.
+  `Twentieth day of EastertideRemembrance of the Armenian Genocide (1915)`). The fetcher now
+  preserves the `<br>` boundary as a ` — ` separator, so the whole pipeline — the ground-truth
+  cache, the shipped tables, and the `"Liturgical Day"` output — carries the components
+  already split. Example: `Twentieth day of Eastertide — Remembrance of the Armenian Genocide
+  (1915)`.
+
+### Changed
+- The engine now serves these authoritatively-delimited names directly and composes the
+  April-24 Genocide Remembrance note and the Annunciation-collision names on the real
+  separator. The previous approach re-derived the component boundary at runtime from a
+  position-label vocabulary; that reverse-engineering is **removed** (the boundary comes
+  from the source now, not a regex).
+
+Readings are unaffected (one Easter-Sunday reading-order outlier in the source, 2011-04-24,
+is normalized to the cross-year consensus so the shipped tables rebuild identically). The
+0-wrong readings contract and the 100%-match feast-name contract both still hold.
+
 ## [1.1.0] — 2026-07-19
 
 ### Added
