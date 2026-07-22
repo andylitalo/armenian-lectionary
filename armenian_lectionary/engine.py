@@ -1059,24 +1059,12 @@ def _collision_base_feast(d, tables=None):
     return entry["feast"] if entry is not None else None
 
 
-def _split_eastertide_position(feast):
-    """Split a leading Eastertide day-count prefix ("Nth day of Easter[tide]", "Octave of
-    Easter (New Sunday)") off ``feast`` -> (prefix, remainder). Lets a co-celebrated feast
-    be inserted AFTER the calendar position while keeping the position at the front, the
-    way the source calendar orders an Eastertide collision."""
-    if feast.startswith("Octave of Easter (New Sunday)"):
-        n = len("Octave of Easter (New Sunday)")
-        return feast[:n], feast[n:]
-    # "<Ordinal> day of Eastertide|Easter" then (mashed, no separator) the commemoration.
-    marker = " day of "
-    idx = feast.find(marker)
-    if idx != -1:
-        after = feast[idx + len(marker):]
-        for season in ("Eastertide", "Easter"):     # Eastertide first (Easter is a prefix)
-            if after.startswith(season):
-                cut = idx + len(marker) + len(season)
-                return feast[:cut], feast[cut:]
-    return "", feast
+# Separator between the components the source packs into one feast name (calendar-position
+# label, commemoration, eve/status note). The source delimits them with <br>; the fetch
+# layer (dev/fetch_reference._strip) preserves that boundary as this string, so the shipped
+# table and every served label carry the components already split -- the engine never has
+# to re-derive the boundary. Keep in sync with dev/fetch_reference.FEAST_SEP.
+_FEAST_SEP = " — "
 
 
 def _annunciation_composite(d, tables=None):
@@ -1644,11 +1632,15 @@ _GENOCIDE_REMEMBRANCE = "Remembrance of the Armenian Genocide (1915)"
 
 
 def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
-    """Return ``label`` with the Genocide Remembrance note anchored to April 24."""
-    stripped = label.replace(_GENOCIDE_REMEMBRANCE, "").strip()
+    """Return ``label`` with the Genocide Remembrance note anchored to April 24.
+
+    The note is a distinct ``_FEAST_SEP``-delimited component; drop it wherever the
+    Easter-keyed table baked it (it floats off April 24 in other years) and re-append it
+    only on April 24."""
+    parts = [p for p in label.split(_FEAST_SEP) if p != _GENOCIDE_REMEMBRANCE]
     if (d.month, d.day) == (4, 24):
-        return (stripped + _GENOCIDE_REMEMBRANCE) if stripped else _GENOCIDE_REMEMBRANCE
-    return stripped
+        parts.append(_GENOCIDE_REMEMBRANCE)
+    return _FEAST_SEP.join(parts)
 
 
 def compute_armenian_lectionary(target_date: datetime.date) -> dict:
@@ -1809,11 +1801,11 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
             _name = _annun
         elif _e_off >= 1:
             # Eastertide: the Annunciation leads the commemorations, but the calendar
-            # day-count stays at the front -- position + Annunciation + any saint.
-            _pos, _rest = _split_eastertide_position(_base)
-            _name = _pos + _annun + _rest
+            # day-count stays at the front -- position, then Annunciation, then any saint.
+            _parts = _base.split(_FEAST_SEP)
+            _name = _FEAST_SEP.join([_parts[0], _annun] + _parts[1:])
         else:
-            _name = _base + _annun       # Lent/Holy Week: the movable day leads
+            _name = _base + _FEAST_SEP + _annun   # Lent/Holy Week: the movable day leads
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": _name,

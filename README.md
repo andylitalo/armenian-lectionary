@@ -72,7 +72,10 @@ Every result also carries the **feast/fast name of the day** in the `"Liturgical
 field. As of **1.1.0** this name is locked against the same authoritative ground truth:
 the engine's commemoration matches the source on **all 9,495 days of 2001–2026 (100%)**,
 with no exceptions and no allowlist (`tests/test_feast.py`). The engine always serves a
-concrete, source-matched name — never a placeholder.
+concrete, source-matched name — never a placeholder. As of **1.1.1** the name's
+components (calendar-position label, commemoration, eve/status note) are joined with a
+` — ` separator that mirrors the source's own `<br>` structure — e.g. `Twentieth day of
+Eastertide — Remembrance of the Armenian Genocide (1915)` — instead of running together.
 
 The match is checked on the **commemoration component** — the saint/feast identity. The
 source string also prepends a *year-varying* calendar-position label ("Nth day of

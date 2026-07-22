@@ -24,10 +24,23 @@ URL = ("https://www.sacredtradition.am/Calendar/nter.php"
        "?NM=0&iM=1103&iA=0&iL=2&ymd={ymd}")
 
 
+# Separator joining the <br>-delimited components the source packs into one field
+# (position label, commemoration, eve/status note). Must match the engine's join
+# convention (armenian_lectionary.engine._FEAST_SEP) so the shipped table and the
+# reference cache carry component boundaries identically.
+FEAST_SEP = " — "
+
+
 def _strip(s: str) -> str:
     import html as _html
+    # Preserve component boundaries before deleting tags: the previous version mapped
+    # <br> to "" (re.sub of every tag), silently mashing the components together. Map
+    # <br> to a sentinel first, drop the remaining tags, then rejoin on FEAST_SEP.
+    s = re.sub(r"\s*<br\s*/?>\s*", "\x00", s)
     s = re.sub(r"<[^>]+>", "", s)
-    return _html.unescape(s).strip()
+    s = _html.unescape(s)
+    parts = [p.strip() for p in s.split("\x00") if p.strip()]
+    return FEAST_SEP.join(parts)
 
 
 def fetch_day(d: datetime.date, force: bool = False) -> dict:

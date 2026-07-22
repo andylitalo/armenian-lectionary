@@ -38,6 +38,37 @@ def apply_cohort_corrections(readings):
 
 
 # --------------------------------------------------------------------------- #
+# Reading-ORDER normalization
+#
+# sacredtradition.am re-ordered a single Easter Sunday's readings (2011-04-24) at some
+# point after the corpus was first cached: the SAME 14 readings, but with the Resurrection
+# Gospel (John 20.1-18) demoted from first to eleventh. Every OTHER year's Easter keeps the
+# Resurrection Gospel leading, and the engine serves ONE modal entry for the Easter-offset-0
+# coordinate, so this lone outlier order splits that entry's cross-year support and drops
+# Easter-Sunday coverage (its "RESURRECTION..." name and readings fall through to the
+# estimate tier). Restore the consensus order so a freshly re-fetched cache rebuilds the
+# shipped artifacts identically. Applied by dev/analyze.load_all on the SAME reading set only.
+# --------------------------------------------------------------------------- #
+READING_ORDER_FIXES = {
+    "2011-04-24": [
+        "John 20.1-18", "Acts of the Apostles 1.1-8", "Mark 16.2-8", "John 19.38-42",
+        "Luke 23.50-56", "Mark 15.42-16.1", "Matthew 27.57-66", "John 19.16-22",
+        "John 11.1-46", "Acts of the Apostles 1.15-26", "Luke 24.13-35", "John 5.24-30",
+        "John 19.31-37", "John 20.19-25",
+    ],
+}
+
+
+def apply_reading_order(date_iso, readings):
+    """Return ``readings`` in the consensus order for ``date_iso`` when a fix is registered
+    and it is the SAME set (a pure reorder); otherwise return ``readings`` unchanged."""
+    fixed = READING_ORDER_FIXES.get(date_iso)
+    if fixed is not None and sorted(fixed) == sorted(readings):
+        return list(fixed)
+    return readings
+
+
+# --------------------------------------------------------------------------- #
 # Feast-NAME canonicalization (for tests/test_feast.py)
 #
 # The engine serves the feast/fast name of the day as "Liturgical Day". The test
