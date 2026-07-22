@@ -11,7 +11,7 @@ import argparse
 import datetime
 import json
 
-from .engine import compute_armenian_lectionary
+from .engine import compute_armenian_lectionary, SUPPORTED_LANGUAGES
 
 
 def main(argv=None):
@@ -28,7 +28,7 @@ def main(argv=None):
     parser.add_argument(
         "-l", "--language", "--lang",
         default="en",
-        choices=["en", "hy"],
+        choices=list(SUPPORTED_LANGUAGES),
         help="Language for feast and book names: 'en' (default) or 'hy' (Armenian).",
     )
     args = parser.parse_args(argv)

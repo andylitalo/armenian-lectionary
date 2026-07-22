@@ -1684,8 +1684,10 @@ def _localize(result: dict, language: str) -> dict:
     Only the *scraped* values are localized -- the feast (``Liturgical Day``) and the
     book names inside ``Readings``/``ReadingsList``. Provenance/metadata fields
     (``Season``, ``Source``, ``Confidence``, ``Note``) stay in English; they are engine
-    annotations, not source data, and have no scraped Armenian form.
+    annotations, not source data, and have no scraped Armenian form. The result always
+    carries a ``Language`` key naming the language its names are in.
     """
+    result["Language"] = language
     if language == "en":
         return result
     result["Liturgical Day"] = _translate_feast(
@@ -1699,7 +1701,6 @@ def _localize(result: dict, language: str) -> dict:
         section: [_translate_reading(r, _BOOK_NAMES_HY) for r in refs]
         for section, refs in result.get("Readings", {}).items()
     }
-    result["Language"] = language
     return result
 
 

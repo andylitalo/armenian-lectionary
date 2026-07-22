@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 from dev.source_corrections import apply_cohort_corrections  # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
+from tests._reference_cache import requires_reference_cache  # noqa: E402
 
 # The structurally-validated tiers: a mismatch here breaks the strict-shipping
 # 0-wrong contract. The generative/resolved tiers are labeled best-guesses,
@@ -37,6 +38,7 @@ def _expected(res, readings):
 COVERAGE_RATCHET = int(os.environ.get("COVERAGE_RATCHET", "9392"))
 
 
+@requires_reference_cache
 class TestRegression(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -67,6 +69,7 @@ class TestRegression(unittest.TestCase):
         self.assertEqual(validated_exact + validated_wrong + other, reference)
 
 
+@requires_reference_cache
 class TestCocelebrationResolvers(unittest.TestCase):
     """Locks the Feb-13 (PrLE) and Nov-21 (HEB band) co-celebration recovery."""
 
@@ -111,6 +114,7 @@ class TestCocelebrationResolvers(unittest.TestCase):
                              f"{year}-11-21 should exact-match ground truth")
 
 
+@requires_reference_cache
 class TestPresentationEveComposite(unittest.TestCase):
     """Locks Fix A: the Presentation-eve (Feb 13) composite best-guess for single-sample
     Easter offsets the PrLE keyspace cannot validate. Base proper (movable slot or
@@ -167,6 +171,7 @@ class TestPresentationEveComposite(unittest.TestCase):
         self.assertEqual(res["ReadingsList"][3:], self._EVE)
 
 
+@requires_reference_cache
 class TestFirstVolumeContinua(unittest.TestCase):
     """Locks the interim 'A' wiring of the First-Volume movable winter continua
     (source-derived, best-guess) for the latest-Easter single-sample days."""
@@ -194,6 +199,7 @@ class TestFirstVolumeContinua(unittest.TestCase):
         self.assertNotEqual(res["Source"], "first-volume-continua")
 
 
+@requires_reference_cache
 class TestLeapSummerParity(unittest.TestCase):
     """Locks the Second-Volume leap-parity summer split: the same Easter date (03-27)
     ships a distinct saint on the shared civil date in a leap vs a non-leap year, per the
@@ -221,6 +227,7 @@ class TestLeapSummerParity(unittest.TestCase):
             compute_armenian_lectionary(datetime.date(2016, 7, 23))["ReadingsList"])
 
 
+@requires_reference_cache
 class TestWinterMarch(unittest.TestCase):
     """Locks the post-Nativity winter march: the long-window (2011) tail saints that the
     generative laydown mis-placed now ship exact from the cycle tier."""
@@ -248,6 +255,7 @@ def _ref_readings(y, m, d):
         return json.load(fh)["readings"]
 
 
+@requires_reference_cache
 class TestSummerSourceMarch(unittest.TestCase):
     """Locks the source-derived per-canon summer marches (Tonatsoyts Second Volume canons
     Ր and Թ) that replace the truncated generic sequence. These are the cross-validatable
@@ -288,6 +296,7 @@ class TestSummerSourceMarch(unittest.TestCase):
                              f"2008-{m:02d}-{d:02d} should exact-match ground truth")
 
 
+@requires_reference_cache
 class TestAutumnSolarMarch(unittest.TestCase):
     """Locks the solar-anchored autumn triplet (Andrew / Adrian / Abraham & Khoren). These
     cross-validate across DIFFERENT taregirs that share a Gregorian Easter (2010 Ա, 2021 Ս),
@@ -315,6 +324,7 @@ class TestAutumnSolarMarch(unittest.TestCase):
                              f"2004-{m:02d}-{d:02d} should exact-match ground truth")
 
 
+@requires_reference_cache
 class TestWinterSourceMarch(unittest.TestCase):
     """Locks the per-taregir post-Nativity (winter) sequences that replace the generic march
     for taregirs whose January laydown differs: ԹԸ (2004) inserts Eugenia between Vahan and
@@ -340,6 +350,7 @@ class TestWinterSourceMarch(unittest.TestCase):
                          "2009-01-29 should exact-match ground truth")
 
 
+@requires_reference_cache
 class TestAssumptionFastContinua(unittest.TestCase):
     """Locks the Easter-md banding of the Fast-of-the-Assumption Wed/Fri continua: at span-28
     index 7 the same (span, idx, wd) bucket conflated 2Tim 2.20-26 (Easter 04-05, taregir Թ)
@@ -357,6 +368,7 @@ class TestAssumptionFastContinua(unittest.TestCase):
                              f"{y}-08-05 should exact-match ground truth")
 
 
+@requires_reference_cache
 class TestAnnunciationCompositeCompleteness(unittest.TestCase):
     """Locks the Apr-7 Annunciation collision composite. The flat E/EB slots carry no
     service structure, so the published calendar's co-celebration REDUCTIONS cannot be
@@ -408,6 +420,7 @@ class TestAnnunciationCompositeCompleteness(unittest.TestCase):
                              f"{y}-04-07 should remain an exact match")
 
 
+@requires_reference_cache
 class TestNativityOctaveEncroachment(unittest.TestCase):
     """Locks the p.464 Fast-of-Catechumens encroachment on the mid-January octave, the
     extreme-early-Easter case (2008, Easter Mar 23) where the fast reaches back to Jan 14.
@@ -439,6 +452,7 @@ class TestNativityOctaveEncroachment(unittest.TestCase):
                              f"2019-01-{dd:02d} wrongly claimed by an octave composite")
 
 
+@requires_reference_cache
 class TestPreLentCohort(unittest.TestCase):
     """Locks the pre-Lent martyr cohort (Sargis/Atom/Sukias/Voskian/Ghevond) served from
     the Tōnats'oyts First Volume pp.464-465. Readings follow the SOURCE verse-ranges (a few

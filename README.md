@@ -135,7 +135,7 @@ outside it returns HTTP 400 with a message explaining the current range.
 `language` is optional — `en` (default) or `hy` for Classical Armenian (alias
 `lang`); an unsupported value returns HTTP 400. In `hy` the feast name and the
 scripture book names come back in Armenian (`?date=2026-04-05&language=hy` →
-`"ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)"`, `"Ավետարան ըստ Հովհաննեսի
+`"ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)"`, `"Աւետարան ըստ Յովհաննէսի
 20.1-18"`); provenance fields stay English. Example:
 
 ```bash
@@ -189,7 +189,7 @@ print(reading["ReadingsList"])     # ['John 20.1-18', 'Acts of the Apostles 1.1-
 # Armenian names: pass language="hy" (default "en").
 hy = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4, 5), language="hy")
 print(hy["Liturgical Day"])        # ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)
-print(hy["ReadingsList"][0])       # Ավետարան ըստ Հովհաննեսի 20.1-18
+print(hy["ReadingsList"][0])       # Աւետարան ըստ Յովհաննէսի 20.1-18
 ```
 
 The distribution name is **`armenian-lectionary`**; the import name is

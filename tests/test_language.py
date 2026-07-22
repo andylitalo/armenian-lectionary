@@ -71,7 +71,8 @@ class TestLanguageKwarg(unittest.TestCase):
     def test_default_is_english_and_unlocalized(self):
         result = compute_armenian_lectionary(self.DATE)
         self.assertIn("RESURRECTION", result["Liturgical Day"].upper())
-        self.assertNotIn("Language", result)
+        # The result names its language even in the English default.
+        self.assertEqual(result["Language"], "en")
 
     def test_explicit_en_matches_default(self):
         self.assertEqual(

@@ -12,9 +12,9 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   the feast (`"Liturgical Day"`) and the scripture book names in Classical Armenian.
   `language` defaults to `"en"`; an unsupported value raises `ValueError` (HTTP 400 in the
   API). Provenance fields (`Season`, `Source`, `Confidence`, `Note`) stay in English — they
-  are engine annotations, not scraped source data — and `"Language": "hy"` is added to a
-  localized result. Any feast component or book with no known Armenian form is left in
-  English rather than dropped.
+  are engine annotations, not scraped source data. Every result now carries a
+  `"Language"` key (`"en"` or `"hy"`) naming the language of its names. Any feast
+  component or book with no known Armenian form is left in English rather than dropped.
 - The names ship as two static maps under `armenian_lectionary/data/`
   (`feast_names_hy.json`, `book_names_hy.json`), so the runtime stays fully offline. They are
   scraped once from sacredtradition.am (`iL=0`, Classical Armenian) by the new dev tool

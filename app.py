@@ -11,7 +11,7 @@ import os
 from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 
-from armenian_lectionary import compute_armenian_lectionary
+from armenian_lectionary import compute_armenian_lectionary, SUPPORTED_LANGUAGES
 
 # Supported date range. Readings are validated for 2001-2027 so far; the range
 # is env-overridable so it can widen later without a code change.
@@ -109,10 +109,10 @@ def readings():
         }), 400
 
     language = request.args.get("language", request.args.get("lang", "en"))
-    if language not in ("en", "hy"):
+    if language not in SUPPORTED_LANGUAGES:
         return jsonify({
             "error": f"Unsupported language {language!r}.",
-            "supported_languages": ["en", "hy"],
+            "supported_languages": list(SUPPORTED_LANGUAGES),
         }), 400
 
     return jsonify(compute_armenian_lectionary(target_date, language=language))
