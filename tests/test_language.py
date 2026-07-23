@@ -155,6 +155,15 @@ class TestShippedMapsOrthography(unittest.TestCase):
             self.assertNotIn("ություն", v, f"reformed suffix in {v!r}")
             self.assertNotIn("և", v, f"reformed ligature in {v!r}")
             self.assertNotIn("Ավ", v, f"reformed 'Ավ' (want 'Աւ') in {v!r}")
+            self.assertNotIn("օրենք", v, f"reformed 'օրենք' (want 'օրէնք') in {v!r}")
+            # General vew guard: in this data classical վ (U+057E) only ever follows
+            # ա or ո (աւ/ոււ diphthongs). A վ after any other letter is a reform
+            # leftover where classical writes ւ (e.g. "Թվեր" for "Թիւեր").
+            for i, ch in enumerate(v):
+                if ch == "վ":
+                    prev = v[i - 1] if i else ""
+                    self.assertIn(prev, "աո",
+                                  f"reformed 'վ' after {prev!r} (want 'ւ') in {v!r}")
         # The maintainer's canonical example.
         self.assertEqual(books.get("John"), "Աւետարան ըստ Յովհաննէսի")
 

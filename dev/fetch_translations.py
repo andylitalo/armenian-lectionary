@@ -94,6 +94,8 @@ _MASHTOTS_SYSTEMATIC = (
     ("և", "եւ"),             # the ligature -> classical digraph
     ("առաքյալ", "առաքեալ"),  # "apostle": յա -> եա
     ("մարգարե", "մարգարէ"),  # "prophet": final ե -> է
+    ("Թվեր", "Թիւեր"),       # Numbers: reformed drops classical իւ (թիւ) -> վ
+    ("օրենք", "օրէնք"),      # "law(s)": ե -> է (Deuteronomy "Երկրորդ օրենք")
 )
 
 # Proper-noun reversals (ե->է in stressed syllables; reformed initial հ-> classical
@@ -125,6 +127,23 @@ def to_mashtots(s: str) -> str:
     for a, b in _MASHTOTS_SYSTEMATIC:
         s = s.replace(a, b)
     for a, b in _MASHTOTS_PROPER:
+        s = s.replace(a, b)
+    return s
+
+
+# Feast titles are entered in traditional orthography at the source, so unlike the book
+# names they are NOT run through to_mashtots (a blanket /aw/ reversal would corrupt the
+# genuine consonant վ in words like "Վարդավառ", "զօրավար", "նախավկայ"). These are the
+# isolated reform slips the source nonetheless typed into a feast title; fold each with a
+# targeted word swap so a re-scrape reproduces the shipped, corrected form.
+_FEAST_ORTHO_FIXES = (
+    ("հավատացեալ", "հաւատացեալ"),  # "believer" (Abgar): reformed /aw/ diphthong ավ -> աւ
+)
+
+
+def fix_feast_orthography(s: str) -> str:
+    """Fold the isolated reformed-orthography slips found in source feast titles."""
+    for a, b in _FEAST_ORTHO_FIXES:
         s = s.replace(a, b)
     return s
 
@@ -255,10 +274,11 @@ def build(force: bool = False):
         if i % 25 == 0 or i == len(dates):
             print(f"  {i}/{len(dates)} ({fetched} fetched)")
 
-    feast_map = {en: votes.most_common(1)[0][0]
+    feast_map = {en: fix_feast_orthography(votes.most_common(1)[0][0])
                  for en, votes in feast_votes.items()}
     # Book names arrive in reformed orthography; the Church uses Mashtots. Reverse the
-    # reform (orthography only). Feast titles are already traditional, so leave them.
+    # reform (orthography only). Feast titles are already traditional, so leave them
+    # (bar the isolated reform slips folded by fix_feast_orthography above).
     book_map = {en: to_mashtots(votes.most_common(1)[0][0])
                 for en, votes in book_votes.items()}
 

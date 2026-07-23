@@ -4,6 +4,24 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.3] — 2026-07-23
+
+### Fixed
+- **Reformed ("Soviet") orthography in three `hy` names.** The `language="hy"` maps carried a
+  few reformed-orthography spellings the traditional (Mashtots) contract should have caught.
+  Two book names slipped through `dev/fetch_translations.to_mashtots` because its reversal
+  tables had no rule that fired on them — `Numbers` shipped as `Թվեր` (want `Թիւեր`) and
+  `Deuteronomy` as `Երկրորդ օրենք` (want `Երկրորդ օրէնք`, `ե→է`). One feast title carried a lone
+  reform slip the source typed into otherwise-traditional text — the Abgar commemoration's
+  `հավատացեալ` (want `հաւատացեալ`, `ավ→աւ`); feast titles bypass `to_mashtots`, so this was
+  folded by a new targeted `fix_feast_orthography` step rather than a blanket `/aw/` reversal
+  (which would corrupt the genuine consonant `վ` in `Վարդավառ`, `զօրավար`, `նախավկայ`). The
+  shipped `book_names_hy.json`/`feast_names_hy.json` carry the corrected forms, the dev
+  reversal tables reproduce them on a re-scrape, and the orthography contract test
+  (`tests/test_language.py::test_books_use_mashtots_orthography`) is tightened with an
+  `օրենք` guard and a general vew (`վ`) check so a reformed book name can no longer ship
+  unnoticed. English keys, dates, reading content, and feast wording are unchanged.
+
 ## [1.2.2] — 2026-07-22
 
 ### Fixed
