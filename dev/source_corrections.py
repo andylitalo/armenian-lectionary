@@ -148,6 +148,37 @@ def normalize_confusables(text):
     return text
 
 
+# Plain-spelling typos in the *English* feast text (distinct from the character-level
+# confusables above -- these are ordinary misspellings of saint/feast names). Each is
+# uniformly the source's modal spelling, contradicted by the form the church actually uses
+# (and, where the saint recurs, by the engine's own id/Armenian rendering). Folded so the
+# name reads correctly. Applied to every reference_data reader (apply_source_corrections),
+# so the shipped table, the hy name map, and the saint schedule all rebuild with the
+# corrected names, and inside canonical_commem so the feast-name test compares like-for-like.
+# The shipped artifacts carry the corrected spelling directly.
+_FEAST_SPELLING_FIXES = {
+    "Staint": "Saint",                     # Staint Gregory ... -> Saint
+    "Theordore": "Theodore",               # Theordore Stratelates
+    "Transifiguration": "Transfiguration",
+    "Grogoris": "Grigoris",                # grandson of St. Gregory the Illuminator
+    "Marcarius": "Macarius",               # id: ..._makarios_...
+    "Hermongenes": "Hermogenes",
+    "Alerius": "Valerius",                 # id: ..._valerian; hy: Վաղերիոսի
+    "Canditus": "Candidus",
+    "Eugraphius": "Eugraphus",             # Menas, Hermogenes and Eugraphus
+}
+
+
+def normalize_feast_spelling(text):
+    """Fold known English feast/saint-name misspellings (``_FEAST_SPELLING_FIXES``) to their
+    canonical form. Idempotent; leaves everything else untouched."""
+    if not text:
+        return text
+    for wrong, right in _FEAST_SPELLING_FIXES.items():
+        text = text.replace(wrong, right)
+    return text
+
+
 # --------------------------------------------------------------------------- #
 # Character-set guard (the detector backing ``normalize_confusables``)
 #
@@ -217,7 +248,7 @@ def apply_source_corrections(day):
     read, not assumed baked into the cache.)"""
     day["readings"] = apply_reading_order(day.get("date", ""), day.get("readings", []))
     day["readings"] = apply_book_name_fixes(day.get("readings", []))
-    day["feast"] = normalize_confusables(day.get("feast", ""))
+    day["feast"] = normalize_feast_spelling(normalize_confusables(day.get("feast", "")))
     return day
 
 
@@ -227,7 +258,7 @@ def canonical_commem(commem):
     Applied symmetrically to the scraped and engine commemorations before comparison.
     Also repairs the "Fiest" -> "Feast" scrape typo and the Cyrillic-homoglyph
     contamination (Cyrillic Е/о) in the source's English feast text."""
-    commem = normalize_confusables(commem)
+    commem = normalize_feast_spelling(normalize_confusables(commem))
     commem = commem.replace("Fiest of", "Feast of")     # sacredtradition.am typo
     for canonical, pred in _FEAST_CANON_RULES:
         if pred(commem):
