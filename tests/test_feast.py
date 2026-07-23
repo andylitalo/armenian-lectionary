@@ -115,5 +115,45 @@ class TestCommemorationExtractor(unittest.TestCase):
         self.assertEqual(commemoration_of("(commemoration)"), "")
 
 
+class TestConfusables(unittest.TestCase):
+    def test_folds_cyrillic_homoglyphs(self):
+        from dev.source_corrections import normalize_confusables
+        # Cyrillic Е (U+0415) and о (U+043E) -> Latin E / o.
+        self.assertEqual(normalize_confusables("Еighth day of Nativity"),
+                         "Eighth day of Nativity")
+        self.assertEqual(normalize_confusables("Tatоul"), "Tatoul")
+
+    def test_idempotent_and_pure_ascii_result(self):
+        from dev.source_corrections import normalize_confusables
+        once = normalize_confusables("Еighth day, Tatоul")
+        self.assertEqual(once, normalize_confusables(once))
+        self.assertTrue(once.isascii(), f"residual non-ASCII in {once!r}")
+
+    def test_unexpected_chars_detector(self):
+        from dev.source_corrections import unexpected_chars
+        # Flags contaminants the fold map does not (yet) cover.
+        self.assertEqual(unexpected_chars("Tatоul"), ["о"])       # Cyrillic o (U+043E)
+        self.assertEqual(unexpected_chars("Оrder"), ["О"])        # Cyrillic O (U+041E)
+        self.assertEqual(unexpected_chars("Ηoly"), ["Η"])         # Greek Eta (U+0397)
+        # Passes everything legitimately in the data: English, the em-dash FEAST_SEP,
+        # Armenian script, and the Latin digits/parens the hy names carry.
+        self.assertEqual(unexpected_chars("Eighth day of Nativity"), [])
+        self.assertEqual(unexpected_chars("A — B"), [])           # U+2014 FEAST_SEP
+        self.assertEqual(unexpected_chars("Ը օր Ս. Ծննդեան"), [])
+        self.assertEqual(unexpected_chars("… (381 թ.)".replace("…", "")), [])
+        self.assertEqual(unexpected_chars(""), [])
+
+    def test_shipped_table_feasts_have_no_unexpected_chars(self):
+        import json
+        from armenian_lectionary.engine import DATA_PATH
+        from dev.source_corrections import unexpected_chars
+        with open(DATA_PATH, encoding="utf-8") as f:
+            tables = json.load(f)["tables"]
+        for ks, entries in tables.items():
+            for key, entry in entries.items():
+                bad = unexpected_chars(entry.get("feast", ""))
+                self.assertEqual(bad, [], f"unexpected {bad} in {ks}/{key} feast")
+
+
 if __name__ == "__main__":
     unittest.main()

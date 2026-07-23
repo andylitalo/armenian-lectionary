@@ -133,6 +133,18 @@ class TestShippedMapsOrthography(unittest.TestCase):
             stray = self._non_armenian_letters(v)
             self.assertEqual(stray, [], f"non-Armenian letters {stray} in {v!r}")
 
+    def test_map_keys_have_no_unexpected_chars(self):
+        # The English keys are the lookup surface: a homoglyph here (as the source typed
+        # into some feast names) silently fails to translate. Guard them against ANY
+        # contaminant, not just the two folded so far.
+        from dev.source_corrections import unexpected_chars
+        keys = list(engine._FEAST_NAMES_HY) + list(engine._BOOK_NAMES_HY)
+        if not keys:
+            self.skipTest("hy maps not present")
+        for k in keys:
+            bad = unexpected_chars(k)
+            self.assertEqual(bad, [], f"unexpected {bad} in hy map key {k!r}")
+
     def test_books_use_mashtots_orthography(self):
         books = engine._BOOK_NAMES_HY
         if not books:

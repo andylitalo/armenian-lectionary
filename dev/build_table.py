@@ -148,6 +148,20 @@ def export_table(tables, stats, path=None):
         for key, v in entries.items():
             keystr = key if isinstance(key, str) else str(key)
             slim[ks][keystr] = {"feast": v["feast"], "readings": v["readings"]}
+    # Gate: no shipped feast label may carry a contaminant (Cyrillic/Greek homoglyph,
+    # curly quote, ...). Fold known ones upstream (normalize_confusables); anything else
+    # fails here so the maintainer decides fold-vs-allow rather than shipping it silently.
+    from dev.source_corrections import unexpected_chars
+    dirty = []
+    for ks, entries in slim.items():
+        for key, v in entries.items():
+            bad = unexpected_chars(v["feast"])
+            if bad:
+                dirty.append(f"{ks}/{key} {v['feast']!r}: unexpected {bad}")
+    if dirty:
+        raise ValueError("shipped table feast labels contain unexpected characters:\n  "
+                         + "\n  ".join(dirty[:20]))
+
     meta = {
         "source": "Distilled & cross-year-validated from sacredtradition.am "
                   "(Tonatsooyts), 2014-2026. Offline; no runtime network use.",
