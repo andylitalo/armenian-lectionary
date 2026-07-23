@@ -19,6 +19,9 @@ import sys
 import time
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from dev.source_corrections import normalize_confusables  # noqa: E402
+
 CACHE_DIR = os.path.join(os.path.dirname(__file__), "reference_data")
 URL = ("https://www.sacredtradition.am/Calendar/nter.php"
        "?NM=0&iM=1103&iA=0&iL=2&ymd={ymd}")
@@ -33,7 +36,6 @@ FEAST_SEP = " — "
 
 def _strip(s: str) -> str:
     import html as _html
-    from source_corrections import normalize_confusables
     # Preserve component boundaries before deleting tags: the previous version mapped
     # <br> to "" (re.sub of every tag), silently mashing the components together. Map
     # <br> to a sentinel first, drop the remaining tags, then rejoin on FEAST_SEP.

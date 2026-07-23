@@ -127,15 +127,30 @@ class TestConfusables(unittest.TestCase):
         self.assertEqual(once, normalize_confusables(once))
         self.assertTrue(once.isascii(), f"residual non-ASCII in {once!r}")
 
-    def test_shipped_table_feasts_have_no_cyrillic(self):
+    def test_unexpected_chars_detector(self):
+        from dev.source_corrections import unexpected_chars
+        # Flags contaminants the fold map does not (yet) cover.
+        self.assertEqual(unexpected_chars("Tatоul"), ["о"])       # Cyrillic o (U+043E)
+        self.assertEqual(unexpected_chars("Оrder"), ["О"])        # Cyrillic O (U+041E)
+        self.assertEqual(unexpected_chars("Ηoly"), ["Η"])         # Greek Eta (U+0397)
+        # Passes everything legitimately in the data: English, the em-dash FEAST_SEP,
+        # Armenian script, and the Latin digits/parens the hy names carry.
+        self.assertEqual(unexpected_chars("Eighth day of Nativity"), [])
+        self.assertEqual(unexpected_chars("A — B"), [])           # U+2014 FEAST_SEP
+        self.assertEqual(unexpected_chars("Ը օր Ս. Ծննդեան"), [])
+        self.assertEqual(unexpected_chars("… (381 թ.)".replace("…", "")), [])
+        self.assertEqual(unexpected_chars(""), [])
+
+    def test_shipped_table_feasts_have_no_unexpected_chars(self):
         import json
         from armenian_lectionary.engine import DATA_PATH
-        tables = json.load(open(DATA_PATH, encoding="utf-8"))["tables"]
+        from dev.source_corrections import unexpected_chars
+        with open(DATA_PATH, encoding="utf-8") as f:
+            tables = json.load(f)["tables"]
         for ks, entries in tables.items():
             for key, entry in entries.items():
-                for ch in entry.get("feast", ""):
-                    self.assertFalse(0x0400 <= ord(ch) <= 0x04FF,
-                                     f"Cyrillic {ch!r} in {ks}/{key} feast")
+                bad = unexpected_chars(entry.get("feast", ""))
+                self.assertEqual(bad, [], f"unexpected {bad} in {ks}/{key} feast")
 
 
 if __name__ == "__main__":
