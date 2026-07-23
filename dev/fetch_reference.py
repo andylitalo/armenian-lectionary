@@ -19,6 +19,9 @@ import sys
 import time
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from dev.source_corrections import normalize_confusables  # noqa: E402
+
 CACHE_DIR = os.path.join(os.path.dirname(__file__), "reference_data")
 URL = ("https://www.sacredtradition.am/Calendar/nter.php"
        "?NM=0&iM=1103&iA=0&iL=2&ymd={ymd}")
@@ -39,6 +42,9 @@ def _strip(s: str) -> str:
     s = re.sub(r"\s*<br\s*/?>\s*", "\x00", s)
     s = re.sub(r"<[^>]+>", "", s)
     s = _html.unescape(s)
+    # The source occasionally types English feast text with Cyrillic homoglyphs
+    # (Cyrillic Е/о); fold them to Latin at ingestion so the whole pipeline stays clean.
+    s = normalize_confusables(s)
     parts = [p.strip() for p in s.split("\x00") if p.strip()]
     return FEAST_SEP.join(parts)
 

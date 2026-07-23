@@ -39,10 +39,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # reconciliation to the map keys so those labels resolve. Optional: degrade to identity
 # if the dev module is unavailable.
 try:
-    from dev.source_corrections import canonical_commem
+    from dev.source_corrections import canonical_commem, apply_source_corrections
 except Exception:  # pragma: no cover - dev-only convenience
     def canonical_commem(c):
         return c
+
+    def apply_source_corrections(day):
+        return day
 
 HERE = os.path.dirname(__file__)
 REF_DIR = os.path.join(HERE, "reference_data")
@@ -168,7 +171,11 @@ def _representative_dates():
     book_date = {}        # english book head    -> a date it appears on
     en_by_date = {}
     for f in sorted(glob.glob(os.path.join(REF_DIR, "*.json"))):
-        rec = json.load(open(f, encoding="utf-8"))
+        with open(f, encoding="utf-8") as fh:
+            rec = json.load(fh)
+        # Apply the same on-read source corrections as every other cache reader (folds the
+        # Cyrillic homoglyphs in the English feast text) so the keys below are already clean.
+        apply_source_corrections(rec)
         date = rec["date"]
         keep = False
         feast = rec.get("feast", "")
@@ -202,6 +209,8 @@ def build(force: bool = False):
         hy = fetch_hy(d, force=force)
         en = en_by_date[date]
 
+        # en records arrive already source-corrected (Cyrillic homoglyphs folded) via
+        # _representative_dates, so the English keys match the engine's cleaned output.
         if en.get("feast") and hy.get("feast"):
             feast_votes[en["feast"]][hy["feast"]] += 1
             # Also vote per component. The engine composes some labels itself
@@ -272,6 +281,21 @@ def build(force: bool = False):
               f"pair (first 10):")
         for date, r in misaligned[:10]:
             print(f"    {date}: {r}")
+
+    # Gate: no map key or value may carry a contaminant (Cyrillic/Greek homoglyph, curly
+    # quote, ...). Fold known ones in normalize_confusables; anything else fails here so
+    # the maintainer decides fold-vs-allow rather than silently shipping it.
+    from dev.source_corrections import unexpected_chars
+    dirty = []
+    for name, m in (("feast_names_hy", feast_map), ("book_names_hy", book_map)):
+        for k, v in m.items():
+            for label, s in (("key", k), ("value", v)):
+                bad = unexpected_chars(s)
+                if bad:
+                    dirty.append(f"{name} {label} {s!r}: unexpected {bad}")
+    if dirty:
+        raise ValueError("hy map contains unexpected characters:\n  "
+                         + "\n  ".join(dirty[:20]))
 
     os.makedirs(DATA_DIR, exist_ok=True)
     with open(FEAST_MAP_PATH, "w", encoding="utf-8") as f:
