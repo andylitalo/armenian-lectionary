@@ -19,12 +19,15 @@ REF_DIR = os.path.join(os.path.dirname(__file__), "reference_data")
 
 
 def load_all():
-    from dev.source_corrections import apply_reading_order
+    from dev.source_corrections import apply_source_corrections
     days = {}
     for path in glob.glob(os.path.join(REF_DIR, "*.json")):
         with open(path, encoding="utf-8") as f:
             d = json.load(f)
-        d["readings"] = apply_reading_order(d["date"], d["readings"])
+        # Reading-order fix + Cyrillic-homoglyph fold, applied uniformly across every
+        # reference_data reader so the built table matches the cleaned shipped one
+        # regardless of whether the local cache predates those fixes.
+        apply_source_corrections(d)
         days[d["date"]] = d
     return days
 

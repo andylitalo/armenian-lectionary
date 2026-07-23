@@ -116,11 +116,84 @@ _FEAST_CANON_RULES = (
 )
 
 
+# The scrape mixes a few wrong-code-point characters into the *English* feast text that
+# read identically to their canonical ASCII form, so fold each to the twin the rest of the
+# data uses. Two kinds observed:
+#   * Cyrillic homoglyphs (the source was evidently typed with a Cyrillic keyboard):
+#     Cyrillic Е/о in "Еighth day of Nativity" and "Tatоul";
+#   * a typographic curly apostrophe U+2019 in two possessives ("St. Mary’s Box",
+#     "…Illuminator’s Commitment…") where every other name uses the ASCII apostrophe.
+# Only folds justified by characters actually seen in the data are listed (deliberately
+# conservative); anything unlisted is left alone and caught by ``unexpected_chars`` below.
+_CONFUSABLE_FOLDS = {
+    "Е": "E",   # U+0415 CYRILLIC CAPITAL LETTER IE -> LATIN E
+    "о": "o",   # U+043E CYRILLIC SMALL LETTER O     -> LATIN o
+    "’": "'",   # U+2019 RIGHT SINGLE QUOTATION MARK -> ASCII APOSTROPHE
+}
+
+
+def normalize_confusables(text):
+    """Fold the wrong-code-point characters the source mixes into English feast names to
+    the canonical ASCII twin used elsewhere. Idempotent; leaves everything else untouched.
+
+    This is the *fixer*: a narrow, observed-only fold. It is intentionally NOT a general
+    "downgrade any confusable" pass -- we never want to silently rewrite a genuinely
+    non-Latin character. The general *detector* that catches anything the fixer misses is
+    ``unexpected_chars`` below, asserted at the build steps and in the shipped-artifact
+    tests, so a NEW contaminant fails loudly (and gets added here) instead of shipping."""
+    if not text:
+        return text
+    for src, dst in _CONFUSABLE_FOLDS.items():
+        text = text.replace(src, dst)
+    return text
+
+
+# --------------------------------------------------------------------------- #
+# Character-set guard (the detector backing ``normalize_confusables``)
+#
+# Feast/book text legitimately draws from exactly these code points:
+#   * ASCII        -- English words, Latin digits, and the punctuation both languages use
+#                     (the Armenian feast names carry Latin digits/parens, e.g. "(381 թ.)");
+#   * the Armenian block U+0530-U+058F -- letters AND Armenian punctuation;
+#   * the Armenian ligatures U+FB13-U+FB17 (եւ etc.);
+#   * the em-dash U+2014 -- the FEAST_SEP joining a feast's <br>-delimited components.
+# Anything else (Cyrillic/Greek homoglyphs, curly quotes, zero-width joiners, ...) is a
+# contaminant. Positively validating against this allow-list is more robust than chasing a
+# growing blacklist of specific confusables.
+# --------------------------------------------------------------------------- #
+def _is_expected_char(c):
+    o = ord(c)
+    return (c.isascii()
+            or 0x0530 <= o <= 0x058F        # Armenian block (letters + punctuation)
+            or 0xFB13 <= o <= 0xFB17        # Armenian ligatures (եւ etc.)
+            or c == "—")               # em-dash FEAST_SEP
+
+
+def unexpected_chars(text):
+    """Sorted, de-duplicated list of characters in ``text`` outside the expected
+    English+Armenian character set (empty list == clean). See ``_is_expected_char``."""
+    return sorted({c for c in (text or "") if not _is_expected_char(c)})
+
+
+def apply_source_corrections(day):
+    """Apply the on-read source corrections to a cached reference-day dict, in place.
+
+    Single home for the corrections every reference_data reader must apply identically:
+    the Easter-Sunday reading-order fix and the Cyrillic-homoglyph fold on the English
+    feast text. Returns ``day`` for convenience. (Caches are git-ignored/local and may
+    predate these fixes, so they are applied on read, not assumed baked into the cache.)"""
+    day["readings"] = apply_reading_order(day.get("date", ""), day.get("readings", []))
+    day["feast"] = normalize_confusables(day.get("feast", ""))
+    return day
+
+
 def canonical_commem(commem):
     """Collapse reviewed companion-enumeration variants to a primary commemoration.
 
     Applied symmetrically to the scraped and engine commemorations before comparison.
-    Also repairs the "Fiest" -> "Feast" scrape typo."""
+    Also repairs the "Fiest" -> "Feast" scrape typo and the Cyrillic-homoglyph
+    contamination (Cyrillic Е/о) in the source's English feast text."""
+    commem = normalize_confusables(commem)
     commem = commem.replace("Fiest of", "Feast of")     # sacredtradition.am typo
     for canonical, pred in _FEAST_CANON_RULES:
         if pred(commem):
