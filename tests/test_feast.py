@@ -155,5 +155,49 @@ class TestConfusables(unittest.TestCase):
                 self.assertEqual(bad, [], f"unexpected {bad} in {ks}/{key} feast")
 
 
+class TestFeastSpelling(unittest.TestCase):
+    """Locks the English feast-name misspelling fixes (source shipped e.g. 'Theordore';
+    the engine now serves the canonical 'Theodore'). Self-contained -- no reference cache."""
+
+    _TYPOS = ("Staint", "Theordore", "Transifiguration", "Grogoris", "Marcarius",
+              "Hermongenes", "Alerius", "Canditus", "Eugraphius", "Fiest")
+
+    def test_fold_is_narrow_and_idempotent(self):
+        from dev.source_corrections import normalize_feast_spelling
+        self.assertEqual(normalize_feast_spelling("Theordore Stratelates"),
+                         "Theodore Stratelates")
+        once = normalize_feast_spelling("Staint Gregory, Grogoris, Marcarius")
+        self.assertEqual(once, "Saint Gregory, Grigoris, Macarius")
+        self.assertEqual(once, normalize_feast_spelling(once))          # idempotent
+        # Leaves correct text untouched (no over-matching of e.g. 'Macarius'/'Saint').
+        self.assertEqual(normalize_feast_spelling("Saint Macarius"), "Saint Macarius")
+
+    def test_shipped_data_files_carry_no_typo(self):
+        import glob
+        import os
+        from armenian_lectionary.engine import DATA_PATH
+        data_dir = os.path.dirname(DATA_PATH)
+        for path in glob.glob(os.path.join(data_dir, "*.json")):
+            text = open(path, encoding="utf-8").read()
+            for typo in self._TYPOS:
+                self.assertNotIn(typo, text,
+                                 f"{os.path.basename(path)} still carries {typo!r}")
+
+    def test_runtime_liturgical_day_is_corrected(self):
+        # Dates whose feast surfaced a typo before the fix (validated + generative tiers).
+        cases = {
+            datetime.date(2026, 6, 6): "Saint Gregory the Illuminator's coming out of Pit",
+            datetime.date(2026, 7, 10): "Fifth day of the Fast of the Transfiguration",
+            datetime.date(2026, 8, 6):
+                "Saints Adrian and his wife Natalia, and Theodore Stratelates "
+                "and Eleutherius the Martyrs",
+        }
+        for d, expected in cases.items():
+            label = compute_armenian_lectionary(d)["Liturgical Day"]
+            self.assertEqual(label, expected, d)
+            for typo in self._TYPOS:
+                self.assertNotIn(typo, label, f"{d} leaked {typo!r}")
+
+
 if __name__ == "__main__":
     unittest.main()

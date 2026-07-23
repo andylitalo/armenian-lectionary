@@ -4,6 +4,35 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.2] — 2026-07-22
+
+### Fixed
+- **Malachi book-name typo.** The source truncated the book name on the Presentation-eve
+  (Feb 13) block, shipping `Malach 3.1-4` where Malachi 3:1-4 (Մաղաքիա) is meant — the same
+  book the source and this engine spell `Malachi` on every other day it appears. The engine
+  now serves the canonical `Malachi 3.1-4` everywhere: the hardcoded generative block
+  (`engine._PRESENTATION_EVE_BLOCK`) and the shipped `lectionary_data.json` carry the fixed
+  spelling directly, and the stale `Malach` key was dropped from the `hy` book-name map (its
+  `Malachi` twin already mapped to the same Armenian name, so `language="hy"` still localizes
+  the reading). The fold is registered as `dev/source_corrections.apply_book_name_fixes` and
+  applied by every `reference_data` reader (`apply_source_corrections`), so the built table
+  and `hy` map rebuild with `Malachi` and the ground-truth oracle scores the corrected output
+  as a hit (0-wrong contract preserved). No date, reading-content, or feast wording changes.
+- **English feast-name misspellings.** The source shipped a family of plain misspellings in the
+  English feast text, uniformly its modal spelling and thus surfaced verbatim in the
+  `"Liturgical Day"` output: `Staint`→`Saint`, `Theordore`→`Theodore`,
+  `Transifiguration`→`Transfiguration`, `Grogoris`→`Grigoris`, `Marcarius`→`Macarius`,
+  `Hermongenes`→`Hermogenes`, and in the Eugenios cluster `Alerius`→`Valerius`,
+  `Canditus`→`Candidus`, `Eugraphius`→`Eugraphus` (the last three confirmed by the engine's own
+  saint id and Armenian rendering). They are folded by the new
+  `dev/source_corrections.normalize_feast_spelling`, applied in `apply_source_corrections` (so the
+  shipped `lectionary_data.json`, `saint_schedule.json`, and `feast_names_hy.json` rebuild with the
+  corrected names) and in `canonical_commem` (so the feast-name test compares like-for-like); the
+  three shipped artifacts carry the corrected spelling directly. Also dropped now-redundant
+  duplicate keys from the `hy` feast map (the stale `Fiest of …` typo twins of `Feast of …`, and a
+  `Hermongenes/Eugraphius` twin). Deliberate name-*variants* (`Phillip`, `Nicolas`, `Zachariah`,
+  `Eugenios`, `Simeon`, `Sargius`) are left untouched. No date or reading changes.
+
 ## [1.2.1] — 2026-07-22
 
 ### Fixed
