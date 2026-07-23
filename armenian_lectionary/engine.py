@@ -1140,7 +1140,7 @@ def _annunciation_composite(d, tables=None):
 # --------------------------------------------------------------------------- #
 
 _PRESENTATION_EVE_BLOCK = (
-    "Leviticus 12.6-8", "Proverbs 8.22-34", "Ezekiel 44.1-2", "Malach 3.1-4",
+    "Leviticus 12.6-8", "Proverbs 8.22-34", "Ezekiel 44.1-2", "Malachi 3.1-4",
     "St. Paul's Epistle to the Galatians 3.24-29", "Luke 2.22-40",
 )
 

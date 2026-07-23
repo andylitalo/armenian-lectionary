@@ -15,7 +15,7 @@ from .engine import (
     SUPPORTED_LANGUAGES,
 )
 
-__version__ = "1.2.1"
+__version__ = "1.2.2"
 __all__ = [
     "compute_armenian_lectionary",
     "calculate_gregorian_easter",

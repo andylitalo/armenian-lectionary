@@ -4,6 +4,21 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.2] — 2026-07-22
+
+### Fixed
+- **Malachi book-name typo.** The source truncated the book name on the Presentation-eve
+  (Feb 13) block, shipping `Malach 3.1-4` where Malachi 3:1-4 (Մաղաքիա) is meant — the same
+  book the source and this engine spell `Malachi` on every other day it appears. The engine
+  now serves the canonical `Malachi 3.1-4` everywhere: the hardcoded generative block
+  (`engine._PRESENTATION_EVE_BLOCK`) and the shipped `lectionary_data.json` carry the fixed
+  spelling directly, and the stale `Malach` key was dropped from the `hy` book-name map (its
+  `Malachi` twin already mapped to the same Armenian name, so `language="hy"` still localizes
+  the reading). The fold is registered as `dev/source_corrections.apply_book_name_fixes` and
+  applied by every `reference_data` reader (`apply_source_corrections`), so the built table
+  and `hy` map rebuild with `Malachi` and the ground-truth oracle scores the corrected output
+  as a hit (0-wrong contract preserved). No date, reading-content, or feast wording changes.
+
 ## [1.2.1] — 2026-07-22
 
 ### Fixed

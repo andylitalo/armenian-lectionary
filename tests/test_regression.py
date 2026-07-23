@@ -13,7 +13,7 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
-from dev.source_corrections import apply_cohort_corrections  # noqa: E402
+from dev.source_corrections import apply_book_name_fixes, apply_cohort_corrections  # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
 from tests._reference_cache import requires_reference_cache  # noqa: E402
 
@@ -122,7 +122,7 @@ class TestPresentationEveComposite(unittest.TestCase):
     never validated. See reports/blank_sourcing.md."""
 
     _EVE = [
-        "Leviticus 12.6-8", "Proverbs 8.22-34", "Ezekiel 44.1-2", "Malach 3.1-4",
+        "Leviticus 12.6-8", "Proverbs 8.22-34", "Ezekiel 44.1-2", "Malachi 3.1-4",
         "St. Paul's Epistle to the Galatians 3.24-29", "Luke 2.22-40",
     ]
     # Days whose base resolves and whose GT carries the full eve block -> exact match.
@@ -130,10 +130,13 @@ class TestPresentationEveComposite(unittest.TestCase):
               "2020-02-13", "2022-02-13")
 
     def _gt(self, iso):
+        # The cache spells the eve block's Malachi reading "Malach" (a source typo the
+        # engine serves canonically as "Malachi"); apply the same book-name fold every
+        # reference_data reader does so the oracle matches the shipped/generative output.
         ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
                            "reference_data", f"{iso}.json")
         with open(ref) as fh:
-            return json.load(fh)["readings"]
+            return apply_book_name_fixes(json.load(fh)["readings"])
 
     def test_exact_matches_ship_best_guess(self):
         for iso in self._EXACT:
@@ -169,6 +172,35 @@ class TestPresentationEveComposite(unittest.TestCase):
                           "St. Paul's Second Epistle to Timothy 2.15-26",
                           "John 6.15-21"])
         self.assertEqual(res["ReadingsList"][3:], self._EVE)
+
+
+class TestMalachiBookName(unittest.TestCase):
+    """Locks the Malachi book-name typo fix (source shipped "Malach"; the engine serves
+    the canonical "Malachi" on every day). Self-contained -- the Presentation-eve block
+    that carries this reading is generative, so no reference cache is needed."""
+
+    # Presentation-eve (Feb 13) surfaces the Malachi reading across the validated range;
+    # sample years whose base resolves via different tiers (table, cohort, continua).
+    _FEB13_YEARS = (2003, 2015, 2019, 2020, 2022, 2025, 2026)
+
+    def test_feb13_ships_canonical_malachi(self):
+        for year in self._FEB13_YEARS:
+            res = compute_armenian_lectionary(datetime.date(year, 2, 13))
+            self.assertIn("Malachi 3.1-4", res["ReadingsList"],
+                          f"{year}-02-13 should ship canonical 'Malachi 3.1-4'")
+            for r in res["ReadingsList"]:
+                self.assertFalse(
+                    r == "Malach" or r.startswith("Malach "),
+                    f"{year}-02-13 leaked the source typo {r!r}",
+                )
+
+    def test_hy_translates_malachi(self):
+        # The Armenian book-name map keys on the canonical "Malachi"; the reading must
+        # localize rather than fall through to the English head.
+        res = compute_armenian_lectionary(datetime.date(2026, 2, 13), language="hy")
+        self.assertIn("Մաղաքիայի մարգարէութիւնը 3.1-4", res["ReadingsList"])
+        for r in res["ReadingsList"]:
+            self.assertNotIn("Malach", r, f"untranslated Malachi head leaked: {r!r}")
 
 
 @requires_reference_cache

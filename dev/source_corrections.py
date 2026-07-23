@@ -175,14 +175,48 @@ def unexpected_chars(text):
     return sorted({c for c in (text or "") if not _is_expected_char(c)})
 
 
+# --------------------------------------------------------------------------- #
+# Book-NAME spelling normalization
+#
+# The source truncates one book name on the Presentation-eve (Feb 13) block: "Malach
+# 3.1-4" is Malachi 3:1-4 (Մաղաքիա / Malachi) -- the same book the source (and this
+# engine) spell "Malachi" on every other day it appears. It is a plain typo, not a
+# distinct book, so fold the lone outlier spelling to the canonical name. Applied to
+# every reference_data reader (via apply_source_corrections) so the shipped table
+# (dev/build_table) and hy name map (dev/fetch_translations) rebuild with "Malachi" and
+# the oracle scores the engine's "Malachi" as a hit. The runtime artifacts that carry
+# this reading directly -- engine._PRESENTATION_EVE_BLOCK and the shipped
+# lectionary_data.json -- already spell it "Malachi".
+# --------------------------------------------------------------------------- #
+BOOK_NAME_FIXES = {
+    "Malach": "Malachi",
+}
+
+
+def apply_book_name_fixes(readings):
+    """Fold source book-name typos (BOOK_NAME_FIXES) to their canonical spelling in a
+    list of reading strings. Matches on the book head only, so an already-correct
+    "Malachi ..." is left untouched; idempotent."""
+    fixed = []
+    for r in readings:
+        for wrong, right in BOOK_NAME_FIXES.items():
+            if r == wrong or r.startswith(wrong + " "):
+                r = right + r[len(wrong):]
+                break
+        fixed.append(r)
+    return fixed
+
+
 def apply_source_corrections(day):
     """Apply the on-read source corrections to a cached reference-day dict, in place.
 
     Single home for the corrections every reference_data reader must apply identically:
-    the Easter-Sunday reading-order fix and the Cyrillic-homoglyph fold on the English
-    feast text. Returns ``day`` for convenience. (Caches are git-ignored/local and may
-    predate these fixes, so they are applied on read, not assumed baked into the cache.)"""
+    the Easter-Sunday reading-order fix, the Malachi book-name typo fold, and the
+    Cyrillic-homoglyph fold on the English feast text. Returns ``day`` for convenience.
+    (Caches are git-ignored/local and may predate these fixes, so they are applied on
+    read, not assumed baked into the cache.)"""
     day["readings"] = apply_reading_order(day.get("date", ""), day.get("readings", []))
+    day["readings"] = apply_book_name_fixes(day.get("readings", []))
     day["feast"] = normalize_confusables(day.get("feast", ""))
     return day
 
