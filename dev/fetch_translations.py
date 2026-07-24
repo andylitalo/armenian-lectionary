@@ -98,10 +98,14 @@ _MASHTOTS_SYSTEMATIC = (
     ("օրենք", "օրէնք"),      # "law(s)": ե -> է (Deuteronomy "Երկրորդ օրենք")
 )
 
-# Proper-noun reversals (ե->է in stressed syllables; reformed initial հ-> classical
-# յ- for the Greek Io-/I- names such as John/Joel/Jonah; Hosea's եե->էէ). Applied
-# AFTER the systematic pass,
-# so the search sides are already in their post-systematic form.
+# Specific whole-word reversals: ե->է in stressed syllables; reformed initial հ->
+# classical յ- for the Greek Io-/I- names (John/Joel/Jonah); Hosea's եե->էէ; and the one
+# /aw/ diphthong that must be word-scoped ("հավատ", below). Unlike _MASHTOTS_SYSTEMATIC
+# these are exact words, so they are safe to apply to BOTH the book names (after the
+# systematic pass, via to_mashtots) and the feast titles (on their own, via
+# to_mashtots_names) — the systematic /aw/ swap can't touch feasts without corrupting the
+# genuine consonant վ in "Վարդավառ"/"զօրավար"/"նախավկայ", but these specific words can.
+# Each search side is written to match both the raw source and the post-systematic form.
 _MASHTOTS_PROPER = (
     ("Հովհաննես", "Յովհաննէս"),   # John (Gospel genitive + the three epistles)
     ("Մատթեոս", "Մատթէոս"),       # Matthew
@@ -118,34 +122,27 @@ _MASHTOTS_PROPER = (
     ("Անգե", "Անգէ"),             # Haggai
     ("Օսեե", "Օսէէ"),             # Hosea
     ("Տիմոթեոս", "Տիմոթէոս"),      # Timothy
+    ("հավատ", "հաւատ"),           # "believer" (Abgar feast): word-scoped /aw/ ավ -> աւ
 )
+
+
+def _apply(table, s: str) -> str:
+    for a, b in table:
+        s = s.replace(a, b)
+    return s
 
 
 def to_mashtots(s: str) -> str:
-    """Convert a reformed-orthography book name to traditional (Mashtots) orthography,
+    """Convert a reformed-orthography *book* name to traditional (Mashtots) orthography,
     preserving the source's words. Only the reform is reversed (see the tables above)."""
-    for a, b in _MASHTOTS_SYSTEMATIC:
-        s = s.replace(a, b)
-    for a, b in _MASHTOTS_PROPER:
-        s = s.replace(a, b)
-    return s
+    return _apply(_MASHTOTS_PROPER, _apply(_MASHTOTS_SYSTEMATIC, s))
 
 
-# Feast titles are entered in traditional orthography at the source, so unlike the book
-# names they are NOT run through to_mashtots (a blanket /aw/ reversal would corrupt the
-# genuine consonant վ in words like "Վարդավառ", "զօրավար", "նախավկայ"). These are the
-# isolated reform slips the source nonetheless typed into a feast title; fold each with a
-# targeted word swap so a re-scrape reproduces the shipped, corrected form.
-_FEAST_ORTHO_FIXES = (
-    ("հավատացեալ", "հաւատացեալ"),  # "believer" (Abgar): reformed /aw/ diphthong ավ -> աւ
-)
-
-
-def fix_feast_orthography(s: str) -> str:
-    """Fold the isolated reformed-orthography slips found in source feast titles."""
-    for a, b in _FEAST_ORTHO_FIXES:
-        s = s.replace(a, b)
-    return s
+def to_mashtots_names(s: str) -> str:
+    """Reverse the reform in a *feast* title. Feast titles are entered in traditional
+    orthography at the source, so only the specific-word reversals apply — the systematic
+    /aw/ swap would corrupt the genuine consonant վ in "Վարդավառ"/"զօրավար"/"նախավկայ"."""
+    return _apply(_MASHTOTS_PROPER, s)
 
 
 def _split_ref(ref: str):
@@ -274,11 +271,11 @@ def build(force: bool = False):
         if i % 25 == 0 or i == len(dates):
             print(f"  {i}/{len(dates)} ({fetched} fetched)")
 
-    feast_map = {en: fix_feast_orthography(votes.most_common(1)[0][0])
+    feast_map = {en: to_mashtots_names(votes.most_common(1)[0][0])
                  for en, votes in feast_votes.items()}
     # Book names arrive in reformed orthography; the Church uses Mashtots. Reverse the
-    # reform (orthography only). Feast titles are already traditional, so leave them
-    # (bar the isolated reform slips folded by fix_feast_orthography above).
+    # reform (orthography only). Feast titles are already traditional bar isolated proper-
+    # noun slips (Դանիել, Եզեկիել, Անգե, հավատ), so they get the specific-word pass only.
     book_map = {en: to_mashtots(votes.most_common(1)[0][0])
                 for en, votes in book_votes.items()}
 

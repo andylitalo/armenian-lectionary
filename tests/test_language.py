@@ -167,6 +167,19 @@ class TestShippedMapsOrthography(unittest.TestCase):
         # The maintainer's canonical example.
         self.assertEqual(books.get("John"), "Աւետարան ըստ Յովհաննէսի")
 
+    def test_feasts_use_mashtots_orthography(self):
+        # Feast titles are entered in traditional orthography at the source but carry a
+        # few proper-noun reform slips (Դանիել/Եզեկիել/Անգե, հավատ). The shipped map must
+        # be a fixed point of the specific-word reversal that dev applies on a re-scrape:
+        # re-running it changes nothing, so no reformed proper noun can ship unnoticed.
+        from dev.fetch_translations import to_mashtots_names
+        feasts = engine._FEAST_NAMES_HY
+        if not feasts:
+            self.skipTest("feast map not present")
+        for v in feasts.values():
+            self.assertEqual(v, to_mashtots_names(v),
+                             f"reformed proper noun survives in feast {v!r}")
+
 
 if __name__ == "__main__":
     unittest.main()
