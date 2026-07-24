@@ -155,8 +155,30 @@ class TestShippedMapsOrthography(unittest.TestCase):
             self.assertNotIn("ություն", v, f"reformed suffix in {v!r}")
             self.assertNotIn("և", v, f"reformed ligature in {v!r}")
             self.assertNotIn("Ավ", v, f"reformed 'Ավ' (want 'Աւ') in {v!r}")
+            self.assertNotIn("օրենք", v, f"reformed 'օրենք' (want 'օրէնք') in {v!r}")
+            # General vew guard: in this data classical վ (U+057E) only ever follows
+            # ա or ո (աւ/ոււ diphthongs). A վ after any other letter is a reform
+            # leftover where classical writes ւ (e.g. "Թվեր" for "Թիւեր").
+            for i, ch in enumerate(v):
+                if ch == "վ":
+                    prev = v[i - 1] if i else ""
+                    self.assertIn(prev, "աո",
+                                  f"reformed 'վ' after {prev!r} (want 'ւ') in {v!r}")
         # The maintainer's canonical example.
         self.assertEqual(books.get("John"), "Աւետարան ըստ Յովհաննէսի")
+
+    def test_feasts_use_mashtots_orthography(self):
+        # Feast titles are entered in traditional orthography at the source but carry a
+        # few proper-noun reform slips (Դանիել/Եզեկիել/Անգե, հավատ). The shipped map must
+        # be a fixed point of the specific-word reversal that dev applies on a re-scrape:
+        # re-running it changes nothing, so no reformed proper noun can ship unnoticed.
+        from dev.fetch_translations import to_mashtots_names
+        feasts = engine._FEAST_NAMES_HY
+        if not feasts:
+            self.skipTest("feast map not present")
+        for v in feasts.values():
+            self.assertEqual(v, to_mashtots_names(v),
+                             f"reformed proper noun survives in feast {v!r}")
 
 
 if __name__ == "__main__":

@@ -4,6 +4,26 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.3] — 2026-07-23
+
+### Fixed
+- **Reformed ("Soviet") orthography in the `hy` name maps.** The `language="hy"` maps carried
+  reformed-orthography spellings the traditional (Mashtots) contract should have caught.
+  Two **book** names slipped through `dev/fetch_translations.to_mashtots` because its reversal
+  tables had no rule that fired on them — `Numbers` shipped as `Թվեր` (want `Թիւեր`) and
+  `Deuteronomy` as `Երկրորդ օրենք` (want `Երկրորդ օրէնք`, `ե→է`). Five **feast** titles carried
+  proper-noun reform slips the source typed into otherwise-traditional text: `Դանիել→Դանիէլ`
+  (Daniel, three feasts), `Եզեկիել→Եզեկիէլ` (Ezekiel), `Անգե→Անգէ` (Haggai), and the Abgar
+  commemoration's `հավատ→հաւատ` (`ավ→աւ`). Feast titles previously bypassed the reversal
+  entirely; they now run through the specific-word (proper-noun) pass via a shared
+  `to_mashtots_names`, which is safe on feasts — the blanket systematic `/aw/` swap is *not*
+  applied there because it would corrupt the genuine consonant `վ` in `Վարդավառ`, `զօրավար`,
+  `նախավկայ`. The shipped `book_names_hy.json`/`feast_names_hy.json` carry the corrected forms,
+  the dev reversal tables reproduce them on a re-scrape, and two contract tests
+  (`tests/test_language.py`) lock it: the book guard gains an `օրենք` marker plus a general vew
+  (`վ`) check, and a new feast guard asserts the shipped feast map is a fixed point of
+  `to_mashtots_names`. English keys, dates, and reading content are unchanged.
+
 ## [1.2.2] — 2026-07-22
 
 ### Fixed
