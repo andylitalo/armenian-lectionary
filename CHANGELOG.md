@@ -4,6 +4,14 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- Add the Armenian Church eight-mode assignment to every result as `"Mode"`, and expose
+  `calculate_liturgical_mode(date)` for date-only use. The canonical Armenian mode code is
+  language-independent; tests exercise all 9,495 dates from 2001–2026 and include
+  SacredTradition source fixtures across that range.
+
 ## [1.2.3] — 2026-07-23
 
 ### Fixed
