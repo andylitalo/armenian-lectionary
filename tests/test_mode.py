@@ -19,20 +19,31 @@ class TestLiturgicalMode(unittest.TestCase):
     def test_canonical_order(self):
         self.assertEqual(
             LITURGICAL_MODES,
-            ("ԱՁ", "ԱԿ", "ԲՁ", "ԲԿ", "ԳՁ", "ԳԿ", "ԴՁ", "ԴԿ"),
+            (
+                "ԱՁ", "ԱԿ", "ԲՁ", "ԲԿ", "ԳՁ", "ԳԿ", "ԴՁ", "ԴԿ",
+            ),
         )
+        self.assertEqual(len(set(LITURGICAL_MODES)), 8)
 
     def test_great_barekendan_and_easter_reset(self):
         for year in range(2001, 2027):
             easter = calculate_gregorian_easter(year)
             great_barekendan = easter - datetime.timedelta(days=49)
-            self.assertEqual(calculate_liturgical_mode(great_barekendan), "ԴԿ", year)
             self.assertEqual(
-                calculate_liturgical_mode(great_barekendan + datetime.timedelta(days=1)),
-                "ԱՁ",
+                calculate_liturgical_mode(great_barekendan),
+                {"Tone": "ԴԿ", "Number": 8},
                 year,
             )
-            self.assertEqual(calculate_liturgical_mode(easter), "ԱՁ", year)
+            self.assertEqual(
+                calculate_liturgical_mode(great_barekendan + datetime.timedelta(days=1)),
+                {"Tone": "ԱՁ", "Number": 1},
+                year,
+            )
+            self.assertEqual(
+                calculate_liturgical_mode(easter),
+                {"Tone": "ԱՁ", "Number": 1},
+                year,
+            )
 
     def test_cycle_advances_daily_between_annual_resets(self):
         day = datetime.date(2001, 1, 1)
@@ -44,12 +55,14 @@ class TestLiturgicalMode(unittest.TestCase):
                 - datetime.timedelta(days=49)
             )
             if next_day == next_reset:
-                self.assertEqual(calculate_liturgical_mode(next_day), "ԴԿ", next_day)
+                self.assertEqual(
+                    calculate_liturgical_mode(next_day)["Number"], 8, next_day
+                )
                 day = next_day
                 continue
-            current_index = LITURGICAL_MODES.index(calculate_liturgical_mode(day))
-            next_index = LITURGICAL_MODES.index(calculate_liturgical_mode(next_day))
-            self.assertEqual(next_index, (current_index + 1) % 8, day)
+            current_number = calculate_liturgical_mode(day)["Number"]
+            next_number = calculate_liturgical_mode(next_day)["Number"]
+            self.assertEqual(next_number, current_number % 8 + 1, day)
             day = next_day
 
     def test_source_spot_checks(self):
@@ -94,14 +107,42 @@ class TestLiturgicalMode(unittest.TestCase):
             datetime.date(2026, 7, 30): "ԳՁ",
             datetime.date(2026, 12, 31): "ԴՁ",
         }
+        numbers_by_tone = {
+            tone: number for number, tone in enumerate(LITURGICAL_MODES, start=1)
+        }
+        for day, tone in expected.items():
+            mode = calculate_liturgical_mode(day)
+            self.assertEqual(mode["Tone"], tone, day)
+            self.assertEqual(mode["Number"], numbers_by_tone[tone], day)
+
+    def test_exact_mode_records(self):
+        expected = {
+            datetime.date(2026, 2, 15): {"Tone": "ԴԿ", "Number": 8},
+            datetime.date(2026, 2, 16): {"Tone": "ԱՁ", "Number": 1},
+            datetime.date(2026, 4, 5): {"Tone": "ԱՁ", "Number": 1},
+            datetime.date(2026, 7, 29): {"Tone": "ԲԿ", "Number": 4},
+        }
         for day, mode in expected.items():
-            self.assertEqual(calculate_liturgical_mode(day), mode, day)
+            with self.subTest(day=day):
+                self.assertEqual(calculate_liturgical_mode(day), mode)
 
     def test_mode_is_in_every_result_and_is_not_localized(self):
         day = datetime.date(2026, 7, 29)
-        self.assertEqual(compute_armenian_lectionary(day)["Mode"], "ԲԿ")
+        expected = {"Tone": "ԲԿ", "Number": 4}
+        english_mode = compute_armenian_lectionary(day)["Mode"]
+        armenian_mode = compute_armenian_lectionary(day, language="hy")["Mode"]
+        self.assertEqual(english_mode, expected)
+        self.assertEqual(armenian_mode, expected)
+        self.assertEqual(english_mode, armenian_mode)
+        self.assertIs(type(english_mode["Number"]), int)
+
+    def test_returned_mode_records_are_independent(self):
+        first = calculate_liturgical_mode(datetime.date(2026, 4, 5))
+        first["Tone"] = "changed"
         self.assertEqual(
-            compute_armenian_lectionary(day, language="hy")["Mode"], "ԲԿ")
+            calculate_liturgical_mode(datetime.date(2026, 4, 5)),
+            {"Tone": "ԱՁ", "Number": 1},
+        )
 
 
 if __name__ == "__main__":

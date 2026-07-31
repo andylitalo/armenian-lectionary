@@ -7,10 +7,12 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 ## [Unreleased]
 
 ### Added
-- Add the Armenian Church eight-mode assignment to every result as `"Mode"`, and expose
-  `calculate_liturgical_mode(date)` for date-only use. The canonical Armenian mode code is
-  language-independent; tests exercise all 9,495 dates from 2001–2026 and include
-  SacredTradition source fixtures across that range.
+- Add the Armenian Church eight-mode assignment to every result as a structured `"Mode"`
+  object with a canonical Armenian `"Tone"` and matching integer `"Number"` from 1–8,
+  and expose the same record through `calculate_liturgical_mode(date)` for date-only use.
+  Both values are language-independent; tests exercise all 9,495 dates from 2001–2026,
+  include SacredTradition source fixtures across that range, and cover the HTTP/JSON
+  boundary.
 
 ## [1.2.3] — 2026-07-23
 

@@ -39,10 +39,13 @@ BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 SUPPORTED_LANGUAGES = ("en", "hy")
 
-# Canonical order of the Armenian Church's eight-mode (ութ ձայն) cycle.  The
-# abbreviations are identifiers rather than localized display names, so callers receive
-# the same value for both supported output languages.
-LITURGICAL_MODES = ("ԱՁ", "ԱԿ", "ԲՁ", "ԲԿ", "ԳՁ", "ԳԿ", "ԴՁ", "ԴԿ")
+# Canonical order of the Armenian Church's eight-mode (ութ ձայն) cycle.  Immutable
+# strings preserve the public API; public results are fresh dictionaries.
+# The Armenian tones are identifiers rather than localized display names, so callers
+# receive the same values for both supported output languages.
+LITURGICAL_MODES = (
+    "ԱՁ", "ԱԿ", "ԲՁ", "ԲԿ", "ԳՁ", "ԳԿ", "ԴՁ", "ԴԿ",
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -68,8 +71,8 @@ def calculate_gregorian_easter(year: int) -> datetime.date:
     return datetime.date(year, month, day)
 
 
-def calculate_liturgical_mode(target_date: datetime.date) -> str:
-    """Return the Armenian Church's eight-mode abbreviation for ``target_date``.
+def calculate_liturgical_mode(target_date: datetime.date) -> dict:
+    """Return the Armenian Church's eight-mode record for ``target_date``.
 
     Between annual anchors, the mode advances one position per civil day.  The cycle
     is re-anchored at Great Barekendan (Easter - 49 days) as ``ԴԿ``; its following
@@ -80,7 +83,8 @@ def calculate_liturgical_mode(target_date: datetime.date) -> str:
     great_barekendan = easter - datetime.timedelta(days=49)
     if target_date < great_barekendan:
         easter = calculate_gregorian_easter(target_date.year - 1)
-    return LITURGICAL_MODES[(target_date - easter).days % len(LITURGICAL_MODES)]
+    mode_index = (target_date - easter).days % len(LITURGICAL_MODES)
+    return {"Tone": LITURGICAL_MODES[mode_index], "Number": mode_index + 1}
 
 
 def sunday_closest_to(year: int, month: int, day: int) -> datetime.date:

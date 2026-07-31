@@ -87,14 +87,16 @@ Naming nuances may still be refined as experts review. Audit with `python dev/fe
 
 ### Eight-mode cycle
 
-Every result includes `"Mode"`, the canonical Armenian abbreviation for the day's
-eight-mode (ութ ձայն) assignment: `ԱՁ`, `ԱԿ`, `ԲՁ`, `ԲԿ`, `ԳՁ`, `ԳԿ`, `ԴՁ`, or `ԴԿ`.
-The value is a liturgical identifier and is therefore unchanged by `language`. The cycle
-is re-anchored at Great Barekendan (`ԴԿ`), advances daily from there, and places Easter
-Sunday at `ԱՁ`; earlier dates continue from the preceding Easter instead of restarting on
-January 1. The calculation is date-only and constant-time. Tests exercise all 9,495 dates
-from 2001–2026, with SacredTradition fixtures spanning every year and the annual reset;
-`calculate_liturgical_mode(date)` exposes it without resolving the readings.
+Every result includes a structured `"Mode"` object. Its `"Tone"` is the canonical
+Armenian abbreviation for the day's eight-mode (ութ ձայն) assignment—`ԱՁ`, `ԱԿ`,
+`ԲՁ`, `ԲԿ`, `ԳՁ`, `ԳԿ`, `ԴՁ`, or `ԴԿ`—and its integer `"Number"` is the corresponding
+stable value from 1 through 8. Both values are liturgical identifiers and are unchanged
+by `language`. The cycle is re-anchored at Great Barekendan (`ԴԿ`, 8), advances daily
+from there, and places Easter Sunday at `ԱՁ`, 1; earlier dates continue from the preceding
+Easter instead of restarting on January 1. The calculation is date-only and constant-time.
+Tests exercise all 9,495 dates from 2001–2026, with SacredTradition fixtures spanning
+every year and the annual reset; `calculate_liturgical_mode(date)` returns the same
+`{"Tone": tone, "Number": number}` record without resolving the readings.
 
 ### Source fidelity & known typos
 
@@ -157,7 +159,10 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
 {
   "Date": "2026-06-01",
   "Liturgical Day": "Saints Hripsime and her companions",
-  "Mode": "ԱԿ",
+  "Mode": {
+    "Tone": "ԱԿ",
+    "Number": 2
+  },
   "Season": "After Pentecost",
   "Readings": {
     "Old Testament": ["Proverbs 31.29-31", "Isaiah 61.10-62.3"],
@@ -196,7 +201,7 @@ import armenian_lectionary
 
 reading = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4, 5))
 print(reading["Liturgical Day"])   # RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)
-print(reading["Mode"])             # ԱՁ
+print(reading["Mode"])             # {'Tone': 'ԱՁ', 'Number': 1}
 print(reading["ReadingsList"])     # ['John 20.1-18', 'Acts of the Apostles 1.1-8', ...]
 
 # Armenian names: pass language="hy" (default "en").
@@ -209,7 +214,8 @@ The distribution name is **`armenian-lectionary`**; the import name is
 **`armenian_lectionary`**. The public API is intentionally small —
 `compute_armenian_lectionary(date, language="en")` and
 `calculate_gregorian_easter(year)`, plus the date-only
-`calculate_liturgical_mode(date)` helper.
+`calculate_liturgical_mode(date)` helper, which returns a `Mode`-shaped record with the
+canonical Armenian `Tone` and integer `Number`.
 (Internal calendar helpers and constants remain importable from
 `armenian_lectionary.engine` if you need them.)
 
