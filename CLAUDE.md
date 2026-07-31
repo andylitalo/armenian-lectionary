@@ -46,19 +46,48 @@ PORT=8090 gunicorn --bind "0.0.0.0:$PORT" --workers 2 --threads 4 --timeout 60 a
 
 ### Tests
 ```bash
-python -m unittest tests.test_calendar tests.test_parser   # self-contained, no cache
+# self-contained, no cache needed:
+python -m unittest tests.test_calendar tests.test_parser tests.test_language \
+                   tests.test_feast_contract
+python -m unittest discover -s tests -t .                  # everything
 ```
 The full-dataset regression tests (`test_regression`, `test_full_dataset`,
-`test_table_build`, `test_feast`) need the git-ignored `dev/reference_data/`
-ground-truth cache; without it they fail their coverage floors. Rebuild the cache with
-`python dev/bulk_fetch.py` (see README).
+`test_table_build`, `test_feast`, `test_feast_name_raw`) need the git-ignored
+`dev/reference_data/` ground-truth cache; they SKIP without it (`@requires_reference_cache`).
+Rebuild the cache with `python dev/bulk_fetch.py` (see README).
 
-`test_feast` locks the engine's feast/fast NAME (`"Liturgical Day"`) against the
-scraped `feast` field — the value bahk uses for AI context. It compares only the
-*commemoration component* (`dev/feast_names.commemoration_of`, canonicalized by
-`dev/source_corrections.canonical_commem`), since the scrape mashes a year-varying
-"Nth day of <Season>" position label onto the name. Audit residual mismatches with
-`python dev/feast_audit.py`.
+The feast/fast NAME (`"Liturgical Day"`) — the value bahk persists into `Feast.name` — is
+locked by **three** tests at different strengths. Keep all three; each covers what the
+others structurally cannot:
+
+| Test | Compares | Needs cache? |
+|------|----------|--------------|
+| `test_feast_name_raw` | the **raw string**, component-wise on ` — `. Contradictions (engine emits a component the source lacks) must be **0**; omissions and exact matches are ratchets. | yes (2001–2026) |
+| `test_feast_contract` | source-**independent** invariants — no placeholder, fits `Feast.name`, `hy` differs from `en`, clean characters. | **no** (2001–2027) |
+| `test_feast` | only the *commemoration component*. Narrowest: it strips the position/eve components from both sides, so >50% of days compare `"" == ""`. | yes (2001–2026) |
+
+That last stripping is why `test_feast` alone was not enough — the engine shipped a name
+the source contradicted on 41 days, and six more as bare placeholders, entirely invisible
+to it. `test_feast_contract` needs no ground truth, so it is the only cover for **2027**:
+sacredtradition.am publishes nothing for that year, so the cache's 365 days for it are
+empty and no oracle test can assert anything about them.
+
+The governing rule for any new difference from the source: it must be either counted by a
+ratchet or registered in `dev/source_corrections`. Nothing passes silently.
+
+Dev tooling:
+```bash
+python dev/feast_discrepancy_report.py   # -> reports/feast_name_discrepancies.md
+python dev/verify_position_labels.py     # engine._position_label vs. every cached label
+python dev/feast_audit.py                # residual commemoration mismatches
+```
+
+The calendar-position label ("Fourth Sunday after Nativity") is **not** stored in the
+table — a table key is a liturgical coordinate shared by civil years whose ordinals
+differ, so storing it asserted the modal year's count for every year. `build_table.
+unanimous_feast` drops non-unanimous calendar-derived components and
+`engine._position_label` regenerates them per date. If you add a family there, verify it
+with `dev/verify_position_labels.py`: MISMATCH and EXTRA must both stay 0.
 
 ## Configuration (env vars)
 

@@ -9,11 +9,11 @@ Compares the **raw `"Liturgical Day"` string** — the value bahk persists into 
 | class | days | meaning |
 |---|---:|---|
 | **CONTRADICTION** | 0 | engine asserts a component the source lacks — **wrong data, persisted by bahk** |
-| OMISSION | 23 | source has a component the engine drops — incomplete, not wrong |
-| CASING | 19 | same component, different letter case — an *unregistered* normalization |
+| OMISSION | 15 | source has a component the engine drops — incomplete, not wrong |
+| CASING | 0 | same component, different letter case — an *unregistered* normalization |
 | STORAGE | 54 | name exceeds bahk's `Feast.name` (256 chars) |
 | UNTRANSLATED | 0 | `language="hy"` returns the English string |
-| _exact_ | 9454 | byte-exact, or equal under the registered `dev/source_corrections` folds |
+| _exact_ | 9481 | byte-exact, or equal under the registered `dev/source_corrections` folds |
 
 Cache holds **9861** days; **9496** carry a source feast name and were compared; **365** have no ground truth and were skipped (see *Coverage gap* below).
 
@@ -31,9 +31,9 @@ The concentration in the **validated** tiers is the headline: those tiers carry 
 
 ### Discrepancies by year
 
-| 2001 | 2002 | 2003 | 2004 | 2005 | 2006 | 2007 | 2008 | 2010 | 2011 | 2012 | 2013 | 2014 | 2016 | 2017 | 2018 | 2019 | 2021 | 2022 | 2023 | 2024 | 2025 |
-|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 2 | 3 | 2 | 1 | 1 | 1 | 2 | 3 | 2 | 2 | 2 | 3 | 2 | 1 | 1 | 2 | 3 | 2 | 1 | 1 | 3 | 2 |
+| 2001 | 2002 | 2004 | 2007 | 2008 | 2010 | 2011 | 2012 | 2013 | 2018 | 2019 | 2021 | 2024 |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 1 | 1 | 1 | 1 | 2 | 1 | 1 | 1 | 1 | 1 | 2 | 1 |
 
 ### Coverage gap
 
@@ -53,7 +53,6 @@ The engine and the source name the same commemoration with different letter case
 
 | source | engine | days |
 |---|---|---:|
-| PRESENTATION of the Holy Mother of God to the Temple | Presentation of the Holy Mother of God to the Temple | 19 |
 
 ---
 
@@ -63,7 +62,6 @@ The engine drops a component the source carries. Safe (it asserts nothing false)
 
 | dropped component(s) | days | example |
 |---|---:|---|
-| `Feast day` | 8 | 2002-12-09 |
 | `Eve of Fast of Saint James the bishop of Nisibis` | 4 | 2001-12-09 |
 | `Eve of Fast of Exaltation of Holy Cross` | 4 | 2002-09-08 |
 | `Eve of Fast of Advent` | 3 | 2004-11-21 |

@@ -9,12 +9,20 @@ by test_full_dataset.py; this locks the NAME.
 
 The scrape mashes several ``<br>``-separated components (a year-varying "Nth day of
 <Season>" position label, the commemoration, an "Eve of <Fast>" status note) into one
-separatorless string, and a static engine cannot byte-reproduce the year-varying
-position label. So -- per design -- this compares only the COMMEMORATION component
+string. This test compares only the COMMEMORATION component
 (dev/feast_names.commemoration_of), canonicalized on BOTH sides
 (dev/source_corrections.canonical_commem) to reconcile reviewed companion-enumeration
-variants. The contract is simple: every day's engine commemoration equals the scraped
-commemoration across 2001-2026, with no exceptions.
+variants: every day's engine commemoration equals the scraped commemoration across
+2001-2026.
+
+That contract holds of the PROJECTION, not of the name. Because the position and eve
+components are stripped from both sides, over half the corpus reduces to ``"" == ""`` and
+is asserted about only vacuously -- which is how the engine came to ship a name the source
+contradicted on 41 days without this test noticing. ``tests/test_feast_name_raw.py`` locks
+the unprojected string that downstream actually stores, and ``tests/test_feast_contract.py``
+adds the source-independent invariants; this file is now the narrowest of the three.
+Audit residual mismatches with ``python dev/feast_audit.py``, and see
+``reports/feast_name_discrepancies.md`` for the full inventory.
 """
 
 import datetime
@@ -33,6 +41,12 @@ from tests._reference_cache import requires_reference_cache             # noqa: 
 # Lower bound on processed reference days; guards against silent data loss.
 EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
 
+# Ceiling on days where BOTH commemorations are empty, so the comparison is vacuous.
+# Over half the corpus is a pure position/eve day with no commemoration, and this test
+# says nothing about those; tests/test_feast_name_raw.py is what actually locks them.
+# Monotonic DOWN -- if the projection starts discarding more, that is a regression.
+VACUOUS_CEILING = int(os.environ.get("FEAST_VACUOUS_CEILING", "5100"))
+
 
 def _commem(feast_str):
     """Canonical, casefolded commemoration for comparison (applied to both sides)."""
@@ -47,6 +61,7 @@ class TestFeastCommemoration(unittest.TestCase):
 
     def test_commemoration_matches_source(self):
         total = 0
+        vacuous = 0               # both sides reduce to "" -- the comparison asserts nothing
         mismatches = []           # engine commemoration != scrape commemoration
         unsegmented = []          # extractor left an unrecognized-prefix sentinel
         for iso in sorted(self.days):
@@ -59,7 +74,9 @@ class TestFeastCommemoration(unittest.TestCase):
                 unsegmented.append((iso, feast))
             got = compute_armenian_lectionary(
                 datetime.date.fromisoformat(iso))["Liturgical Day"]
-            if _commem(feast) != _commem(got):
+            if not _commem(feast) and not _commem(got):
+                vacuous += 1
+            elif _commem(feast) != _commem(got):
                 mismatches.append((iso, src, canonical_commem(commemoration_of(got))))
 
         # No silent data loss.
@@ -70,11 +87,21 @@ class TestFeastCommemoration(unittest.TestCase):
         self.assertEqual(
             unsegmented, [],
             f"{len(unsegmented)} feast strings did not segment: {unsegmented[:5]}")
-        # The contract: every engine feast name matches the scrape (2001-2026).
+        # The contract: every engine commemoration matches the scrape (2001-2026).
         self.assertEqual(
             mismatches, [],
             f"{len(mismatches)} engine feast names disagree with the scrape "
             f"(first 10): {mismatches[:10]}")
+        # Report the blind spot rather than hide it. Days whose commemoration is empty on
+        # both sides (a pure position/eve day) are compared, but the comparison is
+        # vacuous -- it is satisfied by ANY pair of such names, which is how a placeholder
+        # and a real label once matched. Those days are covered for real by
+        # test_feast_name_raw.py, which compares the unprojected string. Keep this ceiling
+        # so the projection cannot quietly widen.
+        self.assertLessEqual(
+            vacuous, VACUOUS_CEILING,
+            f"{vacuous} of {total} days compare \"\" == \"\" here (ceiling "
+            f"{VACUOUS_CEILING}); this test asserts nothing about them")
 
 
 class TestCommemorationExtractor(unittest.TestCase):
@@ -110,9 +137,18 @@ class TestCommemorationExtractor(unittest.TestCase):
             commemoration_of("Saints Hripsime and her companions"),
             "Saints Hripsime and her companions")
 
-    def test_engine_placeholder_is_empty(self):
-        self.assertEqual(commemoration_of("(movable ordinary-time reading)"), "")
-        self.assertEqual(commemoration_of("(commemoration)"), "")
+    def test_engine_placeholder_survives_extraction(self):
+        """A placeholder must NOT reduce to "" -- that is what hid six defective days.
+
+        Collapsing it made "(movable ordinary-time reading)" compare equal to any
+        pure-position source label, which also collapses to "". Kept verbatim, a
+        placeholder can only match another placeholder.
+        """
+        self.assertEqual(commemoration_of("(movable ordinary-time reading)"),
+                         "(movable ordinary-time reading)")
+        self.assertEqual(commemoration_of("(commemoration)"), "(commemoration)")
+        self.assertNotEqual(commemoration_of("(movable ordinary-time reading)"),
+                            commemoration_of("Fast day"))
 
 
 class TestConfusables(unittest.TestCase):

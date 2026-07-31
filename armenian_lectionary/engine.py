@@ -1220,10 +1220,13 @@ _POSITION_FAMILIES = (
     ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday after Pentecost"),
     # -- Ordinary-time fast days (terminal fallthrough) -------------------------
     # A Wed/Fri no season above has claimed is simply a fast day. Verified exact on every
-    # such day in the ground truth (1553/1553), with one deterministic exception: on the
-    # Conception of the Theotokos (Dec 9) the source writes "Feast day" instead, the
-    # feast outranking the fast. Counter ``None`` = a fixed label with no ordinal.
-    ("E", (_ANY, _ANY), (2, 4), None, 0, "Feast day", (12, 9)),
+    # such day in the ground truth (1553/1553). Counter ``None`` = a fixed label, no ordinal.
+    #
+    # The Conception of the Theotokos (Dec 9) is the one date that reads "Feast day"
+    # instead -- the feast outranking the Advent fast -- on Mon/Tue/Wed/Fri, and takes no
+    # marker at all on Thu/Sat (16 of 16 either way; Sunday is an Advent Sunday, claimed
+    # above). The weekday set is the source's, recorded as observed.
+    ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Feast day", (12, 9)),
     ("E", (_ANY, _ANY), (2, 4), None, 0, "Fast day"),
 )
 

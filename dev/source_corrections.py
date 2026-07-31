@@ -109,6 +109,13 @@ _FEAST_CANON_RULES = (
      lambda c: c.startswith("Saints Atom and his soldiers")),
     ("PRESENTATION OF OUR LORD TO THE TEMPLE",
      lambda c: "PRESENTATION OF OUR LORD TO THE TEMPLE" in c),
+    # The Theotokos' Presentation (Nov 21) is typed with the first word shouted in 19 of
+    # the 26 cached years and in plain title case in the other 7 -- the source disagreeing
+    # with itself, with no rule to reproduce. The engine serves the title-case form (the
+    # one the hy name map is keyed on); folding on case makes the two score as the same
+    # commemoration, which they are.
+    ("Presentation of the Holy Mother of God to the Temple",
+     lambda c: c.lower().startswith("presentation of the holy mother of god to the temple")),
     # St. Theodore the Recruit: the scrape says "the General", the Tonats'oyts table
     # "the Tyron" (Greek Tiron/Recruit) -- the same soldier-martyr.
     ("Saint Theodore the General",
