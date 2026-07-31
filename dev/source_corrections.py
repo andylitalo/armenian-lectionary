@@ -180,6 +180,50 @@ def normalize_feast_spelling(text):
 
 
 # --------------------------------------------------------------------------- #
+# Calendar-POSITION label normalization
+#
+# The engine regenerates the source's position label per date (engine._position_label),
+# verified against every occurrence in the cache by dev/verify_position_labels.py. Seven
+# occurrences are the source contradicting ITSELF rather than a rule the engine is missing,
+# so they are folded here -- the same treatment BOOK_NAME_FIXES gives the "Malach" typo:
+#
+#   * a stray trailing period on "the Fast of Nativity." (4 x Jan 1; every other day in the
+#     same window has no period);
+#   * a comma where the source's own 25 other occurrences of each phrase use a period
+#     ("Great Lent, Sunday of the Expulsion" / "... the Advent");
+#   * one wrong ordinal word: 2008-04-07 reads "Thirteenth day of Eastertide" where the
+#     count is 16. Its neighbours pin it -- Apr 5 is "Fourteenth" (offset 13) and Apr 8 is
+#     "Seventeenth" (offset 16) -- so 13 is a typo for 16, not a different counting rule.
+# --------------------------------------------------------------------------- #
+POSITION_LABEL_FIXES = {
+    "day of the Fast of Nativity.": "day of the Fast of Nativity",
+    "Great Lent, Sunday of the Expulsion": "Great Lent. Sunday of the Expulsion",
+    "Great Lent, Sunday of the Advent": "Great Lent. Sunday of the Advent",
+}
+
+# The wrong-ordinal fix must be DATE-SCOPED: "Thirteenth day of Eastertide" is the correct
+# label on every other year's Easter+12, so folding it globally would corrupt 25 good days
+# to fix one bad one.
+POSITION_LABEL_FIXES_BY_DATE = {
+    "2008-04-07": {"Thirteenth day of Eastertide": "Sixteenth day of Eastertide"},
+}
+
+
+def normalize_position_label(text, date_iso=""):
+    """Fold the source's self-contradicting position labels to the form it uses elsewhere.
+
+    Idempotent. Date-scoped fixes apply only on their own date.
+    """
+    if not text:
+        return text
+    for wrong, right in POSITION_LABEL_FIXES.items():
+        text = text.replace(wrong, right)
+    for wrong, right in POSITION_LABEL_FIXES_BY_DATE.get(date_iso, {}).items():
+        text = text.replace(wrong, right)
+    return text
+
+
+# --------------------------------------------------------------------------- #
 # Character-set guard (the detector backing ``normalize_confusables``)
 #
 # Feast/book text legitimately draws from exactly these code points:
@@ -248,7 +292,9 @@ def apply_source_corrections(day):
     read, not assumed baked into the cache.)"""
     day["readings"] = apply_reading_order(day.get("date", ""), day.get("readings", []))
     day["readings"] = apply_book_name_fixes(day.get("readings", []))
-    day["feast"] = normalize_feast_spelling(normalize_confusables(day.get("feast", "")))
+    day["feast"] = normalize_position_label(
+        normalize_feast_spelling(normalize_confusables(day.get("feast", ""))),
+        day.get("date", ""))
     return day
 
 

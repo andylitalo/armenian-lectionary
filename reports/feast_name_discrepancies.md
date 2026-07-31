@@ -8,12 +8,12 @@ Compares the **raw `"Liturgical Day"` string** — the value bahk persists into 
 
 | class | days | meaning |
 |---|---:|---|
-| **CONTRADICTION** | 41 | engine asserts a component the source lacks — **wrong data, persisted by bahk** |
-| OMISSION | 63 | source has a component the engine drops — incomplete, not wrong |
+| **CONTRADICTION** | 0 | engine asserts a component the source lacks — **wrong data, persisted by bahk** |
+| OMISSION | 23 | source has a component the engine drops — incomplete, not wrong |
 | CASING | 19 | same component, different letter case — an *unregistered* normalization |
 | STORAGE | 54 | name exceeds bahk's `Feast.name` (256 chars) |
-| UNTRANSLATED | 6 | `language="hy"` returns the English string |
-| _exact_ | 9373 | byte-exact, or equal under the registered `dev/source_corrections` folds |
+| UNTRANSLATED | 0 | `language="hy"` returns the English string |
+| _exact_ | 9454 | byte-exact, or equal under the registered `dev/source_corrections` folds |
 
 Cache holds **9861** days; **9496** carry a source feast name and were compared; **365** have no ground truth and were skipped (see *Coverage gap* below).
 
@@ -21,10 +21,6 @@ Cache holds **9861** days; **9496** carry a source feast name and were compared;
 
 | cause | days |
 |---|---:|
-| wrong ordinal | 34 |
-| engine placeholder | 5 |
-| wrong eve note | 1 |
-| wrong position label | 1 |
 
 ### Contradictions by engine tier
 
@@ -32,15 +28,12 @@ The concentration in the **validated** tiers is the headline: those tiers carry 
 
 | engine `Source` | days |
 |---|---:|
-| `validated-table` | 33 |
-| `first-volume-continua` | 5 |
-| `generative-composite` | 3 |
 
 ### Discrepancies by year
 
-| 2001 | 2002 | 2003 | 2004 | 2005 | 2006 | 2007 | 2008 | 2009 | 2010 | 2011 | 2012 | 2013 | 2014 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
-|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 4 | 7 | 4 | 3 | 5 | 3 | 5 | 9 | 3 | 4 | 12 | 4 | 7 | 4 | 3 | 5 | 3 | 5 | 5 | 4 | 4 | 4 | 4 | 5 | 4 | 3 |
+| 2001 | 2002 | 2003 | 2004 | 2005 | 2006 | 2007 | 2008 | 2010 | 2011 | 2012 | 2013 | 2014 | 2016 | 2017 | 2018 | 2019 | 2021 | 2022 | 2023 | 2024 | 2025 |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2 | 3 | 2 | 1 | 1 | 1 | 2 | 3 | 2 | 2 | 2 | 3 | 2 | 1 | 1 | 2 | 3 | 2 | 1 | 1 | 3 | 2 |
 
 ### Coverage gap
 
@@ -51,304 +44,6 @@ No day in **2027** carries a source feast name, so no oracle test asserts anythi
 ## CONTRADICTIONS
 
 Grouped by defect: one entry per distinct (source, engine) component pair, since the same liturgical coordinate recurs across civil years. Each entry shows the earliest affected date in context.
-
-### 2001-09-09 (+6 more) — wrong ordinal
-
-engine tier: `validated-table` · affects **7 days**
-
-- engine asserts `Fourth Sunday after Assumption` — not in the source's string for this day
-- source has `Fifth Sunday after the Assumption` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2001-09-07 | Fri | Fast day | = |
-| 2001-09-08 | Sat | Feast of the Birth of Holy Virgin Mary from Anna | = |
-| **2001-09-09** | **Sun** | **Fifth Sunday after the Assumption — Eve of Fast of Exaltation of Holy Cross** | **Fourth Sunday after Assumption — Eve of Fast of Exaltation of Holy Cross** ❌ |
-| 2001-09-10 | Mon | First day of the Fast of the Holy Cross | = |
-| 2001-09-11 | Tue | Second day of the Fast of the Holy Cross | = |
-
-<details><summary>All affected dates</summary>
-
-2001-09-09, 2006-09-10, 2007-09-09, 2012-09-09, 2017-09-10, 2018-09-09, 2023-09-10
-
-</details>
-
-### 2004-08-08 (+5 more) — wrong ordinal
-
-engine tier: `validated-table` · affects **6 days**
-
-- engine asserts `Third Sunday after Transfiguration` — not in the source's string for this day
-- source has `Fourth Sunday after Transfiguration` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2004-08-06 | Fri | Fast day | = |
-| 2004-08-07 | Sat | Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341) | = |
-| **2004-08-08** | **Sun** | **Fourth Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** | **Third Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** ❌ |
-| 2004-08-09 | Mon | First day of the Fast of Assumption | = |
-| 2004-08-10 | Tue | Second day of the Fast of Assumption | = |
-
-<details><summary>All affected dates</summary>
-
-2004-08-08, 2007-08-05, 2009-08-09, 2012-08-05, 2020-08-09, 2023-08-06
-
-</details>
-
-### 2002-08-11 (+4 more) — wrong ordinal
-
-engine tier: `validated-table` · affects **5 days**
-
-- engine asserts `Third Sunday after Transfiguration` — not in the source's string for this day
-- source has `Sixth Sunday after Transfiguration` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2002-08-09 | Fri | Fast day | = |
-| 2002-08-10 | Sat | Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341) | = |
-| **2002-08-11** | **Sun** | **Sixth Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** | **Third Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** ❌ |
-| 2002-08-12 | Mon | First day of the Fast of Assumption | = |
-| 2002-08-13 | Tue | Second day of the Fast of Assumption | = |
-
-<details><summary>All affected dates</summary>
-
-2002-08-11, 2005-08-07, 2013-08-11, 2016-08-07, 2024-08-11
-
-</details>
-
-### 2010-08-08 (+4 more) — wrong ordinal
-
-engine tier: `validated-table` · affects **5 days**
-
-- engine asserts `Third Sunday after Transfiguration` — not in the source's string for this day
-- source has `Fifth Sunday after Transfiguration` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2010-08-06 | Fri | Fast day | = |
-| 2010-08-07 | Sat | Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341) | = |
-| **2010-08-08** | **Sun** | **Fifth Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** | **Third Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** ❌ |
-| 2010-08-09 | Mon | First day of the Fast of Assumption | = |
-| 2010-08-10 | Tue | Second day of the Fast of Assumption | = |
-
-<details><summary>All affected dates</summary>
-
-2010-08-08, 2015-08-09, 2018-08-05, 2021-08-08, 2026-08-09
-
-</details>
-
-### 2011-02-04 (+3 more) — engine placeholder
-
-engine tier: `first-volume-continua` · affects **4 days**
-
-- engine asserts `(movable ordinary-time reading)` — not in the source's string for this day
-- source has `Fast day` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2011-02-02 | Wed | Fast day | = |
-| 2011-02-03 | Thu | Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs | = |
-| **2011-02-04** | **Fri** | **Fast day** | **(movable ordinary-time reading)** ❌ |
-| 2011-02-05 | Sat | Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grigoris and Daniel | = |
-| 2011-02-06 | Sun | Fourth Sunday after Nativity | (movable ordinary-time reading) ❌ |
-
-<details><summary>All affected dates</summary>
-
-2011-02-04, 2011-02-09, 2011-02-11, 2022-02-04
-
-</details>
-
-### 2002-01-27 (+1 more) — wrong ordinal
-
-engine tier: `validated-table` · affects **2 days**
-
-- engine asserts `Third Sunday after Nativity` — not in the source's string for this day
-- source has `Second Sunday after Nativity` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2002-01-25 | Fri | Fifth day of the Fast of the Catechumens — Remembrance of the Prophet Jonah | = |
-| 2002-01-26 | Sat | Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers | = |
-| **2002-01-27** | **Sun** | **Second Sunday after Nativity** | **Third Sunday after Nativity** ❌ |
-| 2002-01-28 | Mon | Saints Atom and his soldiers | = |
-| 2002-01-29 | Tue | Saints Sukiasians the Martyrs | = |
-
-<details><summary>All affected dates</summary>
-
-2002-01-27, 2013-01-27
-
-</details>
-
-### 2002-02-03 (+1 more) — wrong ordinal
-
-engine tier: `validated-table` · affects **2 days**
-
-- engine asserts `Fourth Sunday after Nativity` — not in the source's string for this day
-- source has `Third Sunday after Nativity` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2002-02-01 | Fri | Fast day | = |
-| 2002-02-02 | Sat | Saint Sahak I the Parthian, Patriarch of Armenia | = |
-| **2002-02-03** | **Sun** | **Third Sunday after Nativity** | **Fourth Sunday after Nativity** ❌ |
-| 2002-02-04 | Mon | Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen | = |
-| 2002-02-05 | Tue | Saints Ghevond the Priest and His Companions | = |
-
-<details><summary>All affected dates</summary>
-
-2002-02-03, 2013-02-03
-
-</details>
-
-### 2008-01-20 — wrong ordinal
-
-engine tier: `validated-table`
-
-- engine asserts `Fifth Sunday after Nativity` — not in the source's string for this day
-- source has `First Sunday after Nativity` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2008-01-18 | Fri | Fifth day of the Fast of the Catechumens — Remembrance of the Prophet Jonah | = |
-| 2008-01-19 | Sat | Feast of the Birth of St. John the Forerunner (Baptist) | = |
-| **2008-01-20** | **Sun** | **First Sunday after Nativity** | **Fifth Sunday after Nativity** ❌ |
-| 2008-01-21 | Mon | Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints Atom and his soldiers | = |
-| 2008-01-22 | Tue | Saints Sukiasians the Martyrs | = |
-
-### 2008-01-27 — wrong ordinal
-
-engine tier: `validated-table`
-
-- engine asserts `Sixth Sunday after Nativity` — not in the source's string for this day
-- source has `Second Sunday after Nativity` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2008-01-25 | Fri | Fast day | = |
-| 2008-01-26 | Sat | Saint Sahak I the Parthian, Patriarch of Armenia | = |
-| **2008-01-27** | **Sun** | **Second Sunday after Nativity** | **Sixth Sunday after Nativity** ❌ |
-| 2008-01-28 | Mon | Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen | = |
-| 2008-01-29 | Tue | Saints Ghevond the Priest and His Companions | = |
-
-### 2008-04-07 — wrong ordinal
-
-engine tier: `generative-composite`
-
-- engine asserts `Sixteenth day of Eastertide` — not in the source's string for this day
-- source has `Thirteenth day of Eastertide` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2008-04-05 | Sat | Fourteenth day of Eastertide | = |
-| 2008-04-06 | Sun | Third Sunday. Sunday of the World temple (Green Sunday) | = |
-| **2008-04-07** | **Mon** | **Thirteenth day of Eastertide — Annunciation to the Virgin Mary** | **Sixteenth day of Eastertide — Annunciation to the Virgin Mary** ❌ |
-| 2008-04-08 | Tue | Seventeenth day of Eastertide | = |
-| 2008-04-09 | Wed | Eighteenth day of Eastertide | = |
-
-### 2008-08-10 — wrong ordinal
-
-engine tier: `validated-table`
-
-- engine asserts `Third Sunday after Transfiguration` — not in the source's string for this day
-- source has `Seventh Sunday after Transfiguration` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2008-08-08 | Fri | Fast day | = |
-| 2008-08-09 | Sat | Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341) | = |
-| **2008-08-10** | **Sun** | **Seventh Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** | **Third Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** ❌ |
-| 2008-08-11 | Mon | First day of the Fast of Assumption | = |
-| 2008-08-12 | Tue | Second day of the Fast of Assumption | = |
-
-### 2011-02-06 — engine placeholder
-
-engine tier: `first-volume-continua`
-
-- engine asserts `(movable ordinary-time reading)` — not in the source's string for this day
-- source has `Fourth Sunday after Nativity` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2011-02-04 | Fri | Fast day | (movable ordinary-time reading) ❌ |
-| 2011-02-05 | Sat | Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grigoris and Daniel | = |
-| **2011-02-06** | **Sun** | **Fourth Sunday after Nativity** | **(movable ordinary-time reading)** ❌ |
-| 2011-02-07 | Mon | Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons | = |
-| 2011-02-08 | Tue | Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi | = |
-
-### 2011-02-13 — wrong eve note
-
-engine tier: `generative-composite`
-
-- engine asserts `Eve of the Presentation of the Lord` — not in the source's string for this day
-- source has `Fifth Sunday after Nativity` — engine drops it
-- source has `Eve of Fast of Catechumens` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2011-02-11 | Fri | Fast day | (movable ordinary-time reading) ❌ |
-| 2011-02-12 | Sat | Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin | = |
-| **2011-02-13** | **Sun** | **Fifth Sunday after Nativity — Eve of Fast of Catechumens** | **Eve of the Presentation of the Lord** ❌ |
-| 2011-02-14 | Mon | First day of the Fast of the Catechumens — PRESENTATION OF OUR LORD TO THE TEMPLE | PRESENTATION OF OUR LORD TO THE TEMPLE ⚠ omission |
-| 2011-02-15 | Tue | Second day of the Fast of the Catechumens | = |
-
-### 2011-02-20 — wrong ordinal
-
-engine tier: `validated-table`
-
-- engine asserts `Fifth Sunday after Nativity` — not in the source's string for this day
-- source has `Sixth Sunday after Nativity` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2011-02-18 | Fri | Fifth day of the Fast of the Catechumens — Remembrance of the Prophet Jonah | = |
-| 2011-02-19 | Sat | Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers | = |
-| **2011-02-20** | **Sun** | **Sixth Sunday after Nativity** | **Fifth Sunday after Nativity** ❌ |
-| 2011-02-21 | Mon | Saints Atom and his soldiers | = |
-| 2011-02-22 | Tue | Saints Sukiasians the Martyrs | = |
-
-### 2011-02-27 — wrong ordinal
-
-engine tier: `validated-table`
-
-- engine asserts `Sixth Sunday after Nativity` — not in the source's string for this day
-- source has `Seventh Sunday after Nativity` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2011-02-25 | Fri | Fast day | = |
-| 2011-02-26 | Sat | Saint Sahak I the Parthian, Patriarch of Armenia | = |
-| **2011-02-27** | **Sun** | **Seventh Sunday after Nativity** | **Sixth Sunday after Nativity** ❌ |
-| 2011-02-28 | Mon | Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen | = |
-| 2011-03-01 | Tue | Saints Ghevond the Priest and His Companions | = |
-
-### 2011-08-07 — wrong ordinal
-
-engine tier: `validated-table`
-
-- engine asserts `Third Sunday after Transfiguration` — not in the source's string for this day
-- source has `Second Sunday after Transfiguration` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2011-08-05 | Fri | Fast day | = |
-| 2011-08-06 | Sat | Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341) | = |
-| **2011-08-07** | **Sun** | **Second Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** | **Third Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God** ❌ |
-| 2011-08-08 | Mon | First day of the Fast of Assumption | = |
-| 2011-08-09 | Tue | Second day of the Fast of Assumption | = |
-
-### 2019-04-07 — wrong position label
-
-engine tier: `generative-composite`
-
-- engine asserts `Sixth Sunday of Great Lent. Sunday of the Advent` — not in the source's string for this day
-- source has `Sixth Sunday of Great Lent, Sunday of the Advent` — engine drops it
-
-| date | wd | ground truth (sacredtradition.am) | engine `Liturgical Day` |
-|---|---|---|---|
-| 2019-04-05 | Fri | Thirty Third day of Great Lent | = |
-| 2019-04-06 | Sat | Thirty Fourth day of Great Lent — Saint Gregory the Illuminator's Commitment to the Pit | = |
-| **2019-04-07** | **Sun** | **Sixth Sunday of Great Lent, Sunday of the Advent — Annunciation to the Virgin Mary** | **Sixth Sunday of Great Lent. Sunday of the Advent — Annunciation to the Virgin Mary** ❌ |
-| 2019-04-08 | Mon | Thirty Sixth day of Great Lent | = |
-| 2019-04-09 | Tue | Thirty Seventh day of Great Lent | = |
 
 ---
 
@@ -368,25 +63,12 @@ The engine drops a component the source carries. Safe (it asserts nothing false)
 
 | dropped component(s) | days | example |
 |---|---:|---|
-| `Feast day` | 16 | 2002-12-09 |
-| `Fast day` | 6 | 2001-02-14 |
-| `Third Sunday of Advent` · `Eve of Fast of Saint James the bishop of Nisibis` | 4 | 2001-12-09 |
-| `Fourth Sunday after Assumption` · `Eve of Fast of Exaltation of Holy Cross` | 4 | 2002-09-08 |
-| `First day of the Fast of the Holy Cross` | 4 | 2003-09-08 |
-| `Fourth day of the Fast of the Holy Cross` | 4 | 2005-09-08 |
-| `Second day of the Fast of the Holy Cross` | 4 | 2009-09-08 |
-| `Fifth day of the Fast of the Catechumens` | 3 | 2003-02-14 |
-| `Third day of the Fast of the Holy Cross` | 3 | 2004-09-08 |
-| `Eleventh Sunday after the Holy Cross` · `Eve of Fast of Advent` | 3 | 2004-11-21 |
-| `Fourth day of Great Lent` | 2 | 2002-02-14 |
+| `Feast day` | 8 | 2002-12-09 |
+| `Eve of Fast of Saint James the bishop of Nisibis` | 4 | 2001-12-09 |
+| `Eve of Fast of Exaltation of Holy Cross` | 4 | 2002-09-08 |
+| `Eve of Fast of Advent` | 3 | 2004-11-21 |
+| `Eve of Fast of Catechumens` | 2 | 2008-01-13 |
 | `Eve of Great Lent` | 2 | 2010-02-14 |
-| `Third day of Great Lent` | 2 | 2018-02-14 |
-| `Eighth day of Great Lent` | 1 | 2005-02-14 |
-| `Eighth day of Nativity` · `Eve of Fast of Catechumens` | 1 | 2008-01-13 |
-| `Eleventh day of Great Lent` | 1 | 2008-02-14 |
-| `First day of the Fast of the Catechumens` | 1 | 2011-02-14 |
-| `Second Sunday of Great Lent, Sunday of the Expulsion` | 1 | 2016-02-14 |
-| `Fourth day of the Fast of the Catechumens` | 1 | 2019-02-14 |
 
 ---
 
@@ -424,14 +106,5 @@ Source string on 2001-12-06 is 257 chars — **identical**, so the retired scrap
 
 `language="hy"` returns the English string, so bahk records `name_hy = None` and the app falls back to English.
 
-| date | engine name (en == hy) |
-|---|---|
-| 2011-02-04 | (movable ordinary-time reading) |
-| 2011-02-06 | (movable ordinary-time reading) |
-| 2011-02-09 | (movable ordinary-time reading) |
-| 2011-02-11 | (movable ordinary-time reading) |
-| 2011-02-13 | Eve of the Presentation of the Lord |
-| 2022-02-04 | (movable ordinary-time reading) |
-
-Every one of these is also a CONTRADICTION above — the engine has no Armenian form precisely *because* the English name it invented is not a real feast name. A single invariant (`hy != en` on every date) therefore catches this whole class without needing any ground truth.
+_None — every date resolves to a genuine Armenian name._
 

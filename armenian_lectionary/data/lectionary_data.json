@@ -3591,7 +3591,7 @@
     ]
    },
    "1:-63": {
-    "feast": "Third Sunday after Nativity",
+    "feast": "",
     "readings": [
      "Isaiah 63.7-18",
      "St. Paul's Second Epistle to Timothy 3.1-12",
@@ -8821,7 +8821,7 @@
     ]
    },
    "1:-56": {
-    "feast": "Fourth Sunday after Nativity",
+    "feast": "",
     "readings": [
      "Isaiah 63.18-64.12",
      "St. Paul's Epistle to Titus 1.1-11",
@@ -13910,7 +13910,7 @@
     ]
    },
    "-63": {
-    "feast": "Fifth Sunday after Nativity",
+    "feast": "",
     "readings": [
      "Isaiah 63.7-18",
      "St. Paul's Second Epistle to Timothy 3.1-12",
@@ -13918,7 +13918,7 @@
     ]
    },
    "-56": {
-    "feast": "Sixth Sunday after Nativity",
+    "feast": "",
     "readings": [
      "Isaiah 63.18-64.12",
      "St. Paul's Epistle to Titus 1.1-11",
@@ -14987,7 +14987,7 @@
     ]
    },
    "1": {
-    "feast": "Sixth Sunday of Advent",
+    "feast": "",
     "readings": [
      "Isaiah 51.15-52.3",
      "St. Paul's Epistle to the Hebrews 13.18-25",
@@ -15765,7 +15765,7 @@
   },
   "AdvFerB": {
    "0": {
-    "feast": "Fifth day of the Fast of Nativity",
+    "feast": "",
     "readings": [
      "St. Paul's Epistle to the Hebrews 13.10-16",
      "Luke 21.34-38"
@@ -15795,7 +15795,7 @@
     ]
    },
    "12": {
-    "feast": "Fifth day of the Fast of Nativity",
+    "feast": "",
     "readings": [
      "St. Paul's Epistle to the Hebrews 13.10-16",
      "Luke 21.34-38"
@@ -16260,7 +16260,7 @@
     ]
    },
    "49:6:Tue": {
-    "feast": "Third day of the Fast of Nativity.",
+    "feast": "Third day of the Fast of Nativity",
     "readings": [
      "St. Paul's Epistle to the Hebrews 10.1-18",
      "Luke 20.9-18"
@@ -17713,7 +17713,7 @@
     ]
    },
    "49:0:Tue": {
-    "feast": "Third day of the Fast of Nativity.",
+    "feast": "Third day of the Fast of Nativity",
     "readings": [
      "St. Paul's Epistle to the Hebrews 10.1-18",
      "Luke 20.9-18"
@@ -19229,7 +19229,7 @@
     ]
    },
    "6:Sat": {
-    "feast": "Sixth day of the Fast of Nativity — Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "feast": "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
     "readings": [
      "Proverbs 11.2-11",
      "Isaiah 4.2-6",
@@ -19249,7 +19249,7 @@
     ]
    },
    "0:Sat": {
-    "feast": "Second day of the Fast of Nativity — Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "feast": "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
     "readings": [
      "Proverbs 11.2-11",
      "Isaiah 4.2-6",
@@ -21264,7 +21264,7 @@
   "PnSatB": {},
   "TrEve": {
    "0": {
-    "feast": "Third Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God",
+    "feast": "Eve of Fast of Assumption of the Holy Mother of God",
     "readings": [
      "Isaiah 7.1-9",
      "St. Paul's First Epistle to the Corinthians 13.11-14.5",
@@ -21274,7 +21274,7 @@
   },
   "AsEve": {
    "0": {
-    "feast": "Fourth Sunday after Assumption — Eve of Fast of Exaltation of Holy Cross",
+    "feast": "Eve of Fast of Exaltation of Holy Cross",
     "readings": [
      "Isaiah 13.2-11",
      "St. Paul's Second Epistle to the Corinthians 7.4-16",
@@ -37486,7 +37486,7 @@
     ]
    },
    "-7": {
-    "feast": "Third Sunday after Transfiguration — Eve of Fast of Assumption of the Holy Mother of God",
+    "feast": "Eve of Fast of Assumption of the Holy Mother of God",
     "readings": [
      "Isaiah 7.1-9",
      "St. Paul's First Epistle to the Corinthians 13.11-14.5",
@@ -37913,7 +37913,7 @@
     ]
    },
    "-7": {
-    "feast": "Fourth Sunday after Assumption — Eve of Fast of Exaltation of Holy Cross",
+    "feast": "Eve of Fast of Exaltation of Holy Cross",
     "readings": [
      "Isaiah 13.2-11",
      "St. Paul's Second Epistle to the Corinthians 7.4-16",
@@ -40820,7 +40820,7 @@
     ]
    },
    "49:44": {
-    "feast": "Third day of the Fast of Nativity.",
+    "feast": "Third day of the Fast of Nativity",
     "readings": [
      "St. Paul's Epistle to the Hebrews 10.1-18",
      "Luke 20.9-18"
@@ -41519,7 +41519,7 @@
   },
   "HEp": {
    "47": {
-    "feast": "Fifth day of the Fast of Nativity",
+    "feast": "",
     "readings": [
      "St. Paul's Epistle to the Hebrews 13.10-16",
      "Luke 21.34-38"
@@ -41542,7 +41542,7 @@
     ]
    },
    "45": {
-    "feast": "Third day of the Fast of Nativity",
+    "feast": "",
     "readings": [
      "St. Paul's Epistle to the Hebrews 12.5-17",
      "Luke 20.41-21.4"
@@ -41575,7 +41575,7 @@
     ]
    },
    "48": {
-    "feast": "Sixth day of the Fast of Nativity — Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+    "feast": "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
     "readings": [
      "Proverbs 11.2-11",
      "Isaiah 4.2-6",
