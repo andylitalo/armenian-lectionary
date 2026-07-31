@@ -4,6 +4,57 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- **Calendar-position labels were frozen from the wrong year.** The validated table is keyed
+  by liturgical *coordinate*, and many civil years share a key. The commemoration is
+  invariant across them, but the position label the source packs into the same string
+  ("Fourth Sunday after Nativity", "Third day of Advent") counts from an anchor whose
+  distance to that coordinate changes year to year. `dev/build_table.modal_feast` stored
+  the **modal** year's ordinal and the engine served it for every year, so the shipped
+  `"Liturgical Day"` contradicted the source on **41 days** across 2001–2026 — e.g.
+  2011-02-20 read `Fifth Sunday after Nativity` where the source says `Sixth`, and 17 days
+  read `Third Sunday after Transfiguration` for the 4th/5th/6th/7th. Six further days
+  shipped a bare placeholder (`(movable ordinary-time reading)` on 2011-02-04/06/09/11 and
+  2022-02-04) or an invented eve (`Eve of the Presentation of the Lord` on 2011-02-13,
+  where the source says `Fifth Sunday after Nativity — Eve of Fast of Catechumens`).
+
+  Fixed in two halves. `dev/build_table.unanimous_feast` now drops a calendar-derived
+  component unless every year sharing the key states it identically, so the table stops
+  asserting what it cannot reproduce; commemorations are exempt, since the source varies a
+  saint's companion list and dropping on disagreement would leave those days nameless.
+  `engine._position_label` then regenerates the label per date, from families whose
+  counting rules were derived from the ground truth and verified against **every**
+  occurrence in it (`dev/verify_position_labels.py`: 6068 matched, 0 mismatched, 0
+  spurious). Season-heading feasts are suppressed — the Assumption Sunday is
+  `ASSUMPTION OF THE HOLY MOTHER OF GOD`, not `Fourth Sunday after Transfiguration` — and
+  any family without an exact rule emits nothing, since an omitted label is incomplete but
+  a wrong one is wrong.
+
+  Net over the ground truth: contradictions 41 → **0**, days with no Armenian name 6 → **0**,
+  omissions 63 → 15, exact 9373 → **9481** of 9496. **Readings are unchanged** — the
+  0-wrong contract holds with every coverage floor untouched.
+- **Seven source self-contradictions registered** in `dev/source_corrections.POSITION_LABEL_FIXES`
+  (a stray trailing period on `the Fast of Nativity.`, two comma-for-period variants of
+  `Great Lent. Sunday of …`, and one wrong ordinal word on 2008-04-07 that its own
+  neighbours pin), plus a case fold for the Theotokos' Presentation, which the source
+  shouts in 19 of 26 years and title-cases in the other 7.
+
+### Added
+- **`tests/test_feast_name_raw.py`** — locks the **raw** `"Liturgical Day"` string
+  component-wise, the value downstream actually stores. Contradictions must be 0; omissions
+  and exact matches are ratchets. `tests/test_feast.py` compares only the *commemoration
+  component*, which strips the position and eve components from both sides and so compared
+  `"" == ""` on over half the corpus — that blind spot is what hid all of the above.
+- **`tests/test_feast_contract.py`** — source-independent invariants (no placeholder,
+  storable length, `hy` differs from `en`, no contaminant characters) across the whole
+  supported 2001–2027 window. Needs no ground-truth cache, so it also covers **2027**, for
+  which sacredtradition.am publishes nothing and no oracle test can exist.
+- **`dev/feast_discrepancy_report.py`** → `reports/feast_name_discrepancies.md`, a
+  classified inventory of every remaining feast-name difference, each shown with the two
+  days either side of ground truth for context.
+
 ## [1.2.3] — 2026-07-23
 
 ### Fixed
