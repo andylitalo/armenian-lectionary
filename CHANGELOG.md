@@ -101,6 +101,21 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   test can exist. It asserts no storage limit: the engine serves whatever name the source
   states — the longest is 289 characters, a feast enumerating twelve saints — and how to
   store that belongs to the consumer.
+- **`dev/feast_name_review.tsv` — our own ground truth for the English names.** One row
+  per distinct feast-name component (392), with the approved English spelling, the source's
+  own Armenian beside it as an independent witness, how many days carry it, and the first
+  such date. `dev/reference_data/` answers "does the engine match sacredtradition.am?";
+  this answers "is the name right?", which no cache of that source can. Reviewing it needs
+  no programming: edit the `approved` column in a spreadsheet (GitHub renders the file as a
+  table too) and `tests/test_feast_name_review.py` fails until the decision is applied.
+  14 rows are marked `review` with an open question — `Jacoc`, `Theodoron`, `coming out of
+  Pit`, `Herbivorous Hermits`, `Aret`/Arethas, and others where nothing available
+  established the intended English.
+- **`tests/test_feast_name_review.py`** — holds the engine to those approved names across
+  2001–2027, and requires every component the source publishes to have a review row so a
+  re-fetch cannot add a name that escapes review. Needs no cache for the first check.
+- **`docs/feast-name-corrections.md`** — every correction below, written up with its
+  evidence, and the open questions.
 - **`tests/test_source_text.py`** — locks the quality of the SOURCE's feast text rather
   than the engine's fidelity to it. Without it, a re-fetch could pull a new typo from the
   live site into the cache, rebuild it into the shipped artifacts, pass every oracle test

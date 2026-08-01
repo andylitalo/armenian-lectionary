@@ -66,6 +66,7 @@ others structurally cannot:
 | `test_feast_contract` | source-**independent** invariants — no placeholder, no empty name, `hy` differs from `en`, no repeated or runaway component, clean characters. Deliberately asserts **no storage limit**: how to store a name is the consumer's problem. | **no** (2001–2027) |
 | `test_feast` | only the *commemoration component*. Narrowest: it strips the position/eve components from both sides, so >50% of days compare `"" == ""`. | yes (2001–2026) |
 | `test_source_text` | the **source's own** text quality, not the engine's fidelity to it — see below. | yes (2001–2026) |
+| `test_feast_name_review` | the engine against **our own** approved names (`dev/feast_name_review.tsv`) — the only one that can fail because a name is *wrong*. | mostly **no** |
 
 That last stripping is why `test_feast` alone was not enough — the engine shipped a name
 the source contradicted on 41 days, and six more as bare placeholders, entirely invisible
@@ -89,11 +90,32 @@ found dated `AD 341` in English and `431` in Armenian, and Pentecost called the
 Registered repairs live in `dev/source_corrections._FEAST_TEXT_FIXES`, each justified by
 the source contradicting itself rather than by editorial preference. When one lands, the
 shipped artifacts must be rebuilt with it — including `saint_schedule.json`, whose feast
-labels are served directly (`dev/refresh_artifact_names.py`).
+labels are served directly (`dev/refresh_artifact_names.py`). Every correction is written
+up, with its evidence, in [`docs/feast-name-corrections.md`](docs/feast-name-corrections.md).
+
+### Our own ground truth: `dev/feast_name_review.tsv`
+
+`dev/reference_data/` is *sacredtradition.am's* ground truth. **`dev/feast_name_review.tsv`
+is ours** — one row per distinct name component with the English a human approved, the
+source's own Armenian beside it, and the questions still open. It is the only name test
+that can fail because a name is *wrong* rather than because it differs from the source.
+
+The review loop, and why it is safe to hand to a non-programmer:
+
+1. open the TSV (a spreadsheet, or GitHub, which renders it as a table);
+2. edit the `approved` column where the English should read differently, and say why in
+   `note`. Leave `source` alone — it is the record of what was published;
+3. `tests/test_feast_name_review.py` now fails, naming the row;
+4. register the fold in `dev/source_corrections._FEAST_TEXT_FIXES`, rebuild (order below),
+   and it passes.
+
+`python dev/feast_name_review.py` refreshes the file and **never discards human edits**;
+`--check` reports rows whose approved name the engine does not yet serve.
 
 Dev tooling:
 ```bash
 python dev/audit_source_anomalies.py     # errors in the SOURCE's own feast text
+python dev/feast_name_review.py          # refresh dev/feast_name_review.tsv (our own GT)
 python dev/refresh_artifact_names.py     # push registered fixes into saint_schedule.json
 python dev/feast_discrepancy_report.py   # engine vs. source, classified (now: 0 findings)
 python dev/verify_position_labels.py     # engine._position_label vs. every cached label

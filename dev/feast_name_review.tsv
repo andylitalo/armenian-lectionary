@@ -1,0 +1,393 @@
+status	days	first	source	approved	armenian	note
+ok	26	2001-05-24	ASCENSION OF OUR LORD JESUS CHRIST	ASCENSION OF OUR LORD JESUS CHRIST	ՀԱՄԲԱՐՁՈՒՄՆ ՔՐԻՍՏՈՍԻ ԱՍՏՈՒԾՈՅ ՄԵՐՈՅ	
+ok	26	2001-08-12	ASSUMPTION OF THE HOLY MOTHER OF GOD	ASSUMPTION OF THE HOLY MOTHER OF GOD	ՎԵՐԱՓՈԽՈՒՄՆ Ս. ԱՍՏՈՒԱԾԱԾՆԻ	
+ok	26	2001-04-07	Annunciation to the Virgin Mary	Annunciation to the Virgin Mary	Աւետումն սրբուհւոյ Աստուածածնի	
+ok	26	2001-05-13	Appearance of the Holy Cross	Appearance of the Holy Cross	Տօն Երեւման ս. խաչի	
+fixed	26	2001-05-25	Begining of the Fast	Beginning of the Fast	Սկիզբն պահոց	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-04-21	Beheading of St. John the Forerunner (the Baptist)	Beheading of St. John the Forerunner (the Baptist)	Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի	
+ok	26	2001-02-24	Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)	Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)	Կոստանդնուպոլսոյ ս. ժողովոյն հարիւր յիսուն հայրապետացն (381 թ.)	
+fixed	26	2001-08-04	Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)	Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 431)	Եփեսոսի ս. ժողովոյն երկու հարիւր հայրապետացն (431 թ.)	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+review	26	2001-09-01	Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)	Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)	Նիկիոյ սուրբ ժողովոյն երեք հարիւր տասն եւ ութ հայրապետացն (325 թ.)	'Nicea' -- the usual English is Nicaea (or Nicea). Accepted as a variant, not folded. Confirm the preferred form.
+review	26	2001-10-15	Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits	Discovery of Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits	Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից կաթողիկոսին եւ սրբոց հարցն Թաթլոյ, Վարոսի, Թումասու, Անտոնի, Կրօնիդեայ եւ եօթն խոտաճարակացն, որք յԻննակնեայ վանսն կատարեցան	'Herbivorous Hermits' renders hy 'խոտաճարակացն' literally (grass-eating). The usual English is 'the Seven Grass-eating Hermits'. Preferred form?
+fixed	26	2001-10-28	Discovery of the Holy Cross.	Discovery of the Holy Cross	Գիւտ խաչի	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-09-16	EXALTATION OF THE HOLY CROSS	EXALTATION OF THE HOLY CROSS	ԽԱՉՎԵՐԱՑ	
+ok	26	2001-05-02	Eighteenth day of Eastertide	Eighteenth day of Eastertide	ԺԸ օր Յինանց	
+ok	26	2001-03-15	Eighteenth day of Great Lent	Eighteenth day of Great Lent	ԺԸ օր Մեծի պահոց	
+ok	26	2001-11-04	Eighth Sunday after the Holy Cross	Eighth Sunday after the Holy Cross	Ը կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-03-05	Eighth day of Great Lent	Eighth day of Great Lent	Ը օր Մեծի պահոց	
+ok	7	2004-11-21	Eleventh Sunday after the Holy Cross	Eleventh Sunday after the Holy Cross	ԺԱ կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-04-25	Eleventh day of Eastertide	Eleventh day of Eastertide	ԺԱ օր Յինանց	
+ok	26	2001-03-08	Eleventh day of Great Lent	Eleventh day of Great Lent	ԺԱ օր Մեծի պահոց	
+ok	7	2004-11-21	Eve of Fast of Advent	Eve of Fast of Advent	Բարեկենդան Յիսնակի պահոցն	
+ok	26	2001-08-05	Eve of Fast of Assumption of the Holy Mother of God	Eve of Fast of Assumption of the Holy Mother of God	Բարեկենդան Սուրբ Աստուածածնի պահոց	
+ok	26	2001-02-04	Eve of Fast of Catechumens	Eve of Fast of Catechumens	Բարեկենդան Առաջաւորաց պահոց	
+ok	26	2001-09-09	Eve of Fast of Exaltation of Holy Cross	Eve of Fast of Exaltation of Holy Cross	Բարեկենդան Ս. Խաչի պահոց	
+ok	26	2001-12-29	Eve of Fast of Nativity	Eve of Fast of Nativity	Բարեկենդան Սուրբ Ծննդեան պահոց	
+ok	26	2001-06-03	Eve of Fast of Prophet Elijah	Eve of Fast of Prophet Elijah	Բարեկենդան Եղիական պահոց	
+ok	26	2001-06-24	Eve of Fast of Saint Gregory the Illuminator	Eve of Fast of Saint Gregory the Illuminator	Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց	
+ok	26	2001-12-09	Eve of Fast of Saint James the bishop of Nisibis	Eve of Fast of Saint James the bishop of Nisibis	Բարեկենդան Ս. Յակովբայ պահոց	
+ok	26	2001-07-15	Eve of Fast of Transfiguration	Eve of Fast of Transfiguration	Բարեկենդան Վարդավառի պահոց	
+ok	26	2001-09-23	Eve of Fast of the Holy Cross of Varag	Eve of Fast of the Holy Cross of Varag	Բարեկենդան Վարագայ ս. խաչի	
+ok	26	2001-02-25	Eve of Great Lent	Eve of Great Lent	Բուն բարեկենդան	
+ok	19	2001-11-18	Eve of the Fast of Advent	Eve of the Fast of Advent	Բարեկենդան Յիսնակի պահոցն	
+ok	26	2001-01-05	Eve of the Nativity and Theophany of our Lord Jesus Christ	Eve of the Nativity and Theophany of our Lord Jesus Christ	Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի — Նաւակատիք	
+ok	26	2001-04-14	Eve of the Resurrection of our Lord Jesus Christ	Eve of the Resurrection of our Lord Jesus Christ		
+ok	2141	2001-01-17	Fast day	Fast day	Պահք	
+fixed	2	2009-04-07	Fast day, Remembrance of the Ten Virgins	Fast day — Remembrance of the Ten Virgins	Պահք — Յիշատակ տասն կուսանացն	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	16	2002-12-09	Feast day	Feast day	Պահք	
+ok	26	2001-08-26	Feast day of the Discovery of the Belt of the Holy Mother of God	Feast day of the Discovery of the Belt of the Holy Mother of God	Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի	
+ok	26	2001-11-03	Feast of All Saints, the old and the new, the known and the unknown	Feast of All Saints, the old and the new, the known and the unknown	Տօն ամենայն սրբոց` հնոց եւ նորոց, յայտից եւ անյայտից	
+ok	26	2001-08-11	Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator	Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator	Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին — Նաւակատիք	
+ok	26	2001-06-30	Feast of Discovery of Saint Gregory's Relics	Feast of Discovery of Saint Gregory's Relics	Գիւտ նշխարաց սրբոյն Գրիգորի Լուսաւորչին մերոյ	
+ok	26	2001-09-15	Feast of Holy Church in Dedication of Holy Cross	Feast of Holy Church in Dedication of Holy Cross	Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին — Նաւակատիք	
+ok	26	2001-06-17	Feast of Holy Etchmiadzin	Feast of Holy Etchmiadzin	Տօն Կաթուղիկէ Սուրբ Էջմիածնի	
+ok	26	2001-01-13	Feast of Naming of Our Lord Jesus Christ	Feast of Naming of Our Lord Jesus Christ	Տօն Անուանակոչութեան Տեառն մերոյ Յիսուսի Քրիստոսի	
+ok	26	2001-09-08	Feast of the Birth of Holy Virgin Mary from Anna	Feast of the Birth of Holy Virgin Mary from Anna	Տօն Ծննդեան սրբուհւոյ Կուսին Մարիամու յԱննայէ	
+ok	26	2001-01-15	Feast of the Birth of St. John the Forerunner (Baptist)	Feast of the Birth of St. John the Forerunner (Baptist)	Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին	
+fixed	26	2001-07-08	Feast of the Discovery of St. Mary’s Box	Feast of the Discovery of St. Mary's Box	Գիւտ տփոյ սրբուհւոյ Աստուածածնի	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	78	2001-09-18	Feast of the Holy Church	Feast of the Holy Church	Տօն է Ս. Եկեղեցւոյ	
+ok	78	2001-09-17	Feast of the Holy Cross	Feast of the Holy Cross	Տօն է Ս. Խաչի	
+ok	26	2001-09-30	Feast of the Holy Cross of Varag	Feast of the Holy Cross of Varag	Տօն Վարագայ ս. խաչի	
+fixed	26	2001-12-09	Fiest of the Conception of the Holy Virgin Mary by Anna	Feast of the Conception of the Holy Virgin Mary by Anna	Յղութիւն սրբուհւոյ Աստուածածնի յԱննայ	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-03-12	Fifteenth day of Great Lent	Fifteenth day of Great Lent	ԺԵ օր Մեծի պահոց	
+ok	26	2001-05-13	Fifth Sunday	Fifth Sunday	Ե կիւրակէ	
+ok	15	2001-02-11	Fifth Sunday after Nativity	Fifth Sunday after Nativity	Ե կիւրակէ զկնի Ս. Ծննդեան	
+ok	26	2001-07-08	Fifth Sunday after Pentecost	Fifth Sunday after Pentecost	Ե կիւրակէ զկնի Հոգեգալստեան	
+ok	11	2002-08-04	Fifth Sunday after Transfiguration	Fifth Sunday after Transfiguration	Ե կիւրակէ զկնի Վարդավառի	
+ok	7	2001-09-09	Fifth Sunday after the Assumption	Fifth Sunday after the Assumption	Ե կիւրակէ զկնի Վերափոխման	
+ok	26	2001-10-14	Fifth Sunday after the Holy Cross	Fifth Sunday after the Holy Cross	Ե կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-12-23	Fifth Sunday of Advent	Fifth Sunday of Advent	Ե կիւրակէ Յիսնակի	
+ok	26	2001-03-25	Fifth Sunday of Great Lent. Sunday of the Judge	Fifth Sunday of Great Lent. Sunday of the Judge	Ե կիւրակէ Քառասնորդական պահոց (Դատաւորին)	
+ok	4	2003-11-21	Fifth day of Advent	Fifth day of Advent	Ե օր Յիսնակի պահոց	
+ok	26	2001-04-19	Fifth day of Easter	Fifth day of Easter	Ե օր Զատկի	
+ok	26	2001-03-02	Fifth day of Great Lent	Fifth day of Great Lent	Ե օր Մեծի պահոց	
+ok	26	2001-01-10	Fifth day of Nativity	Fifth day of Nativity	Ե օր Ս. Ծննդեան	
+ok	26	2001-06-07	Fifth day of Pentecost	Fifth day of Pentecost	Ե օր Հոգեգալստեան	
+ok	26	2001-08-16	Fifth day of the Assumption	Fifth day of the Assumption	Ե օր Վերափոխման	
+ok	22	2001-11-23	Fifth day of the Fast of Advent	Fifth day of the Fast of Advent	Ե օր Յիսնակի պահոց	
+ok	26	2001-08-10	Fifth day of the Fast of Assumption	Fifth day of the Fast of Assumption	Ե օր Աստուածածնի պահոց	
+ok	23	2001-01-03	Fifth day of the Fast of Nativity	Fifth day of the Fast of Nativity	Ե օր Ս. Ծննդեան պահոց	
+ok	26	2001-02-09	Fifth day of the Fast of the Catechumens	Fifth day of the Fast of the Catechumens	Ե օր Առաջաւորաց պահոց	
+ok	26	2001-09-14	Fifth day of the Fast of the Holy Cross	Fifth day of the Fast of the Holy Cross	Ե օր Ս. Խաչի պահոց	
+fixed	26	2001-07-20	Fifth day of the Fast of the Transifiguration	Fifth day of the Fast of the Transfiguration	Ե օր Վարդավառի պահոց	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-01-14	First Sunday after Nativity	First Sunday after Nativity	Ա կիւրակէ զկնի Ս. Ծննդեան	
+ok	26	2001-11-25	First Sunday of Advent	First Sunday of Advent	Ա կիւրակէ Յիսնակի	
+ok	4	2005-11-21	First day of Advent	First day of Advent	Ա օր Յիսնակի պահոց	
+ok	26	2001-02-26	First day of Great Lent	First day of Great Lent	Ա օր Մեծի պահոց	
+ok	22	2001-11-19	First day of the Fast of Advent	First day of the Fast of Advent	Ա օր Յիսնակի պահոց	
+ok	26	2001-08-06	First day of the Fast of Assumption	First day of the Fast of Assumption	Ա օր Աստուածածնի պահոց	
+ok	22	2002-12-30	First day of the Fast of Nativity	First day of the Fast of Nativity	Ա օր Ս. Ծննդեան պահոց	
+ok	26	2001-02-05	First day of the Fast of the Catechumens	First day of the Fast of the Catechumens	Ա օր Առաջաւորաց պահոց	
+ok	26	2001-09-10	First day of the Fast of the Holy Cross	First day of the Fast of the Holy Cross	Ա օր Ս. Խաչի պահոց	
+ok	26	2001-07-16	First day of the Fast of the Transfiguration	First day of the Fast of the Transfiguration	Ա օր Վարդավառի պահոց	
+ok	26	2001-05-24	Fortieth day of Eastertide	Fortieth day of Eastertide	Խ օր Յինանց	
+ok	26	2001-04-06	Fortieth day of Great Lent	Fortieth day of Great Lent	Խ օր Մեծի պահոց	
+ok	26	2001-06-01	Forty Eighth day of Eastertide	Forty Eighth day of Eastertide	ԽԸ օր Յինանց	
+ok	26	2001-05-29	Forty Fifth day of Eastertide	Forty Fifth day of Eastertide	ԽԵ օր Յինանց	
+ok	26	2001-05-25	Forty First day of Eastertide	Forty First day of Eastertide	ԽԱ օր Յինանց	
+ok	26	2001-04-07	Forty First day of Great Lent	Forty First day of Great Lent	ԽԱ օր Մեծի պահոց	
+ok	26	2001-05-28	Forty Fourth day of Eastertide	Forty Fourth day of Eastertide	ԽԴ օր Յինանց	
+ok	26	2001-06-02	Forty Ninth day of Eastertide	Forty Ninth day of Eastertide	ԽԹ օր Յինանց	
+ok	26	2001-05-26	Forty Second day of Eastertide	Forty Second day of Eastertide	ԽԲ օր Յինանց	
+ok	26	2001-05-31	Forty Seventh day of Eastertide	Forty Seventh day of Eastertide	ԽԷ օր Յինանց	
+ok	26	2001-05-30	Forty Sixth day of Eastertide	Forty Sixth day of Eastertide	ԽԶ օր Յինանց	
+ok	26	2001-04-28	Fourteenth day of Eastertide	Fourteenth day of Eastertide	ԺԴ օր Յինանց	
+ok	26	2001-05-06	Fourth Sunday (Red Sunday)	Fourth Sunday (Red Sunday)	Դ կիւրակէ (Կարմիր կիւրակէ)	
+ok	26	2001-09-02	Fourth Sunday after Assumption	Fourth Sunday after Assumption	Դ կիւրակէ զկնի Վերափոխման	
+ok	21	2001-02-04	Fourth Sunday after Nativity	Fourth Sunday after Nativity	Դ կիւրակէ զկնի Ս. Ծննդեան	
+ok	26	2001-07-01	Fourth Sunday after Pentecost	Fourth Sunday after Pentecost	Դ կիւրակէ զկնի Հոգեգալստեան	
+ok	17	2002-07-28	Fourth Sunday after Transfiguration	Fourth Sunday after Transfiguration	Դ կիւրակէ զկնի Վարդավառի	
+ok	26	2001-10-07	Fourth Sunday after the Holy Cross	Fourth Sunday after the Holy Cross	Դ կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-12-16	Fourth Sunday of Advent	Fourth Sunday of Advent	Դ կիւրակէ Յիսնակի	
+ok	26	2001-03-18	Fourth Sunday of Great Lent. Sunday of the Steward	Fourth Sunday of Great Lent. Sunday of the Steward	Դ կիւրակէ Քառասնորդական պահոց (Տնտեսին)	
+ok	4	2002-11-21	Fourth day of Advent	Fourth day of Advent	Դ օր Յիսնակի պահոց	
+ok	26	2001-04-18	Fourth day of Easter	Fourth day of Easter	Դ օր Զատկի	
+ok	26	2001-03-01	Fourth day of Great Lent	Fourth day of Great Lent	Դ օր Մեծի պահոց	
+ok	26	2001-01-09	Fourth day of Nativity	Fourth day of Nativity	Դ օր Ս. Ծննդեան	
+ok	26	2001-06-06	Fourth day of Pentecost	Fourth day of Pentecost	Դ օր Հոգեգալստեան	
+ok	26	2001-08-15	Fourth day of the Assumption	Fourth day of the Assumption	Դ օր Վերափոխման	
+ok	22	2001-11-22	Fourth day of the Fast of Advent	Fourth day of the Fast of Advent	Դ օր Յիսնակի պահոց	
+ok	26	2001-08-09	Fourth day of the Fast of Assumption	Fourth day of the Fast of Assumption	Դ օր Աստուածածնի պահոց	
+ok	23	2001-01-02	Fourth day of the Fast of Nativity	Fourth day of the Fast of Nativity	Դ օր Ս. Ծննդեան պահոց	
+ok	26	2001-02-08	Fourth day of the Fast of the Catechumens	Fourth day of the Fast of the Catechumens	Դ օր Առաջաւորաց պահոց	
+ok	26	2001-09-13	Fourth day of the Fast of the Holy Cross	Fourth day of the Fast of the Holy Cross	Դ օր Ս. Խաչի պահոց	
+ok	26	2001-07-19	Fourth day of the Fast of the Transfiguration	Fourth day of the Fast of the Transfiguration	Դ օր Վարդավառի պահոց	
+ok	26	2001-04-13	Great Friday	Great Friday	Աւագ ուրբաթ	
+ok	26	2001-04-09	Great Monday	Great Monday	Աւագ երկուշաբթի	
+ok	26	2001-04-14	Great Saturday	Great Saturday		
+ok	26	2001-04-12	Great Thursday	Great Thursday	Աւագ հինգշաբթի	
+ok	26	2001-04-10	Great Tuesday	Great Tuesday	Աւագ երեքշաբթի	
+ok	26	2001-04-11	Great Wednesday	Great Wednesday	Աւագ չորեքշաբթի	
+ok	3	2006-08-26	Holy Apostle Thomas	Holy Apostle Thomas	Սրբոյն Թովմայի առաքելոյն	
+ok	3	2006-09-02	Holy Apostles James and Simon	Holy Apostles James and Simon	Սրբոց առաքելոցն Յակովբայ եւ Շմաւոնի	
+ok	26	2001-12-01	Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia	Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia	Սրբոց առաքելոցն եւ առաջին լուսաւորչացն մերոց Թադէոսի եւ Բարդուղիմէոսի	
+ok	23	2001-08-25	Holy Apostles Thomas, James and Simon	Holy Apostles Thomas, James and Simon	Սրբոց առաքելոցն Թովմայի, Յակովբայ եւ Շմաւոնի	
+ok	26	2001-11-10	Holy Archangels Gabriel and Michael and all the heavenly Angels	Holy Archangels Gabriel and Michael and all the heavenly Angels	Սրբոց հրեշտակապետացն Գաբրիելի եւ Միքայելի եւ ամենայն երկնային զօրացն	
+ok	26	2001-10-20	Holy Evangelists Matthew, Mark, Luke and John	Holy Evangelists Matthew, Mark, Luke and John	Սրբոց աւետարանչացն Մատթէոսի, Մարկոսի, Ղուկասու եւ Յովհաննու	
+ok	18	2002-07-27	Holy Fathers Saints Athanasius and Cyril of Alexandria	Holy Fathers Saints Athanasius and Cyril of Alexandria	Սրբոց հայրապետացն Աթանասի եւ Կիւրղի	
+fixed	8	2001-01-27	Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory of Theologian	Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory the Theologian	Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-08-28	Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist	Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist	Սրբոց մարգարէիցն Եզեկիէլի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի	
+ok	26	2001-10-13	Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful	Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful	Սրբոց Թարգմանչաց վարդապետացն մերոց Մեսրովբայ, Եղիշէի, Մովսիսի Քերթողին, Դաւթի Անյաղթ փիլիսոփային, Գրիգորի Նարեկացւոյն եւ Ներսիսի Կլայեցւոյն: Տօն ազգային եւ եկեղեցական` ի յիշատակ գիւտի նշանագրացն հայոց եւ թարգմանութեան Սուրբ Գրոց	
+ok	26	2001-07-05	Holy Translators Saints Sahak and Mesrop	Holy Translators Saints Sahak and Mesrop	Սրբոց թարգմանչացն մերոց Սահակայ եւ Մեսրովբայ	
+ok	26	2001-01-06	NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST	NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST	ՏՕՆ ԾՆՆԴԵԱՆ ԵՒ ԱՍՏՈՒԱԾԱՅԱՅՏՆՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ	
+ok	26	2001-05-03	Nineteenth day of Eastertide	Nineteenth day of Eastertide	ԺԹ օր Յինանց	
+ok	26	2001-03-16	Nineteenth day of Great Lent	Nineteenth day of Great Lent	ԺԹ օր Մեծի պահոց	
+ok	26	2001-11-11	Ninth Sunday after the Holy Cross	Ninth Sunday after the Holy Cross	Թ կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-08-20	Ninth day of Assumption	Ninth day of Assumption	Թ օր Վերափոխման	
+ok	26	2001-04-23	Ninth day of Eastertide	Ninth day of Eastertide	Թ օր Յինանց	
+ok	26	2001-03-06	Ninth day of Great Lent	Ninth day of Great Lent	Թ օր Մեծի պահոց	
+ok	26	2001-04-22	Octave of Easter (New Sunday)	Octave of Easter (New Sunday)	Ը օր Զատկի. Կրկնազատիկ (Նոր կիւրակէ)	
+fixed	26	2001-06-03	PENTECOST (Fifteenth day of Eastertide)	PENTECOST (Fiftieth day of Eastertide)	ՀՈԳԵԳԱԼՈՒՍՏ (Պենտեկոստէ` յիսներորդ օր ի Զատկէն)	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-02-14	PRESENTATION OF OUR LORD TO THE TEMPLE	PRESENTATION OF OUR LORD TO THE TEMPLE	ՏԵԱՌՆԸՆԴԱՌԱՋ (տօն քառասնօրեայ գալստեանն Քրիստոսի ի Տաճարն)	
+ok	19	2001-11-21	PRESENTATION of the Holy Mother of God to the Temple	PRESENTATION of the Holy Mother of God to the Temple	Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն	
+ok	26	2001-04-08	Palm Sunday	Palm Sunday	ԾԱՂԿԱԶԱՐԴ	
+ok	7	2004-11-21	Presentation of the Holy Mother of God to the Temple	Presentation of the Holy Mother of God to the Temple	Ընծայումն ս.Աստուածածնի երից ամաց ի Տաճարն	
+ok	26	2001-04-15	RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)	RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)	ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)	
+ok	26	2001-06-10	Remembrance of Prophet Elijah	Remembrance of Prophet Elijah	Յիշատակ Եղիայի մարգարէին	
+ok	26	2001-04-24	Remembrance of the Armenian Genocide (1915)	Remembrance of the Armenian Genocide (1915)	Յիշատակ Հայոց ցեղասպանութեան (1915) բիւրաւոր նահատակացն	
+ok	130	2001-01-07	Remembrance of the Dead	Remembrance of the Dead	Յիշատակ մեռելոց	
+ok	26	2001-04-12	Remembrance of the Last Supper	Remembrance of the Last Supper	Յիշատակ վերջին ընթրեաց Տեառն մերոյ Յիսուսի Քրիստոսի	
+ok	26	2001-07-21	Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church	Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church	Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ — Նաւակատիք	
+ok	26	2001-04-13	Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ	Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ	Յիշատակ չարչարանաց, խաչելութեան եւ թաղման Տեառն մերոյ Յիսուսի Քրիստոսի	
+ok	26	2001-02-09	Remembrance of the Prophet Jonah	Remembrance of the Prophet Jonah	Յիշատակ Յովնանու մարգարէին	
+ok	26	2001-04-07	Remembrance of the Raising of Lazarus	Remembrance of the Raising of Lazarus	Յիշատակ յարութեան Ղազարու	
+ok	24	2001-04-10	Remembrance of the Ten Virgins	Remembrance of the Ten Virgins	Յիշատակ տասն կուսանացն	
+ok	26	2001-12-04	Saint Abgar the Witness and the First Christian King	Saint Abgar the Witness and the First Christian King	Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հաւատացեալ թագաւորին մերոյ	
+ok	26	2001-07-12	Saint Elisha the Prophet	Saint Elisha the Prophet	Սրբոյն Եղիսէի մարգարէին	
+fixed	18	2002-08-03	Saint Gregory of Theologian	Saint Gregory the Theologian	Սրբոյն Գրիգորի Աստուածաբանին	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+fixed	26	2001-02-03	Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel	Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grigoris and Daniel	Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+fixed	26	2001-03-31	Saint Gregory the Illuminator’s Commitment to the Pit	Saint Gregory the Illuminator's Commitment to the Pit	Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-07-26	Saint Isaiah the Prophet	Saint Isaiah the Prophet	Սրբոյն Եսայեայ մարգարէին	
+ok	26	2001-12-29	Saint James the Apostle and His Brother John the Evangelist	Saint James the Apostle and His Brother John the Evangelist	Սրբոց Որդւոցն Որոտման Յակովբայ առաքելոյն եւ Յովհաննու աւետարանչին	
+ok	26	2001-08-23	Saint Jeremiah the Prophet	Saint Jeremiah the Prophet	Սրբոյն Երեմիայի մարգարէին	
+ok	26	2001-11-01	Saint John Chrysostom	Saint John Chrysostom	Սրբոյն Յովհաննու Ոսկեբերան հայրապետին	
+review	19	2001-12-08	Saint Nicolas Wonderworker the Bishop of Myra	Saint Nicholas Wonderworker the Bishop of Myra	Սրբոյն Նիկողայոսի Զմիւռնացւոյ սքանչելագործ հայրապետին	Reads 'Nicholas Wonderworker' after the spelling fold; the other two components naming him say 'the Wonderworker'. Add the article?
+fixed	26	2001-09-27	Saint Patriarchs Barlaam, Anthimus and Irenaeus	Saints Patriarchs Barlaam, Anthimus and Irenaeus	Սրբոց հայրապետացն Բարաղամու, Անթիմոսի եւ Երանոսի	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+fixed	23	2001-12-17	Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv	Saints Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv	Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+fixed	3	2004-12-20	Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides	Saints Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides	Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-02-17	Saint Sahak I the Parthian, Patriarch of Armenia	Saint Sahak I the Parthian, Patriarch of Armenia	Սրբոյն Իսահակայ Պարթեւի հայրապետին մերոյ	
+ok	25	2001-02-10	Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers	Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers	Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն	
+ok	1	2008-01-21	Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints Atom and his soldiers	Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints Atom and his soldiers	Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն եւ սրբոց Ատովմեանց զօրավարացն	
+ok	26	2001-12-25	Saint Stephen the Proto-Deacon and the First Martyr	Saint Stephen the Proto-Deacon and the First Martyr	Սրբոյն Ստեփաննոսի Նախավկային եւ առաջին մարտիրոսին	
+ok	1	2016-02-13	Saint Theodore the General	Saint Theodore the General	Սրբոյն Թէոդորոսի զօրավարին	
+ok	25	2001-03-03	Saint Theodore the Tyron	Saint Theodore the Tyron	Սրբոյն Թէոդորոսի զօրավարին	
+review	4	2009-12-22	Saint Theodoron the Martyr	Saint Theodoron the Martyr	Սրբոյն Աստուածատրոյ վկային	hy 'Աստուածատրոյ' is Astvatsatur, 'God-given' -- the Armenian name usually rendered Theodore. 'Theodoron' looks like a half-declined Greek form. Should this be 'Theodore the Martyr', or is Theodoron the intended distinct form?
+ok	1	2004-01-26	Saint Vahan of Goghtn	Saint Vahan of Goghtn	Սրբոյն Վահանայ Գողթնացւոյն	
+fixed	19	2001-11-26	Saint Virgins Juliana and Basilla	Saints Virgins Juliana and Basilla	Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-07-10	Saint Zechariah the Prophet	Saint Zechariah the Prophet	Սրբոյն Զաքարիայի մարգարէին	
+ok	4	2009-12-21	Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian	Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian	Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի	
+ok	18	2001-09-06	Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr	Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr	Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային	
+fixed	26	2001-09-04	Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs	Saints Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs	Սրբոցն Անդրիանոսի եւ կնոջ նորա Անատոլայ եւ Թէոդորոսի եւ Ելեւթիւրոսի վկայիցն	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-11-06	Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr	Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr	Սրբոցն Ակիփսիմեայ եպիսկոպոսին եւ Յովսեփայ քահանային, Այիթալայ սարկաւագին եւ Պղատոնի վկային	
+ok	26	2001-10-29	Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her	Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her	Սրբոցն Անաստասայ քահանային, Վարոսի, Թէոդորիտեայ եւ որդւոց նորա եւ որք ընդ նմա կատարեցան	
+ok	25	2001-09-03	Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs	Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs	Սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն	
+ok	26	2001-07-31	Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs	Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs	Սրբոցն Աթանագինեայ եպիսկոպոսին եւ տասն աշակերտացն եւ հինգ վկայիցն	
+ok	20	2001-02-12	Saints Atom and his soldiers	Saints Atom and his soldiers	Սրբոց Ատովմեանց զօրավարացն	
+ok	2	2012-02-06	Saints Atom and his soldiers, and Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen	Saints Atom and his soldiers, and Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen	Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի	
+ok	3	2006-02-13	Saints Atom and his soldiers, and Saints Sukiasians the Martyrs	Saints Atom and his soldiers, and Saints Sukiasians the Martyrs	Սրբոց Ատովմեանց զօրավարացն եւ Սուքիասեանց վկայիցն	
+ok	25	2001-12-22	Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian	Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian	Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ	
+ok	26	2001-07-09	Saints Callistratus and his companions, and Lukianos the Priest	Saints Callistratus and his companions, and Lukianos the Priest	Սրբոցն Կալիստրատոսի եւ քառասուն եւ ինն վկայիցն եւ Ղունկիանոսի քահանային	
+fixed	26	2001-11-29	Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina	Saints Clement the Bishop of Rome and Pancratius the Bishop of Taormina	Սրբոցն Կղեմայ հայրապետին եւ Բագարատայ Տոռոմենոյ եպիսկոպոսին	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-06-26	Saints Constantine the Emperor and his mother Helen	Saints Constantine the Emperor and his mother Helen	Սրբոցն Կոստանդիանոսի թագաւորին եւ մօրն նորա Հեղինեայ	
+ok	4	2003-12-02	Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East	Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East	Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան	
+ok	22	2001-12-11	Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East	Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East	Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան	
+ok	26	2001-07-30	Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina	Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina	Սրբոցն Կիպրիանոսի եպիսկոպոսին եւ քառասուն եւ հինգ վկայիցն եւ սրբոց կուսանացն Յուստիանեայ, Եւփիմեայ եւ Քրիստինեայ	
+ok	3	2008-07-24	Saints Cyricus and His Mother Julitta	Saints Cyricus and His Mother Julitta	Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի	
+ok	21	2001-01-22	Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris	Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris	Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի	
+ok	2	2015-01-22	Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris	Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris	Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի	
+ok	26	2001-03-10	Saints Cyril of Jerusalem, Cyril the Bishop and Anna	Saints Cyril of Jerusalem, Cyril the Bishop and Anna	Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի	
+ok	26	2001-10-01	Saints David of Dvin and the Martyrs Eulampius and Eulampia	Saints David of Dvin and the Martyrs Eulampius and Eulampia	Սրբոյն Դաւթի Դւնեցւոյն եւ սրբոց վկայիցն Ղամբէոսի եւ Ղամբէուհւոյն	
+ok	26	2001-12-24	Saints David the Prophet-King and James the Apostle	Saints David the Prophet-King and James the Apostle	Սրբոցն Դաւթի մարգարէին եւ Յակովբայ Տեառնեղբայր առաքելոյն	
+ok	26	2001-11-13	Saints Demetrios the Martyr and Basil the Priest	Saints Demetrios the Martyr and Basil the Priest	Սրբոցն Դեմետրեայ վկային եւ Բասիլիսկոսի քահանային	
+ok	26	2001-10-18	Saints Dionysius the Areopagite and the Apostles Timothy and Titus	Saints Dionysius the Areopagite and the Apostles Timothy and Titus	Սրբոցն Դիոնիսիոսի Արիսպագացւոյն եւ առաքելոցն Տիմոթէոսի եւ Տիտոսի	
+ok	26	2001-06-25	Saints Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples	Saints Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples	Սրբոցն Եպիփանու Կիպրացւոյն, Բաբելայ հայրապետին եւ երից աշակերտաց նորին	
+fixed	4	2004-01-27	Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs	Saints Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs	Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+fixed	2	2015-08-03	Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila	Saints Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Macarius, Valerius, Candidus and Aquila	Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն, նաեւ սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	23	2001-01-25	Saints Eugenios, Makarios, Valerian, Candidus and Aquila	Saints Eugenios, Makarios, Valerian, Candidus and Aquila	Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ	
+fixed	1	2009-01-27	Saints Eugenius, Marcarius, Alerius, Canditus and Aquila, and Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs	Saints Eugenius, Macarius, Valerius, Candidus and Aquila, and Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs	Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ, նաեւ սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-10-02	Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine	Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine	Սրբոցն Եւստաթէոսի եւ կնոջ նորա Թէոփիստեայ եւ երկուց որդւոցն եւ սրբոց կուսանացն Երմոնեայ եւ Նեքտարինեայ	
+ok	26	2001-12-13	Saints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia	Saints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia	Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի	
+ok	26	2001-08-02	Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs	Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs	Սրբոց նախահարցն Ադամայ, Աբելի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակովբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուելի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գեդէոնի եւ այլոց սրբոց նախահարցն	
+ok	26	2001-03-24	Saints Forty Martyrs of Sebastia	Saints Forty Martyrs of Sebastia	Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան	
+ok	26	2001-06-12	Saints Gayiane and her companions	Saints Gayiane and her companions	Սրբոց կուսանացն Գայիանեանց	
+ok	4	2009-11-30	Saints Gennaro the Bishop and Mercurius the Warrior	Saints Gennaro the Bishop and Mercurius the Warrior	Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին	
+fixed	22	2001-12-03	Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles	Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Jacoc and Themistocles	Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-09-29	Saints George the Warrior, Adauctus and Romanus the Melodist	Saints George the Warrior, Adauctus and Romanus the Melodist	Սրբոցն Գէորգայ քաջամարտիկ զօրավարին, Ադոկտոսի եւ Ռոմանոսի երգեցողին	
+ok	26	2001-02-20	Saints Ghevond the Priest and His Companions	Saints Ghevond the Priest and His Companions	Սրբոց Ղեւոնդեանց քահանայիցն	
+review	7	2006-11-25	Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop	Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop	Սրբոցն Նիկողայոսի եւ Գրիգորի սքանչելագործ հայրապետացն եւ միւս Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին	'and other Nicholas' -- hy 'միւս Նիկողայոսի' is 'the other Nicholas'. Add the article?
+ok	19	2001-11-24	Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop	Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop	Սրբոցն Գրիգորի Սքանչելագործին, Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին	
+ok	26	2001-11-15	Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier	Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier	Սրբոցն Գուրիասայ, Սամունասայ, Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին եւ Հիւսիքոսի զինաւորին	
+ok	7	2004-10-26	Saints Hipparchus and his Companions Who were Martyred in Samosata	Saints Hipparchus and his Companions Who were Martyred in Samosata	Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան	
+ok	19	2001-10-30	Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples	Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples	Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին	
+ok	26	2001-06-11	Saints Hripsime and her companions	Saints Hripsime and her companions	Սրբոց կուսանացն Հռիփսիմեանց	
+review	4	2009-12-01	Saints Jacoc and Themistocles	Saints Jacoc and Themistocles	Սրբոցն Յակովկայ եւ Իրաւափառայ	'Jacoc' is not an English name. hy 'Յակովկայ' is the genitive of Յակովիկ (a diminutive of Jacob/James), so this is plausibly 'Jacob' -- but 'Jacovk' or 'Hakovik' would transliterate the Armenian more closely. Which?
+ok	26	2001-12-15	Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop	Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop	Սրբոցն Յակովբայ Մծբնայ հայրապետին, Մարուգէի ճգնաւորին եւ Մելիտոսի եպիսկոպոսին	
+review	26	2001-08-21	Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores	Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores	Սրբոցն Յովակիմայ եւ Աննայի` ծնողաց սուրբ Աստուածածնի, եւ կանանցն իւղաբերից	'and of Myrophores' is hard to parse; the Myrophores are the myrrh-bearing women. 'and of the Myrophores'?
+ok	26	2001-06-14	Saints John the Forerunner (Baptist) and Bishop Atanagine	Saints John the Forerunner (Baptist) and Bishop Atanagine	Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին	
+ok	26	2001-08-30	Saints John the Forerunner (Baptist) and Job the Righteous	Saints John the Forerunner (Baptist) and Job the Righteous	Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն	
+ok	26	2001-03-17	Saints John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev	Saints John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev	Սրբոցն Յովհաննու Երուսաղեմայ հայրապետին եւ հայրապետին մերոյ Յովհաննու Օձնեցւոյն եւ վարդապետացն մերոց Յովհաննու Որոտնեցւոյն եւ Գրիգորի Տաթեւացւոյն	
+ok	26	2001-10-22	Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary	Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary	Սրբոցն Ղունկիանոսի հարիւրապետին, որ հաւատաց ի խաչելութիւնն Քրիստոսի, եւ Յովսեփայ աստուածահօրն, Յովսեփայ Արեմաթացւոյն եւ բարեկամին Քրիստոսի Ղազարու եւ քերցն նորա Մարթայի եւ Մարիամու	
+ok	26	2001-11-27	Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul	Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul	Սրբոյն Ղունկիանոսի քահանային եւ սրբոցն Տարագրոսի, Պրոպոսի, Անդրոնիկոսի, Ոնեսիմեայ եւ այլոց աշակերտացն սրբոյն Պօղոսի	
+ok	26	2001-01-29	Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons	Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons	Սրբոց Մակաբայեցւոցն` Եղիազարու քահանային եւ Շամունեայ եւ եօթն որդւոց նորին	
+ok	26	2001-09-24	Saints Mamas, Philomenos and Simeon the Stylite	Saints Mamas, Philomenos and Simeon the Stylite	Սրբոցն Մամասայ, Փիլիկտիմոնի եւ Սիմէոնի Սիւնակեցոյն	
+ok	24	2001-02-19	Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen	Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen	Սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի	
+ok	26	2001-11-12	Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon	Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon	Սրբոցն Մելիտոսի Անտիոքայ հայրապետին եւ Մինասայ Եգիպտացւոյն եւ միւս Մելիտոսի եպիսկոպոսին, Բուրայ քահանային եւ Շինու սարկաւագին	
+review	22	2001-12-10	Saints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis	Saints Menas, Hermogenes, Eugraphus and the poor men John and Alexis	Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի	Corrected to 'the poor men'. But hy 'կամաւոր աղքատացն' is the VOLUNTARY poor -- 'the voluntary poor John and Alexis' may be the intended sense. Confirm.
+fixed	4	2002-12-03	Saints Menas, Hermongenes, Eugraphius and the poor mans John and Alexis	Saints Menas, Hermogenes, Eugraphus and the poor men John and Alexis	Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-11-08	Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs	Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs	Սրբոց հայրապետացն Մետրոփանոսի, Աղեքսանդրոսի եւ Պօղոսի խոստովանողին եւ սրբոց նօտարացն Մարկիանոսի եւ Մարտիրոնի	
+ok	26	2001-06-23	Saints Nerses the Great Patriarch and Bishop Khad	Saints Nerses the Great Patriarch and Bishop Khad	Սրբոյն Ներսիսի Մեծի հայրապետին մերոյ եւ Խադայ եպիսկոպոսին	
+ok	26	2001-10-11	Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin	Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin	Սրբոցն Պանդալէոնի բժշկին, Երմողեայ քահանային եւ Եւպրակսեայ կուսին	
+ok	26	2001-12-27	Saints Peter and Paul the Apostles	Saints Peter and Paul the Apostles	Սրբոց առաքելոցն Պետրոսի եւ Պօղոսի	
+ok	26	2001-01-16	Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon	Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon	Սրբոցն Պետրոսի հայրապետին, Վլասայ եպիսկոպոսին եւ Աբիսողոմայ սարկաւագին	
+ok	26	2001-10-08	Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles	Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles	Սրբոցն Փոկասու հայրապետին եւ Երանոսի հետեւողին առաքելոցն	
+ok	26	2001-06-21	Saints Princes Sahak and Joseph and the Martyrs Sargius and Bacchus	Saints Princes Sahak and Joseph and the Martyrs Sargius and Bacchus	Սրբոց իշխանացն Սահակայ եւ Յովսեփայ եւ սրբոց վկայիցն Սարգսի եւ Բագոսի	
+ok	26	2001-07-03	Saints Prophet Daniel and his Companions Shadrach, Meshach and Abednego	Saints Prophet Daniel and his Companions Shadrach, Meshach and Abednego	Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի	
+ok	7	2004-10-28	Saints Severianus of Sebastia and Babylas and his 84 Disciples	Saints Severianus of Sebastia and Babylas and his 84 Disciples	Սրբոցն Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին	
+ok	26	2001-02-01	Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape	Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape	Սրբոցն Սոփիայ եւ երից դստերացն Պիստոսի, Էլպիսի եւ Ագապեայ	
+review	26	2001-10-25	Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina	Saints Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina	Սրբոց Խարիթեանցն եւ սրբոց վկայիցն Արտեմեայ եւ Քրիստափորի եւ երկուց կանանցն Կալինիկեայ եւ Ակիւլինեայ	The doubled title was dropped. 'Aret' renders hy 'Խարիթեանցն'; the saint is usually Arethas of Najran in English. 'Saints Arethas and His Companions'?
+ok	26	2001-08-27	Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus	Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus	Սրբոյն Ստեփաննոսի Ուլնեցւոյն եւ սրբոց վկայիցն Գոհարինեայ, Ծամիդեսի, Տուքիկոսի եւ Ռատիկոսի	
+fixed	26	2001-11-05	Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls	Saints Stephen, Bishop of Rome and the priests, deacons and many faithful	Սրբոցն Ստեփաննոսի Հռովմայ հայրապետին եւ քահանայիցն եւ սարկաւագացն եւ ժողովրդոցն	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	23	2001-02-13	Saints Sukiasians the Martyrs	Saints Sukiasians the Martyrs	Սրբոց Սուքիասեանց վկայիցն	
+ok	26	2001-07-28	Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin	Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin	Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին	
+fixed	26	2001-10-23	Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus	Saints Theodoret the Priest of Antioch, Zenon the soldier, Macarius, Eudoxius and Romulus	Սրբոցն Թէոդիտոնի քահանային, Զենոնի զինաւորին, Մակարայ, Եւդոքսեայ եւ Ռամելայ	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-01-20	Saints Theodosius and the Children of Ephesus	Saints Theodosius and the Children of Ephesus	Սրբոցն Թէոդոսի թագաւորին եւ մանկանցն Եփեսոսի	
+ok	26	2001-06-28	Saints Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra	Saints Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra	Սրբոցն Թէոդիտոնի Գաղատացւոյն եւ Թալիլեայ բժշկին եւ եօթն կուսանացն, որք յԱնկիւրիա կատարեցան	
+ok	23	2001-12-18	Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides	Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides	Սրբոցն Թէոպոմպայ եպիսկոպոսին եւ Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ	
+ok	26	2001-07-07	Saints Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht	Saints Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht	Սրբոցն Տրդատայ թագաւորին մերոյ եւ Աշխենի տիկնոջն եւ Խոսրովիդխտոյն	
+ok	26	2001-01-30	Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi	Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi	Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ	
+fixed	20	2001-01-23	Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs	Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs	Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	3	2008-07-28	Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris	Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris	Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի	
+review	26	2001-02-22	Saints Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle	Saints Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle	Սրբոց Վարդանանց զօրավարացն մերոց` հազար երեսուն եւ վեց վկայիցն, որք կատարեցան ի մեծի պատերազմին	Uses a hyphen where the source's own component separator is an em-dash. Left as published because it sits INSIDE a component, but it may be meant as a break.
+ok	26	2001-09-25	Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan	Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan	Սրբոց կուսանացն Փեբրոնեայ, Մարիանեայ եւ Շուշանայ` դստերն Մեծին Վարդանայ	
+ok	26	2001-06-19	Saints Virgins Nune and Mane	Saints Virgins Nune and Mane	Սրբոց կուսանացն Նունեայ եւ Մանեայ	
+ok	26	2001-10-09	Saints Virgins Thecla, Barbara and Pelagia	Saints Virgins Thecla, Barbara and Pelagia	Սրբոց կուսանացն Թեկղի, Վառվառեայ եւ Պեղիգեայ	
+ok	26	2001-02-15	Saints Voskians the Priests	Saints Voskians the Priests	Սրբոց Ոսկեանց քահանայիցն	
+review	26	2001-07-02	Saints martyrs Antoninus, Theophilus, Anicetus and Potinus	Saints martyrs Antoninus, Theophilus, Anicetus and Potinus	Սրբոց վկայիցն Անտոնինոսի, Թէոփիլոսի, Անիքտոսի եւ Փոտինոսի	Lowercase 'martyrs' where 'Saints Virgins' and 'Saints Princes' are capitalised. Capitalise for consistency, or leave as published?
+review	23	2001-12-20	Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia	Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia	Սրբոց կուսանացն Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց	Lowercase 'virgins' -- same question as the row above.
+ok	26	2001-01-21	Second Sunday after Nativity	Second Sunday after Nativity	Բ կիւրակէ զկնի Ս. Ծննդեան	
+ok	52	2001-06-10	Second Sunday after Pentecost	Second Sunday after Pentecost	Ա կիւրակէ զկնի Հոգեգալստեան	
+ok	26	2001-07-29	Second Sunday after Transfiguration	Second Sunday after Transfiguration	Բ կիւրակէ զկնի Վարդավառի	
+ok	26	2001-08-19	Second Sunday after the Assumption	Second Sunday after the Assumption	Բ կիւրակէ զկնի Վերափոխման	
+ok	26	2001-09-23	Second Sunday after the Holy Cross	Second Sunday after the Holy Cross	Բ կիւրակէ զկնի Ս. Խաչին	
+ok	26	2001-12-02	Second Sunday of Advent	Second Sunday of Advent	Բ կիւրակէ Յիսնակի	
+fixed	1	2016-02-14	Second Sunday of Great Lent, Sunday of the Expulsion	Second Sunday of Great Lent. Sunday of the Expulsion	Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	25	2001-03-04	Second Sunday of Great Lent. Sunday of the Expulsion	Second Sunday of Great Lent. Sunday of the Expulsion	Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)	
+ok	3	2006-11-21	Second day of Advent	Second day of Advent	Բ օր Յիսնակի պահոց	
+ok	26	2001-04-16	Second day of Easter	Second day of Easter	Բ օր Զատկի	
+ok	26	2001-02-27	Second day of Great Lent	Second day of Great Lent	Բ օր Մեծի պահոց	
+ok	26	2001-01-07	Second day of Nativity	Second day of Nativity	Բ օր Ս. Ծննդեան	
+ok	26	2001-06-04	Second day of Pentecost	Second day of Pentecost	Բ օր Հոգեգալստեան	
+ok	26	2001-07-23	Second day of Transfiguration	Second day of Transfiguration	Բ օր Վարդավառի	
+ok	26	2001-08-13	Second day of the Assumption	Second day of the Assumption	Բ օր Վերափոխման	
+ok	23	2001-11-20	Second day of the Fast of Advent	Second day of the Fast of Advent	Բ օր Յիսնակի պահոց	
+ok	26	2001-08-07	Second day of the Fast of Assumption	Second day of the Fast of Assumption	Բ օր Աստուածածնի պահոց	
+ok	23	2001-12-31	Second day of the Fast of Nativity	Second day of the Fast of Nativity	Բ օր Ս. Ծննդեան պահոց	
+ok	26	2001-02-06	Second day of the Fast of the Catechumens	Second day of the Fast of the Catechumens	Բ օր Առաջաւորաց պահոց	
+ok	26	2001-09-11	Second day of the Fast of the Holy Cross	Second day of the Fast of the Holy Cross	Բ օր Ս. Խաչի պահոց	
+ok	26	2001-07-17	Second day of the Fast of the Transfiguration	Second day of the Fast of the Transfiguration	Բ օր Վարդավառի պահոց	
+ok	26	2001-05-01	Seventeenth day of Eastertide	Seventeenth day of Eastertide	ԺԷ օր Յինանց	
+ok	26	2001-03-14	Seventeenth day of Great Lent	Seventeenth day of Great Lent	ԺԷ օր Մեծի պահոց	
+ok	1	2011-02-27	Seventh Sunday after Nativity	Seventh Sunday after Nativity	Է կիւրակէ զկնի Ս. Ծննդեան	
+ok	1	2008-08-10	Seventh Sunday after Transfiguration	Seventh Sunday after Transfiguration	Է կիւրակէ զկնի Վարդավառի	
+ok	26	2001-10-28	Seventh Sunday after the Holy Cross	Seventh Sunday after the Holy Cross	Է կիւրակէ զկնի Ս. Խաչի	
+ok	7	2004-01-04	Seventh Sunday of Advent	Seventh Sunday of Advent	Է կիւրակէ Յիսնակի	
+ok	26	2001-05-27	Seventh Sunday of Eastertide. Second Palm Sunday	Seventh Sunday of Eastertide. Second Palm Sunday	Է կիւրակէ. Երկրորդ ծաղկազարդ	
+ok	26	2001-04-21	Seventh day of Easter	Seventh day of Easter	Է օր Զատկի	
+ok	26	2001-01-12	Seventh day of Nativity	Seventh day of Nativity	Է օր Ս. Ծննդեան	
+ok	26	2001-06-09	Seventh day of Pentecost	Seventh day of Pentecost	Է օր Հոգեգալստեան	
+ok	26	2001-08-18	Seventh day of the Assumption	Seventh day of the Assumption	Է օր Վերափոխման	
+ok	26	2001-10-06	Seventy Two Holy Disciples of Christ	Seventy Two Holy Disciples of Christ	Սրբոց եօթանասնից եւ երկուց աշակերտացն Քրիստոսի	
+ok	25	2001-04-30	Sixteenth day of Eastertide	Sixteenth day of Eastertide	ԺԶ օր Յինանց	
+ok	26	2001-03-13	Sixteenth day of Great Lent	Sixteenth day of Great Lent	ԺԶ օր Մեծի պահոց	
+ok	9	2001-02-18	Sixth Sunday after Nativity	Sixth Sunday after Nativity	Զ կիւրակէ զկնի Ս. Ծննդեան	
+ok	26	2001-07-15	Sixth Sunday after Pentecost	Sixth Sunday after Pentecost	Զ կիւրակէ զկնի Հոգեգալստեան	
+ok	6	2002-08-11	Sixth Sunday after Transfiguration	Sixth Sunday after Transfiguration	Զ կիւրակէ զկնի Վարդավառի	
+ok	26	2001-10-21	Sixth Sunday after the Holy Cross	Sixth Sunday after the Holy Cross	Զ կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-12-30	Sixth Sunday of Advent	Sixth Sunday of Advent	Զ կիւրակէ Յիսնակի	
+ok	26	2001-05-20	Sixth Sunday of Eastertide	Sixth Sunday of Eastertide	Զ կիւրակէ	
+fixed	1	2019-04-07	Sixth Sunday of Great Lent, Sunday of the Advent	Sixth Sunday of Great Lent. Sunday of the Advent	Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	25	2001-04-01	Sixth Sunday of Great Lent. Sunday of the Advent	Sixth Sunday of Great Lent. Sunday of the Advent	Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)	
+ok	26	2001-04-20	Sixth day of Easter	Sixth day of Easter	Զ օր Զատկի	
+ok	26	2001-03-03	Sixth day of Great Lent	Sixth day of Great Lent	Զ օր Մեծի պահոց	
+ok	26	2001-01-11	Sixth day of Nativity	Sixth day of Nativity	Զ օր Ս. Ծննդեան	
+ok	26	2001-06-08	Sixth day of Pentecost	Sixth day of Pentecost	Զ օր Հոգեգալստեան	
+ok	26	2001-08-17	Sixth day of the Assumption	Sixth day of the Assumption	Զ օր Վերափոխման	
+ok	22	2001-01-04	Sixth day of the Fast of Nativity	Sixth day of the Fast of Nativity	Զ օր Ս. Ծննդեան պահոց	
+review	26	2001-06-16	Staint Gregory the Illuminator's coming out of Pit	Saint Gregory the Illuminator's coming out of Pit	Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն	Missing article, and lowercase 'coming' where the companion feast reads 'Commitment to the Pit'. 'Coming out of the Pit'? Left alone as the source's own wording rather than silently rewritten.
+ok	26	2001-07-22	TRANSFIGURATION OF OUR LORD (Vardavar)	TRANSFIGURATION OF OUR LORD (Vardavar)	ՊԱՅԾԱՌԱԿԵՐՊՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Վարդավառ)	
+ok	26	2001-11-18	Tenth Sunday after the Holy Cross	Tenth Sunday after the Holy Cross	Ժ կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-04-24	Tenth day of Eastertide	Tenth day of Eastertide	Ժ օր Յինանց	
+ok	26	2001-03-07	Tenth day of Great Lent	Tenth day of Great Lent	Ժ օր Մեծի պահոց	
+ok	26	2001-06-18	The Children of Bethlehem. Saints Acacius the Martyr, Mocius the Priest and Codratus the Soldier	The Children of Bethlehem. Saints Acacius the Martyr, Mocius the Priest and Codratus the Soldier	Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին	
+ok	7	2002-01-17	The Hermit Saints Anton	The Hermit Saints Anton	Սրբոյն Անտոնի ճգնաւորին	
+ok	19	2001-01-18	The Hermits Saints Anton, Triphon, Barsauma and Onouphrius	The Hermits Saints Anton, Triphon, Barsauma and Onouphrius	Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն	
+ok	7	2002-08-01	The Hermits Saints Triphon, Barsauma and Onouphrius	The Hermits Saints Triphon, Barsauma and Onouphrius	Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն	
+ok	26	2001-10-16	The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus	The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus	Սրբոց առաքելոցն Անանիայի, Մատթէի, Բառնաբայ, Փիլիպպոսի, Յովհաննու, Շիղայի եւ Սիւղիանոսի	
+fixed	26	2001-11-17	The Holy Apostles Andrew and Phillip	The Holy Apostles Andrew and Philip	Սրբոց առաքելոցն Անդրէի եւ Փիլիպպոսի	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-12-06	The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others	The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others	Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն	
+ok	4	2002-11-25	The Holy Virgins Juliana and Basilla, and Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr	The Holy Virgins Juliana and Basilla, and Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr	Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային	
+ok	3	2004-11-29	The Holy Virgins Juliana and Basilla, and Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia	The Holy Virgins Juliana and Basilla, and Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia	Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց	
+ok	26	2001-10-04	The Saintly Princes Sahak and Hamazasp	The Saintly Princes Sahak and Hamazasp	Սրբոց իշխանացն Սահակայ եւ Համազասպայ	
+review	26	2001-10-27	The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria	The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria	Սրբոց երկոտասանից վարդապետացն Ռեթէոսի, Դիոնիսիոսի, Սեղբեստրոսի, Աթանասի, Կիւրղի Երուսաղեմացւոյն, Եփրեմի Խուրին Ասորւոյ, Բարսղի Կեսարացւոյն, Գրիգորի Նիւսացւոյն, Գրիգորի Աստուածաբանին, Եպիփանու Կիպրացւոյն, Յովհաննու Ոսկեբերանին եւ Կիւրղի Աղեքսանդրացւոյն	'of Church' is missing an article -- 'of the Church'. Also the longest name served, at 289 characters.
+ok	26	2001-08-26	Third Sunday after Assumption	Third Sunday after Assumption	Գ կիւրակէ զկնի Վերափոխման	
+ok	25	2001-01-28	Third Sunday after Nativity	Third Sunday after Nativity	Գ կիւրակէ զկնի Ս. Ծննդեան	
+ok	26	2001-06-24	Third Sunday after Pentecost	Third Sunday after Pentecost	Գ կիւրակէ զկնի Հոգեգալստեան	
+ok	25	2001-08-05	Third Sunday after Transfiguration	Third Sunday after Transfiguration	Գ կիւրակէ զկնի Վարդավառի	
+ok	26	2001-09-30	Third Sunday after the Holy Cross	Third Sunday after the Holy Cross	Գ կիւրակէ զկնի Ս. Խաչի	
+ok	26	2001-12-09	Third Sunday of Advent	Third Sunday of Advent	Գ կիւրակէ Յիսնակի	
+ok	26	2001-03-11	Third Sunday of Great Lent. Sunday of the Prodigal Son	Third Sunday of Great Lent. Sunday of the Prodigal Son	Գ կիւրակէ Քառասնորդական պահոց (Անառակին)	
+ok	26	2001-04-29	Third Sunday. Sunday of the World temple (Green Sunday)	Third Sunday. Sunday of the World temple (Green Sunday)	Գ կիւրակէ. Աշխարհամատրան (Կանաչ կիւրակէ)	
+ok	4	2001-11-21	Third day of Advent	Third day of Advent	Գ օր Յիսնակի պահոց	
+ok	26	2001-04-17	Third day of Easter	Third day of Easter	Գ օր Զատկի	
+ok	26	2001-02-28	Third day of Great Lent	Third day of Great Lent	Գ օր Մեծի պահոց	
+ok	26	2001-01-08	Third day of Nativity	Third day of Nativity	Գ օր Ս. Ծննդեան	
+ok	26	2001-06-05	Third day of Pentecost	Third day of Pentecost	Գ օր Հոգեգալստեան	
+ok	26	2001-07-24	Third day of Transfiguration	Third day of Transfiguration	Գ օր Վարդավառի	
+ok	26	2001-08-14	Third day of the Assumption	Third day of the Assumption	Գ օր Վերափոխման	
+ok	22	2002-11-20	Third day of the Fast of Advent	Third day of the Fast of Advent	Գ օր Յիսնակի պահոց	
+ok	26	2001-08-08	Third day of the Fast of Assumption	Third day of the Fast of Assumption	Գ օր Աստուածածնի պահոց	
+ok	18	2001-01-01	Third day of the Fast of Nativity	Third day of the Fast of Nativity	Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ	
+fixed	4	2002-01-01	Third day of the Fast of Nativity.	Third day of the Fast of Nativity	Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
+ok	26	2001-02-07	Third day of the Fast of the Catechumens	Third day of the Fast of the Catechumens	Գ օր Առաջաւորաց պահոց	
+ok	26	2001-09-12	Third day of the Fast of the Holy Cross	Third day of the Fast of the Holy Cross	Գ օր Ս. Խաչի պահոց	
+ok	26	2001-07-18	Third day of the Fast of the Transfiguration	Third day of the Fast of the Transfiguration	Գ օր Վարդավառի պահոց	
+ok	27	2001-04-27	Thirteenth day of Eastertide	Thirteenth day of Eastertide	ԺԳ օր Յինանց	
+ok	26	2001-03-10	Thirteenth day of Great Lent	Thirteenth day of Great Lent	ԺԳ օր Մեծի պահոց	
+ok	26	2001-05-14	Thirtieth day of Eastertide	Thirtieth day of Eastertide	Լ օր Յինանց	
+ok	26	2001-03-27	Thirtieth day of Great Lent	Thirtieth day of Great Lent	Լ օր Մեծի պահոց	
+ok	26	2001-05-22	Thirty Eighth day of Eastertide	Thirty Eighth day of Eastertide	ԼԸ օր Յինանց	
+ok	26	2001-04-04	Thirty Eighth day of Great Lent	Thirty Eighth day of Great Lent	ԼԸ օր Մեծի պահոց	
+ok	26	2001-05-19	Thirty Fifth day of Eastertide	Thirty Fifth day of Eastertide	ԼԵ օր Յինանց	
+ok	26	2001-05-15	Thirty First day of Eastertide	Thirty First day of Eastertide	ԼԱ օր Յինանց	
+ok	26	2001-03-28	Thirty First day of Great Lent	Thirty First day of Great Lent	ԼԱ օր Մեծի պահոց	
+ok	26	2001-05-18	Thirty Fourth day of Eastertide	Thirty Fourth day of Eastertide	ԼԴ օր Յինանց	
+ok	26	2001-03-31	Thirty Fourth day of Great Lent	Thirty Fourth day of Great Lent	ԼԴ օր Մեծի պահոց	
+ok	26	2001-05-23	Thirty Ninth day of Eastertide	Thirty Ninth day of Eastertide	ԼԹ օր Յինանց	
+ok	26	2001-04-05	Thirty Ninth day of Great Lent	Thirty Ninth day of Great Lent	ԼԹ օր Մեծի պահոց	
+ok	26	2001-05-16	Thirty Second day of Eastertide	Thirty Second day of Eastertide	ԼԲ օր Յինանց	
+ok	26	2001-03-29	Thirty Second day of Great Lent	Thirty Second day of Great Lent	ԼԲ օր Մեծի պահոց	
+ok	26	2001-05-21	Thirty Seventh day of Eastertide	Thirty Seventh day of Eastertide	ԼԷ օր Յինանց	
+ok	26	2001-04-03	Thirty Seventh day of Great Lent	Thirty Seventh day of Great Lent	ԼԷ օր Մեծի պահոց	
+ok	26	2001-04-02	Thirty Sixth day of Great Lent	Thirty Sixth day of Great Lent	ԼԶ օր Մեծի պահոց	
+ok	26	2001-05-17	Thirty Third day of Eastertide	Thirty Third day of Eastertide	ԼԳ օր Յինանց	
+ok	26	2001-03-30	Thirty Third day of Great Lent	Thirty Third day of Great Lent	ԼԳ օր Մեծի պահոց	
+ok	26	2001-04-26	Twelfth day of Eastertide	Twelfth day of Eastertide	ԺԲ օր Յինանց	
+ok	26	2001-03-09	Twelfth day of Great Lent	Twelfth day of Great Lent	ԺԲ օր Մեծի պահոց	
+ok	26	2001-07-14	Twelve Holy Apostles of Christ and Saint Paul, the Thirteenth Apostle	Twelve Holy Apostles of Christ and Saint Paul, the Thirteenth Apostle	Սրբոց երկոտասան առաքելոցն Քրիստոսի եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն	
+ok	26	2001-05-04	Twentieth day of Eastertide	Twentieth day of Eastertide	Ի օր Յինանց	
+ok	26	2001-03-17	Twentieth day of Great Lent	Twentieth day of Great Lent	Ի օր Մեծի պահոց	
+ok	26	2001-05-12	Twenty Eighth day of Eastertide	Twenty Eighth day of Eastertide	ԻԸ օր Յինանց	
+ok	26	2001-05-09	Twenty Fifth day of Eastertide	Twenty Fifth day of Eastertide	ԻԵ օր Յինանց	
+ok	26	2001-03-22	Twenty Fifth day of Great Lent	Twenty Fifth day of Great Lent	ԻԵ օր Մեծի պահոց	
+ok	26	2001-05-05	Twenty First day of Eastertide	Twenty First day of Eastertide	ԻԱ օր Յինանց	
+ok	26	2001-05-08	Twenty Fourth day of Eastertide	Twenty Fourth day of Eastertide	ԻԴ օր Յինանց	
+ok	26	2001-03-21	Twenty Fourth day of Great Lent. Median day of Lent	Twenty Fourth day of Great Lent. Median day of Lent	ԻԴ օր Մեծի պահոց: Միջինք	
+ok	26	2001-03-26	Twenty Ninth day of Great Lent	Twenty Ninth day of Great Lent	ԻԹ օր Մեծի պահոց	
+ok	26	2001-03-19	Twenty Second day of Great Lent	Twenty Second day of Great Lent	ԻԲ օր Մեծի պահոց	
+ok	26	2001-05-11	Twenty Seventh day of Eastertide	Twenty Seventh day of Eastertide	ԻԷ օր Յինանց	
+ok	26	2001-03-24	Twenty Seventh day of Great Lent	Twenty Seventh day of Great Lent	ԻԷ օր Մեծի պահոց	
+ok	26	2001-05-10	Twenty Sixth day of Eastertide	Twenty Sixth day of Eastertide	ԻԶ օր Յինանց	
+ok	26	2001-03-23	Twenty Sixth day of Great Lent	Twenty Sixth day of Great Lent	ԻԶ օր Մեծի պահոց	
+ok	26	2001-05-07	Twenty Third day of Eastertide	Twenty Third day of Eastertide	ԻԳ օր Յինանց	
+ok	26	2001-03-20	Twenty Third day of Great Lent	Twenty Third day of Great Lent	ԻԳ օր Մեծի պահոց	
+fixed	26	2001-01-13	Еighth day of Nativity	Eighth day of Nativity	Ը օր Ս. Ծննդեան	registered correction; see dev/source_corrections._FEAST_TEXT_FIXES
