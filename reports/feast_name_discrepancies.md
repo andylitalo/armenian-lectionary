@@ -9,11 +9,11 @@ Compares the **raw `"Liturgical Day"` string** — the value bahk persists into 
 | class | days | meaning |
 |---|---:|---|
 | **CONTRADICTION** | 0 | engine asserts a component the source lacks — **wrong data, persisted by bahk** |
-| OMISSION | 15 | source has a component the engine drops — incomplete, not wrong |
+| OMISSION | 0 | source has a component the engine drops — incomplete, not wrong |
 | CASING | 0 | same component, different letter case — an *unregistered* normalization |
 | LONG | 54 | name over 256 chars (informational — correct, just long) |
 | UNTRANSLATED | 0 | `language="hy"` returns the English string |
-| _exact_ | 9481 | byte-exact, or equal under the registered `dev/source_corrections` folds |
+| _exact_ | 9496 | byte-exact, or equal under the registered `dev/source_corrections` folds |
 
 Cache holds **9861** days; **9496** carry a source feast name and were compared; **365** have no ground truth and were skipped (see *Coverage gap* below).
 
@@ -31,9 +31,9 @@ The concentration in the **validated** tiers is the headline: those tiers carry 
 
 ### Discrepancies by year
 
-| 2001 | 2002 | 2004 | 2007 | 2008 | 2010 | 2011 | 2012 | 2013 | 2018 | 2019 | 2021 | 2024 |
-|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 1 | 1 | 1 | 1 | 2 | 1 | 1 | 1 | 1 | 1 | 2 | 1 |
+|  |
+|
+|  |
 
 ### Coverage gap
 
@@ -62,11 +62,6 @@ The engine drops a component the source carries. Safe (it asserts nothing false)
 
 | dropped component(s) | days | example |
 |---|---:|---|
-| `Eve of Fast of Saint James the bishop of Nisibis` | 4 | 2001-12-09 |
-| `Eve of Fast of Exaltation of Holy Cross` | 4 | 2002-09-08 |
-| `Eve of Fast of Advent` | 3 | 2004-11-21 |
-| `Eve of Fast of Catechumens` | 2 | 2008-01-13 |
-| `Eve of Great Lent` | 2 | 2010-02-14 |
 
 ---
 

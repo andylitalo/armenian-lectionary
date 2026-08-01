@@ -1287,6 +1287,76 @@ def _position_label(d: datetime.date):
     return None
 
 
+# ---------------------------------------------------------------------------
+# Eve labels ("Eve of Fast of Advent"). Same problem as the position label, one
+# step further out: an eve is a fixed offset from a MOVABLE anchor, so when it lands on a
+# fixed-date feast the table key is that feast's civil date and the eve component is not
+# unanimous across the years sharing it -- ``build_table.unanimous_feast`` drops it, and
+# the day loses its fast marker. Regenerating the eve per date closes that.
+#
+# (anchor key, day offset from the anchor, label). Every family is an exact offset -- no
+# counting, no ordinals -- and each fires once a year.
+_EVE_FAMILIES = (
+    ("E",  -70, "Eve of Fast of Catechumens"),
+    ("E",  -49, "Eve of Great Lent"),
+    ("E",   -1, "Eve of the Resurrection of our Lord Jesus Christ"),
+    ("PE",   0, "Eve of Fast of Prophet Elijah"),
+    ("PE",  21, "Eve of Fast of Saint Gregory the Illuminator"),
+    ("TR",  -7, "Eve of Fast of Transfiguration"),
+    ("AS",  -7, "Eve of Fast of Assumption of the Holy Mother of God"),
+    ("EX",  -7, "Eve of Fast of Exaltation of Holy Cross"),
+    ("EX",   7, "Eve of Fast of the Holy Cross of Varag"),
+    ("HE",  21, "Eve of Fast of Saint James the bishop of Nisibis"),
+)
+
+# The two solar eves, by civil date.
+_EVE_CIVIL = {
+    (12, 29): "Eve of Fast of Nativity",
+    (1, 5): "Eve of the Nativity and Theophany of our Lord Jesus Christ",
+}
+
+
+def _advent_eve_label(heesnak: datetime.date) -> str:
+    """The Advent eve is Heesnak itself (the fast opens the next morning).
+
+    The source writes it two ways and the choice is not free: it keeps the article in the
+    19 years Heesnak falls 9 weeks after Exaltation and drops it in the 7 where it falls
+    10. An inconsistency, like the Sundays after (the) Assumption, but deterministic in
+    the offset -- so reproduce both forms exactly rather than normalize to one.
+    """
+    weeks = (heesnak - sunday_closest_to(heesnak.year, 9, 14)).days
+    return "Eve of the Fast of Advent" if weeks == 63 else "Eve of Fast of Advent"
+
+
+def _eve_label(d: datetime.date):
+    """The source's ``Eve of ...`` component for ``d``, or None.
+
+    Exact on every occurrence in the ground truth: 338/338 across 2001-2026, with no
+    mismatch and no day labelled an eve that the source does not (see
+    ``dev/verify_eve_labels.py``).
+    """
+    if (d.month, d.day) in _EVE_CIVIL:
+        return _EVE_CIVIL[(d.month, d.day)]
+    if d.weekday() not in (5, 6):   # every remaining eve is a Sunday, bar Holy Saturday
+        return None
+    for year in (d.year - 1, d.year, d.year + 1):
+        easter = calculate_gregorian_easter(year)
+        anchor = {
+            "E": easter,
+            "PE": easter + datetime.timedelta(days=49),
+            "TR": easter + datetime.timedelta(days=98),
+            "AS": sunday_closest_to(year, 8, 15),
+            "EX": sunday_closest_to(year, 9, 14),
+            "HE": sunday_closest_to(year, 11, 18),
+        }
+        for akey, offset, label in _EVE_FAMILIES:
+            if d == anchor[akey] + datetime.timedelta(days=offset):
+                return label
+        if d == anchor["HE"]:
+            return _advent_eve_label(anchor["HE"])
+    return None
+
+
 def _annunciation_composite(d, tables=None):
     """Best-guess Annunciation (Apr 7) readings via the Tonatsooyts collision rule,
     for offsets the validated AnnE keyspace does not cover. Returns a list of refs
@@ -1967,14 +2037,33 @@ def _is_position_component(component: str) -> bool:
     return bool(_POSITION_COMPONENT_RE.match(component))
 
 
+def _apply_eve_label(label: str, d: datetime.date) -> str:
+    """Append ``d``'s regenerated ``Eve of ...`` component to ``label``.
+
+    The source prints the eve last, after the commemoration, so this appends where
+    :func:`_apply_position_label` prepends. A name that already carries an eve keeps it
+    untouched -- either the table kept it (every year sharing the key agreed) or a
+    composite named the day, and in both cases the stored wording is the validated one.
+    """
+    eve = _eve_label(d)
+    if eve is None:
+        return label
+    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    if any(p.startswith("Eve of ") for p in parts):
+        return _FEAST_SEP.join(parts) if parts else label
+    return _FEAST_SEP.join(parts + [eve]) if parts else eve
+
+
 def compute_armenian_lectionary(target_date: datetime.date,
                                 language: str = "en") -> dict:
     """Return the liturgical day and readings for ``target_date``.
 
     Thin wrapper over :func:`_compute_lectionary` that re-anchors fixed civil-date
     commemorations (Genocide Remembrance -> April 24) which the Easter-keyed table
-    would otherwise misplace, and heads the name with the civil year's calendar-position
-    label (see :func:`_apply_position_label`).
+    would otherwise misplace, and re-adds the components a table key shared by several
+    civil years cannot hold: the calendar-position label at the head
+    (:func:`_apply_position_label`) and the ``Eve of ...`` note at the tail
+    (:func:`_apply_eve_label`).
 
     ``language`` selects the language of the human-readable names: ``"en"`` (default)
     or ``"hy"`` for Classical Armenian. In ``"hy"`` the feast (``Liturgical Day``) and
@@ -1988,8 +2077,10 @@ def compute_armenian_lectionary(target_date: datetime.date,
             f"unsupported language {language!r}; expected one of "
             f"{', '.join(SUPPORTED_LANGUAGES)}")
     result = _compute_lectionary(target_date)
-    result["Liturgical Day"] = _apply_position_label(
-        _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+    result["Liturgical Day"] = _apply_eve_label(
+        _apply_position_label(
+            _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+            target_date),
         target_date)
     return _localize(result, language)
 

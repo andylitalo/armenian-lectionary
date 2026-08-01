@@ -35,6 +35,28 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   Net over the ground truth: contradictions 41 → **0**, days with no Armenian name 6 → **0**,
   omissions 63 → 15, exact 9373 → **9481** of 9496. **Readings are unchanged** — the
   0-wrong contract holds with every coverage floor untouched.
+- **Eve notes were dropped where a fast opened on a fixed-date feast.** The same defect one
+  step out: an eve sits at a fixed offset from a *movable* anchor, so when it lands on a
+  fixed civil date the table key is that feast's date and the years sharing it disagree —
+  `unanimous_feast` dropped the eve and the day lost its fast marker. 15 days across
+  2001–2026, every one of them the opening of a fast: `Eve of Fast of Advent` on
+  2004/2010/2021-11-21 (the Presentation of the Theotokos), `Eve of Great Lent` on
+  2010/2021-02-14 (the Presentation of the Lord), `Eve of Fast of Saint James the bishop of
+  Nisibis` on four Dec 9ths, `Eve of Fast of Exaltation of Holy Cross` on four Sep 8ths, and
+  `Eve of Fast of Catechumens` on 2008-01-13 and 2011-02-13.
+
+  `engine._eve_label` regenerates the eve per date and `_apply_eve_label` appends it where
+  the name does not already carry one — the source prints the eve last, so this appends
+  where the position label prepends. All twelve movable families plus the two solar ones
+  (Dec 29, Jan 5) are exact offsets, verified on every occurrence in the ground truth
+  (`dev/verify_eve_labels.py`: 338 matched, 0 mismatched, 0 missing, 0 spurious). The
+  Advent eve is reproduced in both of the source's wordings — it keeps the article in the
+  19 years Heesnak falls nine weeks after Exaltation and drops it in the seven where it
+  falls ten.
+
+  With this the ground-truth match is complete: omissions 15 → **0** and exact 9481 →
+  **9496 of 9496**. The engine now reproduces sacredtradition.am's feast-name string on
+  every day it publishes. Readings again unchanged.
 - **Seven source self-contradictions registered** in `dev/source_corrections.POSITION_LABEL_FIXES`
   (a stray trailing period on `the Fast of Nativity.`, two comma-for-period variants of
   `Great Lent. Sunday of …`, and one wrong ordinal word on 2008-04-07 that its own
@@ -47,13 +69,17 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   and exact matches are ratchets. `tests/test_feast.py` compares only the *commemoration
   component*, which strips the position and eve components from both sides and so compared
   `"" == ""` on over half the corpus — that blind spot is what hid all of the above.
-- **`tests/test_feast_contract.py`** — source-independent invariants (no placeholder,
-  storable length, `hy` differs from `en`, no contaminant characters) across the whole
-  supported 2001–2027 window. Needs no ground-truth cache, so it also covers **2027**, for
-  which sacredtradition.am publishes nothing and no oracle test can exist.
+- **`tests/test_feast_contract.py`** — source-independent invariants (no placeholder, no
+  empty name, `hy` differs from `en`, no repeated or runaway component, no contaminant
+  characters) across the whole supported 2001–2027 window. Needs no ground-truth cache, so
+  it also covers **2027**, for which sacredtradition.am publishes nothing and no oracle
+  test can exist. It asserts no storage limit: the engine serves whatever name the source
+  states — the longest is 289 characters, a feast enumerating twelve saints — and how to
+  store that belongs to the consumer.
 - **`dev/feast_discrepancy_report.py`** → `reports/feast_name_discrepancies.md`, a
   classified inventory of every remaining feast-name difference, each shown with the two
-  days either side of ground truth for context.
+  days either side of ground truth for context. It now reports no contradiction, no
+  omission and no casing variant on any of the 9,496 days with ground truth.
 
 ## [1.2.3] — 2026-07-23
 

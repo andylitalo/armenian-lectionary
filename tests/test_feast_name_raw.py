@@ -21,6 +21,11 @@ The three contracts, strongest first:
   * OMISSIONS <= a floor that only moves down. Dropping a component the source carries is
     incomplete but not wrong, so it is ratcheted rather than forbidden.
   * EXACT >= a floor that only moves up.
+
+Both ratchets are now at their limits -- 0 omissions, 9,496 of 9,496 days exact -- so in
+practice this asserts the engine reproduces the source's feast name on every day of
+ground truth. They stay ratchets rather than equalities so that extending the cache (a
+new year, a refetch) reports its true numbers instead of failing on arithmetic.
 """
 
 import os
@@ -32,15 +37,16 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.feast_discrepancy_report import collect, is_position         # noqa: E402
 from tests._reference_cache import requires_reference_cache           # noqa: E402
 
-# Days the engine drops a source component on. All 15 are an "Eve of <Fast>" note on a
-# fixed feast whose table key could not keep it (the eve floats across civil years, so
-# build_table.unanimous_feast drops it and no verified rule regenerates it yet).
+# Days the engine drops a source component on. Now zero: the last 15 were an
+# "Eve of <Fast>" note on a fixed-date feast whose table key could not keep it, and
+# engine._eve_label regenerates those per date (dev/verify_eve_labels.py).
 # Monotonic DOWN -- lower it whenever a fix lands, never raise it.
-OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "15"))
+OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "0"))
 
 # Days whose raw name matches the source exactly (or under the registered folds).
-# Monotonic UP.
-EXACT_FLOOR = int(os.environ.get("FEAST_EXACT_FLOOR", "9481"))
+# Monotonic UP. Now every compared day: the engine reproduces the source's feast name
+# string for all 9,496 days of ground truth.
+EXACT_FLOOR = int(os.environ.get("FEAST_EXACT_FLOOR", "9496"))
 
 # Days with a source feast name to compare against. Guards against a shrinking cache
 # silently shrinking the oracle.
@@ -96,6 +102,21 @@ class TestRawFeastName(unittest.TestCase):
             dropped[:10], [],
             f"{len(dropped)} days lost a position/fast label the source states; run "
             "dev/verify_position_labels.py, whose END-TO-END line must read 0 LOST")
+
+    def test_no_eve_note_is_ever_dropped(self):
+        """Every "Eve of <Fast>" the source states must be served.
+
+        Sibling of the test above and separate from the ratchet for the same reason: an
+        eve opens a fast, so it is fasting-calendar data, not decoration. These reach the
+        served name either from the table or from ``engine._eve_label``; this asserts the
+        union is complete. Evidence: ``dev/verify_eve_labels.py``.
+        """
+        dropped = [(f["iso"], c) for f in self.data["findings"]
+                   for c in f["omissions"] if c.startswith("Eve of ")]
+        self.assertEqual(
+            dropped[:10], [],
+            f"{len(dropped)} days lost an eve note the source states; run "
+            "dev/verify_eve_labels.py, whose END-TO-END line must read 0 LOST")
 
     def test_omissions_within_ratchet(self):
         """Dropped components are allowed, but the count may only shrink."""
