@@ -13,13 +13,17 @@ for a name it invented.
 
 What each invariant protects:
 
-  1. no placeholder -- bahk discards a placeholder as "no feast", so the day silently
-     loses its name in the app;
-  2. storable length -- ``Feast.name`` is a bounded CharField and PostgreSQL raises
-     DataError past it, while bahk's SQLite test DB accepts it silently;
-  3. Armenian resolves -- a name with no `hy` form is nearly always a name the engine
-     made up;
+  1. no placeholder -- an internal marker is not a name; a consumer can only discard it,
+     and the day silently loses its name;
+  2. Armenian resolves -- a name with no `hy` form is nearly always a name the engine
+     made up rather than one the source uses;
+  3. no runaway or repeated components -- the position-label overlay assembles names by
+     concatenation, so it needs a guard against doubling one;
   4. clean characters -- reuses the same allow-list the shipped artifacts are gated on.
+
+Deliberately NOT here: any storage limit. The engine serves whatever name the source
+states, and the longest is 289 characters because that feast's name enumerates twelve
+saints. How to store that belongs to the consumer, not to this package.
 """
 
 import datetime
@@ -38,17 +42,17 @@ from armenian_lectionary.engine import compute_armenian_lectionary     # noqa: E
 MIN_YEAR = int(os.environ.get("LECTIONARY_MIN_YEAR", "2001"))
 MAX_YEAR = int(os.environ.get("LECTIONARY_MAX_YEAR", "2027"))
 
-# bahk's hub.models.Feast.name limit. Kept as a literal rather than imported: this package
-# must not depend on bahk.
+# Runaway-concatenation guard, NOT a storage limit. The engine serves whatever name the
+# source states, however long -- how to store that is a consumer's problem, and encoding
+# any particular consumer's column width here would be the wrong dependency direction.
 #
-# 512, matching the widened column. Two names in the corpus exceed the previous 256 -- the
-# Twelve Holy Doctors (289 chars) and the Holy Fathers of Egypt (257) -- and both are
-# byte-identical to what sacredtradition.am serves, so the retired scrape hit the same
-# PostgreSQL DataError: pre-existing, not a regression. The engine cannot fix them without
-# truncating a name the source states in full, so the column was widened downstream
-# instead (bahk migration 0057). Raise this only in step with that column, never to make a
-# failing day pass.
-FEAST_NAME_MAX = int(os.environ.get("FEAST_NAME_MAX", "512"))
+# What this does catch is a bug in the name assembly. `_apply_position_label` prepends a
+# regenerated component to a stored one, so a mistake there (a doubled label, a component
+# appended per family instead of once) would inflate names without necessarily making any
+# single component wrong. The longest name the engine legitimately serves is 289 chars --
+# the Twelve Holy Doctors, whose name enumerates all twelve -- so a name past ~2x that is
+# structurally broken rather than merely verbose.
+MAX_PLAUSIBLE_NAME = int(os.environ.get("MAX_PLAUSIBLE_NAME", "600"))
 
 # Internal markers that are not commemorations. A day reaching a caller with one of these
 # has no usable name.
@@ -92,14 +96,25 @@ class TestFeastNameContract(unittest.TestCase):
             f"{len(bad)} dates serve a placeholder instead of a feast name; downstream "
             "records these as 'no feast' and the day loses its name")
 
-    def test_name_fits_downstream_storage(self):
+    def test_no_name_is_implausibly_long(self):
+        """Catches runaway concatenation in the name assembly, not a storage limit."""
         bad = [(d.isoformat(), len(en)) for d, (en, _) in self.names.items()
-               if len(en) > FEAST_NAME_MAX]
+               if len(en) > MAX_PLAUSIBLE_NAME]
         self.assertEqual(
             bad[:10], [],
-            f"{len(bad)} dates serve a name longer than {FEAST_NAME_MAX} chars; "
-            "PostgreSQL raises DataError on these (SQLite does not, so downstream tests "
-            "will not catch it)")
+            f"{len(bad)} dates serve a name over {MAX_PLAUSIBLE_NAME} chars, well past "
+            "the longest real one (289); suspect a duplicated or repeatedly-appended "
+            "component in _apply_position_label")
+
+    def test_no_component_is_repeated(self):
+        """The position-label overlay must not re-add a component the name already has."""
+        bad = []
+        for d, (en, _) in self.names.items():
+            parts = [p.strip() for p in en.split(" — ") if p.strip()]
+            if len(parts) != len(set(parts)):
+                bad.append((d.isoformat(), en))
+        self.assertEqual(bad[:10], [],
+                         f"{len(bad)} dates repeat a name component")
 
     def test_armenian_name_resolves(self):
         """``hy`` must differ from ``en`` -- equality means no Armenian form is known."""

@@ -8,9 +8,12 @@ actually printed, and reports
 
   * MISMATCH -- the engine emits a label the source contradicts. Must be 0: a wrong label
     is worse than none, since bahk persists it into ``Feast.name``.
-  * MISSING  -- the source has a position label the engine does not reproduce. Safe; these
-    are the families whose counting rule is not exact on every occurrence, deliberately
-    left unimplemented. Reported so the residue stays visible and can shrink.
+  * MISSING  -- the source has a position label this GENERATOR does not produce. NOT data
+    loss: the label may still be served from the validated table, which keeps a
+    calendar-derived component whenever every year sharing the key states it identically
+    (build_table.unanimous_feast). The whole residue is currently of that kind -- the
+    "Fast day" marker on Mon/Tue/Thu/Sat/Sun -- so every source position label still
+    reaches the served name. The end-to-end check is at the bottom of this report.
   * EXTRA    -- the engine emits a label where the source printed none. Also a defect.
 
 Usage:
@@ -27,7 +30,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                       # noqa: E402
 from dev.feast_names import is_position                                # noqa: E402
-from armenian_lectionary.engine import _FEAST_SEP, _position_label     # noqa: E402
+from armenian_lectionary.engine import (                               # noqa: E402
+    _FEAST_SEP, _position_label, compute_armenian_lectionary,
+)
 
 
 def source_position(feast_str):
@@ -68,10 +73,32 @@ def main():
         elif got and not src:
             extra.append((iso, got))
 
+    # The question that actually matters downstream: does the SERVED name carry every
+    # position label the source states? The generator is only one of its two sources; the
+    # validated table supplies the rest. Anything counted here as "missing" above may
+    # still be served, so report the end-to-end number too -- reading the generator's
+    # residue as data loss is the obvious misreading of this tool.
+    served_ok = served_lost = 0
+    for iso in sorted(days):
+        feast = (days[iso].get("feast") or "").strip()
+        src = source_position(feast) if feast else None
+        if not src:
+            continue
+        served = compute_armenian_lectionary(
+            datetime.date.fromisoformat(iso))["Liturgical Day"]
+        if src in [c.strip() for c in served.split(_FEAST_SEP)]:
+            served_ok += 1
+        else:
+            served_lost += 1
+
     print(f"matched  {matched}")
     print(f"MISMATCH {len(mismatch)}   (must be 0 -- engine contradicts the source)")
     print(f"EXTRA    {len(extra)}   (must be 0 -- engine labels a day the source does not)")
-    print(f"missing  {len(missing)}   (safe residue: families with no exact rule)")
+    print(f"missing  {len(missing)}   (generator does not produce it; may still be served "
+          f"from the table -- see below)")
+    print()
+    print(f"END-TO-END: {served_ok}/{served_ok + served_lost} source position labels reach "
+          f"the served name; {served_lost} LOST (must be 0)")
 
     if missing:
         print("\nmissing by family:")

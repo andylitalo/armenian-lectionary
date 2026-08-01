@@ -29,7 +29,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from dev.feast_discrepancy_report import collect                      # noqa: E402
+from dev.feast_discrepancy_report import collect, is_position         # noqa: E402
 from tests._reference_cache import requires_reference_cache           # noqa: E402
 
 # Days the engine drops a source component on. All 15 are an "Eve of <Fast>" note on a
@@ -77,6 +77,25 @@ class TestRawFeastName(unittest.TestCase):
             f"{len(bad)} days differ from the source only in letter case; either register "
             "the fold in dev/source_corrections._FEAST_CANON_RULES or emit the source's "
             "casing")
+
+    def test_no_position_label_is_ever_dropped(self):
+        """Every calendar-position / fast-day marker the source states must be served.
+
+        Stronger than the omission ratchet below, and separate from it on purpose. These
+        components are what a fasting calendar is built from -- "Sixth day of the Fast of
+        Nativity", "Fast day" -- so losing one is a different kind of failure from losing
+        a commemoration's eve note, and must not be absorbed by a shared budget.
+
+        They reach the served name two ways: regenerated per date by
+        ``engine._position_label``, or kept in the validated table where every year
+        sharing the key agreed. This asserts the union covers the source completely.
+        """
+        dropped = [(f["iso"], c) for f in self.data["findings"]
+                   for c in f["omissions"] if is_position(c)]
+        self.assertEqual(
+            dropped[:10], [],
+            f"{len(dropped)} days lost a position/fast label the source states; run "
+            "dev/verify_position_labels.py, whose END-TO-END line must read 0 LOST")
 
     def test_omissions_within_ratchet(self):
         """Dropped components are allowed, but the count may only shrink."""

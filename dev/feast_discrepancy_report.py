@@ -21,8 +21,8 @@ rather than byte-wise separates the two failure modes that matter very different
 
 Two further classes are independent of the source and are reported alongside:
 
-  STORAGE        name longer than bahk's ``Feast.name`` limit (would raise DataError on
-                 PostgreSQL; SQLite tests do not enforce it).
+  LONG           name longer than a typical 256-char column. Informational, not a
+                 defect: these names are correct and match the source byte for byte.
   UNTRANSLATED   ``language="hy"`` returns the English string, i.e. no Armenian form.
 
 Usage:
@@ -49,9 +49,11 @@ OUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     "reports", "feast_name_discrepancies.md")
 
-# bahk's hub.models.Feast.name storage limit -- the reason an over-long name is a defect
-# rather than a curiosity. Kept here (not imported) because this repo must not depend on bahk.
-FEAST_NAME_MAX = 256
+# Names past this are listed as a heads-up for consumers sizing a column or a UI field.
+# NOT a defect threshold: these names are correct and byte-identical to the source, they
+# are simply long because the feast's name enumerates its saints. Set to a round number
+# consumers commonly default to, purely so the report surfaces the ones worth knowing about.
+LONG_NAME_NOTICE = 256
 
 # Engine placeholders: not commemorations, and not something bahk should ever persist.
 PLACEHOLDERS = ("(movable ordinary-time reading)", "(commemoration)",
@@ -156,7 +158,7 @@ def collect():
 
         # Source-independent flags: these hold for every date the engine can answer,
         # including the years the cache has no ground truth for.
-        if len(eng) > FEAST_NAME_MAX:
+        if len(eng) > LONG_NAME_NOTICE:
             storage.append((iso, len(eng), eng))
         if hy == eng:
             untranslated.append((iso, eng))
@@ -257,8 +259,8 @@ def render(data):
       "not wrong |")
     w(f"| CASING | {len(casing)} | same component, different letter case — an *unregistered* "
       "normalization |")
-    w(f"| STORAGE | {len(data['storage'])} | name exceeds bahk's `Feast.name` "
-      f"({FEAST_NAME_MAX} chars) |")
+    w(f"| LONG | {len(data['storage'])} | name over {LONG_NAME_NOTICE} chars "
+      "(informational — correct, just long) |")
     w(f"| UNTRANSLATED | {len(data['untranslated'])} | `language=\"hy\"` returns the English "
       "string |")
     w(f"| _exact_ | {data['exact']} | byte-exact, or equal under the registered "
@@ -298,7 +300,7 @@ def render(data):
       "no oracle test asserts anything about those years — while bahk serves feast names "
       "through 2027. sacredtradition.am publishes nothing for 2027 (probed 2026-07-30: the "
       "page returns an empty shell), so this gap cannot be closed by re-fetching. Those years "
-      "are covered by the source-independent invariants instead (STORAGE / UNTRANSLATED "
+      "are covered by the source-independent invariants instead (UNTRANSLATED "
       "above, and `tests/test_feast_contract.py`).\n")
 
     # ---- contradictions ---------------------------------------------------- #
@@ -369,10 +371,10 @@ def render(data):
 
     # ---- storage ----------------------------------------------------------- #
     w("---\n")
-    w("## STORAGE\n")
-    w(f"`hub.models.Feast.name` is `CharField(max_length={FEAST_NAME_MAX})`. PostgreSQL "
-      "raises `DataError` on these; SQLite (the bahk test DB) silently accepts them, which "
-      "is why no bahk test caught it.\n")
+    w("## LONG NAMES\n")
+    w(f"Names over {LONG_NAME_NOTICE} characters. **Not defects** — they match the source "
+      "byte for byte and are long only because the feast's name enumerates its saints. "
+      "Listed as a heads-up when sizing a database column or a UI field.\n")
     by_name = collections.OrderedDict()
     for iso, length, name in data["storage"]:
         by_name.setdefault(name, []).append(iso)
