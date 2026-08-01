@@ -51,7 +51,7 @@ def unanimous_feast(items):
     it counts from an anchor whose distance to this coordinate changes year to year.
     Shipping ``modal_feast`` therefore asserted the *modal* year's ordinal for every year,
     which is wrong wherever the ordinal differs (34 days across 2001-2026; see
-    reports/feast_name_discrepancies.md).
+    dev/feast_discrepancy_report.py).
 
     So a calendar-derived component (``feast_names.is_calendar_component``: position label
     or eve note) survives only if EVERY year sharing the key states it identically. The

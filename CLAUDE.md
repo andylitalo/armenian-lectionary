@@ -65,6 +65,7 @@ others structurally cannot:
 | `test_feast_name_raw` | the **raw string**, component-wise on ` — `. Contradictions (engine emits a component the source lacks) must be **0**; omissions and exact matches are ratchets, both now at their limits (0 omissions, 9,496/9,496 exact). | yes (2001–2026) |
 | `test_feast_contract` | source-**independent** invariants — no placeholder, no empty name, `hy` differs from `en`, no repeated or runaway component, clean characters. Deliberately asserts **no storage limit**: how to store a name is the consumer's problem. | **no** (2001–2027) |
 | `test_feast` | only the *commemoration component*. Narrowest: it strips the position/eve components from both sides, so >50% of days compare `"" == ""`. | yes (2001–2026) |
+| `test_source_text` | the **source's own** text quality, not the engine's fidelity to it — see below. | yes (2001–2026) |
 
 That last stripping is why `test_feast` alone was not enough — the engine shipped a name
 the source contradicted on 41 days, and six more as bare placeholders, entirely invisible
@@ -75,13 +76,45 @@ empty and no oracle test can assert anything about them.
 The governing rule for any new difference from the source: it must be either counted by a
 ratchet or registered in `dev/source_corrections`. Nothing passes silently.
 
+### The source is not automatically right
+
+The engine now matches the source on every day it publishes, which means each of the
+source's own typos is a name the engine serves. `dev/audit_source_anomalies.py` looks for
+those, and `test_source_text` keeps its detectors silent. The strongest of them compare a
+feast's English name against **its own Armenian name** — the source stating the same fact
+twice, so it can be caught contradicting itself. That is how the Council of Ephesus was
+found dated `AD 341` in English and `431` in Armenian, and Pentecost called the
+`Fifteenth day of Eastertide` where the Armenian says fiftieth.
+
+Registered repairs live in `dev/source_corrections._FEAST_TEXT_FIXES`, each justified by
+the source contradicting itself rather than by editorial preference. When one lands, the
+shipped artifacts must be rebuilt with it — including `saint_schedule.json`, whose feast
+labels are served directly (`dev/refresh_artifact_names.py`).
+
 Dev tooling:
 ```bash
-python dev/feast_discrepancy_report.py   # -> reports/feast_name_discrepancies.md
+python dev/audit_source_anomalies.py     # errors in the SOURCE's own feast text
+python dev/refresh_artifact_names.py     # push registered fixes into saint_schedule.json
+python dev/feast_discrepancy_report.py   # engine vs. source, classified (now: 0 findings)
 python dev/verify_position_labels.py     # engine._position_label vs. every cached label
 python dev/verify_eve_labels.py          # engine._eve_label vs. every cached eve note
 python dev/feast_audit.py                # residual commemoration mismatches
 ```
+
+**After any change to `dev/source_corrections`**, rebuild in this order and re-run the
+suite — the table and the `hy` map are keyed on the corrected English, so a partial
+rebuild leaves days with no Armenian name:
+```bash
+python dev/refresh_artifact_names.py --write   # saint_schedule labels
+python dev/build_table.py                      # lectionary_data.json
+python dev/fetch_translations.py               # feast/book *_names_hy.json (offline
+                                               #   from dev/reference_data_hy/)
+```
+`dev/saint_schedule.py` and `dev/build_second_volume_cycles.py` are deliberately NOT in
+that list: they do not currently reproduce their checked-in artifacts from the present
+cache, and regenerating them moves readings provenance (2016-07-30 drops from
+`second-volume-cycle` to `generative-saint`). That drift predates this work and needs its
+own reviewed change.
 
 Two kinds of name component are **not** stored in the table, because a table key is a
 liturgical coordinate shared by civil years that disagree about them. `build_table.

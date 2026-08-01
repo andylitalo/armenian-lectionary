@@ -6,7 +6,7 @@ the engine's own placeholders, and it discards them from BOTH sides before compa
 on 53% of the corpus it compared ``"" == ""`` and asserted nothing. bahk persists the raw
 string into ``Feast.name``, and the difference was not academic: the engine shipped a name
 the source contradicted on 41 days across 2001-2026, and six more days as bare
-placeholders, all of it invisible to that test (see reports/feast_name_discrepancies.md).
+placeholders, all of it invisible to that test.
 
 This test compares the raw string, component by component on ``_FEAST_SEP``, after the
 registered ``dev/source_corrections`` folds are applied to both sides. Every remaining
@@ -73,7 +73,7 @@ class TestRawFeastName(unittest.TestCase):
         self.assertEqual(
             [], [(f["iso"], f["contradictions"], f["omissions"]) for f in bad[:10]],
             f"{len(bad)} days ship a feast-name component the source does not have; "
-            "regenerate reports/feast_name_discrepancies.md for the full list")
+            "run dev/feast_discrepancy_report.py for the full list")
 
     def test_no_unregistered_casing_variant(self):
         """Case-only differences must be registered in source_corrections, not tolerated."""

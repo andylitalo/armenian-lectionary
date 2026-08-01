@@ -1088,7 +1088,7 @@ _FEAST_SEP = " — "
 # whose keys are liturgical coordinates shared by many years: doing so asserted the modal
 # year's ordinal for every year and shipped a wrong label on 34 days across 2001-2026
 # (dev/build_table.unanimous_feast now drops those; see
-# reports/feast_name_discrepancies.md). The label is regenerated here instead, per date,
+# dev/feast_discrepancy_report.py). The label is regenerated here instead, per date,
 # where the year is known.
 #
 # Each family's counting rule was derived from the ground-truth cache and verified against

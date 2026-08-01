@@ -15,3 +15,6 @@ dev/reference_data/
 # Dev Armenian-name scrape cache (the distilled *_names_hy.json maps are committed)
 dev/reference_data_hy/
 dev/*.log
+# Regenerated on demand by dev/feast_discrepancy_report.py; it now reports no
+# discrepancy at all, so a committed copy is an empty artifact that goes stale.
+reports/feast_name_discrepancies.md

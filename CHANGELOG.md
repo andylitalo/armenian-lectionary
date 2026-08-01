@@ -57,6 +57,31 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   With this the ground-truth match is complete: omissions 15 → **0** and exact 9481 →
   **9496 of 9496**. The engine now reproduces sacredtradition.am's feast-name string on
   every day it publishes. Readings again unchanged.
+- **Eighteen errors in the source's own feast text**, registered in
+  `dev/source_corrections._FEAST_TEXT_FIXES` and found by the new
+  `dev/audit_source_anomalies.py`. This became worth doing precisely because the engine now
+  matches the source everywhere: from here on, each of the source's typos is a name the
+  engine serves. Every fix is the source contradicting itself, never an editorial
+  preference:
+  - **factual**, caught by comparing a feast's English name with its own Armenian one —
+    the Council of Ephesus is dated `AD 341` in English and `431 թ.` in Armenian, and
+    Pentecost reads `Fifteenth day of Eastertide` where the Armenian says
+    `յիսներորդ` (fiftieth), which is also what the day is (Easter+49, the day after the
+    source's own `Forty Ninth day of Eastertide`);
+  - **grammatical**, where the Armenian settles the sense — `the poor mans` → `poor men`,
+    `many faithfuls` → `many faithful`, `Gregory of Theologian` → `Gregory the
+    Theologian`, `Saint Patriarchs`/`Saint Virgins` → `Saints …` (both Armenian forms are
+    plural), `Clement the Bishop Rome` → `Bishop of Rome`;
+  - **mechanical** — `Saints Saints Jacoc`, `Saints St. Aret`, a trailing period on
+    `Discovery of the Holy Cross.`, `Begining` → `Beginning`, `Antiosh` → `Antioch`, and
+    `Fast day, Remembrance of the Ten Virgins`, whose fast marker was comma-joined into
+    the commemoration where the source's own Armenian separates it;
+  - **one saint, two spellings** — the Apostle `Phillip`/`Philip`, St. `Nicolas`/`Nicholas`
+    of Myra, `Gregoris`/`Grigoris` of Aghvank, each folded to the source's dominant form.
+
+  Left alone, and listed by the audit script instead, are the strings where nothing
+  established the intended form: `Jacoc`, `Theodoron`, `coming out of Pit`, `Twelve Holy
+  Doctors of Church`, and the source's lowercase `Saints martyrs` / `Saints virgins`.
 - **Seven source self-contradictions registered** in `dev/source_corrections.POSITION_LABEL_FIXES`
   (a stray trailing period on `the Fast of Nativity.`, two comma-for-period variants of
   `Great Lent. Sunday of …`, and one wrong ordinal word on 2008-04-07 that its own
@@ -76,10 +101,21 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   test can exist. It asserts no storage limit: the engine serves whatever name the source
   states — the longest is 289 characters, a feast enumerating twelve saints — and how to
   store that belongs to the consumer.
-- **`dev/feast_discrepancy_report.py`** → `reports/feast_name_discrepancies.md`, a
-  classified inventory of every remaining feast-name difference, each shown with the two
-  days either side of ground truth for context. It now reports no contradiction, no
-  omission and no casing variant on any of the 9,496 days with ground truth.
+- **`tests/test_source_text.py`** — locks the quality of the SOURCE's feast text rather
+  than the engine's fidelity to it. Without it, a re-fetch could pull a new typo from the
+  live site into the cache, rebuild it into the shipped artifacts, pass every oracle test
+  (the engine would match the source perfectly) and reach the client. A failure means a
+  string no human has judged yet; judging it either way — a fix in `source_corrections`, or
+  a named clearance in the audit script — makes it quiet again.
+- **`dev/audit_source_anomalies.py`** — nine detectors over the source's own text, the
+  two strongest cross-checking a feast's English name against its Armenian one.
+- **`dev/refresh_artifact_names.py`** — pushes registered text fixes into
+  `saint_schedule.json`'s served labels, text only: ids, ordering and every reading stay
+  byte-identical, so a name fix cannot smuggle in a readings change.
+- **`dev/feast_discrepancy_report.py`** — a classified inventory of every remaining
+  feast-name difference, each shown with the two days either side of ground truth for
+  context. It now reports no contradiction, no omission and no casing variant on any of
+  the 9,496 days with ground truth, so the report itself is no longer committed.
 
 ## [1.2.3] — 2026-07-23
 

@@ -22,7 +22,7 @@ contradicted on 41 days without this test noticing. ``tests/test_feast_name_raw.
 the unprojected string that downstream actually stores, and ``tests/test_feast_contract.py``
 adds the source-independent invariants; this file is now the narrowest of the three.
 Audit residual mismatches with ``python dev/feast_audit.py``, and see
-``reports/feast_name_discrepancies.md`` for the full inventory.
+the full inventory (``python dev/feast_discrepancy_report.py``).
 """
 
 import datetime
