@@ -13,6 +13,14 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   Both values are language-independent; tests exercise all 9,495 dates from 2001–2026,
   include SacredTradition source fixtures across that range, and cover the HTTP/JSON
   boundary.
+- Add a language-independent `"Calendar"` object to every result with weekday/Sunday,
+  Dominical, fast-day and fast-context, saints and broad saint-class, Cross, Marian, and
+  memorial facts. The fields provide the minimum deterministic inputs to downstream
+  standard-service decision trees; they do not select service propers. Multiple
+  identities may be true on collision days,
+  and tests lock the schema and value vocabularies across every date from 2001–2027. A
+  development-only dual-extraction audit validates 4,748 dates from 13 hash-locked annual
+  Oratsouyts sources and distills all source-positive cases into an offline CI fixture.
 
 ## [1.2.3] — 2026-07-23
 

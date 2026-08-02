@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "date": "2018-07-28",
+      "field": "saint_classes",
+      "rationale": "The 2018 source uniquely adds Gregory the Theologian, while the current canonical runtime identity still names only Athanasius and Cyril. Correct the occurrence identity before deriving vartapet from it at runtime.",
+      "runtime_value": [
+        "hierarch"
+      ],
+      "source_value": [
+        "hierarch",
+        "vartapet"
+      ]
+    }
+  ],
+  "schema_version": 1
+}

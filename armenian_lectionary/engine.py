@@ -1707,9 +1707,10 @@ def _localize(result: dict, language: str) -> dict:
 
     Only the *scraped* values are localized -- the feast (``Liturgical Day``) and the
     book names inside ``Readings``/``ReadingsList``. Provenance/metadata fields
-    (``Season``, ``Source``, ``Confidence``, ``Note``) stay in English; they are engine
-    annotations, not source data, and have no scraped Armenian form. The result always
-    carries a ``Language`` key naming the language its names are in.
+    (``Season``, ``Source``, ``Confidence``, ``Note``) and the canonical identifiers in
+    ``Calendar`` stay in English; they are engine annotations, not source data, and have
+    no scraped Armenian form. The result always carries a ``Language`` key naming the
+    language its names are in.
     """
     result["Language"] = language
     if language == "en":
@@ -1731,6 +1732,253 @@ def _localize(result: dict, language: str) -> dict:
 # --------------------------------------------------------------------------- #
 # Public API
 # --------------------------------------------------------------------------- #
+
+# ``Calendar`` response metadata is intentionally a small set of routing facts, not a
+# service-proper selector.  Values are canonical, language-independent identifiers so a
+# consumer does not have to re-classify the translated ``Liturgical Day`` string.
+_SAINT_SIGNAL_RE = re.compile(
+    r"(?:\b(?:saints?|saintly|apostles?|prophets?|martyrs?|martyred|patriarchs?|"
+    r"bishops?|catholicos|evangelists?|holy fathers|holy virgins|holy archangels|"
+    r"holy disciples|holy translators|holy doctors?|children of bethlehem)\b|"
+    r"\bst\.(?=\s|$))",
+    re.IGNORECASE,
+)
+
+_WEEKDAY_NAMES = (
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
+)
+
+_CROSS_FEAST_PHRASES = (
+    "appearance of the holy cross",
+    "exaltation of the holy cross",
+    "feast of the holy cross",
+    "discovery of the holy cross",
+)
+
+_MARIAN_FEAST_PHRASES = (
+    "annunciation to the virgin mary",
+    "birth of holy virgin mary",
+    "conception of the holy virgin mary",
+    "presentation of the holy mother of god",
+    "discovery of st. mary's box",
+    "discovery of the box of the holy mother of god",
+    "discovery of the belt of the holy mother of god",
+)
+
+_SAINT_CLASS_PATTERNS = (
+    ("apostle", re.compile(
+        r"\b(?:apostles?|evangelists?|holy disciples|disciples?)\b", re.I)),
+    ("prophet", re.compile(r"\bprophets?\b", re.I)),
+    ("martyr", re.compile(
+        r"\b(?:martyrs?|martyred|witness|hripsime|sargis the warrior|atom and his "
+        r"soldiers|sukiasians|voskians|ghevond the priest|callistratus|cyricus|"
+        r"eugeni(?:os|us))\b", re.I)),
+    ("hierarch", re.compile(
+        r"\b(?:patriarchs?|bishops?|catholicos|john chrysostom|"
+        r"athanasius and cyril)\b", re.I)),
+    ("vartapet", re.compile(
+        r"\b(?:doctors? of (?:the )?church|theologian|holy translators|"
+        r"john of vorotan|gregory of tatev)\b", re.I)),
+    ("monastic", re.compile(r"\b(?:hermits?|monks?|holy fathers of egypt)\b", re.I)),
+    ("virgin", re.compile(r"\b(?:virgins?|hripsime|sandoukht|gayiane)\b", re.I)),
+    ("illuminator", re.compile(r"\bgregory the illuminator\b", re.I)),
+    ("hripsimian", re.compile(r"\bhripsime\b", re.I)),
+)
+
+
+def _calendar_components(liturgical_day: str) -> tuple:
+    """Canonical English observance components, stripped of display punctuation."""
+    return tuple(
+        component.strip().strip(". ").casefold()
+        for component in liturgical_day.split(_FEAST_SEP)
+        if component.strip()
+    )
+
+
+def _is_cross_feast(components: tuple) -> bool:
+    # "Sunday after the Holy Cross" and a fast/eve *named for* the Cross describe
+    # calendar position, not a Cross feast.  Require an explicit feast identity.
+    return any(
+        any(phrase in component for phrase in _CROSS_FEAST_PHRASES)
+        for component in components
+    )
+
+
+def _is_marian_feast(components: tuple) -> bool:
+    for component in components:
+        if any(phrase in component for phrase in _MARIAN_FEAST_PHRASES):
+            return True
+        # The Assumption itself and its nine-day observance retain Marian identity.
+        # Later Sundays merely positioned "after Assumption" do not.
+        if component.startswith("assumption of "):
+            return True
+        if re.match(
+                r"^(?:second|third|fourth|fifth|sixth|seventh|ninth) day of "
+                r"(?:the )?assumption\b", component):
+            return True
+        if re.match(r"^second sunday after (?:the )?assumption\b", component):
+            return True
+    return False
+
+
+def _saint_text(components: tuple) -> str:
+    """Return only components that can carry a saints' commemoration.
+
+    This excludes fast eves and Marian feast identities: both can contain words such
+    as ``Saint`` or ``Virgin`` without making the date a saints-day branch.
+    """
+    parts = []
+    for component in components:
+        if component.startswith("eve of fast"):
+            continue
+        if any(phrase in component for phrase in _MARIAN_FEAST_PHRASES):
+            continue
+        if component.startswith("feast of dedication of holy etchmiadzin"):
+            continue
+        if component.startswith("remembrance of the ten virgins"):
+            continue
+        if (_SAINT_SIGNAL_RE.search(component)
+                or component.startswith("commemoration of ") and " fathers " in component
+                or component.startswith("feast of all saints")
+                or component.startswith("beheading of st. john")):
+            parts.append(component)
+    return _FEAST_SEP.join(parts)
+
+
+def _date_fast_context(target_date: datetime.date):
+    """Return a calendar-math fast window, independently of display-title rank.
+
+    Fixed or movable feasts can replace the English display title without erasing
+    the underlying fast.  These windows are corroborated by every available annual
+    Oratsouyts; Varaga Cross and St James are the two contexts not previously exposed.
+    """
+    easter = calculate_gregorian_easter(target_date.year)
+    e_off = (target_date - easter).days
+    if -48 <= e_off <= -8:
+        return "great_lent"
+    if -7 <= e_off <= -1:
+        return "holy_week"
+    if -69 <= e_off <= -65:
+        return "fast_of_catechumens"
+    if 50 <= e_off <= 54:
+        return "fast_of_prophet_elijah"
+    if 71 <= e_off <= 75:
+        return "fast_of_saint_gregory"
+    if 92 <= e_off <= 96:
+        return "fast_of_transfiguration"
+
+    a = anchors(target_date.year)
+    if a["AS"] - datetime.timedelta(days=6) <= target_date <= (
+            a["AS"] - datetime.timedelta(days=2)):
+        return "fast_of_assumption"
+    if a["EX"] - datetime.timedelta(days=6) <= target_date <= (
+            a["EX"] - datetime.timedelta(days=2)):
+        return "fast_of_holy_cross"
+    if a["EX"] + datetime.timedelta(days=8) <= target_date <= (
+            a["EX"] + datetime.timedelta(days=12)):
+        return "fast_of_varaga_cross"
+    if a["HE"] < target_date <= a["HE"] + datetime.timedelta(days=5):
+        return "fast_of_advent"
+    if a["HE"] + datetime.timedelta(days=22) <= target_date <= (
+            a["HE"] + datetime.timedelta(days=26)):
+        return "fast_of_saint_james"
+    if ((target_date.month == 12 and target_date.day >= 30)
+            or (target_date.month == 1 and target_date.day <= 4)):
+        return "fast_of_nativity"
+    return None
+
+
+def _is_fast_day(target_date: datetime.date, liturgical_day: str,
+                 date_context) -> bool:
+    """Whether the calendar designates this date itself as a fast day."""
+    if date_context is not None:
+        # Great Lent includes Saturdays but none of its Sundays.  Other named
+        # windows are five weekdays; the Nativity span can contain a Sunday.
+        return target_date.weekday() != 6
+    label = liturgical_day.casefold()
+    if "fast day" in label or re.search(r"\bday of (?:the )?fast\b", label):
+        return True
+    if "begining of the fast" in label or "beginning of the fast" in label:
+        return True
+    if (target_date.weekday() in (2, 4)
+            and label == "(movable ordinary-time reading)"):
+        return True
+    return False
+
+
+def _fast_context(date_context, is_fast_day: bool) -> str:
+    """Return a canonical fast context without turning every context into a fast day."""
+    if date_context in ("great_lent", "holy_week"):
+        return date_context
+    if not is_fast_day:
+        return None
+    return date_context or "weekly_fast"
+
+
+def _is_dominical(target_date: datetime.date, liturgical_day: str, season: str,
+                   is_cross_feast: bool, is_marian_feast: bool) -> bool:
+    """Whether the date carries Sunday/Dominical identity.
+
+    Multiple identities may be true on a collision day; this function reports facts
+    and deliberately does not encode an office-specific precedence rule.
+    """
+    if target_date.weekday() == 6 or is_cross_feast or is_marian_feast:
+        return True
+    label = liturgical_day.casefold()
+    if season in ("Easter", "Eastertide (Hinank)"):
+        return True
+    return any(
+        phrase in label
+        for phrase in (
+            "our lord", "resurrection", "pentecost", "ascension",
+            "transfiguration", "nativity", "theophany", "feast of holy church",
+            "feast of the holy church", "feast of the new holy church",
+            "dedication of holy etchmiadzin",
+        )
+    ) and not any(
+        phrase in label for phrase in (
+            "fast of nativity", "fast of the nativity",
+            "fast of transfiguration", "fast of the transfiguration",
+        )
+    )
+
+
+def _calendar_attributes(target_date: datetime.date, liturgical_day: str,
+                         season: str) -> dict:
+    """Build the language-independent calendar facts in the public response."""
+    components = _calendar_components(liturgical_day)
+    cross = _is_cross_feast(components)
+    marian = _is_marian_feast(components)
+    saint_text = _saint_text(components)
+    genocide_martyrs = (
+        (target_date.month, target_date.day) == (4, 24)
+        and target_date.year >= 2016
+    )
+    is_saints_day = bool(saint_text) or genocide_martyrs
+    saint_classes = [
+        name for name, pattern in _SAINT_CLASS_PATTERNS
+        if is_saints_day and pattern.search(saint_text)
+    ]
+    if genocide_martyrs and "martyr" not in saint_classes:
+        saint_classes.append("martyr")
+    date_context = _date_fast_context(target_date)
+    fast_day = _is_fast_day(target_date, liturgical_day, date_context)
+    return {
+        "Weekday": _WEEKDAY_NAMES[target_date.weekday()],
+        "Is Sunday": target_date.weekday() == 6,
+        "Is Dominical": _is_dominical(
+            target_date, liturgical_day, season, cross, marian),
+        "Is Fast Day": fast_day,
+        "Fast Context": _fast_context(date_context, fast_day),
+        "Is Saints Day": is_saints_day,
+        "Saint Classes": saint_classes,
+        "Is Cross Feast": cross,
+        "Is Marian Feast": marian,
+        "Is Memorial": (
+            "remembrance of the dead" in liturgical_day.casefold()
+            or "saints vardan the general" in liturgical_day.casefold()
+        ),
+    }
 
 # The Remembrance of the Armenian Genocide (1915) is a fixed CIVIL-date
 # commemoration kept on April 24. The cross-year-validated table keys days by their
@@ -1764,8 +2012,8 @@ def compute_armenian_lectionary(target_date: datetime.date,
     or ``"hy"`` for Classical Armenian. In ``"hy"`` the feast (``Liturgical Day``) and
     the book names in ``Readings``/``ReadingsList`` come from sacredtradition.am
     (scraped offline into ``data/{feast,book}_names_hy.json``); any name with no known
-    Armenian form is left in English. Provenance fields stay English (see
-    :func:`_localize`).
+    Armenian form is left in English. Provenance fields and the canonical ``Calendar``
+    routing attributes stay English (see :func:`_localize`).
     """
     if language not in SUPPORTED_LANGUAGES:
         raise ValueError(
@@ -1775,6 +2023,8 @@ def compute_armenian_lectionary(target_date: datetime.date,
     result["Liturgical Day"] = _anchor_genocide_remembrance(
         result["Liturgical Day"], target_date)
     result["Mode"] = calculate_liturgical_mode(target_date)
+    result["Calendar"] = _calendar_attributes(
+        target_date, result["Liturgical Day"], result["Season"])
     return _localize(result, language)
 
 

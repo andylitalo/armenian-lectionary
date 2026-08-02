@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "filename": "2013 Օրացույց.pdf",
+      "page_count": 225,
+      "sha256": "f2b3b96f0c3ec3f4e63616b5226887ba785968e5b8142095bcda8294c252168c",
+      "year": 2013
+    },
+    {
+      "filename": "2014 Օրացույց.pdf",
+      "page_count": 271,
+      "sha256": "01e6eedea73db27b9de439324aaf85889a5c0e95cc50ae0adf48e34919f16858",
+      "year": 2014
+    },
+    {
+      "filename": "2015 Օրացույց.pdf",
+      "page_count": 270,
+      "sha256": "ac103b519a8d54a85da5363b05c9c3ecd24a0e2282db04804f345fe9172bd0dd",
+      "year": 2015
+    },
+    {
+      "filename": "2016 Օրացույց.pdf",
+      "page_count": 272,
+      "sha256": "ebae2cbb99175f9773b5f5d20ae0fd4237343ced48a764f7037bdab73da4e269",
+      "year": 2016
+    },
+    {
+      "filename": "2017 Օրացույց.pdf",
+      "page_count": 256,
+      "sha256": "20486beac77abff93fa11901c718d2d99f29827acaa3a8f0c304a880170d614a",
+      "year": 2017
+    },
+    {
+      "filename": "2018 օրացույց.pdf",
+      "page_count": 134,
+      "sha256": "42ebadd8bc545252a2ac44efcb484fe387dc077488f40f9b50dc51e5bf8cd9c4",
+      "year": 2018
+    },
+    {
+      "filename": "2019 Օրացույց.pdf",
+      "page_count": 91,
+      "sha256": "0302597f676a7c30cad05e6f21aff4b767e25ebcfbf1247cab9d2ff8ebeff0f6",
+      "year": 2019
+    },
+    {
+      "filename": "2020 Օրացույց.pdf",
+      "page_count": 137,
+      "sha256": "e32c1c95495269d9f9258d32fabfdb38d97cf04d642a6dd255e41788033205b0",
+      "year": 2020
+    },
+    {
+      "filename": "2022 Օրացույց.pdf",
+      "page_count": 272,
+      "sha256": "2f9ef0142d589e3d956c82bb804070184fbf7787ca3c66f7d8a81f49d8ac2e68",
+      "year": 2022
+    },
+    {
+      "filename": "2023 Օրացույց.pdf",
+      "page_count": 272,
+      "sha256": "bfcd69dc98259dd2ffaa02edd06f9c1b3ab04b50eb9b47d6b8e25fd490a94276",
+      "year": 2023
+    },
+    {
+      "filename": "2024 Օրացույց.pdf",
+      "page_count": 272,
+      "sha256": "b62b468c67c8bfad2a12e8b454f494929e9de33355dad19ed41dd8c62ee64466",
+      "year": 2024
+    },
+    {
+      "filename": "2025 Օրացույց.pdf",
+      "page_count": 272,
+      "sha256": "c1143ec6052b03da3a89c1eaca2b2be82a37ccf2db03858ec30638a70f4eddcd",
+      "year": 2025
+    },
+    {
+      "filename": "2026 Օրացույց.pdf",
+      "page_count": 272,
+      "sha256": "ba6907007fa353d3e91da5de08db25e87ae44d96ae16acd26162e90135961abc",
+      "year": 2026
+    }
+  ]
+}

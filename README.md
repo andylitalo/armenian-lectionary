@@ -98,6 +98,73 @@ Tests exercise all 9,495 dates from 2001–2026, with SacredTradition fixtures s
 every year and the annual reset; `calculate_liturgical_mode(date)` returns the same
 `{"Tone": tone, "Number": number}` record without resolving the readings.
 
+### Calendar routing attributes
+
+Every result also includes a language-independent `"Calendar"` object. It contains the
+minimum calendar facts that can be defined deterministically and that a downstream
+resolver can use to enter the decision tree for the Armenian Prayer Hours, Divine
+Liturgy, or another standard service. It does **not** select a Trisagion, litany, Mesedi,
+proper hymn, or any other service-specific appointment.
+
+```json
+{
+  "Weekday": "Monday",
+  "Is Sunday": false,
+  "Is Dominical": false,
+  "Is Fast Day": false,
+  "Fast Context": null,
+  "Is Saints Day": true,
+  "Saint Classes": ["martyr", "virgin", "hripsimian"],
+  "Is Cross Feast": false,
+  "Is Marian Feast": false,
+  "Is Memorial": false
+}
+```
+
+`"Date"` is the liturgical date these facts describe. A caller scheduling an Evening
+Office is responsible for converting its civil service time to the controlling liturgical
+date before calling the engine.
+
+- `"Is Fast Day"` means that the calendar designates the date itself as a fast day. It
+  does not describe a person's dietary practice and is not a synonym for a future
+  office-specific `is_penitential` decision.
+- `"Is Dominical"` is deterministic, but its confidence is not yet uniform: Sundays
+  are established by civil-date math, while the non-Sunday feast-family taxonomy is
+  still an explicit reconciliation item. Treat non-Sunday `true` values as provisional
+  until that occurrence taxonomy receives liturgical review.
+- `"Fast Context"` is `null` or one of `weekly_fast`, `great_lent`, `holy_week`,
+  `fast_of_catechumens`, `fast_of_prophet_elijah`, `fast_of_saint_gregory`,
+  `fast_of_transfiguration`, `fast_of_assumption`, `fast_of_holy_cross`,
+  `fast_of_varaga_cross`, `fast_of_advent`, `fast_of_saint_james`, and
+  `fast_of_nativity`. A Sunday in Great Lent has
+  `"Fast Context": "great_lent"` while retaining `"Is Fast Day": false`.
+- `"Saint Classes"` contains zero or more stable broad identifiers: `apostle`, `prophet`,
+  `martyr`, `hierarch`, `vartapet`, `monastic`, `virgin`, `illuminator`, or `hripsimian`.
+  An empty list on a saints' day means the available calendar identity does not establish
+  a narrower class; consumers should use their generic saints branch.
+- `"Is Memorial"` means an explicit calendar-level Remembrance of the Dead marker,
+  including the national memorial attached to Vardanants. It does not mean every event
+  whose English title happens to contain “remembrance.”
+
+The booleans are independent facts, not a priority list. More than one can be true on a
+collision or post-feast day; a downstream office resolver owns the precedence rules.
+Prefeast, vigil, observance rank, and penitential-proper fields are intentionally absent
+until their calendar-wide semantics can be established independently of service-specific
+rubrics. The object uses the same canonical values for `language="en"` and `language="hy"`
+and adds no runtime data file or network lookup.
+
+The development-only corpus audit can be regenerated when the reviewed PDFs are present:
+
+```bash
+python -m dev.oratsouyts.pipeline --source-dir "/path/to/calendars"
+```
+
+The exact 13-source inventory is locked by full hashes in
+`dev/oratsouyts/source_manifest.json`. The command compares independent Poppler layout and
+raw-order extractions, rejects incomplete or shifted date runs, regenerates the coverage
+and reconciliation reports, and updates a compact source-positive CI fixture. Verbose
+page evidence stays under ignored `.work/oratsouyts/`; none is imported by the library.
+
 ### Source fidelity & known typos
 
 The engine treats the printed Տօնացոյց (Tōnatsooyts) as the **primary source** and
@@ -164,6 +231,18 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
     "Number": 2
   },
   "Season": "After Pentecost",
+  "Calendar": {
+    "Weekday": "Monday",
+    "Is Sunday": false,
+    "Is Dominical": false,
+    "Is Fast Day": false,
+    "Fast Context": null,
+    "Is Saints Day": true,
+    "Saint Classes": ["martyr", "virgin", "hripsimian"],
+    "Is Cross Feast": false,
+    "Is Marian Feast": false,
+    "Is Memorial": false
+  },
   "Readings": {
     "Old Testament": ["Proverbs 31.29-31", "Isaiah 61.10-62.3"],
     "Epistle": ["St. Paul's Epistle to the Romans 15.30-16.2"],

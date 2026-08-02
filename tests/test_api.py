@@ -27,6 +27,27 @@ class TestReadingsAPI(unittest.TestCase):
                 self.assertEqual(mode, expected)
                 self.assertIs(type(mode["Number"]), int)
 
+    def test_calendar_object_survives_json_boundary_in_both_languages(self):
+        expected = {
+            "Weekday": "Monday",
+            "Is Sunday": False,
+            "Is Dominical": True,
+            "Is Fast Day": False,
+            "Fast Context": None,
+            "Is Saints Day": False,
+            "Saint Classes": [],
+            "Is Cross Feast": False,
+            "Is Marian Feast": True,
+            "Is Memorial": True,
+        }
+        for language in ("en", "hy"):
+            with self.subTest(language=language):
+                response = self.client.get(
+                    "/readings?date=2026-08-17&language=" + language
+                )
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.get_json()["Calendar"], expected)
+
 
 if __name__ == "__main__":
     unittest.main()
