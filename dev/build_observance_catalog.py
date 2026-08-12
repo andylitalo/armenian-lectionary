@@ -113,6 +113,19 @@ _DATE_SCOPED = {
     for n, letter in enumerate(_ILLUMINATOR_FAST_HY, start=1)
 }
 
+# _FEAST_SEP is the ENGINE's component join, and a catalog entry is ONE component. Any
+# entry whose own text contains it is a category error, and it shows: the source's Armenian
+# for a few days carries a trailing note its English drops ("— Նաւակատիք", the vigil;
+# "— Կաղանդ. տարեմուտ", the New Year), and feast_names_hy.json kept that inside the single
+# component it was paired with. The engine then joined the day's components with the same
+# separator, so `hy` came out with one component more than `en` on 131 days -- a consumer
+# splitting on " — " to render or measure them saw a different shape per language.
+#
+# The content is real and the source publishes it, so it stays; only the delimiter changes.
+# ASCII on purpose: source_corrections._is_expected_char allows ASCII, the Armenian block
+# and the em-dash, so a semicolon needs no widening of that allow-list.
+_INTERNAL_SEP = "; "
+
 _STRIP_PREFIX = re.compile(
     r"^(the\s+|sts?\.?\s+|saints?\s+|holy\s+)+", re.IGNORECASE)
 _NON_WORD = re.compile(r"[^a-z0-9]+")
@@ -228,12 +241,19 @@ def build_catalog():
     for text in sorted(all_texts):
         if text in minted_en:
             continue    # already minted (e.g. a pre-lent cohort literal)
+        if _FEAST_SEP in text:
+            # Not one component. A registered correction split the source's comma-joined
+            # "Fast day, Remembrance of the Ten Virgins" into two components with the
+            # engine's separator, so the ground truth carries the JOINED form as one row.
+            # Minting an id for it would be minting an id for a whole day; the day already
+            # resolves component-wise to its two real ids.
+            continue
         hy = hy_for(text, hy_map)
         if hy is None:
             missing_hy.append(text)
             continue
         sid = _slug(text, used_ids)
-        catalog[sid] = {"en": text, "hy": hy}
+        catalog[sid] = {"en": text, "hy": hy.replace(_FEAST_SEP, _INTERNAL_SEP)}
         minted_en.add(text)
 
     return catalog, sorted(set(missing_hy))

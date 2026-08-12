@@ -26,6 +26,12 @@ Findings are classified, strongest first:
     ``Phillip``/``Philip`` (docs/feast-name-corrections.md section 4), and the day the cache
     happens to sample decides nothing. Separated out so the counts above mean
     "unexplained", not "everything that differs".
+  * ``INTERNAL_DELIMITER`` -- identical to the source once the catalog's internal delimiter
+    is read back as the component separator. Also not a defect, and a deliberate trade: the
+    source's Armenian glues a trailing note ("— Նաւակատիք") onto a name whose English has
+    no such piece, so reproducing its punctuation exactly cost ``hy`` an extra component
+    that ``en`` did not have. The text is identical; only the delimiter differs. See
+    ``dev/build_observance_catalog._INTERNAL_SEP``.
 
 Unlike the English side, none of these is zero yet, and the residue is not all engine
 defect. Of the 12 contradictions at the time of writing: 7 are days where the shipped
@@ -61,6 +67,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from armenian_lectionary.engine import (                                # noqa: E402
     _FEAST_SEP, compute_armenian_lectionary,
 )
+from dev.build_observance_catalog import _INTERNAL_SEP                  # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
 
 REF_DIR_HY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reference_data_hy")
@@ -160,7 +167,9 @@ def collect():
 
         src_comps, eng_comps = components(src), components(eng)
         contradictions, omissions = diff_components(src_comps, eng_comps)
-        if _is_dominant_form(contradictions, omissions, dominant):
+        if eng.replace(_INTERNAL_SEP, _FEAST_SEP) == src:
+            kind = "INTERNAL_DELIMITER"
+        elif _is_dominant_form(contradictions, omissions, dominant):
             kind = "DOMINANT_FORM"
         elif contradictions:
             kind = "CONTRADICTION"
@@ -176,7 +185,7 @@ def collect():
     return {"compared": compared, "exact": exact, "findings": findings}
 
 
-KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "DOMINANT_FORM")
+KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "DOMINANT_FORM", "INTERNAL_DELIMITER")
 
 
 def counts(data):

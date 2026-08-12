@@ -32,9 +32,12 @@ time of writing the 12 contradictions are:
 So the contract is "no NEW divergence", enforced by floors that may only move toward zero.
 Lower them whenever a fix lands; never raise one to make a change pass.
 
-DOMINANT_FORM has a ceiling too, for a different reason. Those days are correct -- the
-source spells one name several ways and we serve the one it uses most -- but a RISING count
-means the source grew a new spelling that nobody has looked at, which is worth knowing.
+DOMINANT_FORM and INTERNAL_DELIMITER have ceilings too, for a different reason. Those days
+are correct as served -- the source spells one name several ways and we serve the one it
+uses most; or its Armenian glues a trailing note onto a name whose English has no such
+piece, and the catalog keeps the text while changing the delimiter. Neither is a defect,
+but a RISING count means the source grew a spelling or a glued note that nobody has looked
+at, which is worth knowing.
 """
 
 import os
@@ -60,9 +63,19 @@ HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
 # but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
 HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "5"))
 
-# Days whose Armenian name matches the source exactly (under the registered orthography
-# reversal). Monotonic UP.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "413"))
+# Days identical to the source except that a catalog entry's internal break uses the
+# catalog's own delimiter rather than the component separator. Monotonic DOWN, but only
+# reachable by a source change: these are correct as served.
+HY_INTERNAL_DELIMITER_CEILING = int(
+    os.environ.get("HY_INTERNAL_DELIMITER_CEILING", "6"))
+
+# Days whose Armenian name matches the source byte for byte (under the registered
+# orthography reversal). Monotonic UP.
+#
+# Note this counts BYTE equality, so the internal-delimiter days above are excluded from it
+# even though their text is identical. exact + INTERNAL_DELIMITER is the "same words" number
+# and is what moves when a real fix lands: 407 + 6 = 413.
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "407"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.
@@ -111,6 +124,14 @@ class TestRawArmenianFeastName(unittest.TestCase):
             f"{HY_DOMINANT_FORM_CEILING}); these are not defects, but a rise means the "
             "source grew a spelling nobody has reviewed -- run "
             "`python dev/audit_hy_variants.py`")
+
+    def test_internal_delimiter_within_ratchet(self):
+        n = self.tally["INTERNAL_DELIMITER"]
+        self.assertLessEqual(
+            n, HY_INTERNAL_DELIMITER_CEILING,
+            f"{n} days differ from the source only by the catalog's internal delimiter "
+            f"(ceiling {HY_INTERNAL_DELIMITER_CEILING}); a rise means the source glued a "
+            "new trailing note onto a name, which is worth a look")
 
     def test_exact_match_floor(self):
         n = self.data["exact"]

@@ -301,7 +301,7 @@
  },
  "eve_of_the_nativity": {
   "en": "Eve of the Nativity and Theophany of our Lord Jesus Christ",
-  "hy": "Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի — Նաւակատիք"
+  "hy": "Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի; Նաւակատիք"
  },
  "eve_of_the_resurrection": {
   "en": "Eve of the Resurrection of our Lord Jesus Christ",
@@ -314,10 +314,6 @@
  "fast_day": {
   "en": "Fast day",
   "hy": "Պահք"
- },
- "fast_day_remembrance_of": {
-  "en": "Fast day — Remembrance of the Ten Virgins",
-  "hy": "Պահք — Յիշատակ տասն կուսանացն"
  },
  "fathers_of_egypt_paul": {
   "en": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
@@ -341,7 +337,7 @@
  },
  "feast_of_dedication_of": {
   "en": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
-  "hy": "Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին — Նաւակատիք"
+  "hy": "Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին; Նաւակատիք"
  },
  "feast_of_discovery_of": {
   "en": "Feast of Discovery of St. Gregory's Relics",
@@ -349,7 +345,7 @@
  },
  "feast_of_holy_church": {
   "en": "Feast of Holy Church in Dedication of Holy Cross",
-  "hy": "Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին — Նաւակատիք"
+  "hy": "Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին; Նաւակատիք"
  },
  "feast_of_holy_etchmiadzin": {
   "en": "Feast of Holy Etchmiadzin",
@@ -953,7 +949,7 @@
  },
  "remembrance_of_the_old": {
   "en": "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church",
-  "hy": "Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ — Նաւակատիք"
+  "hy": "Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ; Նաւակատիք"
  },
  "remembrance_of_the_passion": {
   "en": "Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ",
@@ -1281,7 +1277,7 @@
  },
  "third_day_of_the_4": {
   "en": "Third day of the Fast of Nativity",
-  "hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ"
+  "hy": "Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ"
  },
  "third_day_of_the_5": {
   "en": "Third day of the Fast of the Catechumens",
