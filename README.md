@@ -172,9 +172,23 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
   "ReadingsList": ["Proverbs 31.29-31", "Isaiah 61.10-62.3",
                    "St. Paul's Epistle to the Romans 15.30-16.2",
                    "Matthew 10.26-33"],
+  "ReadingsRefs": [
+    {"book": "Proverbs", "start_chapter": 31, "start_verse": 29,
+     "end_chapter": 31, "end_verse": 31, "citation": "Proverbs 31.29-31"},
+    {"book": "Isaiah", "start_chapter": 61, "start_verse": 10,
+     "end_chapter": 62, "end_verse": 3, "citation": "Isaiah 61.10-62.3"}
+  ],
   "Source": "validated-table"
 }
 ```
+
+`ReadingsRefs` gives the same readings as structured
+`{book, start_chapter, start_verse, end_chapter, end_verse, citation}` dicts, one per
+sub-reference, so a consumer does not have to parse citation strings like
+`"Mark 15.42-16.1"` back apart itself. `book` is always the canonical English head,
+independent of `language`. A composite citation — currently only the Daniel/Azariah
+reading, `"Daniel 3.1-23, Azariah. 1-68"` — expands to two dicts sharing that
+`citation` string, the back-pointer to their shared `ReadingsList` entry.
 
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.
@@ -203,8 +217,10 @@ reading = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4,
 print(reading["Liturgical Day"])   # RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)
 print(reading["Mode"])             # {'Tone': 'ԱՁ', 'Number': 1}
 print(reading["ReadingsList"])     # ['John 20.1-18', 'Acts of the Apostles 1.1-8', ...]
+print(reading["ReadingsRefs"][0])  # {'book': 'John', 'start_chapter': 20, 'start_verse': 1,
+                                    #  'end_chapter': 20, 'end_verse': 18, 'citation': 'John 20.1-18'}
 
-# Armenian names: pass language="hy" (default "en").
+# Armenian names: pass language="hy" (default "en"). ReadingsRefs' "book" stays English.
 hy = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4, 5), language="hy")
 print(hy["Liturgical Day"])        # ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)
 print(hy["ReadingsList"][0])       # Աւետարան ըստ Յովհաննէսի 20.1-18
@@ -243,7 +259,8 @@ where present) rather than assuming every result is authoritative:
 - `second-volume-cycle` / `generative-continua` / other generative tiers —
   best-guess readings derived from the source laydown, flagged as such.
 - `algorithmic-estimate` — no readings confidently derivable; `"ReadingsList"`
-  is empty. Gate on an empty list rather than expecting an error.
+  (and `"ReadingsRefs"`) is empty. Gate on an empty list rather than expecting an
+  error.
 
 See the `Source` values under [Accuracy](#accuracy) for the full picture.
 
