@@ -4,7 +4,7 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.3.0] — 2026-08-12
 
 ### Added
 - Add the Armenian Church eight-mode assignment to every result as a structured `"Mode"`
@@ -139,6 +139,38 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   feast-name difference, each shown with the two days either side of ground truth for
   context. It now reports no contradiction, no omission and no casing variant on any of
   the 9,496 days with ground truth, so the report itself is no longer committed.
+
+### Changed
+- **Display-text resolution consolidated into one id-keyed catalog.** Verbose feast/fast
+  text used to be produced and stored in four independent places — the table's raw
+  `"feast"` strings, `saint_schedule.json`'s labels, five hardcoded string-literal
+  families in `engine.py` (position/eve labels), and a flat English→Armenian text map —
+  so a single wording change needed edits in all four. `armenian_lectionary/data/
+  observance_catalog.json` now holds one canonical `id -> {en, hy}` entry (both
+  languages **required**, no nulls) for every distinct commemoration/position/eve
+  component (388 entries), and every storage tier carries an ordered `observance_ids`
+  list alongside its existing text. Resolution moves to one place,
+  `engine._resolve_observance_names`, called once at the `language=` boundary; internal
+  computation is otherwise unchanged and the resolved **English** text is byte-identical
+  to before across the full 2001–2027 corpus (`dev/verify_observance_catalog.py`: 0
+  orphans, 0 missing-`hy` entries).
+
+  Consolidating onto one canonical mapping surfaced two pre-existing bugs that the old
+  scattered/composite-scrape translations had been masking:
+  - `saint_schedule.json`'s shipped labels had drifted stale relative to the approved
+    ground truth (a prior spelling fix had never actually been pushed into this
+    artifact) — invisible to `test_feast.py` because its comparison corrected the
+    engine's output before comparing, not the artifact itself.
+  - `language="hy"` served **"Ա" (First) Sunday after Pentecost"** for what should always
+    read **"Բ" (Second)** — English never has a "First Sunday after Pentecost" (the count
+    floors at two), but one scraped composite translation had carried the wrong ordinal
+    into the old flat text map. The catalog resolves this to one correct Armenian string
+    everywhere; locked by a new regression test
+    (`test_language.test_second_sunday_after_pentecost_ordinal`).
+
+  `armenian_lectionary/data/feast_names_hy.json` is no longer read at runtime (kept only
+  as a dev-time input to `dev/build_observance_catalog.py`). No public result-dict field
+  changed — `"Liturgical Day"` still resolves via the existing `language=` kwarg.
 
 ## [1.2.3] — 2026-07-23
 
