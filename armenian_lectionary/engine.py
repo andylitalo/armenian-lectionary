@@ -1992,6 +1992,68 @@ def _translate_reading(ref: str, book_map: dict) -> str:
     return f"{hy} {tail}" if hy else ref
 
 
+# Book vocabulary for structured citation parsing (ReadingsRefs). Every book head that
+# appears in a served reading is a key of _BOOK_NAMES_HY, except Azariah -- the sole
+# apocryphal fragment with no book-level Armenian rendering of its own (it is composed
+# from Daniel 3:24-90 in the Armenian corpus). Longest names first, so a prefix match
+# picks the more specific book (matters where names share a leading word, e.g. the
+# "St. ... Epistle" family).
+_CITATION_BOOKS = sorted(set(_BOOK_NAMES_HY) | {"Azariah"}, key=len, reverse=True)
+
+# The numeric tail of a citation, e.g. "9.1-10.2", "3.1-23", "1.1", or (Azariah's
+# single-chapter book) "1-68". A missing chapter defaults to 1; a missing end defaults
+# to the start (single verse); an end verse with no chapter of its own shares the start
+# chapter (same-chapter range).
+_CITATION_TAIL_RE = re.compile(
+    r"^(?:(?P<start_chapter>\d+)\.)?(?P<start_verse>\d+)"
+    r"(?:-(?:(?P<end_chapter>\d+)\.)?(?P<end_verse>\d+))?$")
+
+
+def _parse_citation_ref(citation: str) -> list:
+    """Parse an English reading citation into one structured dict per sub-reference.
+
+    A composite citation -- currently only "Daniel 3.1-23, Azariah. 1-68", the sole
+    scripture composite in the corpus -- splits on ", " into multiple dicts that all
+    carry the original, unsplit ``citation`` string, the back-pointer that keeps them
+    aligned to their shared entry in ``ReadingsList``.
+    """
+    refs = []
+    for piece in citation.split(", "):
+        piece = piece.strip()
+        book = next((b for b in _CITATION_BOOKS if piece.startswith(b)), None)
+        if book is None:
+            raise ValueError(f"unrecognized book in citation {citation!r}")
+        tail = piece[len(book):].lstrip(". ").strip()
+        m = _CITATION_TAIL_RE.match(tail)
+        if not m:
+            raise ValueError(f"unparseable verse range in citation {citation!r}: {tail!r}")
+        start_chapter = int(m.group("start_chapter") or 1)
+        start_verse = int(m.group("start_verse"))
+        if m.group("end_verse") is None:
+            end_chapter, end_verse = start_chapter, start_verse
+        else:
+            end_chapter = int(m.group("end_chapter") or start_chapter)
+            end_verse = int(m.group("end_verse"))
+        refs.append({
+            "book": book,
+            "start_chapter": start_chapter,
+            "start_verse": start_verse,
+            "end_chapter": end_chapter,
+            "end_verse": end_verse,
+            "citation": citation,
+        })
+    return refs
+
+
+def _build_readings_refs(readings_list: list) -> list:
+    """Flat-map :func:`_parse_citation_ref` over ``readings_list`` (English citation
+    strings from ``ReadingsList``); ``[]`` in, ``[]`` out."""
+    refs = []
+    for citation in readings_list:
+        refs.extend(_parse_citation_ref(citation))
+    return refs
+
+
 def _translate_feast(label: str, feast_map: dict) -> str:
     """Return ``label`` (a possibly FEAST_SEP-composite feast name) in the target
     language. Try the whole string first; else translate each component individually,
@@ -2035,8 +2097,11 @@ def _localize(result: dict, language: str) -> dict:
     Only the *scraped* values are localized -- the feast (``Liturgical Day``) and the
     book names inside ``Readings``/``ReadingsList``. Provenance/metadata fields
     (``Season``, ``Source``, ``Confidence``, ``Note``) stay in English; they are engine
-    annotations, not source data, and have no scraped Armenian form. The result always
-    carries a ``Language`` key naming the language its names are in.
+    annotations, not source data, and have no scraped Armenian form. ``ReadingsRefs``
+    is structured, language-independent data -- its ``book`` stays the canonical
+    English head regardless of ``language``; only the human-readable strings carry a
+    translation. The result always carries a ``Language`` key naming the language its
+    names are in.
     """
     result["Language"] = language
     if language == "en":
@@ -2144,6 +2209,15 @@ def compute_armenian_lectionary(target_date: datetime.date,
     (scraped offline into ``data/{feast,book}_names_hy.json``); any name with no known
     Armenian form is left in English. Provenance fields stay English (see
     :func:`_localize`).
+
+    ``ReadingsRefs`` gives every reading in ``ReadingsList`` as a structured
+    ``{"book", "start_chapter", "start_verse", "end_chapter", "end_verse", "citation"}``
+    dict instead of an English citation string, so a consumer does not have to parse
+    "Mark 15.42-16.1" back apart itself. It is one dict per sub-reference: a composite
+    citation (currently only the Daniel/Azariah reading) expands to multiple dicts that
+    share the same ``citation`` value, the back-pointer to their shared
+    ``ReadingsList`` entry. ``book`` is always the canonical English head, independent
+    of ``language``.
     """
     if language not in SUPPORTED_LANGUAGES:
         raise ValueError(
@@ -2156,6 +2230,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
             target_date),
         target_date)
     result["Mode"] = calculate_liturgical_mode(target_date)
+    result["ReadingsRefs"] = _build_readings_refs(result.get("ReadingsList", []))
     return _localize(result, language)
 
 

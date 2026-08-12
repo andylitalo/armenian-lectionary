@@ -27,6 +27,21 @@ class TestReadingsAPI(unittest.TestCase):
                 self.assertEqual(mode, expected)
                 self.assertIs(type(mode["Number"]), int)
 
+    def test_readings_refs_survives_json_boundary_in_both_languages(self):
+        for language in ("en", "hy"):
+            with self.subTest(language=language):
+                response = self.client.get(
+                    "/readings?date=2026-04-05&language=" + language
+                )
+                self.assertEqual(response.status_code, 200)
+                body = response.get_json()
+                refs = body["ReadingsRefs"]
+                self.assertTrue(refs)
+                first = refs[0]
+                self.assertEqual(first["book"], "John")
+                self.assertEqual(first["citation"], "John 20.1-18")
+                self.assertIs(type(first["start_chapter"]), int)
+
 
 if __name__ == "__main__":
     unittest.main()
