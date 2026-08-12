@@ -185,12 +185,17 @@ def export_table(tables, stats, path=None):
     if path is None:
         path = DATA_PATH
     # Strip support_years from shipped entries to keep the file lean.
+    from dev.observance_ids import ids_for_text
     slim = {}
     for ks, entries in tables.items():
         slim[ks] = {}
         for key, v in entries.items():
             keystr = key if isinstance(key, str) else str(key)
-            slim[ks][keystr] = {"feast": v["feast"], "readings": v["readings"]}
+            slim[ks][keystr] = {
+                "feast": v["feast"],
+                "observance_ids": ids_for_text(v["feast"]),
+                "readings": v["readings"],
+            }
     # Gate: no shipped feast label may carry a contaminant (Cyrillic/Greek homoglyph,
     # curly quote, ...). Fold known ones upstream (normalize_confusables); anything else
     # fails here so the maintainer decides fold-vs-allow rather than shipping it silently.

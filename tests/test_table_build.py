@@ -14,18 +14,24 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
 from dev.build_table import build, validate  # noqa: E402
+from dev.observance_ids import ids_for_text  # noqa: E402
 from armenian_lectionary.engine import DATA_PATH  # noqa: E402
 from tests._reference_cache import requires_reference_cache  # noqa: E402
 
 
 def _slim(tables):
-    """Replicate export_table's slimming: string keys, {feast, readings} only."""
+    """Replicate export_table's slimming: string keys, {feast, observance_ids,
+    readings} only."""
     out = {}
     for ks, entries in tables.items():
         out[ks] = {}
         for key, v in entries.items():
             keystr = key if isinstance(key, str) else str(key)
-            out[ks][keystr] = {"feast": v["feast"], "readings": v["readings"]}
+            out[ks][keystr] = {
+                "feast": v["feast"],
+                "observance_ids": ids_for_text(v["feast"]),
+                "readings": v["readings"],
+            }
     return out
 
 
