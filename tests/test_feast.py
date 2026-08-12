@@ -222,10 +222,10 @@ class TestFeastSpelling(unittest.TestCase):
     def test_runtime_liturgical_day_is_corrected(self):
         # Dates whose feast surfaced a typo before the fix (validated + generative tiers).
         cases = {
-            datetime.date(2026, 6, 6): "Saint Gregory the Illuminator's coming out of Pit",
+            datetime.date(2026, 6, 6): "St. Gregory the Illuminator's coming out of Pit",
             datetime.date(2026, 7, 10): "Fifth day of the Fast of the Transfiguration",
             datetime.date(2026, 8, 6):
-                "Saints Adrian and his wife Natalia, and Theodore Stratelates "
+                "Sts. Adrian and his wife Natalia, and Theodore Stratelates "
                 "and Eleutherius the Martyrs",
         }
         for d, expected in cases.items():

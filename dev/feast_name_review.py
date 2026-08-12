@@ -14,7 +14,7 @@ Columns:
              fixed     a registered correction changed it (see dev/source_corrections)
              review    an open question -- the ``note`` says what is uncertain
   days       how many days in 2001-2026 carry this component
-  first      earliest date carrying it, for looking it up on sacredtradition.am
+  last       latest date carrying it, for looking it up on sacredtradition.am
   source     EXACTLY what the source publishes, before any correction
   approved   the English the engine must serve. THIS COLUMN IS THE GROUND TRUTH.
   armenian   the source's own Armenian for the same component, as an independent witness
@@ -51,13 +51,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import REF_DIR                                        # noqa: E402
 from dev.source_corrections import (                                   # noqa: E402
-    normalize_confusables, normalize_feast_spelling, normalize_position_label,
+    apply_ground_truth, normalize_confusables, normalize_feast_spelling,
+    normalize_position_label,
 )
 from armenian_lectionary.engine import _FEAST_SEP, FEAST_NAMES_HY_PATH  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "feast_name_review.tsv")
-FIELDS = ("status", "days", "first", "source", "approved", "armenian", "note")
+FIELDS = ("status", "days", "last", "source", "approved", "armenian", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
 # Each is a name that reads oddly but that nothing available settles: the Armenian is
@@ -116,6 +117,59 @@ OPEN_QUESTIONS = {
     "Women Callinice and Aquilina":
         "The doubled title was dropped. 'Aret' renders hy 'Խարիթեանցն'; the saint is "
         "usually Arethas of Najran in English. 'Saints Arethas and His Companions'?",
+
+    # Found during the atomic-unit / Wikipedia-verification review pass.
+    "Saint Virgins Juliana and Basilla":
+        "possible duplicate: the same two saints are also named 'The Holy Virgins Juliana "
+        "and Basilla' elsewhere in the corpus (a different phrasing, never published "
+        "alone). Same commemoration worded inconsistently across years, or two different "
+        "occasions?",
+    "Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in "
+    "Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East":
+        "possible duplicate: the companion row drops 'the Relative of Christ' from "
+        "Simeon's name. Same group worded inconsistently across years, or intentional?",
+    "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop "
+    "of Smyrna, and the Martyrs that perished in the East":
+        "possible duplicate: the companion row includes 'the Relative of Christ' after "
+        "Simeon's name. Same group worded inconsistently across years, or intentional?",
+    "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop":
+        "possible duplicate: the companion row names a second, 'other' Nicholas "
+        "('Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop "
+        "and Myron the Bishop'). Same group worded inconsistently across years, or a "
+        "genuinely different day?",
+    "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, "
+    "Housik, Grogoris and Daniel":
+        "Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', "
+        "not 'Aristakes'/'Housik' -- but Armenian Church diocese sites are inconsistent "
+        "on this convention generally (cf. Ghevond vs Ghevont). Wikipedia form or "
+        "church-website form?",
+    "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins "
+    "Hermione and Catherine":
+        "'Catherine' is suspect: the Armenian is 'Նեքտարինեայ', which starts with Ն "
+        "(N), not Կ (K) as 'Catherine' would. Eustace's own known family are his sons "
+        "Agapius and Theopistus, not daughters -- this may be an unrelated commemoration "
+        "glued onto his day. Could not identify the intended English name.",
+    "Saints Eugenios, Makarios, Valerian, Candidus and Aquila":
+        "folded to match the registered spelling of the same group elsewhere (Eugenius, "
+        "Macarius, Valerius, Candidus, Aquila) for consistency, but the standard Orthodox "
+        "'Eugene/Candidus/Valerian/Aquila of Trebizond' is a group of FOUR -- no Macarius "
+        "at all. Armenian tradition may add a fifth companion, or this may be an "
+        "inherited error further upstream. Worth a closer look.",
+    "Eve of Fast of Advent":
+        "do not fold to 'Eve of the Fast of Advent' -- this is the engine's deliberate "
+        "dual-form reproduction (engine._advent_eve_label): the source writes it two ways "
+        "depending on whether Heesnak falls 9 or 10 weeks after Exaltation, and both are "
+        "correct as published.",
+    "Second Sunday of Great Lent, Sunday of the Expulsion":
+        "the served form (period, not comma) is a hardcoded template in "
+        "engine._POSITION_FAMILIES, already a deliberate fix. A different 'approved' here "
+        "has no effect on what is served.",
+    "Sixth Sunday of Great Lent, Sunday of the Advent":
+        "the served form (period, 'the Advent') is a hardcoded template in "
+        "engine._POSITION_FAMILIES, already reviewed. 'Sunday of the Second Coming' would "
+        "be a real theological content change, not a mechanical fix -- needs explicit "
+        "sign-off before it could go anywhere, and even then requires an engine.py edit "
+        "since a text correction here has no effect on what is served.",
 }
 
 
@@ -127,7 +181,7 @@ def corrected(text):
     property of that day rather than of the component.
     """
     return normalize_position_label(
-        normalize_feast_spelling(normalize_confusables(text)))
+        normalize_feast_spelling(normalize_confusables(apply_ground_truth(text))))
 
 
 def armenian_for(approved, hy):
@@ -146,9 +200,9 @@ def armenian_for(approved, hy):
 
 
 def source_components():
-    """{raw component -> (days, first date)} straight from the cache, uncorrected."""
+    """{raw component -> (days, last date)} straight from the cache, uncorrected."""
     days = collections.Counter()
-    first = {}
+    last = {}
     for path in sorted(glob.glob(os.path.join(REF_DIR, "*.json"))):
         with open(path, encoding="utf-8") as fh:
             rec = json.load(fh)
@@ -156,9 +210,9 @@ def source_components():
         for comp in [c.strip() for c in (rec.get("feast") or "").split(_FEAST_SEP)
                      if c.strip()]:
             days[comp] += 1
-            if comp not in first or iso < first[comp]:
-                first[comp] = iso
-    return days, first
+            if comp not in last or iso > last[comp]:
+                last[comp] = iso
+    return days, last
 
 
 def armenian_map():
@@ -178,7 +232,7 @@ def read_existing():
 
 
 def build_rows():
-    days, first = source_components()
+    days, last = source_components()
     hy = armenian_map()
     existing = read_existing()
     rows, drift = [], []
@@ -203,7 +257,7 @@ def build_rows():
         rows.append({
             "status": status,
             "days": days[src],
-            "first": first[src],
+            "last": last[src],
             "source": src,
             "approved": approved,
             "armenian": armenian_for(approved, hy),

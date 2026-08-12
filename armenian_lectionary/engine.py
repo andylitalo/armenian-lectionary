@@ -1301,12 +1301,12 @@ _EVE_FAMILIES = (
     ("E",  -49, "Eve of Great Lent"),
     ("E",   -1, "Eve of the Resurrection of our Lord Jesus Christ"),
     ("PE",   0, "Eve of Fast of Prophet Elijah"),
-    ("PE",  21, "Eve of Fast of Saint Gregory the Illuminator"),
+    ("PE",  21, "Eve of Fast of St. Gregory the Illuminator"),
     ("TR",  -7, "Eve of Fast of Transfiguration"),
     ("AS",  -7, "Eve of Fast of Assumption of the Holy Mother of God"),
     ("EX",  -7, "Eve of Fast of Exaltation of Holy Cross"),
     ("EX",   7, "Eve of Fast of the Holy Cross of Varag"),
-    ("HE",  21, "Eve of Fast of Saint James the bishop of Nisibis"),
+    ("HE",  21, "Eve of Fast of St. James the bishop of Nisibis"),
 )
 
 # The two solar eves, by civil date.
@@ -1642,23 +1642,23 @@ def _nativity_octave_composite(d, tables=None):
 _PRELENT_COHORT = (
     # (id, easter_offset, may_shift, label, source readings)
     ("sargis", -64, True,
-     "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
+     "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     "Saints Atom and his soldiers",
+     "Sts. Atom and his soldiers",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,
-     "Saints Sukiasians the Martyrs",
+     "Sts. Sukiasians the Martyrs",
      ["Proverbs 22.1-12", "Isaiah 56.6-7",
       "St. Paul's Epistle to the Hebrews 11.32-40", "Luke 12.4-8"]),
     ("voskian", -59, False,
-     "Saints Voskians the Priests",
+     "Sts. Voskians the Priests",
      ["Proverbs 24.1-12", "Jeremiah 30.18-22",
       "St. Paul's Second Epistle to Timothy 3.10-12", "Matthew 5.1-12"]),
     ("ghevond", -54, False,
-     "Saints Ghevond the Priest and His Companions",
+     "Sts. Ghevond the Priest and His Companions",
      ["Wisdom 5.16-23", "Isaiah 35.1-2", "Isaiah 61.6-7",
       "St. Peter's First Epistle General 1.3-9", "Luke 12.4-10"]),
 )

@@ -22,6 +22,10 @@ days the engine ships from the pre-Lent cohort tier (Source == "first-volume-coh
 never globally.
 """
 
+import functools
+import json
+import os
+
 # cache reading string -> source (Tōnats'oyts First Vol p.464-465) reading string.
 # Applied ONLY on first-volume-cohort days (scoped by the shipping tier, not by text).
 COHORT_CORRECTIONS = {
@@ -93,20 +97,23 @@ def apply_reading_order(date_iso, readings):
 
 # Ordered (first match wins). Each entry: (predicate on the commemoration) -> canonical.
 _FEAST_CANON_RULES = (
-    ("Saints Cyricus and His Mother Julitta",
-     lambda c: c.startswith("Saints Cyricus and His Mother Julitta")),
-    ("Holy Fathers Saints Athanasius and Cyril of Alexandria",
-     lambda c: c.startswith("Holy Fathers Saints Athanasius and Cyril of Alexandria")),
-    ("Saint Vahan of Goghtn",
+    ("Sts. Cyricus and His Mother Julitta",
+     lambda c: c.startswith(("Saints Cyricus and His Mother Julitta",
+                              "Sts. Cyricus and His Mother Julitta"))),
+    ("Holy Fathers Sts. Athanasius and Cyril of Alexandria",
+     lambda c: c.startswith(("Holy Fathers Saints Athanasius and Cyril of Alexandria",
+                              "Holy Fathers Sts. Athanasius and Cyril of Alexandria"))),
+    ("St. Vahan of Goghtn",
      lambda c: "Vahan of Goghtn" in c),
     ("The Hermit Saints Anton",
      lambda c: "Anton" in c and "Hermit" in c),
-    ("Saints Eugenios, Makarios, Valerian, Candidus and Aquila",
-     lambda c: c.startswith(("Saints Eugenios", "Saints Eugenius"))),
-    ("Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
-     lambda c: c.startswith("Saint Sargis the Warrior")),
-    ("Saints Atom and his soldiers",
-     lambda c: c.startswith("Saints Atom and his soldiers")),
+    ("Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
+     lambda c: c.startswith(("Saints Eugenios", "Saints Eugenius",
+                              "Sts. Eugenios", "Sts. Eugenius"))),
+    ("St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
+     lambda c: c.startswith(("Saint Sargis the Warrior", "St. Sargis the Warrior"))),
+    ("Sts. Atom and his soldiers",
+     lambda c: c.startswith(("Saints Atom and his soldiers", "Sts. Atom and his soldiers"))),
     ("PRESENTATION OF OUR LORD TO THE TEMPLE",
      lambda c: "PRESENTATION OF OUR LORD TO THE TEMPLE" in c),
     # The Theotokos' Presentation (Nov 21) is typed with the first word shouted in 19 of
@@ -375,18 +382,93 @@ def apply_book_name_fixes(readings):
     return fixed
 
 
+# --------------------------------------------------------------------------- #
+# Ground-truth component names, reviewed via dev/feast_name_review.tsv
+#
+# ``dev/feast_name_ground_truth.json`` is the frozen approved-name mapping (built by
+# ``dev/build_ground_truth.py``): raw feast-name component -> the English text a human
+# has signed off on. Unlike ``_FEAST_TEXT_FIXES``/``_FEAST_SPELLING_FIXES`` above (a small,
+# individually-commented set, each justified by the source contradicting itself), this
+# covers every component in the 2001-2026 corpus and folds in a style decision too
+# ("Saint"/"Saints" -> "St."/"Sts."), so it is generated rather than hand-curated.
+#
+# Applied FIRST, before the older folds: each entry replaces the ENTIRE raw component in
+# one shot (it is already the fully-corrected text), so the confusable/spelling/position
+# folds that follow are a no-op on whatever it touched and only still act on components
+# the ground truth left alone.
+#
+# NOT everything in the ground truth is reachable this way. Two families of component
+# --  calendar-position labels and "Eve of ..." notes -- are excluded from the shipped
+# TABLE (``dev/build_table.unanimous_feast`` drops any calendar-derived text the years
+# sharing a key do not state identically) and regenerated live instead, from hardcoded
+# templates in ``engine._POSITION_FAMILIES``/``engine._EVE_FAMILIES``. A ground-truth entry
+# for one of those has no effect on what is actually served unless the matching engine.py
+# template is edited too (see the two "St. Gregory"/"St. James" eve labels there for the
+# pattern) -- and some, like the Advent eve's deliberate dual form, are correct exactly as
+# the engine already reproduces them and must NOT be folded to one spelling. Rows where
+# this applies are marked in the TSV's ``note`` rather than silently included here; see
+# ``docs/feast-name-corrections.md``.
+# --------------------------------------------------------------------------- #
+_GROUND_TRUTH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "feast_name_ground_truth.json")
+
+
+@functools.lru_cache(maxsize=1)
+def _ground_truth_fixes():
+    """[(source, approved), ...], LONGEST source first.
+
+    Composite (glued-day) components contain their own sub-component rows as literal
+    substrings -- e.g. "Saints Cyricus..., and Saints Gordius..." contains "Saints
+    Cyricus..." verbatim. Iterating shortest-first lets the sub-component's fix fire first
+    and consume that substring, so the composite's OWN entry (which would have fixed the
+    remaining half too) no longer matches. Longest-first guarantees a composite gets first
+    claim on its full text before any of its parts can.
+
+    Each entry is registered under BOTH the pristine raw source AND, where it differs, the
+    older confusables/spelling chain's output for that source. ``saint_schedule.json`` is a
+    checked-in artifact, not rebuilt from the raw cache (its own generator is not
+    reproducible -- see CLAUDE.md); some of its labels were already run through the OLD
+    fixes when it was last built (e.g. "Gregory of Theologian" -> "Gregory the Theologian"
+    is already baked in), so the text this fold actually sees there is that older-corrected
+    form, not the raw one. Keying on both means the fold fires either way.
+    """
+    with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
+        data = json.load(fh)
+    fixes = {}
+    for src, v in data.items():
+        approved = v["approved"]
+        if not approved or approved == src:
+            continue
+        fixes[src] = approved
+        old = normalize_feast_spelling(normalize_confusables(src))
+        if old != src:
+            fixes[old] = approved
+    ordered = sorted(fixes.items(), key=lambda pair: len(pair[0]), reverse=True)
+    return ordered
+
+
+def apply_ground_truth(text):
+    """Fold every reviewed component in ``text`` to its approved English spelling."""
+    if not text:
+        return text
+    for wrong, right in _ground_truth_fixes():
+        text = text.replace(wrong, right)
+    return text
+
+
 def apply_source_corrections(day):
     """Apply the on-read source corrections to a cached reference-day dict, in place.
 
     Single home for the corrections every reference_data reader must apply identically:
-    the Easter-Sunday reading-order fix, the Malachi book-name typo fold, and the
-    Cyrillic-homoglyph fold on the English feast text. Returns ``day`` for convenience.
-    (Caches are git-ignored/local and may predate these fixes, so they are applied on
-    read, not assumed baked into the cache.)"""
+    the Easter-Sunday reading-order fix, the Malachi book-name typo fold, the reviewed
+    ground-truth names, and the Cyrillic-homoglyph fold on the English feast text. Returns
+    ``day`` for convenience. (Caches are git-ignored/local and may predate these fixes, so
+    they are applied on read, not assumed baked into the cache.)"""
     day["readings"] = apply_reading_order(day.get("date", ""), day.get("readings", []))
     day["readings"] = apply_book_name_fixes(day.get("readings", []))
     day["feast"] = normalize_position_label(
-        normalize_feast_spelling(normalize_confusables(day.get("feast", ""))),
+        normalize_feast_spelling(normalize_confusables(
+            apply_ground_truth(day.get("feast", "")))),
         day.get("date", ""))
     return day
 
@@ -395,9 +477,12 @@ def canonical_commem(commem):
     """Collapse reviewed companion-enumeration variants to a primary commemoration.
 
     Applied symmetrically to the scraped and engine commemorations before comparison.
-    Also repairs the "Fiest" -> "Feast" scrape typo and the Cyrillic-homoglyph
-    contamination (Cyrillic Е/о) in the source's English feast text."""
-    commem = normalize_feast_spelling(normalize_confusables(commem))
+    Also repairs the "Fiest" -> "Feast" scrape typo, the Cyrillic-homoglyph
+    contamination (Cyrillic Е/о) in the source's English feast text, and folds in the
+    reviewed ground truth -- so the source's raw spelling and the engine's approved one
+    canonicalize to the same string and register as a reviewed difference, not a
+    contradiction."""
+    commem = normalize_feast_spelling(normalize_confusables(apply_ground_truth(commem)))
     commem = commem.replace("Fiest of", "Feast of")     # sacredtradition.am typo
     for canonical, pred in _FEAST_CANON_RULES:
         if pred(commem):
