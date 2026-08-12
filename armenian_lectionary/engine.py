@@ -39,6 +39,14 @@ BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 SUPPORTED_LANGUAGES = ("en", "hy")
 
+# Canonical order of the Armenian Church's eight-mode (ութ ձայն) cycle.  Immutable
+# strings preserve the public API; public results are fresh dictionaries.
+# The Armenian tones are identifiers rather than localized display names, so callers
+# receive the same values for both supported output languages.
+LITURGICAL_MODES = (
+    "ԱՁ", "ԱԿ", "ԲՁ", "ԲԿ", "ԳՁ", "ԳԿ", "ԴՁ", "ԴԿ",
+)
+
 
 # --------------------------------------------------------------------------- #
 # Calendar framework
@@ -61,6 +69,22 @@ def calculate_gregorian_easter(year: int) -> datetime.date:
     month = (h + L - 7 * m + 114) // 31
     day = ((h + L - 7 * m + 114) % 31) + 1
     return datetime.date(year, month, day)
+
+
+def calculate_liturgical_mode(target_date: datetime.date) -> dict:
+    """Return the Armenian Church's eight-mode record for ``target_date``.
+
+    Between annual anchors, the mode advances one position per civil day.  The cycle
+    is re-anchored at Great Barekendan (Easter - 49 days) as ``ԴԿ``; its following
+    Monday and Easter Sunday are therefore both ``ԱՁ``.  Earlier dates continue the
+    cycle counted from the preceding Easter rather than resetting on January 1.
+    """
+    easter = calculate_gregorian_easter(target_date.year)
+    great_barekendan = easter - datetime.timedelta(days=49)
+    if target_date < great_barekendan:
+        easter = calculate_gregorian_easter(target_date.year - 1)
+    mode_index = (target_date - easter).days % len(LITURGICAL_MODES)
+    return {"Tone": LITURGICAL_MODES[mode_index], "Number": mode_index + 1}
 
 
 def sunday_closest_to(year: int, month: int, day: int) -> datetime.date:
@@ -2082,6 +2106,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
             _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
             target_date),
         target_date)
+    result["Mode"] = calculate_liturgical_mode(target_date)
     return _localize(result, language)
 
 

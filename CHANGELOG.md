@@ -6,6 +6,14 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
 ## [Unreleased]
 
+### Added
+- Add the Armenian Church eight-mode assignment to every result as a structured `"Mode"`
+  object with a canonical Armenian `"Tone"` and matching integer `"Number"` from 1–8,
+  and expose the same record through `calculate_liturgical_mode(date)` for date-only use.
+  Both values are language-independent; tests exercise all 9,495 dates from 2001–2026,
+  include SacredTradition source fixtures across that range, and cover the HTTP/JSON
+  boundary.
+
 ### Fixed
 - **Calendar-position labels were frozen from the wrong year.** The validated table is keyed
   by liturgical *coordinate*, and many civil years share a key. The commemoration is
