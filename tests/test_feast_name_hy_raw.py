@@ -17,19 +17,24 @@ Why these are ratchets and not zeroes
 The English test can assert CONTRADICTIONS == 0 because every deliberate departure from
 the source is registered in ``dev/source_corrections`` and folded on both sides before
 comparing. Armenian has no such registry, and the residue is not all engine defect. At the
-time of writing the 26 findings are, roughly:
+time of writing the 12 contradictions are:
 
   * 7 days where the shipped table's commemoration enumerates a different companion list
     than the year the cache sampled -- the same class ``canonical_commem`` folds away on
     the English side, which has no Armenian analogue;
-  * 6 days of the Presentation of the Theotokos serving a minority spelling variant;
-  * 3 days of the Fast of St. Gregory the Illuminator served as a bare ``Պահք``;
   * 1 deliberate correction, where the source's own Armenian carries a wrong ordinal
     (``Ա`` for ``Բ`` Sunday after Pentecost) that English pins as wrong;
-  * the rest single-day punctuation, casing and ordering differences.
+  * 2 word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the engine serves the
+    source's dominant spelling, but which the DOMINANT_FORM classifier is deliberately too
+    crude to group -- it compares spacing and case, not morphology;
+  * 2 single-day punctuation differences.
 
 So the contract is "no NEW divergence", enforced by floors that may only move toward zero.
 Lower them whenever a fix lands; never raise one to make a change pass.
+
+DOMINANT_FORM has a ceiling too, for a different reason. Those days are correct -- the
+source spells one name several ways and we serve the one it uses most -- but a RISING count
+means the source grew a new spelling that nobody has looked at, which is worth knowing.
 """
 
 import os
@@ -43,7 +48,7 @@ from tests._reference_cache import requires_reference_cache_hy          # noqa: 
 
 # Days where the engine emits an Armenian component the source does not have.
 # Monotonic DOWN. The target is 0, as on the English side.
-HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "23"))
+HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "12"))
 
 # Days where the engine drops an Armenian component the source states. Monotonic DOWN.
 HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "2"))
@@ -51,9 +56,13 @@ HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "2"))
 # Days carrying the right components in a different order. Monotonic DOWN.
 HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
 
+# Days where the source spells a name several ways and we serve its dominant form. Correct,
+# but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
+HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "5"))
+
 # Days whose Armenian name matches the source exactly (under the registered orthography
 # reversal). Monotonic UP.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "407"))
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "413"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.
@@ -93,6 +102,15 @@ class TestRawArmenianFeastName(unittest.TestCase):
             n, HY_ORDER_CEILING,
             f"{n} days serve the right Armenian components in the wrong order (ceiling "
             f"{HY_ORDER_CEILING}); run `python dev/hy_discrepancy.py --list`")
+
+    def test_dominant_form_within_ratchet(self):
+        n = self.tally["DOMINANT_FORM"]
+        self.assertLessEqual(
+            n, HY_DOMINANT_FORM_CEILING,
+            f"{n} days serve a dominant spelling where the source varies (ceiling "
+            f"{HY_DOMINANT_FORM_CEILING}); these are not defects, but a rise means the "
+            "source grew a spelling nobody has reviewed -- run "
+            "`python dev/audit_hy_variants.py`")
 
     def test_exact_match_floor(self):
         n = self.data["exact"]

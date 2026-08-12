@@ -110,6 +110,31 @@ These three are the most debatable corrections here: `Phillip` and `Nicolas` are
 legitimate English spellings, and only the source's inconsistency argues against them.
 Each is a one-line revert if the preferred form is the other one.
 
+## 4b. One name, two spellings — in Armenian
+
+The same policy as above, applied to `language="hy"`. The source's Armenian varies its own
+spelling across years, and `dev/fetch_translations.py` pairs each English name with the
+Armenian of **one** representative day — so whichever day it sampled decides what ships,
+for every occurrence of that name. That is a coin flip, not a decision.
+
+The engine serves the form the source uses **most often**, and `dev/audit_hy_variants.py`
+is what makes that checkable: it counts every witness in `dev/reference_data_hy/` and
+reports any catalog entry serving a minority spelling.
+
+| Name | Source publishes | Served |
+|---|---|---|
+| Presentation of the Theotokos | `Ս. Աստուածածնի` ×4, `ս. Աստուածածնի` ×2, `ս.Աստուածածնի` ×1 | `Ս. Աստուածածնի` |
+| Fast of the Catechumens | `Առաջաւորաց` ×8, `Առաջաւորի` ×2 | `Առաջաւորաց` |
+| Sundays after Nativity | `զկնի Ս. Ծննդեան` ×9, `զկնի Ծննդեան` ×1 | `զկնի Ս. Ծննդեան` |
+| Days of Great Lent | `Մեծի պահոց` ×40, `Մեծի Պահոց` ×1 | `Մեծի պահոց` |
+
+Only the first was wrong: the catalog was serving `ս.Աստուածածնի` — lowercase, and missing
+the space after the abbreviation dot — on **every Nov 21**, because that 1-of-7 day is the
+one the pairing sampled. Fixed in `dev/build_observance_catalog._HY_CORRECTIONS`. The other
+three were already correct, and are listed here so they are not "fixed" into the minority
+form later; `dev/hy_discrepancy.py` classifies them `DOMINANT_FORM` rather than counting
+them against the accuracy ratchet.
+
 ## 5. Position labels
 
 Registered separately, in `POSITION_LABEL_FIXES`, because they are calendar labels rather

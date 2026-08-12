@@ -82,6 +82,14 @@ _MANUAL_HY_OVERRIDES = {
 # every occurrence; verified against the one composite entry that has it right.
 _HY_CORRECTIONS = {
     "Second Sunday after Pentecost": "Բ կիւրակէ զկնի Հոգեգալստեան",
+    # The source spells this three ways across the cached years and feast_names_hy.json
+    # paired it with the rarest: 'Ս. Աստուածածնի' x4, 'ս. Աստուածածնի' x2,
+    # 'ս.Աստուածածնի' x1 -- and the 1-of-7 form, lowercase with no space after the
+    # abbreviation dot, is what shipped on every Nov 21. Reported by
+    # dev/audit_hy_variants.py; the majority form is also what this component's own
+    # ground-truth row carries.
+    "Presentation of the Holy Mother of God to the Temple":
+        "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
 }
 
 # Observances the source names more specifically in Armenian than in English, so one

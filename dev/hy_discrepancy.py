@@ -21,14 +21,22 @@ Findings are classified, strongest first:
   * ``CONTRADICTION`` -- the engine emits an Armenian component the source does not have.
   * ``OMISSION`` -- the source states a component the engine drops.
   * ``ORDER`` -- the same components in a different order.
+  * ``DOMINANT_FORM`` -- the source spells one name several ways and the engine serves the
+    one it uses most often. Not a defect: it is the same policy the English side applies to
+    ``Phillip``/``Philip`` (docs/feast-name-corrections.md section 4), and the day the cache
+    happens to sample decides nothing. Separated out so the counts above mean
+    "unexplained", not "everything that differs".
 
-Unlike the English side, none of these is zero yet. The residue at the time of writing is
-25 days, and it is NOT all engine defect -- it includes days where the shipped table's
-commemoration enumerates a different companion list than this particular year's source
-publishes (the same class ``canonical_commem`` folds away on the English side, which has
-no Armenian analogue), and one deliberate correction where the source's own Armenian
-carries a wrong ordinal. Callers should treat the counts as ratchets, not as a defect
-list: what matters is that no NEW divergence appears.
+Unlike the English side, none of these is zero yet, and the residue is not all engine
+defect. Of the 12 contradictions at the time of writing: 7 are days where the shipped
+table's commemoration enumerates a different companion list than the year the cache
+sampled -- the same class ``canonical_commem`` folds away on the English side, which has
+no Armenian analogue; 1 is a deliberate correction of a wrong ordinal in the source's own
+Armenian; 2 are word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the engine again
+serves the dominant form, but which ``normalized`` is too crude to group -- it compares
+spacing and case, not morphology, on purpose; and 2 are single-day punctuation
+differences. Callers should treat the counts as ratchets, not as a defect list: what
+matters is that no NEW divergence appears.
 
 Coverage caveat: ``dev/reference_data_hy/`` holds 433 days, one representative date per
 distinct English feast string (``dev/fetch_translations.py`` builds it that way), not the
@@ -41,6 +49,7 @@ Usage:
     python dev/hy_discrepancy.py --list     # every finding, with both strings
 """
 
+import collections
 import datetime
 import glob
 import json
@@ -74,6 +83,33 @@ def source_days():
     return days
 
 
+def normalized(text):
+    """Collapse whitespace and case, so spellings of one name group together.
+
+    Deliberately crude: it must group ``Ս. Աստուածածնի`` with ``ս.Աստուածածնի`` (a case
+    change AND a lost space) without merging two genuinely different names. Armenian names
+    differing only in spacing and case are the same name.
+    """
+    return "".join(text.split()).casefold()
+
+
+def component_witnesses():
+    """``{armenian component: times the source publishes it}`` over the whole cache."""
+    seen = collections.Counter()
+    for raw in source_days().values():
+        for component in components(to_mashtots_names(raw)):
+            seen[component] += 1
+    return seen
+
+
+def _dominant_forms(witnesses):
+    """``{normalized name: the spelling the source uses most often}``."""
+    by_shape = collections.defaultdict(collections.Counter)
+    for component, count in witnesses.items():
+        by_shape[normalized(component)][component] += count
+    return {shape: variants.most_common(1)[0][0] for shape, variants in by_shape.items()}
+
+
 def diff_components(src_comps, eng_comps):
     """``(contradictions, omissions)``: what the engine asserts that the source lacks, and
     what the source states that the engine drops.
@@ -94,10 +130,24 @@ def diff_components(src_comps, eng_comps):
     return contradictions, unmatched_src
 
 
+def _is_dominant_form(contradictions, omissions, dominant):
+    """True when the day's whole difference is spelling, and we serve the source's own
+    most-frequent spelling of each name."""
+    if not contradictions or len(contradictions) != len(omissions):
+        return False
+    dropped = {normalized(o): o for o in omissions}
+    for served in contradictions:
+        shape = normalized(served)
+        if shape not in dropped or dominant.get(shape) != served:
+            return False
+    return True
+
+
 def collect():
     """Walk the Armenian cache once; return per-day findings and the totals."""
     findings = []
     compared = exact = 0
+    dominant = _dominant_forms(component_witnesses())
 
     for iso, raw in sorted(source_days().items()):
         src = to_mashtots_names(raw)
@@ -110,7 +160,9 @@ def collect():
 
         src_comps, eng_comps = components(src), components(eng)
         contradictions, omissions = diff_components(src_comps, eng_comps)
-        if contradictions:
+        if _is_dominant_form(contradictions, omissions, dominant):
+            kind = "DOMINANT_FORM"
+        elif contradictions:
             kind = "CONTRADICTION"
         elif omissions:
             kind = "OMISSION"
@@ -124,9 +176,12 @@ def collect():
     return {"compared": compared, "exact": exact, "findings": findings}
 
 
+KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "DOMINANT_FORM")
+
+
 def counts(data):
     """``{kind: n}`` over the findings, for the ratchets."""
-    tally = {"CONTRADICTION": 0, "OMISSION": 0, "ORDER": 0}
+    tally = {kind: 0 for kind in KINDS}
     for finding in data["findings"]:
         tally[finding["kind"]] += 1
     return tally
@@ -136,7 +191,7 @@ def main():
     data = collect()
     tally = counts(data)
     print(f"compared {data['compared']}   exact {data['exact']}")
-    for kind in ("CONTRADICTION", "OMISSION", "ORDER"):
+    for kind in KINDS:
         print(f"  {kind:<14} {tally[kind]}")
 
     if "--list" in sys.argv:

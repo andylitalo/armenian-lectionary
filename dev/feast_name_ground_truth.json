@@ -840,10 +840,10 @@
   "status": "ok"
  },
  "PRESENTATION of the Holy Mother of God to the Temple": {
-  "approved": "PRESENTATION of the Holy Mother of God to the Temple",
+  "approved": "Presentation of the Holy Mother of God to the Temple",
   "armenian": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
-  "note": "",
-  "status": "ok"
+  "note": "The source shouts this name in 19 years and title-cases it in the other 7; the engine already folds to title case (docs/feast-name-corrections.md section 5), so this row's approved text now says so instead of contradicting it. Recording it here also collapses the two catalog entries the split was minting into one -- and the surviving entry keeps THIS row's Armenian, which is the well-formed majority form. The title-cased row carried 'ս.Աստուածածնի' (lowercase, no space after the abbreviation dot), the 1-of-7 malformation that dev/fetch_translations.py happened to sample, and was serving it on every Nov 21.",
+  "status": "fixed"
  },
  "Palm Sunday": {
   "approved": "Palm Sunday",
