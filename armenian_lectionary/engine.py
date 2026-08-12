@@ -1103,6 +1103,284 @@ def _collision_base_feast(d, tables=None):
 _FEAST_SEP = " — "
 
 
+# --------------------------------------------------------------------------- #
+# Calendar-POSITION labels
+#
+# The source heads most days with a position label -- "Fourth Sunday after Nativity",
+# "Third day of Advent", "Twelfth day of Great Lent" -- counted from a governing feast.
+# The count depends on the CIVIL YEAR, so it cannot be stored in the validated table,
+# whose keys are liturgical coordinates shared by many years: doing so asserted the modal
+# year's ordinal for every year and shipped a wrong label on 34 days across 2001-2026
+# (dev/build_table.unanimous_feast now drops those; see
+# dev/feast_discrepancy_report.py). The label is regenerated here instead, per date,
+# where the year is known.
+#
+# Each family's counting rule was derived from the ground-truth cache and verified against
+# every occurrence in it (dev/verify_position_labels.py). Families whose rule is not exact
+# on every occurrence are deliberately ABSENT: an omitted label is incomplete, a wrong one
+# is wrong, and only the latter reaches bahk as bad data.
+# --------------------------------------------------------------------------- #
+
+_ORDINAL_WORDS = (
+    "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth",
+    "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth",
+    "Seventeenth", "Eighteenth", "Nineteenth", "Twentieth", "Twenty First", "Twenty Second",
+    "Twenty Third", "Twenty Fourth", "Twenty Fifth", "Twenty Sixth", "Twenty Seventh",
+    "Twenty Eighth", "Twenty Ninth", "Thirtieth", "Thirty First", "Thirty Second",
+    "Thirty Third", "Thirty Fourth", "Thirty Fifth", "Thirty Sixth", "Thirty Seventh",
+    "Thirty Eighth", "Thirty Ninth", "Fortieth", "Forty First", "Forty Second",
+    "Forty Third", "Forty Fourth", "Forty Fifth", "Forty Sixth", "Forty Seventh",
+    "Forty Eighth", "Forty Ninth", "Fiftieth",
+)
+
+_MON_TO_FRI = (0, 1, 2, 3, 4)
+_MON_TO_SAT = (0, 1, 2, 3, 4, 5)
+_SUN = (6,)
+_ANY = None          # unbounded end of a family's offset window
+
+# Recognizes a component as a calendar-position label, so a stored one is not duplicated
+# by the regenerated one. Mirrors dev/feast_names.is_position (dev tooling cannot be
+# imported at runtime); the ordinal words are this module's own _ORDINAL_WORDS.
+_POSITION_COMPONENT_RE = re.compile(
+    r"^(?:" + "|".join(_ORDINAL_WORDS) + r")\s+(?:day of|Sunday)\b"
+    r"|^(?:Fast|Feast) day$")
+
+
+def _theophany_closing(d: datetime.date) -> datetime.date:
+    """The Theophany (Jan 6) that CLOSES the Advent/Fast-of-Nativity arc containing ``d``.
+
+    Advent runs Nov -> Jan 6, so a January day belongs to the arc that began the previous
+    civil year and a December day to the one closing next January.
+    """
+    return datetime.date(d.year if d.month < 6 else d.year + 1, 1, 6)
+
+
+def _heesnak_governing(d: datetime.date) -> datetime.date:
+    """The Heesnak Sunday (Advent start) governing ``d`` -- this year's if ``d`` is past
+    it, else last year's, so Jan 1-5 counts from the Advent it is still inside."""
+    he = sunday_closest_to(d.year, 11, 18)
+    return he if d > he else sunday_closest_to(d.year - 1, 11, 18)
+
+
+def _count_sundays_after(anchor: datetime.date, d: datetime.date) -> int:
+    """Number of Sundays in (anchor, d]."""
+    return sum(1 for k in range(1, (d - anchor).days + 1)
+               if (anchor + datetime.timedelta(days=k)).weekday() == 6)
+
+
+# Anchor accessors, by the key used in _POSITION_FAMILIES.
+_POSITION_ANCHORS = {
+    "E":   lambda d: calculate_gregorian_easter(d.year),
+    "PE":  lambda d: calculate_gregorian_easter(d.year) + datetime.timedelta(days=49),
+    "TR":  lambda d: calculate_gregorian_easter(d.year) + datetime.timedelta(days=98),
+    "AS":  lambda d: sunday_closest_to(d.year, 8, 15),
+    "EX":  lambda d: sunday_closest_to(d.year, 9, 14),
+    "TH":  lambda d: datetime.date(d.year, 1, 6),
+    "THn": _theophany_closing,
+    "HE":  _heesnak_governing,
+}
+
+# (anchor, day-offset window inclusive, allowed weekdays, what to count, ordinal
+#  adjustment, label template[, (month, day) civil-date guard]). "days" counts days since
+# the anchor, "sundays" counts Sundays since it; the adjustment maps that raw count onto
+# the ordinal the source prints. The optional civil-date guard restricts a family to one
+# calendar date, for the handful the source words differently there.
+#
+# Ordered: the first family whose window and weekday match wins, so the more specific
+# entries (the named Lenten/Eastertide Sundays, the octaves) precede the broad seasonal
+# ones, and the later anchors precede the earlier ones where their tails overlap -- a
+# Sunday in September is "after the Holy Cross", not still "after Transfiguration".
+_POSITION_FAMILIES = (
+    # -- Great Lent: the named Sundays outrank the plain day count --------------
+    ("E", (-42, -42), _SUN, "sundays", 2, "{ord} Sunday of Great Lent. Sunday of the Expulsion"),
+    ("E", (-35, -35), _SUN, "sundays", 3, "{ord} Sunday of Great Lent. Sunday of the Prodigal Son"),
+    ("E", (-28, -28), _SUN, "sundays", 4, "{ord} Sunday of Great Lent. Sunday of the Steward"),
+    ("E", (-25, -25), (2,), "days", 49, "{ord} day of Great Lent. Median day of Lent"),
+    ("E", (-21, -21), _SUN, "sundays", 5, "{ord} Sunday of Great Lent. Sunday of the Judge"),
+    ("E", (-14, -14), _SUN, "sundays", 6, "{ord} Sunday of Great Lent. Sunday of the Advent"),
+    ("E", (-48, -8), None, "days", 49, "{ord} day of Great Lent"),
+    ("E", (-69, -65), _MON_TO_FRI, "days", 70, "{ord} day of the Fast of the Catechumens"),
+    # -- Easter and Eastertide -------------------------------------------------
+    ("E", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of Easter"),
+    ("E", (14, 14), _SUN, "sundays", 1, "{ord} Sunday. Sunday of the World temple (Green Sunday)"),
+    ("E", (21, 21), _SUN, "sundays", 1, "{ord} Sunday (Red Sunday)"),
+    ("E", (28, 28), _SUN, "sundays", 1, "{ord} Sunday"),
+    ("E", (35, 35), _SUN, "sundays", 1, "{ord} Sunday of Eastertide"),
+    ("E", (42, 42), _SUN, "sundays", 1, "{ord} Sunday of Eastertide. Second Palm Sunday"),
+    ("E", (8, 48), _MON_TO_SAT, "days", 1, "{ord} day of Eastertide"),
+    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of Pentecost"),
+    # -- Winter first: the Nativity arc outranks the autumn anchors it overlaps.
+    # Jan 6-13 is the Nativity octave, not the tail of Advent; and once Heesnak has
+    # passed, a Sunday is "of Advent", not still "after the Holy Cross".
+    # A Sunday inside the Fast of Nativity (Dec 30 - Jan 5) keeps its Advent Sunday
+    # number; only the weekdays are counted as days of the fast.
+    ("THn", (-7, -2), _MON_TO_SAT, "days", 8, "{ord} day of the Fast of Nativity"),
+    ("TH", (1, 7), None, "days", 1, "{ord} day of Nativity"),
+    ("TH", (8, 52), _SUN, "sundays", -1, "{ord} Sunday after Nativity"),
+    # On the Presentation of the Theotokos (Nov 21) the source drops "the Fast of" and
+    # writes plainly "Nth day of Advent" -- the same count, a different wording, on that
+    # civil date only (19 occurrences, no counter-example).
+    ("HE", (1, 5), _MON_TO_FRI, "days", 0, "{ord} day of Advent", (11, 21)),
+    ("HE", (1, 5), _MON_TO_FRI, "days", 0, "{ord} day of the Fast of Advent"),
+    ("HE", (7, 49), _SUN, "sundays", 0, "{ord} Sunday of Advent"),
+    # -- Transfiguration / Assumption / Exaltation (latest anchor first) --------
+    ("EX", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Holy Cross"),
+    ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday after the Holy Cross"),
+    ("AS", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of Assumption"),
+    ("AS", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Assumption"),
+    ("AS", (8, 8), (0,), "days", 1, "{ord} day of Assumption"),
+    # The source keeps the article on the 1st and 4th Sundays after the Assumption and
+    # drops it on the 2nd and 3rd. Inconsistent, but deterministic in the offset, so both
+    # forms are reproduced exactly rather than normalized to one.
+    ("AS", (7, 7), _SUN, "sundays", 1, "{ord} Sunday after the Assumption"),
+    ("AS", (14, 21), _SUN, "sundays", 1, "{ord} Sunday after Assumption"),
+    ("AS", (28, 28), _SUN, "sundays", 1, "{ord} Sunday after the Assumption"),
+    ("TR", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Transfiguration"),
+    ("TR", (1, 2), (0, 1), "days", 1, "{ord} day of Transfiguration"),
+    ("TR", (7, 42), _SUN, "sundays", 1, "{ord} Sunday after Transfiguration"),
+    # The source has no "First Sunday after Pentecost": the Sunday right after Pentecost
+    # is already the "Second", so the count floors at 2.
+    ("PE", (7, 7), _SUN, "sundays", 1, "{ord} Sunday after Pentecost"),
+    ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday after Pentecost"),
+    # -- Ordinary-time fast days (terminal fallthrough) -------------------------
+    # A Wed/Fri no season above has claimed is simply a fast day. Verified exact on every
+    # such day in the ground truth (1553/1553). Counter ``None`` = a fixed label, no ordinal.
+    #
+    # The Conception of the Theotokos (Dec 9) is the one date that reads "Feast day"
+    # instead -- the feast outranking the Advent fast -- on Mon/Tue/Wed/Fri, and takes no
+    # marker at all on Thu/Sat (16 of 16 either way; Sunday is an Advent Sunday, claimed
+    # above). The weekday set is the source's, recorded as observed.
+    ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Feast day", (12, 9)),
+    ("E", (_ANY, _ANY), (2, 4), None, 0, "Fast day"),
+)
+
+
+def _position_anchor_days(year: int) -> set:
+    """Days that head their own season and therefore carry NO position label.
+
+    The source never counts a governing feast as a position within some other season: the
+    Assumption Sunday is "ASSUMPTION OF THE HOLY MOTHER OF GOD", not "Fourth Sunday after
+    Transfiguration", even though it sits inside that count. Same for Exaltation inside the
+    after-Assumption count, and Theophany and its eve inside Advent.
+
+    Two season-opening days are deliberately NOT here, because the source does keep
+    counting them in the season they close (verified 26/26 years each):
+    Heesnak is "Tenth Sunday after the Holy Cross", and the eve of the Fast of Catechumens
+    (Easter-70) is an "Nth Sunday after Nativity".
+    """
+    e = calculate_gregorian_easter(year)
+    return {
+        e,                                        # Easter
+        e + datetime.timedelta(days=49),          # Pentecost
+        e + datetime.timedelta(days=98),          # Transfiguration (Vardavar)
+        e - datetime.timedelta(days=49),          # Eve of Great Lent
+        sunday_closest_to(year, 8, 15),           # Assumption
+        sunday_closest_to(year, 9, 14),           # Exaltation of the Cross
+        datetime.date(year, 1, 6),                # Theophany / Nativity
+        datetime.date(year, 1, 5),                # Eve of the Nativity and Theophany
+    }
+
+
+def _position_label(d: datetime.date):
+    """The source's calendar-position label for ``d``, or ``None`` where no verified rule
+    applies (an ordinary-time saint weekday, a season-heading feast, or a family whose
+    counting rule is not exact on every occurrence in the ground truth).
+
+    ``None`` is a normal, safe answer: the day is then named by its commemoration alone.
+    """
+    if d in _position_anchor_days(d.year):
+        return None
+    for family in _POSITION_FAMILIES:
+        akey, (lo, hi), weekdays, counter, adjust, template = family[:6]
+        civil = family[6] if len(family) > 6 else None    # optional (month, day) guard
+        if civil is not None and (d.month, d.day) != civil:
+            continue
+        if weekdays is not None and d.weekday() not in weekdays:
+            continue
+        anchor = _POSITION_ANCHORS[akey](d)
+        offset = (d - anchor).days
+        if (lo is not None and offset < lo) or (hi is not None and offset > hi):
+            continue
+        if counter is None:                  # fixed label, no ordinal to compute
+            return template
+        raw = offset if counter == "days" else _count_sundays_after(anchor, d)
+        n = raw + adjust
+        if not 1 <= n <= len(_ORDINAL_WORDS):
+            return None
+        return template.format(ord=_ORDINAL_WORDS[n - 1])
+    return None
+
+
+# ---------------------------------------------------------------------------
+# Eve labels ("Eve of Fast of Advent"). Same problem as the position label, one
+# step further out: an eve is a fixed offset from a MOVABLE anchor, so when it lands on a
+# fixed-date feast the table key is that feast's civil date and the eve component is not
+# unanimous across the years sharing it -- ``build_table.unanimous_feast`` drops it, and
+# the day loses its fast marker. Regenerating the eve per date closes that.
+#
+# (anchor key, day offset from the anchor, label). Every family is an exact offset -- no
+# counting, no ordinals -- and each fires once a year.
+_EVE_FAMILIES = (
+    ("E",  -70, "Eve of Fast of Catechumens"),
+    ("E",  -49, "Eve of Great Lent"),
+    ("E",   -1, "Eve of the Resurrection of our Lord Jesus Christ"),
+    ("PE",   0, "Eve of Fast of Prophet Elijah"),
+    ("PE",  21, "Eve of Fast of St. Gregory the Illuminator"),
+    ("TR",  -7, "Eve of Fast of Transfiguration"),
+    ("AS",  -7, "Eve of Fast of Assumption of the Holy Mother of God"),
+    ("EX",  -7, "Eve of Fast of Exaltation of Holy Cross"),
+    ("EX",   7, "Eve of Fast of the Holy Cross of Varag"),
+    ("HE",  21, "Eve of Fast of St. James the bishop of Nisibis"),
+)
+
+# The two solar eves, by civil date.
+_EVE_CIVIL = {
+    (12, 29): "Eve of Fast of Nativity",
+    (1, 5): "Eve of the Nativity and Theophany of our Lord Jesus Christ",
+}
+
+
+def _advent_eve_label(heesnak: datetime.date) -> str:
+    """The Advent eve is Heesnak itself (the fast opens the next morning).
+
+    The source writes it two ways and the choice is not free: it keeps the article in the
+    19 years Heesnak falls 9 weeks after Exaltation and drops it in the 7 where it falls
+    10. An inconsistency, like the Sundays after (the) Assumption, but deterministic in
+    the offset -- so reproduce both forms exactly rather than normalize to one.
+    """
+    weeks = (heesnak - sunday_closest_to(heesnak.year, 9, 14)).days
+    return "Eve of the Fast of Advent" if weeks == 63 else "Eve of Fast of Advent"
+
+
+def _eve_label(d: datetime.date):
+    """The source's ``Eve of ...`` component for ``d``, or None.
+
+    Exact on every occurrence in the ground truth: 338/338 across 2001-2026, with no
+    mismatch and no day labelled an eve that the source does not (see
+    ``dev/verify_eve_labels.py``).
+    """
+    if (d.month, d.day) in _EVE_CIVIL:
+        return _EVE_CIVIL[(d.month, d.day)]
+    if d.weekday() not in (5, 6):   # every remaining eve is a Sunday, bar Holy Saturday
+        return None
+    for year in (d.year - 1, d.year, d.year + 1):
+        easter = calculate_gregorian_easter(year)
+        anchor = {
+            "E": easter,
+            "PE": easter + datetime.timedelta(days=49),
+            "TR": easter + datetime.timedelta(days=98),
+            "AS": sunday_closest_to(year, 8, 15),
+            "EX": sunday_closest_to(year, 9, 14),
+            "HE": sunday_closest_to(year, 11, 18),
+        }
+        for akey, offset, label in _EVE_FAMILIES:
+            if d == anchor[akey] + datetime.timedelta(days=offset):
+                return label
+        if d == anchor["HE"]:
+            return _advent_eve_label(anchor["HE"])
+    return None
+
+
 def _annunciation_composite(d, tables=None):
     """Best-guess Annunciation (Apr 7) readings via the Tonatsooyts collision rule,
     for offsets the validated AnnE keyspace does not cover. Returns a list of refs
@@ -1388,23 +1666,23 @@ def _nativity_octave_composite(d, tables=None):
 _PRELENT_COHORT = (
     # (id, easter_offset, may_shift, label, source readings)
     ("sargis", -64, True,
-     "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
+     "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     "Saints Atom and his soldiers",
+     "Sts. Atom and his soldiers",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,
-     "Saints Sukiasians the Martyrs",
+     "Sts. Sukiasians the Martyrs",
      ["Proverbs 22.1-12", "Isaiah 56.6-7",
       "St. Paul's Epistle to the Hebrews 11.32-40", "Luke 12.4-8"]),
     ("voskian", -59, False,
-     "Saints Voskians the Priests",
+     "Sts. Voskians the Priests",
      ["Proverbs 24.1-12", "Jeremiah 30.18-22",
       "St. Paul's Second Epistle to Timothy 3.10-12", "Matthew 5.1-12"]),
     ("ghevond", -54, False,
-     "Saints Ghevond the Priest and His Companions",
+     "Sts. Ghevond the Priest and His Companions",
      ["Wisdom 5.16-23", "Isaiah 35.1-2", "Isaiah 61.6-7",
       "St. Peter's First Epistle General 1.3-9", "Luke 12.4-10"]),
 )
@@ -1752,13 +2030,64 @@ def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
     return _FEAST_SEP.join(parts)
 
 
+_PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
+
+
+def _apply_position_label(label: str, d: datetime.date) -> str:
+    """Head ``label`` with ``d``'s regenerated calendar-position label.
+
+    The table stores only the components that are invariant for a liturgical coordinate
+    (``dev/build_table.unanimous_feast``), so the position label -- which depends on the
+    civil year -- is added here instead. A stored label that already carries its own
+    position component keeps it: those are the coordinates where every year agreed, so the
+    stored value and the regenerated one are the same string.
+
+    Where the stored label is empty or a placeholder, the position label becomes the whole
+    name. That is the point: a day whose entire source name was its position ("Fourth
+    Sunday after Nativity") previously fell through to "(commemoration)" or "(movable
+    ordinary-time reading)", which bahk had to discard as "no feast".
+    """
+    position = _position_label(d)
+    if position is None:
+        return label
+    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    if any(_is_position_component(p) for p in parts):
+        return _FEAST_SEP.join(parts) if parts else label
+    return _FEAST_SEP.join([position] + parts)
+
+
+def _is_position_component(component: str) -> bool:
+    """True if a stored component is already a calendar-position label."""
+    return bool(_POSITION_COMPONENT_RE.match(component))
+
+
+def _apply_eve_label(label: str, d: datetime.date) -> str:
+    """Append ``d``'s regenerated ``Eve of ...`` component to ``label``.
+
+    The source prints the eve last, after the commemoration, so this appends where
+    :func:`_apply_position_label` prepends. A name that already carries an eve keeps it
+    untouched -- either the table kept it (every year sharing the key agreed) or a
+    composite named the day, and in both cases the stored wording is the validated one.
+    """
+    eve = _eve_label(d)
+    if eve is None:
+        return label
+    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    if any(p.startswith("Eve of ") for p in parts):
+        return _FEAST_SEP.join(parts) if parts else label
+    return _FEAST_SEP.join(parts + [eve]) if parts else eve
+
+
 def compute_armenian_lectionary(target_date: datetime.date,
                                 language: str = "en") -> dict:
     """Return the liturgical day and readings for ``target_date``.
 
     Thin wrapper over :func:`_compute_lectionary` that re-anchors fixed civil-date
     commemorations (Genocide Remembrance -> April 24) which the Easter-keyed table
-    would otherwise misplace.
+    would otherwise misplace, and re-adds the components a table key shared by several
+    civil years cannot hold: the calendar-position label at the head
+    (:func:`_apply_position_label`) and the ``Eve of ...`` note at the tail
+    (:func:`_apply_eve_label`).
 
     ``language`` selects the language of the human-readable names: ``"en"`` (default)
     or ``"hy"`` for Classical Armenian. In ``"hy"`` the feast (``Liturgical Day``) and
@@ -1772,8 +2101,11 @@ def compute_armenian_lectionary(target_date: datetime.date,
             f"unsupported language {language!r}; expected one of "
             f"{', '.join(SUPPORTED_LANGUAGES)}")
     result = _compute_lectionary(target_date)
-    result["Liturgical Day"] = _anchor_genocide_remembrance(
-        result["Liturgical Day"], target_date)
+    result["Liturgical Day"] = _apply_eve_label(
+        _apply_position_label(
+            _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+            target_date),
+        target_date)
     result["Mode"] = calculate_liturgical_mode(target_date)
     return _localize(result, language)
 
@@ -1953,9 +2285,12 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     if pe is not None:
         # Name the day by its movable/base commemoration (the pre-Lent cohort martyr, or
         # the Lenten day it falls on) the way the source does -- the Presentation eve is
-        # a co-celebrated reading block, not the day's headline. Fall back to the eve name
-        # only when no base commemoration resolves (an extreme-Easter ferial).
-        _name = _collision_base_feast(target_date) or "Eve of the Presentation of the Lord"
+        # a co-celebrated reading block, not the day's headline. When no base commemoration
+        # resolves (an extreme-Easter ferial) the day is left to its regenerated position
+        # label alone: the source names 2011-02-13 "Fifth Sunday after Nativity — Eve of
+        # Fast of Catechumens" and never "Eve of the Presentation of the Lord", so
+        # inventing that eve here shipped a name the source contradicts.
+        _name = _collision_base_feast(target_date) or ""
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": _name,

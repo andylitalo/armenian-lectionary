@@ -28,16 +28,18 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
-from armenian_lectionary.engine import winter_coords, WINTER_KS, hinge_coords, HINGE_KS  # noqa: E402
+from armenian_lectionary.engine import (                        # noqa: E402
+    DATA_PATH, winter_coords, WINTER_KS, hinge_coords, HINGE_KS,
+)
 
 
 def _fixed_dates(days):
     """The civil (month,day) immovable feasts that build() claims (and so removes
     from the winter buckets); mirror that here for an accurate diagnostic."""
     import json
-    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                        "lectionary_data.json")
-    with open(path, encoding="utf-8") as f:
+    # DATA_PATH, not a hand-built repo-root path: the table moved into the package when
+    # it was packaged for PyPI, and this diagnostic still pointed at its old home.
+    with open(DATA_PATH, encoding="utf-8") as f:
         civ = json.load(f)["tables"]["C"]
     return {(int(k[:2]), int(k[3:])) for k in civ}
 

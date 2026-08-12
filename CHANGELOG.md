@@ -14,6 +14,132 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   include SacredTradition source fixtures across that range, and cover the HTTP/JSON
   boundary.
 
+### Fixed
+- **Calendar-position labels were frozen from the wrong year.** The validated table is keyed
+  by liturgical *coordinate*, and many civil years share a key. The commemoration is
+  invariant across them, but the position label the source packs into the same string
+  ("Fourth Sunday after Nativity", "Third day of Advent") counts from an anchor whose
+  distance to that coordinate changes year to year. `dev/build_table.modal_feast` stored
+  the **modal** year's ordinal and the engine served it for every year, so the shipped
+  `"Liturgical Day"` contradicted the source on **41 days** across 2001–2026 — e.g.
+  2011-02-20 read `Fifth Sunday after Nativity` where the source says `Sixth`, and 17 days
+  read `Third Sunday after Transfiguration` for the 4th/5th/6th/7th. Six further days
+  shipped a bare placeholder (`(movable ordinary-time reading)` on 2011-02-04/06/09/11 and
+  2022-02-04) or an invented eve (`Eve of the Presentation of the Lord` on 2011-02-13,
+  where the source says `Fifth Sunday after Nativity — Eve of Fast of Catechumens`).
+
+  Fixed in two halves. `dev/build_table.unanimous_feast` now drops a calendar-derived
+  component unless every year sharing the key states it identically, so the table stops
+  asserting what it cannot reproduce; commemorations are exempt, since the source varies a
+  saint's companion list and dropping on disagreement would leave those days nameless.
+  `engine._position_label` then regenerates the label per date, from families whose
+  counting rules were derived from the ground truth and verified against **every**
+  occurrence in it (`dev/verify_position_labels.py`: 6068 matched, 0 mismatched, 0
+  spurious). Season-heading feasts are suppressed — the Assumption Sunday is
+  `ASSUMPTION OF THE HOLY MOTHER OF GOD`, not `Fourth Sunday after Transfiguration` — and
+  any family without an exact rule emits nothing, since an omitted label is incomplete but
+  a wrong one is wrong.
+
+  Net over the ground truth: contradictions 41 → **0**, days with no Armenian name 6 → **0**,
+  omissions 63 → 15, exact 9373 → **9481** of 9496. **Readings are unchanged** — the
+  0-wrong contract holds with every coverage floor untouched.
+- **Eve notes were dropped where a fast opened on a fixed-date feast.** The same defect one
+  step out: an eve sits at a fixed offset from a *movable* anchor, so when it lands on a
+  fixed civil date the table key is that feast's date and the years sharing it disagree —
+  `unanimous_feast` dropped the eve and the day lost its fast marker. 15 days across
+  2001–2026, every one of them the opening of a fast: `Eve of Fast of Advent` on
+  2004/2010/2021-11-21 (the Presentation of the Theotokos), `Eve of Great Lent` on
+  2010/2021-02-14 (the Presentation of the Lord), `Eve of Fast of Saint James the bishop of
+  Nisibis` on four Dec 9ths, `Eve of Fast of Exaltation of Holy Cross` on four Sep 8ths, and
+  `Eve of Fast of Catechumens` on 2008-01-13 and 2011-02-13.
+
+  `engine._eve_label` regenerates the eve per date and `_apply_eve_label` appends it where
+  the name does not already carry one — the source prints the eve last, so this appends
+  where the position label prepends. All twelve movable families plus the two solar ones
+  (Dec 29, Jan 5) are exact offsets, verified on every occurrence in the ground truth
+  (`dev/verify_eve_labels.py`: 338 matched, 0 mismatched, 0 missing, 0 spurious). The
+  Advent eve is reproduced in both of the source's wordings — it keeps the article in the
+  19 years Heesnak falls nine weeks after Exaltation and drops it in the seven where it
+  falls ten.
+
+  With this the ground-truth match is complete: omissions 15 → **0** and exact 9481 →
+  **9496 of 9496**. The engine now reproduces sacredtradition.am's feast-name string on
+  every day it publishes. Readings again unchanged.
+- **Eighteen errors in the source's own feast text**, registered in
+  `dev/source_corrections._FEAST_TEXT_FIXES` and found by the new
+  `dev/audit_source_anomalies.py`. This became worth doing precisely because the engine now
+  matches the source everywhere: from here on, each of the source's typos is a name the
+  engine serves. Every fix is the source contradicting itself, never an editorial
+  preference:
+  - **factual**, caught by comparing a feast's English name with its own Armenian one —
+    the Council of Ephesus is dated `AD 341` in English and `431 թ.` in Armenian, and
+    Pentecost reads `Fifteenth day of Eastertide` where the Armenian says
+    `յիսներորդ` (fiftieth), which is also what the day is (Easter+49, the day after the
+    source's own `Forty Ninth day of Eastertide`);
+  - **grammatical**, where the Armenian settles the sense — `the poor mans` → `poor men`,
+    `many faithfuls` → `many faithful`, `Gregory of Theologian` → `Gregory the
+    Theologian`, `Saint Patriarchs`/`Saint Virgins` → `Saints …` (both Armenian forms are
+    plural), `Clement the Bishop Rome` → `Bishop of Rome`;
+  - **mechanical** — `Saints Saints Jacoc`, `Saints St. Aret`, a trailing period on
+    `Discovery of the Holy Cross.`, `Begining` → `Beginning`, `Antiosh` → `Antioch`, and
+    `Fast day, Remembrance of the Ten Virgins`, whose fast marker was comma-joined into
+    the commemoration where the source's own Armenian separates it;
+  - **one saint, two spellings** — the Apostle `Phillip`/`Philip`, St. `Nicolas`/`Nicholas`
+    of Myra, `Gregoris`/`Grigoris` of Aghvank, each folded to the source's dominant form.
+
+  Left alone, and listed by the audit script instead, are the strings where nothing
+  established the intended form: `Jacoc`, `Theodoron`, `coming out of Pit`, `Twelve Holy
+  Doctors of Church`, and the source's lowercase `Saints martyrs` / `Saints virgins`.
+- **Seven source self-contradictions registered** in `dev/source_corrections.POSITION_LABEL_FIXES`
+  (a stray trailing period on `the Fast of Nativity.`, two comma-for-period variants of
+  `Great Lent. Sunday of …`, and one wrong ordinal word on 2008-04-07 that its own
+  neighbours pin), plus a case fold for the Theotokos' Presentation, which the source
+  shouts in 19 of 26 years and title-cases in the other 7.
+
+### Added
+- **`tests/test_feast_name_raw.py`** — locks the **raw** `"Liturgical Day"` string
+  component-wise, the value downstream actually stores. Contradictions must be 0; omissions
+  and exact matches are ratchets. `tests/test_feast.py` compares only the *commemoration
+  component*, which strips the position and eve components from both sides and so compared
+  `"" == ""` on over half the corpus — that blind spot is what hid all of the above.
+- **`tests/test_feast_contract.py`** — source-independent invariants (no placeholder, no
+  empty name, `hy` differs from `en`, no repeated or runaway component, no contaminant
+  characters) across the whole supported 2001–2027 window. Needs no ground-truth cache, so
+  it also covers **2027**, for which sacredtradition.am publishes nothing and no oracle
+  test can exist. It asserts no storage limit: the engine serves whatever name the source
+  states — the longest is 289 characters, a feast enumerating twelve saints — and how to
+  store that belongs to the consumer.
+- **`dev/feast_name_review.tsv` — our own ground truth for the English names.** One row
+  per distinct feast-name component (392), with the approved English spelling, the source's
+  own Armenian beside it as an independent witness, how many days carry it, and the first
+  such date. `dev/reference_data/` answers "does the engine match sacredtradition.am?";
+  this answers "is the name right?", which no cache of that source can. Reviewing it needs
+  no programming: edit the `approved` column in a spreadsheet (GitHub renders the file as a
+  table too) and `tests/test_feast_name_review.py` fails until the decision is applied.
+  14 rows are marked `review` with an open question — `Jacoc`, `Theodoron`, `coming out of
+  Pit`, `Herbivorous Hermits`, `Aret`/Arethas, and others where nothing available
+  established the intended English.
+- **`tests/test_feast_name_review.py`** — holds the engine to those approved names across
+  2001–2027, and requires every component the source publishes to have a review row so a
+  re-fetch cannot add a name that escapes review. Needs no cache for the first check.
+- **`docs/feast-name-corrections.md`** — every correction below, written up with its
+  evidence, and the open questions.
+- **`tests/test_source_text.py`** — locks the quality of the SOURCE's feast text rather
+  than the engine's fidelity to it. Without it, a re-fetch could pull a new typo from the
+  live site into the cache, rebuild it into the shipped artifacts, pass every oracle test
+  (the engine would match the source perfectly) and reach the client. A failure means a
+  string no human has judged yet; judging it either way — a fix in `source_corrections`, or
+  a named clearance in the audit script — makes it quiet again.
+- **`dev/audit_source_anomalies.py`** — nine detectors over the source's own text, the
+  two strongest cross-checking a feast's English name against its Armenian one.
+- **`dev/refresh_artifact_names.py`** — pushes registered text fixes into
+  `saint_schedule.json`'s served labels, text only: ids, ordering and every reading stay
+  byte-identical, so a name fix cannot smuggle in a readings change.
+- **`dev/feast_discrepancy_report.py`** — a classified inventory of every remaining
+  feast-name difference, each shown with the two days either side of ground truth for
+  context. It now reports no contradiction, no omission and no casing variant on any of
+  the 9,496 days with ground truth, so the report itself is no longer committed.
+
 ## [1.2.3] — 2026-07-23
 
 ### Fixed

@@ -46,19 +46,113 @@ PORT=8090 gunicorn --bind "0.0.0.0:$PORT" --workers 2 --threads 4 --timeout 60 a
 
 ### Tests
 ```bash
-python -m unittest tests.test_calendar tests.test_parser   # self-contained, no cache
+# self-contained, no cache needed:
+python -m unittest tests.test_calendar tests.test_parser tests.test_language \
+                   tests.test_feast_contract
+python -m unittest discover -s tests -t .                  # everything
 ```
 The full-dataset regression tests (`test_regression`, `test_full_dataset`,
-`test_table_build`, `test_feast`) need the git-ignored `dev/reference_data/`
-ground-truth cache; without it they fail their coverage floors. Rebuild the cache with
-`python dev/bulk_fetch.py` (see README).
+`test_table_build`, `test_feast`, `test_feast_name_raw`) need the git-ignored
+`dev/reference_data/` ground-truth cache; they SKIP without it (`@requires_reference_cache`).
+Rebuild the cache with `python dev/bulk_fetch.py` (see README).
 
-`test_feast` locks the engine's feast/fast NAME (`"Liturgical Day"`) against the
-scraped `feast` field — the value bahk uses for AI context. It compares only the
-*commemoration component* (`dev/feast_names.commemoration_of`, canonicalized by
-`dev/source_corrections.canonical_commem`), since the scrape mashes a year-varying
-"Nth day of <Season>" position label onto the name. Audit residual mismatches with
-`python dev/feast_audit.py`.
+The feast/fast NAME (`"Liturgical Day"`) — the value bahk persists into `Feast.name` — is
+locked by **three** tests at different strengths. Keep all three; each covers what the
+others structurally cannot:
+
+| Test | Compares | Needs cache? |
+|------|----------|--------------|
+| `test_feast_name_raw` | the **raw string**, component-wise on ` — `. Contradictions (engine emits a component the source lacks) must be **0**; omissions and exact matches are ratchets, both now at their limits (0 omissions, 9,496/9,496 exact). | yes (2001–2026) |
+| `test_feast_contract` | source-**independent** invariants — no placeholder, no empty name, `hy` differs from `en`, no repeated or runaway component, clean characters. Deliberately asserts **no storage limit**: how to store a name is the consumer's problem. | **no** (2001–2027) |
+| `test_feast` | only the *commemoration component*. Narrowest: it strips the position/eve components from both sides, so >50% of days compare `"" == ""`. | yes (2001–2026) |
+| `test_source_text` | the **source's own** text quality, not the engine's fidelity to it — see below. | yes (2001–2026) |
+| `test_feast_name_review` | the engine against **our own** approved names (`dev/feast_name_review.tsv`) — the only one that can fail because a name is *wrong*. | mostly **no** |
+
+That last stripping is why `test_feast` alone was not enough — the engine shipped a name
+the source contradicted on 41 days, and six more as bare placeholders, entirely invisible
+to it. `test_feast_contract` needs no ground truth, so it is the only cover for **2027**:
+sacredtradition.am publishes nothing for that year, so the cache's 365 days for it are
+empty and no oracle test can assert anything about them.
+
+The governing rule for any new difference from the source: it must be either counted by a
+ratchet or registered in `dev/source_corrections`. Nothing passes silently.
+
+### The source is not automatically right
+
+The engine now matches the source on every day it publishes, which means each of the
+source's own typos is a name the engine serves. `dev/audit_source_anomalies.py` looks for
+those, and `test_source_text` keeps its detectors silent. The strongest of them compare a
+feast's English name against **its own Armenian name** — the source stating the same fact
+twice, so it can be caught contradicting itself. That is how the Council of Ephesus was
+found dated `AD 341` in English and `431` in Armenian, and Pentecost called the
+`Fifteenth day of Eastertide` where the Armenian says fiftieth.
+
+Registered repairs live in `dev/source_corrections._FEAST_TEXT_FIXES`, each justified by
+the source contradicting itself rather than by editorial preference. When one lands, the
+shipped artifacts must be rebuilt with it — including `saint_schedule.json`, whose feast
+labels are served directly (`dev/refresh_artifact_names.py`). Every correction is written
+up, with its evidence, in [`docs/feast-name-corrections.md`](docs/feast-name-corrections.md).
+
+### Our own ground truth: `dev/feast_name_review.tsv`
+
+`dev/reference_data/` is *sacredtradition.am's* ground truth. **`dev/feast_name_review.tsv`
+is ours** — one row per distinct name component with the English a human approved, the
+source's own Armenian beside it, and the questions still open. It is the only name test
+that can fail because a name is *wrong* rather than because it differs from the source.
+
+The review loop, and why it is safe to hand to a non-programmer:
+
+1. open the TSV (a spreadsheet, or GitHub, which renders it as a table);
+2. edit the `approved` column where the English should read differently, and say why in
+   `note`. Leave `source` alone — it is the record of what was published;
+3. `tests/test_feast_name_review.py` now fails, naming the row;
+4. register the fold in `dev/source_corrections._FEAST_TEXT_FIXES`, rebuild (order below),
+   and it passes.
+
+`python dev/feast_name_review.py` refreshes the file and **never discards human edits**;
+`--check` reports rows whose approved name the engine does not yet serve.
+
+Dev tooling:
+```bash
+python dev/audit_source_anomalies.py     # errors in the SOURCE's own feast text
+python dev/feast_name_review.py          # refresh dev/feast_name_review.tsv (our own GT)
+python dev/refresh_artifact_names.py     # push registered fixes into saint_schedule.json
+python dev/feast_discrepancy_report.py   # engine vs. source, classified (now: 0 findings)
+python dev/verify_position_labels.py     # engine._position_label vs. every cached label
+python dev/verify_eve_labels.py          # engine._eve_label vs. every cached eve note
+python dev/feast_audit.py                # residual commemoration mismatches
+```
+
+**After any change to `dev/source_corrections`**, rebuild in this order and re-run the
+suite — the table and the `hy` map are keyed on the corrected English, so a partial
+rebuild leaves days with no Armenian name:
+```bash
+python dev/refresh_artifact_names.py --write   # saint_schedule labels
+python dev/build_table.py                      # lectionary_data.json
+python dev/fetch_translations.py               # feast/book *_names_hy.json (offline
+                                               #   from dev/reference_data_hy/)
+```
+`dev/saint_schedule.py` and `dev/build_second_volume_cycles.py` are deliberately NOT in
+that list: they do not currently reproduce their checked-in artifacts from the present
+cache, and regenerating them moves readings provenance (2016-07-30 drops from
+`second-volume-cycle` to `generative-saint`). That drift predates this work and needs its
+own reviewed change.
+
+Two kinds of name component are **not** stored in the table, because a table key is a
+liturgical coordinate shared by civil years that disagree about them. `build_table.
+unanimous_feast` drops any calendar-derived component the years sharing a key do not state
+identically, and the engine regenerates it per date as an overlay in
+`compute_armenian_lectionary`:
+
+| Component | Regenerated by | Position | Verify with |
+|---|---|---|---|
+| calendar position — "Fourth Sunday after Nativity", "Sixth day of the Fast of Nativity", "Fast day" | `engine._position_label` | head | `dev/verify_position_labels.py` |
+| eve note — "Eve of Fast of Advent", "Eve of Great Lent" | `engine._eve_label` | tail | `dev/verify_eve_labels.py` |
+
+Storing them asserted the modal year's count for every year — the defect that shipped
+41 wrong names. If you add a family to either, run its verifier: MISMATCH and EXTRA must
+stay 0, and so must the END-TO-END LOST count, which is the number that actually matters
+downstream (a fasting calendar is built from exactly these components).
 
 ## Configuration (env vars)
 

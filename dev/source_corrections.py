@@ -22,6 +22,10 @@ days the engine ships from the pre-Lent cohort tier (Source == "first-volume-coh
 never globally.
 """
 
+import functools
+import json
+import os
+
 # cache reading string -> source (Tōnats'oyts First Vol p.464-465) reading string.
 # Applied ONLY on first-volume-cohort days (scoped by the shipping tier, not by text).
 COHORT_CORRECTIONS = {
@@ -93,22 +97,32 @@ def apply_reading_order(date_iso, readings):
 
 # Ordered (first match wins). Each entry: (predicate on the commemoration) -> canonical.
 _FEAST_CANON_RULES = (
-    ("Saints Cyricus and His Mother Julitta",
-     lambda c: c.startswith("Saints Cyricus and His Mother Julitta")),
-    ("Holy Fathers Saints Athanasius and Cyril of Alexandria",
-     lambda c: c.startswith("Holy Fathers Saints Athanasius and Cyril of Alexandria")),
-    ("Saint Vahan of Goghtn",
+    ("Sts. Cyricus and His Mother Julitta",
+     lambda c: c.startswith(("Saints Cyricus and His Mother Julitta",
+                              "Sts. Cyricus and His Mother Julitta"))),
+    ("Holy Fathers Sts. Athanasius and Cyril of Alexandria",
+     lambda c: c.startswith(("Holy Fathers Saints Athanasius and Cyril of Alexandria",
+                              "Holy Fathers Sts. Athanasius and Cyril of Alexandria"))),
+    ("St. Vahan of Goghtn",
      lambda c: "Vahan of Goghtn" in c),
     ("The Hermit Saints Anton",
      lambda c: "Anton" in c and "Hermit" in c),
-    ("Saints Eugenios, Makarios, Valerian, Candidus and Aquila",
-     lambda c: c.startswith(("Saints Eugenios", "Saints Eugenius"))),
-    ("Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
-     lambda c: c.startswith("Saint Sargis the Warrior")),
-    ("Saints Atom and his soldiers",
-     lambda c: c.startswith("Saints Atom and his soldiers")),
+    ("Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
+     lambda c: c.startswith(("Saints Eugenios", "Saints Eugenius",
+                              "Sts. Eugenios", "Sts. Eugenius"))),
+    ("St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
+     lambda c: c.startswith(("Saint Sargis the Warrior", "St. Sargis the Warrior"))),
+    ("Sts. Atom and his soldiers",
+     lambda c: c.startswith(("Saints Atom and his soldiers", "Sts. Atom and his soldiers"))),
     ("PRESENTATION OF OUR LORD TO THE TEMPLE",
      lambda c: "PRESENTATION OF OUR LORD TO THE TEMPLE" in c),
+    # The Theotokos' Presentation (Nov 21) is typed with the first word shouted in 19 of
+    # the 26 cached years and in plain title case in the other 7 -- the source disagreeing
+    # with itself, with no rule to reproduce. The engine serves the title-case form (the
+    # one the hy name map is keyed on); folding on case makes the two score as the same
+    # commemoration, which they are.
+    ("Presentation of the Holy Mother of God to the Temple",
+     lambda c: c.lower().startswith("presentation of the holy mother of god to the temple")),
     # St. Theodore the Recruit: the scrape says "the General", the Tonats'oyts table
     # "the Tyron" (Greek Tiron/Recruit) -- the same soldier-martyr.
     ("Saint Theodore the General",
@@ -166,15 +180,145 @@ _FEAST_SPELLING_FIXES = {
     "Alerius": "Valerius",                 # id: ..._valerian; hy: Վաղերիոսի
     "Canditus": "Candidus",
     "Eugraphius": "Eugraphus",             # Menas, Hermogenes and Eugraphus
+    "Begining": "Beginning",               # "Begining of the Fast"; hy Սկիզբն պահոց
+    "Antiosh": "Antioch",                  # Ignatius, bishop of Antioch
+    "Fiest of": "Feast of",                # "Fiest of the Conception ..." (26x)
+}
+
+
+# --------------------------------------------------------------------------- #
+# Source TEXT repairs, beyond single misspelled words
+#
+# Found by ``dev/audit_source_anomalies.py``, which reads the source rather than the
+# engine. It matters now in a way it did not before: the engine reproduces the source's
+# feast string on 9496/9496 days, so from here on every error the source makes is an error
+# the engine serves. Each entry below is the source contradicting ITSELF -- its own
+# Armenian name for the same feast, its own wording for the same saint elsewhere, or plain
+# arithmetic -- never an editorial preference. Where the right form could not be
+# established that way it is left alone and listed in the script's output instead.
+#
+# Grouped by what makes each one certain:
+#
+#   * FACTUAL, contradicted by the source's own Armenian. The hy name is an independent
+#     rendering of the same day by the same publisher, which makes it an oracle:
+#       - the Council of Ephesus is dated "(AD 341)" in English and "(431 թ.)" in Armenian.
+#         431 is the historical council; 341 is a digit transposition.
+#       - Pentecost reads "(Fifteenth day of Eastertide)" in English and
+#         "յիսներորդ օր" (fiftieth) in Armenian. Fiftieth is also what the day IS -- it is
+#         Easter+49, and the source's own Eastertide count reaches "Forty Ninth" the day
+#         before. "Pentecost" means fiftieth.
+#
+#   * GRAMMATICAL, where the Armenian settles the intended sense:
+#       - "the poor mans John and Alexis" -> "poor men"; hy "կամաւոր աղքատացն" is plural.
+#       - "many faithfuls" -> "faithful"; hy "ժողովրդոցն" (the people).
+#       - "Gregory of Theologian" -> "Gregory the Theologian"; hy "Գրիգորի Աստուածաբանին".
+#       - "Saint Patriarchs" / "Saint Virgins" -> "Saints ..."; both hy forms are plural
+#         (Սրբոց հայրապետացն / Սրբոց կուսանացն), and the source itself writes "Saints
+#         Virgins Nune and Mane" on other days.
+#       - "Clement the Bishop Rome" -> "Bishop of Rome"; a dropped preposition.
+#
+#   * MECHANICAL slips:
+#       - "Saints Saints Jacoc" -- the word typed twice.
+#       - "Saints St. Aret" -- two titles stacked on one name.
+#       - "Discovery of the Holy Cross." -- a trailing period no other component has.
+#       - "Fast day, Remembrance of the Ten Virgins" -- the day's fast marker comma-joined
+#         into the commemoration. The source's own Armenian for that day separates them
+#         with FEAST_SEP, as does its English on all 2139 other fast days.
+#
+#   * ONE SAINT, TWO SPELLINGS -- the source disagreeing with itself about a name:
+#       - the Apostle is "Philip" in one component and "Phillip" in another;
+#       - St. Nicholas of Myra is "Nicolas" in one and "Nicholas" in two others (hy
+#         Նիկողայոս throughout);
+#       - the Catholicos of Aghvank is "Gregoris" here and "Grigoris" elsewhere
+#         (hy Գրիգորիսի) -- the same fold the "Grogoris" entry above already makes.
+#     Each is folded to the form the source uses more often, which is also the standard
+#     English one.
+#
+# NOT fixed, because no evidence establishes the intended form -- see the audit script's
+# output: "Jacoc" (hy Յակովկայ), "Theodoron" (hy Աստուածատրոյ), "coming out of Pit",
+# "Twelve Holy Doctors of Church", and the source's lowercase "Saints martyrs" /
+# "Saints virgins". Those are left exactly as the source states them.
+# --------------------------------------------------------------------------- #
+_FEAST_TEXT_FIXES = {
+    # factual
+    "Council of Ephesus (AD 341)": "Council of Ephesus (AD 431)",
+    "PENTECOST (Fifteenth day of Eastertide)": "PENTECOST (Fiftieth day of Eastertide)",
+    # grammatical
+    "the poor mans ": "the poor men ",
+    "many faithfuls": "many faithful",
+    "Gregory of Theologian": "Gregory the Theologian",
+    "Saint Patriarchs ": "Saints Patriarchs ",
+    "Saint Virgins ": "Saints Virgins ",
+    "Clement the Bishop Rome": "Clement the Bishop of Rome",
+    # mechanical
+    "Saints Saints ": "Saints ",
+    "Saints St. Aret": "Saints Aret",
+    "Discovery of the Holy Cross.": "Discovery of the Holy Cross",
+    "Fast day, Remembrance of the Ten Virgins":
+        "Fast day — Remembrance of the Ten Virgins",
+    # one saint, two spellings
+    "Phillip": "Philip",
+    "Nicolas ": "Nicholas ",
+    "Gregoris ": "Grigoris ",
 }
 
 
 def normalize_feast_spelling(text):
-    """Fold known English feast/saint-name misspellings (``_FEAST_SPELLING_FIXES``) to their
-    canonical form. Idempotent; leaves everything else untouched."""
+    """Fold the source's known English feast-text errors to the corrected form.
+
+    Two registers, applied in order: single misspelled words (``_FEAST_SPELLING_FIXES``)
+    then multi-word repairs (``_FEAST_TEXT_FIXES``). Every replacement is idempotent, so
+    applying this twice is the same as applying it once.
+    """
     if not text:
         return text
     for wrong, right in _FEAST_SPELLING_FIXES.items():
+        text = text.replace(wrong, right)
+    for wrong, right in _FEAST_TEXT_FIXES.items():
+        text = text.replace(wrong, right)
+    return text
+
+
+# --------------------------------------------------------------------------- #
+# Calendar-POSITION label normalization
+#
+# The engine regenerates the source's position label per date (engine._position_label),
+# verified against every occurrence in the cache by dev/verify_position_labels.py. Seven
+# occurrences are the source contradicting ITSELF rather than a rule the engine is missing,
+# so they are folded here -- the same treatment BOOK_NAME_FIXES gives the "Malach" typo:
+#
+#   * a stray trailing period on "the Fast of Nativity." (4 x Jan 1; every other day in the
+#     same window has no period);
+#   * a comma where the source's own 25 other occurrences of each phrase use a period
+#     ("Great Lent, Sunday of the Expulsion" / "... the Advent");
+#   * one wrong ordinal word: 2008-04-07 reads "Thirteenth day of Eastertide" where the
+#     count is 16. Its neighbours pin it -- Apr 5 is "Fourteenth" (offset 13) and Apr 8 is
+#     "Seventeenth" (offset 16) -- so 13 is a typo for 16, not a different counting rule.
+# --------------------------------------------------------------------------- #
+POSITION_LABEL_FIXES = {
+    "day of the Fast of Nativity.": "day of the Fast of Nativity",
+    "Great Lent, Sunday of the Expulsion": "Great Lent. Sunday of the Expulsion",
+    "Great Lent, Sunday of the Advent": "Great Lent. Sunday of the Advent",
+}
+
+# The wrong-ordinal fix must be DATE-SCOPED: "Thirteenth day of Eastertide" is the correct
+# label on every other year's Easter+12, so folding it globally would corrupt 25 good days
+# to fix one bad one.
+POSITION_LABEL_FIXES_BY_DATE = {
+    "2008-04-07": {"Thirteenth day of Eastertide": "Sixteenth day of Eastertide"},
+}
+
+
+def normalize_position_label(text, date_iso=""):
+    """Fold the source's self-contradicting position labels to the form it uses elsewhere.
+
+    Idempotent. Date-scoped fixes apply only on their own date.
+    """
+    if not text:
+        return text
+    for wrong, right in POSITION_LABEL_FIXES.items():
+        text = text.replace(wrong, right)
+    for wrong, right in POSITION_LABEL_FIXES_BY_DATE.get(date_iso, {}).items():
         text = text.replace(wrong, right)
     return text
 
@@ -238,17 +382,94 @@ def apply_book_name_fixes(readings):
     return fixed
 
 
+# --------------------------------------------------------------------------- #
+# Ground-truth component names, reviewed via dev/feast_name_review.tsv
+#
+# ``dev/feast_name_ground_truth.json`` is the frozen approved-name mapping (built by
+# ``dev/build_ground_truth.py``): raw feast-name component -> the English text a human
+# has signed off on. Unlike ``_FEAST_TEXT_FIXES``/``_FEAST_SPELLING_FIXES`` above (a small,
+# individually-commented set, each justified by the source contradicting itself), this
+# covers every component in the 2001-2026 corpus and folds in a style decision too
+# ("Saint"/"Saints" -> "St."/"Sts."), so it is generated rather than hand-curated.
+#
+# Applied FIRST, before the older folds: each entry replaces the ENTIRE raw component in
+# one shot (it is already the fully-corrected text), so the confusable/spelling/position
+# folds that follow are a no-op on whatever it touched and only still act on components
+# the ground truth left alone.
+#
+# NOT everything in the ground truth is reachable this way. Two families of component
+# --  calendar-position labels and "Eve of ..." notes -- are excluded from the shipped
+# TABLE (``dev/build_table.unanimous_feast`` drops any calendar-derived text the years
+# sharing a key do not state identically) and regenerated live instead, from hardcoded
+# templates in ``engine._POSITION_FAMILIES``/``engine._EVE_FAMILIES``. A ground-truth entry
+# for one of those has no effect on what is actually served unless the matching engine.py
+# template is edited too (see the two "St. Gregory"/"St. James" eve labels there for the
+# pattern) -- and some, like the Advent eve's deliberate dual form, are correct exactly as
+# the engine already reproduces them and must NOT be folded to one spelling. Rows where
+# this applies are marked in the TSV's ``note`` rather than silently included here; see
+# ``docs/feast-name-corrections.md``.
+# --------------------------------------------------------------------------- #
+_GROUND_TRUTH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "feast_name_ground_truth.json")
+
+
+@functools.lru_cache(maxsize=1)
+def _ground_truth_fixes():
+    """[(source, approved), ...], LONGEST source first.
+
+    Composite (glued-day) components contain their own sub-component rows as literal
+    substrings -- e.g. "Saints Cyricus..., and Saints Gordius..." contains "Saints
+    Cyricus..." verbatim. Iterating shortest-first lets the sub-component's fix fire first
+    and consume that substring, so the composite's OWN entry (which would have fixed the
+    remaining half too) no longer matches. Longest-first guarantees a composite gets first
+    claim on its full text before any of its parts can.
+
+    Each entry is registered under BOTH the pristine raw source AND, where it differs, the
+    older confusables/spelling chain's output for that source. ``saint_schedule.json`` is a
+    checked-in artifact, not rebuilt from the raw cache (its own generator is not
+    reproducible -- see CLAUDE.md); some of its labels were already run through the OLD
+    fixes when it was last built (e.g. "Gregory of Theologian" -> "Gregory the Theologian"
+    is already baked in), so the text this fold actually sees there is that older-corrected
+    form, not the raw one. Keying on both means the fold fires either way.
+    """
+    with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
+        data = json.load(fh)
+    fixes = {}
+    for src, v in data.items():
+        approved = v["approved"]
+        if not approved or approved == src:
+            continue
+        fixes[src] = approved
+        old = normalize_feast_spelling(normalize_confusables(src))
+        if old != src:
+            fixes[old] = approved
+    ordered = sorted(fixes.items(), key=lambda pair: len(pair[0]), reverse=True)
+    return ordered
+
+
+def apply_ground_truth(text):
+    """Fold every reviewed component in ``text`` to its approved English spelling."""
+    if not text:
+        return text
+    for wrong, right in _ground_truth_fixes():
+        text = text.replace(wrong, right)
+    return text
+
+
 def apply_source_corrections(day):
     """Apply the on-read source corrections to a cached reference-day dict, in place.
 
     Single home for the corrections every reference_data reader must apply identically:
-    the Easter-Sunday reading-order fix, the Malachi book-name typo fold, and the
-    Cyrillic-homoglyph fold on the English feast text. Returns ``day`` for convenience.
-    (Caches are git-ignored/local and may predate these fixes, so they are applied on
-    read, not assumed baked into the cache.)"""
+    the Easter-Sunday reading-order fix, the Malachi book-name typo fold, the reviewed
+    ground-truth names, and the Cyrillic-homoglyph fold on the English feast text. Returns
+    ``day`` for convenience. (Caches are git-ignored/local and may predate these fixes, so
+    they are applied on read, not assumed baked into the cache.)"""
     day["readings"] = apply_reading_order(day.get("date", ""), day.get("readings", []))
     day["readings"] = apply_book_name_fixes(day.get("readings", []))
-    day["feast"] = normalize_feast_spelling(normalize_confusables(day.get("feast", "")))
+    day["feast"] = normalize_position_label(
+        normalize_feast_spelling(normalize_confusables(
+            apply_ground_truth(day.get("feast", "")))),
+        day.get("date", ""))
     return day
 
 
@@ -256,9 +477,12 @@ def canonical_commem(commem):
     """Collapse reviewed companion-enumeration variants to a primary commemoration.
 
     Applied symmetrically to the scraped and engine commemorations before comparison.
-    Also repairs the "Fiest" -> "Feast" scrape typo and the Cyrillic-homoglyph
-    contamination (Cyrillic Е/о) in the source's English feast text."""
-    commem = normalize_feast_spelling(normalize_confusables(commem))
+    Also repairs the "Fiest" -> "Feast" scrape typo, the Cyrillic-homoglyph
+    contamination (Cyrillic Е/о) in the source's English feast text, and folds in the
+    reviewed ground truth -- so the source's raw spelling and the engine's approved one
+    canonicalize to the same string and register as a reviewed difference, not a
+    contradiction."""
+    commem = normalize_feast_spelling(normalize_confusables(apply_ground_truth(commem)))
     commem = commem.replace("Fiest of", "Feast of")     # sacredtradition.am typo
     for canonical, pred in _FEAST_CANON_RULES:
         if pred(commem):

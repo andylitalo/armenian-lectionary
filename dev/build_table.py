@@ -25,7 +25,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all  # noqa: E402
 # Reuse the runtime calendar math (and key-resolution) so the table is built and
 # keyed exactly as the app reads it.
-from armenian_lectionary.engine import coords_for, WINDOWS, PRECEDENCE, _lookup, DATA_PATH  # noqa: E402
+from armenian_lectionary.engine import (  # noqa: E402
+    coords_for, WINDOWS, PRECEDENCE, _lookup, DATA_PATH, _FEAST_SEP as FEAST_SEP,
+)
 
 
 def rsig(day):
@@ -38,6 +40,47 @@ def modal_feast(items):
     """Most common feast label among items (list of (year, day))."""
     c = collections.Counter(day["feast"].strip() for _, day in items)
     return c.most_common(1)[0][0]
+
+
+def unanimous_feast(items):
+    """Modal feast label with any NON-unanimous calendar-derived component removed.
+
+    A table key is a liturgical *coordinate*, shared by many civil years. The
+    commemoration is invariant across them; the calendar-position label the source packs
+    into the same string ("Fourth Sunday after Nativity", "Third day of Advent") is not --
+    it counts from an anchor whose distance to this coordinate changes year to year.
+    Shipping ``modal_feast`` therefore asserted the *modal* year's ordinal for every year,
+    which is wrong wherever the ordinal differs (34 days across 2001-2026; see
+    dev/feast_discrepancy_report.py).
+
+    So a calendar-derived component (``feast_names.is_calendar_component``: position label
+    or eve note) survives only if EVERY year sharing the key states it identically. The
+    table then never asserts a label it cannot reproduce -- the same discipline the
+    readings side already enforces via the 0-wrong contract -- and the dropped labels are
+    regenerated per civil year at runtime (``engine._position_label``), which is where the
+    year is actually known.
+
+    Commemorations are deliberately NOT subject to unanimity. The source varies a saint's
+    companion list across years ("Holy Apostles Thomas, James and Simon" vs. "Holy Apostle
+    Thomas"), and dropping on disagreement would leave those days with no name at all --
+    strictly worse than a longer-or-shorter companion list, and not a defect the runtime
+    can regenerate its way out of. Those variants are reconciled where reviewed, by
+    ``source_corrections.canonical_commem``.
+    """
+    from dev.feast_names import is_calendar_component
+
+    per_year = [[c.strip() for c in day["feast"].strip().split(FEAST_SEP) if c.strip()]
+                for _, day in items]
+    if not per_year:
+        return ""
+
+    kept = []
+    for component in [c.strip() for c in modal_feast(items).split(FEAST_SEP) if c.strip()]:
+        if is_calendar_component(component) and not all(component in comps
+                                                        for comps in per_year):
+            continue
+        kept.append(component)
+    return FEAST_SEP.join(kept)
 
 
 def _consistent(items, min_years):
@@ -72,7 +115,7 @@ def build(days):
         if _consistent(items, CIVIL_MIN_YEARS):
             day0 = items[0][1]
             civil_table[md] = {
-                "feast": modal_feast(items),
+                "feast": unanimous_feast(items),
                 "readings": list(day0["readings"]),
                 "support_years": sorted({yr for yr, _ in items}),
             }
@@ -104,7 +147,7 @@ def build(days):
             if _consistent(items, 2):
                 day0 = items[0][1]
                 tables[ks][key] = {
-                    "feast": modal_feast(items),
+                    "feast": unanimous_feast(items),
                     "readings": list(day0["readings"]),
                     "support_years": sorted({yr for yr, _ in items}),
                 }

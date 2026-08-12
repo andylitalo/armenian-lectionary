@@ -64,9 +64,13 @@ _EVES = sorted([
     "Eve of the Presentation of the Lord",
 ], key=len, reverse=True)
 
-# Engine placeholders that are NOT a commemoration name -> normalize to empty.
-_PLACEHOLDERS = ["(movable ordinary-time reading)", "(commemoration)",
-                 "(day not yet in validated table)"]
+# Engine placeholders. These are NOT normalized away: erasing them made a placeholder
+# compare equal to any pure-position source label ("Fast day" -> "" == "(movable
+# ordinary-time reading)" -> ""), which is how six placeholder days passed the
+# commemoration test for years. They are surfaced instead, so a placeholder can only ever
+# match another placeholder.
+PLACEHOLDERS = ("(movable ordinary-time reading)", "(commemoration)",
+                "(day not yet in validated table)")
 
 _PAREN_POS = re.compile(rf"\({ORD} day of [A-Za-z' ]+\)")   # e.g. "(Fifteenth day of Eastertide)"
 _DAYOF = re.compile(rf"^{ORD} day of ")
@@ -97,6 +101,32 @@ def _strip_leading_position(s):
     return s
 
 
+_IS_POSITION = re.compile(
+    rf"^(?:{ORD})\s+(?:day of|Sunday(?:\s+(?:after|of))?)\b|^(?:Fast|Feast) day$")
+
+
+def is_position(component):
+    """True if a feast component is a calendar-POSITION label rather than a commemoration.
+
+    "Fourth Sunday after Nativity", "Third day of Advent", "Fast day" -- labels that count
+    from a liturgical anchor, so their value depends on the civil year, not just on the
+    liturgical coordinate a table key represents.
+    """
+    return bool(_IS_POSITION.match(component))
+
+
+def is_calendar_component(component):
+    """True if a component is derivable from the calendar alone (position label or eve note).
+
+    These are the components a table key MUST NOT freeze: the key is shared across civil
+    years whose ordinals differ, so a stored value is right only for the years that happen
+    to share the modal year's count. They are regenerated per-date at runtime instead
+    (``engine._position_label``). Commemorations are not calendar-derived -- they identify
+    the saint/feast and are genuinely invariant for the coordinate, so they stay stored.
+    """
+    return is_position(component) or component.startswith("Eve of")
+
+
 def commemoration_of(feast_str):
     """Return the commemoration component of a (mashed) feast string.
 
@@ -113,8 +143,8 @@ def commemoration_of(feast_str):
     # (no separator) canonicalizes identically. The separator carries no commemoration.
     s = feast_str.replace(" — ", "")
     s = s.replace("Е", "E")                    # Cyrillic 'Е' glitch -> Latin 'E'
-    for p in _PLACEHOLDERS:
-        s = s.replace(p, "")
+    if s.strip() in PLACEHOLDERS:
+        return s.strip()                       # kept verbatim; never collapsed to ""
     s = _strip_leading_position(s)
     for e in _EVES:
         idx = s.find(e)
