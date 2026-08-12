@@ -84,6 +84,27 @@ _HY_CORRECTIONS = {
     "Second Sunday after Pentecost": "Բ կիւրակէ զկնի Հոգեգալստեան",
 }
 
+# Observances the source names more specifically in Armenian than in English, so one
+# English text covers several distinct observances and the id cannot be recovered from it.
+# The engine resolves these from the DATE instead (engine._date_scoped_observance_id), so
+# they are minted here directly rather than discovered by enumerating served text -- an
+# enumeration keyed on English would only ever see the one ambiguous string.
+#
+# The Fast of St. Gregory the Illuminator is the only family so far: the source heads its
+# five weekdays (Pentecost+22..+26) with the ordinal in Armenian and a bare "Fast day" in
+# English. The Armenian for days 1, 2 and 4 is attested directly in dev/reference_data_hy/
+# (2001-06-25/26/28); days 3 and 5 are the same construction with the next letter numeral,
+# the form the source uses for every other counted fast ("Ա օր Յիսնակի պահոց",
+# "ԼԴ օր Մեծի պահոց"). Marked so verify_observance_catalog.py does not report them unused.
+_ILLUMINATOR_FAST_HY = ("Ա", "Բ", "Գ", "Դ", "Ե")
+_DATE_SCOPED = {
+    f"illuminator_fast_day_{n}": {
+        "en": "Fast day",
+        "hy": f"{letter} օր Լուսաւորչի պահոց",
+    }
+    for n, letter in enumerate(_ILLUMINATOR_FAST_HY, start=1)
+}
+
 _STRIP_PREFIX = re.compile(
     r"^(the\s+|sts?\.?\s+|saints?\s+|holy\s+)+", re.IGNORECASE)
 _NON_WORD = re.compile(r"[^a-z0-9]+")
@@ -181,11 +202,23 @@ def build_catalog():
             continue
         catalog[sid] = {"en": label, "hy": hy}
 
+    # Date-scoped ids, minted verbatim. Deliberately BEFORE the text sweep so their shared
+    # English ("Fast day") is already spoken for; the sweep's own entry for that text is
+    # minted below under its general id, which is what the ambiguous text resolves to when
+    # no date rule fires.
+    for sid, entry in _DATE_SCOPED.items():
+        used_ids.add(sid)
+        catalog[sid] = dict(entry)
+
     positions, eves = live_generated_texts()
     all_texts = set(ground_truth_texts()) | positions | eves
 
+    # Date-scoped ids are excluded from the "already minted" check on purpose: they SHARE
+    # their English with a general component, which still needs its own general id.
+    minted_en = {entry["en"] for sid, entry in catalog.items() if sid not in _DATE_SCOPED}
+
     for text in sorted(all_texts):
-        if any(entry["en"] == text for entry in catalog.values()):
+        if text in minted_en:
             continue    # already minted (e.g. a pre-lent cohort literal)
         hy = hy_for(text, hy_map)
         if hy is None:
@@ -193,6 +226,7 @@ def build_catalog():
             continue
         sid = _slug(text, used_ids)
         catalog[sid] = {"en": text, "hy": hy}
+        minted_en.add(text)
 
     return catalog, sorted(set(missing_hy))
 

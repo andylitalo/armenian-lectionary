@@ -1976,11 +1976,68 @@ def _load_observance_catalog():
 
 
 _OBSERVANCE_CATALOG = _load_observance_catalog()
+
+
+# --------------------------------------------------------------------------- #
+# Date-scoped observance ids
+#
+# Almost every component identifies itself by its English text, so the reverse map below
+# recovers its id. A few cannot, because the SOURCE is more specific in Armenian than in
+# English on those days: it heads the five weekdays of the Fast of St. Gregory the
+# Illuminator "Ա/Բ/Գ/Դ/Ե օր Լուսաւորչի պահոց" (First..Fifth day of the Fast of the
+# Illuminator) while its English says only "Fast day" -- the same two words it uses on
+# 2,139 ordinary fast days. One English text, six different observances.
+#
+# English must not change: "Fast day" is what the source publishes on all 130 of these days
+# across 2001-2026, and inventing a richer English label would contradict it. So the id is
+# resolved from the DATE instead, and only then does the Armenian differ.
+#
+# This is the same shape as source_corrections.POSITION_LABEL_FIXES_BY_DATE: a rule scoped
+# to when it applies, because the text alone is genuinely ambiguous. The eventual cure is
+# Phase 3 -- the shipped table already carries observance_ids that engine.py does not yet
+# read (dev/build_table.py), and threading those through the name overlay would make every
+# id explicit rather than recovered.
+# --------------------------------------------------------------------------- #
+
+_ILLUMINATOR_FAST_DAYS = 5      # Mon-Fri; the fast opens the day after its Sunday eve
+
+
+def _illuminator_fast_ordinal(d: datetime.date):
+    """1-5 if ``d`` is a weekday of the Fast of St. Gregory the Illuminator, else None.
+
+    The fast runs Pentecost+22 .. Pentecost+26, opening the morning after its eve
+    (Pentecost+21, in _EVE_FAMILIES) and closing before the Discovery of the Relics on the
+    Saturday. Confirmed on all 26 years of ground truth.
+    """
+    pentecost = calculate_gregorian_easter(d.year) + datetime.timedelta(days=49)
+    ordinal = (d - pentecost).days - 21
+    return ordinal if 1 <= ordinal <= _ILLUMINATOR_FAST_DAYS else None
+
+
+_DATE_SCOPED_OBSERVANCE_IDS = frozenset(
+    f"illuminator_fast_day_{n}" for n in range(1, _ILLUMINATOR_FAST_DAYS + 1))
+
+
+def _date_scoped_observance_id(component: str, d: datetime.date):
+    """The id for ``component`` on ``d`` where its English text alone cannot say, else None."""
+    if component == "Fast day" and d is not None:
+        ordinal = _illuminator_fast_ordinal(d)
+        if ordinal is not None:
+            return f"illuminator_fast_day_{ordinal}"
+    return None
+
+
 # Reverse lookup: an already-served English component -> its stable id. Built once at
 # import time; every component this engine can produce was enumerated when the catalog
 # was built (dev/build_observance_catalog.py, verified by dev/verify_observance_catalog.py
 # to have zero orphans), so this covers the full corpus, not just a sample.
-_TEXT_TO_OBSERVANCE_ID = {v["en"]: sid for sid, v in _OBSERVANCE_CATALOG.items()}
+#
+# Date-scoped ids are excluded: they deliberately share their English text with the general
+# component ("Fast day"), so leaving them in would make this dict's value depend on catalog
+# iteration order and could shadow the general id on all 2,139 ordinary fast days.
+_TEXT_TO_OBSERVANCE_ID = {
+    v["en"]: sid for sid, v in _OBSERVANCE_CATALOG.items()
+    if sid not in _DATE_SCOPED_OBSERVANCE_IDS}
 
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
@@ -2013,7 +2070,8 @@ def _translate_feast(label: str, feast_map: dict) -> str:
     return label
 
 
-def _resolve_observance_names(label: str, language: str) -> str:
+def _resolve_observance_names(label: str, language: str,
+                              target_date: datetime.date = None) -> str:
     """Return ``label`` (a possibly FEAST_SEP-composite observance name) resolved to
     ``language`` via the id-based observance catalog: each component's already-served
     English text is mapped to its stable id, then to that id's text in ``language``.
@@ -2024,18 +2082,25 @@ def _resolve_observance_names(label: str, language: str) -> str:
     become an id and get translated. A component with no catalog entry (a placeholder
     sentinel like "(commemoration)", or the catalog absent in a thin checkout) is left in
     English rather than dropped.
+
+    ``target_date`` resolves the handful of components whose English text is ambiguous
+    because the source is more specific in Armenian on those days -- see
+    :func:`_date_scoped_observance_id`. Omitting it is safe: those components then fall
+    back to the general id, which is what the English says anyway.
     """
     if not label:
         return label
     resolved = []
     for part in label.split(_FEAST_SEP):
-        sid = _TEXT_TO_OBSERVANCE_ID.get(part)
+        sid = (_date_scoped_observance_id(part, target_date)
+               or _TEXT_TO_OBSERVANCE_ID.get(part))
         entry = _OBSERVANCE_CATALOG.get(sid) if sid else None
         resolved.append(entry.get(language, part) if entry else part)
     return _FEAST_SEP.join(resolved)
 
 
-def _localize(result: dict, language: str) -> dict:
+def _localize(result: dict, language: str,
+              target_date: datetime.date = None) -> dict:
     """Translate the human-readable feast and reading names of ``result`` in place.
 
     Only the *scraped* values are localized -- the feast (``Liturgical Day``) and the
@@ -2043,12 +2108,15 @@ def _localize(result: dict, language: str) -> dict:
     (``Season``, ``Source``, ``Confidence``, ``Note``) stay in English; they are engine
     annotations, not source data, and have no scraped Armenian form. The result always
     carries a ``Language`` key naming the language its names are in.
+
+    ``target_date`` is passed through to :func:`_resolve_observance_names` for the few
+    components whose id the English text alone cannot determine.
     """
     result["Language"] = language
     if language == "en":
         return result
     result["Liturgical Day"] = _resolve_observance_names(
-        result.get("Liturgical Day", ""), language)
+        result.get("Liturgical Day", ""), language, target_date)
     result["ReadingsList"] = [
         _translate_reading(r, _BOOK_NAMES_HY) for r in result.get("ReadingsList", [])]
     # Translate within the existing groups: the OT/Epistle/Gospel classification was
@@ -2162,7 +2230,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
             target_date),
         target_date)
     result["Mode"] = calculate_liturgical_mode(target_date)
-    return _localize(result, language)
+    return _localize(result, language, target_date)
 
 
 def _compute_lectionary(target_date: datetime.date) -> dict:
