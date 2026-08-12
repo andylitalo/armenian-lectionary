@@ -1257,11 +1257,17 @@ _POSITION_FAMILIES = (
     # A Wed/Fri no season above has claimed is simply a fast day. Verified exact on every
     # such day in the ground truth (1553/1553). Counter ``None`` = a fixed label, no ordinal.
     #
-    # The Conception of the Theotokos (Dec 9) is the one date that reads "Feast day"
-    # instead -- the feast outranking the Advent fast -- on Mon/Tue/Wed/Fri, and takes no
-    # marker at all on Thu/Sat (16 of 16 either way; Sunday is an Advent Sunday, claimed
-    # above). The weekday set is the source's, recorded as observed.
-    ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Feast day", (12, 9)),
+    # The Conception of the Theotokos (Dec 9) carries the marker on Mon/Tue/Wed/Fri -- the
+    # Advent-fast weekdays, two more than the ordinary Wed/Fri below -- and none at all on
+    # Thu/Sat (16 of 16 either way; Sunday is an Advent Sunday, claimed above).
+    #
+    # The source prints that marker as "Feast day", which is its own typo for "Fast day":
+    # the string appears on no other date in the 9,861-day English corpus, its weekday set
+    # is the fast schedule rather than anything about the feast (a feast marker would show
+    # on Thu/Sat too -- it is the same feast every year), and the source's own Armenian
+    # reads "Պահք". Folded in source_corrections.POSITION_LABEL_FIXES; see
+    # docs/feast-name-corrections.md section 1.
+    ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Fast day", (12, 9)),
     ("E", (_ANY, _ANY), (2, 4), None, 0, "Fast day"),
 )
 

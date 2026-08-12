@@ -43,6 +43,7 @@ Registry: `dev/source_corrections._FEAST_TEXT_FIXES` and `_FEAST_SPELLING_FIXES`
 |---|---|---|---|
 | Aug 4 (Council of Ephesus) | `… of Ephesus (AD 341)` | `… (431 թ.)` | `… (AD 431)` |
 | Pentecost | `PENTECOST (Fifteenth day of Eastertide)` | `ՀՈԳԵԳԱԼՈՒՍՏ (Պենտեկոստէ՝ յիսներորդ օր ի Զատկէն)` | `PENTECOST (Fiftieth day of Eastertide)` |
+| Dec 9 (Conception of the Theotokos) | `Feast day` | `Պահք` | `Fast day` |
 
 **Ephesus.** The Third Ecumenical Council met at Ephesus in **431**. `341` is a digit
 transposition, and the source's own Armenian gives `431 թ.` on the same day.
@@ -50,9 +51,26 @@ transposition, and the source's own Armenian gives `431 թ.` on the same day.
 **Pentecost.** `յիսներորդ` is *fiftieth*. Three independent confirmations: the Armenian;
 the arithmetic (the day is Easter + 49, and the source's own Eastertide count reaches
 `Forty Ninth day of Eastertide` the day before); and the word *Pentecost* itself, from
-πεντηκοστή, fiftieth. `Fifteenth` is wrong on all three.
+πεντηκոստή, fiftieth. `Fifteenth` is wrong on all three.
 
-Neither error varies by year, so neither could have been found by comparing years.
+**Dec 9.** `Fast`, mistyped `Feast` — one letter, on the same row where the source also
+writes `Fiest of the Conception`. Three independent confirmations:
+
+- `Feast day` appears on **no other date** in the 9,861-day English corpus. A genuine
+  marker meaning "this is a feast" would not be unique to one December day in a calendar
+  this dense with feasts.
+- It appears only on **Mon, Tue, Wed and Fri**, and is absent on Thu and Sat (16 of 16
+  either way; Sunday is claimed by the Advent Sunday count). That is the Advent-fast
+  weekday set. It cannot be describing the feast: Dec 9 is the same feast every year, so a
+  feast marker would appear on Thursdays too. It tracks the **fast**.
+- The source's own Armenian for the component reads `Պահք` — *fast*.
+
+The third witness is the one the catalog surfaced. Consolidating display text onto one
+id-keyed entry put `Feast day → Պահք` and `Fast day → Պահք` side by side, which is how a
+seven-year-old typo became visible.
+
+None of these three errors varies by year, so none could have been found by comparing
+years — only by reading the source against itself.
 
 ## 2. Grammatical — the Armenian settles the sense
 
