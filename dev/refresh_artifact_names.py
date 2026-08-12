@@ -28,6 +28,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from dev.observance_ids import ids_for_text                           # noqa: E402
 from dev.source_corrections import (                                  # noqa: E402
     apply_ground_truth, normalize_confusables, normalize_feast_spelling,
 )
@@ -52,6 +53,10 @@ def refresh(schedule):
             if fixed != entry.get("label"):
                 changes.append((entry["label"], fixed))
                 entry["label"] = fixed
+            ids = ids_for_text(fixed)
+            if ids != entry.get("observance_ids"):
+                changes.append((entry.get("observance_ids"), ids))
+                entry["observance_ids"] = ids
         aliases = zone.get("aliases")
         if aliases is None:
             continue
