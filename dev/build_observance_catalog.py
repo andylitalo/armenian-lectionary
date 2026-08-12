@@ -74,6 +74,21 @@ _MANUAL_HY_OVERRIDES = {
     "Eve of the Resurrection of our Lord Jesus Christ": "Ճրագալոյց Զատկի",
 }
 
+# KNOWN GAP, deliberately not papered over. The source's Armenian ends Holy Saturday with a
+# trailing "— Նաւակատիք" (the vigil) that its English does not have, so the component-wise
+# rejoin drops it: 2 days in the cache, every Holy Saturday in the corpus.
+#
+# It cannot be fixed by gluing the note onto the eve's name, which was tried and is wrong:
+# on a Holy Saturday that coincides with the Annunciation (2007-04-07) the source puts
+# Նաւակատիք LAST, after the Annunciation, not beside the eve. So it is a day-level
+# component in its own right, not part of any one name -- and this catalog cannot express
+# one, because resolution is driven by the ENGLISH components a day has and English has
+# none here.
+#
+# Expressing it needs an observance that exists in only one language, which is a design
+# change (and squarely Phase 3 territory, where ids come from storage rather than from
+# reverse text lookup). Recorded here, counted by dev/hy_discrepancy.py, and left alone.
+
 # A known-WRONG scraped value to override even though feast_names_hy.json does have an
 # entry: "Second Sunday after Pentecost" ITSELF disagrees with two of its own composite
 # occurrences (2-of-3 scraped as "Ա" = First, 1-of-3 as "Բ" = Second) -- a scrape-pairing
@@ -82,14 +97,6 @@ _MANUAL_HY_OVERRIDES = {
 # every occurrence; verified against the one composite entry that has it right.
 _HY_CORRECTIONS = {
     "Second Sunday after Pentecost": "Բ կիւրակէ զկնի Հոգեգալստեան",
-    # The source spells this three ways across the cached years and feast_names_hy.json
-    # paired it with the rarest: 'Ս. Աստուածածնի' x4, 'ս. Աստուածածնի' x2,
-    # 'ս.Աստուածածնի' x1 -- and the 1-of-7 form, lowercase with no space after the
-    # abbreviation dot, is what shipped on every Nov 21. Reported by
-    # dev/audit_hy_variants.py; the majority form is also what this component's own
-    # ground-truth row carries.
-    "Presentation of the Holy Mother of God to the Temple":
-        "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
 }
 
 # Observances the source names more specifically in Armenian than in English, so one

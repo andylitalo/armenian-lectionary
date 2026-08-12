@@ -130,10 +130,30 @@ reports any catalog entry serving a minority spelling.
 
 Only the first was wrong: the catalog was serving `ս.Աստուածածնի` — lowercase, and missing
 the space after the abbreviation dot — on **every Nov 21**, because that 1-of-7 day is the
-one the pairing sampled. Fixed in `dev/build_observance_catalog._HY_CORRECTIONS`. The other
-three were already correct, and are listed here so they are not "fixed" into the minority
-form later; `dev/hy_discrepancy.py` classifies them `DOMINANT_FORM` rather than counting
-them against the accuracy ratchet.
+one the pairing sampled. Fixed by folding the two Presentation ground-truth rows into one,
+after which the pairing's own vote picks the majority. The other three were already
+correct, and are listed here so they are not "fixed" into the minority form later;
+`dev/hy_discrepancy.py` classifies them `DOMINANT_FORM` rather than counting them against
+the accuracy ratchet.
+
+`Ը օր Զատկի. Կրկնազատիկ` belongs to the same family and is worth naming, because it looks
+backwards: the source writes the Octave of Easter as one component with a period twice, and
+splits it into two with an em-dash once. The period is the dominant form, so that is what
+ships — reproducing the single em-dash day would be serving the minority.
+
+### Known gap: `Նաւակատիք` on Holy Saturday
+
+The source's Armenian ends Holy Saturday with a trailing `— Նաւակատիք` (the vigil) that its
+English does not have. Resolution is driven by the English components a day has, so the
+note has nothing to attach to and is dropped — every Holy Saturday.
+
+Gluing it onto the eve's name does not work, and the source says why: when Holy Saturday
+coincides with the Annunciation (2007-04-07) it prints `Նաւակատիք` **last**, after the
+Annunciation, not beside the eve. It is a day-level component in its own right.
+
+Expressing that needs an observance that exists in only one language — a design change, and
+properly part of Phase 3, where ids come from storage rather than from reverse text lookup.
+Until then it is counted as an `OMISSION` by `dev/hy_discrepancy.py` rather than hidden.
 
 ## 5. Position labels
 

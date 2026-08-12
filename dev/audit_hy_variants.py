@@ -41,7 +41,12 @@ CATALOG_PATH = os.path.join(REPO_ROOT, "armenian_lectionary", "data",
                             "observance_catalog.json")
 
 
-def main():
+def minority_variants():
+    """``[(id, shipped, shipped_count, majority, majority_count, all_variants), ...]``.
+
+    Empty is the healthy state. Exposed as a function so tests can assert on it directly
+    rather than re-deriving the comparison and drifting from this script.
+    """
     with open(CATALOG_PATH, encoding="utf-8") as fh:
         catalog = json.load(fh)
 
@@ -61,6 +66,11 @@ def main():
             continue                        # already serving the dominant form
         findings.append((sid, shipped, witnesses.get(shipped, 0),
                          majority, majority_count, variants))
+    return findings
+
+
+def main():
+    findings = minority_variants()
 
     if not findings:
         print("0 entries serve a minority Armenian variant.")

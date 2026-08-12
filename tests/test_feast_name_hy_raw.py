@@ -153,6 +153,27 @@ class TestRawArmenianFeastName(unittest.TestCase):
             classified, self.data["compared"],
             "some compared days were neither exact nor recorded as a finding")
 
+    def test_no_entry_serves_a_minority_spelling(self):
+        """Where the source spells a name several ways, ship the one it uses most.
+
+        dev/fetch_translations.py pairs each English name with the Armenian of ONE
+        representative day, so a name the source spells three ways ships whichever the
+        pairing happened to sample. That is a coin flip, and it landed wrong once: the
+        Presentation of the Theotokos shipped 'ս.Աստուածածնի' -- lowercase, no space after
+        the abbreviation dot -- on every Nov 21, because that 1-of-7 day was the sample.
+
+        Asserting the audit rather than pinning individual strings: this covers every entry,
+        including names nobody has looked at yet, and it keeps working after a re-fetch
+        resamples the cache.
+        """
+        from dev.audit_hy_variants import minority_variants
+        findings = [(sid, shipped, majority)
+                    for sid, shipped, _n, majority, _m, _all in minority_variants()]
+        self.assertEqual(
+            findings[:5], [],
+            f"{len(findings)} catalog entr(y/ies) serve a minority Armenian spelling; "
+            "run `python dev/audit_hy_variants.py` for the witness counts")
+
 
 if __name__ == "__main__":
     unittest.main()
