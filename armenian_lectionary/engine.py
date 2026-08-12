@@ -50,6 +50,18 @@ OBSERVANCE_CATALOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)
 
 SUPPORTED_LANGUAGES = ("en", "hy")
 
+# Supported date range. The validated table, the saint schedule and the ground truth all
+# stop here, and outside it the engine has nothing to say: it falls through to internal
+# absence-markers and would serve "(commemoration)" or "Feast (day not yet in validated
+# table)" as if those were names. tests/test_feast_contract.py forbids exactly those strings
+# INSIDE the range, so returning them outside it was the same defect with no test looking.
+#
+# Env-overridable under the names app.py already used, so the range can widen without a code
+# change; app.py now imports these rather than defining its own copy. Read once at import,
+# like every other configuration here.
+MIN_YEAR = int(os.environ.get("LECTIONARY_MIN_YEAR", "2001"))
+MAX_YEAR = int(os.environ.get("LECTIONARY_MAX_YEAR", "2027"))
+
 # Canonical order of the Armenian Church's eight-mode (ութ ձայն) cycle.  Immutable
 # strings preserve the public API; public results are fresh dictionaries.
 # The Armenian tones are identifiers rather than localized display names, so callers
@@ -2144,11 +2156,22 @@ def compute_armenian_lectionary(target_date: datetime.date,
     (scraped offline into ``data/{feast,book}_names_hy.json``); any name with no known
     Armenian form is left in English. Provenance fields stay English (see
     :func:`_localize`).
+
+    Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
+    the engine has no validated data and would otherwise return an internal absence-marker
+    dressed as a name -- the very strings ``tests/test_feast_contract.py`` forbids inside
+    it. :func:`calculate_liturgical_mode` is NOT restricted this way; it is pure arithmetic
+    on the paschal cycle and correct for any date.
     """
     if language not in SUPPORTED_LANGUAGES:
         raise ValueError(
             f"unsupported language {language!r}; expected one of "
             f"{', '.join(SUPPORTED_LANGUAGES)}")
+    if not MIN_YEAR <= target_date.year <= MAX_YEAR:
+        raise ValueError(
+            f"date {target_date.isoformat()} is outside the supported range "
+            f"{MIN_YEAR}-{MAX_YEAR}; readings are validated only for those years "
+            f"(override with LECTIONARY_MIN_YEAR / LECTIONARY_MAX_YEAR)")
     result = _compute_lectionary(target_date)
     result["Liturgical Day"] = _apply_eve_label(
         _apply_position_label(
