@@ -1,0 +1,155 @@
+"""DEV-ONLY: classify every difference between the served Armenian feast name and
+sacredtradition.am's own Armenian.
+
+The Armenian counterpart of ``dev/feast_discrepancy_report.py``, and it exists for the
+same reason: so the accuracy test and the human-readable numbers can never drift apart.
+It was written after a refactor regressed ``language="hy"`` on ~118 days with nothing to
+catch it -- English had a 9,496-day contract and Armenian had none.
+
+Two normalizations are applied to the SOURCE before comparing, both matching a deliberate,
+already-registered decision rather than papering over a defect:
+
+  * ``dev/fetch_translations.to_mashtots_names`` -- the source types a handful of proper
+    nouns in reformed ("Soviet") orthography inside otherwise-traditional text
+    (``Դանիել`` for ``Դանիէլ``). v1.2.3 reversed those in the shipped maps on purpose, so
+    comparing against the raw scrape would re-report a fix as a defect.
+  * component splitting on ``_FEAST_SEP``, so a day is compared as a set of observances
+    rather than one string -- the same projection the English test uses.
+
+Findings are classified, strongest first:
+
+  * ``CONTRADICTION`` -- the engine emits an Armenian component the source does not have.
+  * ``OMISSION`` -- the source states a component the engine drops.
+  * ``ORDER`` -- the same components in a different order.
+
+Unlike the English side, none of these is zero yet. The residue at the time of writing is
+25 days, and it is NOT all engine defect -- it includes days where the shipped table's
+commemoration enumerates a different companion list than this particular year's source
+publishes (the same class ``canonical_commem`` folds away on the English side, which has
+no Armenian analogue), and one deliberate correction where the source's own Armenian
+carries a wrong ordinal. Callers should treat the counts as ratchets, not as a defect
+list: what matters is that no NEW divergence appears.
+
+Coverage caveat: ``dev/reference_data_hy/`` holds 433 days, one representative date per
+distinct English feast string (``dev/fetch_translations.py`` builds it that way), not the
+full 9,861-day range. So this covers the distinct NAMES well and per-year calendar
+behaviour thinly -- a wrong ordinal in a year the cache does not sample is invisible here.
+A regression detector, not a completeness proof.
+
+Usage:
+    python dev/hy_discrepancy.py            # summary
+    python dev/hy_discrepancy.py --list     # every finding, with both strings
+"""
+
+import datetime
+import glob
+import json
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from armenian_lectionary.engine import (                                # noqa: E402
+    _FEAST_SEP, compute_armenian_lectionary,
+)
+from dev.fetch_translations import to_mashtots_names                    # noqa: E402
+
+REF_DIR_HY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reference_data_hy")
+
+
+def components(feast_str):
+    """The feast string's ``_FEAST_SEP``-joined components, stripped and de-blanked."""
+    return [c.strip() for c in (feast_str or "").split(_FEAST_SEP) if c.strip()]
+
+
+def source_days():
+    """``{iso: armenian feast string}`` for every cached day that carries one."""
+    days = {}
+    for path in sorted(glob.glob(os.path.join(REF_DIR_HY, "*.json"))):
+        with open(path, encoding="utf-8") as fh:
+            day = json.load(fh)
+        feast = (day.get("feast") or "").strip()
+        if feast:
+            days[day["date"]] = feast
+    return days
+
+
+def diff_components(src_comps, eng_comps):
+    """``(contradictions, omissions)``: what the engine asserts that the source lacks, and
+    what the source states that the engine drops.
+
+    Matching is exact and greedy in component order, so a component is never counted as
+    both. There is no correction-equivalence pass as there is on the English side: the
+    Armenian has no ``canonical_commem``, and inventing a fuzzy match here would hide
+    exactly the kind of near-miss (a minority spelling variant, a lost sub-component) this
+    module exists to surface.
+    """
+    unmatched_src = list(src_comps)
+    contradictions = []
+    for eng in eng_comps:
+        if eng in unmatched_src:
+            unmatched_src.remove(eng)
+        else:
+            contradictions.append(eng)
+    return contradictions, unmatched_src
+
+
+def collect():
+    """Walk the Armenian cache once; return per-day findings and the totals."""
+    findings = []
+    compared = exact = 0
+
+    for iso, raw in sorted(source_days().items()):
+        src = to_mashtots_names(raw)
+        eng = compute_armenian_lectionary(
+            datetime.date.fromisoformat(iso), language="hy")["Liturgical Day"]
+        compared += 1
+        if eng == src:
+            exact += 1
+            continue
+
+        src_comps, eng_comps = components(src), components(eng)
+        contradictions, omissions = diff_components(src_comps, eng_comps)
+        if contradictions:
+            kind = "CONTRADICTION"
+        elif omissions:
+            kind = "OMISSION"
+        else:
+            kind = "ORDER"
+        findings.append({
+            "iso": iso, "kind": kind, "src": src, "eng": eng,
+            "contradictions": contradictions, "omissions": omissions,
+        })
+
+    return {"compared": compared, "exact": exact, "findings": findings}
+
+
+def counts(data):
+    """``{kind: n}`` over the findings, for the ratchets."""
+    tally = {"CONTRADICTION": 0, "OMISSION": 0, "ORDER": 0}
+    for finding in data["findings"]:
+        tally[finding["kind"]] += 1
+    return tally
+
+
+def main():
+    data = collect()
+    tally = counts(data)
+    print(f"compared {data['compared']}   exact {data['exact']}")
+    for kind in ("CONTRADICTION", "OMISSION", "ORDER"):
+        print(f"  {kind:<14} {tally[kind]}")
+
+    if "--list" in sys.argv:
+        for finding in data["findings"]:
+            print(f"\n--- {finding['iso']}  {finding['kind']}")
+            print(f"  src: {finding['src']}")
+            print(f"  eng: {finding['eng']}")
+            for component in finding["contradictions"]:
+                print(f"    + {component}")
+            for component in finding["omissions"]:
+                print(f"    - {component}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
