@@ -74,6 +74,16 @@ _MANUAL_HY_OVERRIDES = {
     "Eve of the Resurrection of our Lord Jesus Christ": "Ճրագալոյց Զատկի",
 }
 
+# A known-WRONG scraped value to override even though feast_names_hy.json does have an
+# entry: "Second Sunday after Pentecost" ITSELF disagrees with two of its own composite
+# occurrences (2-of-3 scraped as "Ա" = First, 1-of-3 as "Բ" = Second) -- a scrape-pairing
+# defect, not a real ambiguity. _POSITION_FAMILIES' own comment is explicit that English
+# has no "First Sunday after Pentecost" (the count floors at 2), so "Բ" is correct on
+# every occurrence; verified against the one composite entry that has it right.
+_HY_CORRECTIONS = {
+    "Second Sunday after Pentecost": "Բ կիւրակէ զկնի Հոգեգալստեան",
+}
+
 _STRIP_PREFIX = re.compile(
     r"^(the\s+|sts?\.?\s+|saints?\s+|holy\s+)+", re.IGNORECASE)
 _NON_WORD = re.compile(r"[^a-z0-9]+")
@@ -114,6 +124,8 @@ def hy_for(text, hy_map):
     Virgins" in two, so the joined form was never scraped as one string even though both
     halves were -- same case dev.feast_name_review.armenian_for handles), the per-piece
     translations rejoined; else a manual backfill."""
+    if text in _HY_CORRECTIONS:
+        return _HY_CORRECTIONS[text]
     if text in hy_map:
         return hy_map[text]
     parts = [p.strip() for p in text.split(_FEAST_SEP) if p.strip()]

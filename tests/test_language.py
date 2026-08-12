@@ -85,9 +85,16 @@ class TestLanguageKwarg(unittest.TestCase):
 
     def test_hy_localizes_names_only(self):
         # Inject known maps so the test is deterministic regardless of scraped data.
-        orig_f, orig_b = engine._FEAST_NAMES_HY, engine._BOOK_NAMES_HY
-        engine._FEAST_NAMES_HY = {
-            "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)": "ՅԱՐՈՒԹԻՒՆ"}
+        # "Liturgical Day" resolves via the id-based observance catalog, not
+        # _FEAST_NAMES_HY directly -- see _resolve_observance_names.
+        orig_cat, orig_ids = engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID
+        orig_b = engine._BOOK_NAMES_HY
+        engine._OBSERVANCE_CATALOG = {
+            "resurrection": {
+                "en": "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)",
+                "hy": "ՅԱՐՈՒԹԻՒՆ"}}
+        engine._TEXT_TO_OBSERVANCE_ID = {
+            "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)": "resurrection"}
         engine._BOOK_NAMES_HY = {"John": "Ավետարան ըստ Հովհաննեսի",
                                  "Acts of the Apostles": "Գործք առաքելոց",
                                  "Mark": "Ավետարան ըստ Մարկոսի",
@@ -96,7 +103,8 @@ class TestLanguageKwarg(unittest.TestCase):
         try:
             result = compute_armenian_lectionary(self.DATE, language="hy")
         finally:
-            engine._FEAST_NAMES_HY, engine._BOOK_NAMES_HY = orig_f, orig_b
+            engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID = orig_cat, orig_ids
+            engine._BOOK_NAMES_HY = orig_b
 
         self.assertEqual(result["Liturgical Day"], "ՅԱՐՈՒԹԻՒՆ")
         self.assertEqual(result["Language"], "hy")
@@ -109,6 +117,21 @@ class TestLanguageKwarg(unittest.TestCase):
         self.assertTrue(any("Ավետարան" in r for r in result["Readings"]["Gospel"]))
         # Provenance metadata is not translated.
         self.assertEqual(result["Source"], "validated-table")
+
+    def test_second_sunday_after_pentecost_ordinal(self):
+        """Locks a real fix the observance-catalog resolver surfaced: the OLD whole-
+        string _translate_feast could return "Ա" (First) for "Second Sunday after
+        Pentecost" depending on which composite happened to be scraped whole, even
+        though English never has a "First Sunday after Pentecost" (the count floors at
+        2 -- see engine._POSITION_FAMILIES). The catalog resolves this English text to
+        one canonical, correct "Բ" (Second) everywhere. Self-contained: skips if the
+        shipped catalog is absent."""
+        if not engine._OBSERVANCE_CATALOG:
+            self.skipTest("observance catalog not present")
+        result = compute_armenian_lectionary(datetime.date(2001, 6, 17), language="hy")
+        self.assertEqual(
+            result["Liturgical Day"],
+            "Բ կիւրակէ զկնի Հոգեգալստեան — Տօն Կաթուղիկէ Սուրբ Էջմիածնի")
 
 
 class TestShippedMapsOrthography(unittest.TestCase):

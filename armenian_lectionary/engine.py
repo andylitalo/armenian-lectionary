@@ -32,10 +32,21 @@ DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # dev/fetch_translations.py. Each degrades to {} if absent; language="hy" then falls
 # back to the English name. FEAST maps a whole scraped feast string OR a single
 # FEAST_SEP component -> its Armenian form; BOOK maps an English book head -> Armenian.
+# FEAST_NAMES_HY_PATH is no longer consulted for feast-name resolution at runtime (see
+# OBSERVANCE_CATALOG_PATH below) but stays as a dev-time input to
+# dev/build_observance_catalog.py and is still exercised by tests/test_language.py's
+# orthography guards, so the file and this path are kept.
 FEAST_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    "data", "feast_names_hy.json")
 BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "data", "book_names_hy.json")
+
+# id -> {"en": ..., "hy": ...} for every liturgical-observance display-text component
+# (commemoration, calendar position, eve note). Built by dev/build_observance_catalog.py;
+# see its docstring for sources. Degrades to {} if absent, matching every other optional
+# data file here -- then _resolve_observance_names leaves every component in English.
+OBSERVANCE_CATALOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                       "data", "observance_catalog.json")
 
 SUPPORTED_LANGUAGES = ("en", "hy")
 
@@ -1949,6 +1960,22 @@ def _load_json_map(path):
 _FEAST_NAMES_HY = _load_json_map(FEAST_NAMES_HY_PATH)
 _BOOK_NAMES_HY = _load_json_map(BOOK_NAMES_HY_PATH)
 
+
+def _load_observance_catalog():
+    try:
+        with open(OBSERVANCE_CATALOG_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+_OBSERVANCE_CATALOG = _load_observance_catalog()
+# Reverse lookup: an already-served English component -> its stable id. Built once at
+# import time; every component this engine can produce was enumerated when the catalog
+# was built (dev/build_observance_catalog.py, verified by dev/verify_observance_catalog.py
+# to have zero orphans), so this covers the full corpus, not just a sample.
+_TEXT_TO_OBSERVANCE_ID = {v["en"]: sid for sid, v in _OBSERVANCE_CATALOG.items()}
+
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
 _READING_SPLIT_RE = re.compile(r"^(.*?)(\d+[.:]\d.*)$")
@@ -1980,6 +2007,28 @@ def _translate_feast(label: str, feast_map: dict) -> str:
     return label
 
 
+def _resolve_observance_names(label: str, language: str) -> str:
+    """Return ``label`` (a possibly FEAST_SEP-composite observance name) resolved to
+    ``language`` via the id-based observance catalog: each component's already-served
+    English text is mapped to its stable id, then to that id's text in ``language``.
+
+    This is the late, single resolution point the observance-catalog id refactor exists
+    to create -- everywhere upstream (the table, the saint schedule, the position/eve
+    generators) still computes English text exactly as before; only here does that text
+    become an id and get translated. A component with no catalog entry (a placeholder
+    sentinel like "(commemoration)", or the catalog absent in a thin checkout) is left in
+    English rather than dropped.
+    """
+    if not label:
+        return label
+    resolved = []
+    for part in label.split(_FEAST_SEP):
+        sid = _TEXT_TO_OBSERVANCE_ID.get(part)
+        entry = _OBSERVANCE_CATALOG.get(sid) if sid else None
+        resolved.append(entry.get(language, part) if entry else part)
+    return _FEAST_SEP.join(resolved)
+
+
 def _localize(result: dict, language: str) -> dict:
     """Translate the human-readable feast and reading names of ``result`` in place.
 
@@ -1992,8 +2041,8 @@ def _localize(result: dict, language: str) -> dict:
     result["Language"] = language
     if language == "en":
         return result
-    result["Liturgical Day"] = _translate_feast(
-        result.get("Liturgical Day", ""), _FEAST_NAMES_HY)
+    result["Liturgical Day"] = _resolve_observance_names(
+        result.get("Liturgical Day", ""), language)
     result["ReadingsList"] = [
         _translate_reading(r, _BOOK_NAMES_HY) for r in result.get("ReadingsList", [])]
     # Translate within the existing groups: the OT/Epistle/Gospel classification was
