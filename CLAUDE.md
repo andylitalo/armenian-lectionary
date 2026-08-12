@@ -129,11 +129,15 @@ python dev/feast_audit.py                # residual commemoration mismatches
 suite — the table and the `hy` map are keyed on the corrected English, so a partial
 rebuild leaves days with no Armenian name:
 ```bash
+python dev/build_ground_truth.py               # freeze feast_name_review.tsv edits
 python dev/refresh_artifact_names.py --write   # saint_schedule labels
 python dev/build_table.py                      # lectionary_data.json
 python dev/fetch_translations.py               # feast/book *_names_hy.json (offline
                                                #   from dev/reference_data_hy/)
+python dev/build_observance_catalog.py         # observance_catalog.json
 ```
+The catalog is **last** because it reads the outputs of the two steps above it. It was
+missing from this list entirely, which is how a stale entry could survive a rebuild.
 `dev/saint_schedule.py` and `dev/build_second_volume_cycles.py` are deliberately NOT in
 that list: they do not currently reproduce their checked-in artifacts from the present
 cache, and regenerating them moves readings provenance (2016-07-30 drops from

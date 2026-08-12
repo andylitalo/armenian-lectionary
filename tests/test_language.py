@@ -14,6 +14,17 @@ from armenian_lectionary import compute_armenian_lectionary  # noqa: E402
 from armenian_lectionary import engine  # noqa: E402
 
 
+def _feast_names_hy():
+    """The shipped Armenian feast map, loaded from disk.
+
+    The engine no longer loads this at import -- nothing at runtime reads it since feast
+    names resolve through the observance catalog. The guards below check the shipped FILE,
+    which is still a dev-time input to dev/build_observance_catalog.py, so they read it
+    themselves rather than keeping an unused module global alive to hang a test on.
+    """
+    return engine._load_json_map(engine.FEAST_NAMES_HY_PATH)
+
+
 class TestTranslateReading(unittest.TestCase):
     BOOKS = {"John": "Ավետարան ըստ Հովհաննեսի",
              "St. Paul's Epistle to the Hebrews": "Թուղթ եբրայեցիներին"}
@@ -43,26 +54,46 @@ class TestTranslateReading(unittest.TestCase):
             "Ավետարան ըստ Հովհաննեսի 3:16")
 
 
-class TestTranslateFeast(unittest.TestCase):
-    FEASTS = {"Fifth day of Nativity": "Ե օր Ս. Ծննդեան",
-              "Remembrance of the Armenian Genocide (1915)": "ՀՀ եղեռն"}
+class TestResolveObservanceNames(unittest.TestCase):
+    """Resolution semantics, on the function that actually serves them.
 
-    def test_whole_string(self):
+    These previously exercised ``_translate_feast``, the pre-catalog whole-string
+    translator, which stopped being reachable at runtime when #18 moved resolution onto the
+    id catalog. Testing a function nothing calls proves nothing, so they now cover
+    ``_resolve_observance_names`` -- same three behaviours, real code path.
+    """
+
+    CATALOG = {
+        "nativity_5": {"en": "Fifth day of Nativity", "hy": "Ե օր Ս. Ծննդեան"},
+        "genocide": {"en": "Remembrance of the Armenian Genocide (1915)",
+                     "hy": "ՀՀ եղեռն"},
+    }
+
+    def setUp(self):
+        self._orig = (engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID)
+        engine._OBSERVANCE_CATALOG = self.CATALOG
+        engine._TEXT_TO_OBSERVANCE_ID = {
+            v["en"]: sid for sid, v in self.CATALOG.items()}
+        self.addCleanup(self._restore)
+
+    def _restore(self):
+        engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID = self._orig
+
+    def test_single_component(self):
         self.assertEqual(
-            engine._translate_feast("Fifth day of Nativity", self.FEASTS),
+            engine._resolve_observance_names("Fifth day of Nativity", "hy"),
             "Ե օր Ս. Ծննդեան")
 
-    def test_component_fallback(self):
-        # A composite never seen whole still translates component-by-component,
-        # leaving unknown components in English.
+    def test_composite_resolves_component_by_component(self):
+        """Unknown components stay English rather than dropping the whole name."""
         label = "Some Sunday" + engine._FEAST_SEP + \
             "Remembrance of the Armenian Genocide (1915)"
         self.assertEqual(
-            engine._translate_feast(label, self.FEASTS),
+            engine._resolve_observance_names(label, "hy"),
             "Some Sunday" + engine._FEAST_SEP + "ՀՀ եղեռն")
 
     def test_unknown_unchanged(self):
-        self.assertEqual(engine._translate_feast("Mystery", self.FEASTS), "Mystery")
+        self.assertEqual(engine._resolve_observance_names("Mystery", "hy"), "Mystery")
 
 
 class TestLanguageKwarg(unittest.TestCase):
@@ -149,7 +180,7 @@ class TestShippedMapsOrthography(unittest.TestCase):
         return out
 
     def test_no_cyrillic_or_latin_letters(self):
-        maps = {**engine._FEAST_NAMES_HY, **engine._BOOK_NAMES_HY}
+        maps = {**_feast_names_hy(), **engine._BOOK_NAMES_HY}
         if not maps:
             self.skipTest("hy maps not present")
         for v in maps.values():
@@ -161,7 +192,7 @@ class TestShippedMapsOrthography(unittest.TestCase):
         # into some feast names) silently fails to translate. Guard them against ANY
         # contaminant, not just the two folded so far.
         from dev.source_corrections import unexpected_chars
-        keys = list(engine._FEAST_NAMES_HY) + list(engine._BOOK_NAMES_HY)
+        keys = list(_feast_names_hy()) + list(engine._BOOK_NAMES_HY)
         if not keys:
             self.skipTest("hy maps not present")
         for k in keys:
@@ -196,7 +227,7 @@ class TestShippedMapsOrthography(unittest.TestCase):
         # be a fixed point of the specific-word reversal that dev applies on a re-scrape:
         # re-running it changes nothing, so no reformed proper noun can ship unnoticed.
         from dev.fetch_translations import to_mashtots_names
-        feasts = engine._FEAST_NAMES_HY
+        feasts = _feast_names_hy()
         if not feasts:
             self.skipTest("feast map not present")
         for v in feasts.values():

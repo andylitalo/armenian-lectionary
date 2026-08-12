@@ -134,8 +134,14 @@ as published until someone who reads Armenian decides. Enter the preferred Engli
 ```bash
 python dev/feast_name_review.py          # refresh the table (never discards edits)
 python dev/feast_name_review.py --check  # report rows the engine does not yet serve
+python dev/feast_name_review_atomic.py   # one saint per row, for reviewing them singly
 python dev/audit_source_anomalies.py     # hunt for NEW errors in the source
+python dev/audit_hy_variants.py          # catalog entries serving a minority Armenian form
 ```
+
+`feast_name_review_atomic.py` splits the rows where the SOURCE glued two independent
+commemorations onto one day, so a reviewer sees each saint once instead of once per
+combination. Its output is derived and therefore not committed — run it when you want it.
 
 Edit `approved` in `dev/feast_name_review.tsv`, say why in `note`, and
 `tests/test_feast_name_review.py` will fail until the fold is registered in
