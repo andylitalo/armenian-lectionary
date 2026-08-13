@@ -32,10 +32,11 @@ DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # dev/fetch_translations.py. Each degrades to {} if absent; language="hy" then falls
 # back to the English name. FEAST maps a whole scraped feast string OR a single
 # FEAST_SEP component -> its Armenian form; BOOK maps an English book head -> Armenian.
-# FEAST_NAMES_HY_PATH is no longer consulted for feast-name resolution at runtime (see
-# OBSERVANCE_CATALOG_PATH below) but stays as a dev-time input to
-# dev/build_observance_catalog.py and is still exercised by tests/test_language.py's
-# orthography guards, so the file and this path are kept.
+# FEAST_NAMES_HY_PATH is no longer consulted at runtime at all: #18 moved feast-name
+# resolution onto the id catalog (see OBSERVANCE_CATALOG_PATH below), so the map it points
+# at is now a dev-time input to dev/build_observance_catalog.py and a shipped data file
+# that tests/test_language.py's orthography guards check. The PATH is kept for both of
+# those; the eager load is not, since nothing at runtime reads the result.
 FEAST_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    "data", "feast_names_hy.json")
 BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -1967,7 +1968,13 @@ def _group_readings(refs: list) -> dict:
 # --------------------------------------------------------------------------- #
 
 def _load_json_map(path):
-    """Load a {str: str} name map, degrading to {} if the file is absent."""
+    """Load a shipped JSON data map, degrading to {} if the file is absent.
+
+    Absent is a supported state for every optional data file here (a thin checkout, a wheel
+    built without one): the caller then falls back to English. A file that exists but is
+    malformed is NOT swallowed -- that is a build error, and failing at import beats serving
+    half a corpus.
+    """
     try:
         with open(path, encoding="utf-8") as f:
             return json.load(f)
@@ -1975,19 +1982,10 @@ def _load_json_map(path):
         return {}
 
 
-_FEAST_NAMES_HY = _load_json_map(FEAST_NAMES_HY_PATH)
 _BOOK_NAMES_HY = _load_json_map(BOOK_NAMES_HY_PATH)
 
 
-def _load_observance_catalog():
-    try:
-        with open(OBSERVANCE_CATALOG_PATH, encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
-
-
-_OBSERVANCE_CATALOG = _load_observance_catalog()
+_OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 
 
 # --------------------------------------------------------------------------- #
@@ -2127,21 +2125,6 @@ def _build_readings_refs(readings_list: list) -> list:
     for citation in readings_list:
         refs.extend(_parse_citation_ref(citation))
     return refs
-
-
-def _translate_feast(label: str, feast_map: dict) -> str:
-    """Return ``label`` (a possibly FEAST_SEP-composite feast name) in the target
-    language. Try the whole string first; else translate each component individually,
-    leaving any component with no known translation in English."""
-    if not label:
-        return label
-    whole = feast_map.get(label)
-    if whole is not None:
-        return whole
-    parts = label.split(_FEAST_SEP)
-    if len(parts) > 1:
-        return _FEAST_SEP.join(feast_map.get(p, p) for p in parts)
-    return label
 
 
 def _resolve_observance_names(label: str, language: str,

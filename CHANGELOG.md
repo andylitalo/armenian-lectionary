@@ -4,7 +4,7 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.3.0] — 2026-08-12
 
 ### Added
 - **`ReadingsRefs`: structured citations** ([#1](https://github.com/andylitalo/armenian-lectionary/issues/1)).
@@ -107,8 +107,65 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   `Great Lent. Sunday of …`, and one wrong ordinal word on 2008-04-07 that its own
   neighbours pin), plus a case fold for the Theotokos' Presentation, which the source
   shouts in 19 of 26 years and title-cases in the other 7.
+- **`language="hy"` regressed on ~118 days when display text moved onto the catalog, and
+  nothing caught it.** The old `feast_names_hy.json` keyed **whole composite English
+  strings** to Armenian; the catalog keys **single components**. Wherever the source's
+  Armenian segments differently from its English, the component-wise rejoin dropped the
+  richer Armenian form. English had a 9,496-day accuracy contract and Armenian had none, so
+  the entire suite stayed green. Fixed, and the gap that hid it closed:
+  - **The Fast of St. Gregory the Illuminator lost its name on 135 days.** The source heads
+    the fast's five weekdays (Pentecost+22..+26) `Ա/Բ/Գ/Դ/Ե օր Լուսաւորչի պահոց` in Armenian
+    and writes only `Fast day` in English — the same two words it uses on 2,139 ordinary
+    fast days. One English string, six observances, so reverse text lookup cannot tell them
+    apart and all five collapsed to a bare `Պահք`. English is unchanged (`Fast day` is what
+    the source publishes on every one of these days); the id is resolved from the **date**
+    instead, via `engine._date_scoped_observance_id`, the same shape as the existing
+    `POSITION_LABEL_FIXES_BY_DATE`.
+  - **The Presentation of the Theotokos served a malformed spelling on every Nov 21.**
+    `dev/fetch_translations.py` pairs each English name with the Armenian of one
+    representative day, so a name the source spells three ways ships whichever day was
+    sampled — here `ս.Աստուածածնի`, lowercase and missing the space after the abbreviation
+    dot, the 1-of-7 form. New `dev/audit_hy_variants.py` makes that checkable, and the
+    accuracy test now asserts it: no entry may serve a minority spelling.
+  - **`hy` had one more component than `en` on 131 days.** Six catalog entries embedded the
+    component separator in their own text, because the source's Armenian glues a trailing
+    note (`— Նաւակատիք`, the vigil; `— Կաղանդ. տարեմուտ`, the New Year) onto names whose
+    English has no such piece. A consumer splitting on the separator saw a different shape
+    per language. Internal breaks now use an ASCII `"; "`, and three new invariants hold the
+    line — no entry contains the separator, component counts match across languages, and
+    English is unique across all non-date-scoped ids.
+- **A nineteenth error in the source's own text: `Feast day` on Dec 9 means `Fast day`.**
+  Three independent witnesses — the string appears on no other date in the 9,861-day corpus;
+  it appears Mon/Tue/Wed/Fri and never Thu/Sat, which is the Advent-fast weekday set and
+  cannot be describing a feast that falls on the same date every year; and the source's own
+  Armenian reads `Պահք`. Consolidating display text is what surfaced it, by putting
+  `Feast day → Պահք` and `Fast day → Պահք` side by side in one file. English changes on 16
+  days; Armenian was right all along.
+- **`dev.source_corrections.apply_ground_truth` could fire a short fix inside a longer
+  reviewed name.** The ground truth is keyed by *component* but was applied as a substring
+  replace over the whole feast string; its longest-first ordering protects a short key only
+  when both are *changing* rows, and no-op rows (approved == source) are dropped from the
+  list entirely. So a component a human had reviewed as already correct had no protection.
+  Registering the Dec 9 fix turned that latent hole into a live one — `Feast day` rewrote
+  `Feast day of the Discovery of the Belt of the Holy Mother of God`, a different feast on
+  26 days, into `Fast day of the Discovery …`. Components are now matched exactly first,
+  with the substring chain kept as a fallback for the composites that still need it.
 
-### Added
+### Added — tooling & tests
+- **`tests/test_feast_name_hy_raw.py` + `dev/hy_discrepancy.py`** — the Armenian
+  counterpart of the raw-name lock below, and the answer to "why did nobody notice". It
+  classifies every difference between the served Armenian and the source's own
+  (`CONTRADICTION` / `OMISSION` / `ORDER`, plus `DOMINANT_FORM` and `INTERNAL_DELIMITER` for
+  the two classes that are deliberate), and ratchets each. Unlike English these are not
+  zero, because the residue is not all engine defect — 7 of the 12 contradictions are
+  companion-list differences of the class `canonical_commem` folds away on the English side,
+  and one is a deliberate correction of a wrong ordinal in the source's own Armenian. The
+  contract is "no NEW divergence". Coverage caveat, stated in the module: the Armenian cache
+  is 433 days, one representative date per distinct English feast string, so it covers the
+  distinct **names** well and per-year calendar behaviour thinly.
+- **`dev/audit_hy_variants.py`** — counts every Armenian witness in the cache and reports
+  any catalog entry not serving the source's most frequent spelling. Asserted by the test
+  above, so it covers every entry rather than pinning individual strings.
 - **`tests/test_feast_name_raw.py`** — locks the **raw** `"Liturgical Day"` string
   component-wise, the value downstream actually stores. Contradictions must be 0; omissions
   and exact matches are ratchets. `tests/test_feast.py` compares only the *commemoration
@@ -151,6 +208,68 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   feast-name difference, each shown with the two days either side of ground truth for
   context. It now reports no contradiction, no omission and no casing variant on any of
   the 9,496 days with ground truth, so the report itself is no longer committed.
+
+### Changed
+- **English feast names now abbreviate the honorific: `Saints …` → `Sts. …`,
+  `Saint …` → `St. …`.** This is the largest user-visible change in the release —
+  **2,260 days**, roughly a quarter of the corpus — so it is called out on its own rather
+  than left inside the ground-truth work below. It is a **style decision**, not a source
+  correction: unlike the eighteen text fixes, nothing in the source contradicts itself here.
+  The source simply writes the honorific out, and the review approved the abbreviated form
+  for all 106 components that carry one. Consumers that match on stored feast strings
+  (rather than re-fetching them) will see these change. Registry:
+  `dev/feast_name_ground_truth.json`; the reasoning is in `dev/source_corrections`'
+  ground-truth section and `docs/feast-name-corrections.md`.
+- **`compute_armenian_lectionary` now raises `ValueError` outside 2001–2027.** It used to
+  answer for any date, and outside the validated range it fell through to internal
+  absence-markers and returned them as names — `2038-02-28` came back as
+  `"(commemoration)"`, `2038-02-13` as `"Feast (day not yet in validated table)"`. Those are
+  the very strings `tests/test_feast_contract.py` forbids *inside* the range, on the grounds
+  that an internal marker is not a name and a consumer can only discard it.
+  `MIN_YEAR`/`MAX_YEAR` are now public, read `LECTIONARY_MIN_YEAR`/`LECTIONARY_MAX_YEAR`,
+  and `app.py` imports them instead of keeping a second copy of the bound; the endpoint
+  still answers out-of-range requests with its own HTTP 400 rather than letting the
+  exception surface as a 500. `calculate_liturgical_mode` is exempt — pure arithmetic on the
+  paschal cycle, correct for any date. **This is the one behaviour change in the release
+  that can break a caller**: code relying on a `dict` for an out-of-range date now sees an
+  exception. The previous return value was not usable output.
+- **Display-text resolution consolidated into one id-keyed catalog.** Verbose feast/fast
+  text used to be produced and stored in four independent places — the table's raw
+  `"feast"` strings, `saint_schedule.json`'s labels, five hardcoded string-literal
+  families in `engine.py` (position/eve labels), and a flat English→Armenian text map —
+  so a single wording change needed edits in all four. `armenian_lectionary/data/
+  observance_catalog.json` now holds one canonical `id -> {en, hy}` entry (both
+  languages **required**, no nulls) for every distinct commemoration/position/eve
+  component (390 entries), and every storage tier carries an ordered `observance_ids`
+  list alongside its existing text. Resolution moves to one place,
+  `engine._resolve_observance_names`, called once at the `language=` boundary; internal
+  computation is otherwise unchanged and the resolved **English** text is byte-identical
+  to before across the full 2001–2027 corpus (`dev/verify_observance_catalog.py`: 0
+  orphans, 0 missing-`hy` entries).
+
+  Consolidating onto one canonical mapping surfaced four pre-existing bugs that the old
+  scattered/composite-scrape translations had been masking (the last two are written up
+  under **Fixed** above, since both were user-visible):
+  - `saint_schedule.json`'s shipped labels had drifted stale relative to the approved
+    ground truth (a prior spelling fix had never actually been pushed into this
+    artifact) — invisible to `test_feast.py` because its comparison corrected the
+    engine's output before comparing, not the artifact itself.
+  - `language="hy"` served **"Ա" (First) Sunday after Pentecost"** for what should always
+    read **"Բ" (Second)** — English never has a "First Sunday after Pentecost" (the count
+    floors at two), but one scraped composite translation had carried the wrong ordinal
+    into the old flat text map. The catalog resolves this to one correct Armenian string
+    everywhere; locked by a new regression test
+    (`test_language.test_second_sunday_after_pentecost_ordinal`).
+  - the Presentation of the Theotokos was serving a 1-of-7 malformed Armenian spelling on
+    every Nov 21, because two ground-truth rows for the same name (the source shouts it in
+    19 years, title-cases it in 7) minted two catalog entries and the surviving one carried
+    the worse Armenian.
+  - `Feast day` and `Fast day` resolved to the identical Armenian `Պահք`, which is what
+    exposed the source's Dec 9 typo.
+
+  `armenian_lectionary/data/feast_names_hy.json` is no longer read at runtime (kept only
+  as a dev-time input to `dev/build_observance_catalog.py`). No public result-dict field
+  changed — `"Liturgical Day"` still resolves via the existing `language=` kwarg.
 
 ## [1.2.3] — 2026-07-23
 
