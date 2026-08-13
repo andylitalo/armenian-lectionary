@@ -231,7 +231,8 @@ The distribution name is **`armenian-lectionary`**; the import name is
 `compute_armenian_lectionary(date, language="en")` and
 `calculate_gregorian_easter(year)`, plus the date-only
 `calculate_liturgical_mode(date)` helper, which returns a `Mode`-shaped record with the
-canonical Armenian `Tone` and integer `Number`.
+canonical Armenian `Tone` and integer `Number`, and the `MIN_YEAR` / `MAX_YEAR` bounds of
+the supported range.
 (Internal calendar helpers and constants remain importable from
 `armenian_lectionary.engine` if you need them.)
 
@@ -248,11 +249,16 @@ python -m armenian_lectionary.cli 2026-04-05   # equivalent
 
 ### Gating on `Source` / `Confidence`
 
-`compute_armenian_lectionary(date)` always returns a `dict` and never raises or
-makes a network call. It will compute **any** date — the 2001–2027 range check is
-a property of the API layer (`app.py`), not the engine. Because the output blends
-tiers of differing certainty, **gate on the `Source` field** (and `Confidence`
-where present) rather than assuming every result is authoritative:
+`compute_armenian_lectionary(date)` returns a `dict` and never makes a network call. It
+raises `ValueError` for an unsupported `language`, or for a date outside **2001–2027**
+(`MIN_YEAR`–`MAX_YEAR`, both exported and overridable via `LECTIONARY_MIN_YEAR` /
+`LECTIONARY_MAX_YEAR`) — outside that window there is no validated data, and the engine
+would otherwise hand back an internal absence-marker as if it were a feast name.
+`calculate_liturgical_mode(date)` is unrestricted: it is pure arithmetic on the paschal
+cycle and correct for any date.
+
+Because the output blends tiers of differing certainty, **gate on the `Source` field** (and
+`Confidence` where present) rather than assuming every result is authoritative:
 
 - `validated-*` — cross-year-validated against the authoritative Tōnatsooyts;
   never wrong across all 9,495 tested days.
