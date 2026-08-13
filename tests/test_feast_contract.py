@@ -51,10 +51,9 @@ MAX_YEAR = int(os.environ.get("LECTIONARY_MAX_YEAR", "2027"))
 # What this does catch is a bug in the name assembly. `_apply_position_label` prepends a
 # regenerated component to a stored one, so a mistake there (a doubled label, a component
 # appended per family instead of once) would inflate names without necessarily making any
-# single component wrong. The longest name the engine legitimately serves is 289 chars --
-# the Twelve Holy Doctors, whose name enumerates all twelve -- so a name past ~2x that is
-# structurally broken rather than merely verbose.
-MAX_PLAUSIBLE_NAME = int(os.environ.get("MAX_PLAUSIBLE_NAME", "600"))
+# single component wrong. The longest name possible (base name + position prefix + eve
+# suffix, worst case) is 417 chars; 450 gives it a small buffer.
+MAX_PLAUSIBLE_NAME = int(os.environ.get("MAX_PLAUSIBLE_NAME", "450"))
 
 # Internal markers that are not commemorations. A day reaching a caller with one of these
 # has no usable name.
