@@ -32,8 +32,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                               # noqa: E402
-    DATA_PATH, _EMBEDDED_FEAST, _FEAST_SEP, _PRELENT_COHORT,
-    _eve_label, _position_label,
+    DATA_PATH, _DATE_SCOPED_OBSERVANCE_IDS, _EMBEDDED_FEAST, _FEAST_SEP,
+    _PRELENT_COHORT, _date_scoped_observance_id, _eve_label, _position_label,
 )
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -93,6 +93,28 @@ def embedded_components():
     return set(_EMBEDDED_FEAST.values())
 
 
+def date_scoped_ids_reached():
+    """Every date-scoped id the engine actually resolves somewhere in the range.
+
+    The text-set checks above are blind to these: five ids all read "Fast day" in English,
+    so they collapse to one served string and can never be reported unused, however wrong
+    the date rule is. Enumerating the rule itself is what catches an id that never fires --
+    an off-by-one in the ordinal window would silently strand the first or last day of the
+    fast on the general "Պահք" it used to get.
+    """
+    reached = set()
+    d = datetime.date(MIN_YEAR, 1, 1)
+    end = datetime.date(MAX_YEAR, 12, 31)
+    one_day = datetime.timedelta(days=1)
+    while d <= end:
+        for component in ("Fast day",):
+            sid = _date_scoped_observance_id(component, d)
+            if sid:
+                reached.add(sid)
+        d += one_day
+    return reached
+
+
 def main():
     with open(CATALOG_PATH, encoding="utf-8") as fh:
         catalog = json.load(fh)
@@ -118,8 +140,24 @@ def main():
     else:
         print("0 unused catalog entries.")
 
+    # Date-scoped ids, checked by id rather than by text -- see date_scoped_ids_reached.
+    declared = set(_DATE_SCOPED_OBSERVANCE_IDS)
+    missing_entry = sorted(declared - set(catalog))
+    never_reached = sorted(declared - date_scoped_ids_reached())
+    if missing_entry:
+        print(f"\n{len(missing_entry)} date-scoped id(s) with NO catalog entry:")
+        for sid in missing_entry:
+            print(f"  - {sid}")
+    if never_reached:
+        print(f"\n{len(never_reached)} date-scoped id(s) the engine never resolves "
+              f"in {MIN_YEAR}-{MAX_YEAR}:")
+        for sid in never_reached:
+            print(f"  - {sid}")
+    if not missing_entry and not never_reached:
+        print(f"\n{len(declared)} date-scoped id(s), all present and all reached.")
+
     print(f"\n{len(catalog)} catalog entries; {len(served)} distinct components served.")
-    return 1 if orphans else 0
+    return 1 if (orphans or missing_entry or never_reached) else 0
 
 
 if __name__ == "__main__":

@@ -74,6 +74,21 @@ _MANUAL_HY_OVERRIDES = {
     "Eve of the Resurrection of our Lord Jesus Christ": "Ճրագալոյց Զատկի",
 }
 
+# KNOWN GAP, deliberately not papered over. The source's Armenian ends Holy Saturday with a
+# trailing "— Նաւակատիք" (the vigil) that its English does not have, so the component-wise
+# rejoin drops it: 2 days in the cache, every Holy Saturday in the corpus.
+#
+# It cannot be fixed by gluing the note onto the eve's name, which was tried and is wrong:
+# on a Holy Saturday that coincides with the Annunciation (2007-04-07) the source puts
+# Նաւակատիք LAST, after the Annunciation, not beside the eve. So it is a day-level
+# component in its own right, not part of any one name -- and this catalog cannot express
+# one, because resolution is driven by the ENGLISH components a day has and English has
+# none here.
+#
+# Expressing it needs an observance that exists in only one language, which is a design
+# change (and squarely Phase 3 territory, where ids come from storage rather than from
+# reverse text lookup). Recorded here, counted by dev/hy_discrepancy.py, and left alone.
+
 # A known-WRONG scraped value to override even though feast_names_hy.json does have an
 # entry: "Second Sunday after Pentecost" ITSELF disagrees with two of its own composite
 # occurrences (2-of-3 scraped as "Ա" = First, 1-of-3 as "Բ" = Second) -- a scrape-pairing
@@ -83,6 +98,40 @@ _MANUAL_HY_OVERRIDES = {
 _HY_CORRECTIONS = {
     "Second Sunday after Pentecost": "Բ կիւրակէ զկնի Հոգեգալստեան",
 }
+
+# Observances the source names more specifically in Armenian than in English, so one
+# English text covers several distinct observances and the id cannot be recovered from it.
+# The engine resolves these from the DATE instead (engine._date_scoped_observance_id), so
+# they are minted here directly rather than discovered by enumerating served text -- an
+# enumeration keyed on English would only ever see the one ambiguous string.
+#
+# The Fast of St. Gregory the Illuminator is the only family so far: the source heads its
+# five weekdays (Pentecost+22..+26) with the ordinal in Armenian and a bare "Fast day" in
+# English. The Armenian for days 1, 2 and 4 is attested directly in dev/reference_data_hy/
+# (2001-06-25/26/28); days 3 and 5 are the same construction with the next letter numeral,
+# the form the source uses for every other counted fast ("Ա օր Յիսնակի պահոց",
+# "ԼԴ օր Մեծի պահոց"). Marked so verify_observance_catalog.py does not report them unused.
+_ILLUMINATOR_FAST_HY = ("Ա", "Բ", "Գ", "Դ", "Ե")
+_DATE_SCOPED = {
+    f"illuminator_fast_day_{n}": {
+        "en": "Fast day",
+        "hy": f"{letter} օր Լուսաւորչի պահոց",
+    }
+    for n, letter in enumerate(_ILLUMINATOR_FAST_HY, start=1)
+}
+
+# _FEAST_SEP is the ENGINE's component join, and a catalog entry is ONE component. Any
+# entry whose own text contains it is a category error, and it shows: the source's Armenian
+# for a few days carries a trailing note its English drops ("— Նաւակատիք", the vigil;
+# "— Կաղանդ. տարեմուտ", the New Year), and feast_names_hy.json kept that inside the single
+# component it was paired with. The engine then joined the day's components with the same
+# separator, so `hy` came out with one component more than `en` on 131 days -- a consumer
+# splitting on " — " to render or measure them saw a different shape per language.
+#
+# The content is real and the source publishes it, so it stays; only the delimiter changes.
+# ASCII on purpose: source_corrections._is_expected_char allows ASCII, the Armenian block
+# and the em-dash, so a semicolon needs no widening of that allow-list.
+_INTERNAL_SEP = "; "
 
 _STRIP_PREFIX = re.compile(
     r"^(the\s+|sts?\.?\s+|saints?\s+|holy\s+)+", re.IGNORECASE)
@@ -181,18 +230,38 @@ def build_catalog():
             continue
         catalog[sid] = {"en": label, "hy": hy}
 
+    # Date-scoped ids, minted verbatim. Deliberately BEFORE the text sweep so their shared
+    # English ("Fast day") is already spoken for; the sweep's own entry for that text is
+    # minted below under its general id, which is what the ambiguous text resolves to when
+    # no date rule fires.
+    for sid, entry in _DATE_SCOPED.items():
+        used_ids.add(sid)
+        catalog[sid] = dict(entry)
+
     positions, eves = live_generated_texts()
     all_texts = set(ground_truth_texts()) | positions | eves
 
+    # Date-scoped ids are excluded from the "already minted" check on purpose: they SHARE
+    # their English with a general component, which still needs its own general id.
+    minted_en = {entry["en"] for sid, entry in catalog.items() if sid not in _DATE_SCOPED}
+
     for text in sorted(all_texts):
-        if any(entry["en"] == text for entry in catalog.values()):
+        if text in minted_en:
             continue    # already minted (e.g. a pre-lent cohort literal)
+        if _FEAST_SEP in text:
+            # Not one component. A registered correction split the source's comma-joined
+            # "Fast day, Remembrance of the Ten Virgins" into two components with the
+            # engine's separator, so the ground truth carries the JOINED form as one row.
+            # Minting an id for it would be minting an id for a whole day; the day already
+            # resolves component-wise to its two real ids.
+            continue
         hy = hy_for(text, hy_map)
         if hy is None:
             missing_hy.append(text)
             continue
         sid = _slug(text, used_ids)
-        catalog[sid] = {"en": text, "hy": hy}
+        catalog[sid] = {"en": text, "hy": hy.replace(_FEAST_SEP, _INTERNAL_SEP)}
+        minted_en.add(text)
 
     return catalog, sorted(set(missing_hy))
 

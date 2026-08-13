@@ -301,7 +301,7 @@
  },
  "eve_of_the_nativity": {
   "en": "Eve of the Nativity and Theophany of our Lord Jesus Christ",
-  "hy": "Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի — Նաւակատիք"
+  "hy": "Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի; Նաւակատիք"
  },
  "eve_of_the_resurrection": {
   "en": "Eve of the Resurrection of our Lord Jesus Christ",
@@ -315,10 +315,6 @@
   "en": "Fast day",
   "hy": "Պահք"
  },
- "fast_day_remembrance_of": {
-  "en": "Fast day — Remembrance of the Ten Virgins",
-  "hy": "Պահք — Յիշատակ տասն կուսանացն"
- },
  "fathers_of_egypt_paul": {
   "en": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
   "hy": "Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն"
@@ -331,10 +327,6 @@
   "en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
   "hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին"
  },
- "feast_day": {
-  "en": "Feast day",
-  "hy": "Պահք"
- },
  "feast_day_of_the": {
   "en": "Feast day of the Discovery of the Belt of the Holy Mother of God",
   "hy": "Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի"
@@ -345,7 +337,7 @@
  },
  "feast_of_dedication_of": {
   "en": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
-  "hy": "Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին — Նաւակատիք"
+  "hy": "Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին; Նաւակատիք"
  },
  "feast_of_discovery_of": {
   "en": "Feast of Discovery of St. Gregory's Relics",
@@ -353,7 +345,7 @@
  },
  "feast_of_holy_church": {
   "en": "Feast of Holy Church in Dedication of Holy Cross",
-  "hy": "Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին — Նաւակատիք"
+  "hy": "Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին; Նաւակատիք"
  },
  "feast_of_holy_etchmiadzin": {
   "en": "Feast of Holy Etchmiadzin",
@@ -747,6 +739,26 @@
   "en": "Sts. Hripsime and her companions",
   "hy": "Սրբոց կուսանացն Հռիփսիմեանց"
  },
+ "illuminator_fast_day_1": {
+  "en": "Fast day",
+  "hy": "Ա օր Լուսաւորչի պահոց"
+ },
+ "illuminator_fast_day_2": {
+  "en": "Fast day",
+  "hy": "Բ օր Լուսաւորչի պահոց"
+ },
+ "illuminator_fast_day_3": {
+  "en": "Fast day",
+  "hy": "Գ օր Լուսաւորչի պահոց"
+ },
+ "illuminator_fast_day_4": {
+  "en": "Fast day",
+  "hy": "Դ օր Լուսաւորչի պահոց"
+ },
+ "illuminator_fast_day_5": {
+  "en": "Fast day",
+  "hy": "Ե օր Լուսաւորչի պահոց"
+ },
  "isaiah_the_prophet": {
   "en": "St. Isaiah the Prophet",
   "hy": "Սրբոյն Եսայեայ մարգարէին"
@@ -904,12 +916,8 @@
   "hy": "ՏԵԱՌՆԸՆԴԱՌԱՋ (տօն քառասնօրեայ գալստեանն Քրիստոսի ի Տաճարն)"
  },
  "presentation_of_the_holy": {
-  "en": "PRESENTATION of the Holy Mother of God to the Temple",
-  "hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն"
- },
- "presentation_of_the_holy_2": {
   "en": "Presentation of the Holy Mother of God to the Temple",
-  "hy": "Ընծայումն ս.Աստուածածնի երից ամաց ի Տաճարն"
+  "hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն"
  },
  "princes_sahak_and_joseph": {
   "en": "Sts. Princes Sahak and Joseph and the Martyrs Sergius and Bacchus",
@@ -941,7 +949,7 @@
  },
  "remembrance_of_the_old": {
   "en": "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church",
-  "hy": "Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ — Նաւակատիք"
+  "hy": "Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ; Նաւակատիք"
  },
  "remembrance_of_the_passion": {
   "en": "Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ",
@@ -1269,7 +1277,7 @@
  },
  "third_day_of_the_4": {
   "en": "Third day of the Fast of Nativity",
-  "hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ"
+  "hy": "Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ"
  },
  "third_day_of_the_5": {
   "en": "Third day of the Fast of the Catechumens",
