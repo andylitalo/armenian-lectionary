@@ -51,7 +51,7 @@ transposition, and the source's own Armenian gives `431 թ.` on the same day.
 **Pentecost.** `յիսներորդ` is *fiftieth*. Three independent confirmations: the Armenian;
 the arithmetic (the day is Easter + 49, and the source's own Eastertide count reaches
 `Forty Ninth day of Eastertide` the day before); and the word *Pentecost* itself, from
-πεντηκոստή, fiftieth. `Fifteenth` is wrong on all three.
+Greek for "fiftieth". `Fifteenth` is wrong on all three.
 
 **Dec 9.** `Fast`, mistyped `Feast` — one letter, on the same row where the source also
 writes `Fiest of the Conception`. Three independent confirmations:
