@@ -26,6 +26,8 @@ import functools
 import json
 import os
 
+from armenian_lectionary.engine import _FEAST_SEP
+
 # cache reading string -> source (Tōnats'oyts First Vol p.464-465) reading string.
 # Applied ONLY on first-volume-cohort days (scoped by the shipping tier, not by text).
 COHORT_CORRECTIONS = {
@@ -294,6 +296,13 @@ def normalize_feast_spelling(text):
 #   * one wrong ordinal word: 2008-04-07 reads "Thirteenth day of Eastertide" where the
 #     count is 16. Its neighbours pin it -- Apr 5 is "Fourteenth" (offset 13) and Apr 8 is
 #     "Seventeenth" (offset 16) -- so 13 is a typo for 16, not a different counting rule.
+#
+# An eighth, "Feast day" -> "Fast day" on Dec 9, is deliberately NOT here: these folds are
+# substring replaces over the whole feast string, and a bare "Feast day" would also rewrite
+# "Feast day of the Discovery of the Belt of the Holy Mother of God" (a different feast, 26
+# other days) into a nonsense "Fast day of the Discovery ...". It is registered as a
+# component-exact ground-truth row instead -- see apply_ground_truth and
+# docs/feast-name-corrections.md section 1.
 # --------------------------------------------------------------------------- #
 POSITION_LABEL_FIXES = {
     "day of the Fast of Nativity.": "day of the Fast of Nativity",
@@ -447,13 +456,49 @@ def _ground_truth_fixes():
     return ordered
 
 
+@functools.lru_cache(maxsize=1)
+def _ground_truth_reviewed():
+    """Every reviewed component, INCLUDING the rows whose approved text equals the source.
+
+    ``_ground_truth_fixes`` drops those no-op rows -- there is nothing to replace. But they
+    still carry information: they say "a human looked at this exact component and it is
+    already right", which is exactly what a shorter fix firing inside them would violate.
+    See ``apply_ground_truth``.
+    """
+    with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
+        return {src: v["approved"] for src, v in json.load(fh).items() if v["approved"]}
+
+
 def apply_ground_truth(text):
-    """Fold every reviewed component in ``text`` to its approved English spelling."""
+    """Fold every reviewed component in ``text`` to its approved English spelling.
+
+    Component-exact first, substring chain second. The ground truth is keyed by COMPONENT
+    (see dev/build_ground_truth.py's docstring on why), so when a component matches a
+    reviewed row outright, that row is the answer and no other fix may touch it.
+
+    Without that short-circuit a short fix fires inside a longer reviewed component that
+    merely starts the same way. ``_ground_truth_fixes``'s longest-first ordering only
+    protects the case where BOTH are changing rows; it cannot protect a no-op row, because
+    no-op rows are not in the list at all. Registering ``Feast day`` -> ``Fast day``
+    (the Dec 9 marker) turned that latent hole into a live one: it rewrote
+    ``Feast day of the Discovery of the Belt of the Holy Mother of God`` -- a different,
+    correctly-spelled feast on 26 other days -- into ``Fast day of the Discovery ...``.
+
+    The substring pass still runs on components with no exact row, because a composite the
+    source glued from two commemorations may have no row of its own while each half does.
+    """
     if not text:
         return text
-    for wrong, right in _ground_truth_fixes():
-        text = text.replace(wrong, right)
-    return text
+    reviewed = _ground_truth_reviewed()
+    folded = []
+    for component in text.split(_FEAST_SEP):
+        if component in reviewed:
+            folded.append(reviewed[component])
+            continue
+        for wrong, right in _ground_truth_fixes():
+            component = component.replace(wrong, right)
+        folded.append(component)
+    return _FEAST_SEP.join(folded)
 
 
 def apply_source_corrections(day):

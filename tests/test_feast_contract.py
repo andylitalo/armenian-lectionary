@@ -34,7 +34,9 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.source_corrections import unexpected_chars                   # noqa: E402
-from armenian_lectionary.engine import compute_armenian_lectionary     # noqa: E402
+from armenian_lectionary.engine import (                              # noqa: E402
+    _FEAST_SEP, compute_armenian_lectionary,
+)
 
 # The supported window (armenian_lectionary/app.py's range guard, and the window bahk's
 # hub/services/feast_service.py mirrors). Deliberately includes 2027, the year with no
@@ -132,6 +134,72 @@ class TestFeastNameContract(unittest.TestCase):
                 if stray:
                     bad.append((d.isoformat(), label, stray))
         self.assertEqual(bad[:10], [], f"{len(bad)} names carry unexpected characters")
+
+    def test_both_languages_have_the_same_component_count(self):
+        """A day is the same set of observances whichever language names it.
+
+        The separator is the ENGINE's join, so component counts are structural, not
+        linguistic: if `hy` has one more piece than `en`, some entry smuggled a second
+        observance into a single catalog entry. That shipped on 131 days -- the source's
+        Armenian carries a trailing "— Նաւակատիք" (vigil) or "— Կաղանդ. տարեմուտ" (New
+        Year) that its English drops, and the pairing kept it inside the component.
+
+        A consumer splitting on the separator to render or measure the pieces -- which is
+        exactly what a fasting calendar does -- saw a different shape per language.
+        """
+        bad = []
+        for d, (en, hy) in self.names.items():
+            if len(en.split(_FEAST_SEP)) != len(hy.split(_FEAST_SEP)):
+                bad.append((d.isoformat(), en, hy))
+        self.assertEqual(
+            bad[:5], [],
+            f"{len(bad)} dates serve a different number of components in en and hy")
+
+
+class TestObservanceCatalogShape(unittest.TestCase):
+    """Structural invariants on the shipped catalog itself, independent of any date."""
+
+    @classmethod
+    def setUpClass(cls):
+        from armenian_lectionary.engine import _OBSERVANCE_CATALOG
+        if not _OBSERVANCE_CATALOG:
+            raise unittest.SkipTest("observance catalog not present")
+        cls.catalog = _OBSERVANCE_CATALOG
+
+    def test_no_entry_contains_the_component_separator(self):
+        """One entry is ONE observance. The separator belongs to the engine's join.
+
+        Where the source really does break a name in two, the catalog uses an internal
+        delimiter instead (dev/build_observance_catalog._INTERNAL_SEP), so the piece is
+        preserved without the entry pretending to be two components.
+        """
+        bad = [(sid, lang, entry[lang])
+               for sid, entry in sorted(self.catalog.items())
+               for lang in ("en", "hy")
+               if _FEAST_SEP in entry[lang]]
+        self.assertEqual(
+            bad[:5], [],
+            f"{len(bad)} catalog entr(y/ies) embed the component separator in their own "
+            "text; use _INTERNAL_SEP, or split the entry")
+
+    def test_english_is_unique_outside_the_date_scoped_ids(self):
+        """Reverse text lookup must stay deterministic.
+
+        Date-scoped ids deliberately share an English string (five read "Fast day") and are
+        resolved from the date instead; every OTHER id has to be recoverable from its text
+        alone, or engine._TEXT_TO_OBSERVANCE_ID's winner depends on iteration order.
+        """
+        from armenian_lectionary.engine import _DATE_SCOPED_OBSERVANCE_IDS
+        seen = {}
+        collisions = []
+        for sid, entry in sorted(self.catalog.items()):
+            if sid in _DATE_SCOPED_OBSERVANCE_IDS:
+                continue
+            if entry["en"] in seen:
+                collisions.append((seen[entry["en"]], sid, entry["en"]))
+            seen[entry["en"]] = sid
+        self.assertEqual(collisions[:5], [],
+                         f"{len(collisions)} English text(s) map to more than one id")
 
 
 if __name__ == "__main__":

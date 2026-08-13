@@ -6,19 +6,40 @@ git-ignored (large, and the third-party source data is not redistributed; see
 README), so a fresh checkout does not have it. Decorate those test *classes* with
 ``@requires_reference_cache`` so they SKIP (rather than fail their coverage floors)
 when the cache is absent; rebuild it with ``python dev/bulk_fetch.py``.
+
+The source's *Armenian* is a second, separate cache (``dev/reference_data_hy/``) with its
+own guard, ``@requires_reference_cache_hy``. It is a distinct witness, not a subset:
+sacredtradition.am publishes each day in both languages independently, which is what makes
+the Armenian an oracle for the English. It is also sampled differently -- 433 days, one
+representative date per distinct English feast string (see ``dev/fetch_translations.py``),
+not the full range -- so tests over it cover the distinct NAMES well and per-year calendar
+behaviour thinly.
 """
 
 import os
 import unittest
 
-REF_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "dev", "reference_data")
+_DEV_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "dev")
 
-HAS_REFERENCE_CACHE = os.path.isdir(REF_DIR) and any(
-    name.endswith(".json") for name in os.listdir(REF_DIR))
+REF_DIR = os.path.join(_DEV_DIR, "reference_data")
+REF_DIR_HY = os.path.join(_DEV_DIR, "reference_data_hy")
+
+
+def _has_cache(path):
+    return os.path.isdir(path) and any(
+        name.endswith(".json") for name in os.listdir(path))
+
+
+HAS_REFERENCE_CACHE = _has_cache(REF_DIR)
+HAS_REFERENCE_CACHE_HY = _has_cache(REF_DIR_HY)
 
 requires_reference_cache = unittest.skipUnless(
     HAS_REFERENCE_CACHE,
     "dev/reference_data/ ground-truth cache absent; run `python dev/bulk_fetch.py` "
     "to enable the accuracy-lock tests.")
+
+requires_reference_cache_hy = unittest.skipUnless(
+    HAS_REFERENCE_CACHE_HY,
+    "dev/reference_data_hy/ Armenian ground-truth cache absent; run "
+    "`python dev/fetch_translations.py` to enable the Armenian accuracy lock.")
