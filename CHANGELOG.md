@@ -7,20 +7,24 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 ## [1.3.0] — 2026-08-12
 
 ### Added
+- **`ReadingsRefs`: structured citations** ([#1](https://github.com/andylitalo/armenian-lectionary/issues/1)).
+  Every result now carries `"ReadingsRefs"`, the same readings as `"ReadingsList"` but as
+  `{"book", "start_chapter", "start_verse", "end_chapter", "end_verse", "citation"}` dicts,
+  one per sub-reference, so a consumer no longer has to parse a citation string like
+  `"Mark 15.42-16.1"` back apart itself. `book` is always the canonical English head,
+  independent of `language`. The one scripture composite in the corpus, the
+  Daniel/Azariah reading (`"Daniel 3.1-23, Azariah. 1-68"`), expands to two dicts sharing
+  that `citation` string as a back-pointer to their shared `ReadingsList` entry; Azariah's
+  bare, chapter-less tail (`"1-68"`) defaults to chapter 1, since it is a single-chapter
+  book. Additive and non-breaking: `ReadingsList`/`Readings` are unchanged, `ReadingsRefs`
+  is `[]` wherever they are. Locked by `tests/test_readings_refs.py`, including a
+  corpus-wide parse over every citation served 2001–2027, and an HTTP/JSON boundary test.
 - Add the Armenian Church eight-mode assignment to every result as a structured `"Mode"`
   object with a canonical Armenian `"Tone"` and matching integer `"Number"` from 1–8,
   and expose the same record through `calculate_liturgical_mode(date)` for date-only use.
   Both values are language-independent; tests exercise all 9,495 dates from 2001–2026,
   include SacredTradition source fixtures across that range, and cover the HTTP/JSON
   boundary.
-- **`ReadingsRefs` — the same readings as structured citations.** Every result now carries
-  `{book, start_chapter, start_verse, end_chapter, end_verse, citation}` dicts alongside the
-  existing `ReadingsList` strings, so a consumer no longer has to regex `"Mark 15.42-16.1"`
-  back apart. `book` stays the canonical English head regardless of `language`, and the
-  corpus's one composite citation (Daniel/Azariah) expands to two dicts sharing the original
-  `citation` string as a back-pointer. Additive: `ReadingsList`/`Readings` are byte-identical
-  to before, and `ReadingsRefs` is `[]` wherever they are. Verified by parsing every citation
-  the engine serves across 2001–2027 (9,861 dates, 0 parse errors).
 
 ### Fixed
 - **Calendar-position labels were frozen from the wrong year.** The validated table is keyed

@@ -43,6 +43,7 @@ Registry: `dev/source_corrections._FEAST_TEXT_FIXES` and `_FEAST_SPELLING_FIXES`
 |---|---|---|---|
 | Aug 4 (Council of Ephesus) | `… of Ephesus (AD 341)` | `… (431 թ.)` | `… (AD 431)` |
 | Pentecost | `PENTECOST (Fifteenth day of Eastertide)` | `ՀՈԳԵԳԱԼՈՒՍՏ (Պենտեկոստէ՝ յիսներորդ օր ի Զատկէն)` | `PENTECOST (Fiftieth day of Eastertide)` |
+| Dec 9 (Conception of the Theotokos) | `Feast day` | `Պահք` | `Fast day` |
 
 **Ephesus.** The Third Ecumenical Council met at Ephesus in **431**. `341` is a digit
 transposition, and the source's own Armenian gives `431 թ.` on the same day.
@@ -50,9 +51,26 @@ transposition, and the source's own Armenian gives `431 թ.` on the same day.
 **Pentecost.** `յիսներորդ` is *fiftieth*. Three independent confirmations: the Armenian;
 the arithmetic (the day is Easter + 49, and the source's own Eastertide count reaches
 `Forty Ninth day of Eastertide` the day before); and the word *Pentecost* itself, from
-πεντηκοστή, fiftieth. `Fifteenth` is wrong on all three.
+Greek for "fiftieth". `Fifteenth` is wrong on all three.
 
-Neither error varies by year, so neither could have been found by comparing years.
+**Dec 9.** `Fast`, mistyped `Feast` — one letter, on the same row where the source also
+writes `Fiest of the Conception`. Three independent confirmations:
+
+- `Feast day` appears on **no other date** in the 9,861-day English corpus. A genuine
+  marker meaning "this is a feast" would not be unique to one December day in a calendar
+  this dense with feasts.
+- It appears only on **Mon, Tue, Wed and Fri**, and is absent on Thu and Sat (16 of 16
+  either way; Sunday is claimed by the Advent Sunday count). That is the Advent-fast
+  weekday set. It cannot be describing the feast: Dec 9 is the same feast every year, so a
+  feast marker would appear on Thursdays too. It tracks the **fast**.
+- The source's own Armenian for the component reads `Պահք` — *fast*.
+
+The third witness is the one the catalog surfaced. Consolidating display text onto one
+id-keyed entry put `Feast day → Պահք` and `Fast day → Պահք` side by side, which is how a
+seven-year-old typo became visible.
+
+None of these three errors varies by year, so none could have been found by comparing
+years — only by reading the source against itself.
 
 ## 2. Grammatical — the Armenian settles the sense
 
@@ -91,6 +109,51 @@ more often, which is also the standard English one.
 These three are the most debatable corrections here: `Phillip` and `Nicolas` are both
 legitimate English spellings, and only the source's inconsistency argues against them.
 Each is a one-line revert if the preferred form is the other one.
+
+## 4b. One name, two spellings — in Armenian
+
+The same policy as above, applied to `language="hy"`. The source's Armenian varies its own
+spelling across years, and `dev/fetch_translations.py` pairs each English name with the
+Armenian of **one** representative day — so whichever day it sampled decides what ships,
+for every occurrence of that name. That is a coin flip, not a decision.
+
+The engine serves the form the source uses **most often**, and `dev/audit_hy_variants.py`
+is what makes that checkable: it counts every witness in `dev/reference_data_hy/` and
+reports any catalog entry serving a minority spelling.
+
+| Name | Source publishes | Served |
+|---|---|---|
+| Presentation of the Theotokos | `Ս. Աստուածածնի` ×4, `ս. Աստուածածնի` ×2, `ս.Աստուածածնի` ×1 | `Ս. Աստուածածնի` |
+| Fast of the Catechumens | `Առաջաւորաց` ×8, `Առաջաւորի` ×2 | `Առաջաւորաց` |
+| Sundays after Nativity | `զկնի Ս. Ծննդեան` ×9, `զկնի Ծննդեան` ×1 | `զկնի Ս. Ծննդեան` |
+| Days of Great Lent | `Մեծի պահոց` ×40, `Մեծի Պահոց` ×1 | `Մեծի պահոց` |
+
+Only the first was wrong: the catalog was serving `ս.Աստուածածնի` — lowercase, and missing
+the space after the abbreviation dot — on **every Nov 21**, because that 1-of-7 day is the
+one the pairing sampled. Fixed by folding the two Presentation ground-truth rows into one,
+after which the pairing's own vote picks the majority. The other three were already
+correct, and are listed here so they are not "fixed" into the minority form later;
+`dev/hy_discrepancy.py` classifies them `DOMINANT_FORM` rather than counting them against
+the accuracy ratchet.
+
+`Ը օր Զատկի. Կրկնազատիկ` belongs to the same family and is worth naming, because it looks
+backwards: the source writes the Octave of Easter as one component with a period twice, and
+splits it into two with an em-dash once. The period is the dominant form, so that is what
+ships — reproducing the single em-dash day would be serving the minority.
+
+### Known gap: `Նաւակատիք` on Holy Saturday
+
+The source's Armenian ends Holy Saturday with a trailing `— Նաւակատիք` (the vigil) that its
+English does not have. Resolution is driven by the English components a day has, so the
+note has nothing to attach to and is dropped — every Holy Saturday.
+
+Gluing it onto the eve's name does not work, and the source says why: when Holy Saturday
+coincides with the Annunciation (2007-04-07) it prints `Նաւակատիք` **last**, after the
+Annunciation, not beside the eve. It is a day-level component in its own right.
+
+Expressing that needs an observance that exists in only one language — a design change, and
+properly part of Phase 3, where ids come from storage rather than from reverse text lookup.
+Until then it is counted as an `OMISSION` by `dev/hy_discrepancy.py` rather than hidden.
 
 ## 5. Position labels
 

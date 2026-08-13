@@ -11,12 +11,15 @@ import os
 from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 
-from armenian_lectionary import compute_armenian_lectionary, SUPPORTED_LANGUAGES
+from armenian_lectionary import (
+    compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, SUPPORTED_LANGUAGES,
+)
 
-# Supported date range. Readings are validated for 2001-2027 so far; the range
-# is env-overridable so it can widen later without a code change.
-MIN_YEAR = int(os.environ.get("LECTIONARY_MIN_YEAR", "2001"))
-MAX_YEAR = int(os.environ.get("LECTIONARY_MAX_YEAR", "2027"))
+# Supported date range. Readings are validated for 2001-2027 so far; the range is
+# env-overridable (LECTIONARY_MIN_YEAR / LECTIONARY_MAX_YEAR) so it can widen later without
+# a code change. Imported from the engine rather than redefined here: the engine enforces
+# the same bound and would raise, so a second copy could only ever drift into a 500.
+# What this endpoint adds is the HTTP shape -- a 400 with the range spelled out.
 
 # Per-client rate limits (abuse protection). Semicolon-separated, env-overridable.
 RATE_LIMITS = [

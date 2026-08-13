@@ -164,7 +164,7 @@ downstream (a fasting calendar is built from exactly these components).
 
 | Var | Default | Effect |
 |-----|---------|--------|
-| `LECTIONARY_MIN_YEAR` / `LECTIONARY_MAX_YEAR` | `2001` / `2027` | Supported date range; outside → HTTP 400. |
+| `LECTIONARY_MIN_YEAR` / `LECTIONARY_MAX_YEAR` | `2001` / `2027` | Supported date range, read by the engine (`ValueError` outside it) and imported by `app.py`, which turns it into HTTP 400. `calculate_liturgical_mode` is exempt — pure arithmetic. |
 | `LECTIONARY_RATE_LIMITS` | `60 per minute;600 per hour` | Per-client-IP limits (semicolon-separated). |
 | `LECTIONARY_RATELIMIT_STORAGE_URI` | `memory://` | Rate-limit counter store. Set to a shared backend (e.g. `redis://…`) for exact global limits across instances. |
 | `PORT` | `8080` (container) | Bind port; set by Cloud Run. |

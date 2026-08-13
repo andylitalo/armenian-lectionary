@@ -235,5 +235,61 @@ class TestFeastSpelling(unittest.TestCase):
                 self.assertNotIn(typo, label, f"{d} leaked {typo!r}")
 
 
+class TestDecemberNinthFastMarker(unittest.TestCase):
+    """The Conception of the Theotokos (Dec 9) carries a FAST marker, not a feast one.
+
+    The source prints "Feast day" there, which is its own typo for "Fast day" -- the marker
+    tracks the Advent-fast weekday set (present Mon/Tue/Wed/Fri, absent Thu/Sat) rather than
+    the feast, which is the same feast every year; and the source's own Armenian reads
+    "Պահք". See docs/feast-name-corrections.md section 1.
+
+    This pins both halves of the fix together: the engine template
+    (``_POSITION_FAMILIES``'s Dec-9 entry) and the source-side fold that keeps the raw-name
+    comparison honest. Editing one without the other reopens the contradiction.
+    Self-contained -- no reference cache.
+    """
+
+    _CONCEPTION = "Feast of the Conception of the Holy Virgin Mary by Anna"
+
+    def test_marker_is_fast_on_advent_fast_weekdays(self):
+        # Mon, Tue, Wed, Fri Dec 9ths across the supported window.
+        for year in (2013, 2014, 2015, 2016):
+            with self.subTest(year=year):
+                label = compute_armenian_lectionary(
+                    datetime.date(year, 12, 9))["Liturgical Day"]
+                self.assertEqual(label, f"Fast day — {self._CONCEPTION}")
+
+    def test_no_marker_on_thursday_or_saturday(self):
+        for year in (2017, 2021):        # Sat, Thu
+            with self.subTest(year=year):
+                label = compute_armenian_lectionary(
+                    datetime.date(year, 12, 9))["Liturgical Day"]
+                self.assertEqual(label, self._CONCEPTION)
+
+    def test_feast_day_marker_is_gone_everywhere(self):
+        """No day in the supported window may serve the mistyped marker."""
+        day = datetime.date(2001, 1, 1)
+        end = datetime.date(2027, 12, 31)
+        while day <= end:
+            label = compute_armenian_lectionary(day)["Liturgical Day"]
+            self.assertNotIn("Feast day —", label, day)
+            day += datetime.timedelta(days=1)
+
+    def test_the_belt_feast_is_not_collateral_damage(self):
+        """A different feast whose name merely STARTS with the mistyped marker.
+
+        "Feast day of the Discovery of the Belt of the Holy Mother of God" is correct as
+        published, on 26 days. The fold is component-exact precisely so it cannot reach
+        inside this one; an unanchored substring replace turned it into "Fast day of the
+        Discovery ..." when this fix was first written.
+        """
+        from dev.source_corrections import apply_ground_truth
+        belt = "Feast day of the Discovery of the Belt of the Holy Mother of God"
+        self.assertEqual(apply_ground_truth(belt), belt)
+        self.assertEqual(
+            apply_ground_truth(f"Feast day — {self._CONCEPTION}"),
+            f"Fast day — {self._CONCEPTION}")
+
+
 if __name__ == "__main__":
     unittest.main()
