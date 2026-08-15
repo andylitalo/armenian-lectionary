@@ -4,6 +4,49 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] — 2026-08-15
+
+### Added
+- **`ObservanceIds`: a key that survives a name correction.** Every result now carries
+  `"ObservanceIds"`, the stable catalog id of each `"Liturgical Day"` component in the same
+  order, independent of `language`. A day is identified by the whole ordered list — 1,750 of
+  the 9,861 days in range name two to four observances at once (a calendar position, a
+  commemoration, an eve note) — and the engine imposes no separator, so a consumer joins
+  them however it likes.
+
+  This exists because 1.3.0 was expensive downstream. Folding `Saint(s)` to `St(s).` and
+  fixing 122 component spellings is the engine getting more right, but a consumer that keys
+  rows on the name — bahk keys `Feast` on `(church, name)` — finds every renamed row
+  unreachable after the upgrade, with its curated enrichment stranded behind it and nothing
+  raised. 158 of 429 distinct names it had stored were names this engine no longer emits.
+  An id is what that key should have been.
+
+  Resolved through the same reverse index `language="hy"` already used
+  (`engine._resolve_observance_names`), computed from the English label before localization,
+  so the ids are by construction the ones the Armenian text was keyed on. **All or nothing:**
+  an unresolvable component yields `[]` rather than a list with a hole in it, since a partial
+  list is not a key — it would silently identify a different observance. Inside the supported
+  range every component resolves; `[]` means "do not key on this".
+
+  Additive and non-breaking. Locked by `tests/test_observance_ids.py`, including a
+  corpus-wide sweep asserting every one of the 9,861 days resolves completely and round-trips
+  back to its own name, and an HTTP/JSON boundary test in both languages.
+
+### Changed
+- **Published observance ids are now frozen.** The contract is that an id, once shipped,
+  keeps meaning the same observance forever — without it `ObservanceIds` would only move the
+  rename problem one level down, where it fails silently instead of loudly.
+
+  Ids used to be slugs of display text, minted from scratch on every run of
+  `dev/build_observance_catalog.py`, so a text correction reminted the id and an inserted
+  entry renumbered every colliding id that sorted after it. They now live in the `id` column
+  of `dev/feast_name_review.tsv`, beside the human decision about what the observance is
+  called, and the catalog build is a straight projection of that column: correcting a name
+  edits `approved_en` and the id stays put, because nothing recomputes it. A shipped id can
+  only be retired by naming it in `_RETIRED_IDS` with a reason; the build **refuses to write
+  a catalog that drops a published id or revives a retired one**, naming the offender.
+  Rebuilding today reproduces the shipped catalog byte for byte.
+
 ## [1.3.0] — 2026-08-12
 
 ### Added
