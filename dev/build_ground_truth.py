@@ -21,6 +21,8 @@ via ``_FEAST_SEP``, so a fix must be expressed at the same granularity to compos
 with a day the review process has never seen (2027, or a future re-fetched year).
 
 Each entry:
+    id         the observance's frozen catalog id, or "" for a row that is not a single
+               served observance (a whole day, or a minority spelling the engine overrides)
     approved   the reviewed English text the engine should serve for this component
     status     ok | fixed | review -- review means the note asks an unresolved question;
                a component may still be served even under review (the source's own text,
@@ -28,6 +30,9 @@ Each entry:
     note       why it changed, or what is still being asked
     armenian   the source's own Armenian for the component, where attested -- the
                independent witness that justified several of the fixes
+    armenian_approved
+               the reviewed Armenian, where the scrape's own value is wrong or absent;
+               "" means ``armenian`` stands
 
 Regenerate after any edit to ``dev/feast_name_review.tsv``:
     python dev/build_ground_truth.py
@@ -49,10 +54,12 @@ def main():
     ground_truth = {}
     for r in rows:
         ground_truth[r["source"]] = {
+            "id": r["id"],
             "approved": r["approved"],
             "status": r["status"],
             "note": r["note"],
             "armenian": r["armenian"],
+            "armenian_approved": r["armenian_approved"],
         }
 
     with open(OUT_PATH, "w", encoding="utf-8") as fh:

@@ -832,9 +832,9 @@
     ]
    },
    "2:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -879,9 +879,9 @@
     ]
    },
    "5:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -1167,9 +1167,9 @@
     ]
    },
    "1:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -1847,9 +1847,9 @@
     ]
    },
    "6:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -1943,9 +1943,9 @@
     ]
    },
    "0:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -2511,9 +2511,9 @@
     ]
    },
    "5:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -2800,9 +2800,9 @@
     ]
    },
    "4:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -2894,9 +2894,9 @@
     ]
    },
    "2:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -4387,9 +4387,9 @@
     ]
    },
    "6:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -5203,9 +5203,9 @@
     ]
    },
    "3:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -7135,9 +7135,9 @@
     ]
    },
    "6:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -7434,9 +7434,9 @@
     ]
    },
    "3:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -7634,9 +7634,9 @@
     ]
    },
    "5:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -7691,9 +7691,9 @@
     ]
    },
    "2:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -8121,9 +8121,9 @@
     ]
    },
    "3:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -8645,9 +8645,9 @@
     "readings": []
    },
    "4:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -9035,9 +9035,9 @@
     ]
    },
    "2:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -9541,9 +9541,9 @@
     ]
    },
    "2:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -9596,9 +9596,9 @@
     ]
    },
    "0:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -10702,9 +10702,9 @@
     ]
    },
    "6:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -11092,9 +11092,9 @@
     ]
    },
    "5:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -11578,9 +11578,9 @@
     ]
    },
    "1:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -12326,9 +12326,9 @@
     ]
    },
    "3:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -12451,9 +12451,9 @@
     ]
    },
    "5:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -12481,9 +12481,9 @@
     "readings": []
    },
    "6:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -13803,9 +13803,9 @@
     ]
    },
    "1:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -13864,9 +13864,9 @@
     ]
    },
    "3:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -14206,9 +14206,9 @@
     ]
    },
    "1:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -14884,9 +14884,9 @@
     ]
    },
    "1:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -15081,9 +15081,9 @@
     ]
    },
    "4:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -15599,9 +15599,9 @@
     ]
    },
    "0:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -15716,9 +15716,9 @@
     ]
    },
    "4:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -16490,9 +16490,9 @@
     ]
    },
    "4:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -16709,9 +16709,9 @@
     ]
    },
    "0:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -16849,9 +16849,9 @@
     ]
    },
    "0:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -17424,9 +17424,9 @@
     ]
    },
    "74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -17446,9 +17446,9 @@
     ]
    },
    "75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -18572,9 +18572,9 @@
     ]
    },
    "71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -18727,9 +18727,9 @@
     ]
    },
    "72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -19380,9 +19380,9 @@
     ]
    },
    "73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",

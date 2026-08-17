@@ -10,7 +10,7 @@ import functools
 import json
 import os
 
-from armenian_lectionary.engine import _DATE_SCOPED_OBSERVANCE_IDS, _FEAST_SEP
+from armenian_lectionary.engine import _FEAST_SEP
 
 CATALOG_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -25,17 +25,13 @@ def _catalog():
 
 @functools.lru_cache(maxsize=1)
 def _text_to_id():
-    """English component -> id, excluding the date-scoped ids.
+    """English component -> id.
 
-    Those deliberately share their English text with a general component (five ids all read
-    "Fast day"), so including them would make this mapping depend on catalog iteration order
-    and could stamp an Illuminator-fast id onto any of the 2,139 ordinary fast days. Storage
-    tiers key on text alone and have no date to disambiguate with, so they get the general
-    id; the engine applies the date-scoped one at resolution time
-    (engine._date_scoped_observance_id).
+    One entry per component: no two observances share an English text, an invariant
+    dev/build_observance_catalog.py enforces. That is what lets a storage tier -- which has
+    text and no date -- resolve identity on its own.
     """
-    return {v["en"]: sid for sid, v in _catalog().items()
-            if sid not in _DATE_SCOPED_OBSERVANCE_IDS}
+    return {v["en"]: sid for sid, v in _catalog().items()}
 
 
 def ids_for_text(text):

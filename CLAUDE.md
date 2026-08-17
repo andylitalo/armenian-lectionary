@@ -22,9 +22,9 @@ with no install step.
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`) — see `dev/build_observance_catalog.py`. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
-| `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as a **dev-time input** to `dev/build_observance_catalog.py` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
+| `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `armenian` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
 | `Dockerfile` / `.dockerignore` | Container image for Cloud Run (`pip install .` + gunicorn on `0.0.0.0:$PORT`). |
 | `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image and package. Writes the shipped JSON via the engine's PATH constants. |
@@ -106,13 +106,57 @@ The review loop, and why it is safe to hand to a non-programmer:
 
 1. open the TSV (a spreadsheet, or GitHub, which renders it as a table);
 2. edit the `approved` column where the English should read differently, and say why in
-   `note`. Leave `source` alone — it is the record of what was published;
+   `note`. Leave `source` alone — it is the record of what was published, and the stable
+   key everything else joins on. Two more columns are preserved the same way: `id` (below)
+   and `armenian_approved`, which overrides the scraped `armenian` where it is wrong or
+   absent, keeping `armenian` as the independent witness that justifies the English fixes;
 3. `tests/test_feast_name_review.py` now fails, naming the row;
 4. register the fold in `dev/source_corrections._FEAST_TEXT_FIXES`, rebuild (order below),
    and it passes.
 
 `python dev/feast_name_review.py` refreshes the file and **never discards human edits**;
-`--check` reports rows whose approved name the engine does not yet serve.
+`--check` reports rows whose approved name the engine does not yet serve. Rows come from
+two places: every distinct component the source published (from the cache, keyed by its raw
+text) and every position/eve label the engine *composes*, which the source may print less
+specifically — `status = generated` marks the latter.
+
+### Observance ids are stated, not derived
+
+`observance_catalog.json` is the `id -> {en, hy}` table the engine resolves Armenian
+through, and its keys are meant to be what a consumer stores instead of display text.
+That only works if an id never moves. bahk keyed `Feast` on the name, and 1.3.0's
+corrections made 158 of its 429 stored names unreachable, stranding curated icons and
+generated contexts behind them with nothing raised; an id that shifted when its text was
+corrected would reproduce that exactly, only harder to notice.
+
+So the id lives in the **`id` column of `dev/feast_name_review.tsv`**, beside the human
+decision about what the observance is called, and the catalog is a straight projection:
+
+```
+{row.id: {"en": row.approved, "hy": row.armenian_approved or row.armenian}}
+```
+
+Correcting a name edits `approved`; the id stays put because nothing recomputes it. There
+is no reuse-by-text lookup and no registry of superseded spellings — both existed only to
+paper over ids being derived from the text they were supposed to outlive.
+
+Working rules:
+
+- **Never change an id.** Renaming one is a breaking change for every consumer that
+  persisted it, with no way for them to detect it.
+- **A genuinely new observance needs an id**, and `build_observance_catalog.py --mint`
+  assigns one, writing it back to the TSV. The build refuses to write until every served
+  component has one.
+- **Leave `id` empty** for a row that is not one served observance: a whole day (the
+  comma-joined "Fast day, Remembrance of the Ten Virgins", whose halves have their own
+  ids), or a minority source spelling nothing reaches. Text the table *stores* keeps its id
+  even where a higher-precedence tier shadows it at runtime — the artifacts still resolve.
+- **Retiring an id is declared**, in `_RETIRED_IDS` with the reason, or the build fails
+  naming it. Reviving one fails too.
+
+Invariants the build enforces, each of which was violable before: ids unique, English
+unique (no two observances under one display string), no component carrying `_FEAST_SEP` in
+its own text, every served component covered, nothing shipped silently dropped.
 
 Dev tooling:
 ```bash
@@ -129,15 +173,18 @@ python dev/feast_audit.py                # residual commemoration mismatches
 suite — the table and the `hy` map are keyed on the corrected English, so a partial
 rebuild leaves days with no Armenian name:
 ```bash
-python dev/build_ground_truth.py               # freeze feast_name_review.tsv edits
-python dev/refresh_artifact_names.py --write   # saint_schedule labels
-python dev/build_table.py                      # lectionary_data.json
 python dev/fetch_translations.py               # feast/book *_names_hy.json (offline
                                                #   from dev/reference_data_hy/)
+python dev/feast_name_review.py                # refresh the TSV (never discards edits)
+python dev/build_ground_truth.py               # freeze feast_name_review.tsv edits
 python dev/build_observance_catalog.py         # observance_catalog.json
+python dev/build_table.py                      # lectionary_data.json
+python dev/refresh_artifact_names.py --write   # saint_schedule labels
 ```
-The catalog is **last** because it reads the outputs of the two steps above it. It was
-missing from this list entirely, which is how a stale entry could survive a rebuild.
+The catalog comes **before** the table, not after: `dev/build_table.py` stamps an
+`observance_ids` list onto every entry and fails loudly on a component the catalog does not
+cover. And `feast_name_review.py` comes first, because a correction that introduces new
+served text needs a row (and an id) before anything downstream can resolve it.
 `dev/saint_schedule.py` and `dev/build_second_volume_cycles.py` are deliberately NOT in
 that list: they do not currently reproduce their checked-in artifacts from the present
 cache, and regenerating them moves readings provenance (2016-07-30 drops from
@@ -152,7 +199,7 @@ identically, and the engine regenerates it per date as an overlay in
 
 | Component | Regenerated by | Position | Verify with |
 |---|---|---|---|
-| calendar position — "Fourth Sunday after Nativity", "Sixth day of the Fast of Nativity", "Fast day" | `engine._position_label` | head | `dev/verify_position_labels.py` |
+| calendar position — "Fourth Sunday after Nativity", "Sixth day of the Fast of Nativity", "Third day of the Fast of St. Gregory the Illuminator", "Fast day" | `engine._position_label` | head | `dev/verify_position_labels.py` |
 | eve note — "Eve of Fast of Advent", "Eve of Great Lent" | `engine._eve_label` | tail | `dev/verify_eve_labels.py` |
 
 Storing them asserted the modal year's count for every year — the defect that shipped

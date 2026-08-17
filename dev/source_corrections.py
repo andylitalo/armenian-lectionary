@@ -22,6 +22,7 @@ days the engine ships from the pre-Lent cohort tier (Source == "first-volume-coh
 never globally.
 """
 
+import datetime
 import functools
 import json
 import os
@@ -317,6 +318,51 @@ POSITION_LABEL_FIXES_BY_DATE = {
     "2008-04-07": {"Thirteenth day of Eastertide": "Sixteenth day of Eastertide"},
 }
 
+# --------------------------------------------------------------------------- #
+# Fast of St. Gregory the Illuminator: the source is more specific in Armenian than in
+# English, on the same day.
+#
+# It heads the fast's five weekdays (Pentecost+22..+26) "Ա/Բ/Գ/Դ/Ե օր Լուսաւորչի պահոց" --
+# First..Fifth day of the Fast of the Illuminator -- while its English says only "Fast
+# day", the same two words it prints on 2,139 ordinary Wed/Fri fast days. One English
+# string, six different observances. The source contradicting its own other-language
+# statement of the same fact is the standing justification for a repair here (Ephesus
+# "AD 341" vs "431", Pentecost "Fifteenth day of Eastertide" vs fiftieth); this is that,
+# applied to a position label rather than to a commemoration.
+#
+# This is not only a nicety. While the English was ambiguous, no consumer could tell the
+# six apart by text, and the engine carried a date-scoped side channel to recover the
+# distinction for its own Armenian resolution. Saying in English what the source already
+# says in Armenian retires that channel.
+#
+# Date-scoped, for the reason the Eastertide fix above is: "Fast day" is the correct and
+# complete label on every other fast day in the corpus.
+# --------------------------------------------------------------------------- #
+_ILLUMINATOR_FAST_WINDOW = (22, 26)      # Pentecost+21 is the Sunday eve; Mon-Fri follow
+_ILLUMINATOR_FAST_ORDINALS = ("First", "Second", "Third", "Fourth", "Fifth")
+_ILLUMINATOR_FAST_TEMPLATE = "{ord} day of the Fast of St. Gregory the Illuminator"
+_AMBIGUOUS_FAST_LABEL = "Fast day"
+
+
+def illuminator_fast_label(date_iso):
+    """The specific label for a weekday of the Fast of St. Gregory the Illuminator.
+
+    ``None`` on every other date, including the fast's own Sunday eve (which the source
+    names in full already) and the Saturday that closes it.
+    """
+    if not date_iso:
+        return None
+    from armenian_lectionary.engine import calculate_gregorian_easter
+
+    d = datetime.date.fromisoformat(date_iso)
+    pentecost = calculate_gregorian_easter(d.year) + datetime.timedelta(days=49)
+    lo, hi = _ILLUMINATOR_FAST_WINDOW
+    offset = (d - pentecost).days
+    if not lo <= offset <= hi:
+        return None
+    return _ILLUMINATOR_FAST_TEMPLATE.format(
+        ord=_ILLUMINATOR_FAST_ORDINALS[offset - lo])
+
 
 def normalize_position_label(text, date_iso=""):
     """Fold the source's self-contradicting position labels to the form it uses elsewhere.
@@ -329,6 +375,14 @@ def normalize_position_label(text, date_iso=""):
         text = text.replace(wrong, right)
     for wrong, right in POSITION_LABEL_FIXES_BY_DATE.get(date_iso, {}).items():
         text = text.replace(wrong, right)
+    specific = illuminator_fast_label(date_iso)
+    if specific:
+        # Component-exact, not a substring replace: the bare label is what is ambiguous,
+        # and rewriting it inside a longer component would corrupt a name that merely
+        # contains the words.
+        text = _FEAST_SEP.join(
+            specific if part.strip() == _AMBIGUOUS_FAST_LABEL else part
+            for part in text.split(_FEAST_SEP))
     return text
 
 

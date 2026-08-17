@@ -2,2352 +2,3176 @@
  "ASCENSION OF OUR LORD JESUS CHRIST": {
   "approved": "ASCENSION OF OUR LORD JESUS CHRIST",
   "armenian": "ՀԱՄԲԱՐՁՈՒՄՆ ՔՐԻՍՏՈՍԻ ԱՍՏՈՒԾՈՅ ՄԵՐՈՅ",
+  "armenian_approved": "",
+  "id": "ascension_of_our_lord",
   "note": "",
   "status": "ok"
  },
  "ASSUMPTION OF THE HOLY MOTHER OF GOD": {
   "approved": "ASSUMPTION OF THE HOLY MOTHER OF GOD",
   "armenian": "ՎԵՐԱՓՈԽՈՒՄՆ Ս. ԱՍՏՈՒԱԾԱԾՆԻ",
+  "armenian_approved": "",
+  "id": "assumption_of_the_holy",
   "note": "",
   "status": "ok"
  },
  "Annunciation to the Virgin Mary": {
   "approved": "Annunciation to the Virgin Mary",
   "armenian": "Աւետումն սրբուհւոյ Աստուածածնի",
+  "armenian_approved": "",
+  "id": "annunciation_to_the_virgin",
   "note": "",
   "status": "ok"
  },
  "Appearance of the Holy Cross": {
   "approved": "Appearance of the Holy Cross",
   "armenian": "Տօն Երեւման ս. խաչի",
+  "armenian_approved": "",
+  "id": "appearance_of_the_holy",
   "note": "",
   "status": "ok"
  },
  "Begining of the Fast": {
   "approved": "Beginning of the Fast",
   "armenian": "Սկիզբն պահոց",
+  "armenian_approved": "",
+  "id": "beginning_of_the_fast",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Beheading of St. John the Forerunner (the Baptist)": {
   "approved": "Beheading of St. John the Forerunner (the Baptist)",
   "armenian": "Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի",
+  "armenian_approved": "",
+  "id": "beheading_of_st_john",
   "note": "",
   "status": "ok"
  },
  "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)": {
   "approved": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
   "armenian": "Կոստանդնուպոլսոյ ս. ժողովոյն հարիւր յիսուն հայրապետացն (381 թ.)",
+  "armenian_approved": "",
+  "id": "commemoration_of_150_fathers",
   "note": "",
   "status": "ok"
  },
  "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)": {
   "approved": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 431)",
   "armenian": "Եփեսոսի ս. ժողովոյն երկու հարիւր հայրապետացն (431 թ.)",
+  "armenian_approved": "",
+  "id": "commemoration_of_200_fathers",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)": {
   "approved": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
   "armenian": "Նիկիոյ սուրբ ժողովոյն երեք հարիւր տասն եւ ութ հայրապետացն (325 թ.)",
+  "armenian_approved": "",
+  "id": "commemoration_of_318_fathers",
   "note": "'Nicea' -- the usual English is Nicaea (or Nicea). Accepted as a variant, not folded. Confirm the preferred form.",
   "status": "review"
  },
  "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits": {
   "approved": "Discovery of Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
   "armenian": "Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից կաթողիկոսին եւ սրբոց հարցն Թաթլոյ, Վարոսի, Թումասու, Անտոնի, Կրօնիդեայ եւ եօթն խոտաճարակացն, որք յԻննակնեայ վանսն կատարեցան",
+  "armenian_approved": "",
+  "id": "discovery_of_relics_of",
   "note": "'Herbivorous Hermits' renders hy 'խոտաճարակացն' literally (grass-eating). The usual English is 'the Seven Grass-eating Hermits'. Preferred form?",
   "status": "review"
  },
  "Discovery of the Holy Cross.": {
   "approved": "Discovery of the Holy Cross",
   "armenian": "Գիւտ խաչի",
+  "armenian_approved": "",
+  "id": "discovery_of_the_holy",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "EXALTATION OF THE HOLY CROSS": {
   "approved": "EXALTATION OF THE HOLY CROSS",
   "armenian": "ԽԱՉՎԵՐԱՑ",
+  "armenian_approved": "",
+  "id": "exaltation_of_the_holy",
   "note": "",
   "status": "ok"
  },
  "Eighteenth day of Eastertide": {
   "approved": "Eighteenth day of Eastertide",
   "armenian": "ԺԸ օր Յինանց",
+  "armenian_approved": "",
+  "id": "eighteenth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Eighteenth day of Great Lent": {
   "approved": "Eighteenth day of Great Lent",
   "armenian": "ԺԸ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "eighteenth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Eighth Sunday after the Holy Cross": {
   "approved": "Eighth Sunday after the Holy Cross",
   "armenian": "Ը կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "eighth_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Eighth day of Great Lent": {
   "approved": "Eighth day of Great Lent",
   "armenian": "Ը օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "eighth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Eleventh Sunday after the Holy Cross": {
   "approved": "Eleventh Sunday after the Holy Cross",
   "armenian": "ԺԱ կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "eleventh_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Eleventh day of Eastertide": {
   "approved": "Eleventh day of Eastertide",
   "armenian": "ԺԱ օր Յինանց",
+  "armenian_approved": "",
+  "id": "eleventh_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Eleventh day of Great Lent": {
   "approved": "Eleventh day of Great Lent",
   "armenian": "ԺԱ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "eleventh_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Eve of Fast of Advent": {
   "approved": "Eve of Fast of Advent",
   "armenian": "Բարեկենդան Յիսնակի պահոցն",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of",
   "note": "REVERTED: matches the engine's deliberate dual-form reproduction (engine._advent_eve_label) -- the source writes this two ways depending on whether Heesnak falls 9 or 10 weeks after Exaltation, and the engine reproduces both exactly rather than normalizing to one (verified, see engine.py comment). Do not fold to 'the Fast'.",
   "status": "review"
  },
  "Eve of Fast of Assumption of the Holy Mother of God": {
   "approved": "Eve of Fast of Assumption of the Holy Mother of God",
   "armenian": "Բարեկենդան Սուրբ Աստուածածնի պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_2",
   "note": "",
   "status": "ok"
  },
  "Eve of Fast of Catechumens": {
   "approved": "Eve of Fast of Catechumens",
   "armenian": "Բարեկենդան Առաջաւորաց պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_3",
   "note": "",
   "status": "ok"
  },
  "Eve of Fast of Exaltation of Holy Cross": {
   "approved": "Eve of Fast of Exaltation of Holy Cross",
   "armenian": "Բարեկենդան Ս. Խաչի պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_4",
   "note": "",
   "status": "ok"
  },
  "Eve of Fast of Nativity": {
   "approved": "Eve of Fast of Nativity",
   "armenian": "Բարեկենդան Սուրբ Ծննդեան պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_5",
   "note": "",
   "status": "ok"
  },
  "Eve of Fast of Prophet Elijah": {
   "approved": "Eve of Fast of Prophet Elijah",
   "armenian": "Բարեկենդան Եղիական պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_6",
   "note": "",
   "status": "ok"
  },
  "Eve of Fast of Saint Gregory the Illuminator": {
   "approved": "Eve of Fast of St. Gregory the Illuminator",
   "armenian": "Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_7",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Eve of Fast of Saint James the bishop of Nisibis": {
   "approved": "Eve of Fast of St. James the bishop of Nisibis",
   "armenian": "Բարեկենդան Ս. Յակովբայ պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_8",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Eve of Fast of Transfiguration": {
   "approved": "Eve of Fast of Transfiguration",
   "armenian": "Բարեկենդան Վարդավառի պահոց",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_9",
   "note": "",
   "status": "ok"
  },
  "Eve of Fast of the Holy Cross of Varag": {
   "approved": "Eve of Fast of the Holy Cross of Varag",
   "armenian": "Բարեկենդան Վարագայ ս. խաչի",
+  "armenian_approved": "",
+  "id": "eve_of_fast_of_10",
   "note": "",
   "status": "ok"
  },
  "Eve of Great Lent": {
   "approved": "Eve of Great Lent",
   "armenian": "Բուն բարեկենդան",
+  "armenian_approved": "",
+  "id": "eve_of_great_lent",
   "note": "",
   "status": "ok"
  },
  "Eve of the Fast of Advent": {
   "approved": "Eve of the Fast of Advent",
   "armenian": "Բարեկենդան Յիսնակի պահոցն",
+  "armenian_approved": "",
+  "id": "eve_of_the_fast",
   "note": "",
   "status": "ok"
  },
  "Eve of the Nativity and Theophany of our Lord Jesus Christ": {
   "approved": "Eve of the Nativity and Theophany of our Lord Jesus Christ",
   "armenian": "Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի — Նաւակատիք",
+  "armenian_approved": "",
+  "id": "eve_of_the_nativity",
   "note": "",
   "status": "ok"
  },
  "Eve of the Resurrection of our Lord Jesus Christ": {
   "approved": "Eve of the Resurrection of our Lord Jesus Christ",
-  "armenian": "Ճրագալոյց Զատկի",
+  "armenian": "",
+  "armenian_approved": "Ճրագալոյց Զատկի",
+  "id": "eve_of_the_resurrection",
   "note": "",
   "status": "ok"
  },
  "Fast day": {
   "approved": "Fast day",
   "armenian": "Պահք",
+  "armenian_approved": "",
+  "id": "fast_day",
   "note": "",
   "status": "ok"
  },
  "Fast day, Remembrance of the Ten Virgins": {
   "approved": "Fast day — Remembrance of the Ten Virgins",
   "armenian": "Պահք — Յիշատակ տասն կուսանացն",
+  "armenian_approved": "",
+  "id": "",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Feast day": {
   "approved": "Fast day",
   "armenian": "Պահք",
+  "armenian_approved": "",
+  "id": "fast_day",
   "note": "The source's own one-letter typo for 'Fast day'. Three independent witnesses: the string appears on no other date in the 9,861-day corpus; its Mon/Tue/Wed/Fri weekday set is the Advent-fast schedule, and the marker is absent on Thu/Sat, which a FEAST marker could not be (it is the same feast every year); and the Armenian in the next column reads Պահք (fast). Registered in source_corrections.POSITION_LABEL_FIXES (anchored on the component separator, so it cannot also rewrite 'Feast day of the Discovery of the Belt...'), with the matching engine._POSITION_FAMILIES Dec-9 template edited to emit 'Fast day'. See docs/feast-name-corrections.md section 1.",
   "status": "fixed"
  },
  "Feast day of the Discovery of the Belt of the Holy Mother of God": {
   "approved": "Feast day of the Discovery of the Belt of the Holy Mother of God",
   "armenian": "Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի",
+  "armenian_approved": "",
+  "id": "feast_day_of_the",
   "note": "",
   "status": "ok"
  },
  "Feast of All Saints, the old and the new, the known and the unknown": {
   "approved": "Feast of All Sts., the old and the new, the known and the unknown",
   "armenian": "Տօն ամենայն սրբոց` հնոց եւ նորոց, յայտից եւ անյայտից",
+  "armenian_approved": "",
+  "id": "feast_of_all_sts",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator": {
   "approved": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
   "armenian": "Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին — Նաւակատիք",
+  "armenian_approved": "",
+  "id": "feast_of_dedication_of",
   "note": "",
   "status": "ok"
  },
  "Feast of Discovery of Saint Gregory's Relics": {
   "approved": "Feast of Discovery of St. Gregory's Relics",
   "armenian": "Գիւտ նշխարաց սրբոյն Գրիգորի Լուսաւորչին մերոյ",
+  "armenian_approved": "",
+  "id": "feast_of_discovery_of",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Feast of Holy Church in Dedication of Holy Cross": {
   "approved": "Feast of Holy Church in Dedication of Holy Cross",
   "armenian": "Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին — Նաւակատիք",
+  "armenian_approved": "",
+  "id": "feast_of_holy_church",
   "note": "",
   "status": "ok"
  },
  "Feast of Holy Etchmiadzin": {
   "approved": "Feast of Holy Etchmiadzin",
   "armenian": "Տօն Կաթուղիկէ Սուրբ Էջմիածնի",
+  "armenian_approved": "",
+  "id": "feast_of_holy_etchmiadzin",
   "note": "",
   "status": "ok"
  },
  "Feast of Naming of Our Lord Jesus Christ": {
   "approved": "Feast of Naming of Our Lord Jesus Christ",
   "armenian": "Տօն Անուանակոչութեան Տեառն մերոյ Յիսուսի Քրիստոսի",
+  "armenian_approved": "",
+  "id": "feast_of_naming_of",
   "note": "",
   "status": "ok"
  },
  "Feast of the Birth of Holy Virgin Mary from Anna": {
   "approved": "Feast of the Birth of Holy Virgin Mary from Anna",
   "armenian": "Տօն Ծննդեան սրբուհւոյ Կուսին Մարիամու յԱննայէ",
+  "armenian_approved": "",
+  "id": "feast_of_the_birth",
   "note": "",
   "status": "ok"
  },
  "Feast of the Birth of St. John the Forerunner (Baptist)": {
   "approved": "Feast of the Birth of St. John the Forerunner (Baptist)",
   "armenian": "Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին",
+  "armenian_approved": "",
+  "id": "feast_of_the_birth_2",
   "note": "",
   "status": "ok"
  },
  "Feast of the Discovery of St. Mary’s Box": {
   "approved": "Feast of the Discovery of St. Mary's Box",
   "armenian": "Գիւտ տփոյ սրբուհւոյ Աստուածածնի",
+  "armenian_approved": "",
+  "id": "feast_of_the_discovery",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Feast of the Holy Church": {
   "approved": "Feast of the Holy Church",
   "armenian": "Տօն է Ս. Եկեղեցւոյ",
+  "armenian_approved": "",
+  "id": "feast_of_the_holy",
   "note": "",
   "status": "ok"
  },
  "Feast of the Holy Cross": {
   "approved": "Feast of the Holy Cross",
   "armenian": "Տօն է Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "feast_of_the_holy_2",
   "note": "",
   "status": "ok"
  },
  "Feast of the Holy Cross of Varag": {
   "approved": "Feast of the Holy Cross of Varag",
   "armenian": "Տօն Վարագայ ս. խաչի",
+  "armenian_approved": "",
+  "id": "feast_of_the_holy_3",
   "note": "",
   "status": "ok"
  },
  "Fiest of the Conception of the Holy Virgin Mary by Anna": {
   "approved": "Feast of the Conception of the Holy Virgin Mary by Anna",
   "armenian": "Յղութիւն սրբուհւոյ Աստուածածնի յԱննայ",
+  "armenian_approved": "",
+  "id": "feast_of_the_conception",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Fifteenth day of Great Lent": {
   "approved": "Fifteenth day of Great Lent",
   "armenian": "ԺԵ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "fifteenth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday": {
   "approved": "Fifth Sunday",
   "armenian": "Ե կիւրակէ",
+  "armenian_approved": "",
+  "id": "fifth_sunday",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday after Nativity": {
   "approved": "Fifth Sunday after Nativity",
   "armenian": "Ե կիւրակէ զկնի Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "fifth_sunday_after_nativity",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday after Pentecost": {
   "approved": "Fifth Sunday after Pentecost",
   "armenian": "Ե կիւրակէ զկնի Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "fifth_sunday_after_pentecost",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday after Transfiguration": {
   "approved": "Fifth Sunday after Transfiguration",
   "armenian": "Ե կիւրակէ զկնի Վարդավառի",
+  "armenian_approved": "",
+  "id": "fifth_sunday_after_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday after the Assumption": {
   "approved": "Fifth Sunday after the Assumption",
   "armenian": "Ե կիւրակէ զկնի Վերափոխման",
+  "armenian_approved": "",
+  "id": "fifth_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday after the Holy Cross": {
   "approved": "Fifth Sunday after the Holy Cross",
   "armenian": "Ե կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "fifth_sunday_after_the_2",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday of Advent": {
   "approved": "Fifth Sunday of Advent",
   "armenian": "Ե կիւրակէ Յիսնակի",
+  "armenian_approved": "",
+  "id": "fifth_sunday_of_advent",
   "note": "",
   "status": "ok"
  },
  "Fifth Sunday of Great Lent. Sunday of the Judge": {
   "approved": "Fifth Sunday of Great Lent. Sunday of the Judge",
   "armenian": "Ե կիւրակէ Քառասնորդական պահոց (Դատաւորին)",
+  "armenian_approved": "",
+  "id": "fifth_sunday_of_great",
   "note": "",
   "status": "ok"
  },
  "Fifth day of Advent": {
   "approved": "Fifth day of Advent",
   "armenian": "Ե օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_advent",
   "note": "",
   "status": "ok"
  },
  "Fifth day of Easter": {
   "approved": "Fifth day of Easter",
   "armenian": "Ե օր Զատկի",
+  "armenian_approved": "",
+  "id": "fifth_day_of_easter",
   "note": "",
   "status": "ok"
  },
  "Fifth day of Great Lent": {
   "approved": "Fifth day of Great Lent",
   "armenian": "Ե օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Fifth day of Nativity": {
   "approved": "Fifth day of Nativity",
   "armenian": "Ե օր Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "fifth_day_of_nativity",
   "note": "",
   "status": "ok"
  },
  "Fifth day of Pentecost": {
   "approved": "Fifth day of Pentecost",
   "armenian": "Ե օր Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "fifth_day_of_pentecost",
   "note": "",
   "status": "ok"
  },
  "Fifth day of the Assumption": {
   "approved": "Fifth day of the Assumption",
   "armenian": "Ե օր Վերափոխման",
+  "armenian_approved": "",
+  "id": "fifth_day_of_the",
   "note": "",
   "status": "ok"
  },
  "Fifth day of the Fast of Advent": {
   "approved": "Fifth day of the Fast of Advent",
   "armenian": "Ե օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_the_2",
   "note": "",
   "status": "ok"
  },
  "Fifth day of the Fast of Assumption": {
   "approved": "Fifth day of the Fast of Assumption",
   "armenian": "Ե օր Աստուածածնի պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_the_3",
   "note": "",
   "status": "ok"
  },
  "Fifth day of the Fast of Nativity": {
   "approved": "Fifth day of the Fast of Nativity",
   "armenian": "Ե օր Ս. Ծննդեան պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_the_4",
   "note": "",
   "status": "ok"
+ },
+ "Fifth day of the Fast of St. Gregory the Illuminator": {
+  "approved": "Fifth day of the Fast of St. Gregory the Illuminator",
+  "armenian": "Ե օր Լուսաւորչի պահոց",
+  "armenian_approved": "",
+  "id": "illuminator_fast_day_5",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "status": "generated"
  },
  "Fifth day of the Fast of the Catechumens": {
   "approved": "Fifth day of the Fast of the Catechumens",
   "armenian": "Ե օր Առաջաւորաց պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_the_5",
   "note": "",
   "status": "ok"
  },
  "Fifth day of the Fast of the Holy Cross": {
   "approved": "Fifth day of the Fast of the Holy Cross",
   "armenian": "Ե օր Ս. Խաչի պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_the_6",
   "note": "",
   "status": "ok"
  },
  "Fifth day of the Fast of the Transifiguration": {
   "approved": "Fifth day of the Fast of the Transfiguration",
   "armenian": "Ե օր Վարդավառի պահոց",
+  "armenian_approved": "",
+  "id": "fifth_day_of_the_7",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "First Sunday after Nativity": {
   "approved": "First Sunday after Nativity",
   "armenian": "Ա կիւրակէ զկնի Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "first_sunday_after_nativity",
   "note": "",
   "status": "ok"
  },
  "First Sunday of Advent": {
   "approved": "First Sunday of Advent",
   "armenian": "Ա կիւրակէ Յիսնակի",
+  "armenian_approved": "",
+  "id": "first_sunday_of_advent",
   "note": "",
   "status": "ok"
  },
  "First day of Advent": {
   "approved": "First day of Advent",
   "armenian": "Ա օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_advent",
   "note": "",
   "status": "ok"
  },
  "First day of Great Lent": {
   "approved": "First day of Great Lent",
   "armenian": "Ա օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_great",
   "note": "",
   "status": "ok"
  },
  "First day of the Fast of Advent": {
   "approved": "First day of the Fast of Advent",
   "armenian": "Ա օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_the",
   "note": "",
   "status": "ok"
  },
  "First day of the Fast of Assumption": {
   "approved": "First day of the Fast of Assumption",
   "armenian": "Ա օր Աստուածածնի պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_the_2",
   "note": "",
   "status": "ok"
  },
  "First day of the Fast of Nativity": {
   "approved": "First day of the Fast of Nativity",
   "armenian": "Ա օր Ս. Ծննդեան պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_the_3",
   "note": "",
   "status": "ok"
+ },
+ "First day of the Fast of St. Gregory the Illuminator": {
+  "approved": "First day of the Fast of St. Gregory the Illuminator",
+  "armenian": "Ա օր Լուսաւորչի պահոց",
+  "armenian_approved": "",
+  "id": "illuminator_fast_day_1",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "status": "generated"
  },
  "First day of the Fast of the Catechumens": {
   "approved": "First day of the Fast of the Catechumens",
   "armenian": "Ա օր Առաջաւորաց պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_the_4",
   "note": "",
   "status": "ok"
  },
  "First day of the Fast of the Holy Cross": {
   "approved": "First day of the Fast of the Holy Cross",
   "armenian": "Ա օր Ս. Խաչի պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_the_5",
   "note": "",
   "status": "ok"
  },
  "First day of the Fast of the Transfiguration": {
   "approved": "First day of the Fast of the Transfiguration",
   "armenian": "Ա օր Վարդավառի պահոց",
+  "armenian_approved": "",
+  "id": "first_day_of_the_6",
   "note": "",
   "status": "ok"
  },
  "Fortieth day of Eastertide": {
   "approved": "Fortieth day of Eastertide",
   "armenian": "Խ օր Յինանց",
+  "armenian_approved": "",
+  "id": "fortieth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Fortieth day of Great Lent": {
   "approved": "Fortieth day of Great Lent",
   "armenian": "Խ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "fortieth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Forty Eighth day of Eastertide": {
   "approved": "Forty Eighth day of Eastertide",
   "armenian": "ԽԸ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_eighth_day_of",
   "note": "",
   "status": "ok"
  },
  "Forty Fifth day of Eastertide": {
   "approved": "Forty Fifth day of Eastertide",
   "armenian": "ԽԵ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_fifth_day_of",
   "note": "",
   "status": "ok"
  },
  "Forty First day of Eastertide": {
   "approved": "Forty First day of Eastertide",
   "armenian": "ԽԱ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_first_day_of",
   "note": "",
   "status": "ok"
  },
  "Forty First day of Great Lent": {
   "approved": "Forty First day of Great Lent",
   "armenian": "ԽԱ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "forty_first_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Forty Fourth day of Eastertide": {
   "approved": "Forty Fourth day of Eastertide",
   "armenian": "ԽԴ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_fourth_day_of",
   "note": "",
   "status": "ok"
  },
  "Forty Ninth day of Eastertide": {
   "approved": "Forty Ninth day of Eastertide",
   "armenian": "ԽԹ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_ninth_day_of",
   "note": "",
   "status": "ok"
  },
  "Forty Second day of Eastertide": {
   "approved": "Forty Second day of Eastertide",
   "armenian": "ԽԲ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_second_day_of",
   "note": "",
   "status": "ok"
  },
  "Forty Seventh day of Eastertide": {
   "approved": "Forty Seventh day of Eastertide",
   "armenian": "ԽԷ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_seventh_day_of",
   "note": "",
   "status": "ok"
  },
  "Forty Sixth day of Eastertide": {
   "approved": "Forty Sixth day of Eastertide",
   "armenian": "ԽԶ օր Յինանց",
+  "armenian_approved": "",
+  "id": "forty_sixth_day_of",
   "note": "",
   "status": "ok"
  },
  "Fourteenth day of Eastertide": {
   "approved": "Fourteenth day of Eastertide",
   "armenian": "ԺԴ օր Յինանց",
+  "armenian_approved": "",
+  "id": "fourteenth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday (Red Sunday)": {
   "approved": "Fourth Sunday (Red Sunday)",
   "armenian": "Դ կիւրակէ (Կարմիր կիւրակէ)",
+  "armenian_approved": "",
+  "id": "fourth_sunday_red_sunday",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday after Assumption": {
   "approved": "Fourth Sunday after Assumption",
   "armenian": "Դ կիւրակէ զկնի Վերափոխման",
+  "armenian_approved": "",
+  "id": "fourth_sunday_after_assumption",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday after Nativity": {
   "approved": "Fourth Sunday after Nativity",
   "armenian": "Դ կիւրակէ զկնի Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "fourth_sunday_after_nativity",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday after Pentecost": {
   "approved": "Fourth Sunday after Pentecost",
   "armenian": "Դ կիւրակէ զկնի Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "fourth_sunday_after_pentecost",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday after Transfiguration": {
   "approved": "Fourth Sunday after Transfiguration",
   "armenian": "Դ կիւրակէ զկնի Վարդավառի",
+  "armenian_approved": "",
+  "id": "fourth_sunday_after_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday after the Holy Cross": {
   "approved": "Fourth Sunday after the Holy Cross",
   "armenian": "Դ կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "fourth_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday of Advent": {
   "approved": "Fourth Sunday of Advent",
   "armenian": "Դ կիւրակէ Յիսնակի",
+  "armenian_approved": "",
+  "id": "fourth_sunday_of_advent",
   "note": "",
   "status": "ok"
  },
  "Fourth Sunday of Great Lent. Sunday of the Steward": {
   "approved": "Fourth Sunday of Great Lent. Sunday of the Steward",
   "armenian": "Դ կիւրակէ Քառասնորդական պահոց (Տնտեսին)",
+  "armenian_approved": "",
+  "id": "fourth_sunday_of_great",
   "note": "",
   "status": "ok"
  },
  "Fourth day of Advent": {
   "approved": "Fourth day of Advent",
   "armenian": "Դ օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_advent",
   "note": "",
   "status": "ok"
  },
  "Fourth day of Easter": {
   "approved": "Fourth day of Easter",
   "armenian": "Դ օր Զատկի",
+  "armenian_approved": "",
+  "id": "fourth_day_of_easter",
   "note": "",
   "status": "ok"
  },
  "Fourth day of Great Lent": {
   "approved": "Fourth day of Great Lent",
   "armenian": "Դ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Fourth day of Nativity": {
   "approved": "Fourth day of Nativity",
   "armenian": "Դ օր Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "fourth_day_of_nativity",
   "note": "",
   "status": "ok"
  },
  "Fourth day of Pentecost": {
   "approved": "Fourth day of Pentecost",
   "armenian": "Դ օր Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "fourth_day_of_pentecost",
   "note": "",
   "status": "ok"
  },
  "Fourth day of the Assumption": {
   "approved": "Fourth day of the Assumption",
   "armenian": "Դ օր Վերափոխման",
+  "armenian_approved": "",
+  "id": "fourth_day_of_the",
   "note": "",
   "status": "ok"
  },
  "Fourth day of the Fast of Advent": {
   "approved": "Fourth day of the Fast of Advent",
   "armenian": "Դ օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_the_2",
   "note": "",
   "status": "ok"
  },
  "Fourth day of the Fast of Assumption": {
   "approved": "Fourth day of the Fast of Assumption",
   "armenian": "Դ օր Աստուածածնի պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_the_3",
   "note": "",
   "status": "ok"
  },
  "Fourth day of the Fast of Nativity": {
   "approved": "Fourth day of the Fast of Nativity",
   "armenian": "Դ օր Ս. Ծննդեան պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_the_4",
   "note": "",
   "status": "ok"
+ },
+ "Fourth day of the Fast of St. Gregory the Illuminator": {
+  "approved": "Fourth day of the Fast of St. Gregory the Illuminator",
+  "armenian": "Դ օր Լուսաւորչի պահոց",
+  "armenian_approved": "",
+  "id": "illuminator_fast_day_4",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "status": "generated"
  },
  "Fourth day of the Fast of the Catechumens": {
   "approved": "Fourth day of the Fast of the Catechumens",
   "armenian": "Դ օր Առաջաւորաց պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_the_5",
   "note": "",
   "status": "ok"
  },
  "Fourth day of the Fast of the Holy Cross": {
   "approved": "Fourth day of the Fast of the Holy Cross",
   "armenian": "Դ օր Ս. Խաչի պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_the_6",
   "note": "",
   "status": "ok"
  },
  "Fourth day of the Fast of the Transfiguration": {
   "approved": "Fourth day of the Fast of the Transfiguration",
   "armenian": "Դ օր Վարդավառի պահոց",
+  "armenian_approved": "",
+  "id": "fourth_day_of_the_7",
   "note": "",
   "status": "ok"
  },
  "Great Friday": {
   "approved": "Great Friday",
   "armenian": "Աւագ ուրբաթ",
+  "armenian_approved": "",
+  "id": "great_friday",
   "note": "",
   "status": "ok"
  },
  "Great Monday": {
   "approved": "Great Monday",
   "armenian": "Աւագ երկուշաբթի",
+  "armenian_approved": "",
+  "id": "great_monday",
   "note": "",
   "status": "ok"
  },
  "Great Saturday": {
   "approved": "Great Saturday",
-  "armenian": "Աւագ շաբաթ",
+  "armenian": "",
+  "armenian_approved": "Աւագ շաբաթ",
+  "id": "great_saturday",
   "note": "",
   "status": "ok"
  },
  "Great Thursday": {
   "approved": "Great Thursday",
   "armenian": "Աւագ հինգշաբթի",
+  "armenian_approved": "",
+  "id": "great_thursday",
   "note": "",
   "status": "ok"
  },
  "Great Tuesday": {
   "approved": "Great Tuesday",
   "armenian": "Աւագ երեքշաբթի",
+  "armenian_approved": "",
+  "id": "great_tuesday",
   "note": "",
   "status": "ok"
  },
  "Great Wednesday": {
   "approved": "Great Wednesday",
   "armenian": "Աւագ չորեքշաբթի",
+  "armenian_approved": "",
+  "id": "great_wednesday",
   "note": "",
   "status": "ok"
  },
  "Holy Apostle Thomas": {
   "approved": "Holy Apostle Thomas",
   "armenian": "Սրբոյն Թովմայի առաքելոյն",
+  "armenian_approved": "",
+  "id": "apostle_thomas",
   "note": "",
   "status": "ok"
  },
  "Holy Apostles James and Simon": {
   "approved": "Holy Apostles James and Simon",
   "armenian": "Սրբոց առաքելոցն Յակովբայ եւ Շմաւոնի",
+  "armenian_approved": "",
+  "id": "apostles_james_and_simon",
   "note": "",
   "status": "ok"
  },
  "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia": {
   "approved": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
   "armenian": "Սրբոց առաքելոցն եւ առաջին լուսաւորչացն մերոց Թադէոսի եւ Բարդուղիմէոսի",
+  "armenian_approved": "",
+  "id": "apostles_thaddeus_and_bartholomew",
   "note": "",
   "status": "ok"
  },
  "Holy Apostles Thomas, James and Simon": {
   "approved": "Holy Apostles Thomas, James and Simon",
   "armenian": "Սրբոց առաքելոցն Թովմայի, Յակովբայ եւ Շմաւոնի",
+  "armenian_approved": "",
+  "id": "apostles_thomas_james_and",
   "note": "",
   "status": "ok"
  },
  "Holy Archangels Gabriel and Michael and all the heavenly Angels": {
   "approved": "Holy Archangels Gabriel and Michael and all the heavenly Angels",
   "armenian": "Սրբոց հրեշտակապետացն Գաբրիելի եւ Միքայելի եւ ամենայն երկնային զօրացն",
+  "armenian_approved": "",
+  "id": "archangels_gabriel_and_michael",
   "note": "",
   "status": "ok"
  },
  "Holy Evangelists Matthew, Mark, Luke and John": {
   "approved": "Holy Evangelists Matthew, Mark, Luke and John",
   "armenian": "Սրբոց աւետարանչացն Մատթէոսի, Մարկոսի, Ղուկասու եւ Յովհաննու",
+  "armenian_approved": "",
+  "id": "evangelists_matthew_mark_luke",
   "note": "",
   "status": "ok"
  },
  "Holy Fathers Saints Athanasius and Cyril of Alexandria": {
   "approved": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
   "armenian": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի",
+  "armenian_approved": "",
+  "id": "fathers_sts_athanasius_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory of Theologian": {
   "approved": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
   "armenian": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
+  "armenian_approved": "",
+  "id": "fathers_sts_athanasius_and_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist": {
   "approved": "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist",
   "armenian": "Սրբոց մարգարէիցն Եզեկիէլի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի",
+  "armenian_approved": "",
+  "id": "prophets_ezekiel_ezra_and",
   "note": "",
   "status": "ok"
  },
  "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful": {
   "approved": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
   "armenian": "Սրբոց Թարգմանչաց վարդապետացն մերոց Մեսրովբայ, Եղիշէի, Մովսիսի Քերթողին, Դաւթի Անյաղթ փիլիսոփային, Գրիգորի Նարեկացւոյն եւ Ներսիսի Կլայեցւոյն: Տօն ազգային եւ եկեղեցական` ի յիշատակ գիւտի նշանագրացն հայոց եւ թարգմանութեան Սուրբ Գրոց",
+  "armenian_approved": "",
+  "id": "translators_mesrop_yeghishe_moses",
   "note": "",
   "status": "ok"
  },
  "Holy Translators Saints Sahak and Mesrop": {
   "approved": "Holy Translators Sts. Sahak and Mesrop",
   "armenian": "Սրբոց թարգմանչացն մերոց Սահակայ եւ Մեսրովբայ",
+  "armenian_approved": "",
+  "id": "translators_sts_sahak_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST": {
   "approved": "NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST",
   "armenian": "ՏՕՆ ԾՆՆԴԵԱՆ ԵՒ ԱՍՏՈՒԱԾԱՅԱՅՏՆՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ",
+  "armenian_approved": "",
+  "id": "nativity_and_theophany_of",
   "note": "",
   "status": "ok"
  },
  "Nineteenth day of Eastertide": {
   "approved": "Nineteenth day of Eastertide",
   "armenian": "ԺԹ օր Յինանց",
+  "armenian_approved": "",
+  "id": "nineteenth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Nineteenth day of Great Lent": {
   "approved": "Nineteenth day of Great Lent",
   "armenian": "ԺԹ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "nineteenth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Ninth Sunday after the Holy Cross": {
   "approved": "Ninth Sunday after the Holy Cross",
   "armenian": "Թ կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "ninth_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Ninth day of Assumption": {
   "approved": "Ninth day of Assumption",
   "armenian": "Թ օր Վերափոխման",
+  "armenian_approved": "",
+  "id": "ninth_day_of_assumption",
   "note": "",
   "status": "ok"
  },
  "Ninth day of Eastertide": {
   "approved": "Ninth day of Eastertide",
   "armenian": "Թ օր Յինանց",
+  "armenian_approved": "",
+  "id": "ninth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Ninth day of Great Lent": {
   "approved": "Ninth day of Great Lent",
   "armenian": "Թ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "ninth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Octave of Easter (New Sunday)": {
   "approved": "Octave of Easter (New Sunday)",
   "armenian": "Ը օր Զատկի. Կրկնազատիկ (Նոր կիւրակէ)",
+  "armenian_approved": "",
+  "id": "octave_of_easter_new",
   "note": "",
   "status": "ok"
  },
  "PENTECOST (Fifteenth day of Eastertide)": {
   "approved": "PENTECOST (Fiftieth day of Eastertide)",
   "armenian": "ՀՈԳԵԳԱԼՈՒՍՏ (Պենտեկոստէ` յիսներորդ օր ի Զատկէն)",
+  "armenian_approved": "",
+  "id": "pentecost_fiftieth_day_of",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "PRESENTATION OF OUR LORD TO THE TEMPLE": {
   "approved": "PRESENTATION OF OUR LORD TO THE TEMPLE",
   "armenian": "ՏԵԱՌՆԸՆԴԱՌԱՋ (տօն քառասնօրեայ գալստեանն Քրիստոսի ի Տաճարն)",
+  "armenian_approved": "",
+  "id": "presentation_of_our_lord",
   "note": "",
   "status": "ok"
  },
  "PRESENTATION of the Holy Mother of God to the Temple": {
   "approved": "Presentation of the Holy Mother of God to the Temple",
   "armenian": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
+  "armenian_approved": "",
+  "id": "presentation_of_the_holy",
   "note": "The source shouts this name in 19 years and title-cases it in the other 7; the engine already folds to title case (docs/feast-name-corrections.md section 5), so this row's approved text now says so instead of contradicting it. Recording it here also collapses the two catalog entries the split was minting into one -- and the surviving entry keeps THIS row's Armenian, which is the well-formed majority form. The title-cased row carried 'ս.Աստուածածնի' (lowercase, no space after the abbreviation dot), the 1-of-7 malformation that dev/fetch_translations.py happened to sample, and was serving it on every Nov 21.",
   "status": "fixed"
  },
  "Palm Sunday": {
   "approved": "Palm Sunday",
   "armenian": "ԾԱՂԿԱԶԱՐԴ",
+  "armenian_approved": "",
+  "id": "palm_sunday",
   "note": "",
   "status": "ok"
  },
  "Presentation of the Holy Mother of God to the Temple": {
   "approved": "Presentation of the Holy Mother of God to the Temple",
-  "armenian": "Ընծայումն ս.Աստուածածնի երից ամաց ի Տաճարն",
+  "armenian": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
+  "armenian_approved": "",
+  "id": "presentation_of_the_holy",
   "note": "",
   "status": "ok"
  },
  "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)": {
   "approved": "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)",
   "armenian": "ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)",
+  "armenian_approved": "",
+  "id": "resurrection_of_our_lord",
   "note": "",
   "status": "ok"
  },
  "Remembrance of Prophet Elijah": {
   "approved": "Remembrance of Prophet Elijah",
   "armenian": "Յիշատակ Եղիայի մարգարէին",
+  "armenian_approved": "",
+  "id": "remembrance_of_prophet_elijah",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Armenian Genocide (1915)": {
   "approved": "Remembrance of the Armenian Genocide (1915)",
   "armenian": "Յիշատակ Հայոց ցեղասպանութեան (1915) բիւրաւոր նահատակացն",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_armenian",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Dead": {
   "approved": "Remembrance of the Dead",
   "armenian": "Յիշատակ մեռելոց",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_dead",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Last Supper": {
   "approved": "Remembrance of the Last Supper",
   "armenian": "Յիշատակ վերջին ընթրեաց Տեառն մերոյ Յիսուսի Քրիստոսի",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_last",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church": {
   "approved": "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church",
   "armenian": "Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ — Նաւակատիք",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_old",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ": {
   "approved": "Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ",
   "armenian": "Յիշատակ չարչարանաց, խաչելութեան եւ թաղման Տեառն մերոյ Յիսուսի Քրիստոսի",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_passion",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Prophet Jonah": {
   "approved": "Remembrance of the Prophet Jonah",
   "armenian": "Յիշատակ Յովնանու մարգարէին",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_prophet",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Raising of Lazarus": {
   "approved": "Remembrance of the Raising of Lazarus",
   "armenian": "Յիշատակ յարութեան Ղազարու",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_raising",
   "note": "",
   "status": "ok"
  },
  "Remembrance of the Ten Virgins": {
   "approved": "Remembrance of the Ten Virgins",
   "armenian": "Յիշատակ տասն կուսանացն",
+  "armenian_approved": "",
+  "id": "remembrance_of_the_ten",
   "note": "",
   "status": "ok"
  },
  "Saint Abgar the Witness and the First Christian King": {
   "approved": "St. Abgar the Witness and the First Christian King",
   "armenian": "Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հաւատացեալ թագաւորին մերոյ",
+  "armenian_approved": "",
+  "id": "abgar_the_witness_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Elisha the Prophet": {
   "approved": "St. Elisha the Prophet",
   "armenian": "Սրբոյն Եղիսէի մարգարէին",
+  "armenian_approved": "",
+  "id": "elisha_the_prophet",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Gregory of Theologian": {
   "approved": "St. Gregory the Theologian",
   "armenian": "Սրբոյն Գրիգորի Աստուածաբանին",
+  "armenian_approved": "",
+  "id": "gregory_the_theologian",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel": {
   "approved": "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel",
   "armenian": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
+  "armenian_approved": "",
+  "id": "gregory_the_illuminator_s_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES | Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', not 'Aristakes'/'Housik' -- but Armenian Church diocese sites are inconsistent between transliteration conventions (cf. Ghevond vs Ghevont). Worth a call: Wikipedia form or church-website form?",
   "status": "review"
  },
  "Saint Gregory the Illuminator’s Commitment to the Pit": {
   "approved": "St. Gregory the Illuminator's Commitment to the Pit",
   "armenian": "Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն",
+  "armenian_approved": "",
+  "id": "gregory_the_illuminator_s",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Isaiah the Prophet": {
   "approved": "St. Isaiah the Prophet",
   "armenian": "Սրբոյն Եսայեայ մարգարէին",
+  "armenian_approved": "",
+  "id": "isaiah_the_prophet",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint James the Apostle and His Brother John the Evangelist": {
   "approved": "St. James the Apostle and His Brother John the Evangelist",
   "armenian": "Սրբոց Որդւոցն Որոտման Յակովբայ առաքելոյն եւ Յովհաննու աւետարանչին",
+  "armenian_approved": "",
+  "id": "james_the_apostle_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Jeremiah the Prophet": {
   "approved": "St. Jeremiah the Prophet",
   "armenian": "Սրբոյն Երեմիայի մարգարէին",
+  "armenian_approved": "",
+  "id": "jeremiah_the_prophet",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint John Chrysostom": {
   "approved": "St. John Chrysostom",
   "armenian": "Սրբոյն Յովհաննու Ոսկեբերան հայրապետին",
+  "armenian_approved": "",
+  "id": "john_chrysostom",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Nicolas Wonderworker the Bishop of Myra": {
   "approved": "St. Nicholas Wonderworker the Bishop of Myra",
   "armenian": "Սրբոյն Նիկողայոսի Զմիւռնացւոյ սքանչելագործ հայրապետին",
+  "armenian_approved": "",
+  "id": "nicholas_wonderworker_the_bishop",
   "note": "Reads 'Nicholas Wonderworker' after the spelling fold; the other two components naming him say 'the Wonderworker'. Add the article?",
   "status": "review"
  },
  "Saint Patriarchs Barlaam, Anthimus and Irenaeus": {
   "approved": "Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
   "armenian": "Սրբոց հայրապետացն Բարաղամու, Անթիմոսի եւ Երանոսի",
+  "armenian_approved": "",
+  "id": "patriarchs_barlaam_anthimus_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv": {
   "approved": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
   "armenian": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին",
+  "armenian_approved": "",
+  "id": "patriarchs_ignatius_the_bishop",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides": {
   "approved": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
   "armenian": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
+  "armenian_approved": "",
+  "id": "patriarchs_ignatius_the_bishop_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Sahak I the Parthian, Patriarch of Armenia": {
   "approved": "St. Sahak I the Parthian, Patriarch of Armenia",
   "armenian": "Սրբոյն Իսահակայ Պարթեւի հայրապետին մերոյ",
+  "armenian_approved": "",
+  "id": "sahak_i_the_parthian",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers": {
   "approved": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
   "armenian": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն",
+  "armenian_approved": "",
+  "id": "sargis",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints Atom and his soldiers": {
   "approved": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Sts. Atom and his soldiers",
   "armenian": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն եւ սրբոց Ատովմեանց զօրավարացն",
+  "armenian_approved": "",
+  "id": "",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Stephen the Proto-Deacon and the First Martyr": {
   "approved": "St. Stephen the Proto-Deacon and the First Martyr",
   "armenian": "Սրբոյն Ստեփաննոսի Նախավկային եւ առաջին մարտիրոսին",
+  "armenian_approved": "",
+  "id": "stephen_the_proto_deacon",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Theodore the General": {
   "approved": "St. Theodore the General",
   "armenian": "Սրբոյն Թէոդորոսի զօրավարին",
+  "armenian_approved": "",
+  "id": "",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Theodore the Tyron": {
   "approved": "St. Theodore the Tyron",
   "armenian": "Սրբոյն Թէոդորոսի զօրավարին",
+  "armenian_approved": "",
+  "id": "theodore_the_tyron",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Theodoron the Martyr": {
   "approved": "St. Theodoron the Martyr",
   "armenian": "Սրբոյն Աստուածատրոյ վկային",
+  "armenian_approved": "",
+  "id": "theodoron_the_martyr",
   "note": "hy 'Աստուածատրոյ' is Astvatsatur, 'God-given' -- the Armenian name usually rendered Theodore. 'Theodoron' looks like a half-declined Greek form. Should this be 'Theodore the Martyr', or is Theodoron the intended distinct form?",
   "status": "review"
  },
  "Saint Vahan of Goghtn": {
   "approved": "St. Vahan of Goghtn",
   "armenian": "Սրբոյն Վահանայ Գողթնացւոյն",
+  "armenian_approved": "",
+  "id": "vahan_of_goghtn",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saint Virgins Juliana and Basilla": {
   "approved": "Sts. Virgins Juliana and Basilla",
   "armenian": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ",
+  "armenian_approved": "",
+  "id": "virgins_juliana_and_basilla",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "review"
  },
  "Saint Zechariah the Prophet": {
   "approved": "St. Zechariah the Prophet",
   "armenian": "Սրբոյն Զաքարիայի մարգարէին",
+  "armenian_approved": "",
+  "id": "zechariah_the_prophet",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian": {
   "approved": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian",
   "armenian": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի",
+  "armenian_approved": "",
+  "id": "abraham_and_khoren_moneyless",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": {
   "approved": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "armenian": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
+  "armenian_approved": "",
+  "id": "abraham_and_khoren_moneyless_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": {
   "approved": "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
   "armenian": "Սրբոցն Անդրիանոսի եւ կնոջ նորա Անատոլայ եւ Թէոդորոսի եւ Ելեւթիւրոսի վկայիցն",
+  "armenian_approved": "",
+  "id": "adrian_and_his_wife",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr": {
   "approved": "Sts. Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
   "armenian": "Սրբոցն Ակիփսիմեայ եպիսկոպոսին եւ Յովսեփայ քահանային, Այիթալայ սարկաւագին եւ Պղատոնի վկային",
+  "armenian_approved": "",
+  "id": "akepsimas_the_bishop_joseph",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her": {
   "approved": "Sts. Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
   "armenian": "Սրբոցն Անաստասայ քահանային, Վարոսի, Թէոդորիտեայ եւ որդւոց նորա եւ որք ընդ նմա կատարեցան",
+  "armenian_approved": "",
+  "id": "anastasius_the_priest_varus",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": {
   "approved": "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
   "armenian": "Սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն",
+  "armenian_approved": "",
+  "id": "andrew_the_general_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs": {
   "approved": "Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
   "armenian": "Սրբոցն Աթանագինեայ եպիսկոպոսին եւ տասն աշակերտացն եւ հինգ վկայիցն",
+  "armenian_approved": "",
+  "id": "athenogenes_the_bishop_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Atom and his soldiers": {
   "approved": "Sts. Atom and his soldiers",
   "armenian": "Սրբոց Ատովմեանց զօրավարացն",
+  "armenian_approved": "",
+  "id": "atom",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Atom and his soldiers, and Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen": {
   "approved": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
   "armenian": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
+  "armenian_approved": "",
+  "id": "atom_and_his_soldiers",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Atom and his soldiers, and Saints Sukiasians the Martyrs": {
   "approved": "Sts. Atom and his soldiers, and Sts. Sukiasians the Martyrs",
   "armenian": "Սրբոց Ատովմեանց զօրավարացն եւ Սուքիասեանց վկայիցն",
+  "armenian_approved": "",
+  "id": "atom_and_his_soldiers_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian": {
   "approved": "Sts. Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
   "armenian": "Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ",
+  "armenian_approved": "",
+  "id": "basil_the_great_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Callistratus and his companions, and Lukianos the Priest": {
   "approved": "Sts. Callistratus and his companions, and Lukianos the Priest",
   "armenian": "Սրբոցն Կալիստրատոսի եւ քառասուն եւ ինն վկայիցն եւ Ղունկիանոսի քահանային",
+  "armenian_approved": "",
+  "id": "callistratus_and_his_companions",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina": {
   "approved": "Sts. Clement the Bishop of Rome and Pancratius the Bishop of Taormina",
   "armenian": "Սրբոցն Կղեմայ հայրապետին եւ Բագարատայ Տոռոմենոյ եպիսկոպոսին",
+  "armenian_approved": "",
+  "id": "clement_the_bishop_of",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Constantine the Emperor and his mother Helen": {
   "approved": "Sts. Constantine the Emperor and his mother Helen",
   "armenian": "Սրբոցն Կոստանդիանոսի թագաւորին եւ մօրն նորա Հեղինեայ",
+  "armenian_approved": "",
+  "id": "constantine_the_emperor_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East": {
   "approved": "Sts. Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
   "armenian": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
+  "armenian_approved": "",
+  "id": "cornelius_the_centurion_simeon",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "review"
  },
  "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East": {
   "approved": "Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
   "armenian": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
+  "armenian_approved": "",
+  "id": "cornelius_the_centurion_simeon_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "review"
  },
  "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina": {
   "approved": "Sts. Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
   "armenian": "Սրբոցն Կիպրիանոսի եպիսկոպոսին եւ քառասուն եւ հինգ վկայիցն եւ սրբոց կուսանացն Յուստիանեայ, Եւփիմեայ եւ Քրիստինեայ",
+  "armenian_approved": "",
+  "id": "cyprian_the_bishop_the",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Cyricus and His Mother Julitta": {
   "approved": "Sts. Cyricus and His Mother Julitta",
   "armenian": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
+  "armenian_approved": "",
+  "id": "cyricus_and_his_mother",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris": {
   "approved": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
   "armenian": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
+  "armenian_approved": "",
+  "id": "cyricus_and_his_mother_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": {
   "approved": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
   "armenian": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
+  "armenian_approved": "",
+  "id": "cyricus_and_his_mother_3",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Cyril of Jerusalem, Cyril the Bishop and Anna": {
   "approved": "Sts. Cyril of Jerusalem, Cyril the Bishop and Anna",
   "armenian": "Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի",
+  "armenian_approved": "",
+  "id": "cyril_of_jerusalem_cyril",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints David of Dvin and the Martyrs Eulampius and Eulampia": {
   "approved": "Sts. David of Dvin and the Martyrs Eulampius and Eulampia",
   "armenian": "Սրբոյն Դաւթի Դւնեցւոյն եւ սրբոց վկայիցն Ղամբէոսի եւ Ղամբէուհւոյն",
+  "armenian_approved": "",
+  "id": "david_of_dvin_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints David the Prophet-King and James the Apostle": {
   "approved": "Sts. David the Prophet-King and James the Apostle",
   "armenian": "Սրբոցն Դաւթի մարգարէին եւ Յակովբայ Տեառնեղբայր առաքելոյն",
+  "armenian_approved": "",
+  "id": "david_the_prophet_king",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Demetrios the Martyr and Basil the Priest": {
   "approved": "Sts. Demetrios the Martyr and Basil the Priest",
   "armenian": "Սրբոցն Դեմետրեայ վկային եւ Բասիլիսկոսի քահանային",
+  "armenian_approved": "",
+  "id": "demetrios_the_martyr_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Dionysius the Areopagite and the Apostles Timothy and Titus": {
   "approved": "Sts. Dionysius the Areopagite and the Apostles Timothy and Titus",
   "armenian": "Սրբոցն Դիոնիսիոսի Արիսպագացւոյն եւ առաքելոցն Տիմոթէոսի եւ Տիտոսի",
+  "armenian_approved": "",
+  "id": "dionysius_the_areopagite_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples": {
   "approved": "Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
   "armenian": "Սրբոցն Եպիփանու Կիպրացւոյն, Բաբելայ հայրապետին եւ երից աշակերտաց նորին",
+  "armenian_approved": "",
+  "id": "epiphanius_bishop_of_cyprus",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": {
   "approved": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
   "armenian": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
+  "armenian_approved": "",
+  "id": "eugenia_the_virgin_her",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila": {
   "approved": "Sts. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs, and Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
   "armenian": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն, նաեւ սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ",
+  "armenian_approved": "",
+  "id": "eugenia_the_virgin_her_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Eugenios, Makarios, Valerian, Candidus and Aquila": {
   "approved": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
   "armenian": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ",
+  "armenian_approved": "",
+  "id": "eugenius_macarius_valerius_candidus",
   "note": "same 5-martyr group as the row 'Saints Eugenia...and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila' (registered fix folds that one to Eugenius/Macarius/Valerius/Candidus/Aquila) -- folded to match for consistency, since this row's different raw spelling wasn't caught by that exact-text fold. Note: the standard Orthodox 'Eugene/Candidus/Valerian/Aquila of Trebizond' group is only 4 people, no Macarius -- Armenian tradition may add a 5th, or this may be a distinct pairing; worth a sanity check, not just a spelling question.",
   "status": "review"
  },
  "Saints Eugenius, Marcarius, Alerius, Canditus and Aquila, and Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": {
   "approved": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila, and Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
   "armenian": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ, նաեւ սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն",
+  "armenian_approved": "",
+  "id": "",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine": {
   "approved": "Sts. Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
   "armenian": "Սրբոցն Եւստաթէոսի եւ կնոջ նորա Թէոփիստեայ եւ երկուց որդւոցն եւ սրբոց կուսանացն Երմոնեայ եւ Նեքտարինեայ",
+  "armenian_approved": "",
+  "id": "eustachius_his_wife_theopista",
   "note": "'Catherine' is suspect: the Armenian is 'Նեքտարինեայ' (genitive), which starts with Ն (N), not Կ (K) as 'Catherine'/Կատարինէ would -- no web source found connecting a 'Catherine' to this pairing with Hermione (Eustace's own known family are his sons Agapius/Agapitus and Theopistus, no daughters named Hermione or Catherine, so this may be a second, independent commemoration glued onto his day). Could not determine the intended English name (maybe a Nectaria/Nectarina -- no such saint found either); flagging rather than guessing.",
   "status": "review"
  },
  "Saints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia": {
   "approved": "Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
   "armenian": "Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի",
+  "armenian_approved": "",
+  "id": "eustratius_auxentius_eugenius_orestes",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": {
   "approved": "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
   "armenian": "Սրբոց նախահարցն Ադամայ, Աբելի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակովբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուելի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գեդէոնի եւ այլոց սրբոց նախահարցն",
+  "armenian_approved": "",
+  "id": "forefathers_adam_abel_seth",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Forty Martyrs of Sebastia": {
   "approved": "Sts. Forty Martyrs of Sebastia",
   "armenian": "Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան",
+  "armenian_approved": "",
+  "id": "forty_martyrs_of_sebastia",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Gayiane and her companions": {
   "approved": "Sts. Gayane and her companions",
   "armenian": "Սրբոց կուսանացն Գայիանեանց",
+  "armenian_approved": "",
+  "id": "gayane_and_her_companions",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Gennaro the Bishop and Mercurius the Warrior": {
   "approved": "Sts. Gennaro the Bishop and Mercurius the Warrior",
   "armenian": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին",
+  "armenian_approved": "",
+  "id": "gennaro_the_bishop_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles": {
   "approved": "Sts. Gennaro the Bishop and Mercurius the Warrior, and Sts. Jacoc and Themistocles",
   "armenian": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ",
+  "armenian_approved": "",
+  "id": "gennaro_the_bishop_and_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints George the Warrior, Adauctus and Romanus the Melodist": {
   "approved": "Sts. George the Warrior, Adauctus and Romanus the Melodist",
   "armenian": "Սրբոցն Գէորգայ քաջամարտիկ զօրավարին, Ադոկտոսի եւ Ռոմանոսի երգեցողին",
+  "armenian_approved": "",
+  "id": "george_the_warrior_adauctus",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Ghevond the Priest and His Companions": {
   "approved": "Sts. Ghevond the Priest and His Companions",
   "armenian": "Սրբոց Ղեւոնդեանց քահանայիցն",
+  "armenian_approved": "",
+  "id": "ghevond",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop": {
   "approved": "Sts. Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop",
   "armenian": "Սրբոցն Նիկողայոսի եւ Գրիգորի սքանչելագործ հայրապետացն եւ միւս Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
+  "armenian_approved": "",
+  "id": "gregory_and_nicholas_the",
   "note": "'and other Nicholas' -- hy 'միւս Նիկողայոսի' is 'the other Nicholas'. Add the article?",
   "status": "review"
  },
  "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop": {
   "approved": "Sts. Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
   "armenian": "Սրբոցն Գրիգորի Սքանչելագործին, Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
+  "armenian_approved": "",
+  "id": "gregory_the_wonderworker_nicholas",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "review"
  },
  "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier": {
   "approved": "Sts. Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
   "armenian": "Սրբոցն Գուրիասայ, Սամունասայ, Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին եւ Հիւսիքոսի զինաւորին",
+  "armenian_approved": "",
+  "id": "gurias_samonas_and_habibus",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Hipparchus and his Companions Who were Martyred in Samosata": {
   "approved": "St. Hipparchus and his companions who were martyred in Samosata",
   "armenian": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան",
+  "armenian_approved": "",
+  "id": "hipparchus_and_his_companions",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples": {
   "approved": "Sts. Hipparchus and his Companions Who were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
   "armenian": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
+  "armenian_approved": "",
+  "id": "hipparchus_and_his_companions_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Hripsime and her companions": {
   "approved": "Sts. Hripsime and her companions",
   "armenian": "Սրբոց կուսանացն Հռիփսիմեանց",
+  "armenian_approved": "",
+  "id": "hripsime_and_her_companions",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Jacoc and Themistocles": {
   "approved": "Sts. Jacoc and Themistocles",
   "armenian": "Սրբոցն Յակովկայ եւ Իրաւափառայ",
+  "armenian_approved": "",
+  "id": "jacoc_and_themistocles",
   "note": "'Jacoc' is not an English name. hy 'Յակովկայ' is the genitive of Յակովիկ (a diminutive of Jacob/James), so this is plausibly 'Jacob' -- but 'Jacovk' or 'Hakovik' would transliterate the Armenian more closely. Which?",
   "status": "review"
  },
  "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop": {
   "approved": "Sts. James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
   "armenian": "Սրբոցն Յակովբայ Մծբնայ հայրապետին, Մարուգէի ճգնաւորին եւ Մելիտոսի եպիսկոպոսին",
+  "armenian_approved": "",
+  "id": "james_of_nisibis_marouke",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores": {
   "approved": "Sts. Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
   "armenian": "Սրբոցն Յովակիմայ եւ Աննայի` ծնողաց սուրբ Աստուածածնի, եւ կանանցն իւղաբերից",
+  "armenian_approved": "",
+  "id": "joachim_and_anna_parents",
   "note": "'and of Myrophores' is hard to parse; the Myrophores are the myrrh-bearing women. 'and of the Myrophores'?",
   "status": "review"
  },
  "Saints John the Forerunner (Baptist) and Bishop Atanagine": {
   "approved": "Sts. John the Forerunner (Baptist) and Bishop Atanagine",
   "armenian": "Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին",
+  "armenian_approved": "",
+  "id": "john_the_forerunner_baptist",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints John the Forerunner (Baptist) and Job the Righteous": {
   "approved": "Sts. John the Forerunner (Baptist) and Job the Righteous",
   "armenian": "Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն",
+  "armenian_approved": "",
+  "id": "john_the_forerunner_baptist_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev": {
   "approved": "Sts. John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev",
   "armenian": "Սրբոցն Յովհաննու Երուսաղեմայ հայրապետին եւ հայրապետին մերոյ Յովհաննու Օձնեցւոյն եւ վարդապետացն մերոց Յովհաննու Որոտնեցւոյն եւ Գրիգորի Տաթեւացւոյն",
+  "armenian_approved": "",
+  "id": "john_the_patriarch_of",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary": {
   "approved": "Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
   "armenian": "Սրբոցն Ղունկիանոսի հարիւրապետին, որ հաւատաց ի խաչելութիւնն Քրիստոսի, եւ Յովսեփայ աստուածահօրն, Յովսեփայ Արեմաթացւոյն եւ բարեկամին Քրիստոսի Ղազարու եւ քերցն նորա Մարթայի եւ Մարիամու",
+  "armenian_approved": "",
+  "id": "longinus_the_centurion_joseph",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul": {
   "approved": "Sts. Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
   "armenian": "Սրբոյն Ղունկիանոսի քահանային եւ սրբոցն Տարագրոսի, Պրոպոսի, Անդրոնիկոսի, Ոնեսիմեայ եւ այլոց աշակերտացն սրբոյն Պօղոսի",
+  "armenian_approved": "",
+  "id": "lucian_the_priest_tarachus",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": {
   "approved": "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
   "armenian": "Սրբոց Մակաբայեցւոցն` Եղիազարու քահանային եւ Շամունեայ եւ եօթն որդւոց նորին",
+  "armenian_approved": "",
+  "id": "maccabees_eleazar_the_priest",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Mamas, Philomenos and Simeon the Stylite": {
   "approved": "Sts. Mamas, Philomenos and Simeon the Stylite",
   "armenian": "Սրբոցն Մամասայ, Փիլիկտիմոնի եւ Սիմէոնի Սիւնակեցոյն",
+  "armenian_approved": "",
+  "id": "mamas_philomenos_and_simeon",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen": {
   "approved": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
   "armenian": "Սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
+  "armenian_approved": "",
+  "id": "mark_the_bishop_pionius",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon": {
   "approved": "Sts. Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
   "armenian": "Սրբոցն Մելիտոսի Անտիոքայ հայրապետին եւ Մինասայ Եգիպտացւոյն եւ միւս Մելիտոսի եպիսկոպոսին, Բուրայ քահանային եւ Շինու սարկաւագին",
+  "armenian_approved": "",
+  "id": "meletius_bishop_of_antioch",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis": {
   "approved": "Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
   "armenian": "Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի",
+  "armenian_approved": "",
+  "id": "menas_hermogenes_eugraphus_and",
   "note": "Corrected to 'the poor men'. But hy 'կամաւոր աղքատացն' is the VOLUNTARY poor -- 'the voluntary poor John and Alexis' may be the intended sense. Confirm.",
   "status": "review"
  },
  "Saints Menas, Hermongenes, Eugraphius and the poor mans John and Alexis": {
   "approved": "Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
   "armenian": "Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի",
+  "armenian_approved": "",
+  "id": "menas_hermogenes_eugraphus_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs": {
   "approved": "Sts. Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
   "armenian": "Սրբոց հայրապետացն Մետրոփանոսի, Աղեքսանդրոսի եւ Պօղոսի խոստովանողին եւ սրբոց նօտարացն Մարկիանոսի եւ Մարտիրոնի",
+  "armenian_approved": "",
+  "id": "metrophanes_alexander_and_paul",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Nerses the Great Patriarch and Bishop Khad": {
   "approved": "Sts. Nerses the Great Patriarch and Bishop Khad",
   "armenian": "Սրբոյն Ներսիսի Մեծի հայրապետին մերոյ եւ Խադայ եպիսկոպոսին",
+  "armenian_approved": "",
+  "id": "nerses_the_great_patriarch",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin": {
   "approved": "Sts. Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
   "armenian": "Սրբոցն Պանդալէոնի բժշկին, Երմողեայ քահանային եւ Եւպրակսեայ կուսին",
+  "armenian_approved": "",
+  "id": "pantaleimon_the_physician_hermolaus",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Peter and Paul the Apostles": {
   "approved": "Sts. Peter and Paul the Apostles",
   "armenian": "Սրբոց առաքելոցն Պետրոսի եւ Պօղոսի",
+  "armenian_approved": "",
+  "id": "peter_and_paul_the",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon": {
   "approved": "Sts. Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
   "armenian": "Սրբոցն Պետրոսի հայրապետին, Վլասայ եպիսկոպոսին եւ Աբիսողոմայ սարկաւագին",
+  "armenian_approved": "",
+  "id": "peter_the_patriarch_blaise",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles": {
   "approved": "Sts. Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
   "armenian": "Սրբոցն Փոկասու հայրապետին եւ Երանոսի հետեւողին առաքելոցն",
+  "armenian_approved": "",
+  "id": "phocas_the_patriarch_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Princes Sahak and Joseph and the Martyrs Sargius and Bacchus": {
   "approved": "Sts. Princes Sahak and Joseph and the Martyrs Sergius and Bacchus",
   "armenian": "Սրբոց իշխանացն Սահակայ եւ Յովսեփայ եւ սրբոց վկայիցն Սարգսի եւ Բագոսի",
+  "armenian_approved": "",
+  "id": "princes_sahak_and_joseph",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Prophet Daniel and his Companions Shadrach, Meshach and Abednego": {
   "approved": "Sts. Prophet Daniel and his Companions Shadrach, Meshach and Abednego",
   "armenian": "Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի",
+  "armenian_approved": "",
+  "id": "prophet_daniel_and_his",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Severianus of Sebastia and Babylas and his 84 Disciples": {
   "approved": "Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
   "armenian": "Սրբոցն Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
+  "armenian_approved": "",
+  "id": "severianus_of_sebastia_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape": {
   "approved": "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
   "armenian": "Սրբոցն Սոփիայ եւ երից դստերացն Պիստոսի, Էլպիսի եւ Ագապեայ",
+  "armenian_approved": "",
+  "id": "sophia_and_her_three",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina": {
   "approved": "Sts. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
   "armenian": "Սրբոց Խարիթեանցն եւ սրբոց վկայիցն Արտեմեայ եւ Քրիստափորի եւ երկուց կանանցն Կալինիկեայ եւ Ակիւլինեայ",
+  "armenian_approved": "",
+  "id": "aret_and_his_companions",
   "note": "The doubled title was dropped. 'Aret' renders hy 'Խարիթեանցն'; the saint is usually Arethas of Najran in English. 'Saints Arethas and His Companions'?",
   "status": "review"
  },
  "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus": {
   "approved": "Sts. Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
   "armenian": "Սրբոյն Ստեփաննոսի Ուլնեցւոյն եւ սրբոց վկայիցն Գոհարինեայ, Ծամիդեսի, Տուքիկոսի եւ Ռատիկոսի",
+  "armenian_approved": "",
+  "id": "stephen_of_oulnia_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls": {
   "approved": "Sts. Stephen, Bishop of Rome and the priests, deacons and many faithful",
   "armenian": "Սրբոցն Ստեփաննոսի Հռովմայ հայրապետին եւ քահանայիցն եւ սարկաւագացն եւ ժողովրդոցն",
+  "armenian_approved": "",
+  "id": "stephen_bishop_of_rome",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Sukiasians the Martyrs": {
   "approved": "Sts. Sukiasians the Martyrs",
   "armenian": "Սրբոց Սուքիասեանց վկայիցն",
+  "armenian_approved": "",
+  "id": "sukias",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin": {
   "approved": "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin",
   "armenian": "Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին",
+  "armenian_approved": "",
+  "id": "thaddeus_apostle_of_armenia",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus": {
   "approved": "Sts. Theodoret the Priest of Antioch, Zenon the soldier, Macarius, Eudoxius and Romulus",
   "armenian": "Սրբոցն Թէոդիտոնի քահանային, Զենոնի զինաւորին, Մակարայ, Եւդոքսեայ եւ Ռամելայ",
+  "armenian_approved": "",
+  "id": "theodoret_the_priest_of",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Theodosius and the Children of Ephesus": {
   "approved": "Sts. Theodosius and the Children of Ephesus",
   "armenian": "Սրբոցն Թէոդոսի թագաւորին եւ մանկանցն Եփեսոսի",
+  "armenian_approved": "",
+  "id": "theodosius_and_the_children",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra": {
   "approved": "Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
   "armenian": "Սրբոցն Թէոդիտոնի Գաղատացւոյն եւ Թալիլեայ բժշկին եւ եօթն կուսանացն, որք յԱնկիւրիա կատարեցան",
+  "armenian_approved": "",
+  "id": "theodotus_of_galatia_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides": {
   "approved": "Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
   "armenian": "Սրբոցն Թէոպոմպայ եպիսկոպոսին եւ Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
+  "armenian_approved": "",
+  "id": "theopemptus_the_bishop_of",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht": {
   "approved": "Sts. Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht",
   "armenian": "Սրբոցն Տրդատայ թագաւորին մերոյ եւ Աշխենի տիկնոջն եւ Խոսրովիդխտոյն",
+  "armenian_approved": "",
+  "id": "tiridates_trdat_the_king",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": {
   "approved": "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
   "armenian": "Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ",
+  "armenian_approved": "",
+  "id": "twelve_prophets_hosea_amos",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": {
   "approved": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
   "armenian": "Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
+  "armenian_approved": "",
+  "id": "vahan_of_goghtn_eugenia",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": {
   "approved": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
   "armenian": "Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
+  "armenian_approved": "",
+  "id": "vahan_of_goghtn_gordius",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle": {
   "approved": "Sts. Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle",
   "armenian": "Սրբոց Վարդանանց զօրավարացն մերոց` հազար երեսուն եւ վեց վկայիցն, որք կատարեցան ի մեծի պատերազմին",
+  "armenian_approved": "",
+  "id": "vardan_the_general_and",
   "note": "Uses a hyphen where the source's own component separator is an em-dash. Left as published because it sits INSIDE a component, but it may be meant as a break.",
   "status": "review"
  },
  "Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan": {
   "approved": "Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
   "armenian": "Սրբոց կուսանացն Փեբրոնեայ, Մարիանեայ եւ Շուշանայ` դստերն Մեծին Վարդանայ",
+  "armenian_approved": "",
+  "id": "virgins_febronia_mariana_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Virgins Nune and Mane": {
   "approved": "Sts. Virgins Nune and Mane",
   "armenian": "Սրբոց կուսանացն Նունեայ եւ Մանեայ",
+  "armenian_approved": "",
+  "id": "virgins_nune_and_mane",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Virgins Thecla, Barbara and Pelagia": {
   "approved": "Sts. Virgins Thecla, Barbara and Pelagia",
   "armenian": "Սրբոց կուսանացն Թեկղի, Վառվառեայ եւ Պեղիգեայ",
+  "armenian_approved": "",
+  "id": "virgins_thecla_barbara_and",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints Voskians the Priests": {
   "approved": "Sts. Voskians the Priests",
   "armenian": "Սրբոց Ոսկեանց քահանայիցն",
+  "armenian_approved": "",
+  "id": "voskian",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Saints martyrs Antoninus, Theophilus, Anicetus and Potinus": {
   "approved": "Sts. martyrs Antoninus, Theophilus, Anicetus and Potinus",
   "armenian": "Սրբոց վկայիցն Անտոնինոսի, Թէոփիլոսի, Անիքտոսի եւ Փոտինոսի",
+  "armenian_approved": "",
+  "id": "martyrs_antoninus_theophilus_anicetus",
   "note": "Lowercase 'martyrs' where 'Saints Virgins' and 'Saints Princes' are capitalised. Capitalise for consistency, or leave as published?",
   "status": "review"
  },
  "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia": {
   "approved": "Sts. virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
   "armenian": "Սրբոց կուսանացն Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
+  "armenian_approved": "",
+  "id": "virgins_indes_and_domna",
   "note": "Lowercase 'virgins' -- same question as the row above.",
   "status": "review"
  },
  "Second Sunday after Nativity": {
   "approved": "Second Sunday after Nativity",
   "armenian": "Բ կիւրակէ զկնի Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "second_sunday_after_nativity",
   "note": "",
   "status": "ok"
  },
  "Second Sunday after Pentecost": {
   "approved": "Second Sunday after Pentecost",
   "armenian": "Ա կիւրակէ զկնի Հոգեգալստեան",
+  "armenian_approved": "Բ կիւրակէ զկնի Հոգեգալստեան",
+  "id": "second_sunday_after_pentecost",
   "note": "",
   "status": "ok"
  },
  "Second Sunday after Transfiguration": {
   "approved": "Second Sunday after Transfiguration",
   "armenian": "Բ կիւրակէ զկնի Վարդավառի",
+  "armenian_approved": "",
+  "id": "second_sunday_after_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Second Sunday after the Assumption": {
   "approved": "Second Sunday after the Assumption",
   "armenian": "Բ կիւրակէ զկնի Վերափոխման",
+  "armenian_approved": "",
+  "id": "second_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Second Sunday after the Holy Cross": {
   "approved": "Second Sunday after the Holy Cross",
   "armenian": "Բ կիւրակէ զկնի Ս. Խաչին",
+  "armenian_approved": "",
+  "id": "second_sunday_after_the_2",
   "note": "",
   "status": "ok"
  },
  "Second Sunday of Advent": {
   "approved": "Second Sunday of Advent",
   "armenian": "Բ կիւրակէ Յիսնակի",
+  "armenian_approved": "",
+  "id": "second_sunday_of_advent",
   "note": "",
   "status": "ok"
  },
  "Second Sunday of Great Lent, Sunday of the Expulsion": {
   "approved": "Second Sunday of Great Lent. Sunday of the Expulsion",
   "armenian": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
+  "armenian_approved": "",
+  "id": "second_sunday_of_great",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES (period, not colon) -- already a deliberate fix (comma->period, source's own 25 other occurrences use period). A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "status": "review"
  },
  "Second Sunday of Great Lent. Sunday of the Expulsion": {
   "approved": "Second Sunday of Great Lent. Sunday of the Expulsion",
   "armenian": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
+  "armenian_approved": "",
+  "id": "second_sunday_of_great",
   "note": "",
   "status": "ok"
  },
  "Second day of Advent": {
   "approved": "Second day of Advent",
   "armenian": "Բ օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_advent",
   "note": "",
   "status": "ok"
  },
  "Second day of Easter": {
   "approved": "Second day of Easter",
   "armenian": "Բ օր Զատկի",
+  "armenian_approved": "",
+  "id": "second_day_of_easter",
   "note": "",
   "status": "ok"
  },
  "Second day of Great Lent": {
   "approved": "Second day of Great Lent",
   "armenian": "Բ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Second day of Nativity": {
   "approved": "Second day of Nativity",
   "armenian": "Բ օր Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "second_day_of_nativity",
   "note": "",
   "status": "ok"
  },
  "Second day of Pentecost": {
   "approved": "Second day of Pentecost",
   "armenian": "Բ օր Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "second_day_of_pentecost",
   "note": "",
   "status": "ok"
  },
  "Second day of Transfiguration": {
   "approved": "Second day of Transfiguration",
   "armenian": "Բ օր Վարդավառի",
+  "armenian_approved": "",
+  "id": "second_day_of_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Second day of the Assumption": {
   "approved": "Second day of the Assumption",
   "armenian": "Բ օր Վերափոխման",
+  "armenian_approved": "",
+  "id": "second_day_of_the",
   "note": "",
   "status": "ok"
  },
  "Second day of the Fast of Advent": {
   "approved": "Second day of the Fast of Advent",
   "armenian": "Բ օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_the_2",
   "note": "",
   "status": "ok"
  },
  "Second day of the Fast of Assumption": {
   "approved": "Second day of the Fast of Assumption",
   "armenian": "Բ օր Աստուածածնի պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_the_3",
   "note": "",
   "status": "ok"
  },
  "Second day of the Fast of Nativity": {
   "approved": "Second day of the Fast of Nativity",
   "armenian": "Բ օր Ս. Ծննդեան պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_the_4",
   "note": "",
   "status": "ok"
+ },
+ "Second day of the Fast of St. Gregory the Illuminator": {
+  "approved": "Second day of the Fast of St. Gregory the Illuminator",
+  "armenian": "Բ օր Լուսաւորչի պահոց",
+  "armenian_approved": "",
+  "id": "illuminator_fast_day_2",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "status": "generated"
  },
  "Second day of the Fast of the Catechumens": {
   "approved": "Second day of the Fast of the Catechumens",
   "armenian": "Բ օր Առաջաւորաց պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_the_5",
   "note": "",
   "status": "ok"
  },
  "Second day of the Fast of the Holy Cross": {
   "approved": "Second day of the Fast of the Holy Cross",
   "armenian": "Բ օր Ս. Խաչի պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_the_6",
   "note": "",
   "status": "ok"
  },
  "Second day of the Fast of the Transfiguration": {
   "approved": "Second day of the Fast of the Transfiguration",
   "armenian": "Բ օր Վարդավառի պահոց",
+  "armenian_approved": "",
+  "id": "second_day_of_the_7",
   "note": "",
   "status": "ok"
  },
  "Seventeenth day of Eastertide": {
   "approved": "Seventeenth day of Eastertide",
   "armenian": "ԺԷ օր Յինանց",
+  "armenian_approved": "",
+  "id": "seventeenth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Seventeenth day of Great Lent": {
   "approved": "Seventeenth day of Great Lent",
   "armenian": "ԺԷ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "seventeenth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Seventh Sunday after Nativity": {
   "approved": "Seventh Sunday after Nativity",
   "armenian": "Է կիւրակէ զկնի Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "seventh_sunday_after_nativity",
   "note": "",
   "status": "ok"
  },
  "Seventh Sunday after Transfiguration": {
   "approved": "Seventh Sunday after Transfiguration",
   "armenian": "Է կիւրակէ զկնի Վարդավառի",
+  "armenian_approved": "",
+  "id": "seventh_sunday_after_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Seventh Sunday after the Holy Cross": {
   "approved": "Seventh Sunday after the Holy Cross",
   "armenian": "Է կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "seventh_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Seventh Sunday of Advent": {
   "approved": "Seventh Sunday of Advent",
   "armenian": "Է կիւրակէ Յիսնակի",
+  "armenian_approved": "",
+  "id": "seventh_sunday_of_advent",
   "note": "",
   "status": "ok"
  },
  "Seventh Sunday of Eastertide. Second Palm Sunday": {
   "approved": "Seventh Sunday of Eastertide. Second Palm Sunday",
   "armenian": "Է կիւրակէ. Երկրորդ ծաղկազարդ",
+  "armenian_approved": "",
+  "id": "seventh_sunday_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Seventh day of Easter": {
   "approved": "Seventh day of Easter",
   "armenian": "Է օր Զատկի",
+  "armenian_approved": "",
+  "id": "seventh_day_of_easter",
   "note": "",
   "status": "ok"
  },
  "Seventh day of Nativity": {
   "approved": "Seventh day of Nativity",
   "armenian": "Է օր Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "seventh_day_of_nativity",
   "note": "",
   "status": "ok"
  },
  "Seventh day of Pentecost": {
   "approved": "Seventh day of Pentecost",
   "armenian": "Է օր Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "seventh_day_of_pentecost",
   "note": "",
   "status": "ok"
  },
  "Seventh day of the Assumption": {
   "approved": "Seventh day of the Assumption",
   "armenian": "Է օր Վերափոխման",
+  "armenian_approved": "",
+  "id": "seventh_day_of_the",
   "note": "",
   "status": "ok"
  },
  "Seventy Two Holy Disciples of Christ": {
   "approved": "Seventy Two Holy Disciples of Christ",
   "armenian": "Սրբոց եօթանասնից եւ երկուց աշակերտացն Քրիստոսի",
+  "armenian_approved": "",
+  "id": "seventy_two_holy_disciples",
   "note": "",
   "status": "ok"
  },
  "Sixteenth day of Eastertide": {
   "approved": "Sixteenth day of Eastertide",
   "armenian": "ԺԶ օր Յինանց",
+  "armenian_approved": "",
+  "id": "sixteenth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Sixteenth day of Great Lent": {
   "approved": "Sixteenth day of Great Lent",
   "armenian": "ԺԶ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "sixteenth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Sixth Sunday after Nativity": {
   "approved": "Sixth Sunday after Nativity",
   "armenian": "Զ կիւրակէ զկնի Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "sixth_sunday_after_nativity",
   "note": "",
   "status": "ok"
  },
  "Sixth Sunday after Pentecost": {
   "approved": "Sixth Sunday after Pentecost",
   "armenian": "Զ կիւրակէ զկնի Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "sixth_sunday_after_pentecost",
   "note": "",
   "status": "ok"
  },
  "Sixth Sunday after Transfiguration": {
   "approved": "Sixth Sunday after Transfiguration",
   "armenian": "Զ կիւրակէ զկնի Վարդավառի",
+  "armenian_approved": "",
+  "id": "sixth_sunday_after_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Sixth Sunday after the Holy Cross": {
   "approved": "Sixth Sunday after the Holy Cross",
   "armenian": "Զ կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "sixth_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Sixth Sunday of Advent": {
   "approved": "Sixth Sunday of Advent",
   "armenian": "Զ կիւրակէ Յիսնակի",
+  "armenian_approved": "",
+  "id": "sixth_sunday_of_advent",
   "note": "",
   "status": "ok"
  },
  "Sixth Sunday of Eastertide": {
   "approved": "Sixth Sunday of Eastertide",
   "armenian": "Զ կիւրակէ",
+  "armenian_approved": "",
+  "id": "sixth_sunday_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Sixth Sunday of Great Lent, Sunday of the Advent": {
   "approved": "Sixth Sunday of Great Lent. Sunday of the Advent",
   "armenian": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
+  "armenian_approved": "",
+  "id": "sixth_sunday_of_great",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES ('...Sunday of the Advent', period not colon). 'Sunday of the Second Coming' would be a real theological content change to an already-reviewed label, not a mechanical fix -- needs explicit sign-off, not a silent ground-truth edit. A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "status": "review"
  },
  "Sixth Sunday of Great Lent. Sunday of the Advent": {
   "approved": "Sixth Sunday of Great Lent. Sunday of the Advent",
   "armenian": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
+  "armenian_approved": "",
+  "id": "sixth_sunday_of_great",
   "note": "",
   "status": "ok"
  },
  "Sixth day of Easter": {
   "approved": "Sixth day of Easter",
   "armenian": "Զ օր Զատկի",
+  "armenian_approved": "",
+  "id": "sixth_day_of_easter",
   "note": "",
   "status": "ok"
  },
  "Sixth day of Great Lent": {
   "approved": "Sixth day of Great Lent",
   "armenian": "Զ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "sixth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Sixth day of Nativity": {
   "approved": "Sixth day of Nativity",
   "armenian": "Զ օր Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "sixth_day_of_nativity",
   "note": "",
   "status": "ok"
  },
  "Sixth day of Pentecost": {
   "approved": "Sixth day of Pentecost",
   "armenian": "Զ օր Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "sixth_day_of_pentecost",
   "note": "",
   "status": "ok"
  },
  "Sixth day of the Assumption": {
   "approved": "Sixth day of the Assumption",
   "armenian": "Զ օր Վերափոխման",
+  "armenian_approved": "",
+  "id": "sixth_day_of_the",
   "note": "",
   "status": "ok"
  },
  "Sixth day of the Fast of Nativity": {
   "approved": "Sixth day of the Fast of Nativity",
   "armenian": "Զ օր Ս. Ծննդեան պահոց",
+  "armenian_approved": "",
+  "id": "sixth_day_of_the_2",
   "note": "",
   "status": "ok"
  },
  "Staint Gregory the Illuminator's coming out of Pit": {
   "approved": "St. Gregory the Illuminator's coming out of Pit",
   "armenian": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն",
+  "armenian_approved": "",
+  "id": "gregory_the_illuminator_s_3",
   "note": "Missing article, and lowercase 'coming' where the companion feast reads 'Commitment to the Pit'. 'Coming out of the Pit'? Left alone as the source's own wording rather than silently rewritten.",
   "status": "review"
  },
  "TRANSFIGURATION OF OUR LORD (Vardavar)": {
   "approved": "TRANSFIGURATION OF OUR LORD (Vardavar)",
   "armenian": "ՊԱՅԾԱՌԱԿԵՐՊՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Վարդավառ)",
+  "armenian_approved": "",
+  "id": "transfiguration_of_our_lord",
   "note": "",
   "status": "ok"
  },
  "Tenth Sunday after the Holy Cross": {
   "approved": "Tenth Sunday after the Holy Cross",
   "armenian": "Ժ կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "tenth_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Tenth day of Eastertide": {
   "approved": "Tenth day of Eastertide",
   "armenian": "Ժ օր Յինանց",
+  "armenian_approved": "",
+  "id": "tenth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Tenth day of Great Lent": {
   "approved": "Tenth day of Great Lent",
   "armenian": "Ժ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "tenth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "The Children of Bethlehem. Saints Acacius the Martyr, Mocius the Priest and Codratus the Soldier": {
   "approved": "The Children of Bethlehem. Sts. Acacius the Martyr, Mocius the Priest and Codratus the Soldier",
   "armenian": "Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին",
+  "armenian_approved": "",
+  "id": "children_of_bethlehem_sts",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "The Hermit Saints Anton": {
   "approved": "The Hermit St. Anton",
   "armenian": "Սրբոյն Անտոնի ճգնաւորին",
+  "armenian_approved": "",
+  "id": "hermit_st_anton",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius": {
   "approved": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
   "armenian": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
+  "armenian_approved": "",
+  "id": "hermits_sts_anton_tryphon",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES | spelling ('Tryphon'/'Onuphrius') aligned with the sibling row 'The Hermits Saints Triphon, Barsauma and Onouphrius' for consistency (same two names).",
   "status": "fixed"
  },
  "The Hermits Saints Triphon, Barsauma and Onouphrius": {
   "approved": "The Hermit Sts. Tryphon, Barsauma and Onuphrius",
   "armenian": "Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
+  "armenian_approved": "",
+  "id": "hermit_sts_tryphon_barsauma",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus": {
   "approved": "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus",
   "armenian": "Սրբոց առաքելոցն Անանիայի, Մատթէի, Բառնաբայ, Փիլիպպոսի, Յովհաննու, Շիղայի եւ Սիւղիանոսի",
+  "armenian_approved": "",
+  "id": "apostles_ananias_matthias_barnabas",
   "note": "",
   "status": "ok"
  },
  "The Holy Apostles Andrew and Phillip": {
   "approved": "The Holy Apostles Andrew and Philip",
   "armenian": "Սրբոց առաքելոցն Անդրէի եւ Փիլիպպոսի",
+  "armenian_approved": "",
+  "id": "apostles_andrew_and_philip",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others": {
   "approved": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
   "armenian": "Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն",
+  "armenian_approved": "",
+  "id": "fathers_of_egypt_paul",
   "note": "",
   "status": "ok"
  },
  "The Holy Virgins Juliana and Basilla, and Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": {
   "approved": "The Holy Virgins Juliana and Basilla, and Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "armenian": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
+  "armenian_approved": "",
+  "id": "virgins_juliana_and_basilla_2",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "The Holy Virgins Juliana and Basilla, and Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia": {
   "approved": "The Holy Virgins Juliana and Basilla, and Sts. virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
   "armenian": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
+  "armenian_approved": "",
+  "id": "virgins_juliana_and_basilla_3",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "The Saintly Princes Sahak and Hamazasp": {
   "approved": "The Saintly Princes Sahak and Hamazasp",
   "armenian": "Սրբոց իշխանացն Սահակայ եւ Համազասպայ",
+  "armenian_approved": "",
+  "id": "saintly_princes_sahak_and",
   "note": "",
   "status": "ok"
  },
  "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria": {
   "approved": "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria",
   "armenian": "Սրբոց երկոտասանից վարդապետացն Ռեթէոսի, Դիոնիսիոսի, Սեղբեստրոսի, Աթանասի, Կիւրղի Երուսաղեմացւոյն, Եփրեմի Խուրին Ասորւոյ, Բարսղի Կեսարացւոյն, Գրիգորի Նիւսացւոյն, Գրիգորի Աստուածաբանին, Եպիփանու Կիպրացւոյն, Յովհաննու Ոսկեբերանին եւ Կիւրղի Աղեքսանդրացւոյն",
+  "armenian_approved": "",
+  "id": "twelve_holy_doctors_of",
   "note": "'of Church' is missing an article -- 'of the Church'. Also the longest name served, at 289 characters.",
   "status": "review"
  },
  "Third Sunday after Assumption": {
   "approved": "Third Sunday after Assumption",
   "armenian": "Գ կիւրակէ զկնի Վերափոխման",
+  "armenian_approved": "",
+  "id": "third_sunday_after_assumption",
   "note": "",
   "status": "ok"
  },
  "Third Sunday after Nativity": {
   "approved": "Third Sunday after Nativity",
   "armenian": "Գ կիւրակէ զկնի Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "third_sunday_after_nativity",
   "note": "",
   "status": "ok"
  },
  "Third Sunday after Pentecost": {
   "approved": "Third Sunday after Pentecost",
   "armenian": "Գ կիւրակէ զկնի Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "third_sunday_after_pentecost",
   "note": "",
   "status": "ok"
  },
  "Third Sunday after Transfiguration": {
   "approved": "Third Sunday after Transfiguration",
   "armenian": "Գ կիւրակէ զկնի Վարդավառի",
+  "armenian_approved": "",
+  "id": "third_sunday_after_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Third Sunday after the Holy Cross": {
   "approved": "Third Sunday after the Holy Cross",
   "armenian": "Գ կիւրակէ զկնի Ս. Խաչի",
+  "armenian_approved": "",
+  "id": "third_sunday_after_the",
   "note": "",
   "status": "ok"
  },
  "Third Sunday of Advent": {
   "approved": "Third Sunday of Advent",
   "armenian": "Գ կիւրակէ Յիսնակի",
+  "armenian_approved": "",
+  "id": "third_sunday_of_advent",
   "note": "",
   "status": "ok"
  },
  "Third Sunday of Great Lent. Sunday of the Prodigal Son": {
   "approved": "Third Sunday of Great Lent. Sunday of the Prodigal Son",
   "armenian": "Գ կիւրակէ Քառասնորդական պահոց (Անառակին)",
+  "armenian_approved": "",
+  "id": "third_sunday_of_great",
   "note": "",
   "status": "ok"
  },
  "Third Sunday. Sunday of the World temple (Green Sunday)": {
   "approved": "Third Sunday. Sunday of the World temple (Green Sunday)",
   "armenian": "Գ կիւրակէ. Աշխարհամատրան (Կանաչ կիւրակէ)",
+  "armenian_approved": "",
+  "id": "third_sunday_sunday_of",
   "note": "",
   "status": "ok"
  },
  "Third day of Advent": {
   "approved": "Third day of Advent",
   "armenian": "Գ օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "third_day_of_advent",
   "note": "",
   "status": "ok"
  },
  "Third day of Easter": {
   "approved": "Third day of Easter",
   "armenian": "Գ օր Զատկի",
+  "armenian_approved": "",
+  "id": "third_day_of_easter",
   "note": "",
   "status": "ok"
  },
  "Third day of Great Lent": {
   "approved": "Third day of Great Lent",
   "armenian": "Գ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "third_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Third day of Nativity": {
   "approved": "Third day of Nativity",
   "armenian": "Գ օր Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "third_day_of_nativity",
   "note": "",
   "status": "ok"
  },
  "Third day of Pentecost": {
   "approved": "Third day of Pentecost",
   "armenian": "Գ օր Հոգեգալստեան",
+  "armenian_approved": "",
+  "id": "third_day_of_pentecost",
   "note": "",
   "status": "ok"
  },
  "Third day of Transfiguration": {
   "approved": "Third day of Transfiguration",
   "armenian": "Գ օր Վարդավառի",
+  "armenian_approved": "",
+  "id": "third_day_of_transfiguration",
   "note": "",
   "status": "ok"
  },
  "Third day of the Assumption": {
   "approved": "Third day of the Assumption",
   "armenian": "Գ օր Վերափոխման",
+  "armenian_approved": "",
+  "id": "third_day_of_the",
   "note": "",
   "status": "ok"
  },
  "Third day of the Fast of Advent": {
   "approved": "Third day of the Fast of Advent",
   "armenian": "Գ օր Յիսնակի պահոց",
+  "armenian_approved": "",
+  "id": "third_day_of_the_2",
   "note": "",
   "status": "ok"
  },
  "Third day of the Fast of Assumption": {
   "approved": "Third day of the Fast of Assumption",
   "armenian": "Գ օր Աստուածածնի պահոց",
+  "armenian_approved": "",
+  "id": "third_day_of_the_3",
   "note": "",
   "status": "ok"
  },
  "Third day of the Fast of Nativity": {
   "approved": "Third day of the Fast of Nativity",
   "armenian": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
+  "armenian_approved": "",
+  "id": "third_day_of_the_4",
   "note": "",
   "status": "ok"
  },
  "Third day of the Fast of Nativity.": {
   "approved": "Third day of the Fast of Nativity",
   "armenian": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
+  "armenian_approved": "",
+  "id": "third_day_of_the_4",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
+ },
+ "Third day of the Fast of St. Gregory the Illuminator": {
+  "approved": "Third day of the Fast of St. Gregory the Illuminator",
+  "armenian": "Գ օր Լուսաւորչի պահոց",
+  "armenian_approved": "",
+  "id": "illuminator_fast_day_3",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "status": "generated"
  },
  "Third day of the Fast of the Catechumens": {
   "approved": "Third day of the Fast of the Catechumens",
   "armenian": "Գ օր Առաջաւորաց պահոց",
+  "armenian_approved": "",
+  "id": "third_day_of_the_5",
   "note": "",
   "status": "ok"
  },
  "Third day of the Fast of the Holy Cross": {
   "approved": "Third day of the Fast of the Holy Cross",
   "armenian": "Գ օր Ս. Խաչի պահոց",
+  "armenian_approved": "",
+  "id": "third_day_of_the_6",
   "note": "",
   "status": "ok"
  },
  "Third day of the Fast of the Transfiguration": {
   "approved": "Third day of the Fast of the Transfiguration",
   "armenian": "Գ օր Վարդավառի պահոց",
+  "armenian_approved": "",
+  "id": "third_day_of_the_7",
   "note": "",
   "status": "ok"
  },
  "Thirteenth day of Eastertide": {
   "approved": "Thirteenth day of Eastertide",
   "armenian": "ԺԳ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirteenth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Thirteenth day of Great Lent": {
   "approved": "Thirteenth day of Great Lent",
   "armenian": "ԺԳ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirteenth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Thirtieth day of Eastertide": {
   "approved": "Thirtieth day of Eastertide",
   "armenian": "Լ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirtieth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Thirtieth day of Great Lent": {
   "approved": "Thirtieth day of Great Lent",
   "armenian": "Լ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirtieth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Thirty Eighth day of Eastertide": {
   "approved": "Thirty Eighth day of Eastertide",
   "armenian": "ԼԸ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_eighth_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty Eighth day of Great Lent": {
   "approved": "Thirty Eighth day of Great Lent",
   "armenian": "ԼԸ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_eighth_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Thirty Fifth day of Eastertide": {
   "approved": "Thirty Fifth day of Eastertide",
   "armenian": "ԼԵ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_fifth_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty First day of Eastertide": {
   "approved": "Thirty First day of Eastertide",
   "armenian": "ԼԱ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_first_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty First day of Great Lent": {
   "approved": "Thirty First day of Great Lent",
   "armenian": "ԼԱ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_first_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Thirty Fourth day of Eastertide": {
   "approved": "Thirty Fourth day of Eastertide",
   "armenian": "ԼԴ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_fourth_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty Fourth day of Great Lent": {
   "approved": "Thirty Fourth day of Great Lent",
   "armenian": "ԼԴ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_fourth_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Thirty Ninth day of Eastertide": {
   "approved": "Thirty Ninth day of Eastertide",
   "armenian": "ԼԹ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_ninth_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty Ninth day of Great Lent": {
   "approved": "Thirty Ninth day of Great Lent",
   "armenian": "ԼԹ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_ninth_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Thirty Second day of Eastertide": {
   "approved": "Thirty Second day of Eastertide",
   "armenian": "ԼԲ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_second_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty Second day of Great Lent": {
   "approved": "Thirty Second day of Great Lent",
   "armenian": "ԼԲ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_second_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Thirty Seventh day of Eastertide": {
   "approved": "Thirty Seventh day of Eastertide",
   "armenian": "ԼԷ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_seventh_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty Seventh day of Great Lent": {
   "approved": "Thirty Seventh day of Great Lent",
   "armenian": "ԼԷ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_seventh_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Thirty Sixth day of Great Lent": {
   "approved": "Thirty Sixth day of Great Lent",
   "armenian": "ԼԶ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_sixth_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty Third day of Eastertide": {
   "approved": "Thirty Third day of Eastertide",
   "armenian": "ԼԳ օր Յինանց",
+  "armenian_approved": "",
+  "id": "thirty_third_day_of",
   "note": "",
   "status": "ok"
  },
  "Thirty Third day of Great Lent": {
   "approved": "Thirty Third day of Great Lent",
   "armenian": "ԼԳ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "thirty_third_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Twelfth day of Eastertide": {
   "approved": "Twelfth day of Eastertide",
   "armenian": "ԺԲ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twelfth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Twelfth day of Great Lent": {
   "approved": "Twelfth day of Great Lent",
   "armenian": "ԺԲ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twelfth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Twelve Holy Apostles of Christ and Saint Paul, the Thirteenth Apostle": {
   "approved": "Twelve Holy Apostles of Christ and St. Paul, the Thirteenth Apostle",
   "armenian": "Սրբոց երկոտասան առաքելոցն Քրիստոսի եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն",
+  "armenian_approved": "",
+  "id": "twelve_holy_apostles_of",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  },
  "Twentieth day of Eastertide": {
   "approved": "Twentieth day of Eastertide",
   "armenian": "Ի օր Յինանց",
+  "armenian_approved": "",
+  "id": "twentieth_day_of_eastertide",
   "note": "",
   "status": "ok"
  },
  "Twentieth day of Great Lent": {
   "approved": "Twentieth day of Great Lent",
   "armenian": "Ի օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twentieth_day_of_great",
   "note": "",
   "status": "ok"
  },
  "Twenty Eighth day of Eastertide": {
   "approved": "Twenty Eighth day of Eastertide",
   "armenian": "ԻԸ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twenty_eighth_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Fifth day of Eastertide": {
   "approved": "Twenty Fifth day of Eastertide",
   "armenian": "ԻԵ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twenty_fifth_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Fifth day of Great Lent": {
   "approved": "Twenty Fifth day of Great Lent",
   "armenian": "ԻԵ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twenty_fifth_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Twenty First day of Eastertide": {
   "approved": "Twenty First day of Eastertide",
   "armenian": "ԻԱ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twenty_first_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Fourth day of Eastertide": {
   "approved": "Twenty Fourth day of Eastertide",
   "armenian": "ԻԴ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twenty_fourth_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Fourth day of Great Lent. Median day of Lent": {
   "approved": "Twenty Fourth day of Great Lent. Median day of Lent",
   "armenian": "ԻԴ օր Մեծի պահոց: Միջինք",
+  "armenian_approved": "",
+  "id": "twenty_fourth_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Twenty Ninth day of Great Lent": {
   "approved": "Twenty Ninth day of Great Lent",
   "armenian": "ԻԹ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twenty_ninth_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Second day of Great Lent": {
   "approved": "Twenty Second day of Great Lent",
   "armenian": "ԻԲ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twenty_second_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Seventh day of Eastertide": {
   "approved": "Twenty Seventh day of Eastertide",
   "armenian": "ԻԷ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twenty_seventh_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Seventh day of Great Lent": {
   "approved": "Twenty Seventh day of Great Lent",
   "armenian": "ԻԷ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twenty_seventh_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Twenty Sixth day of Eastertide": {
   "approved": "Twenty Sixth day of Eastertide",
   "armenian": "ԻԶ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twenty_sixth_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Sixth day of Great Lent": {
   "approved": "Twenty Sixth day of Great Lent",
   "armenian": "ԻԶ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twenty_sixth_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Twenty Third day of Eastertide": {
   "approved": "Twenty Third day of Eastertide",
   "armenian": "ԻԳ օր Յինանց",
+  "armenian_approved": "",
+  "id": "twenty_third_day_of",
   "note": "",
   "status": "ok"
  },
  "Twenty Third day of Great Lent": {
   "approved": "Twenty Third day of Great Lent",
   "armenian": "ԻԳ օր Մեծի պահոց",
+  "armenian_approved": "",
+  "id": "twenty_third_day_of_2",
   "note": "",
   "status": "ok"
  },
  "Еighth day of Nativity": {
   "approved": "Eighth day of Nativity",
   "armenian": "Ը օր Ս. Ծննդեան",
+  "armenian_approved": "",
+  "id": "eighth_day_of_nativity",
   "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
   "status": "fixed"
  }

@@ -235,10 +235,6 @@
   "en": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
   "hy": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ"
  },
- "eugenius_macarius_valerius_candidus_2": {
-  "en": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila, and Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
-  "hy": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ, նաեւ սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն"
- },
  "eustachius_his_wife_theopista": {
   "en": "Sts. Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
   "hy": "Սրբոցն Եւստաթէոսի եւ կնոջ նորա Թէոփիստեայ եւ երկուց որդւոցն եւ սրբոց կուսանացն Երմոնեայ եւ Նեքտարինեայ"
@@ -740,23 +736,23 @@
   "hy": "Սրբոց կուսանացն Հռիփսիմեանց"
  },
  "illuminator_fast_day_1": {
-  "en": "Fast day",
+  "en": "First day of the Fast of St. Gregory the Illuminator",
   "hy": "Ա օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_2": {
-  "en": "Fast day",
+  "en": "Second day of the Fast of St. Gregory the Illuminator",
   "hy": "Բ օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_3": {
-  "en": "Fast day",
+  "en": "Third day of the Fast of St. Gregory the Illuminator",
   "hy": "Գ օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_4": {
-  "en": "Fast day",
+  "en": "Fourth day of the Fast of St. Gregory the Illuminator",
   "hy": "Դ օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_5": {
-  "en": "Fast day",
+  "en": "Fifth day of the Fast of St. Gregory the Illuminator",
   "hy": "Ե օր Լուսաւորչի պահոց"
  },
  "isaiah_the_prophet": {
@@ -982,10 +978,6 @@
  "sargis": {
   "en": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
   "hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն"
- },
- "sargis_the_warrior_and": {
-  "en": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Sts. Atom and his soldiers",
-  "hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն եւ սրբոց Ատովմեանց զօրավարացն"
  },
  "second_day_of_advent": {
   "en": "Second day of Advent",
@@ -1214,10 +1206,6 @@
  "thaddeus_apostle_of_armenia": {
   "en": "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin",
   "hy": "Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին"
- },
- "theodore_the_general": {
-  "en": "St. Theodore the General",
-  "hy": "Սրբոյն Թէոդորոսի զօրավարին"
  },
  "theodore_the_tyron": {
   "en": "St. Theodore the Tyron",

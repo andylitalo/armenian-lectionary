@@ -31,9 +31,22 @@ disagrees. Registering the corresponding fold in
 again. That failure is deliberate: it is what stops a reviewed decision from being quietly
 lost the next time the artifacts are rebuilt.
 
-Refreshing this file NEVER discards human edits: ``approved`` and ``note`` are carried over
-by ``source`` key, and a row whose approved text no longer matches what the engine serves
-is reported rather than overwritten.
+``id`` is the observance's frozen catalog id -- the key a consumer stores instead of the
+display text, which moves. It is STATED here, never derived from the text, which is what
+lets a name be corrected without the identity moving with it. Assign one only for a
+component the engine actually serves as a single observance; leave it empty for a row that
+is a whole day rather than one component, or whose text the engine never emits. Never
+change an id that has shipped.
+
+``armenian`` is the source's own text, refreshed from the scrape every run.
+``armenian_approved`` overrides it where the scrape is wrong, and is preserved -- the
+Armenian counterpart of ``source``/``approved``, kept separate so ``armenian`` stays the
+independent witness that justifies the English fixes.
+
+Refreshing this file NEVER discards human edits: ``id``, ``approved``,
+``armenian_approved`` and ``note`` are carried over by ``source`` key, and a row whose
+approved text no longer matches what the engine serves is reported rather than
+overwritten.
 
 Usage:
     python dev/feast_name_review.py             # refresh (preserving edits)
@@ -42,6 +55,7 @@ Usage:
 
 import collections
 import csv
+import datetime
 import glob
 import json
 import os
@@ -54,11 +68,14 @@ from dev.source_corrections import (                                   # noqa: E
     apply_ground_truth, normalize_confusables, normalize_feast_spelling,
     normalize_position_label,
 )
-from armenian_lectionary.engine import _FEAST_SEP, FEAST_NAMES_HY_PATH  # noqa: E402
+from armenian_lectionary.engine import (                                # noqa: E402
+    _FEAST_SEP, FEAST_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
+)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "feast_name_review.tsv")
-FIELDS = ("status", "days", "last", "source", "approved", "armenian", "note")
+FIELDS = ("status", "days", "last", "source", "id", "approved", "armenian",
+          "armenian_approved", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
 # Each is a name that reads oddly but that nothing available settles: the Armenian is
@@ -199,6 +216,31 @@ def armenian_for(approved, hy):
     return ""
 
 
+def generated_components():
+    """{component -> (days, last date)} for labels the ENGINE composes, over the full range.
+
+    The cache cannot enumerate these. A position label the source prints less specifically
+    than its own Armenian is corrected on read (source_corrections.illuminator_fast_label),
+    so the served component exists on no cached day under that spelling -- yet it is a
+    component the engine serves and therefore needs a reviewed name and an id like any
+    other. Enumerated by calling the generators, so no ordinal or season combination is
+    missed.
+    """
+    days = collections.Counter()
+    last = {}
+    d = datetime.date(MIN_YEAR, 1, 1)
+    end = datetime.date(MAX_YEAR, 12, 31)
+    while d <= end:
+        iso = d.isoformat()
+        for label in (_position_label(d), _eve_label(d)):
+            if label:
+                days[label] += 1
+                if label not in last or iso > last[label]:
+                    last[label] = iso
+        d += datetime.timedelta(days=1)
+    return days, last
+
+
 def source_components():
     """{raw component -> (days, last date)} straight from the cache, uncorrected."""
     days = collections.Counter()
@@ -233,12 +275,24 @@ def read_existing():
 
 def build_rows():
     days, last = source_components()
+    gen_days, gen_last = generated_components()
     hy = armenian_map()
     existing = read_existing()
     rows, drift = [], []
 
+    # A generated label the source also publishes is already a cache row; only the ones it
+    # does not get added, keyed by their own text (there is no rawer form of them to key on).
+    # Compared against the CORRECTED cache text: the raw spelling of a row whose name was
+    # folded ("Saint" -> "St.") never equals the generated label, and treating those as new
+    # would duplicate rows that already exist under their raw key.
+    already = {corrected(src) for src in days}
+    generated_only = set(gen_days) - already
+    for label in generated_only:
+        days[label] = gen_days[label]
+        last[label] = gen_last[label]
+
     for src in sorted(days):
-        served = corrected(src)
+        served = src if src in generated_only else corrected(src)
         prior = existing.get(src)
         approved = (prior or {}).get("approved") or served
         note = (prior or {}).get("note") or ""
@@ -250,17 +304,23 @@ def build_rows():
         if src in OPEN_QUESTIONS and not note:
             note = OPEN_QUESTIONS[src]
         status = "review" if src in OPEN_QUESTIONS else (
+            "generated" if src in generated_only else
             "fixed" if served != src else "ok")
         if not note and status == "fixed":
             note = "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES"
+        if not note and status == "generated":
+            note = ("engine-composed label; the source prints a less specific English "
+                    "text here -- see dev/source_corrections")
 
         rows.append({
             "status": status,
             "days": days[src],
             "last": last[src],
             "source": src,
+            "id": (prior or {}).get("id") or "",
             "approved": approved,
             "armenian": armenian_for(approved, hy),
+            "armenian_approved": (prior or {}).get("armenian_approved") or "",
             "note": note,
         })
     return rows, drift
