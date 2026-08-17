@@ -15,17 +15,26 @@ Columns:
              review    an open question -- the ``note`` says what is uncertain
   days       how many days in 2001-2026 carry this component
   last       latest date carrying it, for looking it up on sacredtradition.am
-  source     EXACTLY what the source publishes, before any correction
-  approved   the English the engine must serve. THIS COLUMN IS THE GROUND TRUTH.
-  armenian   the source's own Armenian for the same component, as an independent witness
+  source_en  EXACTLY what the source publishes in English, before any correction
+  approved_en the English the engine must serve. THIS COLUMN IS THE GROUND TRUTH.
+  source_hy  the source's own Armenian for the same component, as an independent witness
+  approved_hy the Armenian the engine must serve -- the Armenian counterpart of
+             ``approved_en``, and stated on every row for the same reason it is: a
+             decision, not an override. It equals ``source_hy`` wherever the scrape is
+             right, which is 394 rows of 397.
   note       why it was changed, or what is being asked
 
-To review: open the file in a spreadsheet (tabs are the separator; GitHub also renders it
-as a table), edit ``approved`` where the English should read differently, and say why in
-``note``. Nothing else needs touching -- leave ``source`` alone, it is the record of what
-was published.
+The two languages are deliberately symmetric: ``source_*`` is what sacredtradition.am
+published and is never edited, ``approved_*`` is what we serve. Keeping ``source_hy``
+separate is what lets the Armenian stay the independent witness that justifies most of the
+English fixes -- an edit to ``approved_hy`` cannot quietly erase the evidence for one.
 
-A changed ``approved`` makes ``tests/test_feast_name_review.py`` fail with the row that
+To review: open the file in a spreadsheet (tabs are the separator; GitHub also renders it
+as a table), edit ``approved_en`` (or ``approved_hy``) where the text should read
+differently, and say why in ``note``. Nothing else needs touching -- leave the ``source_*``
+columns alone, they are the record of what was published.
+
+A changed ``approved_en`` makes ``tests/test_feast_name_review.py`` fail with the row that
 disagrees. Registering the corresponding fold in
 ``dev/source_corrections._FEAST_TEXT_FIXES`` and rebuilding (see CLAUDE.md) makes it pass
 again. That failure is deliberate: it is what stops a reviewed decision from being quietly
@@ -38,15 +47,13 @@ component the engine actually serves as a single observance; leave it empty for 
 is a whole day rather than one component, or whose text the engine never emits. Never
 change an id that has shipped.
 
-``armenian`` is the source's own text, refreshed from the scrape every run.
-``armenian_approved`` overrides it where the scrape is wrong, and is preserved -- the
-Armenian counterpart of ``source``/``approved``, kept separate so ``armenian`` stays the
-independent witness that justifies the English fixes.
+``source_hy`` is refreshed from the scrape every run. ``approved_hy`` is not: like
+``approved_en`` it is carried over, and defaults to ``source_hy`` only on a row that has
+never had one.
 
-Refreshing this file NEVER discards human edits: ``id``, ``approved``,
-``armenian_approved`` and ``note`` are carried over by ``source`` key, and a row whose
-approved text no longer matches what the engine serves is reported rather than
-overwritten.
+Refreshing this file NEVER discards human edits: ``id``, ``approved_en``, ``approved_hy``
+and ``note`` are carried over by ``source_en`` key, and a row whose approved text no longer
+matches what the engine serves is reported rather than overwritten.
 
 Usage:
     python dev/feast_name_review.py             # refresh (preserving edits)
@@ -74,8 +81,8 @@ from armenian_lectionary.engine import (                                # noqa: 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "feast_name_review.tsv")
-FIELDS = ("status", "days", "last", "source", "id", "approved", "armenian",
-          "armenian_approved", "note")
+FIELDS = ("status", "days", "last", "source_en", "id", "approved_en", "source_hy",
+          "approved_hy", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
 # Each is a name that reads oddly but that nothing available settles: the Armenian is
@@ -179,7 +186,7 @@ OPEN_QUESTIONS = {
         "correct as published.",
     "Second Sunday of Great Lent, Sunday of the Expulsion":
         "the served form (period, not comma) is a hardcoded template in "
-        "engine._POSITION_FAMILIES, already a deliberate fix. A different 'approved' here "
+        "engine._POSITION_FAMILIES, already a deliberate fix. A different 'approved_en' here "
         "has no effect on what is served.",
     "Sixth Sunday of Great Lent, Sunday of the Advent":
         "the served form (period, 'the Advent') is a hardcoded template in "
@@ -187,6 +194,60 @@ OPEN_QUESTIONS = {
         "be a real theological content change, not a mechanical fix -- needs explicit "
         "sign-off before it could go anywhere, and even then requires an engine.py edit "
         "since a text correction here has no effect on what is served.",
+    "Fast day":
+        "TWO open questions, both deferred as their own change. (a) Is a fast marker a "
+        "NAME at all? It is arguably an attribute of the day -- served in its own field, "
+        "the way is-a-fast already is -- rather than a component of what the observance "
+        "is called. (b) If it stays a name, the ordinary-time instances should say which "
+        "fast: 1,575 of the 2,108 served days are the generated Wed/Fri position label "
+        "(784 Wed, 783 Fri, plus 8 Advent-fast weekdays on Dec 9), and those are the "
+        "weekly fast, not a generic one. The remaining 533 are stored table text inside "
+        "Holy Week and the week-long fasts, where Wed/Fri is not the reason -- so the two "
+        "groups need different answers and cannot be folded together. Not corrected here "
+        "because either answer rewrites Liturgical Day on >2,000 days, needs an "
+        "engine._POSITION_FAMILIES change plus a table rebuild, and would move the "
+        "omission ratchet in test_feast_name_raw off 0. 'Beginning of the Weekly Fasts' "
+        "(the Friday after Ascension) is already named on the assumption this lands: once "
+        "Wed/Fri carry their own labels that day reads '... -- Friday Fast -- Beginning "
+        "of the Weekly Fasts' and needs no further change.",
+}
+
+# Why a row has no ``id`` -- keyed by the SOURCE spelling, like OPEN_QUESTIONS, so the
+# explanation survives a rebuild. An empty id is a deliberate statement ("this row is not
+# one served observance"), and without a reason beside it the only way to tell that from an
+# oversight is to re-derive the whole argument. Two shapes, both the source's doing:
+#
+#   * a WHOLE DAY the source published as one string, whose halves are separately served
+#     and separately identified;
+#   * a GLUED or ONE-OFF variant the table's unanimity rule overrides -- no date emits it
+#     and no table entry stores it, so an id here could never be matched by a consumer.
+#
+# Three of these carried an id in 1.3.0 and are retired by name in
+# build_observance_catalog._RETIRED_IDS. The reason is stated in both places on purpose: a
+# reviewer reading the TSV never opens that file.
+NO_ID_REASONS = {
+    "Fast day, Remembrance of the Ten Virgins":
+        "no id: a whole DAY, not one observance -- the source comma-joined the day's fast "
+        "marker to its commemoration, and a registered correction splits them. Both halves "
+        "are their own rows with their own ids (fast_day, remembrance_of_the_ten), so the "
+        "day resolves component-wise to the pair.",
+    "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints "
+    "Atom and his soldiers":
+        "no id (retired sargis_the_warrior_and): the source glued two commemorations into "
+        "one string on 2008-01-21 alone. The engine serves only the first half there, and "
+        "both halves already have ids of their own (sargis, atom), so nothing emits or "
+        "stores this text -- an id on it could never be matched.",
+    "Saint Theodore the General":
+        "no id (retired theodore_the_general): published on exactly one day out of 9,861 "
+        "(2016-02-13), where every other year at that coordinate says Theodore the TYRON "
+        "-- which is what the table serves (id theodore_the_tyron). A source one-off, not "
+        "a second observance.",
+    "Saints Eugenius, Marcarius, Alerius, Canditus and Aquila, and Saints Andrew the "
+    "General and his army, and Callinicus and Diomedes the Martyrs":
+        "no id (retired eugenius_macarius_valerius_candidus_2): the source glued two "
+        "commemorations into one string on 2009-01-27 alone. The engine serves only the "
+        "first half there, and both halves already have ids of their own "
+        "(eugenius_macarius_valerius_candidus, andrew_the_general_and).",
 }
 
 
@@ -266,11 +327,11 @@ def armenian_map():
 
 
 def read_existing():
-    """{source -> row} of what a human has already entered."""
+    """{source_en -> row} of what a human has already entered."""
     if not os.path.exists(REVIEW_PATH):
         return {}
     with open(REVIEW_PATH, encoding="utf-8", newline="") as fh:
-        return {r["source"]: r for r in csv.DictReader(fh, delimiter="\t")}
+        return {r["source_en"]: r for r in csv.DictReader(fh, delimiter="\t")}
 
 
 def build_rows():
@@ -294,7 +355,7 @@ def build_rows():
     for src in sorted(days):
         served = src if src in generated_only else corrected(src)
         prior = existing.get(src)
-        approved = (prior or {}).get("approved") or served
+        approved = (prior or {}).get("approved_en") or served
         note = (prior or {}).get("note") or ""
 
         if approved != served:
@@ -303,6 +364,10 @@ def build_rows():
 
         if src in OPEN_QUESTIONS and not note:
             note = OPEN_QUESTIONS[src]
+        # Stated ahead of the generic "registered correction" note below: these rows ARE
+        # registered corrections, but that is not the interesting fact about them.
+        if src in NO_ID_REASONS and not note:
+            note = NO_ID_REASONS[src]
         status = "review" if src in OPEN_QUESTIONS else (
             "generated" if src in generated_only else
             "fixed" if served != src else "ok")
@@ -312,15 +377,18 @@ def build_rows():
             note = ("engine-composed label; the source prints a less specific English "
                     "text here -- see dev/source_corrections")
 
+        source_hy = armenian_for(approved, hy)
         rows.append({
             "status": status,
             "days": days[src],
             "last": last[src],
-            "source": src,
+            "source_en": src,
             "id": (prior or {}).get("id") or "",
-            "approved": approved,
-            "armenian": armenian_for(approved, hy),
-            "armenian_approved": (prior or {}).get("armenian_approved") or "",
+            "approved_en": approved,
+            "source_hy": source_hy,
+            # Defaults to the scrape only on a row that has never carried a decision;
+            # once stated it is preserved, exactly as approved_en is.
+            "approved_hy": (prior or {}).get("approved_hy") or source_hy,
             "note": note,
         })
     return rows, drift
@@ -337,16 +405,19 @@ def write(rows):
 def main():
     rows, drift = build_rows()
     by_status = collections.Counter(r["status"] for r in rows)
-    no_hy = [r for r in rows if not r["armenian"]]
+    no_hy = [r for r in rows if not r["approved_hy"]]
+    hy_fixed = [r for r in rows if r["approved_hy"] != r["source_hy"]]
 
     if "--check" not in sys.argv:
         write(rows)
         print(f"wrote {REVIEW_PATH}")
     print(f"{len(rows)} components: " +
           ", ".join(f"{n} {s}" for s, n in sorted(by_status.items())))
+    print(f"{len(hy_fixed)} row(s) where approved_hy differs from the scraped source_hy")
     if no_hy:
-        print(f"{len(no_hy)} with no Armenian witness (the source publishes none for "
-              "these): " + ", ".join(r["source"][:40] for r in no_hy[:6]))
+        print(f"{len(no_hy)} with no approved Armenian (the source publishes none for "
+              "these -- fill approved_hy, with a note): "
+              + ", ".join(r["source_en"][:40] for r in no_hy[:6]))
     if drift:
         print(f"\n{len(drift)} row(s) where the approved name is NOT what the engine "
               "serves -- register each in dev/source_corrections._FEAST_TEXT_FIXES and "

@@ -15,7 +15,7 @@ The two directions matter differently:
   * every component the source publishes has a row -- so a re-fetch that adds a name
     cannot slip past review by simply not being in the file.
 
-Editing ``approved`` in the TSV is how a reviewer states a decision; the test then fails
+Editing ``approved_en`` in the TSV is how a reviewer states a decision; the test then fails
 until the fold is registered in ``dev/source_corrections._FEAST_TEXT_FIXES`` and the
 artifacts are rebuilt (CLAUDE.md gives the order). That failure is the point.
 
@@ -60,12 +60,12 @@ class TestApprovedNames(unittest.TestCase):
         cls.rows = _rows()
         # An approved name may itself be several components: one registered fix splits a
         # comma-joined fast marker off its commemoration.
-        cls.approved = {p for r in cls.rows for p in _components(r["approved"])}
+        cls.approved = {p for r in cls.rows for p in _components(r["approved_en"])}
 
     def test_review_file_is_populated(self):
         self.assertGreater(len(self.rows), 380,
                            f"{REVIEW_PATH} should carry every distinct feast component")
-        blank = [r["source"] for r in self.rows if not r["approved"].strip()]
+        blank = [r["source_en"] for r in self.rows if not r["approved_en"].strip()]
         self.assertEqual(blank[:5], [],
                          f"{len(blank)} rows have no approved English name")
 
@@ -88,12 +88,40 @@ class TestApprovedNames(unittest.TestCase):
             "rebuild -- see CLAUDE.md), or a new name appeared and needs a review row "
             "(python dev/feast_name_review.py)")
 
+    def test_every_row_has_an_approved_armenian(self):
+        """``approved_hy`` is a decision on every row, not an override on a few.
+
+        It was an override column once -- filled on 3 rows of 397, empty everywhere else,
+        with ``source_hy`` standing in. That made the two languages asymmetric in a way
+        nothing enforced: a row could reach the catalog with no Armenian at all and the
+        only symptom would be an English fallback at runtime.
+        """
+        blank = [r["source_en"] for r in self.rows if not r["approved_hy"].strip()]
+        self.assertEqual(blank[:5], [],
+                         f"{len(blank)} rows have no approved Armenian name")
+
+    def test_every_id_less_row_says_why(self):
+        """An empty ``id`` is a statement, so it has to be a legible one.
+
+        Four rows carry no id, none of them by oversight: one is a whole day whose halves
+        are separately identified, three are glued or one-off source variants nothing
+        emits or stores. Without the reason written down, an id missing on purpose and an
+        id missing by accident look identical -- and the accident is the one that makes a
+        served observance unaddressable.
+        """
+        silent = [r["source_en"] for r in self.rows
+                  if not r["id"].strip() and "no id" not in r["note"]]
+        self.assertEqual(
+            silent[:5], [],
+            f"{len(silent)} row(s) have no id and no note explaining why. Add the reason "
+            "to dev/feast_name_review.NO_ID_REASONS so it survives a rebuild.")
+
     def test_open_questions_are_still_flagged(self):
         """The unresolved rows keep their question until someone answers it."""
         open_rows = [r for r in self.rows if r["status"] == "review"]
         self.assertGreater(len(open_rows), 0,
                            "the review status was dropped from every row")
-        silent = [r["source"] for r in open_rows if not r["note"].strip()]
+        silent = [r["source_en"] for r in open_rows if not r["note"].strip()]
         self.assertEqual(silent[:5], [],
                          f"{len(silent)} rows are marked for review with no question")
 
@@ -106,7 +134,7 @@ class TestReviewCoversTheSource(unittest.TestCase):
         from dev.feast_name_review import source_components
 
         days, _first = source_components()
-        known = {r["source"] for r in _rows()}
+        known = {r["source_en"] for r in _rows()}
         missing = sorted(set(days) - known)
         self.assertEqual(
             missing[:5], [],

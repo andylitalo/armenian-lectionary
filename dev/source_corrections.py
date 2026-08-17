@@ -499,7 +499,7 @@ def _ground_truth_fixes():
         data = json.load(fh)
     fixes = {}
     for src, v in data.items():
-        approved = v["approved"]
+        approved = v["approved_en"]
         if not approved or approved == src:
             continue
         fixes[src] = approved
@@ -520,7 +520,8 @@ def _ground_truth_reviewed():
     See ``apply_ground_truth``.
     """
     with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
-        return {src: v["approved"] for src, v in json.load(fh).items() if v["approved"]}
+        return {src: v["approved_en"]
+                for src, v in json.load(fh).items() if v["approved_en"]}
 
 
 def apply_ground_truth(text):

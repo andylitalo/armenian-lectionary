@@ -15,7 +15,7 @@ This script counts every witness in ``dev/reference_data_hy/`` and flags any ent
 shipped Armenian is not the most frequent form. It compares COMPONENTS, not whole days, so
 a name is judged on its own evidence rather than on the company it keeps.
 
-Fix what it reports in ``feast_name_review.tsv``'s ``armenian_approved`` column (with the counts in
+Fix what it reports in ``feast_name_review.tsv``'s ``approved_hy`` column (with the counts in
 the comment) and rebuild -- never by editing ``feast_names_hy.json``, which
 ``dev/fetch_translations.py`` regenerates from the cache.
 
@@ -84,7 +84,7 @@ def main():
         others = [f"{v!r} x{n}" for v, n in variants.most_common()]
         print(f"    all      {', '.join(others)}")
         print()
-    print("Record the fix in feast_name_review.tsv's armenian_approved column, "
+    print("Record the fix in feast_name_review.tsv's approved_hy column, "
           "with a note, and rebuild.")
     return 0
 

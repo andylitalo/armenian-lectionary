@@ -9,7 +9,7 @@ This is a PROJECTION, not a derivation. Every id is STATED, in the ``id`` column
 dev/feast_name_review.tsv, next to the human decision about what the observance should be
 called::
 
-    {row.id: {"en": row.approved, "hy": row.armenian_approved or row.armenian}}
+    {row.id: {"en": row.approved_en, "hy": row.approved_hy}}
 
 That is the whole build. It matters that ids are stated rather than computed from text:
 an id derived from display text moves when the text is corrected, and a consumer keying
@@ -18,7 +18,7 @@ would be silent. bahk lost 158 of 429 stored feast names that way when 1.3.0 fol
 "Saint(s)" to "St(s)."; an id must not be able to repeat it.
 
 So there is no minting here for text that already has an id, no reuse-by-text lookup, and
-no registry of superseded spellings. Correcting a name edits ``approved`` and the id stays
+no registry of superseded spellings. Correcting a name edits ``approved_en`` and the id stays
 put. Only a genuinely new observance needs an id, and ``--mint`` assigns one, writing it
 back to the TSV so it is recorded in the same place as every other.
 
@@ -146,15 +146,15 @@ def build_catalog(ground_truth):
     by_id, by_en = {}, {}
 
     for source, row in sorted(ground_truth.items()):
-        sid, en = row.get("id"), row.get("approved")
+        sid, en = row.get("id"), row.get("approved_en")
         if not sid:
             continue
-        hy = row.get("armenian_approved") or row.get("armenian")
+        hy = row.get("approved_hy")
         if not en:
             problems.append(f"{sid}: has an id but no approved English")
             continue
         if not hy:
-            problems.append(f"{sid}: no Armenian for {en!r} -- fill armenian_approved "
+            problems.append(f"{sid}: no Armenian for {en!r} -- fill approved_hy "
                             f"in {os.path.basename(REVIEW_PATH)}, with a note")
             continue
         if sid in by_id:
@@ -185,8 +185,8 @@ def build_catalog(ground_truth):
 def audit(catalog, ground_truth):
     """Coverage against what the engine actually serves, and against what has shipped."""
     findings = []
-    approved_ids = {row["approved"]: row.get("id")
-                    for row in ground_truth.values() if row.get("approved")}
+    approved_ids = {row["approved_en"]: row.get("id")
+                    for row in ground_truth.values() if row.get("approved_en")}
     served = served_components()
 
     unregistered = sorted(t for t in served if not approved_ids.get(t))
@@ -219,8 +219,8 @@ def audit(catalog, ground_truth):
 
 def mint(ground_truth):
     """Assign ids to served components that have none, writing them back to the TSV."""
-    approved_ids = {row["approved"]: row.get("id")
-                    for row in ground_truth.values() if row.get("approved")}
+    approved_ids = {row["approved_en"]: row.get("id")
+                    for row in ground_truth.values() if row.get("approved_en")}
     used = {sid for sid in approved_ids.values() if sid}
     new = {text: _slug(text, used)
            for text in sorted(served_components()) if not approved_ids.get(text)}
@@ -231,8 +231,8 @@ def mint(ground_truth):
         reader = csv.DictReader(fh, delimiter="\t")
         fields, rows = reader.fieldnames, list(reader)
     for row in rows:
-        if not row["id"] and row["approved"] in new:
-            row["id"] = new[row["approved"]]
+        if not row["id"] and row["approved_en"] in new:
+            row["id"] = new[row["approved_en"]]
     with open(REVIEW_PATH, "w", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=fields, delimiter="\t",
                            lineterminator="\n", quoting=csv.QUOTE_MINIMAL)

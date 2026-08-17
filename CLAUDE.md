@@ -24,7 +24,7 @@ with no install step.
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
 | `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
-| `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `armenian` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
+| `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
 | `Dockerfile` / `.dockerignore` | Container image for Cloud Run (`pip install .` + gunicorn on `0.0.0.0:$PORT`). |
 | `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image and package. Writes the shipped JSON via the engine's PATH constants. |
@@ -102,14 +102,26 @@ is ours** — one row per distinct name component with the English a human appro
 source's own Armenian beside it, and the questions still open. It is the only name test
 that can fail because a name is *wrong* rather than because it differs from the source.
 
+The columns are symmetric across the two languages, which is the whole shape of the file:
+
+| | English | Armenian |
+|---|---|---|
+| what sacredtradition.am published, never edited | `source_en` | `source_hy` |
+| what the engine must serve — the decision | `approved_en` | `approved_hy` |
+
+`source_en` is also the stable key everything downstream joins on. `approved_hy` is stated
+on **every** row, not only where it differs from the scrape (394 of 397 are equal), for the
+same reason `approved_en` is: it is a decision about what we serve, not a patch on someone
+else's text. Keeping `source_hy` separate is what lets the Armenian remain the independent
+witness that justifies most of the English corrections — an edit to `approved_hy` cannot
+quietly erase the evidence for one.
+
 The review loop, and why it is safe to hand to a non-programmer:
 
 1. open the TSV (a spreadsheet, or GitHub, which renders it as a table);
-2. edit the `approved` column where the English should read differently, and say why in
-   `note`. Leave `source` alone — it is the record of what was published, and the stable
-   key everything else joins on. Two more columns are preserved the same way: `id` (below)
-   and `armenian_approved`, which overrides the scraped `armenian` where it is wrong or
-   absent, keeping `armenian` as the independent witness that justifies the English fixes;
+2. edit `approved_en` (or `approved_hy`) where the text should read differently, and say
+   why in `note`. Leave the `source_*` columns alone — they are the record of what was
+   published. `id` (below) is preserved the same way;
 3. `tests/test_feast_name_review.py` now fails, naming the row;
 4. register the fold in `dev/source_corrections._FEAST_TEXT_FIXES`, rebuild (order below),
    and it passes.
@@ -133,10 +145,10 @@ So the id lives in the **`id` column of `dev/feast_name_review.tsv`**, beside th
 decision about what the observance is called, and the catalog is a straight projection:
 
 ```
-{row.id: {"en": row.approved, "hy": row.armenian_approved or row.armenian}}
+{row.id: {"en": row.approved_en, "hy": row.approved_hy}}
 ```
 
-Correcting a name edits `approved`; the id stays put because nothing recomputes it. There
+Correcting a name edits `approved_en`; the id stays put because nothing recomputes it. There
 is no reuse-by-text lookup and no registry of superseded spellings — both existed only to
 paper over ids being derived from the text they were supposed to outlive.
 
@@ -151,6 +163,10 @@ Working rules:
   comma-joined "Fast day, Remembrance of the Ten Virgins", whose halves have their own
   ids), or a minority source spelling nothing reaches. Text the table *stores* keeps its id
   even where a higher-precedence tier shadows it at runtime — the artifacts still resolve.
+  **Say why in `note`**, via `feast_name_review.NO_ID_REASONS` so it survives a rebuild:
+  `test_every_id_less_row_says_why` fails on a bare empty id, because an id missing on
+  purpose and an id missing by accident are otherwise indistinguishable, and the accident
+  leaves a served observance unaddressable.
 - **Retiring an id is declared**, in `_RETIRED_IDS` with the reason, or the build fails
   naming it. Reviving one fails too.
 

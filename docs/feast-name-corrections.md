@@ -27,13 +27,38 @@ visible immediately in the Armenian.
 Where nothing establishes the intended form, the source stands as published and the
 question is recorded in the review table instead. Those rows are listed at the bottom.
 
+### The one declared exception: disambiguation
+
+A name can be *wrong* in a way self-contradiction cannot detect: correct as far as it goes,
+and still not identifying the observance it names. "Fast day" was the case that forced the
+distinction — one string standing for six different observances (§5). There the Armenian
+happened to be more specific, so the repair fit the rule above. It does not always.
+
+So there is exactly one other admissible justification, and it is deliberately narrow. A
+**disambiguation** may land when all four hold:
+
+1. the served text does not identify the observance a reader is looking at;
+2. **both** languages are equally unspecific, so no self-contradiction exists to appeal to
+   — if the Armenian *is* more specific, this is an ordinary §1 correction, not this;
+3. what the observance actually is can be established from the calendar itself, not from
+   preference — its date, its position, and what the surrounding days do;
+4. the added words state only that established fact, and contradict nothing the source says.
+
+This is a weaker warrant than the rest of this document and is meant to stay rare: one
+correction uses it (§6). "This reads better" still never qualifies, and neither does a name
+that is merely terse — §6 changes a name that gives the reader no way to tell *which* fast
+begins, on the only day of the year that it does.
+
 Detection: [`dev/audit_source_anomalies.py`](../dev/audit_source_anomalies.py) (nine
 detectors) plus a read of all 187 commemoration components by hand — the corpus is small
 enough that exhaustive human review is practical, and two of the corrections below came
 only from that.
 Enforcement: `tests/test_source_text.py` (the detectors stay silent) and
 `tests/test_feast_name_review.py` (the engine serves the approved names).
-Registry: `dev/source_corrections._FEAST_TEXT_FIXES` and `_FEAST_SPELLING_FIXES`.
+Registry: `dev/source_corrections._FEAST_TEXT_FIXES` and `_FEAST_SPELLING_FIXES`, plus the
+`approved_en` / `approved_hy` columns of `dev/feast_name_review.tsv` for whole-component
+folds (the ground truth registers those under both the raw and spelling-corrected forms, so
+they need no second entry).
 
 ---
 
@@ -194,11 +219,66 @@ matched the constructed forms exactly.
 
 ---
 
+## 6. Disambiguation — `Beginning of the Fast` names no fast
+
+| | published | served |
+|---|---|---|
+| en | `Begining of the Fast` | **`Beginning of the Weekly Fasts`** |
+| hy | `Սկիզբն պահոց` | **`Սկիզբն շաբաթական պահոց`** |
+
+(The `Begining` → `Beginning` misspelling is a separate §3 fold and was already registered.)
+
+The only correction in this document justified by [disambiguation](#the-one-declared-exception-disambiguation)
+rather than by the source contradicting itself. Both languages are equally unspecific —
+`Սկիզբն պահոց` is "beginning of the fasts" and names no more of a fast than the English
+does — so there is no second witness to appeal to. The four conditions:
+
+**1. The text does not identify the observance.** The Armenian Church keeps ten week-long
+fasts, Great Lent, the Fast of Advent and a weekly Wed/Fri fast. On a day headed only
+"Beginning of the Fast", a reader has no way to tell which one begins.
+
+**2. Neither language is more specific.** Unlike §5, where the Armenian counted the days
+the English left bare.
+
+**3. The calendar establishes what it is.** It falls on the **41st day of Eastertide,
+always the Friday immediately after Ascension** — one day a year, in all 27 years
+2001–2027. What the surrounding days do settles the rest: no day in Eastertide 1–40 carries
+a fast marker at all, and days 46 (Wed) and 48 (Fri) do. So this is the end of the
+Eastertide dispensation from the weekly Wed/Fri fast, and the day is itself the first
+resumed fast rather than an announcement of one. The rule is published doctrine, not
+inference — the Prelacy states the Wed/Fri fast is waived "during the forty days after
+Easter (until Ascension)".
+
+**4. The added words state only that.** `Weekly` / `շաբաթական` is the whole change.
+
+Not **"after Eastertide"**, which would be false and would contradict the name it composes
+with: the day is *in* Eastertide (41 of 50), and the dispensation ends at Ascension, not at
+Pentecost. The served day already reads `Forty First day of Eastertide — Beginning of the
+Weekly Fasts`, so the position label supplies the coordinate and the commemoration supplies
+the fact.
+
+27 days, one per year. The catalog id **`beginning_of_the_fast` does not move** — the name
+changed in both languages and the identity did not, which is the property the stated-id
+design exists to provide.
+
+`lectionary_data.json` stores this component on 8 entries (`E:40` and `EB:0–6:40`). They
+were folded in place with the same correction chain `dev/build_table.py` applies, rather
+than by a full rebuild, because `dev/reference_data/` was not present in the working copy;
+readings, keys, `observance_ids` and `meta` are byte-identical, and the fold is idempotent,
+so the next rebuild from a live cache reproduces it. Worth confirming when one is next run.
+
+This name is provisional in one direction only: it anticipates the [`Fast day`
+question](#fast-day--a-name-or-an-attribute) below. If the weekly Wed/Fri fasts get their
+own labels, the day reads `… — Friday Fast — Beginning of the Weekly Fasts` and this
+component needs no further change.
+
+---
+
 ## Open questions — NOT corrected
 
 These are recorded in `dev/feast_name_review.tsv` with `status = review`. The source stands
 as published until someone who reads Armenian decides. Enter the preferred English in the
-`approved` column of that file.
+`approved_en` column of that file.
 
 | Component | Question |
 |---|---|
@@ -216,6 +296,31 @@ as published until someone who reads Armenian decides. Enter the preferred Engli
 | `Saints Vardan the General and His Companions - the 1036 Martyrs …` | A hyphen where the source's component separator is an em-dash; possibly meant as a break. |
 | `Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)` | `Nicea` vs `Nicaea` — confirm the preferred form. |
 
+Two of these are larger than a spelling, and blocked on each other.
+
+### `Fast day` — a name, or an attribute?
+
+Served on **2,108 days**, and the two halves of that number want different answers:
+
+| Origin | Days | What it means there |
+|---|---|---|
+| generated position label (`engine._POSITION_FAMILIES` terminal fallthrough) | 1,575 | the **weekly** fast — 784 Wed, 783 Fri, plus 8 Advent-fast weekdays around Dec 9 |
+| stored table text | 533 | Holy Week and the week-long fasts (Elijah, Assumption, post-Ascension Eastertide), where the weekday is not the reason |
+
+So there are really two questions. **(a)** Is a fast marker part of what an observance is
+*called*, or an attribute of the day that belongs in its own field? **(b)** If it stays a
+name, the 1,575 ordinary-time instances should say which fast they are, rather than sharing
+one string with the 533 that are a different thing — the same argument that unblocked the
+Illuminator fast in §5, one level up.
+
+Not corrected here. Either answer rewrites `Liturgical Day` on more than 2,000 days, needs
+an `engine._POSITION_FAMILIES` change plus a table rebuild for the stored half, and moves
+`test_feast_name_raw`'s omission ratchet off 0. It needs its own reviewed change.
+
+§6 is already named on the assumption that it lands: `Beginning of the Weekly Fasts`, the
+Friday after Ascension, reads `… — Friday Fast — Beginning of the Weekly Fasts` once
+Wed/Fri carry their own labels, and needs no further change then.
+
 ## Reviewing
 
 ```bash
@@ -230,7 +335,7 @@ python dev/audit_hy_variants.py          # catalog entries serving a minority Ar
 commemorations onto one day, so a reviewer sees each saint once instead of once per
 combination. Its output is derived and therefore not committed — run it when you want it.
 
-Edit `approved` in `dev/feast_name_review.tsv`, say why in `note`, and
+Edit `approved_en` in `dev/feast_name_review.tsv`, say why in `note`, and
 `tests/test_feast_name_review.py` will fail until the fold is registered in
 `dev/source_corrections._FEAST_TEXT_FIXES` and the artifacts are rebuilt (CLAUDE.md gives
 the order). That failure is deliberate — it is what stops a reviewed decision from being
