@@ -2356,12 +2356,10 @@ def compute_armenian_lectionary(target_date: datetime.date,
     of ``language``.
 
     ``ObservanceIds`` gives the stable catalog id of each ``Liturgical Day`` component,
-    in the same order, independent of ``language``. It is what a consumer should key
-    stored data on: the display text is corrected across releases -- 1.3.0 alone folded
-    ``Saint(s)`` to ``St(s).`` and fixed 122 spellings -- while an id, once published,
-    never moves (see ``dev/build_observance_catalog.py``). A day is identified by the
-    whole ordered list, not by one id: 1,750 of the 9,861 days in range name two to four
-    observances at once. Empty when any component is unresolvable, so a non-empty list is
+    in the same order and independent of ``language``. It is what a consumer should key
+    stored data on: display text is corrected across releases, a published id never moves
+    (see ``dev/build_observance_catalog.py``). A day is identified by the whole ordered
+    list, not by one id. Empty when any component is unresolvable, so a non-empty list is
     always a complete key; see :func:`_observance_ids`.
 
     Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
