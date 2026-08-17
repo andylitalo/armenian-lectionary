@@ -6,13 +6,16 @@ same reason: so the accuracy test and the human-readable numbers can never drift
 It was written after a refactor regressed ``language="hy"`` on ~118 days with nothing to
 catch it -- English had a 9,496-day contract and Armenian had none.
 
-Two normalizations are applied to the SOURCE before comparing, both matching a deliberate,
-already-registered decision rather than papering over a defect:
+Three normalizations are applied to the SOURCE before comparing, each matching a
+deliberate, already-registered decision rather than papering over a defect:
 
   * ``dev/fetch_translations.to_mashtots_names`` -- the source types a handful of proper
     nouns in reformed ("Soviet") orthography inside otherwise-traditional text
     (``Դանիել`` for ``Դանիէլ``). v1.2.3 reversed those in the shipped maps on purpose, so
     comparing against the raw scrape would re-report a fix as a defect.
+  * ``source_corrections.ground_truth_hy_fixes`` -- the reviewed Armenian corrections, the
+    counterpart of what ``canonical_commem`` does for English. Without it a correction a
+    human signed and a regression nobody noticed are the same finding.
   * component splitting on ``_FEAST_SEP``, so a day is compared as a set of observances
     rather than one string -- the same projection the English test uses.
 
@@ -34,13 +37,12 @@ Findings are classified, strongest first:
     ``dev/build_observance_catalog._INTERNAL_SEP``.
 
 Unlike the English side, none of these is zero yet, and the residue is not all engine
-defect. Of the 12 contradictions at the time of writing: 7 are days where the shipped
+defect. Of the 11 contradictions at the time of writing: 7 are days where the shipped
 table's commemoration enumerates a different companion list than the year the cache
 sampled -- the same class ``canonical_commem`` folds away on the English side, which has
-no Armenian analogue; 1 is a deliberate correction of a wrong ordinal in the source's own
-Armenian; 2 are word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the engine again
-serves the dominant form, but which ``normalized`` is too crude to group -- it compares
-spacing and case, not morphology, on purpose; and 2 are single-day punctuation
+no Armenian analogue; 2 are word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the
+engine again serves the dominant form, but which ``normalized`` is too crude to group --
+it compares spacing and case, not morphology, on purpose; and 2 are single-day punctuation
 differences. Callers should treat the counts as ratchets, not as a defect list: what
 matters is that no NEW divergence appears.
 
@@ -69,6 +71,7 @@ from armenian_lectionary.engine import (                                # noqa: 
 )
 from dev.build_observance_catalog import _INTERNAL_SEP                  # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
+from dev.source_corrections import ground_truth_hy_fixes                # noqa: E402
 
 REF_DIR_HY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reference_data_hy")
 
@@ -90,6 +93,21 @@ def source_days():
     return days
 
 
+def source_feast(raw):
+    """The source's Armenian for a day, as we have decided to read it.
+
+    Both normalizations are registered decisions, not fuzz: the orthography reversal
+    v1.2.3 applied to the shipped maps, and the reviewed Armenian corrections from
+    ``approved_hy``. Comparing against the unfolded scrape re-reports each of those as a
+    defect -- which is precisely what it did before this existed, since a deliberate
+    Armenian correction and a regression both read as "the engine emits a component the
+    source does not have".
+    """
+    fixes = ground_truth_hy_fixes()
+    return _FEAST_SEP.join(fixes.get(c, c)
+                           for c in to_mashtots_names(raw).split(_FEAST_SEP))
+
+
 def normalized(text):
     """Collapse whitespace and case, so spellings of one name group together.
 
@@ -104,7 +122,7 @@ def component_witnesses():
     """``{armenian component: times the source publishes it}`` over the whole cache."""
     seen = collections.Counter()
     for raw in source_days().values():
-        for component in components(to_mashtots_names(raw)):
+        for component in components(source_feast(raw)):
             seen[component] += 1
     return seen
 
@@ -157,7 +175,7 @@ def collect():
     dominant = _dominant_forms(component_witnesses())
 
     for iso, raw in sorted(source_days().items()):
-        src = to_mashtots_names(raw)
+        src = source_feast(raw)
         eng = compute_armenian_lectionary(
             datetime.date.fromisoformat(iso), language="hy")["Liturgical Day"]
         compared += 1

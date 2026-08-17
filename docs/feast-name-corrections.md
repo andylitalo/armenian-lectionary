@@ -261,11 +261,10 @@ the fact.
 changed in both languages and the identity did not, which is the property the stated-id
 design exists to provide.
 
-`lectionary_data.json` stores this component on 8 entries (`E:40` and `EB:0–6:40`). They
-were folded in place with the same correction chain `dev/build_table.py` applies, rather
-than by a full rebuild, because `dev/reference_data/` was not present in the working copy;
-readings, keys, `observance_ids` and `meta` are byte-identical, and the fold is idempotent,
-so the next rebuild from a live cache reproduces it. Worth confirming when one is next run.
+`lectionary_data.json` stores this component on 8 entries (`E:40` and `EB:0–6:40`), and
+`feast_names_hy.json` re-keys its two entries onto the corrected English. The documented
+rebuild order was run end to end from the cache and reproduces every artifact byte for
+byte, with `build_table.py` self-validating at 0 wrong over 9,496 days.
 
 This name is provisional in one direction only: it anticipates the [`Fast day`
 question](#fast-day--a-name-or-an-attribute) below. If the weekly Wed/Fri fasts get their

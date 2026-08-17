@@ -16,21 +16,29 @@ Why these are ratchets and not zeroes
 -------------------------------------
 The English test can assert CONTRADICTIONS == 0 because every deliberate departure from
 the source is registered in ``dev/source_corrections`` and folded on both sides before
-comparing. Armenian has no such registry, and the residue is not all engine defect. At the
-time of writing the 12 contradictions are:
+comparing. Armenian now has such a registry too -- ``ground_truth_hy_fixes``, projected
+from the ``approved_hy`` column -- and ``hy_discrepancy.source_feast`` folds it, so a
+reviewed Armenian correction no longer reads as a defect. That is what took the count from
+12 to 11 and the exact floor from 407 to 409; it was not expressible while ``approved_hy``
+was an override filled on 3 rows of 397 rather than a decision stated on every one.
+
+The residue is still not all engine defect. The 11 contradictions are:
 
   * 7 days where the shipped table's commemoration enumerates a different companion list
     than the year the cache sampled -- the same class ``canonical_commem`` folds away on
     the English side, which has no Armenian analogue;
-  * 1 deliberate correction, where the source's own Armenian carries a wrong ordinal
-    (``Ա`` for ``Բ`` Sunday after Pentecost) that English pins as wrong;
   * 2 word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the engine serves the
     source's dominant spelling, but which the DOMINANT_FORM classifier is deliberately too
     crude to group -- it compares spacing and case, not morphology;
   * 2 single-day punctuation differences.
 
+(The deliberate ``Ա``-for-``Բ`` Sunday-after-Pentecost ordinal correction used to be a
+twelfth. It is now folded, along with ``Սկիզբն պահոց`` -> ``Սկիզբն շաբաթական պահոց``.)
+
 So the contract is "no NEW divergence", enforced by floors that may only move toward zero.
-Lower them whenever a fix lands; never raise one to make a change pass.
+Lower them whenever a fix lands; never raise one to make a change pass. A deliberate
+Armenian correction is not an exception to that -- register it in ``approved_hy``, where
+the fold picks it up and the ceiling goes DOWN.
 
 DOMINANT_FORM and INTERNAL_DELIMITER have ceilings too, for a different reason. Those days
 are correct as served -- the source spells one name several ways and we serve the one it
@@ -51,7 +59,7 @@ from tests._reference_cache import requires_reference_cache_hy          # noqa: 
 
 # Days where the engine emits an Armenian component the source does not have.
 # Monotonic DOWN. The target is 0, as on the English side.
-HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "12"))
+HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "11"))
 
 # Days where the engine drops an Armenian component the source states. Monotonic DOWN.
 HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "2"))
@@ -74,8 +82,12 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 #
 # Note this counts BYTE equality, so the internal-delimiter days above are excluded from it
 # even though their text is identical. exact + INTERNAL_DELIMITER is the "same words" number
-# and is what moves when a real fix lands: 407 + 6 = 413.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "407"))
+# and is what moves when a real fix lands: 409 + 6 = 415.
+#
+# The floor is 409 rather than the 410 a full cache now reports: 2 of the 3 days gained
+# since it was set at 407 come from folding the registered Armenian corrections, which is
+# reproducible anywhere, and the third from the cache growing 433 -> 435 days, which is not.
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "409"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.

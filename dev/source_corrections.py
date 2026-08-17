@@ -524,6 +524,31 @@ def _ground_truth_reviewed():
                 for src, v in json.load(fh).items() if v["approved_en"]}
 
 
+@functools.lru_cache(maxsize=1)
+def ground_truth_hy_fixes():
+    """``{source Armenian component -> approved Armenian}``, for the rows that differ.
+
+    The Armenian counterpart of ``_ground_truth_fixes``, and the registry the ``hy``
+    accuracy comparison needs: a deliberate Armenian correction is otherwise
+    indistinguishable from a regression, because both look like "the engine emits a
+    component the source does not have".
+
+    This only became expressible when ``approved_hy`` became a stated column on every row.
+    While it was an override filled on 3 rows of 397, the set of deliberate Armenian
+    corrections could not be read off the data -- an empty cell meant "no correction" and a
+    filled one meant "correction", but only for rows a human had happened to touch.
+
+    Exact, whole-component, and enumerated. It is NOT the fuzzy equivalence pass
+    ``dev.hy_discrepancy.diff_components`` declines to grow: every entry is one row a
+    reviewer signed, so folding it hides nothing that was not already decided in the open.
+    """
+    with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
+        data = json.load(fh)
+    return {v["source_hy"]: v["approved_hy"] for v in data.values()
+            if v.get("source_hy") and v.get("approved_hy")
+            and v["source_hy"] != v["approved_hy"]}
+
+
 def apply_ground_truth(text):
     """Fold every reviewed component in ``text`` to its approved English spelling.
 
