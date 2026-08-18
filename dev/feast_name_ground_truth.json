@@ -1261,9 +1261,9 @@
  },
  "Octave of Easter (New Sunday)": {
   "approved_en": "Octave of Easter (New Sunday)",
-  "approved_hy": "Ը օր Զատկի. Կրկնազատիկ (Նոր կիւրակէ)",
+  "approved_hy": "Ը օր Զատկի; Կրկնազատիկ (Նոր կիւրակէ)",
   "id": "octave_of_easter_new",
-  "note": "",
+  "note": "Two Armenian pieces under one English component. The source itself writes them as separate components on some days (\"Ը օր Զատկի — Կրկնազատիկ\"), so the internal break gets the catalog's declared _INTERNAL_SEP rather than the period the sampled day happened to use — a period is ambiguous with the abbreviation dots elsewhere in these names. Same treatment as third_day_of_the_4.",
   "source_hy": "Ը օր Զատկի. Կրկնազատիկ (Նոր կիւրակէ)",
   "status": "ok",
   "variant_of": ""

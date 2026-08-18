@@ -27,7 +27,7 @@ observance id gave ``diff_components`` a declared equivalence to match on, which
 Armenian analogue of ``canonical_commem`` and took the count 11 -> 6. Those days are
 reported as VARIANT_NAME instead, so they stay visible without being counted as defects.
 
-The residue is still not all engine defect. The 6 contradictions are:
+The residue is still not all engine defect. The 5 contradictions are:
 
   * 2 days where the source GLUED two commemorations that each have their own id (Sargis +
     Atom, Eugenius + Andrew) and the engine serves only the first. A real difference, not a
@@ -35,9 +35,12 @@ The residue is still not all engine defect. The 6 contradictions are:
   * 2 word-form variants (``Առաջաւորի``/``Առաջաւորաց``, ``Ծննդեան``/``Ս. Ծննդեան``) where
     the engine serves the source's dominant spelling, but which the DOMINANT_FORM
     classifier is deliberately too crude to group -- it compares spacing and case, not
-    morphology;
-  * 2 segmentation differences, where the engine splits a day into components on different
-    boundaries than the source's Armenian does.
+    morphology. Neither minority spelling is in the TSV to correct: a row holds ONE
+    ``source_hy``, sampled from one day, and these are what the source printed on another;
+  * 1 segmentation difference (2005-01-01), where the source's Armenian glues ``Կաղանդ.
+    տարեմուտ`` onto the saints that follow while the English carries it with the day count.
+    A boundary disagreement, not a spelling: it can only move if the catalog stops being
+    keyed on English components.
 
 (The deliberate ``Ա``-for-``Բ`` Sunday-after-Pentecost ordinal correction used to be a
 twelfth. It is now folded, along with ``Սկիզբն պահոց`` -> ``Սկիզբն շաբաթական պահոց``.)
@@ -66,7 +69,7 @@ from tests._reference_cache import requires_reference_cache_hy          # noqa: 
 
 # Days where the engine emits an Armenian component the source does not have.
 # Monotonic DOWN. The target is 0, as on the English side.
-HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "6"))
+HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "5"))
 
 # Days where the engine drops an Armenian component the source states. Monotonic DOWN.
 HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "2"))
@@ -88,8 +91,14 @@ HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "5"))
 # Days identical to the source except that a catalog entry's internal break uses the
 # catalog's own delimiter rather than the component separator. Monotonic DOWN, but only
 # reachable by a source change: these are correct as served.
+#
+# This one went 6 -> 7, the single exception the "never raise a ceiling" rule allows,
+# because nothing got worse: 2002-04-07 MOVED here out of CONTRADICTION when
+# octave_of_easter_new's internal break was normalized to _INTERNAL_SEP (it had shipped the
+# period the sampled day happened to use, so the delimiter read-back could not fire). The
+# sum of the two counts is unchanged at 12, and the stronger of them went down.
 HY_INTERNAL_DELIMITER_CEILING = int(
-    os.environ.get("HY_INTERNAL_DELIMITER_CEILING", "6"))
+    os.environ.get("HY_INTERNAL_DELIMITER_CEILING", "7"))
 
 # Days whose Armenian name matches the source byte for byte (under the registered
 # orthography reversal). Monotonic UP.

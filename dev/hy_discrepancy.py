@@ -43,14 +43,15 @@ Findings are classified, strongest first:
     ``dev/build_observance_catalog._INTERNAL_SEP``.
 
 Unlike the English side, none of these is zero yet, and the residue is not all engine
-defect. Of the 11 contradictions at the time of writing: 7 are days where the shipped
-table's commemoration enumerates a different companion list than the year the cache
-sampled -- the same class ``canonical_commem`` folds away on the English side, which has
-no Armenian analogue; 2 are word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the
-engine again serves the dominant form, but which ``normalized`` is too crude to group --
-it compares spacing and case, not morphology, on purpose; and 2 are single-day punctuation
-differences. Callers should treat the counts as ratchets, not as a defect list: what
-matters is that no NEW divergence appears.
+defect. Of the 5 contradictions at the time of writing: 2 are days where the source glues
+a second commemoration onto the first in one run and the shipped table serves only the
+first (Sargis + Atom, Eugenius + Andrew) -- a real content difference, and the only
+genuine defects in the set; 2 are word-form variants (``Առաջաւորի``/``Առաջաւորաց``,
+``Ծննդեան``/``Ս. Ծննդեան``) where the engine serves the source's dominant form, but which
+``normalized`` is too crude to group -- it compares spacing and case, not morphology, on
+purpose; and 1 is a segmentation difference, where the source's Armenian cuts the day into
+components at a different place than its English does. Callers should treat the counts as
+ratchets, not as a defect list: what matters is that no NEW divergence appears.
 
 Coverage caveat: ``dev/reference_data_hy/`` holds 433 days, one representative date per
 distinct English feast string (``dev/fetch_translations.py`` builds it that way), not the
