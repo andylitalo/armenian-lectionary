@@ -117,6 +117,25 @@ class TestApprovedNames(unittest.TestCase):
             f"{len(silent)} row(s) have no id and no note explaining why. Add the reason "
             "to dev/feast_name_review.NO_ID_REASONS so it survives a rebuild.")
 
+    def test_source_text_never_reaches_a_served_name(self):
+        """``source_en`` is a key and a record, never an ingredient.
+
+        ``apply_ground_truth`` passes unknown text through unchanged, which is deliberate
+        (a newly appearing name should surface for review, not be silently rewritten). The
+        invariant that makes that safe is this one: every component the source publishes
+        has a row, so the lookup always hits and the answer is always ``approved_en``
+        verbatim. Nothing is ever assembled out of the raw text.
+        """
+        from dev.source_corrections import apply_ground_truth
+
+        approved_for = {r["source_en"]: r["approved_en"] for r in self.rows}
+        passed_through = [src for src, want in approved_for.items()
+                          if apply_ground_truth(src) != want]
+        self.assertEqual(
+            passed_through[:5], [],
+            f"{len(passed_through)} source component(s) do not resolve to their approved "
+            "text through the lookup, so the raw spelling would reach a caller")
+
     def test_open_questions_are_still_flagged(self):
         """The unresolved rows keep their question until someone answers it."""
         open_rows = [r for r in self.rows if r["status"] == "review"]

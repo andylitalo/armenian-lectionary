@@ -198,15 +198,36 @@ class TestFeastSpelling(unittest.TestCase):
     _TYPOS = ("Staint", "Theordore", "Transifiguration", "Grogoris", "Marcarius",
               "Hermongenes", "Alerius", "Canditus", "Eugraphius", "Fiest")
 
-    def test_fold_is_narrow_and_idempotent(self):
-        from dev.source_corrections import normalize_feast_spelling
-        self.assertEqual(normalize_feast_spelling("Theordore Stratelates"),
-                         "Theodore Stratelates")
-        once = normalize_feast_spelling("Staint Gregory, Grogoris, Marcarius")
-        self.assertEqual(once, "Saint Gregory, Grigoris, Macarius")
-        self.assertEqual(once, normalize_feast_spelling(once))          # idempotent
-        # Leaves correct text untouched (no over-matching of e.g. 'Macarius'/'Saint').
-        self.assertEqual(normalize_feast_spelling("Saint Macarius"), "Saint Macarius")
+    def test_every_typo_resolves_through_a_review_row(self):
+        """Each misspelling is corrected by the ROW that carries it, not by its word.
+
+        These were a word-level fold once, applied to any text containing the letters.
+        That reached past the evidence: "Marcarius" -> "Macarius" was established on three
+        named components and applied to every component in the corpus. As rows, a fix
+        lands exactly where a reviewer looked.
+        """
+        import json
+        import os
+        gt_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                               "dev", "feast_name_ground_truth.json")
+        with open(gt_path, encoding="utf-8") as fh:
+            ground_truth = json.load(fh)
+        for typo in self._TYPOS:
+            rows = [src for src in ground_truth if typo in src]
+            self.assertTrue(rows, f"no review row carries the source typo {typo!r}")
+            unfixed = [src for src in rows if typo in ground_truth[src]["approved_en"]]
+            self.assertEqual(unfixed, [],
+                             f"{typo!r} survives into approved_en on {len(unfixed)} row(s)")
+
+    def test_lookup_is_whole_component_and_idempotent(self):
+        """The fold cannot fire inside a longer name that merely starts the same way."""
+        from dev.source_corrections import apply_ground_truth
+        self.assertEqual(apply_ground_truth("Feast day"), "Fast day")
+        # The Belt feast is correctly published and starts with the same two words.
+        belt = "Feast day of the Discovery of the Belt of the Holy Mother of God"
+        self.assertEqual(apply_ground_truth(belt), belt)
+        once = apply_ground_truth("Saint Theodoron the Martyr")
+        self.assertEqual(once, apply_ground_truth(once))
 
     def test_shipped_data_files_carry_no_typo(self):
         import glob

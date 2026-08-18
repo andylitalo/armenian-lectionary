@@ -165,65 +165,15 @@ def normalize_confusables(text):
     return text
 
 
-# Plain-spelling typos in the *English* feast text (distinct from the character-level
-# confusables above -- these are ordinary misspellings of saint/feast names). Each is
-# uniformly the source's modal spelling, contradicted by the form the church actually uses
-# (and, where the saint recurs, by the engine's own id/Armenian rendering). Folded so the
-# name reads correctly. Applied to every reference_data reader (apply_source_corrections),
-# so the shipped table, the hy name map, and the saint schedule all rebuild with the
-# corrected names, and inside canonical_commem so the feast-name test compares like-for-like.
-# The shipped artifacts carry the corrected spelling directly.
-_FEAST_SPELLING_FIXES = {
-    "Staint": "Saint",                     # Staint Gregory ... -> Saint
-    "Theordore": "Theodore",               # Theordore Stratelates
-    "Transifiguration": "Transfiguration",
-    "Grogoris": "Grigoris",                # grandson of St. Gregory the Illuminator
-    "Marcarius": "Macarius",               # id: ..._makarios_...
-    "Hermongenes": "Hermogenes",
-    "Alerius": "Valerius",                 # id: ..._valerian; hy: Վաղերիոսի
-    "Canditus": "Candidus",
-    "Eugraphius": "Eugraphus",             # Menas, Hermogenes and Eugraphus
-    "Begining": "Beginning",               # "Begining of the Fast"; hy Սկիզբն պահոց
-    "Antiosh": "Antioch",                  # Ignatius, bishop of Antioch
-    "Fiest of": "Feast of",                # "Fiest of the Conception ..." (26x)
-}
-
-
-# --------------------------------------------------------------------------- #
-# Source TEXT repairs beyond single misspelled words used to live here, as a hand-written
-# dict of substring replacements. They are now ordinary rows in dev/feast_name_review.tsv:
-# a reviewer edits ``approved_en``, ``dev/build_ground_truth.py`` freezes it, and
-# ``_ground_truth_fixes`` below picks it up. One registry, stated where the decision is
-# made, instead of the same fold written in two places.
+# Plain-spelling typos in the source's English feast text ("Theordore", "Staint",
+# "Fiest of") used to be folded here, word by word, by a ``normalize_feast_spelling``
+# applied to every reader. They are review rows now, like every other correction: each typo
+# occurs in one to three named components, so it belongs to the name that has it rather
+# than to the word, and ``apply_ground_truth`` resolves the whole component in one lookup.
 #
-# The evidence for each is in docs/feast-name-corrections.md (sections 1-6) and in the
-# row's own ``note``. Removing the dict was verified, not assumed: with it emptied, every
-# shipped artifact rebuilds byte-identically and the whole suite passes, because every
-# string it matched has a reviewed row whose approved text already carries the fix -- which
-# ``tests/test_feast_name_review`` guarantees, since every component the source publishes
-# must have a row.
-#
-# ``_FEAST_SPELLING_FIXES`` above stays. It is the single-word register, and unlike the
-# multi-word repairs it is the only remaining producer of the ALTERNATE key in
-# ``_ground_truth_fixes`` -- the one that lets a fold fire on artifact text that was
-# already run through an older correction chain.
-# --------------------------------------------------------------------------- #
-
-
-
-def normalize_feast_spelling(text):
-    """Fold the source's known single-word misspellings to the corrected form.
-
-    Multi-word repairs used to run here too; they are reviewed rows in
-    dev/feast_name_review.tsv now, applied by ``apply_ground_truth``. Every replacement is
-    idempotent, so applying this twice is the same as applying it once.
-    """
-    if not text:
-        return text
-    for wrong, right in _FEAST_SPELLING_FIXES.items():
-        text = text.replace(wrong, right)
-    return text
-
+# Folding by word was reaching further than the evidence did. "Marcarius" -> "Macarius" was
+# stated once and applied to any component containing those nine letters, including ones no
+# reviewer had seen; a row applies exactly where a human looked.
 
 # --------------------------------------------------------------------------- #
 # Calendar-POSITION label normalization
@@ -420,51 +370,38 @@ _GROUND_TRUTH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 @functools.lru_cache(maxsize=1)
-def _ground_truth_fixes():
-    """[(source, approved), ...], LONGEST source first.
+def _ground_truth_lookup():
+    """``{any known spelling of a component -> the approved English}``.
 
-    Composite (glued-day) components contain their own sub-component rows as literal
-    substrings -- e.g. "Saints Cyricus..., and Saints Gordius..." contains "Saints
-    Cyricus..." verbatim. Iterating shortest-first lets the sub-component's fix fire first
-    and consume that substring, so the composite's OWN entry (which would have fixed the
-    remaining half too) no longer matches. Longest-first guarantees a composite gets first
-    claim on its full text before any of its parts can.
+    A LOOKUP, not a transformation. The review row states what an observance is called, so
+    resolving a name is a dictionary hit on the whole component -- never string surgery on
+    the text, and never a substring fired inside a longer name.
 
-    Each entry is registered under BOTH the pristine raw source AND, where it differs, the
-    older confusables/spelling chain's output for that source. ``saint_schedule.json`` is a
-    checked-in artifact, not rebuilt from the raw cache (its own generator is not
-    reproducible -- see CLAUDE.md); some of its labels were already run through the OLD
-    fixes when it was last built (e.g. "Gregory of Theologian" -> "Gregory the Theologian"
-    is already baked in), so the text this fold actually sees there is that older-corrected
-    form, not the raw one. Keying on both means the fold fires either way.
+    Two keys per row, both exact and whole-component:
+
+      * ``source_en``  -- what sacredtradition.am published. This is the only thing the raw
+        column is used for; it is a key into this table and a record for the reviewer, and
+        it never contributes to the answer.
+      * ``approved_en`` -- mapping to itself. That is what makes the fold idempotent, and
+        it resolves text that has ALREADY been corrected, which is what checked-in
+        artifacts carry (``saint_schedule.json`` is not rebuilt from the raw cache).
+
+    This replaced a longest-first substring pass plus an exact-match short-circuit to
+    protect it. The hazard was structural: a short row ("Feast day" -> "Fast day") fired
+    inside a longer one that merely started the same way, rewriting the correctly-published
+    ``Feast day of the Discovery of the Belt of the Holy Mother of God``. Whole-component
+    lookup cannot do that, so the guard has nothing left to guard.
     """
     with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
         data = json.load(fh)
-    fixes = {}
+    lookup = {}
     for src, v in data.items():
         approved = v["approved_en"]
-        if not approved or approved == src:
+        if not approved:
             continue
-        fixes[src] = approved
-        old = normalize_feast_spelling(normalize_confusables(src))
-        if old != src:
-            fixes[old] = approved
-    ordered = sorted(fixes.items(), key=lambda pair: len(pair[0]), reverse=True)
-    return ordered
-
-
-@functools.lru_cache(maxsize=1)
-def _ground_truth_reviewed():
-    """Every reviewed component, INCLUDING the rows whose approved text equals the source.
-
-    ``_ground_truth_fixes`` drops those no-op rows -- there is nothing to replace. But they
-    still carry information: they say "a human looked at this exact component and it is
-    already right", which is exactly what a shorter fix firing inside them would violate.
-    See ``apply_ground_truth``.
-    """
-    with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
-        return {src: v["approved_en"]
-                for src, v in json.load(fh).items() if v["approved_en"]}
+        lookup[src] = approved
+        lookup[approved] = approved
+    return lookup
 
 
 @functools.lru_cache(maxsize=1)
@@ -493,35 +430,17 @@ def ground_truth_hy_fixes():
 
 
 def apply_ground_truth(text):
-    """Fold every reviewed component in ``text`` to its approved English spelling.
+    """Resolve every component of ``text`` to its approved English name.
 
-    Component-exact first, substring chain second. The ground truth is keyed by COMPONENT
-    (see dev/build_ground_truth.py's docstring on why), so when a component matches a
-    reviewed row outright, that row is the answer and no other fix may touch it.
-
-    Without that short-circuit a short fix fires inside a longer reviewed component that
-    merely starts the same way. ``_ground_truth_fixes``'s longest-first ordering only
-    protects the case where BOTH are changing rows; it cannot protect a no-op row, because
-    no-op rows are not in the list at all. Registering ``Feast day`` -> ``Fast day``
-    (the Dec 9 marker) turned that latent hole into a live one: it rewrote
-    ``Feast day of the Discovery of the Belt of the Holy Mother of God`` -- a different,
-    correctly-spelled feast on 26 other days -- into ``Fast day of the Discovery ...``.
-
-    The substring pass still runs on components with no exact row, because a composite the
-    source glued from two commemorations may have no row of its own while each half does.
+    Whole-component lookup, nothing else. Every distinct component the source publishes has
+    a review row -- ``tests/test_feast_name_review`` requires it -- so for cached text the
+    lookup always hits, and text it does not know is passed through untouched so that a
+    newly appearing name shows up for review instead of being silently rewritten.
     """
     if not text:
         return text
-    reviewed = _ground_truth_reviewed()
-    folded = []
-    for component in text.split(_FEAST_SEP):
-        if component in reviewed:
-            folded.append(reviewed[component])
-            continue
-        for wrong, right in _ground_truth_fixes():
-            component = component.replace(wrong, right)
-        folded.append(component)
-    return _FEAST_SEP.join(folded)
+    lookup = _ground_truth_lookup()
+    return _FEAST_SEP.join(lookup.get(c, c) for c in text.split(_FEAST_SEP))
 
 
 def apply_source_corrections(day):
@@ -535,8 +454,7 @@ def apply_source_corrections(day):
     day["readings"] = apply_reading_order(day.get("date", ""), day.get("readings", []))
     day["readings"] = apply_book_name_fixes(day.get("readings", []))
     day["feast"] = normalize_position_label(
-        normalize_feast_spelling(normalize_confusables(
-            apply_ground_truth(day.get("feast", "")))),
+        normalize_confusables(apply_ground_truth(day.get("feast", ""))),
         day.get("date", ""))
     return day
 
@@ -550,7 +468,7 @@ def canonical_commem(commem):
     reviewed ground truth -- so the source's raw spelling and the engine's approved one
     canonicalize to the same string and register as a reviewed difference, not a
     contradiction."""
-    commem = normalize_feast_spelling(normalize_confusables(apply_ground_truth(commem)))
+    commem = normalize_confusables(apply_ground_truth(commem))
     commem = commem.replace("Fiest of", "Feast of")     # sacredtradition.am typo
     for canonical, pred in _FEAST_CANON_RULES:
         if pred(commem):

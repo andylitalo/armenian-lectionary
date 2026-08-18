@@ -72,8 +72,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import REF_DIR                                        # noqa: E402
 from dev.source_corrections import (                                   # noqa: E402
-    apply_ground_truth, normalize_confusables, normalize_feast_spelling,
-    normalize_position_label,
+    apply_ground_truth, normalize_confusables, normalize_position_label,
 )
 from armenian_lectionary.engine import (                                # noqa: E402
     _FEAST_SEP, FEAST_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
@@ -259,7 +258,7 @@ def corrected(text):
     property of that day rather than of the component.
     """
     return normalize_position_label(
-        normalize_feast_spelling(normalize_confusables(apply_ground_truth(text))))
+        normalize_confusables(apply_ground_truth(text)))
 
 
 def armenian_for(approved, hy):

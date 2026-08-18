@@ -55,11 +55,11 @@ enough that exhaustive human review is practical, and two of the corrections bel
 only from that.
 Enforcement: `tests/test_source_text.py` (the detectors stay silent) and
 `tests/test_feast_name_review.py` (the engine serves the approved names).
-Registry: the `approved_en` / `approved_hy` columns of `dev/feast_name_review.tsv`. A
-whole-component fold needs nothing else — `build_ground_truth.py` freezes the row and
-`apply_ground_truth` serves it, keyed under both the raw and spelling-corrected forms.
-`dev/source_corrections._FEAST_SPELLING_FIXES` remains for single-word typos, which are not
-components and so cannot be expressed as a row.
+Registry: the `approved_en` / `approved_hy` columns of `dev/feast_name_review.tsv`, and
+nothing else. `build_ground_truth.py` freezes the row and `apply_ground_truth` resolves a
+component by whole-component lookup — `source_en` and `approved_en` are both keys, and the
+answer is always `approved_en` verbatim. There is no substring pass and no word-level fold,
+so a correction can only ever land on the component a reviewer actually looked at.
 
 ---
 
