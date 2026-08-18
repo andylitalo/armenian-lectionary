@@ -370,16 +370,23 @@ readings; a day headed by Gregory the Theologian instead ships his own. So closi
 omissions changes no reading anywhere.
 
 **Where the data is.** At `cyricus_and_his:01-22`, six cached years share the key —
-2001, 2004, 2007, 2009 print Cyricus + Gordius; 2015 and 2026 add Vahan.
-`build_table.unanimous_feast` keeps only what they agree on, which is the table doing its
-job: a table key is a liturgical coordinate shared by civil years, and the packing is not
-invariant across them. So the packing belongs where the per-year-type facts already live —
-`second_volume_cycles.json`, keyed by the year's Easter date, which today stores **one**
-`(zone, saint_id)` per date and would need an **ordered list of ids**. The Second Volume
-states them explicitly, page by page: p.588 prints
-*"22. Thursday. Cyriacus and Julitta, and Vahan of Goghtn, and Gordius, Polyeuctus, and
-Grigoris."* The engine would render the packing from that list through the catalog, and keep
-the head canon's readings, which is what the source itself does.
+2001, 2004, 2007, 2009 print Cyricus + Gordius; 2015 and 2026 add Vahan. Commemorations are
+not subject to unanimity (see `build_table.unanimous_feast`, which applies it to calendar
+components only); they go through `modal_feast`, so the four years outvote the two and Vahan
+is dropped. A table key is a liturgical coordinate shared by civil years and the packing is
+not invariant across them, so the majority is the wrong rule here: under preface **Sixth**
+the fuller packing is the one to keep, since naming the companions is the book's own
+instruction and dropping one is not.
+
+Four of the five days close that way, at build time, with no new source data. The fifth
+(2008-07-28) has no table entry at all and falls to `second_volume_cycles.json`, which is
+keyed by the year's Easter date and today stores **one** `(zone, saint_id)` per date where
+it would need an **ordered list of ids**. The Second Volume states the packings explicitly,
+page by page: p.588 prints *"22. Thursday. Cyriacus and Julitta, and Vahan of Goghtn, and
+Gordius, Polyeuctus, and Grigoris."* The engine would render that list through the catalog
+and keep the head canon's readings, which is what the source itself does.
+
+Both are out of scope for this branch, and scoped for a later one.
 
 **The generator no longer blocks it.** `dev/build_second_volume_cycles.py` was the reason
 this was deferred: CLAUDE.md recorded that re-running it did not reproduce its checked-in
