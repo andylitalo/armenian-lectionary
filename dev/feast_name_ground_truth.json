@@ -551,12 +551,28 @@
   "source_hy": "Ե օր Ս. Ծննդեան պահոց",
   "status": "ok"
  },
+ "Fifth day of the Fast of Prophet Elijah": {
+  "approved_en": "Fifth day of the Fast of Prophet Elijah",
+  "approved_hy": "Եղիական պահք",
+  "id": "fifth_day_of_the_8",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Fifth day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Fifth day of the Fast of St. Gregory the Illuminator",
-  "approved_hy": "Ե օր Լուսաւորչի պահոց",
+  "approved_hy": "Սուրբ Գրիգոր Լուսավորչի պահք",
   "id": "illuminator_fast_day_5",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Ե օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Fifth day of the Fast of St. James of Nisibis": {
+  "approved_en": "Fifth day of the Fast of St. James of Nisibis",
+  "approved_hy": "Սուրբ Հակոբի պահք",
+  "id": "fifth_day_of_the_9",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
   "status": "generated"
  },
  "Fifth day of the Fast of the Catechumens": {
@@ -641,10 +657,18 @@
  },
  "First day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "First day of the Fast of St. Gregory the Illuminator",
-  "approved_hy": "Ա օր Լուսաւորչի պահոց",
+  "approved_hy": "Սուրբ Գրիգոր Լուսավորչի պահք",
   "id": "illuminator_fast_day_1",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Ա օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "First day of the Fast of St. James of Nisibis": {
+  "approved_en": "First day of the Fast of St. James of Nisibis",
+  "approved_hy": "Սուրբ Հակոբի պահք",
+  "id": "first_day_of_the_7",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
   "status": "generated"
  },
  "First day of the Fast of the Catechumens": {
@@ -903,12 +927,28 @@
   "source_hy": "Դ օր Ս. Ծննդեան պահոց",
   "status": "ok"
  },
+ "Fourth day of the Fast of Prophet Elijah": {
+  "approved_en": "Fourth day of the Fast of Prophet Elijah",
+  "approved_hy": "Եղիական պահք",
+  "id": "fourth_day_of_the_8",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Fourth day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Fourth day of the Fast of St. Gregory the Illuminator",
-  "approved_hy": "Դ օր Լուսաւորչի պահոց",
+  "approved_hy": "Սուրբ Գրիգոր Լուսավորչի պահք",
   "id": "illuminator_fast_day_4",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Դ օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Fourth day of the Fast of St. James of Nisibis": {
+  "approved_en": "Fourth day of the Fast of St. James of Nisibis",
+  "approved_hy": "Սուրբ Հակոբի պահք",
+  "id": "fourth_day_of_the_9",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
   "status": "generated"
  },
  "Fourth day of the Fast of the Catechumens": {
@@ -934,6 +974,14 @@
   "note": "",
   "source_hy": "Դ օր Վարդավառի պահոց",
   "status": "ok"
+ },
+ "Friday Fast": {
+  "approved_en": "Friday Fast",
+  "approved_hy": "Ուրբաթի պահք",
+  "id": "friday_fast",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
  },
  "Great Friday": {
   "approved_en": "Great Friday",
@@ -2295,12 +2343,28 @@
   "source_hy": "Բ օր Ս. Ծննդեան պահոց",
   "status": "ok"
  },
+ "Second day of the Fast of Prophet Elijah": {
+  "approved_en": "Second day of the Fast of Prophet Elijah",
+  "approved_hy": "Եղիական պահք",
+  "id": "second_day_of_the_8",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Second day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Second day of the Fast of St. Gregory the Illuminator",
-  "approved_hy": "Բ օր Լուսաւորչի պահոց",
+  "approved_hy": "Սուրբ Գրիգոր Լուսավորչի պահք",
   "id": "illuminator_fast_day_2",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Բ օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Second day of the Fast of St. James of Nisibis": {
+  "approved_en": "Second day of the Fast of St. James of Nisibis",
+  "approved_hy": "Սուրբ Հակոբի պահք",
+  "id": "second_day_of_the_9",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
   "status": "generated"
  },
  "Second day of the Fast of the Catechumens": {
@@ -2414,6 +2478,14 @@
   "note": "",
   "source_hy": "Է օր Վերափոխման",
   "status": "ok"
+ },
+ "Seventh day of the Fast of Prophet Elijah": {
+  "approved_en": "Seventh day of the Fast of Prophet Elijah",
+  "approved_hy": "Եղիական պահք",
+  "id": "seventh_day_of_the_2",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
  },
  "Seventy Two Holy Disciples of Christ": {
   "approved_en": "Seventy Two Holy Disciples of Christ",
@@ -2550,6 +2622,14 @@
   "note": "",
   "source_hy": "Զ օր Ս. Ծննդեան պահոց",
   "status": "ok"
+ },
+ "Sixth day of the Fast of Prophet Elijah": {
+  "approved_en": "Sixth day of the Fast of Prophet Elijah",
+  "approved_hy": "Եղիական պահք",
+  "id": "sixth_day_of_the_3",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
  },
  "Staint Gregory the Illuminator's coming out of Pit": {
   "approved_en": "St. Gregory the Illuminator's coming out of Pit",
@@ -2839,12 +2919,28 @@
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
   "status": "fixed"
  },
+ "Third day of the Fast of Prophet Elijah": {
+  "approved_en": "Third day of the Fast of Prophet Elijah",
+  "approved_hy": "Եղիական պահք",
+  "id": "third_day_of_the_8",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Third day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Third day of the Fast of St. Gregory the Illuminator",
-  "approved_hy": "Գ օր Լուսաւորչի պահոց",
+  "approved_hy": "Սուրբ Գրիգոր Լուսավորչի պահք",
   "id": "illuminator_fast_day_3",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Գ օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Third day of the Fast of St. James of Nisibis": {
+  "approved_en": "Third day of the Fast of St. James of Nisibis",
+  "approved_hy": "Սուրբ Հակոբի պահք",
+  "id": "third_day_of_the_9",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
   "status": "generated"
  },
  "Third day of the Fast of the Catechumens": {
@@ -3182,6 +3278,14 @@
   "note": "",
   "source_hy": "ԻԳ օր Մեծի պահոց",
   "status": "ok"
+ },
+ "Wednesday Fast": {
+  "approved_en": "Wednesday Fast",
+  "approved_hy": "Չորեքշաբթիի պահք",
+  "id": "wednesday_fast",
+  "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
+  "source_hy": "",
+  "status": "generated"
  },
  "Еighth day of Nativity": {
   "approved_en": "Eighth day of Nativity",

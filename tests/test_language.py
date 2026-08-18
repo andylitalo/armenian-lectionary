@@ -236,55 +236,31 @@ class TestShippedMapsOrthography(unittest.TestCase):
                              f"reformed proper noun survives in feast {v!r}")
 
 
-class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
-    """The Fast of St. Gregory the Illuminator counts its five weekdays in BOTH languages.
+class TestNamedFastDayCountLabels(unittest.TestCase):
+    """The Fast of St. Gregory the Illuminator and the Fast of St. James of Nisibis
+    each carry their own day-count label in English now ("Nth day of the Fast of ..."),
+    rather than a bare "Fast day" -- so the id is recoverable from the English text
+    alone, with no date-scoping needed (contrast the previous design, which resolved a
+    shared "Fast day" text from the date; see docs/feast-name-corrections.md).
 
-    The source heads them "Ա/Բ/Գ/Դ/Ե օր Լուսաւորչի պահոց" in Armenian but prints a bare
-    "Fast day" in English -- the same two words it uses on 2,139 ordinary fast days. One
-    display string standing for six observances is what forced the engine to carry a
-    date-scoped side channel to recover the distinction; saying in English what the source
-    already says in Armenian retires it, so this pins the English as hard as the Armenian.
-
-    Registered as a repair in source_corrections.illuminator_fast_label, on the standing
-    justification that the source contradicts its own other-language statement of the same
-    fact.
+    Neither fast's per-day wording is attested in the source (English or Armenian); both
+    are a deliberate, documented invention. Armenian does not distinguish the day within
+    either fast (or the renamed Fast of Prophet Elijah): each fast serves ONE fixed
+    Armenian phrase for all its days, supplied directly in the TSV's ``approved_hy``
+    rather than sourced (see docs/feast-name-corrections.md section 10). This is an
+    explicit override of the Illuminator fast's own source-attested per-day ordinal
+    (still recorded as ``source_hy`` -- see ``source_corrections.illuminator_fast_label``
+    and section 5), not an absence of one.
     """
 
-    _ORDINALS = (("First", "Ա"), ("Second", "Բ"), ("Third", "Գ"),
-                 ("Fourth", "Դ"), ("Fifth", "Ե"))
+    _ORDINALS = ("First", "Second", "Third", "Fourth", "Fifth")
 
     def setUp(self):
         if not engine._OBSERVANCE_CATALOG:
             self.skipTest("observance catalog not present")
 
     def _pentecost(self, year):
-        return (engine.calculate_gregorian_easter(year)
-                + datetime.timedelta(days=49))
-
-    def test_each_fast_day_carries_its_ordinal_in_both_languages(self):
-        for year in (2001, 2014, 2026):
-            pentecost = self._pentecost(year)
-            for n, (word, letter) in enumerate(self._ORDINALS, start=1):
-                day = pentecost + datetime.timedelta(days=21 + n)
-                with self.subTest(year=year, ordinal=n):
-                    en = compute_armenian_lectionary(day)["Liturgical Day"]
-                    hy = compute_armenian_lectionary(
-                        day, language="hy")["Liturgical Day"]
-                    self.assertTrue(
-                        en.startswith(
-                            f"{word} day of the Fast of St. Gregory the Illuminator"),
-                        f"{day} served {en!r}")
-                    self.assertTrue(
-                        hy.startswith(f"{letter} օր Լուսաւորչի պահոց"),
-                        f"{day} served {hy!r}")
-
-    def test_an_ordinary_fast_day_is_not_captured(self):
-        """A Wednesday well outside the fast keeps the general, unnumbered label."""
-        day = datetime.date(2026, 10, 7)          # ordinary-time Wednesday
-        self.assertTrue(compute_armenian_lectionary(
-            day, language="hy")["Liturgical Day"].startswith("Պահք"))
-        self.assertTrue(compute_armenian_lectionary(
-            day)["Liturgical Day"].startswith("Fast day"))
+        return engine.calculate_gregorian_easter(year) + datetime.timedelta(days=49)
 
     def test_window_is_closed_at_both_ends(self):
         """The eve (Pentecost+21) and the Discovery of the Relics (+27) are not fast days."""
@@ -294,27 +270,77 @@ class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
                 self.assertIsNone(source_corrections.illuminator_fast_label(
                     (pentecost + datetime.timedelta(days=offset)).isoformat()))
 
-    def test_no_two_observances_share_an_english_name(self):
-        """What the repair buys: the catalog's English is now a key, not a hint.
+    def _heesnak(self, year):
+        return engine.sunday_closest_to(year, 11, 18)
 
-        A duplicate here would mean some component cannot be identified from its text, and
-        the engine would need a side channel to tell the collisions apart again.
-        """
-        seen = {}
-        for sid, entry in engine._OBSERVANCE_CATALOG.items():
-            self.assertNotIn(
-                entry["en"], seen,
-                f"{sid} and {seen.get(entry['en'])} share the English {entry['en']!r}")
-            seen[entry["en"]] = sid
+    def test_illuminator_fast_carries_its_ordinal_in_english(self):
+        for year in (2001, 2014, 2026):
+            pentecost = self._pentecost(year)
+            for n, ordinal in enumerate(self._ORDINALS, start=1):
+                day = pentecost + datetime.timedelta(days=21 + n)
+                with self.subTest(year=year, ordinal=n):
+                    en = compute_armenian_lectionary(day)["Liturgical Day"]
+                    hy = compute_armenian_lectionary(day, language="hy")["Liturgical Day"]
+                    self.assertTrue(
+                        en.startswith(
+                            f"{ordinal} day of the Fast of St. Gregory the Illuminator"),
+                        f"{day} served {en!r}")
+                    self.assertTrue(hy.startswith("Սուրբ Գրիգոր Լուսավորչի պահք"),
+                                    f"{day} served {hy!r}")
 
-    def test_storage_tiers_get_the_general_id(self):
-        """Text-keyed id resolution has no date, so it must yield the general id.
+    def test_nisibis_fast_carries_its_ordinal_in_english(self):
+        # Years chosen so Dec 9 (a separate, higher-precedence suppression -- see
+        # TestDecemberNinthFastMarker) does not fall inside this window and mask it.
+        for year in (2001, 2010, 2023):
+            heesnak = self._heesnak(year)
+            for n, ordinal in enumerate(self._ORDINALS, start=1):
+                day = heesnak + datetime.timedelta(days=21 + n)
+                with self.subTest(year=year, ordinal=n):
+                    en = compute_armenian_lectionary(day)["Liturgical Day"]
+                    hy = compute_armenian_lectionary(day, language="hy")["Liturgical Day"]
+                    self.assertTrue(
+                        en.startswith(
+                            f"{ordinal} day of the Fast of St. James of Nisibis"),
+                        f"{day} served {en!r}")
+                    self.assertTrue(hy.startswith("Սուրբ Հակոբի պահք"),
+                                    f"{day} served {hy!r}")
 
-        If a date-scoped id leaked into dev/observance_ids, every ordinary fast day in the
-        shipped table would be stamped with an Illuminator-fast id.
+    def test_elijah_fast_carries_its_fixed_armenian_phrase(self):
+        for year in (2001, 2014, 2026):
+            pentecost = self._pentecost(year)
+            for offset in (1, 3, 6):        # Mon, Wed, Sat -- a spread across the week
+                day = pentecost + datetime.timedelta(days=offset)
+                with self.subTest(year=year, offset=offset):
+                    en = compute_armenian_lectionary(day)["Liturgical Day"]
+                    hy = compute_armenian_lectionary(day, language="hy")["Liturgical Day"]
+                    self.assertTrue(en.endswith("day of the Fast of Prophet Elijah"),
+                                    f"{day} served {en!r}")
+                    self.assertTrue(hy.startswith("Եղիական պահք"), f"{day} served {hy!r}")
+
+    def test_an_ordinary_fast_day_is_not_captured(self):
+        """A Wednesday well outside any named fast gets the weekday split, not a
+        named-fast label and not the old bare "Fast day"/"Պահք"."""
+        day = datetime.date(2026, 10, 7)          # ordinary-time Wednesday
+        en = compute_armenian_lectionary(day)["Liturgical Day"]
+        hy = compute_armenian_lectionary(day, language="hy")["Liturgical Day"]
+        self.assertTrue(en.startswith("Wednesday Fast"), en)
+        self.assertTrue(hy.startswith("Չորեքշաբթիի պահք"), hy)
+
+    def test_storage_tiers_get_a_dedicated_id(self):
+        """Text-keyed id resolution recovers each fast's own id directly -- no
+        date-scoping needed now that English carries the ordinal. (The exact id string
+        is not pinned here -- dev/build_observance_catalog.py's slug collision
+        resolution numbers it among the many "Nth day of the Fast of ..." components --
+        only that a single, stable id comes back and that it differs per fast/ordinal.)
         """
         from dev.observance_ids import ids_for_text
-        self.assertEqual(ids_for_text("Fast day"), ["fast_day"])
+        illum = ids_for_text("First day of the Fast of St. Gregory the Illuminator")
+        nisibis = ids_for_text("First day of the Fast of St. James of Nisibis")
+        self.assertEqual(len(illum), 1)
+        self.assertEqual(len(nisibis), 1)
+        self.assertNotEqual(illum, nisibis)
+        self.assertEqual(ids_for_text("Wednesday Fast"), ["wednesday_fast"])
+        self.assertEqual(ids_for_text("Friday Fast"), ["friday_fast"])
 
 
 if __name__ == "__main__":

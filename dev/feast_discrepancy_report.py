@@ -41,7 +41,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all                                    # noqa: E402
 from dev.feast_names import ORD                                     # noqa: E402
 from dev.observance_ids import is_added_text, pool_of_text          # noqa: E402
-from dev.source_corrections import canonical_commem                 # noqa: E402
+from dev.source_corrections import (                                # noqa: E402
+    canonical_commem, expected_fast_marker_components,
+)
 from armenian_lectionary.engine import (                            # noqa: E402
     _FEAST_SEP, compute_armenian_lectionary, MAX_YEAR, MIN_YEAR,
 )
@@ -61,8 +63,10 @@ PLACEHOLDERS = ("(movable ordinary-time reading)", "(commemoration)",
                 "(day not yet in validated table)")
 
 # A calendar-position component: "Nth day of <Season>", "Nth Sunday after/of <Anchor>",
-# a bare "Nth Sunday", or the "Fast day"/"Feast day" status marker.
-_POSITION = re.compile(rf"^(?:{ORD})\s+(?:day of|Sunday(?:\s+(?:after|of))?)\b|^(?:Fast|Feast) day$")
+# a bare "Nth Sunday", the "Fast day"/"Feast day" status marker, or its weekday split.
+_POSITION = re.compile(
+    rf"^(?:{ORD})\s+(?:day of|Sunday(?:\s+(?:after|of))?)\b"
+    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$")
 # Ordinal word + the family it counts within, for the wrong-ordinal diagnosis.
 _ORD_FAMILY = re.compile(rf"^({ORD})\s+(.*)$")
 
@@ -70,6 +74,15 @@ _ORD_FAMILY = re.compile(rf"^({ORD})\s+(.*)$")
 def components(feast_str):
     """The feast string's ``_FEAST_SEP``-joined components, stripped and de-blanked."""
     return [c.strip() for c in (feast_str or "").split(_FEAST_SEP) if c.strip()]
+
+
+def reconciled_components(iso, feast_str):
+    """The source's components, with a bare "Fast day"/"Feast day" marker replaced by
+    what the engine is now expected to serve for it (a weekday split, a named-fast
+    day-count label, or nothing) -- see dev.source_corrections.
+    expected_fast_marker_components and docs/feast-name-corrections.md. A day with no
+    such marker is returned unchanged."""
+    return expected_fast_marker_components(iso, components(feast_str))
 
 
 def is_position(component):
@@ -191,7 +204,7 @@ def collect():
         compared += 1
 
         contradictions, omissions, deliberate, expansions, additions = diff_components(
-            components(src), components(eng))
+            reconciled_components(iso, src), components(eng))
         if expansions:
             expanded += 1
         if additions:
@@ -240,7 +253,8 @@ def context_table(days, iso, span=2):
         eng = compute_armenian_lectionary(d)["Liturgical Day"]
 
         contradictions, omissions, _, _, _ = diff_components(
-            components(days.get(key, {}).get("feast") or ""), components(eng))
+            reconciled_components(key, days.get(key, {}).get("feast") or ""),
+            components(eng))
         if contradictions and is_casing_only(contradictions, omissions):
             mark, shown = " ⚠ casing", eng
         elif contradictions:

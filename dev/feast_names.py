@@ -37,6 +37,10 @@ _SEASONS = sorted([
     "the Fast of Assumption", "the Fast of Nativity", "the Fast of Advent",
     "the Fast of St. Gregory the Illuminator",
     "the Assumption",
+    # Engine-invented (no source witness) -- the Wed/Fri split + named-fast day-count
+    # relabeling; see docs/feast-name-corrections.md.
+    "the Fast of Prophet Elijah", "the Fast of St. Gregory the Illuminator",
+    "the Fast of St. James of Nisibis",
 ], key=len, reverse=True)
 
 # Anchor names following "Nth Sunday after/of ...". Longest-first.
@@ -103,7 +107,8 @@ def _strip_leading_position(s):
 
 
 _IS_POSITION = re.compile(
-    rf"^(?:{ORD})\s+(?:day of|Sunday(?:\s+(?:after|of))?)\b|^(?:Fast|Feast) day$")
+    rf"^(?:{ORD})\s+(?:day of|Sunday(?:\s+(?:after|of))?)\b"
+    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$")
 
 
 def is_position(component):
@@ -153,6 +158,7 @@ def commemoration_of(feast_str):
             s = s[:idx] + s[idx + len(e):]
             idx = s.find(e)
     s = s.replace("Fast day", "").replace("Feast day", "")   # fast/feast status markers
+    s = s.replace("Wednesday Fast", "").replace("Friday Fast", "")
     s = _PAREN_POS.sub("", s)
     return s.lstrip(". ,").strip()
 

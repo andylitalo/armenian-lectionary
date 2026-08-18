@@ -80,7 +80,11 @@ the arithmetic (the day is Easter + 49, and the source's own Eastertide count re
 Greek for "fiftieth". `Fifteenth` is wrong on all three.
 
 **Dec 9.** `Fast`, mistyped `Feast` — one letter, on the same row where the source also
-writes `Fiest of the Conception`. Three independent confirmations:
+writes `Fiest of the Conception`. *(As of §6 below, this marker is no longer served on Dec
+9 at all — the typo-fix above is still applied to the raw scrape, and still needed for
+`test_source_text.py`'s self-contradiction detectors, but Dec 9 now reads as just the
+Conception feast on every weekday it falls on, rather than serving the corrected marker.)*
+Three independent confirmations:
 
 - `Feast day` appears on **no other date** in the 9,861-day English corpus. A genuine
   marker meaning "this is a feast" would not be unique to one December day in a calendar
@@ -557,6 +561,90 @@ the new row carries `source_hy = Կաղանդ. տարեմուտ` and `approved_h
 there the source glues the New Year onto the **saints** (`Կաղանդ. տարեմուտ Սրբոցն Բարսղի …`)
 rather than printing it as its own component, and a review row holds one `source_hy`, not
 one per year.
+
+## 10. The Wednesday/Friday Fast split and the named-fast relabeling
+
+Unlike every correction above, this one is not justified by the source contradicting
+itself — it is a deliberate editorial departure, made explicitly with that understood.
+`Fast day` (and its Dec-9 typo `Feast day`) used to be served as a bare, undifferentiated
+marker on every weekday inside a fast — Wed/Fri in ordinary time, and every weekday of
+several named fasts. That marker is now replaced by one of three things, decided purely
+from the date:
+
+1. **True ordinary time** (no other rule below claims the day): a Wednesday becomes
+   **`Wednesday Fast`**, a Friday **`Friday Fast`**. Editorial, not sourced — the source
+   never distinguishes the two weekdays, in English or in Armenian (both read the single
+   word `Պահք`). Armenian: **`Չորեքշաբթիի պահք`** / **`Ուրբաթի պահք`**, supplied by the
+   maintainer directly in `approved_hy` (no `source_hy` witness exists for either) and
+   stored the same way every other component is — a stable, minted catalog id with the
+   Armenian as an editable value, never the Armenian text itself as a lookup key.
+2. **A named fast with its own day-count family** (Great Lent, the Fast of Nativity, the
+   Fast of the Holy Cross, the Fast of Assumption, the Fast of the Transfiguration, the
+   Fast of the Catechumens): the marker was always redundant with that family's own label
+   (`"Third day of the Fast of Assumption"`) and is simply dropped. No behavior change
+   beyond removing the duplicate text.
+3. **A named fast with no day-count family of its own**, which gets a new one, worded to
+   match this codebase's own existing eve-label phrasing:
+   - the week after Pentecost is the **Fast of Prophet Elijah** — the existing family
+     (`"Nth day of Pentecost"`) is *renamed* `"Nth day of the Fast of Prophet Elijah"`,
+     same ordinal, matching the existing `"Eve of Fast of Prophet Elijah"` eve label;
+   - the 5 weekdays after Pentecost+21 are the **Fast of St. Gregory the Illuminator** —
+     new family, `"Nth day of the Fast of St. Gregory the Illuminator"`;
+   - the 5 weekdays after Heesnak+21 (mid-Advent) are the **Fast of St. James of
+     Nisibis** — confirmed against the source cache (exact, saint-fixed text every year
+     on offsets 22–26, an eve at 21, a closing saint's day at 27 — the same shape as the
+     Illuminator fast, just not previously named by any `_POSITION_FAMILIES` entry). New
+     family, `"Nth day of the Fast of St. James of Nisibis"`.
+
+   Neither the Illuminator nor the Nisibis fast has *any* per-day text in the source
+   distinguishing it from a bare `Fast day` — English or Armenian, checked directly
+   against `dev/reference_data{,_hy}/`. Both day-count labels are inventions, accepted
+   deliberately as an extension of the same editorial category as the Wed/Fri split.
+
+   Armenian does not follow the English ordinal at all: each of the three fasts serves
+   **one fixed Armenian phrase**, supplied directly by the maintainer in `approved_hy`,
+   for every day of that fast — `Սուրբ Գրիգոր Լուսավորչի պահք` (Illuminator), `Սուրբ
+   Հակոբի պահք` (Nisibis), `Եղիական պահք` (Prophet Elijah). This is a deliberate
+   override of §5's own conclusion for the Illuminator fast: `source_hy` there still
+   carries the source's genuine, partially-attested per-day ordinal
+   (`Ա/Բ/Գ... օր Լուսաւորչի պահոց`) as evidence, but `approved_hy` — what is actually
+   served — is the maintainer's fixed phrase instead, on the same explicit, editorial
+   basis as Nisibis and Prophet Elijah, neither of which has any per-day Armenian to
+   override in the first place.
+
+**Holy Week** is deliberately *not* given a day-count family: `Great Monday` /
+`Great Friday` / etc. are already specific, well-established names, so only the redundant
+marker is dropped, exactly as in category 2. Since Great Wednesday and Great Friday are
+themselves Wed/Fri, they would otherwise fall through to the ordinary-time split — an
+explicit suppression entry in `_POSITION_FAMILIES` heads them off.
+
+**Dec 9** stands alone: it sits inside the Fast of Advent's outer span but not always
+inside the Fast of Advent's own 5-day window or the Nisibis window, so neither family can
+be relied on to simply miss it. An explicit civil-date suppression, evaluated before
+either family, drops the marker unconditionally on every weekday Dec 9 can fall on. (On
+the rarer years Dec 9 is itself a Sunday, it keeps its own, entirely unrelated `"Nth
+Sunday of Advent"` position and any Nisibis eve note that happens to coincide — those are
+real, sourced components this fix does not touch.)
+
+One consequence worth recording: an earlier draft of this design planned to *eliminate*
+the Illuminator and Nisibis markers outright (deferred to a hypothetical future `is_fast`
+attribute), which would have left roughly 300 days with no marker AND no other name at
+all — a placeholder leak `tests/test_feast_contract.py` forbids. Giving both fasts a real
+day-count family removed that problem entirely rather than requiring a special-cased
+fallback: every date this section touches ends up with *some* real content (a season
+label, a saint, or the Conception feast), so no day is ever left blank.
+
+Enforcement: `tests/test_language.py::TestNamedFastDayCountLabels`,
+`tests/test_feast.py::TestDecemberNinthFastMarker`,
+`tests/test_feast_name_raw.py` (English, ratchets unmoved — see
+`dev.source_corrections.expected_fast_marker_components`, which every English-side dev
+tool reconciles through), and `tests/test_feast_name_hy_raw.py` (Armenian; its
+CONTRADICTION/OMISSION ceilings and EXACT floor moved by exactly the day-counts this
+change accounts for, documented in that file's own module docstring — Armenian has no
+equivalent reconciliation registry, so every date this section touches shows up there as
+a literal, expected divergence from the raw scrape).
+
+---
 
 ## Open questions — NOT corrected
 

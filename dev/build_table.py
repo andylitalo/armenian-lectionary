@@ -76,6 +76,19 @@ def unanimous_feast(items):
 
     kept = []
     for component in [c.strip() for c in modal_feast(items).split(FEAST_SEP) if c.strip()]:
+        if component in ("Fast day", "Feast day"):
+            # Always regenerated at runtime (engine._apply_position_label /
+            # _POSITION_FAMILIES) as a weekday split, a named-fast day-count label, or
+            # dropped entirely -- never stored literally. See
+            # docs/feast-name-corrections.md.
+            continue
+        if component.endswith("day of Pentecost"):
+            # The week after Pentecost is renamed "day of the Fast of Prophet Elijah" at
+            # runtime (same ordinal, different wording) -- storing the source's own "day
+            # of Pentecost" text would ship stale wording _apply_position_label has no
+            # reason to override (it already looks like a resolved position component).
+            # See docs/feast-name-corrections.md.
+            continue
         if is_calendar_component(component) and not all(component in comps
                                                         for comps in per_year):
             continue

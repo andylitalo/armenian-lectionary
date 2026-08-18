@@ -27,7 +27,7 @@ import functools
 import json
 import os
 
-from armenian_lectionary.engine import _FEAST_SEP
+from armenian_lectionary.engine import _FEAST_SEP, _apply_position_label
 
 # cache reading string -> source (Tōnats'oyts First Vol p.464-465) reading string.
 # Applied ONLY on first-volume-cohort days (scoped by the shipping tier, not by text).
@@ -474,3 +474,44 @@ def canonical_commem(commem):
         if pred(commem):
             return canonical
     return commem
+
+
+_BARE_FAST_MARKERS = frozenset({"Fast day", "Feast day"})
+
+
+def expected_fast_marker_components(date_iso, src_components):
+    """The components the engine is now expected to serve for a day whose raw SOURCE
+    components include a bare "Fast day"/"Feast day" marker, or the source's "day of
+    Pentecost" position wording for the week after Pentecost.
+
+    Neither is compared literally anymore -- both are a deliberate, documented departure
+    from the source's own wording (see ``engine._POSITION_FAMILIES``/
+    ``_apply_position_label`` and ``docs/feast-name-corrections.md``):
+
+      * a bare marker becomes a weekday split ("Wednesday Fast"/"Friday Fast"), a
+        named-fast day-count label ("Nth day of the Fast of ..."), or nothing at all,
+        depending on the date;
+      * "Nth day of Pentecost" (the week after Pentecost) is renamed "Nth day of the
+        Fast of Prophet Elijah", same ordinal, to match the existing eve label's wording.
+
+    Dev-tooling comparisons (``dev/verify_position_labels.py``,
+    ``dev/feast_discrepancy_report.py``) should reconcile through this helper rather
+    than comparing the source's text directly, so these intentional changes don't
+    register as regressions. The bare-marker case delegates to the real engine function
+    so it can never drift from runtime behavior; the Pentecost rename is a fixed text
+    substitution, since the underlying ordinal is untouched by this PR.
+
+    ``src_components`` with neither pattern present is returned unchanged.
+    """
+    renamed = [
+        c.replace("day of Pentecost", "day of the Fast of Prophet Elijah")
+        if c.endswith("day of Pentecost") else c
+        for c in src_components
+    ]
+    if not any(c in _BARE_FAST_MARKERS for c in renamed):
+        return renamed
+    d = datetime.date.fromisoformat(date_iso)
+    residual = [c for c in renamed if c not in _BARE_FAST_MARKERS]
+    stored = _FEAST_SEP.join(residual) if residual else "(commemoration)"
+    resolved = _apply_position_label(stored, d)
+    return [c for c in resolved.split(_FEAST_SEP) if c and c != "(commemoration)"]

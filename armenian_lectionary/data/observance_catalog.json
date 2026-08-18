@@ -411,6 +411,14 @@
   "en": "Fifth day of the Fast of the Transfiguration",
   "hy": "Ե օր Վարդավառի պահոց"
  },
+ "fifth_day_of_the_8": {
+  "en": "Fifth day of the Fast of Prophet Elijah",
+  "hy": "Եղիական պահք"
+ },
+ "fifth_day_of_the_9": {
+  "en": "Fifth day of the Fast of St. James of Nisibis",
+  "hy": "Սուրբ Հակոբի պահք"
+ },
  "fifth_sunday": {
   "en": "Fifth Sunday",
   "hy": "Ե կիւրակէ"
@@ -474,6 +482,10 @@
  "first_day_of_the_6": {
   "en": "First day of the Fast of the Transfiguration",
   "hy": "Ա օր Վարդավառի պահոց"
+ },
+ "first_day_of_the_7": {
+  "en": "First day of the Fast of St. James of Nisibis",
+  "hy": "Սուրբ Հակոբի պահք"
  },
  "first_sunday_after_nativity": {
   "en": "First Sunday after Nativity",
@@ -587,6 +599,14 @@
   "en": "Fourth day of the Fast of the Transfiguration",
   "hy": "Դ օր Վարդավառի պահոց"
  },
+ "fourth_day_of_the_8": {
+  "en": "Fourth day of the Fast of Prophet Elijah",
+  "hy": "Եղիական պահք"
+ },
+ "fourth_day_of_the_9": {
+  "en": "Fourth day of the Fast of St. James of Nisibis",
+  "hy": "Սուրբ Հակոբի պահք"
+ },
  "fourth_sunday_after_assumption": {
   "en": "Fourth Sunday after Assumption",
   "hy": "Դ կիւրակէ զկնի Վերափոխման"
@@ -618,6 +638,10 @@
  "fourth_sunday_red_sunday": {
   "en": "Fourth Sunday (Red Sunday)",
   "hy": "Դ կիւրակէ (Կարմիր կիւրակէ)"
+ },
+ "friday_fast": {
+  "en": "Friday Fast",
+  "hy": "Ուրբաթի պահք"
  },
  "gayane_and_her_companions": {
   "en": "Sts. Gayane and her companions",
@@ -717,23 +741,23 @@
  },
  "illuminator_fast_day_1": {
   "en": "First day of the Fast of St. Gregory the Illuminator",
-  "hy": "Ա օր Լուսաւորչի պահոց"
+  "hy": "Սուրբ Գրիգոր Լուսավորչի պահք"
  },
  "illuminator_fast_day_2": {
   "en": "Second day of the Fast of St. Gregory the Illuminator",
-  "hy": "Բ օր Լուսաւորչի պահոց"
+  "hy": "Սուրբ Գրիգոր Լուսավորչի պահք"
  },
  "illuminator_fast_day_3": {
   "en": "Third day of the Fast of St. Gregory the Illuminator",
-  "hy": "Գ օր Լուսաւորչի պահոց"
+  "hy": "Սուրբ Գրիգոր Լուսավորչի պահք"
  },
  "illuminator_fast_day_4": {
   "en": "Fourth day of the Fast of St. Gregory the Illuminator",
-  "hy": "Դ օր Լուսաւորչի պահոց"
+  "hy": "Սուրբ Գրիգոր Լուսավորչի պահք"
  },
  "illuminator_fast_day_5": {
   "en": "Fifth day of the Fast of St. Gregory the Illuminator",
-  "hy": "Ե օր Լուսաւորչի պահոց"
+  "hy": "Սուրբ Գրիգոր Լուսավորչի պահք"
  },
  "isaiah_the_prophet": {
   "en": "St. Isaiah the Prophet",
@@ -1007,6 +1031,14 @@
   "en": "Second day of the Fast of the Transfiguration",
   "hy": "Բ օր Վարդավառի պահոց"
  },
+ "second_day_of_the_8": {
+  "en": "Second day of the Fast of Prophet Elijah",
+  "hy": "Եղիական պահք"
+ },
+ "second_day_of_the_9": {
+  "en": "Second day of the Fast of St. James of Nisibis",
+  "hy": "Սուրբ Հակոբի պահք"
+ },
  "second_day_of_transfiguration": {
   "en": "Second day of Transfiguration",
   "hy": "Բ օր Վարդավառի"
@@ -1062,6 +1094,10 @@
  "seventh_day_of_the": {
   "en": "Seventh day of the Assumption",
   "hy": "Է օր Վերափոխման"
+ },
+ "seventh_day_of_the_2": {
+  "en": "Seventh day of the Fast of Prophet Elijah",
+  "hy": "Եղիական պահք"
  },
  "seventh_sunday_after_nativity": {
   "en": "Seventh Sunday after Nativity",
@@ -1122,6 +1158,10 @@
  "sixth_day_of_the_2": {
   "en": "Sixth day of the Fast of Nativity",
   "hy": "Զ օր Ս. Ծննդեան պահոց"
+ },
+ "sixth_day_of_the_3": {
+  "en": "Sixth day of the Fast of Prophet Elijah",
+  "hy": "Եղիական պահք"
  },
  "sixth_sunday_after_nativity": {
   "en": "Sixth Sunday after Nativity",
@@ -1258,6 +1298,14 @@
  "third_day_of_the_7": {
   "en": "Third day of the Fast of the Transfiguration",
   "hy": "Գ օր Վարդավառի պահոց"
+ },
+ "third_day_of_the_8": {
+  "en": "Third day of the Fast of Prophet Elijah",
+  "hy": "Եղիական պահք"
+ },
+ "third_day_of_the_9": {
+  "en": "Third day of the Fast of St. James of Nisibis",
+  "hy": "Սուրբ Հակոբի պահք"
  },
  "third_day_of_transfiguration": {
   "en": "Third day of Transfiguration",
@@ -1514,6 +1562,10 @@
  "voskian": {
   "en": "Sts. Voskians the Priests",
   "hy": "Սրբոց Ոսկեանց քահանայիցն"
+ },
+ "wednesday_fast": {
+  "en": "Wednesday Fast",
+  "hy": "Չորեքշաբթիի պահք"
  },
  "zechariah_the_prophet": {
   "en": "St. Zechariah the Prophet",

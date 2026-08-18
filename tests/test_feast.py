@@ -147,6 +147,12 @@ class TestCommemorationExtractor(unittest.TestCase):
             commemoration_of("Fast dayPRESENTATION OF OUR LORD TO THE TEMPLE"),
             "PRESENTATION OF OUR LORD TO THE TEMPLE")
 
+    def test_strips_weekday_fast_marker(self):
+        self.assertEqual(
+            commemoration_of("Wednesday FastPRESENTATION OF OUR LORD TO THE TEMPLE"),
+            "PRESENTATION OF OUR LORD TO THE TEMPLE")
+        self.assertEqual(commemoration_of("Friday FastSaints Hripsime"), "Saints Hripsime")
+
     def test_keeps_genocide_remembrance(self):
         self.assertEqual(
             commemoration_of(
@@ -278,34 +284,44 @@ class TestFeastSpelling(unittest.TestCase):
 
 
 class TestDecemberNinthFastMarker(unittest.TestCase):
-    """The Conception of the Theotokos (Dec 9) carries a FAST marker, not a feast one.
+    """The Conception of the Theotokos (Dec 9) sits inside the Fast of Advent's outer
+    span, which the source marks with a "Feast day" (its own typo for "Fast day") on
+    Dec 9's Mon/Tue/Wed/Fri years. Named-fast-season markers are now dropped rather
+    than served (see docs/feast-name-corrections.md); on Dec 9 that means every
+    weekday alike -- no residual weekday split either -- so the day reads as just the
+    Conception feast, on Thu/Sat exactly as it always did.
 
-    The source prints "Feast day" there, which is its own typo for "Fast day" -- the marker
-    tracks the Advent-fast weekday set (present Mon/Tue/Wed/Fri, absent Thu/Sat) rather than
-    the feast, which is the same feast every year; and the source's own Armenian reads
-    "Պահք". See docs/feast-name-corrections.md section 1.
-
-    This pins both halves of the fix together: the engine template
-    (``_POSITION_FAMILIES``'s Dec-9 entry) and the source-side fold that keeps the raw-name
-    comparison honest. Editing one without the other reopens the contradiction.
-    Self-contained -- no reference cache.
+    The source-side fold (the raw "Feast day" -> "Fast day" typo correction) is still
+    applied and still tested separately (test_the_belt_feast_is_not_collateral_damage
+    below) -- it normalizes the raw scrape before the engine's marker-elimination logic
+    ever sees it; this class now pins only the served-name side. Self-contained -- no
+    reference cache.
     """
 
     _CONCEPTION = "Feast of the Conception of the Holy Virgin Mary by Anna"
 
-    def test_marker_is_fast_on_advent_fast_weekdays(self):
-        # Mon, Tue, Wed, Fri Dec 9ths across the supported window.
-        for year in (2013, 2014, 2015, 2016):
+    def test_no_marker_on_any_weekday(self):
+        """No year ever carries the fast marker on Dec 9 -- whatever else the day
+        legitimately has (the Conception feast always; a Sunday year also keeps its own
+        real "Nth Sunday of Advent" position and, some years, the Nisibis eve note --
+        neither of those is the marker this fix eliminates)."""
+        for year in range(2001, 2028):
             with self.subTest(year=year):
                 label = compute_armenian_lectionary(
                     datetime.date(year, 12, 9))["Liturgical Day"]
-                self.assertEqual(label, f"Fast day — {self._CONCEPTION}")
+                self.assertIn(self._CONCEPTION, label, (year, label))
+                for marker in ("Fast day", "Feast day", "Wednesday Fast", "Friday Fast"):
+                    self.assertNotIn(marker, label, (year, label))
 
-    def test_no_marker_on_thursday_or_saturday(self):
-        for year in (2017, 2021):        # Sat, Thu
+    def test_no_marker_on_weekday_years(self):
+        """The common case: Dec 9 on a plain Mon/Tue/Wed/Fri/Thu/Sat carries nothing but
+        the Conception feast."""
+        for year in (2013, 2014, 2015, 2016, 2017, 2021):
+            d = datetime.date(year, 12, 9)
+            if d.weekday() == 6:
+                continue        # Sunday years are covered separately above
             with self.subTest(year=year):
-                label = compute_armenian_lectionary(
-                    datetime.date(year, 12, 9))["Liturgical Day"]
+                label = compute_armenian_lectionary(d)["Liturgical Day"]
                 self.assertEqual(label, self._CONCEPTION)
 
     def test_feast_day_marker_is_gone_everywhere(self):

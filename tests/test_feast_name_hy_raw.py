@@ -54,6 +54,29 @@ Lower them whenever a fix lands; never raise one to make a change pass. A delibe
 Armenian correction is not an exception to that -- register it in ``approved_hy``, where
 the fold picks it up and the ceiling goes DOWN.
 
+CONTRADICTION/OMISSION moved deliberately once more, for the Wednesday/Friday Fast split
+and the named-fast day-count relabeling (docs/feast-name-corrections.md section 10) --
+the first time either has moved for a reason other than an unreviewed source change or a
+newly-registered fold. ``ground_truth_hy_fixes`` only folds a SOURCE string into its
+``approved_hy``; it has nothing to fold when the source's own text is the same
+undifferentiated ``Պահք`` on hundreds of days and the served text now differs by weekday
+or by which named fast the day falls in, so every date this change touches shows up here
+as a literal divergence from the raw scrape rather than a registered correction:
+
+  * 16 new CONTRADICTION days -- the engine now serves ``Չորեքշաբթիի/Ուրբաթի պահք`` (the
+    ordinary-time weekday split) or one of three fixed named-fast phrases (``Եղիական
+    պահք``, ``Սուրբ Գրիգոր Լուսավորչի պահք``, ``Սուրբ Հակոբի պահք``, supplied directly,
+    not per-day ordinals) the source's Armenian does not have -- including the
+    Illuminator fast's days, which used to fold the source's own per-day ordinal and now
+    serve the fixed phrase instead, by deliberate choice (section 10 explicitly overrides
+    section 5's conclusion for this one fast).
+  * 17 new OMISSION days -- the source's Armenian states a bare ``Պահք`` the engine no
+    longer serves at all: Holy Week (already named ``Աւագ ...``), the Fast of Assumption
+    ferias (already named ``Դ օր Վերափոխման`` etc.), and a handful of Eastertide Wed/Fri
+    days the source marks ``Պահք`` in Armenian with no English "Fast day" counterpart at
+    all (a pre-existing English/Armenian asymmetry this change did not create, only
+    exposed by no longer keeping the redundant marker anywhere).
+
 DOMINANT_FORM and INTERNAL_DELIMITER have ceilings too, for a different reason. Those days
 are correct as served -- the source spells one name several ways and we serve the one it
 uses most; or its Armenian glues a trailing note onto a name whose English has no such
@@ -72,11 +95,13 @@ from dev.hy_discrepancy import collect, counts                          # noqa: 
 from tests._reference_cache import requires_reference_cache_hy          # noqa: E402
 
 # Days where the engine emits an Armenian component the source does not have.
-# Monotonic DOWN. The target is 0, as on the English side.
-HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "3"))
+# Monotonic DOWN, except for the +16 documented above -- see
+# docs/feast-name-corrections.md section 10.
+HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "19"))
 
-# Days where the engine drops an Armenian component the source states. Monotonic DOWN.
-HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "4"))
+# Days where the engine drops an Armenian component the source states. Monotonic DOWN,
+# except for the +17 documented above -- see docs/feast-name-corrections.md section 10.
+HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "21"))
 
 # Days carrying the right components in a different order. Monotonic DOWN.
 HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
@@ -117,10 +142,11 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # even though their text is identical. exact + INTERNAL_DELIMITER is the "same words" number
 # and is what moves when a real fix lands: 409 + 6 = 415.
 #
-# The floor is 413 rather than the 414 a full cache now reports: the days gained since it
-# was set at 407 are reproducible anywhere except one, which came from the cache growing
-# 433 -> 435 days.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "412"))
+# The floor is 379 rather than the 412 it was before the Wednesday/Friday Fast split and
+# named-fast relabeling (docs/feast-name-corrections.md section 10): 33 days move out of
+# "exact" and into CONTRADICTION/OMISSION above by deliberate choice, not regression --
+# see that section for the day-counts.
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "379"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.

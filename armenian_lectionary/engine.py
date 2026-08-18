@@ -1165,9 +1165,15 @@ _ANY = None          # unbounded end of a family's offset window
 # Recognizes a component as a calendar-position label, so a stored one is not duplicated
 # by the regenerated one. Mirrors dev/feast_names.is_position (dev tooling cannot be
 # imported at runtime); the ordinal words are this module's own _ORDINAL_WORDS.
+#
+# Deliberately does NOT match "Fast day"/"Feast day": those bare markers are never
+# trusted as an already-resolved position component, wherever they turn up in stored
+# data (some storage tiers -- e.g. generative-continua -- are not rebuilt by
+# dev/build_table.py, so stale literal text can persist); _apply_position_label strips
+# them unconditionally instead. See docs/feast-name-corrections.md.
 _POSITION_COMPONENT_RE = re.compile(
     r"^(?:" + "|".join(_ORDINAL_WORDS) + r")\s+(?:day of|Sunday)\b"
-    r"|^(?:Fast|Feast) day$")
+    r"|^(?:Wednesday|Friday) Fast$")
 
 
 def _theophany_closing(d: datetime.date) -> datetime.date:
@@ -1232,7 +1238,10 @@ _POSITION_FAMILIES = (
     ("E", (35, 35), _SUN, "sundays", 1, "{ord} Sunday of Eastertide"),
     ("E", (42, 42), _SUN, "sundays", 1, "{ord} Sunday of Eastertide. Second Palm Sunday"),
     ("E", (8, 48), _MON_TO_SAT, "days", 1, "{ord} day of Eastertide"),
-    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of Pentecost"),
+    # The week after Pentecost is the Fast of Prophet Elijah -- named to match the
+    # existing eve label ("Eve of Fast of Prophet Elijah"), a deliberate departure from
+    # the source's own "day of Pentecost" wording; see docs/feast-name-corrections.md.
+    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Fast of Prophet Elijah"),
     # -- Winter first: the Nativity arc outranks the autumn anchors it overlaps.
     # Jan 6-13 is the Nativity octave, not the tail of Advent; and once Heesnak has
     # passed, a Sunday is "of Advent", not still "after the Holy Cross".
@@ -1247,6 +1256,23 @@ _POSITION_FAMILIES = (
     ("HE", (1, 5), _MON_TO_FRI, "days", 0, "{ord} day of Advent", (11, 21)),
     ("HE", (1, 5), _MON_TO_FRI, "days", 0, "{ord} day of the Fast of Advent"),
     ("HE", (7, 49), _SUN, "sundays", 0, "{ord} Sunday of Advent"),
+    # The Conception of the Theotokos (Dec 9) stands alone on every weekday it can fall
+    # on (Mon/Tue/Wed/Fri) -- it sits inside the Fast of Advent's outer span but outside
+    # that fast's own 5-day window, and it can coincide with the Fast of St. James of
+    # Nisibis window just below (Mon/Tue/Wed years), so this guard must precede that
+    # family to keep Dec 9 as the Conception rather than folding it into Nisibis. The
+    # source itself sometimes prints "Feast day" here, its own typo for "Fast day"
+    # (folded in source_corrections.POSITION_LABEL_FIXES, see
+    # docs/feast-name-corrections.md section 1); either way, no marker is now served.
+    ("E", (_ANY, _ANY), None, None, 0, None, (12, 9)),
+    # The Fast of St. James of Nisibis: a distinct 5-weekday fast in the middle of
+    # Advent, opening the day after its eve (Heesnak+21, in _EVE_FAMILIES) and closing
+    # before the saint's own commemoration on the Saturday -- the same shape as the
+    # Fast of St. Gregory the Illuminator below. Neither the English nor the Armenian
+    # source distinguishes these days from a generic "Fast day"; this label is a
+    # deliberate, documented invention, not a source-verified rendering. See
+    # docs/feast-name-corrections.md.
+    ("HE", (22, 26), _MON_TO_FRI, "days", -21, "{ord} day of the Fast of St. James of Nisibis"),
     # -- Transfiguration / Assumption / Exaltation (latest anchor first) --------
     ("EX", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Holy Cross"),
     ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday after the Holy Cross"),
@@ -1270,25 +1296,27 @@ _POSITION_FAMILIES = (
     # (Pentecost+21) and closing before the Discovery of the Relics on the Saturday. The
     # source prints only "Fast day" here in English while naming the ordinal in Armenian;
     # source_corrections.illuminator_fast_label registers the repair, and this family
-    # regenerates the same label so the stored and overlaid values agree.
+    # regenerates the same label so the stored and overlaid values agree. (The served
+    # Armenian is now one fixed phrase for the whole fast rather than the source's own
+    # per-day ordinal -- an explicit editorial simplification; see
+    # docs/feast-name-corrections.md.)
     ("PE", (22, 26), _MON_TO_FRI, "days", -21,
      "{ord} day of the Fast of St. Gregory the Illuminator"),
+    # -- Named-fast days with no day-count label of their own --------------------
+    # Holy Week already has its own specific names ("Great Monday", "Great Friday", ...);
+    # no generic ordinal is added. Great Wednesday and Great Friday would otherwise fall
+    # through to the ordinary-time Wed/Fri rule below, so they are explicitly suppressed
+    # here (matched, but the fixed ``None`` template yields no label at all -- named fast
+    # wins). See docs/feast-name-corrections.md.
+    ("E", (-6, -1), (2, 4), None, 0, None),
     # -- Ordinary-time fast days (terminal fallthrough) -------------------------
-    # A Wed/Fri no season above has claimed is simply a fast day. Verified exact on every
-    # such day in the ground truth (1553/1553). Counter ``None`` = a fixed label, no ordinal.
-    #
-    # The Conception of the Theotokos (Dec 9) carries the marker on Mon/Tue/Wed/Fri -- the
-    # Advent-fast weekdays, two more than the ordinary Wed/Fri below -- and none at all on
-    # Thu/Sat (16 of 16 either way; Sunday is an Advent Sunday, claimed above).
-    #
-    # The source prints that marker as "Feast day", which is its own typo for "Fast day":
-    # the string appears on no other date in the 9,861-day English corpus, its weekday set
-    # is the fast schedule rather than anything about the feast (a feast marker would show
-    # on Thu/Sat too -- it is the same feast every year), and the source's own Armenian
-    # reads "Պահք". Folded in source_corrections.POSITION_LABEL_FIXES; see
-    # docs/feast-name-corrections.md section 1.
-    ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Fast day", (12, 9)),
-    ("E", (_ANY, _ANY), (2, 4), None, 0, "Fast day"),
+    # A Wed/Fri no season above has claimed is simply the regular weekly fast. Verified
+    # exact on every such day in the ground truth (1553/1553) back when this was a single
+    # "Fast day" label; the Wednesday/Friday split is a deliberate, documented departure
+    # from the source's own (weekday-agnostic) wording. Counter ``None`` = a fixed label,
+    # no ordinal. See docs/feast-name-corrections.md.
+    ("E", (_ANY, _ANY), (2,), None, 0, "Wednesday Fast"),
+    ("E", (_ANY, _ANY), (4,), None, 0, "Friday Fast"),
 )
 
 
@@ -2204,6 +2232,9 @@ def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
 _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 
 
+_BARE_FAST_MARKERS = ("Fast day", "Feast day")
+
+
 def _apply_position_label(label: str, d: datetime.date) -> str:
     """Head ``label`` with ``d``'s regenerated calendar-position label.
 
@@ -2213,15 +2244,23 @@ def _apply_position_label(label: str, d: datetime.date) -> str:
     position component keeps it: those are the coordinates where every year agreed, so the
     stored value and the regenerated one are the same string.
 
+    A stored "Fast day"/"Feast day" marker is always stripped and never trusted as
+    already-resolved: it is replaced by whatever ``_position_label`` now computes for the
+    date (a weekday split, a named-fast day-count label, or nothing), even in a storage
+    tier ``dev/build_table.py`` does not rebuild (e.g. generative-continua, sourced from
+    ``dev/build_second_volume_cycles.py``'s checked-in artifact) -- see
+    docs/feast-name-corrections.md.
+
     Where the stored label is empty or a placeholder, the position label becomes the whole
     name. That is the point: a day whose entire source name was its position ("Fourth
     Sunday after Nativity") previously fell through to "(commemoration)" or "(movable
     ordinary-time reading)", which bahk had to discard as "no feast".
     """
     position = _position_label(d)
+    parts = [p for p in label.split(_FEAST_SEP)
+             if p and p not in _PLACEHOLDER_LABELS and p not in _BARE_FAST_MARKERS]
     if position is None:
-        return label
-    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+        return _FEAST_SEP.join(parts) if parts else label
     if any(_is_position_component(p) for p in parts):
         return _FEAST_SEP.join(parts) if parts else label
     return _FEAST_SEP.join([position] + parts)

@@ -38,7 +38,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                               # noqa: E402
-    DATA_PATH, _EMBEDDED_FEAST, _FEAST_SEP, _PRELENT_COHORT, _eve_label, _position_label, fixed_date_label,
+    DATA_PATH, _EMBEDDED_FEAST, _FEAST_SEP, _PRELENT_COHORT, _eve_label, _position_label,
+    fixed_date_label,
 )
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
