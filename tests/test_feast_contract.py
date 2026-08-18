@@ -181,19 +181,20 @@ class TestObservanceCatalogShape(unittest.TestCase):
             f"{len(bad)} catalog entr(y/ies) embed the component separator in their own "
             "text; use _INTERNAL_SEP, or split the entry")
 
-    def test_english_is_unique_outside_the_date_scoped_ids(self):
-        """Reverse text lookup must stay deterministic.
+    def test_english_identifies_exactly_one_observance(self):
+        """Reverse text lookup must be deterministic, with no exceptions.
 
-        Date-scoped ids deliberately share an English string (five read "Fast day") and are
-        resolved from the date instead; every OTHER id has to be recoverable from its text
-        alone, or engine._TEXT_TO_OBSERVANCE_ID's winner depends on iteration order.
+        Every id has to be recoverable from its English alone, or the winner in
+        engine._TEXT_TO_OBSERVANCE_ID depends on catalog iteration order. Five ids used to
+        be exempt: the source printed a bare "Fast day" for each weekday of the Fast of St.
+        Gregory the Illuminator while naming the ordinal in Armenian, so they were resolved
+        from the date instead. That repair is registered now
+        (source_corrections.illuminator_fast_label), which is what lets this admit no
+        exception -- and an exception is exactly what a consumer keying on ids cannot see.
         """
-        from armenian_lectionary.engine import _DATE_SCOPED_OBSERVANCE_IDS
         seen = {}
         collisions = []
         for sid, entry in sorted(self.catalog.items()):
-            if sid in _DATE_SCOPED_OBSERVANCE_IDS:
-                continue
             if entry["en"] in seen:
                 collisions.append((seen[entry["en"]], sid, entry["en"]))
             seen[entry["en"]] = sid

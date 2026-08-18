@@ -1266,6 +1266,13 @@ _POSITION_FAMILIES = (
     # is already the "Second", so the count floors at 2.
     ("PE", (7, 7), _SUN, "sundays", 1, "{ord} Sunday after Pentecost"),
     ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday after Pentecost"),
+    # The Fast of St. Gregory the Illuminator, opening the day after its Sunday eve
+    # (Pentecost+21) and closing before the Discovery of the Relics on the Saturday. The
+    # source prints only "Fast day" here in English while naming the ordinal in Armenian;
+    # source_corrections.illuminator_fast_label registers the repair, and this family
+    # regenerates the same label so the stored and overlaid values agree.
+    ("PE", (22, 26), _MON_TO_FRI, "days", -21,
+     "{ord} day of the Fast of St. Gregory the Illuminator"),
     # -- Ordinary-time fast days (terminal fallthrough) -------------------------
     # A Wed/Fri no season above has claimed is simply a fast day. Verified exact on every
     # such day in the ground truth (1553/1553). Counter ``None`` = a fixed label, no ordinal.
@@ -1700,7 +1707,13 @@ _PRELENT_COHORT = (
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     "Sts. Atom and his soldiers",
+     # Two First Volume canons (pp.464-465), packed onto one day and joined on _FEAST_SEP
+     # so each resolves to its own observance id. The Second Volume prints "the Atomian
+     # Generals, and Bishop Mark, Pion, and the others"; its preface (Sixth) says to
+     # celebrate the companions the First Volume sets down.
+     "Sts. Atom and his soldiers" + _FEAST_SEP
+     + "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, "
+       "and Martyrs Abdelmseh, Ormistan and Sayen",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,
@@ -1745,7 +1758,15 @@ def _prelent_cohort_layout(year):
             if (d2 - e).days not in _PRELENT_OFFSETS:
                 continue                                # shifted off the cohort entirely
             d = d2
-        layout.setdefault(d, (sid, label, reads))       # senior placed first wins a merge
+        if d in layout:
+            # Two canons land on one day. The source prints both -- "Saint Sargis ... and
+            # Saints Atom and his soldiers" -- so serve both, joined on _FEAST_SEP so each
+            # resolves to its own observance id. The senior keeps the day's id and its
+            # readings; only the name grows, so a merge cannot move a reading.
+            senior_id, senior_label, senior_reads = layout[d]
+            layout[d] = (senior_id, senior_label + _FEAST_SEP + label, senior_reads)
+            continue
+        layout[d] = (sid, label, reads)                 # senior is placed first
     return layout
 
 
@@ -1988,66 +2009,45 @@ _BOOK_NAMES_HY = _load_json_map(BOOK_NAMES_HY_PATH)
 _OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 
 
-# --------------------------------------------------------------------------- #
-# Date-scoped observance ids
+# Reverse lookup: a served English component -> its stable id. Built once at import time.
 #
-# Almost every component identifies itself by its English text, so the reverse map below
-# recovers its id. A few cannot, because the SOURCE is more specific in Armenian than in
-# English on those days: it heads the five weekdays of the Fast of St. Gregory the
-# Illuminator "Ա/Բ/Գ/Դ/Ե օր Լուսաւորչի պահոց" (First..Fifth day of the Fast of the
-# Illuminator) while its English says only "Fast day" -- the same two words it uses on
-# 2,139 ordinary fast days. One English text, six different observances.
-#
-# English must not change: "Fast day" is what the source publishes on all 130 of these days
-# across 2001-2026, and inventing a richer English label would contradict it. So the id is
-# resolved from the DATE instead, and only then does the Armenian differ.
-#
-# This is the same shape as source_corrections.POSITION_LABEL_FIXES_BY_DATE: a rule scoped
-# to when it applies, because the text alone is genuinely ambiguous. The eventual cure is
-# Phase 3 -- the shipped table already carries observance_ids that engine.py does not yet
-# read (dev/build_table.py), and threading those through the name overlay would make every
-# id explicit rather than recovered.
-# --------------------------------------------------------------------------- #
+# One entry per component, because the catalog holds no two observances under the same
+# English text -- an invariant dev/build_observance_catalog.py enforces and
+# tests/test_language.py pins. It has not always held: the source heads the five weekdays
+# of the Fast of St. Gregory the Illuminator with their ordinal in Armenian but printed a
+# bare "Fast day" in English, one string standing for six observances, and the id had to be
+# recovered from the DATE. That is registered as a repair now
+# (source_corrections.illuminator_fast_label), which is what lets this be a plain dict.
+# Display text -> its own {en, hy}, and display text -> the OBSERVANCE it names. One key
+# set, because one observance is one CANON: where the source prints a longer or shorter
+# companion list for the same liturgical day, that is the Tonats'oyts packing several First
+# Volume canons onto one line, not one observance under two names. The packed line is a
+# _FEAST_SEP join whose components each resolve here on their own
+# (docs/feast-name-corrections.md section 7).
+def _observance_indexes(catalog):
+    """``(text -> that spelling's {en, hy}, text -> the observance's id)``."""
+    names = {entry["en"]: entry for entry in catalog.values()}
+    ids = {entry["en"]: sid for sid, entry in catalog.items()}
+    return names, ids
 
-_ILLUMINATOR_FAST_DAYS = 5      # Mon-Fri; the fast opens the day after its Sunday eve
+
+_TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID = _observance_indexes(_OBSERVANCE_CATALOG)
+_OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
 
 
-def _illuminator_fast_ordinal(d: datetime.date):
-    """1-5 if ``d`` is a weekday of the Fast of St. Gregory the Illuminator, else None.
+def _observance_names():
+    """The text index, rebuilt if ``_OBSERVANCE_CATALOG`` has been swapped underneath it.
 
-    The fast runs Pentecost+22 .. Pentecost+26, opening the morning after its eve
-    (Pentecost+21, in _EVE_FAMILIES) and closing before the Discovery of the Relics on the
-    Saturday. Confirmed on all 26 years of ground truth.
+    Derived state that must not go stale: tests substitute a small catalog to exercise
+    resolution, and an index frozen at import would keep answering from the shipped one.
+    An identity check per call is cheaper than rebuilding, and cannot silently disagree.
     """
-    pentecost = calculate_gregorian_easter(d.year) + datetime.timedelta(days=49)
-    ordinal = (d - pentecost).days - 21
-    return ordinal if 1 <= ordinal <= _ILLUMINATOR_FAST_DAYS else None
-
-
-_DATE_SCOPED_OBSERVANCE_IDS = frozenset(
-    f"illuminator_fast_day_{n}" for n in range(1, _ILLUMINATOR_FAST_DAYS + 1))
-
-
-def _date_scoped_observance_id(component: str, d: datetime.date):
-    """The id for ``component`` on ``d`` where its English text alone cannot say, else None."""
-    if component == "Fast day" and d is not None:
-        ordinal = _illuminator_fast_ordinal(d)
-        if ordinal is not None:
-            return f"illuminator_fast_day_{ordinal}"
-    return None
-
-
-# Reverse lookup: an already-served English component -> its stable id. Built once at
-# import time; every component this engine can produce was enumerated when the catalog
-# was built (dev/build_observance_catalog.py, verified by dev/verify_observance_catalog.py
-# to have zero orphans), so this covers the full corpus, not just a sample.
-#
-# Date-scoped ids are excluded: they deliberately share their English text with the general
-# component ("Fast day"), so leaving them in would make this dict's value depend on catalog
-# iteration order and could shadow the general id on all 2,139 ordinary fast days.
-_TEXT_TO_OBSERVANCE_ID = {
-    v["en"]: sid for sid, v in _OBSERVANCE_CATALOG.items()
-    if sid not in _DATE_SCOPED_OBSERVANCE_IDS}
+    global _TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID, _OBSERVANCE_INDEX_FOR
+    if _OBSERVANCE_INDEX_FOR is not _OBSERVANCE_CATALOG:
+        _TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID = _observance_indexes(
+            _OBSERVANCE_CATALOG)
+        _OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
+    return _TEXT_TO_OBSERVANCE_NAMES
 
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
@@ -2127,8 +2127,7 @@ def _build_readings_refs(readings_list: list) -> list:
     return refs
 
 
-def _resolve_observance_names(label: str, language: str,
-                              target_date: datetime.date = None) -> str:
+def _resolve_observance_names(label: str, language: str) -> str:
     """Return ``label`` (a possibly FEAST_SEP-composite observance name) resolved to
     ``language`` via the id-based observance catalog: each component's already-served
     English text is mapped to its stable id, then to that id's text in ``language``.
@@ -2139,25 +2138,17 @@ def _resolve_observance_names(label: str, language: str,
     become an id and get translated. A component with no catalog entry (a placeholder
     sentinel like "(commemoration)", or the catalog absent in a thin checkout) is left in
     English rather than dropped.
-
-    ``target_date`` resolves the handful of components whose English text is ambiguous
-    because the source is more specific in Armenian on those days -- see
-    :func:`_date_scoped_observance_id`. Omitting it is safe: those components then fall
-    back to the general id, which is what the English says anyway.
     """
     if not label:
         return label
     resolved = []
     for part in label.split(_FEAST_SEP):
-        sid = (_date_scoped_observance_id(part, target_date)
-               or _TEXT_TO_OBSERVANCE_ID.get(part))
-        entry = _OBSERVANCE_CATALOG.get(sid) if sid else None
+        entry = _observance_names().get(part)
         resolved.append(entry.get(language, part) if entry else part)
     return _FEAST_SEP.join(resolved)
 
 
-def _localize(result: dict, language: str,
-              target_date: datetime.date = None) -> dict:
+def _localize(result: dict, language: str) -> dict:
     """Translate the human-readable feast and reading names of ``result`` in place.
 
     Only the *scraped* values are localized -- the feast (``Liturgical Day``) and the
@@ -2168,15 +2159,12 @@ def _localize(result: dict, language: str,
     English head regardless of ``language``; only the human-readable strings carry a
     translation. The result always carries a ``Language`` key naming the language its
     names are in.
-
-    ``target_date`` is passed through to :func:`_resolve_observance_names` for the few
-    components whose id the English text alone cannot determine.
     """
     result["Language"] = language
     if language == "en":
         return result
     result["Liturgical Day"] = _resolve_observance_names(
-        result.get("Liturgical Day", ""), language, target_date)
+        result.get("Liturgical Day", ""), language)
     result["ReadingsList"] = [
         _translate_reading(r, _BOOK_NAMES_HY) for r in result.get("ReadingsList", [])]
     # Translate within the existing groups: the OT/Epistle/Gospel classification was
@@ -2237,6 +2225,61 @@ def _apply_position_label(label: str, d: datetime.date) -> str:
     if any(_is_position_component(p) for p in parts):
         return _FEAST_SEP.join(parts) if parts else label
     return _FEAST_SEP.join([position] + parts)
+
+
+# Observances fixed to a civil date that the source's ENGLISH never names, though its
+# Armenian does. Unlike a position or eve label these are not computed from the calendar
+# and not abbreviated from a longer printed form -- they are days the source's English
+# simply omits, so they are declared here, one entry per date, and counted by their own
+# ratchet (dev/observance_ids._ADDED_OBSERVANCES, FEAST_ADDITION_DAYS).
+#
+# Each entry carries the first year it applies. That is unusual -- the rest of the engine
+# is a function of the liturgical calendar, not of history -- and it is here because the
+# introduction of a new feast is a real, datable event, rare enough to be worth spelling
+# out rather than smoothing over. Serving a rite before it was instituted is not a rounding
+# error; it is a claim about what the Church did in a year it did not do it.
+#
+# Jan 1: the Prayer of Thanks and Pomegranate Blessing, instituted by Karekin II and served
+# at the turn of the year in every Armenian church SINCE 2015. Before that the engine names
+# nothing on Jan 1 beyond the day's position. sacredtradition.am prints "Կաղանդ. տարեմուտ"
+# there in Armenian (and nothing in English), but the 1915 Tonatsoyts itself carries no such
+# entry -- grabar-ocr/corpus has no occurrence of Կաղանդ on any of its 189 pages -- so the
+# civil New Year is the scrape's addition, not the book's, and it is not served. See
+# docs/feast-name-corrections.md section 9.
+_FIXED_DATE_OBSERVANCES = {
+    (1, 1): ("Blessing of the Pomegranates", 2015),
+}
+
+
+def fixed_date_label(d: datetime.date):
+    """``d``'s fixed civil-date observance, or ``None`` before the year it was instituted.
+
+    Public because the review document, the catalog build and the verifiers all have to
+    enumerate exactly what the engine can emit, and a second copy of this mapping would
+    drift.
+    """
+    entry = _FIXED_DATE_OBSERVANCES.get((d.month, d.day))
+    if entry is None:
+        return None
+    name, first_year = entry
+    return name if d.year >= first_year else None
+
+
+def _apply_fixed_date_label(label: str, d: datetime.date) -> str:
+    """Insert ``d``'s fixed civil-date observance ahead of the commemoration.
+
+    Position first, then this, then the commemoration -- the order the source's own
+    Armenian uses on Jan 1 ("Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ ..."). Runs after
+    :func:`_apply_position_label` so the position component is already at the head.
+    """
+    fixed = fixed_date_label(d)
+    if fixed is None:
+        return label
+    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    if fixed in parts:
+        return _FEAST_SEP.join(parts)
+    head = parts[:1] if parts and _is_position_component(parts[0]) else []
+    return _FEAST_SEP.join(head + [fixed] + parts[len(head):])
 
 
 def _is_position_component(component: str) -> bool:
@@ -2305,13 +2348,15 @@ def compute_armenian_lectionary(target_date: datetime.date,
             f"(override with LECTIONARY_MIN_YEAR / LECTIONARY_MAX_YEAR)")
     result = _compute_lectionary(target_date)
     result["Liturgical Day"] = _apply_eve_label(
-        _apply_position_label(
-            _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+        _apply_fixed_date_label(
+            _apply_position_label(
+                _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+                target_date),
             target_date),
         target_date)
     result["Mode"] = calculate_liturgical_mode(target_date)
     result["ReadingsRefs"] = _build_readings_refs(result.get("ReadingsList", []))
-    return _localize(result, language, target_date)
+    return _localize(result, language)
 
 
 def _compute_lectionary(target_date: datetime.date) -> dict:

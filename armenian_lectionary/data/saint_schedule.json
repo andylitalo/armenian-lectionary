@@ -40,18 +40,13 @@
    "Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs": "athenogenes_the_bishop",
    "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": "forefathers_adam_abel",
    "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin": "thaddeus_apostle_of",
-   "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian": "fathers_saints_athanasius",
-   "Holy Fathers Sts. Athanasius and Cyril of Alexandria": "fathers_saints_athanasius",
-   "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
+   "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian": "fathers_saints_athanasius",
+   "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
    "St. Vahan of Goghtn": "vahan_of_goghtn",
-   "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila": "eugenios_makarios_valerian",
-   "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila, and Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "eugenios_makarios_valerian",
-   "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius": "hermits_saints_anton",
-   "The Hermit St. Anton": "hermits_saints_anton",
+   "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila — Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "eugenios_makarios_valerian",
+   "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermits_saints_anton",
    "Sts. Theodosius and the Children of Ephesus": "theodosius_and_the",
-   "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
-   "Sts. Cyricus and His Mother Julitta": "cyricus_and_his",
-   "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
+   "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
    "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
    "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
    "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape": "sophia_and_her",
@@ -76,12 +71,13 @@
    },
    {
     "id": "hermits_saints_anton",
-    "label": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "label": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "order": 1,
     "support_years": 23,
     "anchor": "head",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ]
    },
    {
@@ -96,24 +92,27 @@
    },
    {
     "id": "cyricus_and_his",
-    "label": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "label": "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
     "order": 3,
     "support_years": 19,
     "anchor": "head",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "vahan_of_goghtn",
+     "gordius_polyeuctus_and_grigoris"
     ]
    },
    {
     "id": "fathers_saints_athanasius",
-    "label": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
+    "label": "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian",
     "order": 4,
     "support_years": 17,
     "anchor": "pin:Sat",
     "date_lo": "01-21",
     "date_hi": "01-27",
     "observance_ids": [
-     "fathers_sts_athanasius_and"
+     "fathers_sts_athanasius_and",
+     "gregory_the_theologian"
     ]
    },
    {
@@ -128,12 +127,13 @@
    },
    {
     "id": "vahan_of_goghtn",
-    "label": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "label": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "order": 5,
     "support_years": 15,
     "anchor": "head",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ]
    },
    {
@@ -148,12 +148,13 @@
    },
    {
     "id": "eugenios_makarios_valerian",
-    "label": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
+    "label": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila — Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
     "order": 6,
     "support_years": 15,
     "anchor": "head",
     "observance_ids": [
-     "eugenius_macarius_valerius_candidus"
+     "eugenius_macarius_valerius_candidus",
+     "andrew_the_general_and"
     ]
    },
    {
@@ -331,16 +332,15 @@
   },
   "aliases": {
    "Sts. Peter the Patriarch, Blaise the Bishop and Absalom the Deacon": "peter_the_patriarch",
-   "The Hermit St. Anton": "hermit_saints_anton",
+   "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermit_saints_anton",
    "Sts. Theodosius and the Children of Ephesus": "theodosius_and_the",
    "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel": "gregory_the_illuminator",
    "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
    "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
    "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape": "sophia_and_her",
-   "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
-   "Sts. Cyricus and His Mother Julitta": "cyricus_and_his",
-   "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
-   "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": "vahan_of_goghtn",
+   "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
+   "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
+   "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris": "vahan_of_goghtn",
    "The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermits_saints_triphon",
    "St. Gregory the Theologian": "gregory_of_theologian",
    "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila": "eugenios_makarios_valerian",
@@ -352,10 +352,9 @@
    "Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs": "athenogenes_the_bishop",
    "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": "forefathers_adam_abel",
    "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 431)": "200_fathers_of",
-   "Holy Fathers Sts. Athanasius and Cyril of Alexandria": "fathers_saints_athanasius",
-   "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian": "fathers_saints_athanasius",
+   "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian": "fathers_saints_athanasius",
    "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "eugenia_the_virgin",
-   "Sts. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs, and Sts. Eugenius, Macarius, Valerius, Candidus and Aquila": "eugenia_the_virgin",
+   "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs — Sts. Eugenius, Macarius, Valerius, Candidus and Aquila": "eugenia_the_virgin",
    "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
    "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his"
   },
@@ -489,14 +488,15 @@
    },
    {
     "id": "fathers_saints_athanasius",
-    "label": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
+    "label": "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian",
     "order": 11,
     "support_years": 9,
     "anchor": "pin:Sat",
     "date_lo": "07-23",
     "date_hi": "08-01",
     "observance_ids": [
-     "fathers_sts_athanasius_and"
+     "fathers_sts_athanasius_and",
+     "gregory_the_theologian"
     ]
    },
    {
@@ -511,32 +511,36 @@
    },
    {
     "id": "cyricus_and_his",
-    "label": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "label": "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
     "order": 12,
     "support_years": 7,
     "anchor": "head",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "vahan_of_goghtn",
+     "gordius_polyeuctus_and_grigoris"
     ]
    },
    {
     "id": "hermit_saints_anton",
-    "label": "The Hermit St. Anton",
+    "label": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "order": 12,
     "support_years": 3,
     "anchor": "skip",
     "observance_ids": [
-     "hermit_st_anton"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ]
    },
    {
     "id": "vahan_of_goghtn",
-    "label": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "label": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "order": 13,
     "support_years": 9,
     "anchor": "skip",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ]
    },
    {

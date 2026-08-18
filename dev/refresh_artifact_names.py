@@ -30,14 +30,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.observance_ids import ids_for_text                           # noqa: E402
 from dev.source_corrections import (                                  # noqa: E402
-    apply_ground_truth, normalize_confusables, normalize_feast_spelling,
+    apply_ground_truth, normalize_confusables,
 )
 
 
 def corrected(text):
     """The same text chain ``apply_source_corrections`` runs on a cached feast string,
     minus the date-scoped position-label fix (a schedule label is not date-scoped)."""
-    return normalize_feast_spelling(normalize_confusables(apply_ground_truth(text)))
+    return normalize_confusables(apply_ground_truth(text))
 
 SCHEDULE_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),

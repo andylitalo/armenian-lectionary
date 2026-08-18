@@ -560,9 +560,10 @@
     ]
    },
    "02-13:-62": {
-    "feast": "Sts. Atom and his soldiers, and Sts. Sukiasians the Martyrs",
+    "feast": "Sts. Atom and his soldiers — Sts. Sukiasians the Martyrs",
     "observance_ids": [
-     "atom_and_his_soldiers_2"
+     "atom",
+     "sukias"
     ],
     "readings": [
      "Wisdom 6.11-20",
@@ -832,9 +833,9 @@
     ]
    },
    "2:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -879,9 +880,9 @@
     ]
    },
    "5:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -1167,9 +1168,9 @@
     ]
    },
    "1:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -1847,9 +1848,9 @@
     ]
    },
    "6:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -1943,9 +1944,9 @@
     ]
    },
    "0:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -2511,9 +2512,9 @@
     ]
    },
    "5:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -2800,9 +2801,9 @@
     ]
    },
    "4:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -2894,9 +2895,9 @@
     ]
    },
    "2:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -4387,9 +4388,9 @@
     ]
    },
    "6:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -5078,7 +5079,7 @@
     ]
    },
    "3:40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -5203,9 +5204,9 @@
     ]
    },
    "3:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -6884,7 +6885,7 @@
     ]
    },
    "1:40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -7135,9 +7136,9 @@
     ]
    },
    "6:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -7434,9 +7435,9 @@
     ]
    },
    "3:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -7574,7 +7575,7 @@
     ]
    },
    "5:40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -7634,9 +7635,9 @@
     ]
    },
    "5:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -7691,9 +7692,9 @@
     ]
    },
    "2:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -8121,9 +8122,9 @@
     ]
    },
    "3:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -8645,9 +8646,9 @@
     "readings": []
    },
    "4:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -8877,9 +8878,10 @@
     ]
    },
    "3:-62": {
-    "feast": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Atom and his soldiers — Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
     "observance_ids": [
-     "atom_and_his_soldiers"
+     "atom",
+     "mark_the_bishop_pionius"
     ],
     "readings": [
      "Wisdom 6.11-20",
@@ -9035,9 +9037,9 @@
     ]
    },
    "2:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -9541,9 +9543,9 @@
     ]
    },
    "2:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -9596,9 +9598,9 @@
     ]
    },
    "0:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -10037,7 +10039,7 @@
     ]
    },
    "2:40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -10702,9 +10704,9 @@
     ]
    },
    "6:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -11092,9 +11094,9 @@
     ]
    },
    "5:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -11578,9 +11580,9 @@
     ]
    },
    "1:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -12326,9 +12328,9 @@
     ]
    },
    "3:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -12451,9 +12453,9 @@
     ]
    },
    "5:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -12481,9 +12483,9 @@
     "readings": []
    },
    "6:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -13427,7 +13429,7 @@
     ]
    },
    "4:40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -13803,9 +13805,9 @@
     ]
    },
    "1:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -13864,9 +13866,9 @@
     ]
    },
    "3:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -13874,7 +13876,7 @@
     ]
    },
    "6:40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -14206,9 +14208,9 @@
     ]
    },
    "1:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -14884,9 +14886,9 @@
     ]
    },
    "1:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -15081,9 +15083,9 @@
     ]
    },
    "4:73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -15599,9 +15601,9 @@
     ]
    },
    "0:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -15716,9 +15718,9 @@
     ]
    },
    "4:74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -16490,9 +16492,9 @@
     ]
    },
    "4:72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -16694,7 +16696,7 @@
     ]
    },
    "0:40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -16709,9 +16711,9 @@
     ]
    },
    "0:71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -16849,9 +16851,9 @@
     ]
    },
    "0:75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -17424,9 +17426,9 @@
     ]
    },
    "74": {
-    "feast": "Fast day — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+    "feast": "Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_4",
      "theodotus_of_galatia_and"
     ],
     "readings": [
@@ -17446,9 +17448,9 @@
     ]
    },
    "75": {
-    "feast": "Fast day",
+    "feast": "Fifth day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_5"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.12-25",
@@ -18572,9 +18574,9 @@
     ]
    },
    "71": {
-    "feast": "Fast day — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+    "feast": "First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_1",
      "epiphanius_bishop_of_cyprus"
     ],
     "readings": [
@@ -18727,9 +18729,9 @@
     ]
    },
    "72": {
-    "feast": "Fast day — Sts. Constantine the Emperor and his mother Helen",
+    "feast": "Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and his mother Helen",
     "observance_ids": [
-     "fast_day",
+     "illuminator_fast_day_2",
      "constantine_the_emperor_and"
     ],
     "readings": [
@@ -19229,7 +19231,7 @@
     ]
    },
    "40": {
-    "feast": "Forty First day of Eastertide — Beginning of the Fast",
+    "feast": "Forty First day of Eastertide — Beginning of the Weekly Fasts",
     "observance_ids": [
      "forty_first_day_of",
      "beginning_of_the_fast"
@@ -19380,9 +19382,9 @@
     ]
    },
    "73": {
-    "feast": "Fast day",
+    "feast": "Third day of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
-     "fast_day"
+     "illuminator_fast_day_3"
     ],
     "readings": [
      "St. Paul's Epistle to the Romans 7.1-11",
@@ -25914,9 +25916,10 @@
   },
   "PnSaintMD": {
    "cyricus_and_his:01-21": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -25927,9 +25930,10 @@
     ]
    },
    "vahan_of_goghtn:01-23": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -25939,9 +25943,10 @@
     ]
    },
    "hermits_saints_anton:01-18": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -25951,9 +25956,10 @@
     ]
    },
    "cyricus_and_his:01-23": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -25987,9 +25993,10 @@
     ]
    },
    "hermits_saints_anton:01-17": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -26011,9 +26018,10 @@
     ]
    },
    "fathers_saints_athanasius:01-27": {
-    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
+    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian",
     "observance_ids": [
-     "fathers_sts_athanasius_and_2"
+     "fathers_sts_athanasius_and",
+     "gregory_the_theologian"
     ],
     "readings": [
      "Proverbs 11.2-11",
@@ -26023,9 +26031,10 @@
     ]
    },
    "cyricus_and_his:01-24": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26094,9 +26103,10 @@
     ]
    },
    "vahan_of_goghtn:01-25": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -26179,9 +26189,10 @@
     ]
    },
    "cyricus_and_his:01-22": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26192,9 +26203,10 @@
     ]
    },
    "vahan_of_goghtn:01-24": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -26278,9 +26290,10 @@
     ]
    },
    "hermits_saints_anton:01-19": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -26373,9 +26386,10 @@
   },
   "PnSaintB": {
    "6:cyricus_and_his": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26386,9 +26400,10 @@
     ]
    },
    "6:vahan_of_goghtn": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -26398,9 +26413,10 @@
     ]
    },
    "4:hermits_saints_anton": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -26410,9 +26426,10 @@
     ]
    },
    "3:cyricus_and_his": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26446,9 +26463,10 @@
     ]
    },
    "4:fathers_saints_athanasius": {
-    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
+    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian",
     "observance_ids": [
-     "fathers_sts_athanasius_and_2"
+     "fathers_sts_athanasius_and",
+     "gregory_the_theologian"
     ],
     "readings": [
      "Proverbs 11.2-11",
@@ -26458,9 +26476,10 @@
     ]
    },
    "3:hermits_saints_anton": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -26494,9 +26513,10 @@
     ]
    },
    "5:cyricus_and_his": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26531,9 +26551,10 @@
     ]
    },
    "6:hermits_saints_anton": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -26613,9 +26634,10 @@
     ]
    },
    "5:vahan_of_goghtn": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -26649,9 +26671,10 @@
     ]
    },
    "4:vahan_of_goghtn": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -26710,9 +26733,11 @@
     ]
    },
    "2:cyricus_and_his": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_3"
+     "cyricus_and_his_mother",
+     "vahan_of_goghtn",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26723,9 +26748,10 @@
     ]
    },
    "5:hermits_saints_anton": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -26747,9 +26773,10 @@
     ]
    },
    "4:cyricus_and_his": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26821,9 +26848,10 @@
     ]
    },
    "3:vahan_of_goghtn": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -26833,9 +26861,10 @@
     ]
    },
    "2:hermits_saints_anton": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -26929,9 +26958,10 @@
   },
   "PnSaint": {
    "cyricus_and_his": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -26942,9 +26972,10 @@
     ]
    },
    "vahan_of_goghtn": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -26966,9 +26997,10 @@
     ]
    },
    "hermits_saints_anton": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27050,9 +27082,10 @@
   },
   "PnSatL": {
    "26:1:Thu": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -27062,9 +27095,10 @@
     ]
    },
    "15:2:Mon": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -27087,9 +27121,10 @@
     ]
    },
    "18:1:Sat": {
-    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
+    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian",
     "observance_ids": [
-     "fathers_sts_athanasius_and_2"
+     "fathers_sts_athanasius_and",
+     "gregory_the_theologian"
     ],
     "readings": [
      "Proverbs 11.2-11",
@@ -27099,9 +27134,10 @@
     ]
    },
    "15:1:Tue": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27134,9 +27170,10 @@
     ]
    },
    "26:1:Tue": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -27217,9 +27254,10 @@
     ]
    },
    "26:0:Sat": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27229,9 +27267,10 @@
     ]
    },
    "22:2:Mon": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -27326,9 +27365,11 @@
     ]
    },
    "11:1:Thu": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_3"
+     "cyricus_and_his_mother",
+     "vahan_of_goghtn",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -27339,9 +27380,10 @@
     ]
    },
    "22:2:Tue": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -27399,9 +27441,10 @@
     ]
    },
    "18:1:Thu": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -27474,9 +27517,10 @@
     ]
    },
    "7:1:Thu": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27498,9 +27542,10 @@
     ]
    },
    "18:1:Mon": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27522,9 +27567,10 @@
     ]
    },
    "15:2:Tue": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -27534,9 +27580,10 @@
     ]
    },
    "11:1:Mon": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27569,9 +27616,10 @@
     ]
    },
    "10:1:Mon": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27722,9 +27770,10 @@
     ]
    },
    "22:1:Tue": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27760,9 +27809,10 @@
   },
   "PnSatBL": {
    "26:2:Thu": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -27772,9 +27822,10 @@
     ]
    },
    "15:0:Mon": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -27797,9 +27848,10 @@
     ]
    },
    "18:1:Sat": {
-    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
+    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian",
     "observance_ids": [
-     "fathers_sts_athanasius_and_2"
+     "fathers_sts_athanasius_and",
+     "gregory_the_theologian"
     ],
     "readings": [
      "Proverbs 11.2-11",
@@ -27809,9 +27861,10 @@
     ]
    },
    "15:1:Tue": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27844,9 +27897,10 @@
     ]
    },
    "26:2:Tue": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -27927,9 +27981,10 @@
     ]
    },
    "26:3:Sat": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -27939,9 +27994,10 @@
     ]
    },
    "22:1:Mon": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -28036,9 +28092,11 @@
     ]
    },
    "11:0:Thu": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_3"
+     "cyricus_and_his_mother",
+     "vahan_of_goghtn",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -28049,9 +28107,10 @@
     ]
    },
    "22:1:Tue": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -28109,9 +28168,10 @@
     ]
    },
    "18:1:Thu": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -28184,9 +28244,10 @@
     ]
    },
    "7:0:Thu": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -28208,9 +28269,10 @@
     ]
    },
    "18:1:Mon": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -28232,9 +28294,10 @@
     ]
    },
    "15:0:Tue": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -28244,9 +28307,10 @@
     ]
    },
    "11:0:Mon": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -28279,9 +28343,10 @@
     ]
    },
    "10:0:Mon": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -28432,9 +28497,10 @@
     ]
    },
    "22:2:Tue": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -30719,9 +30785,10 @@
     ]
    },
    "fathers_saints_athanasius:08-01": {
-    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
+    "feast": "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian",
     "observance_ids": [
-     "fathers_sts_athanasius_and_2"
+     "fathers_sts_athanasius_and",
+     "gregory_the_theologian"
     ],
     "readings": [
      "Proverbs 11.2-11",
@@ -31062,9 +31129,10 @@
     ]
    },
    "cyricus_and_his:07-29": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -31207,9 +31275,10 @@
     ]
    },
    "cyricus_and_his:08-03": {
-    "feast": "Sts. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs, and Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
+    "feast": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs — Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
     "observance_ids": [
-     "eugenia_the_virgin_her_2"
+     "eugenia_the_virgin_her",
+     "eugenius_macarius_valerius_candidus"
     ],
     "readings": [
      "Proverbs 1.20-25",
@@ -31289,9 +31358,10 @@
     ]
    },
    "cyricus_and_his:08-02": {
-    "feast": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+    "feast": "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "vahan_of_goghtn_gordius"
+     "vahan_of_goghtn",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -32401,9 +32471,10 @@
     ]
    },
    "1:cyricus_and_his": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -54771,9 +54842,10 @@
   },
   "HEpB": {
    "50:67": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -54783,9 +54855,10 @@
     ]
    },
    "50:62": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -54805,9 +54878,10 @@
     ]
    },
    "47:64": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -54959,9 +55033,10 @@
     ]
    },
    "47:58": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -55030,9 +55105,10 @@
     ]
    },
    "50:65": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -55281,9 +55357,11 @@
     ]
    },
    "51:67": {
-    "feast": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+    "feast": "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
     "observance_ids": [
-     "cyricus_and_his_mother_3"
+     "cyricus_and_his_mother",
+     "vahan_of_goghtn",
+     "gordius_polyeuctus_and_grigoris"
     ],
     "readings": [
      "Proverbs 14.1-6",
@@ -55304,9 +55382,10 @@
     ]
    },
    "47:65": {
-    "feast": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "feast": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn",
+     "eugenia_the_virgin_her"
     ],
     "readings": [
      "Proverbs 7.1-7",
@@ -55585,9 +55664,10 @@
     ]
    },
    "48:60": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",
@@ -55667,9 +55747,10 @@
     ]
    },
    "51:64": {
-    "feast": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+    "feast": "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton",
+     "hermit_sts_tryphon_barsauma"
     ],
     "readings": [
      "Proverbs 21.15-24",

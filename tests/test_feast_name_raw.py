@@ -37,16 +37,49 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.feast_discrepancy_report import collect, is_position         # noqa: E402
 from tests._reference_cache import requires_reference_cache           # noqa: E402
 
-# Days the engine drops a source component on. Now zero: the last 15 were an
-# "Eve of <Fast>" note on a fixed-date feast whose table key could not keep it, and
-# engine._eve_label regenerates those per date (dev/verify_eve_labels.py).
-# Monotonic DOWN -- lower it whenever a fix lands, never raise it.
-OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "0"))
+# Days the engine drops a source component on. Monotonic DOWN -- lower it whenever a fix
+# lands, never raise it.
+#
+# It WAS raised once, 0 -> 5, and only because the measurement got better rather than the
+# engine worse. Splitting a packed day into its First Volume canons (docs section 7) made
+# each canon its own component; before that the engine served one long string and
+# canonical_commem's deliberately crude predicates ("Vahan of Goghtn" in c) folded any two
+# companion sets to equality. The 5 days were already wrong on origin/main and it can be
+# checked directly -- e.g. 2008-07-28, where main serves "Sts. Vahan of Goghtn, Eugenia the
+# Virgin, ..." and the source prints "Saints Vahan of Goghtn, Gordius, Polyeuctus and
+# Grigoris". Same feast id, different canons packed onto the day.
+#
+# What they have in common: the engine serves ONE packing per liturgical coordinate, and
+# which canons the source names varies by year-type. At cyricus_and_his:01-22 six cached
+# years share the key, four printing Cyricus + Gordius and two (2015, 2026) adding Vahan;
+# build_table.unanimous_feast keeps only what they agree on, which is the table doing its
+# job.
+#
+# The fix is NAME-ONLY: all five days already serve the correct readings, because the
+# source keys its propers to the HEAD canon and does not change them when it names more
+# companions (every Cyricus-headed packing ships the same four readings, every Vahan-headed
+# one the same four). What makes it a separate commit is not the packing data but the
+# generator that would have to emit it -- dev/build_second_volume_cycles.py, which CLAUDE.md
+# records as not reproducing its checked-in artifact from the present cache.
+OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "5"))
+
+# Days serving a DECLARED fixed-date observance the source's English never names. Jan 1's
+# Blessing of the Pomegranates, on the 12 days of ground truth from 2015 -- the year the
+# rite was instituted -- through 2026 (2027 has no oracle). Not a
+# contradiction: the source states the day in Armenian and drops it in English, so this is a
+# translation gap the engine closes -- see docs/feast-name-corrections.md section 9 and
+# dev/observance_ids._ADDED_OBSERVANCES.
+#
+# An EQUALITY, not a ceiling. An addition is served on every occurrence of its date or it is
+# not declared correctly, so a count that drifts either way means the overlay has started
+# firing on the wrong days -- which no other assertion here would notice, because an
+# addition is excluded from the contradiction count by construction.
+FEAST_ADDITION_DAYS = int(os.environ.get("FEAST_ADDITION_DAYS", "12"))
 
 # Days whose raw name matches the source exactly (or under the registered folds).
-# Monotonic UP. Now every compared day: the engine reproduces the source's feast name
-# string for all 9,496 days of ground truth.
-EXACT_FLOOR = int(os.environ.get("FEAST_EXACT_FLOOR", "9496"))
+# Monotonic UP. 9,491 of 9,496: the 5 shortfalls are the packed-day omissions above, which
+# used to score as exact only because the fold could not see the difference.
+EXACT_FLOOR = int(os.environ.get("FEAST_EXACT_FLOOR", "9491"))
 
 # Days with a source feast name to compare against. Guards against a shrinking cache
 # silently shrinking the oracle.
@@ -125,6 +158,16 @@ class TestRawFeastName(unittest.TestCase):
             n, OMISSION_FLOOR,
             f"{n} days drop a source component (floor {OMISSION_FLOOR}); a NEW omission "
             "is a regression -- lower the floor when you fix one, never raise it")
+
+    def test_additions_are_exactly_the_declared_days(self):
+        n = self.data["added"]
+        self.assertEqual(
+            n, FEAST_ADDITION_DAYS,
+            f"{n} days serve a declared fixed-date addition, expected exactly "
+            f"{FEAST_ADDITION_DAYS} (Jan 1, 2015-2026). A change either way means "
+            "engine._FIXED_DATE_OBSERVANCES fires on days it should not, or stopped firing "
+            "on days it should -- neither shows up as a contradiction, because an addition "
+            "is excluded from that count by construction.")
 
     def test_exact_match_floor(self):
         n = self.data["exact"]

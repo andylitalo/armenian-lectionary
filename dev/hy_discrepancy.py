@@ -6,13 +6,16 @@ same reason: so the accuracy test and the human-readable numbers can never drift
 It was written after a refactor regressed ``language="hy"`` on ~118 days with nothing to
 catch it -- English had a 9,496-day contract and Armenian had none.
 
-Two normalizations are applied to the SOURCE before comparing, both matching a deliberate,
-already-registered decision rather than papering over a defect:
+Three normalizations are applied to the SOURCE before comparing, each matching a
+deliberate, already-registered decision rather than papering over a defect:
 
   * ``dev/fetch_translations.to_mashtots_names`` -- the source types a handful of proper
     nouns in reformed ("Soviet") orthography inside otherwise-traditional text
     (``Դանիել`` for ``Դանիէլ``). v1.2.3 reversed those in the shipped maps on purpose, so
     comparing against the raw scrape would re-report a fix as a defect.
+  * ``source_corrections.ground_truth_hy_fixes`` -- the reviewed Armenian corrections, the
+    counterpart of what ``canonical_commem`` does for English. Without it a correction a
+    human signed and a regression nobody noticed are the same finding.
   * component splitting on ``_FEAST_SEP``, so a day is compared as a set of observances
     rather than one string -- the same projection the English test uses.
 
@@ -20,6 +23,15 @@ Findings are classified, strongest first:
 
   * ``CONTRADICTION`` -- the engine emits an Armenian component the source does not have.
   * ``OMISSION`` -- the source states a component the engine drops.
+  * ``DECLINED`` -- the source states a component the engine deliberately does not serve
+    (``observance_ids._DECLINED_SOURCE_HY``). Not a defect and not an oversight: the only
+    entry is the civil New Year, which sacredtradition.am prints on Jan 1 and the 1915
+    Tonatsoyts does not carry at all.
+  * ``EXPANSION`` -- the source named one canon of a packed pool and the engine serves
+    others from the same pool. Not a defect: the Second Volume prints only the first saints
+    "for the sake of brevity" and its preface (Sixth) says to celebrate the companions the
+    First Volume sets down. Enumerated rather than inferred -- only ids a reviewer placed in
+    ``observance_ids._PACKED_POOLS`` can match this way.
   * ``ORDER`` -- the same components in a different order.
   * ``DOMINANT_FORM`` -- the source spells one name several ways and the engine serves the
     one it uses most often. Not a defect: it is the same policy the English side applies to
@@ -34,15 +46,15 @@ Findings are classified, strongest first:
     ``dev/build_observance_catalog._INTERNAL_SEP``.
 
 Unlike the English side, none of these is zero yet, and the residue is not all engine
-defect. Of the 12 contradictions at the time of writing: 7 are days where the shipped
-table's commemoration enumerates a different companion list than the year the cache
-sampled -- the same class ``canonical_commem`` folds away on the English side, which has
-no Armenian analogue; 1 is a deliberate correction of a wrong ordinal in the source's own
-Armenian; 2 are word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the engine again
-serves the dominant form, but which ``normalized`` is too crude to group -- it compares
-spacing and case, not morphology, on purpose; and 2 are single-day punctuation
-differences. Callers should treat the counts as ratchets, not as a defect list: what
-matters is that no NEW divergence appears.
+defect. Of the 5 contradictions at the time of writing: 2 are days where the source glues
+a second commemoration onto the first in one run and the shipped table serves only the
+first (Sargis + Atom, Eugenius + Andrew) -- a real content difference, and the only
+genuine defects in the set; 2 are word-form variants (``Առաջաւորի``/``Առաջաւորաց``,
+``Ծննդեան``/``Ս. Ծննդեան``) where the engine serves the source's dominant form, but which
+``normalized`` is too crude to group -- it compares spacing and case, not morphology, on
+purpose; and 1 is a segmentation difference, where the source's Armenian cuts the day into
+components at a different place than its English does. Callers should treat the counts as
+ratchets, not as a defect list: what matters is that no NEW divergence appears.
 
 Coverage caveat: ``dev/reference_data_hy/`` holds 433 days, one representative date per
 distinct English feast string (``dev/fetch_translations.py`` builds it that way), not the
@@ -57,6 +69,7 @@ Usage:
 
 import collections
 import datetime
+import functools
 import glob
 import json
 import os
@@ -67,8 +80,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from armenian_lectionary.engine import (                                # noqa: E402
     _FEAST_SEP, compute_armenian_lectionary,
 )
-from dev.build_observance_catalog import _INTERNAL_SEP                  # noqa: E402
+from dev.build_observance_catalog import CATALOG_PATH, _INTERNAL_SEP   # noqa: E402
+from dev.observance_ids import _PACKED_POOLS, is_declined_hy           # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
+from dev.source_corrections import ground_truth_hy_fixes                # noqa: E402
 
 REF_DIR_HY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reference_data_hy")
 
@@ -90,6 +105,21 @@ def source_days():
     return days
 
 
+def source_feast(raw):
+    """The source's Armenian for a day, as we have decided to read it.
+
+    Both normalizations are registered decisions, not fuzz: the orthography reversal
+    v1.2.3 applied to the shipped maps, and the reviewed Armenian corrections from
+    ``approved_hy``. Comparing against the unfolded scrape re-reports each of those as a
+    defect -- which is precisely what it did before this existed, since a deliberate
+    Armenian correction and a regression both read as "the engine emits a component the
+    source does not have".
+    """
+    fixes = ground_truth_hy_fixes()
+    return _FEAST_SEP.join(fixes.get(c, c)
+                           for c in to_mashtots_names(raw).split(_FEAST_SEP))
+
+
 def normalized(text):
     """Collapse whitespace and case, so spellings of one name group together.
 
@@ -104,7 +134,7 @@ def component_witnesses():
     """``{armenian component: times the source publishes it}`` over the whole cache."""
     seen = collections.Counter()
     for raw in source_days().values():
-        for component in components(to_mashtots_names(raw)):
+        for component in components(source_feast(raw)):
             seen[component] += 1
     return seen
 
@@ -117,24 +147,52 @@ def _dominant_forms(witnesses):
     return {shape: variants.most_common(1)[0][0] for shape, variants in by_shape.items()}
 
 
-def diff_components(src_comps, eng_comps):
-    """``(contradictions, omissions)``: what the engine asserts that the source lacks, and
-    what the source states that the engine drops.
+@functools.lru_cache(maxsize=1)
+def _hy_pool():
+    """``{Armenian spelling -> the packed pool its observance belongs to}``.
 
-    Matching is exact and greedy in component order, so a component is never counted as
-    both. There is no correction-equivalence pass as there is on the English side: the
-    Armenian has no ``canonical_commem``, and inventing a fuzzy match here would hide
-    exactly the kind of near-miss (a minority spelling variant, a lost sub-component) this
-    module exists to surface.
+    The Armenian side of ``observance_ids._PACKED_POOLS``: the First Volume canons the
+    Second Volume packs onto one day, naming only the first for brevity. Only spellings the
+    catalog declares, which is what keeps this from being the fuzzy match the module
+    otherwise refuses.
+    """
+    with open(CATALOG_PATH, encoding="utf-8") as fh:
+        catalog = json.load(fh)
+    pools = {}
+    for sid, entry in catalog.items():
+        pool = next((p for p in _PACKED_POOLS if sid in p), None)
+        if pool is not None:
+            pools[entry["hy"]] = pool
+    return pools
+
+
+def diff_components(src_comps, eng_comps):
+    """``(contradictions, omissions, expansions)``: what the engine asserts that the source
+    lacks, what the source states that the engine drops, and the components the engine adds
+    by expanding the Second Volume's brevity into the First Volume's canons.
+
+    Matching is exact and greedy in component order, so a component is never counted twice.
+    Exact text first; then, for what is left, the declared packed pool -- if the source
+    named one canon of a pool and the engine serves others from the same pool, that is the
+    Tonats'oyts' own instruction (preface, Sixth), not an invention. Enumerated, never
+    inferred: only ids a reviewer put in a pool can match this way.
     """
     unmatched_src = list(src_comps)
-    contradictions = []
+    contradictions, matched = [], []
     for eng in eng_comps:
         if eng in unmatched_src:
             unmatched_src.remove(eng)
+            matched.append(eng)
         else:
             contradictions.append(eng)
-    return contradictions, unmatched_src
+
+    by_hy = _hy_pool()
+    pools = [p for p in (by_hy.get(m) for m in matched) if p]
+    still_wrong, expansions = [], []
+    for eng in contradictions:
+        pool = by_hy.get(eng)
+        (expansions if pool is not None and pool in pools else still_wrong).append(eng)
+    return still_wrong, unmatched_src, expansions
 
 
 def _is_dominant_form(contradictions, omissions, dominant):
@@ -157,7 +215,7 @@ def collect():
     dominant = _dominant_forms(component_witnesses())
 
     for iso, raw in sorted(source_days().items()):
-        src = to_mashtots_names(raw)
+        src = source_feast(raw)
         eng = compute_armenian_lectionary(
             datetime.date.fromisoformat(iso), language="hy")["Liturgical Day"]
         compared += 1
@@ -166,26 +224,32 @@ def collect():
             continue
 
         src_comps, eng_comps = components(src), components(eng)
-        contradictions, omissions = diff_components(src_comps, eng_comps)
+        contradictions, omissions, expansions = diff_components(src_comps, eng_comps)
         if eng.replace(_INTERNAL_SEP, _FEAST_SEP) == src:
             kind = "INTERNAL_DELIMITER"
         elif _is_dominant_form(contradictions, omissions, dominant):
             kind = "DOMINANT_FORM"
         elif contradictions:
             kind = "CONTRADICTION"
+        elif omissions and all(is_declined_hy(o) for o in omissions):
+            kind = "DECLINED"
         elif omissions:
             kind = "OMISSION"
+        elif expansions:
+            kind = "EXPANSION"
         else:
             kind = "ORDER"
         findings.append({
             "iso": iso, "kind": kind, "src": src, "eng": eng,
             "contradictions": contradictions, "omissions": omissions,
+            "expansions": expansions,
         })
 
     return {"compared": compared, "exact": exact, "findings": findings}
 
 
-KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "DOMINANT_FORM", "INTERNAL_DELIMITER")
+KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "EXPANSION", "DECLINED", "DOMINANT_FORM",
+         "INTERNAL_DELIMITER")
 
 
 def counts(data):

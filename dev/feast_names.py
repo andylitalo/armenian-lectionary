@@ -35,6 +35,7 @@ _SEASONS = sorted([
     "the Fast of the Holy Cross", "the Fast of the Transfiguration",
     "the Fast of the Transifiguration",           # sacredtradition.am spelling variant
     "the Fast of Assumption", "the Fast of Nativity", "the Fast of Advent",
+    "the Fast of St. Gregory the Illuminator",
     "the Assumption",
 ], key=len, reverse=True)
 

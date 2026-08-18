@@ -15,9 +15,10 @@ The two directions matter differently:
   * every component the source publishes has a row -- so a re-fetch that adds a name
     cannot slip past review by simply not being in the file.
 
-Editing ``approved`` in the TSV is how a reviewer states a decision; the test then fails
-until the fold is registered in ``dev/source_corrections._FEAST_TEXT_FIXES`` and the
-artifacts are rebuilt (CLAUDE.md gives the order). That failure is the point.
+Editing ``approved_en`` in the TSV is how a reviewer states a decision; the test then fails
+until the artifacts are rebuilt (CLAUDE.md gives the order). For a whole component the
+row itself is the registration -- ``build_ground_truth.py`` freezes ``approved_en`` and
+``apply_ground_truth`` serves it. That failure is the point.
 
 The TSV is checked in and needs no cache, so the served-name direction runs anywhere. The
 coverage direction needs ``dev/reference_data/`` and skips without it.
@@ -60,12 +61,12 @@ class TestApprovedNames(unittest.TestCase):
         cls.rows = _rows()
         # An approved name may itself be several components: one registered fix splits a
         # comma-joined fast marker off its commemoration.
-        cls.approved = {p for r in cls.rows for p in _components(r["approved"])}
+        cls.approved = {p for r in cls.rows for p in _components(r["approved_en"])}
 
     def test_review_file_is_populated(self):
         self.assertGreater(len(self.rows), 380,
                            f"{REVIEW_PATH} should carry every distinct feast component")
-        blank = [r["source"] for r in self.rows if not r["approved"].strip()]
+        blank = [r["source_en"] for r in self.rows if not r["approved_en"].strip()]
         self.assertEqual(blank[:5], [],
                          f"{len(blank)} rows have no approved English name")
 
@@ -88,12 +89,94 @@ class TestApprovedNames(unittest.TestCase):
             "rebuild -- see CLAUDE.md), or a new name appeared and needs a review row "
             "(python dev/feast_name_review.py)")
 
+    def test_every_row_has_an_approved_armenian(self):
+        """``approved_hy`` is a decision on every row, not an override on a few.
+
+        It was an override column once -- filled on 3 rows of 397, empty everywhere else,
+        with ``source_hy`` standing in. That made the two languages asymmetric in a way
+        nothing enforced: a row could reach the catalog with no Armenian at all and the
+        only symptom would be an English fallback at runtime.
+        """
+        blank = [r["source_en"] for r in self.rows if not r["approved_hy"].strip()]
+        self.assertEqual(blank[:5], [],
+                         f"{len(blank)} rows have no approved Armenian name")
+
+    def test_every_id_less_row_says_why(self):
+        """An empty ``id`` is a statement, so it has to be a legible one.
+
+        Most id-less rows are PACKED DAYS -- one line carrying several First Volume canons,
+        whose approved name splits them so each canon resolves to its own id. The rest are
+        a comma-joined day and a one-off source spelling nothing emits or stores. Without
+        the reason written down, an id missing on purpose and an id missing by accident
+        look identical -- and the accident is the one that makes a served observance
+        unaddressable.
+        """
+        silent = [r["source_en"] for r in self.rows
+                  if not r["id"].strip() and "no id" not in r["note"]]
+        self.assertEqual(
+            silent[:5], [],
+            f"{len(silent)} row(s) have no id and no note explaining why. Add the reason "
+            "to dev/feast_name_review.NO_ID_REASONS so it survives a rebuild.")
+
+    def test_source_text_never_reaches_a_served_name(self):
+        """``source_en`` is a key and a record, never an ingredient.
+
+        ``apply_ground_truth`` passes unknown text through unchanged, which is deliberate
+        (a newly appearing name should surface for review, not be silently rewritten). The
+        invariant that makes that safe is this one: every component the source publishes
+        has a row, so the lookup always hits and the answer is always ``approved_en``
+        verbatim. Nothing is ever assembled out of the raw text.
+        """
+        from dev.source_corrections import apply_ground_truth
+
+        approved_for = {r["source_en"]: r["approved_en"] for r in self.rows}
+        passed_through = [src for src, want in approved_for.items()
+                          if apply_ground_truth(src) != want]
+        self.assertEqual(
+            passed_through[:5], [],
+            f"{len(passed_through)} source component(s) do not resolve to their approved "
+            "text through the lookup, so the raw spelling would reach a caller")
+
+    def test_packed_days_resolve_to_their_canons(self):
+        """A packed day carries no id, and every canon it names has one.
+
+        This is what stops a consumer seeing one commemoration as several observances, and
+        the other way round: the Tonats'oyts packs several First Volume canons onto one
+        line when the taregir leaves few days for them (preface, Sixth), so the line is a
+        DAY and the canons are the observances. Splitting it is only safe if each half
+        actually resolves -- an unresolvable half would make a served observance
+        unaddressable, silently.
+        """
+        import json
+        import os
+        cat_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                "armenian_lectionary", "data", "observance_catalog.json")
+        with open(cat_path, encoding="utf-8") as fh:
+            catalog = json.load(fh)
+        by_text = {e["en"]: sid for sid, e in catalog.items()}
+
+        packed = [r for r in self.rows if _FEAST_SEP in r["approved_en"]]
+        self.assertTrue(packed, "the packed-day splits were dropped from every row")
+        for row in packed:
+            self.assertFalse(
+                row["id"].strip(),
+                f"{row['source_en']!r} is a packed DAY and must not carry an id")
+            en_parts = [c.strip() for c in row["approved_en"].split(_FEAST_SEP)]
+            hy_parts = [c.strip() for c in row["approved_hy"].split(_FEAST_SEP)]
+            self.assertEqual(
+                len(en_parts), len(hy_parts),
+                f"{row['source_en']!r} splits into {len(en_parts)} English canons but "
+                f"{len(hy_parts)} Armenian ones")
+            for part in en_parts:
+                self.assertIn(part, by_text,
+                              f"{part!r} is a canon of a packed day with no observance id")
+
     def test_open_questions_are_still_flagged(self):
         """The unresolved rows keep their question until someone answers it."""
         open_rows = [r for r in self.rows if r["status"] == "review"]
         self.assertGreater(len(open_rows), 0,
                            "the review status was dropped from every row")
-        silent = [r["source"] for r in open_rows if not r["note"].strip()]
+        silent = [r["source_en"] for r in open_rows if not r["note"].strip()]
         self.assertEqual(silent[:5], [],
                          f"{len(silent)} rows are marked for review with no question")
 
@@ -106,7 +189,7 @@ class TestReviewCoversTheSource(unittest.TestCase):
         from dev.feast_name_review import source_components
 
         days, _first = source_components()
-        known = {r["source"] for r in _rows()}
+        known = {r["source_en"] for r in _rows()}
         missing = sorted(set(days) - known)
         self.assertEqual(
             missing[:5], [],

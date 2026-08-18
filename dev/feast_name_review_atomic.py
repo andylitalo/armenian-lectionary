@@ -43,7 +43,7 @@ mining (never attested alone) has no independent Armenian witness, so its ``arme
 column is left blank with a note.
 
 Once atomic names are approved, the glued rows need their OWN registered fix in
-``dev.source_corrections._FEAST_TEXT_FIXES``: replace the source's ", and " (or whichever
+the row's ``approved_en``: replace the source's ", and " (or whichever
 connector) with ``armenian_lectionary.engine._FEAST_SEP`` (an em dash, " -- " here only
 because this docstring is plain ASCII) between the two approved atomic names. That is a
 separate, later step -- this script only produces the file to review against.
@@ -155,7 +155,7 @@ def leaves(s, vocab, memo):
 
 def build_atomic_rows():
     rows, _drift = build_rows()
-    by_source = {r["source"]: r for r in rows}
+    by_source = {r["source_en"]: r for r in rows}
     days, last = source_components()
     base = set(days)
 
@@ -187,9 +187,11 @@ def build_atomic_rows():
                 "status": "ok",
                 "days": leaf_days[leaf],
                 "last": leaf_last[leaf],
-                "source": leaf,
-                "approved": approved,
-                "armenian": hy.get(leaf, ""),
+                "source_en": leaf,
+                "id": "",
+                "approved_en": approved,
+                "source_hy": hy.get(leaf, ""),
+                "approved_hy": hy.get(leaf, ""),
                 "note": ("" if hy.get(leaf) else
                          "inferred atomic unit (never published alone in 2001-2026; "
                          "recurs verbatim inside >=1 combined-day rows) -- no independent "
@@ -197,7 +199,7 @@ def build_atomic_rows():
             }
         atomic_rows.append(row)
 
-    by_atomic_source = {r["source"]: r for r in atomic_rows}
+    by_atomic_source = {r["source_en"]: r for r in atomic_rows}
     for a, b in CROSS_REFERENCE_PAIRS:
         ra, rb = by_atomic_source.get(a), by_atomic_source.get(b)
         if ra is None or rb is None:

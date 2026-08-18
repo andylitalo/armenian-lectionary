@@ -21,13 +21,20 @@ via ``_FEAST_SEP``, so a fix must be expressed at the same granularity to compos
 with a day the review process has never seen (2027, or a future re-fetched year).
 
 Each entry:
-    approved   the reviewed English text the engine should serve for this component
-    status     ok | fixed | review -- review means the note asks an unresolved question;
-               a component may still be served even under review (the source's own text,
-               served as-is, is not obviously worse than an unconfirmed guess)
-    note       why it changed, or what is still being asked
-    armenian   the source's own Armenian for the component, where attested -- the
-               independent witness that justified several of the fixes
+    id          the observance's frozen catalog id, or "" for a row that is not a single
+                served observance (a whole day, a minority spelling the engine overrides,
+                or the row is a PACKED DAY, whose canons each keep their own id)
+    approved_en the reviewed English text the engine should serve for this component
+    status      ok | fixed | review -- review means the note asks an unresolved question;
+                a component may still be served even under review (the source's own text,
+                served as-is, is not obviously worse than an unconfirmed guess)
+    note        why it changed, or what is still being asked
+    source_hy   the source's own Armenian for the component, where attested -- the
+                independent witness that justified several of the fixes
+    approved_hy the reviewed Armenian the engine should serve. Stated on every row, not
+                only where it differs from ``source_hy``, so the two languages are
+                symmetric: ``source_*`` is what was published, ``approved_*`` is what we
+                serve.
 
 Regenerate after any edit to ``dev/feast_name_review.tsv``:
     python dev/build_ground_truth.py
@@ -48,21 +55,24 @@ def main():
 
     ground_truth = {}
     for r in rows:
-        ground_truth[r["source"]] = {
-            "approved": r["approved"],
+        ground_truth[r["source_en"]] = {
+            "id": r["id"],
+            "approved_en": r["approved_en"],
             "status": r["status"],
             "note": r["note"],
-            "armenian": r["armenian"],
+            "source_hy": r["source_hy"],
+            "approved_hy": r["approved_hy"],
         }
 
     with open(OUT_PATH, "w", encoding="utf-8") as fh:
         json.dump(ground_truth, fh, ensure_ascii=False, indent=1, sort_keys=True)
         fh.write("\n")
 
-    changed = sum(1 for v in ground_truth.values() if v["approved"] != "")
     review = sum(1 for v in ground_truth.values() if v["status"] == "review")
+    hy_fixed = sum(1 for v in ground_truth.values()
+                   if v["approved_hy"] != v["source_hy"])
     print(f"wrote {OUT_PATH}: {len(ground_truth)} components, "
-          f"{review} still under review")
+          f"{review} still under review, {hy_fixed} with a corrected Armenian")
 
 
 if __name__ == "__main__":

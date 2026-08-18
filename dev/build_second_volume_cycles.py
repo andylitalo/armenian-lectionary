@@ -8,6 +8,17 @@ parse its per-date saint entries from the human-corrected translation and match 
 a saint identity in dev/saint_readings.json (so identity -> readings is a fixed lookup at
 runtime). Built dev-time from grabar-ocr; the engine never reads the translation.
 
+Reproducibility. Every entry is validated against ground truth before it ships
+(``_drop_cache_contradicted``), so the artifact is a function of the translation AND
+``dev/reference_data/``; the build refuses to run without the latter rather than emit an
+unfiltered map that looks valid. ``tests/test_second_volume_cycles.py`` re-runs the build
+and asserts the checked-in file comes back byte for byte, which is what stops the artifact
+and its generator drifting apart again.
+
+Cycles for a year-type that never occurs in MIN_YEAR..MAX_YEAR (e.g. Julian Easter 03-25)
+have no cached year to validate against, so their entries stay best-effort -- and unserved,
+which is why they can move without changing a single day.
+
 Run: armenian_lectionary/venv/bin/python dev/build_second_volume_cycles.py
 """
 import calendar
@@ -523,6 +534,7 @@ def main():
     n = sum(len(v) for v in merged.values())
     print(f"wrote {OUT}: {len(merged)} cycles, {n} dated saint entries "
           f"({dropped} dropped as cache-contradicted)")
+    return merged
 
 
 def _merge_parity(common, leapov):
@@ -587,7 +599,15 @@ def _drop_cache_contradicted(out, leapov=None, nonleap_only=None):
     nonleap_only = nonleap_only or {}
     ref_dir = os.path.join(HERE, "reference_data")
     if not os.path.isdir(ref_dir):
-        return 0
+        # Refuse rather than ship the unfiltered map. This filter is the only thing that
+        # keeps the tier cache-consistent: without it the build silently emits ~269 entries
+        # ground truth contradicts, and the artifact that lands looks exactly like a valid
+        # one. That silence is why the artifact was allowed to drift out of step with its
+        # generator in the first place.
+        raise SystemExit(
+            f"{ref_dir} is missing: the cycle build validates every entry against ground "
+            "truth and cannot produce a shippable artifact without it. Run "
+            "`python dev/bulk_fetch.py` first (see README).")
     common_years = collections.defaultdict(list)
     leap_years = collections.defaultdict(list)
     for y in range(2001, 2027):

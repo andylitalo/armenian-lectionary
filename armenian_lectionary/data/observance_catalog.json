@@ -83,25 +83,21 @@
   "en": "Sts. Atom and his soldiers",
   "hy": "Սրբոց Ատովմեանց զօրավարացն"
  },
- "atom_and_his_soldiers": {
-  "en": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
-  "hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի"
- },
- "atom_and_his_soldiers_2": {
-  "en": "Sts. Atom and his soldiers, and Sts. Sukiasians the Martyrs",
-  "hy": "Սրբոց Ատովմեանց զօրավարացն եւ Սուքիասեանց վկայիցն"
- },
  "basil_the_great_and": {
   "en": "Sts. Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
   "hy": "Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ"
  },
  "beginning_of_the_fast": {
-  "en": "Beginning of the Fast",
-  "hy": "Սկիզբն պահոց"
+  "en": "Beginning of the Weekly Fasts",
+  "hy": "Սկիզբն շաբաթական պահոց"
  },
  "beheading_of_st_john": {
   "en": "Beheading of St. John the Forerunner (the Baptist)",
   "hy": "Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի"
+ },
+ "blessing_of_the_pomegranates": {
+  "en": "Blessing of the Pomegranates",
+  "hy": "Նռնօրհնէք"
  },
  "callistratus_and_his_companions": {
   "en": "Sts. Callistratus and his companions, and Lukianos the Priest",
@@ -146,14 +142,6 @@
  "cyricus_and_his_mother": {
   "en": "Sts. Cyricus and His Mother Julitta",
   "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի"
- },
- "cyricus_and_his_mother_2": {
-  "en": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
-  "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի"
- },
- "cyricus_and_his_mother_3": {
-  "en": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
-  "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի"
  },
  "cyril_of_jerusalem_cyril": {
   "en": "Sts. Cyril of Jerusalem, Cyril the Bishop and Anna",
@@ -227,17 +215,9 @@
   "en": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
   "hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն"
  },
- "eugenia_the_virgin_her_2": {
-  "en": "Sts. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs, and Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
-  "hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն, նաեւ սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ"
- },
  "eugenius_macarius_valerius_candidus": {
   "en": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
   "hy": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ"
- },
- "eugenius_macarius_valerius_candidus_2": {
-  "en": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila, and Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
-  "hy": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ, նաեւ սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն"
  },
  "eustachius_his_wife_theopista": {
   "en": "Sts. Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
@@ -322,10 +302,6 @@
  "fathers_sts_athanasius_and": {
   "en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
   "hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի"
- },
- "fathers_sts_athanasius_and_2": {
-  "en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
-  "hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին"
  },
  "feast_day_of_the": {
   "en": "Feast day of the Discovery of the Belt of the Holy Mother of God",
@@ -663,6 +639,10 @@
   "en": "Sts. Ghevond the Priest and His Companions",
   "hy": "Սրբոց Ղեւոնդեանց քահանայիցն"
  },
+ "gordius_polyeuctus_and_grigoris": {
+  "en": "Sts. Gordius, Polyeuctus and Grigoris",
+  "hy": "Սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի"
+ },
  "great_friday": {
   "en": "Great Friday",
   "hy": "Աւագ ուրբաթ"
@@ -723,10 +703,6 @@
   "en": "The Hermit Sts. Tryphon, Barsauma and Onuphrius",
   "hy": "Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն"
  },
- "hermits_sts_anton_tryphon": {
-  "en": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
-  "hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն"
- },
  "hipparchus_and_his_companions": {
   "en": "St. Hipparchus and his companions who were martyred in Samosata",
   "hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան"
@@ -740,23 +716,23 @@
   "hy": "Սրբոց կուսանացն Հռիփսիմեանց"
  },
  "illuminator_fast_day_1": {
-  "en": "Fast day",
+  "en": "First day of the Fast of St. Gregory the Illuminator",
   "hy": "Ա օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_2": {
-  "en": "Fast day",
+  "en": "Second day of the Fast of St. Gregory the Illuminator",
   "hy": "Բ օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_3": {
-  "en": "Fast day",
+  "en": "Third day of the Fast of St. Gregory the Illuminator",
   "hy": "Գ օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_4": {
-  "en": "Fast day",
+  "en": "Fourth day of the Fast of St. Gregory the Illuminator",
   "hy": "Դ օր Լուսաւորչի պահոց"
  },
  "illuminator_fast_day_5": {
-  "en": "Fast day",
+  "en": "Fifth day of the Fast of St. Gregory the Illuminator",
   "hy": "Ե օր Լուսաւորչի պահոց"
  },
  "isaiah_the_prophet": {
@@ -873,7 +849,7 @@
  },
  "octave_of_easter_new": {
   "en": "Octave of Easter (New Sunday)",
-  "hy": "Ը օր Զատկի. Կրկնազատիկ (Նոր կիւրակէ)"
+  "hy": "Ը օր Զատկի; Կրկնազատիկ (Նոր կիւրակէ)"
  },
  "palm_sunday": {
   "en": "Palm Sunday",
@@ -982,10 +958,6 @@
  "sargis": {
   "en": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
   "hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն"
- },
- "sargis_the_warrior_and": {
-  "en": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Sts. Atom and his soldiers",
-  "hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն եւ սրբոց Ատովմեանց զօրավարացն"
  },
  "second_day_of_advent": {
   "en": "Second day of Advent",
@@ -1215,10 +1187,6 @@
   "en": "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin",
   "hy": "Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին"
  },
- "theodore_the_general": {
-  "en": "St. Theodore the General",
-  "hy": "Սրբոյն Թէոդորոսի զօրավարին"
- },
  "theodore_the_tyron": {
   "en": "St. Theodore the Tyron",
   "hy": "Սրբոյն Թէոդորոսի զօրավարին"
@@ -1277,7 +1245,7 @@
  },
  "third_day_of_the_4": {
   "en": "Third day of the Fast of Nativity",
-  "hy": "Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ"
+  "hy": "Գ օր Ս. Ծննդեան պահոց"
  },
  "third_day_of_the_5": {
   "en": "Third day of the Fast of the Catechumens",
@@ -1510,14 +1478,6 @@
  "vahan_of_goghtn": {
   "en": "St. Vahan of Goghtn",
   "hy": "Սրբոյն Վահանայ Գողթնացւոյն"
- },
- "vahan_of_goghtn_eugenia": {
-  "en": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
-  "hy": "Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն"
- },
- "vahan_of_goghtn_gordius": {
-  "en": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
-  "hy": "Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի"
  },
  "vardan_the_general_and": {
   "en": "Sts. Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle",
