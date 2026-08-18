@@ -1,0 +1,44 @@
+name: CI
+
+# Runs the test suite and a packaging sanity check on every push and pull
+# request, so PRs get a status check before merging. Mirrors the "test" job
+# in release.yml, but as a PR gate rather than a pre-publish check, and across
+# the full support matrix declared in pyproject.toml's classifiers.
+#
+# Note: the accuracy-lock tests that need dev/reference_data/ (git-ignored,
+# ~39 MB scraped cache) SKIP automatically on a fresh checkout -- see
+# tests/_reference_cache.py. CI therefore covers everything except that cache.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install web-layer dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run test suite
+        run: python -m unittest discover -s tests -t .
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install --upgrade build twine
+          python -m build
+          twine check dist/*
