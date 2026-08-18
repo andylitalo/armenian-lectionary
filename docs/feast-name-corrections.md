@@ -351,8 +351,42 @@ liturgical coordinate**, and which canons the source names varies by year-type. 
 days (and four Armenian) now report as OMISSION for that reason. They were already wrong on
 `origin/main` — 2008-07-28 serves Vahan with Eugenia's household where the source prints
 Vahan with Gordius — but `canonical_commem`'s deliberately crude predicates folded any two
-companion sets to equality, so nothing could see it. Closing them needs per-year packing
-data, which moves readings provenance and belongs in its own commit.
+companion sets to equality, so nothing could see it.
+
+**The gap is name-only.** All five days already serve the correct readings, byte for byte,
+because the source keys its propers to the **head canon** and does not change them when it
+names more companions:
+
+| Head canon | Readings, on every packing that begins with it |
+|---|---|
+| Cyricus and Julitta | Proverbs 14.1-6 · Zechariah 8.4-5 · Isaiah 60.8-9 · Hebrews 2.14-18 · Luke 9.44-48 |
+| Vahan of Goghtn | Proverbs 7.1-7 · Ezekiel 12.17-19 · Romans 8.12-27 · Luke 9.23-27 |
+| Anton | Proverbs 21.15-24 · Isaiah 19.19-21 · Hebrews 11.32-40 · Matthew 10.37-42 |
+| Athanasius and Cyril | Proverbs 11.2-11 · Isaiah 61.3-7 · Hebrews 13.7-9 · John 16.33-17.8 |
+
+`Sts. Cyricus and His Mother Julitta`, `… and Sts. Gordius, Polyeuctus and Grigoris` and
+`… and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris` all ship the same five
+readings; a day headed by Gregory the Theologian instead ships his own. So closing the
+omissions changes no reading anywhere.
+
+**Where the data is.** At `cyricus_and_his:01-22`, six cached years share the key —
+2001, 2004, 2007, 2009 print Cyricus + Gordius; 2015 and 2026 add Vahan.
+`build_table.unanimous_feast` keeps only what they agree on, which is the table doing its
+job: a table key is a liturgical coordinate shared by civil years, and the packing is not
+invariant across them. So the packing belongs where the per-year-type facts already live —
+`second_volume_cycles.json`, keyed by the year's Easter date, which today stores **one**
+`(zone, saint_id)` per date and would need an **ordered list of ids**. The Second Volume
+states them explicitly, page by page: p.588 prints
+*"22. Thursday. Cyriacus and Julitta, and Vahan of Goghtn, and Gordius, Polyeuctus, and
+Grigoris."* The engine would render the packing from that list through the catalog, and keep
+the head canon's readings, which is what the source itself does.
+
+**Why that is its own commit.** Not the packing data — the *generator*.
+`dev/build_second_volume_cycles.py` and `dev/saint_schedule.py` are the two builders CLAUDE.md
+records as not reproducing their checked-in artifacts from the present cache: regenerating
+them moves 2016-07-30 from `second-volume-cycle` to `generative-saint`. That drift predates
+this work and has to be resolved before their output can be widened, or a name change would
+smuggle in a readings change.
 
 ### Two packings the engine now gets right
 

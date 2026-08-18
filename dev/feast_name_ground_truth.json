@@ -1052,7 +1052,7 @@
   "approved_hy": "Սրբոց մարգարէիցն Եզեկիէլի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի",
   "id": "prophets_ezekiel_ezra_and",
   "note": "",
-  "source_hy": "Սրբոց մարգարէիցն Եզեկիէլի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի",
+  "source_hy": "Սրբոց մարգարէիցն Եզեկիելի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի",
   "status": "ok"
  },
  "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful": {
@@ -1172,7 +1172,7 @@
   "approved_hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
   "id": "presentation_of_the_holy",
   "note": "",
-  "source_hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
+  "source_hy": "Ընծայումն ս.Աստուածածնի երից ամաց ի Տաճարն",
   "status": "ok"
  },
  "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)": {
@@ -1260,7 +1260,7 @@
   "approved_hy": "Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հաւատացեալ թագաւորին մերոյ",
   "id": "abgar_the_witness_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
-  "source_hy": "Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հաւատացեալ թագաւորին մերոյ",
+  "source_hy": "Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հավատացեալ թագաւորին մերոյ",
   "status": "fixed"
  },
  "Saint Elisha the Prophet": {
@@ -1284,7 +1284,7 @@
   "approved_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
   "id": "gregory_the_illuminator_s_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', not 'Aristakes'/'Housik' -- but Armenian Church diocese sites are inconsistent between transliteration conventions (cf. Ghevond vs Ghevont). Worth a call: Wikipedia form or church-website form?",
-  "source_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
+  "source_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիելի",
   "status": "review"
  },
  "Saint Gregory the Illuminator’s Commitment to the Pit": {
@@ -1972,7 +1972,7 @@
   "approved_hy": "Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի",
   "id": "prophet_daniel_and_his",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
-  "source_hy": "Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի",
+  "source_hy": "Սրբոցն Դանիելի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի",
   "status": "fixed"
  },
  "Saints Severianus of Sebastia and Babylas and his 84 Disciples": {
@@ -2076,7 +2076,7 @@
   "approved_hy": "Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ",
   "id": "twelve_prophets_hosea_amos",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
-  "source_hy": "Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ",
+  "source_hy": "Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգեայ, Զաքարեայ եւ Մաղաքեայ",
   "status": "fixed"
  },
  "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": {
@@ -2652,7 +2652,7 @@
   "approved_hy": "Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն",
   "id": "fathers_of_egypt_paul",
   "note": "",
-  "source_hy": "Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն",
+  "source_hy": "Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիելի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն",
   "status": "ok"
  },
  "The Holy Virgins Juliana and Basilla, and Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": {

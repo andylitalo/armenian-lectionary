@@ -89,7 +89,7 @@ HY_EXPANSION_CEILING = int(os.environ.get("HY_EXPANSION_CEILING", "4"))
 
 # Days where the source spells a name several ways and we serve its dominant form. Correct,
 # but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
-HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "5"))
+HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "4"))
 
 # Days identical to the source except that a catalog entry's internal break uses the
 # catalog's own delimiter rather than the component separator. Monotonic DOWN, but only
@@ -113,7 +113,7 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # The floor is 413 rather than the 414 a full cache now reports: the days gained since it
 # was set at 407 are reproducible anywhere except one, which came from the cache growing
 # 433 -> 435 days.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "412"))
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "413"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.

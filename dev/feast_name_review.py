@@ -291,19 +291,20 @@ def corrected(text):
 def source_armenian_map():
     """``{raw English component -> the Armenian the source printed beside it}``.
 
-    A second, raw-keyed pairing, used only where the approved-keyed one cannot answer.
-    ``feast_names_hy.json`` is keyed on the CORRECTED English, which is what makes the
-    rebuild order work -- but it means several source strings that correct to one approved
-    name become indistinguishable in it. That is now the normal case: the Second Volume's
-    abbreviations (preface, Sixth) all approve to the full companion list, so looking their
-    Armenian up by approved name hands every row in the group the same string and quietly
-    erases the record of what the source actually printed for each -- the record that
-    justifies the correction in the first place.
+    The primary source of the ``source_hy`` column, and keyed the way that column is
+    defined: on the row's OWN source text. ``feast_names_hy.json`` is keyed on the
+    CORRECTED English instead -- which is what makes the rebuild order work, and what makes
+    it the wrong key here. Deriving the witness from the approved name destroyed it three
+    separate times: correcting a name emptied the column, approving one name for several
+    source strings duplicated it across them, and splitting a packed line into its canons
+    synthesised it by joining the halves (so ``source_hy`` equalled ``approved_hy`` and
+    registered no fold at all).
 
-    Deliberately NOT used as the general source: it votes over the 433-day Armenian cache
-    keyed on raw English, so it splits votes the corrected map merges (the Presentation's
-    shouted and title-case spellings) and skips the orthography reversal v1.2.3 applied.
-    Preferring it everywhere would move 7 rows for no reason.
+    It also records the scrape more faithfully. The seven rows that moved when this became
+    primary are the ones where v1.2.3 reversed the source's reformed orthography
+    (``Դանիել`` -> ``Դանիէլ``) or where the source spells a name several ways: the raw form
+    now sits in ``source_hy`` and the reversal reads as the decision it is, in
+    ``approved_hy``. Exact matches went 413 -> 414 and DOMINANT_FORM 5 -> 4.
     """
     votes = collections.defaultdict(collections.Counter)
     for path in sorted(glob.glob(os.path.join(REF_DIR_HY, "*.json"))):
@@ -339,11 +340,21 @@ COMPOSED_SOURCE_HY = {
 
 
 def armenian_for(approved, hy):
-    """The source's Armenian for ``approved``, per component.
+    """The source's Armenian for ``approved``, per component. The FALLBACK, not the default.
 
-    A whole-string lookup first; failing that, join the per-component forms -- one
-    correction splits a component in two ("Fast day, Remembrance of the Ten Virgins"), so
-    the joined form was never scraped as a single string even though both halves were.
+    Reached by 6 rows, and only for text the source never published in the form we serve,
+    where there is no raw English to pair on:
+
+      * the five Illuminator fast weekdays, whose English the engine composes because the
+        source prints a bare "Fast day" there (see source_corrections.illuminator_fast_label).
+        ``feast_names_hy.json`` is keyed on the CORRECTED English, which is exactly why
+        ``dev/fetch_translations.py`` runs first in the rebuild order -- so the approved name
+        is the only key that can answer, and here it is the right one;
+      * "Fast day, Remembrance of the Ten Virgins", where a correction splits one component
+        in two, so the joined form was never scraped as a single string even though both
+        halves were. That is what the per-component join below is for.
+
+    Everything else takes ``source_armenian_map``.
     """
     if approved in hy:
         return hy[approved]
@@ -498,8 +509,10 @@ def build_rows():
         # it equal approved_hy and quietly erasing the glued form the source published.
         # That form is the evidence for the split AND the key ground_truth_hy_fixes needs
         # to fold the source before comparing, so it must come from the raw pairing.
-        source_hy = (raw_hy.get(src) if _FEAST_SEP in approved else None) \
-            or armenian_for(approved, hy) or COMPOSED_SOURCE_HY.get(src, "")
+        # The raw pairing first: source_hy means "what the source printed for THIS row's
+        # source text", so the map keyed on that text is the one that answers it.
+        source_hy = raw_hy.get(src) or armenian_for(approved, hy) \
+            or COMPOSED_SOURCE_HY.get(src, "")
         rows.append({
             "status": status,
             "days": days[src],

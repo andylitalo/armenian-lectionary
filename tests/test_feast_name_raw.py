@@ -50,8 +50,17 @@ from tests._reference_cache import requires_reference_cache           # noqa: E4
 # Grigoris". Same feast id, different canons packed onto the day.
 #
 # What they have in common: the engine serves ONE packing per liturgical coordinate, and
-# which canons the source names varies by year-type. Closing them means per-year packing
-# data, which is a readings-provenance change and belongs in its own commit.
+# which canons the source names varies by year-type. At cyricus_and_his:01-22 six cached
+# years share the key, four printing Cyricus + Gordius and two (2015, 2026) adding Vahan;
+# build_table.unanimous_feast keeps only what they agree on, which is the table doing its
+# job.
+#
+# The fix is NAME-ONLY: all five days already serve the correct readings, because the
+# source keys its propers to the HEAD canon and does not change them when it names more
+# companions (every Cyricus-headed packing ships the same four readings, every Vahan-headed
+# one the same four). What makes it a separate commit is not the packing data but the
+# generator that would have to emit it -- dev/build_second_volume_cycles.py, which CLAUDE.md
+# records as not reproducing its checked-in artifact from the present cache.
 OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "5"))
 
 # Days serving a DECLARED fixed-date observance the source's English never names. Jan 1's
