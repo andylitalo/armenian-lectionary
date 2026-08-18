@@ -1152,10 +1152,10 @@
   "variant_of": ""
  },
  "Holy Fathers Saints Athanasius and Cyril of Alexandria": {
-  "approved_en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
-  "approved_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի",
+  "approved_en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
+  "approved_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
   "id": "fathers_sts_athanasius_and",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի",
   "status": "fixed",
   "variant_of": ""
@@ -1164,7 +1164,7 @@
   "approved_en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
   "approved_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
   "id": "",
-  "note": "alternate name for fathers_sts_athanasius_and: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
   "status": "fixed",
   "variant_of": "fathers_sts_athanasius_and"
@@ -1674,10 +1674,10 @@
   "variant_of": ""
  },
  "Saints Atom and his soldiers": {
-  "approved_en": "Sts. Atom and his soldiers",
-  "approved_hy": "Սրբոց Ատովմեանց զօրավարացն",
+  "approved_en": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+  "approved_hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
   "id": "atom",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն",
   "status": "fixed",
   "variant_of": ""
@@ -1686,7 +1686,7 @@
   "approved_en": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
   "approved_hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
   "id": "",
-  "note": "alternate name for atom: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
   "status": "fixed",
   "variant_of": "atom"
@@ -1764,19 +1764,19 @@
   "variant_of": ""
  },
  "Saints Cyricus and His Mother Julitta": {
-  "approved_en": "Sts. Cyricus and His Mother Julitta",
-  "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
+  "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+  "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "id": "cyricus_and_his_mother",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
   "status": "fixed",
   "variant_of": ""
  },
  "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris": {
-  "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
-  "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
+  "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+  "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "id": "",
-  "note": "alternate name for cyricus_and_his_mother: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "status": "fixed",
   "variant_of": "cyricus_and_his_mother"
@@ -1785,7 +1785,7 @@
   "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
   "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "id": "",
-  "note": "alternate name for cyricus_and_his_mother: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "status": "fixed",
   "variant_of": "cyricus_and_his_mother"
@@ -2916,10 +2916,10 @@
   "variant_of": ""
  },
  "The Hermit Saints Anton": {
-  "approved_en": "The Hermit St. Anton",
-  "approved_hy": "Սրբոյն Անտոնի ճգնաւորին",
+  "approved_en": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
+  "approved_hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
   "id": "hermit_st_anton",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոյն Անտոնի ճգնաւորին",
   "status": "fixed",
   "variant_of": ""
@@ -2928,7 +2928,7 @@
   "approved_en": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
   "approved_hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
   "id": "",
-  "note": "alternate name for hermit_st_anton: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | spelling ('Tryphon'/'Onuphrius') aligned with the sibling row 'The Hermits Saints Triphon, Barsauma and Onouphrius' for consistency (same two names).",
+  "note": "Second Volume preface, Sixth (p.556): the saints' feasts are set down plurally and \"always celebrated together indivisibly\", but the Second Volume prints \"only the name of the first saints ... for the sake of brevity\". So the short forms are the book's own shorthand, not different days: the approved name is the full list the source publishes elsewhere for this id, and every abbreviation resolves to it.",
   "source_hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
   "status": "fixed",
   "variant_of": "hermit_st_anton"

@@ -175,11 +175,17 @@ Working rules:
   naming it. Reviving one fails too.
 - **One observance, not one display string.** Where the source spells a commemoration
   several ways — the same liturgical day with a longer or shorter companion list — the
-  alternates carry `variant_of` (the primary's id) instead of an `id`, and ship as
-  `variants` under it, each keeping its own `en` and `hy`. Identity is single; display text
-  stays exact. A row has an `id` or a `variant_of`, never both. Group only on evidence that
-  it is one day: identical propers settled the five in docs §7, and kept two look-alikes
-  apart.
+  alternates carry `variant_of` (the primary's id) instead of an `id`. A row has an `id` or
+  a `variant_of`, never both. Group only on evidence that it is one day: identical propers
+  settled the five in docs §7, and kept two look-alikes apart.
+  - The short forms are the **Tōnats'oyts' own abbreviations** — Volume II's preface, Sixth
+    (p.556): the saints are "always celebrated together indivisibly", and the Second Volume
+    prints "only the name of the first saints … for the sake of brevity". So `approved_en`
+    and `approved_hy` carry the **full companion list** on every row in the group, and the
+    abbreviation is a key into the catalog, never a value in it.
+  - `variants` survives for the one group whose companion sets are **not nested**
+    (`vahan_of_goghtn`), where naming the union would assert saints the source never puts
+    on that day. Those alternates ship under the id keeping their own `en` and `hy`.
 
 Invariants the build enforces, each of which was violable before: ids unique, English
 unique (no two observances under one display string), no component carrying `_FEAST_SEP` in

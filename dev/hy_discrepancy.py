@@ -24,11 +24,13 @@ Findings are classified, strongest first:
   * ``CONTRADICTION`` -- the engine emits an Armenian component the source does not have.
   * ``OMISSION`` -- the source states a component the engine drops.
   * ``VARIANT_NAME`` -- the source names the same OBSERVANCE with a different declared
-    spelling (a longer or shorter companion list). Not a defect: the catalog states the two
-    are one observance and the propers are byte-identical, so the day the cache happened to
-    sample decides nothing. It is the Armenian analogue of what ``canonical_commem`` does
-    for English, and it is enumerated rather than inferred -- only text a reviewer grouped
-    in ``feast_name_review.tsv``'s ``variant_of`` column can match this way.
+    companion set. Not a defect: the catalog states the two are one observance and the
+    propers are byte-identical, so the day the cache happened to sample decides nothing. It
+    is the Armenian analogue of what ``canonical_commem`` does for English, and it is
+    enumerated rather than inferred -- only text a reviewer grouped in
+    ``feast_name_review.tsv``'s ``variant_of`` column can match this way. Rare now that the
+    Second Volume's abbreviations resolve to the full companion list: what is left is the
+    one group whose two sets are not nested, where no printed full list exists.
   * ``ORDER`` -- the same components in a different order.
   * ``DOMINANT_FORM`` -- the source spells one name several ways and the engine serves the
     one it uses most often. Not a defect: it is the same policy the English side applies to

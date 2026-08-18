@@ -1707,7 +1707,11 @@ _PRELENT_COHORT = (
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     "Sts. Atom and his soldiers",
+     # The full companion list, as the observance catalog approves it: the Second Volume
+     # prints "the Atomian Generals, and Bishop Mark, Pion, and the others" and its
+     # preface (Sixth) says to commemorate the companions the First Volume sets down.
+     "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril "
+     "and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,

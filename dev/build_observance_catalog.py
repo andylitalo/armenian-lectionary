@@ -158,8 +158,13 @@ def build_catalog(ground_truth):
 
     One entry per OBSERVANCE, not per display string. A commemoration the source spells
     several ways (a longer or shorter companion list for the same liturgical day) is one
-    entry whose alternate spellings hang off it as ``variants``, each keeping its own
-    ``en``/``hy`` so display text stays exact while identity stays single.
+    entry, and its short forms are ABBREVIATIONS: the row approves the full list, so the
+    short text is a key into the catalog and never a value in it.
+
+    ``variants`` survives for the one case that is not an abbreviation -- two companion
+    sets the source prints for one id that are not nested in each other, where naming the
+    union would assert saints the source never puts on that day. Those keep their own
+    ``en``/``hy``, so display text stays exact while identity stays single.
     """
     catalog, problems = {}, []
     by_id, by_en = {}, {}
@@ -218,6 +223,13 @@ def build_catalog(ground_truth):
         if primary not in catalog:
             problems.append(f"{en!r} is a variant of {primary!r}, which is not an "
                             "observance -- variant_of must name a row that has an id")
+            continue
+        if en == catalog[primary]["en"]:
+            # The ordinary case, and what the Second Volume's own preface describes: the
+            # source printed an ABBREVIATION of this observance on some days, and the row
+            # approves the full name. The short form is a key into the catalog, never a
+            # value in it -- apply_ground_truth has already resolved it by the time the
+            # engine looks anything up, so there is nothing to add here.
             continue
         if en in by_en:
             problems.append(

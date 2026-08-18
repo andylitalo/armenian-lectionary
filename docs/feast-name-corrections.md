@@ -314,28 +314,67 @@ The same evidence kept two candidates apart, which is why it is a test and not a
   (`"Anton" in c and "Hermit" in c`), which is a comparison heuristic, not an identity
   claim. Disjoint readings. Kept separate.
 
-### Display text is untouched
+### The short forms are the book's own abbreviations
 
-A merge that flattened the names would drop companion saints the source actually states, on
-about 79 days. So identity is single but text is not: each spelling ships as a `variants`
-entry under its observance, keeping its own `en` **and** `hy`.
+The Tōnats'oyts explains the varying strings itself. Volume II's preface, **Sixth**
+(p.556, `grabar-ocr/corpus/book.english.md`):
+
+> The feasts of the Saints for the most part are set down **plurally** in our Tonatsuyts
+> from its original state, that is, two, three, four, five… **which are always celebrated
+> together indivisibly**… But when we mention such in this Second Volume, **we have placed
+> only the name of the first saints in many places for the sake of brevity**; nevertheless,
+> when you encounter such feasts in this Second Volume, you must celebrate, along with the
+> first-named saint, all the other companions following him.
+
+— `զանուն առաջնոց սրբոցն միայն եդաք ի բազում տեղիս վասն կարճելոյ բանին`
+(`book.grabar.md:7683`).
+
+So `"always celebrated together indivisibly"` is the book stating the very criterion the
+readings test measures, and the short strings are its shorthand, not different days. The
+approved name is therefore the **full companion list**, and every abbreviation is a key
+into it rather than a value we serve:
+
+```
+approved_en:  Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius,
+              Polyeuctus and Grigoris
+              ← "Saints Cyricus and His Mother Julitta"
+              ← "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris"
+```
+
+Four groups collapse this way — `cyricus_and_his_mother`, `atom`, `hermit_st_anton`,
+`fathers_sts_athanasius_and` — and the served spellings drop 387 → 382. The engine's
+hardcoded pre-Lent cohort label for `atom` moved with them, since that tier composes its
+text rather than reading it from the table.
+
+**One group cannot.** `vahan_of_goghtn`'s two sets are not nested in each other — Eugenia
+the Virgin's household in one, Gordius/Polyeuctus/Grigoris in the other — so naming the
+union would assert saints the source never puts on that day, and naming either would drop
+the other. Those two keep their own `en` and `hy` as `variants` under the id:
 
 ```json
-"cyricus_and_his_mother": {
-  "en": "Sts. Cyricus and His Mother Julitta",
-  "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
-  "variants": [{"en": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, …",
-                "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, …"}]
+"vahan_of_goghtn": {
+  "en": "St. Vahan of Goghtn",
+  "hy": "Սրբոյն Վահանայ Գողթնացւոյն",
+  "variants": [{"en": "Sts. Vahan of Goghtn, Eugenia the Virgin, …", "hy": "…"},
+               {"en": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris", "hy": "…"}]
 }
 ```
 
 `engine._observance_names()` resolves display text per spelling; `ids_for_text` resolves
-identity per observance, many-to-one. Verified: the served name in both languages, and
-every reading, is byte-identical to before the merge across all 27 years.
+identity per observance, many-to-one. The grouping is **stated**, not inferred — a
+`variant_of` column in `dev/feast_name_review.tsv`, beside the id it belongs to. A row has
+an `id` or a `variant_of`, never both.
 
-The grouping is **stated**, not inferred — a `variant_of` column in
-`dev/feast_name_review.tsv`, beside the id it belongs to. A row has an `id` or a
-`variant_of`, never both.
+### The abbreviation also broke the Armenian witness column
+
+Promoting the full name exposed a defect in `dev/feast_name_review.armenian_for`: it looked
+`source_hy` up by the row's **approved** English, so once several rows approved the same
+name they all received the same Armenian — erasing the record of what the source actually
+printed for each, which is the evidence a correction rests on. Rows in a declared variant
+group now key on their own source text (`source_armenian_map`). Scoped to those groups on
+purpose: casing-typo pairs like the Presentation's two spellings also share an approved
+name, but there the approved-keyed map is the better answer, because it votes across every
+year rather than the single day the Armenian cache sampled.
 
 ### It also gave the Armenian comparison its missing equivalence
 
@@ -343,7 +382,9 @@ The grouping is **stated**, not inferred — a `variant_of` column in
 [declined to invent a fuzzy one](../dev/hy_discrepancy.py). A declared variant group is not
 fuzzy, so it can now match a source spelling to an engine spelling of the same observance.
 Contradictions **11 → 6**; those days report as `VARIANT_NAME`, visible but not counted as
-defects.
+defects. Approving the full companion list then folded four of the five outright — the
+abbreviation now resolves through `ground_truth_hy_fixes` and the day matches exactly — so
+`VARIANT_NAME` is down to the one non-nested group and exact matches are up to 414 of 435.
 
 ## Open questions — NOT corrected
 

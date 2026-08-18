@@ -78,6 +78,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import REF_DIR                                        # noqa: E402
+from dev.hy_discrepancy import REF_DIR_HY                             # noqa: E402
 from dev.source_corrections import (                                   # noqa: E402
     apply_ground_truth, normalize_confusables, normalize_position_label,
 )
@@ -268,6 +269,45 @@ def corrected(text):
         normalize_confusables(apply_ground_truth(text)))
 
 
+def source_armenian_map():
+    """``{raw English component -> the Armenian the source printed beside it}``.
+
+    A second, raw-keyed pairing, used only where the approved-keyed one cannot answer.
+    ``feast_names_hy.json`` is keyed on the CORRECTED English, which is what makes the
+    rebuild order work -- but it means several source strings that correct to one approved
+    name become indistinguishable in it. That is now the normal case: the Second Volume's
+    abbreviations (preface, Sixth) all approve to the full companion list, so looking their
+    Armenian up by approved name hands every row in the group the same string and quietly
+    erases the record of what the source actually printed for each -- the record that
+    justifies the correction in the first place.
+
+    Deliberately NOT used as the general source: it votes over the 433-day Armenian cache
+    keyed on raw English, so it splits votes the corrected map merges (the Presentation's
+    shouted and title-case spellings) and skips the orthography reversal v1.2.3 applied.
+    Preferring it everywhere would move 7 rows for no reason.
+    """
+    votes = collections.defaultdict(collections.Counter)
+    for path in sorted(glob.glob(os.path.join(REF_DIR_HY, "*.json"))):
+        with open(path, encoding="utf-8") as fh:
+            hy_rec = json.load(fh)
+        en_path = os.path.join(REF_DIR, hy_rec["date"] + ".json")
+        if not os.path.exists(en_path):
+            continue
+        with open(en_path, encoding="utf-8") as fh:
+            en_rec = json.load(fh)
+        en_text = (en_rec.get("feast") or "").strip()
+        hy_text = (hy_rec.get("feast") or "").strip()
+        if not en_text or not hy_text:
+            continue
+        votes[en_text][hy_text] += 1
+        en_parts = [c.strip() for c in en_text.split(_FEAST_SEP)]
+        hy_parts = [c.strip() for c in hy_text.split(_FEAST_SEP)]
+        if len(en_parts) == len(hy_parts) > 1:
+            for en_part, hy_part in zip(en_parts, hy_parts):
+                votes[en_part][hy_part] += 1
+    return {en: forms.most_common(1)[0][0] for en, forms in votes.items()}
+
+
 def armenian_for(approved, hy):
     """The source's Armenian for ``approved``, per component.
 
@@ -344,6 +384,7 @@ def build_rows():
     days, last = source_components()
     gen_days, gen_last = generated_components()
     hy = armenian_map()
+    raw_hy = source_armenian_map()
     existing = read_existing()
     rows, drift = [], []
 
@@ -357,6 +398,16 @@ def build_rows():
     for label in generated_only:
         days[label] = gen_days[label]
         last[label] = gen_last[label]
+
+    # Observances the source names both in full and in abbreviation (preface, Sixth). Every
+    # row in such a group approves the SAME full name, so the approved-keyed Armenian map
+    # cannot tell them apart -- key those rows on their own source text instead. Scoped to
+    # declared variant groups on purpose: casing-typo pairs like the Presentation's two
+    # spellings also share an approved name, but there the approved-keyed map is the better
+    # answer, because it votes across every year rather than the one day the Armenian cache
+    # sampled.
+    variant_groups = {row["variant_of"] for row in existing.values()
+                      if row.get("variant_of")}
 
     for src in sorted(days):
         served = src if src in generated_only else corrected(src)
@@ -384,7 +435,10 @@ def build_rows():
             note = ("engine-composed label; the source prints a less specific English "
                     "text here -- see dev/source_corrections")
 
-        source_hy = armenian_for(approved, hy)
+        in_variant_group = bool(
+            {(prior or {}).get("id"), (prior or {}).get("variant_of")} & variant_groups)
+        source_hy = (raw_hy.get(src) if in_variant_group else None) \
+            or armenian_for(approved, hy)
         rows.append({
             "status": status,
             "days": days[src],

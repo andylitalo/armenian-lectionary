@@ -24,8 +24,10 @@ was an override filled on 3 rows of 397 rather than a decision stated on every o
 
 Armenian also has the second half of that now: merging the companion-list variants onto one
 observance id gave ``diff_components`` a declared equivalence to match on, which is the
-Armenian analogue of ``canonical_commem`` and took the count 11 -> 6. Those days are
-reported as VARIANT_NAME instead, so they stay visible without being counted as defects.
+Armenian analogue of ``canonical_commem`` and took the count 11 -> 6. Approving the FULL
+companion list on those ids then folded four of the five outright -- the Second Volume's
+short forms are its own abbreviations (preface, Sixth), so ``ground_truth_hy_fixes`` maps
+each to the full name and the day matches exactly.
 
 The residue is still not all engine defect. The 5 contradictions are:
 
@@ -77,12 +79,16 @@ HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "2"))
 # Days carrying the right components in a different order. Monotonic DOWN.
 HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
 
-# Days where the source names the same OBSERVANCE with a different declared spelling -- a
-# longer or shorter companion list for one commemoration. Correct as served: the catalog
-# states the two are one observance (feast_name_review.tsv's variant_of) and the propers are
-# byte-identical, so the day the cache sampled decides nothing. Monotonic DOWN anyway: a
-# rise means a new spelling appeared that nobody grouped.
-HY_VARIANT_NAME_CEILING = int(os.environ.get("HY_VARIANT_NAME_CEILING", "5"))
+# Days where the source names the same OBSERVANCE with a different declared companion set.
+# Correct as served: the catalog states the two are one observance
+# (feast_name_review.tsv's variant_of) and the propers are byte-identical, so the day the
+# cache sampled decides nothing.
+#
+# 5 -> 1 when the abbreviations were resolved to the full companion list. The one left is
+# vahan_of_goghtn, whose two sets are not nested in each other (Eugenia's household in one,
+# Gordius/Polyeuctus/Grigoris in the other), so there is no full list to approve that the
+# source actually prints. Monotonic DOWN: a rise means a new spelling nobody grouped.
+HY_VARIANT_NAME_CEILING = int(os.environ.get("HY_VARIANT_NAME_CEILING", "1"))
 
 # Days where the source spells a name several ways and we serve its dominant form. Correct,
 # but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
@@ -107,10 +113,10 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # even though their text is identical. exact + INTERNAL_DELIMITER is the "same words" number
 # and is what moves when a real fix lands: 409 + 6 = 415.
 #
-# The floor is 409 rather than the 410 a full cache now reports: 2 of the 3 days gained
-# since it was set at 407 come from folding the registered Armenian corrections, which is
-# reproducible anywhere, and the third from the cache growing 433 -> 435 days, which is not.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "409"))
+# The floor is 413 rather than the 414 a full cache now reports: the days gained since it
+# was set at 407 are reproducible anywhere except one, which came from the cache growing
+# 433 -> 435 days.
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "413"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.

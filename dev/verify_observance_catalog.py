@@ -101,7 +101,10 @@ def embedded_components():
 def main():
     with open(CATALOG_PATH, encoding="utf-8") as fh:
         catalog = json.load(fh)
-    catalog_texts = {v["en"] for v in catalog.values()}
+    # Variants are served text too: an observance the source also prints with a
+    # different companion set ships its alternates under the same id.
+    catalog_texts = {form["en"] for entry in catalog.values()
+                     for form in (entry, *entry.get("variants", ()))}
 
     served = (table_components() | schedule_components() | live_generated_components()
               | prelent_components() | embedded_components())
