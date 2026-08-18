@@ -43,7 +43,7 @@ mining (never attested alone) has no independent Armenian witness, so its ``arme
 column is left blank with a note.
 
 Once atomic names are approved, the glued rows need their OWN registered fix in
-``dev.source_corrections._FEAST_TEXT_FIXES``: replace the source's ", and " (or whichever
+the row's ``approved_en``: replace the source's ", and " (or whichever
 connector) with ``armenian_lectionary.engine._FEAST_SEP`` (an em dash, " -- " here only
 because this docstring is plain ASCII) between the two approved atomic names. That is a
 separate, later step -- this script only produces the file to review against.

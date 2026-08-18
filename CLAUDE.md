@@ -89,8 +89,9 @@ twice, so it can be caught contradicting itself. That is how the Council of Ephe
 found dated `AD 341` in English and `431` in Armenian, and Pentecost called the
 `Fifteenth day of Eastertide` where the Armenian says fiftieth.
 
-Registered repairs live in `dev/source_corrections._FEAST_TEXT_FIXES`, each justified by
-the source contradicting itself rather than by editorial preference. When one lands, the
+Registered repairs live in the `approved_en` column of `dev/feast_name_review.tsv`, each
+justified by the source contradicting itself rather than by editorial preference (with one
+declared exception — see the doc). When one lands, the
 shipped artifacts must be rebuilt with it — including `saint_schedule.json`, whose feast
 labels are served directly (`dev/refresh_artifact_names.py`). Every correction is written
 up, with its evidence, in [`docs/feast-name-corrections.md`](docs/feast-name-corrections.md).
@@ -123,8 +124,10 @@ The review loop, and why it is safe to hand to a non-programmer:
    why in `note`. Leave the `source_*` columns alone — they are the record of what was
    published. `id` (below) is preserved the same way;
 3. `tests/test_feast_name_review.py` now fails, naming the row;
-4. register the fold in `dev/source_corrections._FEAST_TEXT_FIXES`, rebuild (order below),
-   and it passes.
+4. rebuild (order below), and it passes. For a whole component the row **is** the
+   registration — `build_ground_truth.py` freezes it and `apply_ground_truth` serves it.
+   Only a repair that is not a whole component (a word inside many names) needs a
+   `dev/source_corrections` entry as well.
 
 `python dev/feast_name_review.py` refreshes the file and **never discards human edits**;
 `--check` reports rows whose approved name the engine does not yet serve. Rows come from

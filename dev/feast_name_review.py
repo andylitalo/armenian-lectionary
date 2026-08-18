@@ -35,10 +35,10 @@ differently, and say why in ``note``. Nothing else needs touching -- leave the `
 columns alone, they are the record of what was published.
 
 A changed ``approved_en`` makes ``tests/test_feast_name_review.py`` fail with the row that
-disagrees. Registering the corresponding fold in
-``dev/source_corrections._FEAST_TEXT_FIXES`` and rebuilding (see CLAUDE.md) makes it pass
-again. That failure is deliberate: it is what stops a reviewed decision from being quietly
-lost the next time the artifacts are rebuilt.
+disagrees; rebuilding (see CLAUDE.md) makes it pass again. For a whole component the row
+IS the registration -- ``dev/build_ground_truth.py`` freezes it and ``apply_ground_truth``
+serves it, with no second entry anywhere. That failure is deliberate: it is what stops a
+reviewed decision from being quietly lost the next time the artifacts are rebuilt.
 
 ``id`` is the observance's frozen catalog id -- the key a consumer stores instead of the
 display text, which moves. It is STATED here, never derived from the text, which is what
@@ -372,7 +372,8 @@ def build_rows():
             "generated" if src in generated_only else
             "fixed" if served != src else "ok")
         if not note and status == "fixed":
-            note = "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES"
+            note = ("reviewed correction: this row IS the registration -- "
+                    "build_ground_truth.py freezes approved_en and apply_ground_truth serves it")
         if not note and status == "generated":
             note = ("engine-composed label; the source prints a less specific English "
                     "text here -- see dev/source_corrections")
@@ -420,7 +421,7 @@ def main():
               + ", ".join(r["source_en"][:40] for r in no_hy[:6]))
     if drift:
         print(f"\n{len(drift)} row(s) where the approved name is NOT what the engine "
-              "serves -- register each in dev/source_corrections._FEAST_TEXT_FIXES and "
+              "serves -- rebuild so the row takes effect (CLAUDE.md gives the order), and "
               "rebuild:")
         for src, served, approved in drift:
             print(f"  source   {src}")

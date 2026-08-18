@@ -55,10 +55,11 @@ enough that exhaustive human review is practical, and two of the corrections bel
 only from that.
 Enforcement: `tests/test_source_text.py` (the detectors stay silent) and
 `tests/test_feast_name_review.py` (the engine serves the approved names).
-Registry: `dev/source_corrections._FEAST_TEXT_FIXES` and `_FEAST_SPELLING_FIXES`, plus the
-`approved_en` / `approved_hy` columns of `dev/feast_name_review.tsv` for whole-component
-folds (the ground truth registers those under both the raw and spelling-corrected forms, so
-they need no second entry).
+Registry: the `approved_en` / `approved_hy` columns of `dev/feast_name_review.tsv`. A
+whole-component fold needs nothing else — `build_ground_truth.py` freezes the row and
+`apply_ground_truth` serves it, keyed under both the raw and spelling-corrected forms.
+`dev/source_corrections._FEAST_SPELLING_FIXES` remains for single-word typos, which are not
+components and so cannot be expressed as a row.
 
 ---
 
@@ -115,7 +116,7 @@ years — only by reading the source against itself.
 | `… and Saints Saints Jacoc and Themistocles` | `… and Saints Jacoc …` | The word typed twice. |
 | `Saints St. Aret and His Companions …` | `Saints Aret …` | Two titles stacked on one name. |
 | `Discovery of the Holy Cross.` | `Discovery of the Holy Cross` | A trailing period no other component carries; the Armenian `Գիւտ խաչի` has none. |
-| `Begining of the Fast` | `Beginning of the Fast` | Plain misspelling; `Սկիզբն պահոց`. |
+| `Begining of the Fast` | `Beginning of the Weekly Fasts` | Plain misspelling; the rest of the change is the §6 disambiguation. |
 | `… Ignatius the Bishop of Antiosh …` | `… of Antioch …` | Ignatius of **Antioch**. |
 | `Fast day, Remembrance of the Ten Virgins` | `Fast day — Remembrance of the Ten Virgins` | The day's fast marker comma-joined into the commemoration. The source's own Armenian for that day separates the two with the component separator, as does its English on all 2,139 other fast days. |
 | `Fiest of the Conception …` | `Feast of the Conception …` | Long-standing scrape typo, now folded in the same place as the rest. |
@@ -335,7 +336,6 @@ commemorations onto one day, so a reviewer sees each saint once instead of once 
 combination. Its output is derived and therefore not committed — run it when you want it.
 
 Edit `approved_en` in `dev/feast_name_review.tsv`, say why in `note`, and
-`tests/test_feast_name_review.py` will fail until the fold is registered in
-`dev/source_corrections._FEAST_TEXT_FIXES` and the artifacts are rebuilt (CLAUDE.md gives
-the order). That failure is deliberate — it is what stops a reviewed decision from being
+`tests/test_feast_name_review.py` will fail until the artifacts are rebuilt (CLAUDE.md
+gives the order); the row itself is the registration. That failure is deliberate — it is what stops a reviewed decision from being
 lost the next time the artifacts are rebuilt.

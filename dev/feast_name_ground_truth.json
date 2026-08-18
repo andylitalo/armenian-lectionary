@@ -59,7 +59,7 @@
   "approved_en": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 431)",
   "approved_hy": "Եփեսոսի ս. ժողովոյն երկու հարիւր հայրապետացն (431 թ.)",
   "id": "commemoration_of_200_fathers",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Եփեսոսի ս. ժողովոյն երկու հարիւր հայրապետացն (431 թ.)",
   "status": "fixed"
  },
@@ -83,7 +83,7 @@
   "approved_en": "Discovery of the Holy Cross",
   "approved_hy": "Գիւտ խաչի",
   "id": "discovery_of_the_holy",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գիւտ խաչի",
   "status": "fixed"
  },
@@ -203,7 +203,7 @@
   "approved_en": "Eve of Fast of St. Gregory the Illuminator",
   "approved_hy": "Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց",
   "id": "eve_of_fast_of_7",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց",
   "status": "fixed"
  },
@@ -211,7 +211,7 @@
   "approved_en": "Eve of Fast of St. James the bishop of Nisibis",
   "approved_hy": "Բարեկենդան Ս. Յակովբայ պահոց",
   "id": "eve_of_fast_of_8",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բարեկենդան Ս. Յակովբայ պահոց",
   "status": "fixed"
  },
@@ -299,7 +299,7 @@
   "approved_en": "Feast of All Sts., the old and the new, the known and the unknown",
   "approved_hy": "Տօն ամենայն սրբոց` հնոց եւ նորոց, յայտից եւ անյայտից",
   "id": "feast_of_all_sts",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Տօն ամենայն սրբոց` հնոց եւ նորոց, յայտից եւ անյայտից",
   "status": "fixed"
  },
@@ -315,7 +315,7 @@
   "approved_en": "Feast of Discovery of St. Gregory's Relics",
   "approved_hy": "Գիւտ նշխարաց սրբոյն Գրիգորի Լուսաւորչին մերոյ",
   "id": "feast_of_discovery_of",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գիւտ նշխարաց սրբոյն Գրիգորի Լուսաւորչին մերոյ",
   "status": "fixed"
  },
@@ -363,7 +363,7 @@
   "approved_en": "Feast of the Discovery of St. Mary's Box",
   "approved_hy": "Գիւտ տփոյ սրբուհւոյ Աստուածածնի",
   "id": "feast_of_the_discovery",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գիւտ տփոյ սրբուհւոյ Աստուածածնի",
   "status": "fixed"
  },
@@ -395,7 +395,7 @@
   "approved_en": "Feast of the Conception of the Holy Virgin Mary by Anna",
   "approved_hy": "Յղութիւն սրբուհւոյ Աստուածածնի յԱննայ",
   "id": "feast_of_the_conception",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Յղութիւն սրբուհւոյ Աստուածածնի յԱննայ",
   "status": "fixed"
  },
@@ -571,7 +571,7 @@
   "approved_en": "Fifth day of the Fast of the Transfiguration",
   "approved_hy": "Ե օր Վարդավառի պահոց",
   "id": "fifth_day_of_the_7",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ե օր Վարդավառի պահոց",
   "status": "fixed"
  },
@@ -1027,7 +1027,7 @@
   "approved_en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
   "approved_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի",
   "id": "fathers_sts_athanasius_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի",
   "status": "fixed"
  },
@@ -1035,7 +1035,7 @@
   "approved_en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
   "approved_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
   "id": "fathers_sts_athanasius_and_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
   "status": "fixed"
  },
@@ -1059,7 +1059,7 @@
   "approved_en": "Holy Translators Sts. Sahak and Mesrop",
   "approved_hy": "Սրբոց թարգմանչացն մերոց Սահակայ եւ Մեսրովբայ",
   "id": "translators_sts_sahak_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց թարգմանչացն մերոց Սահակայ եւ Մեսրովբայ",
   "status": "fixed"
  },
@@ -1131,7 +1131,7 @@
   "approved_en": "PENTECOST (Fiftieth day of Eastertide)",
   "approved_hy": "ՀՈԳԵԳԱԼՈՒՍՏ (Պենտեկոստէ` յիսներորդ օր ի Զատկէն)",
   "id": "pentecost_fiftieth_day_of",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "ՀՈԳԵԳԱԼՈՒՍՏ (Պենտեկոստէ` յիսներորդ օր ի Զատկէն)",
   "status": "fixed"
  },
@@ -1251,7 +1251,7 @@
   "approved_en": "St. Abgar the Witness and the First Christian King",
   "approved_hy": "Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հաւատացեալ թագաւորին մերոյ",
   "id": "abgar_the_witness_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հաւատացեալ թագաւորին մերոյ",
   "status": "fixed"
  },
@@ -1259,7 +1259,7 @@
   "approved_en": "St. Elisha the Prophet",
   "approved_hy": "Սրբոյն Եղիսէի մարգարէին",
   "id": "elisha_the_prophet",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Եղիսէի մարգարէին",
   "status": "fixed"
  },
@@ -1267,7 +1267,7 @@
   "approved_en": "St. Gregory the Theologian",
   "approved_hy": "Սրբոյն Գրիգորի Աստուածաբանին",
   "id": "gregory_the_theologian",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Գրիգորի Աստուածաբանին",
   "status": "fixed"
  },
@@ -1275,7 +1275,7 @@
   "approved_en": "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel",
   "approved_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
   "id": "gregory_the_illuminator_s_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES | Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', not 'Aristakes'/'Housik' -- but Armenian Church diocese sites are inconsistent between transliteration conventions (cf. Ghevond vs Ghevont). Worth a call: Wikipedia form or church-website form?",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', not 'Aristakes'/'Housik' -- but Armenian Church diocese sites are inconsistent between transliteration conventions (cf. Ghevond vs Ghevont). Worth a call: Wikipedia form or church-website form?",
   "source_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
   "status": "review"
  },
@@ -1283,7 +1283,7 @@
   "approved_en": "St. Gregory the Illuminator's Commitment to the Pit",
   "approved_hy": "Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն",
   "id": "gregory_the_illuminator_s",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն",
   "status": "fixed"
  },
@@ -1291,7 +1291,7 @@
   "approved_en": "St. Isaiah the Prophet",
   "approved_hy": "Սրբոյն Եսայեայ մարգարէին",
   "id": "isaiah_the_prophet",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Եսայեայ մարգարէին",
   "status": "fixed"
  },
@@ -1299,7 +1299,7 @@
   "approved_en": "St. James the Apostle and His Brother John the Evangelist",
   "approved_hy": "Սրբոց Որդւոցն Որոտման Յակովբայ առաքելոյն եւ Յովհաննու աւետարանչին",
   "id": "james_the_apostle_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Որդւոցն Որոտման Յակովբայ առաքելոյն եւ Յովհաննու աւետարանչին",
   "status": "fixed"
  },
@@ -1307,7 +1307,7 @@
   "approved_en": "St. Jeremiah the Prophet",
   "approved_hy": "Սրբոյն Երեմիայի մարգարէին",
   "id": "jeremiah_the_prophet",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Երեմիայի մարգարէին",
   "status": "fixed"
  },
@@ -1315,7 +1315,7 @@
   "approved_en": "St. John Chrysostom",
   "approved_hy": "Սրբոյն Յովհաննու Ոսկեբերան հայրապետին",
   "id": "john_chrysostom",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Յովհաննու Ոսկեբերան հայրապետին",
   "status": "fixed"
  },
@@ -1331,7 +1331,7 @@
   "approved_en": "Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
   "approved_hy": "Սրբոց հայրապետացն Բարաղամու, Անթիմոսի եւ Երանոսի",
   "id": "patriarchs_barlaam_anthimus_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Բարաղամու, Անթիմոսի եւ Երանոսի",
   "status": "fixed"
  },
@@ -1339,7 +1339,7 @@
   "approved_en": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
   "approved_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին",
   "id": "patriarchs_ignatius_the_bishop",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին",
   "status": "fixed"
  },
@@ -1347,7 +1347,7 @@
   "approved_en": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
   "approved_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
   "id": "patriarchs_ignatius_the_bishop_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
   "status": "fixed"
  },
@@ -1355,7 +1355,7 @@
   "approved_en": "St. Sahak I the Parthian, Patriarch of Armenia",
   "approved_hy": "Սրբոյն Իսահակայ Պարթեւի հայրապետին մերոյ",
   "id": "sahak_i_the_parthian",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Իսահակայ Պարթեւի հայրապետին մերոյ",
   "status": "fixed"
  },
@@ -1363,7 +1363,7 @@
   "approved_en": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
   "approved_hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն",
   "id": "sargis",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն",
   "status": "fixed"
  },
@@ -1379,7 +1379,7 @@
   "approved_en": "St. Stephen the Proto-Deacon and the First Martyr",
   "approved_hy": "Սրբոյն Ստեփաննոսի Նախավկային եւ առաջին մարտիրոսին",
   "id": "stephen_the_proto_deacon",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ստեփաննոսի Նախավկային եւ առաջին մարտիրոսին",
   "status": "fixed"
  },
@@ -1395,7 +1395,7 @@
   "approved_en": "St. Theodore the Tyron",
   "approved_hy": "Սրբոյն Թէոդորոսի զօրավարին",
   "id": "theodore_the_tyron",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Թէոդորոսի զօրավարին",
   "status": "fixed"
  },
@@ -1411,7 +1411,7 @@
   "approved_en": "St. Vahan of Goghtn",
   "approved_hy": "Սրբոյն Վահանայ Գողթնացւոյն",
   "id": "vahan_of_goghtn",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Վահանայ Գողթնացւոյն",
   "status": "fixed"
  },
@@ -1419,7 +1419,7 @@
   "approved_en": "Sts. Virgins Juliana and Basilla",
   "approved_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ",
   "id": "virgins_juliana_and_basilla",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ",
   "status": "review"
  },
@@ -1427,7 +1427,7 @@
   "approved_en": "St. Zechariah the Prophet",
   "approved_hy": "Սրբոյն Զաքարիայի մարգարէին",
   "id": "zechariah_the_prophet",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Զաքարիայի մարգարէին",
   "status": "fixed"
  },
@@ -1435,7 +1435,7 @@
   "approved_en": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian",
   "approved_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի",
   "id": "abraham_and_khoren_moneyless",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի",
   "status": "fixed"
  },
@@ -1443,7 +1443,7 @@
   "approved_en": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "approved_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
   "id": "abraham_and_khoren_moneyless_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
   "status": "fixed"
  },
@@ -1451,7 +1451,7 @@
   "approved_en": "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
   "approved_hy": "Սրբոցն Անդրիանոսի եւ կնոջ նորա Անատոլայ եւ Թէոդորոսի եւ Ելեւթիւրոսի վկայիցն",
   "id": "adrian_and_his_wife",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Անդրիանոսի եւ կնոջ նորա Անատոլայ եւ Թէոդորոսի եւ Ելեւթիւրոսի վկայիցն",
   "status": "fixed"
  },
@@ -1459,7 +1459,7 @@
   "approved_en": "Sts. Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
   "approved_hy": "Սրբոցն Ակիփսիմեայ եպիսկոպոսին եւ Յովսեփայ քահանային, Այիթալայ սարկաւագին եւ Պղատոնի վկային",
   "id": "akepsimas_the_bishop_joseph",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Ակիփսիմեայ եպիսկոպոսին եւ Յովսեփայ քահանային, Այիթալայ սարկաւագին եւ Պղատոնի վկային",
   "status": "fixed"
  },
@@ -1467,7 +1467,7 @@
   "approved_en": "Sts. Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
   "approved_hy": "Սրբոցն Անաստասայ քահանային, Վարոսի, Թէոդորիտեայ եւ որդւոց նորա եւ որք ընդ նմա կատարեցան",
   "id": "anastasius_the_priest_varus",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Անաստասայ քահանային, Վարոսի, Թէոդորիտեայ եւ որդւոց նորա եւ որք ընդ նմա կատարեցան",
   "status": "fixed"
  },
@@ -1475,7 +1475,7 @@
   "approved_en": "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
   "approved_hy": "Սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն",
   "id": "andrew_the_general_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն",
   "status": "fixed"
  },
@@ -1483,7 +1483,7 @@
   "approved_en": "Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
   "approved_hy": "Սրբոցն Աթանագինեայ եպիսկոպոսին եւ տասն աշակերտացն եւ հինգ վկայիցն",
   "id": "athenogenes_the_bishop_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Աթանագինեայ եպիսկոպոսին եւ տասն աշակերտացն եւ հինգ վկայիցն",
   "status": "fixed"
  },
@@ -1491,7 +1491,7 @@
   "approved_en": "Sts. Atom and his soldiers",
   "approved_hy": "Սրբոց Ատովմեանց զօրավարացն",
   "id": "atom",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն",
   "status": "fixed"
  },
@@ -1499,7 +1499,7 @@
   "approved_en": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
   "approved_hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
   "id": "atom_and_his_soldiers",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
   "status": "fixed"
  },
@@ -1507,7 +1507,7 @@
   "approved_en": "Sts. Atom and his soldiers, and Sts. Sukiasians the Martyrs",
   "approved_hy": "Սրբոց Ատովմեանց զօրավարացն եւ Սուքիասեանց վկայիցն",
   "id": "atom_and_his_soldiers_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն եւ Սուքիասեանց վկայիցն",
   "status": "fixed"
  },
@@ -1515,7 +1515,7 @@
   "approved_en": "Sts. Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
   "approved_hy": "Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ",
   "id": "basil_the_great_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ",
   "status": "fixed"
  },
@@ -1523,7 +1523,7 @@
   "approved_en": "Sts. Callistratus and his companions, and Lukianos the Priest",
   "approved_hy": "Սրբոցն Կալիստրատոսի եւ քառասուն եւ ինն վկայիցն եւ Ղունկիանոսի քահանային",
   "id": "callistratus_and_his_companions",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կալիստրատոսի եւ քառասուն եւ ինն վկայիցն եւ Ղունկիանոսի քահանային",
   "status": "fixed"
  },
@@ -1531,7 +1531,7 @@
   "approved_en": "Sts. Clement the Bishop of Rome and Pancratius the Bishop of Taormina",
   "approved_hy": "Սրբոցն Կղեմայ հայրապետին եւ Բագարատայ Տոռոմենոյ եպիսկոպոսին",
   "id": "clement_the_bishop_of",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կղեմայ հայրապետին եւ Բագարատայ Տոռոմենոյ եպիսկոպոսին",
   "status": "fixed"
  },
@@ -1539,7 +1539,7 @@
   "approved_en": "Sts. Constantine the Emperor and his mother Helen",
   "approved_hy": "Սրբոցն Կոստանդիանոսի թագաւորին եւ մօրն նորա Հեղինեայ",
   "id": "constantine_the_emperor_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կոստանդիանոսի թագաւորին եւ մօրն նորա Հեղինեայ",
   "status": "fixed"
  },
@@ -1547,7 +1547,7 @@
   "approved_en": "Sts. Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
   "approved_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
   "id": "cornelius_the_centurion_simeon",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
   "status": "review"
  },
@@ -1555,7 +1555,7 @@
   "approved_en": "Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
   "approved_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
   "id": "cornelius_the_centurion_simeon_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
   "status": "review"
  },
@@ -1563,7 +1563,7 @@
   "approved_en": "Sts. Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
   "approved_hy": "Սրբոցն Կիպրիանոսի եպիսկոպոսին եւ քառասուն եւ հինգ վկայիցն եւ սրբոց կուսանացն Յուստիանեայ, Եւփիմեայ եւ Քրիստինեայ",
   "id": "cyprian_the_bishop_the",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիպրիանոսի եպիսկոպոսին եւ քառասուն եւ հինգ վկայիցն եւ սրբոց կուսանացն Յուստիանեայ, Եւփիմեայ եւ Քրիստինեայ",
   "status": "fixed"
  },
@@ -1571,7 +1571,7 @@
   "approved_en": "Sts. Cyricus and His Mother Julitta",
   "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
   "id": "cyricus_and_his_mother",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
   "status": "fixed"
  },
@@ -1579,7 +1579,7 @@
   "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
   "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "id": "cyricus_and_his_mother_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "status": "fixed"
  },
@@ -1587,7 +1587,7 @@
   "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
   "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "id": "cyricus_and_his_mother_3",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "status": "fixed"
  },
@@ -1595,7 +1595,7 @@
   "approved_en": "Sts. Cyril of Jerusalem, Cyril the Bishop and Anna",
   "approved_hy": "Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի",
   "id": "cyril_of_jerusalem_cyril",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի",
   "status": "fixed"
  },
@@ -1603,7 +1603,7 @@
   "approved_en": "Sts. David of Dvin and the Martyrs Eulampius and Eulampia",
   "approved_hy": "Սրբոյն Դաւթի Դւնեցւոյն եւ սրբոց վկայիցն Ղամբէոսի եւ Ղամբէուհւոյն",
   "id": "david_of_dvin_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Դաւթի Դւնեցւոյն եւ սրբոց վկայիցն Ղամբէոսի եւ Ղամբէուհւոյն",
   "status": "fixed"
  },
@@ -1611,7 +1611,7 @@
   "approved_en": "Sts. David the Prophet-King and James the Apostle",
   "approved_hy": "Սրբոցն Դաւթի մարգարէին եւ Յակովբայ Տեառնեղբայր առաքելոյն",
   "id": "david_the_prophet_king",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դաւթի մարգարէին եւ Յակովբայ Տեառնեղբայր առաքելոյն",
   "status": "fixed"
  },
@@ -1619,7 +1619,7 @@
   "approved_en": "Sts. Demetrios the Martyr and Basil the Priest",
   "approved_hy": "Սրբոցն Դեմետրեայ վկային եւ Բասիլիսկոսի քահանային",
   "id": "demetrios_the_martyr_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դեմետրեայ վկային եւ Բասիլիսկոսի քահանային",
   "status": "fixed"
  },
@@ -1627,7 +1627,7 @@
   "approved_en": "Sts. Dionysius the Areopagite and the Apostles Timothy and Titus",
   "approved_hy": "Սրբոցն Դիոնիսիոսի Արիսպագացւոյն եւ առաքելոցն Տիմոթէոսի եւ Տիտոսի",
   "id": "dionysius_the_areopagite_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դիոնիսիոսի Արիսպագացւոյն եւ առաքելոցն Տիմոթէոսի եւ Տիտոսի",
   "status": "fixed"
  },
@@ -1635,7 +1635,7 @@
   "approved_en": "Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
   "approved_hy": "Սրբոցն Եպիփանու Կիպրացւոյն, Բաբելայ հայրապետին եւ երից աշակերտաց նորին",
   "id": "epiphanius_bishop_of_cyprus",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եպիփանու Կիպրացւոյն, Բաբելայ հայրապետին եւ երից աշակերտաց նորին",
   "status": "fixed"
  },
@@ -1643,7 +1643,7 @@
   "approved_en": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
   "approved_hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
   "id": "eugenia_the_virgin_her",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
   "status": "fixed"
  },
@@ -1651,7 +1651,7 @@
   "approved_en": "Sts. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs, and Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
   "approved_hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն, նաեւ սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ",
   "id": "eugenia_the_virgin_her_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն, նաեւ սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ",
   "status": "fixed"
  },
@@ -1683,7 +1683,7 @@
   "approved_en": "Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
   "approved_hy": "Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի",
   "id": "eustratius_auxentius_eugenius_orestes",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի",
   "status": "fixed"
  },
@@ -1691,7 +1691,7 @@
   "approved_en": "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
   "approved_hy": "Սրբոց նախահարցն Ադամայ, Աբելի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակովբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուելի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գեդէոնի եւ այլոց սրբոց նախահարցն",
   "id": "forefathers_adam_abel_seth",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց նախահարցն Ադամայ, Աբելի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակովբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուելի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գեդէոնի եւ այլոց սրբոց նախահարցն",
   "status": "fixed"
  },
@@ -1699,7 +1699,7 @@
   "approved_en": "Sts. Forty Martyrs of Sebastia",
   "approved_hy": "Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան",
   "id": "forty_martyrs_of_sebastia",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան",
   "status": "fixed"
  },
@@ -1707,7 +1707,7 @@
   "approved_en": "Sts. Gayane and her companions",
   "approved_hy": "Սրբոց կուսանացն Գայիանեանց",
   "id": "gayane_and_her_companions",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Գայիանեանց",
   "status": "fixed"
  },
@@ -1715,7 +1715,7 @@
   "approved_en": "Sts. Gennaro the Bishop and Mercurius the Warrior",
   "approved_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին",
   "id": "gennaro_the_bishop_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին",
   "status": "fixed"
  },
@@ -1723,7 +1723,7 @@
   "approved_en": "Sts. Gennaro the Bishop and Mercurius the Warrior, and Sts. Jacoc and Themistocles",
   "approved_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ",
   "id": "gennaro_the_bishop_and_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ",
   "status": "fixed"
  },
@@ -1731,7 +1731,7 @@
   "approved_en": "Sts. George the Warrior, Adauctus and Romanus the Melodist",
   "approved_hy": "Սրբոցն Գէորգայ քաջամարտիկ զօրավարին, Ադոկտոսի եւ Ռոմանոսի երգեցողին",
   "id": "george_the_warrior_adauctus",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գէորգայ քաջամարտիկ զօրավարին, Ադոկտոսի եւ Ռոմանոսի երգեցողին",
   "status": "fixed"
  },
@@ -1739,7 +1739,7 @@
   "approved_en": "Sts. Ghevond the Priest and His Companions",
   "approved_hy": "Սրբոց Ղեւոնդեանց քահանայիցն",
   "id": "ghevond",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ղեւոնդեանց քահանայիցն",
   "status": "fixed"
  },
@@ -1755,7 +1755,7 @@
   "approved_en": "Sts. Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
   "approved_hy": "Սրբոցն Գրիգորի Սքանչելագործին, Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
   "id": "gregory_the_wonderworker_nicholas",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գրիգորի Սքանչելագործին, Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
   "status": "review"
  },
@@ -1763,7 +1763,7 @@
   "approved_en": "Sts. Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
   "approved_hy": "Սրբոցն Գուրիասայ, Սամունասայ, Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին եւ Հիւսիքոսի զինաւորին",
   "id": "gurias_samonas_and_habibus",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գուրիասայ, Սամունասայ, Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին եւ Հիւսիքոսի զինաւորին",
   "status": "fixed"
  },
@@ -1771,7 +1771,7 @@
   "approved_en": "St. Hipparchus and his companions who were martyred in Samosata",
   "approved_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան",
   "id": "hipparchus_and_his_companions",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան",
   "status": "fixed"
  },
@@ -1779,7 +1779,7 @@
   "approved_en": "Sts. Hipparchus and his Companions Who were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
   "approved_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
   "id": "hipparchus_and_his_companions_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
   "status": "fixed"
  },
@@ -1787,7 +1787,7 @@
   "approved_en": "Sts. Hripsime and her companions",
   "approved_hy": "Սրբոց կուսանացն Հռիփսիմեանց",
   "id": "hripsime_and_her_companions",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Հռիփսիմեանց",
   "status": "fixed"
  },
@@ -1803,7 +1803,7 @@
   "approved_en": "Sts. James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
   "approved_hy": "Սրբոցն Յակովբայ Մծբնայ հայրապետին, Մարուգէի ճգնաւորին եւ Մելիտոսի եպիսկոպոսին",
   "id": "james_of_nisibis_marouke",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Յակովբայ Մծբնայ հայրապետին, Մարուգէի ճգնաւորին եւ Մելիտոսի եպիսկոպոսին",
   "status": "fixed"
  },
@@ -1819,7 +1819,7 @@
   "approved_en": "Sts. John the Forerunner (Baptist) and Bishop Atanagine",
   "approved_hy": "Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին",
   "id": "john_the_forerunner_baptist",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին",
   "status": "fixed"
  },
@@ -1827,7 +1827,7 @@
   "approved_en": "Sts. John the Forerunner (Baptist) and Job the Righteous",
   "approved_hy": "Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն",
   "id": "john_the_forerunner_baptist_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն",
   "status": "fixed"
  },
@@ -1835,7 +1835,7 @@
   "approved_en": "Sts. John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev",
   "approved_hy": "Սրբոցն Յովհաննու Երուսաղեմայ հայրապետին եւ հայրապետին մերոյ Յովհաննու Օձնեցւոյն եւ վարդապետացն մերոց Յովհաննու Որոտնեցւոյն եւ Գրիգորի Տաթեւացւոյն",
   "id": "john_the_patriarch_of",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Յովհաննու Երուսաղեմայ հայրապետին եւ հայրապետին մերոյ Յովհաննու Օձնեցւոյն եւ վարդապետացն մերոց Յովհաննու Որոտնեցւոյն եւ Գրիգորի Տաթեւացւոյն",
   "status": "fixed"
  },
@@ -1843,7 +1843,7 @@
   "approved_en": "Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
   "approved_hy": "Սրբոցն Ղունկիանոսի հարիւրապետին, որ հաւատաց ի խաչելութիւնն Քրիստոսի, եւ Յովսեփայ աստուածահօրն, Յովսեփայ Արեմաթացւոյն եւ բարեկամին Քրիստոսի Ղազարու եւ քերցն նորա Մարթայի եւ Մարիամու",
   "id": "longinus_the_centurion_joseph",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Ղունկիանոսի հարիւրապետին, որ հաւատաց ի խաչելութիւնն Քրիստոսի, եւ Յովսեփայ աստուածահօրն, Յովսեփայ Արեմաթացւոյն եւ բարեկամին Քրիստոսի Ղազարու եւ քերցն նորա Մարթայի եւ Մարիամու",
   "status": "fixed"
  },
@@ -1851,7 +1851,7 @@
   "approved_en": "Sts. Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
   "approved_hy": "Սրբոյն Ղունկիանոսի քահանային եւ սրբոցն Տարագրոսի, Պրոպոսի, Անդրոնիկոսի, Ոնեսիմեայ եւ այլոց աշակերտացն սրբոյն Պօղոսի",
   "id": "lucian_the_priest_tarachus",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ղունկիանոսի քահանային եւ սրբոցն Տարագրոսի, Պրոպոսի, Անդրոնիկոսի, Ոնեսիմեայ եւ այլոց աշակերտացն սրբոյն Պօղոսի",
   "status": "fixed"
  },
@@ -1859,7 +1859,7 @@
   "approved_en": "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
   "approved_hy": "Սրբոց Մակաբայեցւոցն` Եղիազարու քահանային եւ Շամունեայ եւ եօթն որդւոց նորին",
   "id": "maccabees_eleazar_the_priest",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Մակաբայեցւոցն` Եղիազարու քահանային եւ Շամունեայ եւ եօթն որդւոց նորին",
   "status": "fixed"
  },
@@ -1867,7 +1867,7 @@
   "approved_en": "Sts. Mamas, Philomenos and Simeon the Stylite",
   "approved_hy": "Սրբոցն Մամասայ, Փիլիկտիմոնի եւ Սիմէոնի Սիւնակեցոյն",
   "id": "mamas_philomenos_and_simeon",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մամասայ, Փիլիկտիմոնի եւ Սիմէոնի Սիւնակեցոյն",
   "status": "fixed"
  },
@@ -1875,7 +1875,7 @@
   "approved_en": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
   "approved_hy": "Սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
   "id": "mark_the_bishop_pionius",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
   "status": "fixed"
  },
@@ -1883,7 +1883,7 @@
   "approved_en": "Sts. Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
   "approved_hy": "Սրբոցն Մելիտոսի Անտիոքայ հայրապետին եւ Մինասայ Եգիպտացւոյն եւ միւս Մելիտոսի եպիսկոպոսին, Բուրայ քահանային եւ Շինու սարկաւագին",
   "id": "meletius_bishop_of_antioch",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մելիտոսի Անտիոքայ հայրապետին եւ Մինասայ Եգիպտացւոյն եւ միւս Մելիտոսի եպիսկոպոսին, Բուրայ քահանային եւ Շինու սարկաւագին",
   "status": "fixed"
  },
@@ -1899,7 +1899,7 @@
   "approved_en": "Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
   "approved_hy": "Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի",
   "id": "menas_hermogenes_eugraphus_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի",
   "status": "fixed"
  },
@@ -1907,7 +1907,7 @@
   "approved_en": "Sts. Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
   "approved_hy": "Սրբոց հայրապետացն Մետրոփանոսի, Աղեքսանդրոսի եւ Պօղոսի խոստովանողին եւ սրբոց նօտարացն Մարկիանոսի եւ Մարտիրոնի",
   "id": "metrophanes_alexander_and_paul",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Մետրոփանոսի, Աղեքսանդրոսի եւ Պօղոսի խոստովանողին եւ սրբոց նօտարացն Մարկիանոսի եւ Մարտիրոնի",
   "status": "fixed"
  },
@@ -1915,7 +1915,7 @@
   "approved_en": "Sts. Nerses the Great Patriarch and Bishop Khad",
   "approved_hy": "Սրբոյն Ներսիսի Մեծի հայրապետին մերոյ եւ Խադայ եպիսկոպոսին",
   "id": "nerses_the_great_patriarch",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ներսիսի Մեծի հայրապետին մերոյ եւ Խադայ եպիսկոպոսին",
   "status": "fixed"
  },
@@ -1923,7 +1923,7 @@
   "approved_en": "Sts. Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
   "approved_hy": "Սրբոցն Պանդալէոնի բժշկին, Երմողեայ քահանային եւ Եւպրակսեայ կուսին",
   "id": "pantaleimon_the_physician_hermolaus",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Պանդալէոնի բժշկին, Երմողեայ քահանային եւ Եւպրակսեայ կուսին",
   "status": "fixed"
  },
@@ -1931,7 +1931,7 @@
   "approved_en": "Sts. Peter and Paul the Apostles",
   "approved_hy": "Սրբոց առաքելոցն Պետրոսի եւ Պօղոսի",
   "id": "peter_and_paul_the",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց առաքելոցն Պետրոսի եւ Պօղոսի",
   "status": "fixed"
  },
@@ -1939,7 +1939,7 @@
   "approved_en": "Sts. Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
   "approved_hy": "Սրբոցն Պետրոսի հայրապետին, Վլասայ եպիսկոպոսին եւ Աբիսողոմայ սարկաւագին",
   "id": "peter_the_patriarch_blaise",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Պետրոսի հայրապետին, Վլասայ եպիսկոպոսին եւ Աբիսողոմայ սարկաւագին",
   "status": "fixed"
  },
@@ -1947,7 +1947,7 @@
   "approved_en": "Sts. Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
   "approved_hy": "Սրբոցն Փոկասու հայրապետին եւ Երանոսի հետեւողին առաքելոցն",
   "id": "phocas_the_patriarch_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Փոկասու հայրապետին եւ Երանոսի հետեւողին առաքելոցն",
   "status": "fixed"
  },
@@ -1955,7 +1955,7 @@
   "approved_en": "Sts. Princes Sahak and Joseph and the Martyrs Sergius and Bacchus",
   "approved_hy": "Սրբոց իշխանացն Սահակայ եւ Յովսեփայ եւ սրբոց վկայիցն Սարգսի եւ Բագոսի",
   "id": "princes_sahak_and_joseph",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց իշխանացն Սահակայ եւ Յովսեփայ եւ սրբոց վկայիցն Սարգսի եւ Բագոսի",
   "status": "fixed"
  },
@@ -1963,7 +1963,7 @@
   "approved_en": "Sts. Prophet Daniel and his Companions Shadrach, Meshach and Abednego",
   "approved_hy": "Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի",
   "id": "prophet_daniel_and_his",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի",
   "status": "fixed"
  },
@@ -1971,7 +1971,7 @@
   "approved_en": "Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
   "approved_hy": "Սրբոցն Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
   "id": "severianus_of_sebastia_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
   "status": "fixed"
  },
@@ -1979,7 +1979,7 @@
   "approved_en": "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
   "approved_hy": "Սրբոցն Սոփիայ եւ երից դստերացն Պիստոսի, Էլպիսի եւ Ագապեայ",
   "id": "sophia_and_her_three",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Սոփիայ եւ երից դստերացն Պիստոսի, Էլպիսի եւ Ագապեայ",
   "status": "fixed"
  },
@@ -1995,7 +1995,7 @@
   "approved_en": "Sts. Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
   "approved_hy": "Սրբոյն Ստեփաննոսի Ուլնեցւոյն եւ սրբոց վկայիցն Գոհարինեայ, Ծամիդեսի, Տուքիկոսի եւ Ռատիկոսի",
   "id": "stephen_of_oulnia_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ստեփաննոսի Ուլնեցւոյն եւ սրբոց վկայիցն Գոհարինեայ, Ծամիդեսի, Տուքիկոսի եւ Ռատիկոսի",
   "status": "fixed"
  },
@@ -2003,7 +2003,7 @@
   "approved_en": "Sts. Stephen, Bishop of Rome and the priests, deacons and many faithful",
   "approved_hy": "Սրբոցն Ստեփաննոսի Հռովմայ հայրապետին եւ քահանայիցն եւ սարկաւագացն եւ ժողովրդոցն",
   "id": "stephen_bishop_of_rome",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Ստեփաննոսի Հռովմայ հայրապետին եւ քահանայիցն եւ սարկաւագացն եւ ժողովրդոցն",
   "status": "fixed"
  },
@@ -2011,7 +2011,7 @@
   "approved_en": "Sts. Sukiasians the Martyrs",
   "approved_hy": "Սրբոց Սուքիասեանց վկայիցն",
   "id": "sukias",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Սուքիասեանց վկայիցն",
   "status": "fixed"
  },
@@ -2019,7 +2019,7 @@
   "approved_en": "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin",
   "approved_hy": "Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին",
   "id": "thaddeus_apostle_of_armenia",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին",
   "status": "fixed"
  },
@@ -2027,7 +2027,7 @@
   "approved_en": "Sts. Theodoret the Priest of Antioch, Zenon the soldier, Macarius, Eudoxius and Romulus",
   "approved_hy": "Սրբոցն Թէոդիտոնի քահանային, Զենոնի զինաւորին, Մակարայ, Եւդոքսեայ եւ Ռամելայ",
   "id": "theodoret_the_priest_of",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոդիտոնի քահանային, Զենոնի զինաւորին, Մակարայ, Եւդոքսեայ եւ Ռամելայ",
   "status": "fixed"
  },
@@ -2035,7 +2035,7 @@
   "approved_en": "Sts. Theodosius and the Children of Ephesus",
   "approved_hy": "Սրբոցն Թէոդոսի թագաւորին եւ մանկանցն Եփեսոսի",
   "id": "theodosius_and_the_children",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոդոսի թագաւորին եւ մանկանցն Եփեսոսի",
   "status": "fixed"
  },
@@ -2043,7 +2043,7 @@
   "approved_en": "Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
   "approved_hy": "Սրբոցն Թէոդիտոնի Գաղատացւոյն եւ Թալիլեայ բժշկին եւ եօթն կուսանացն, որք յԱնկիւրիա կատարեցան",
   "id": "theodotus_of_galatia_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոդիտոնի Գաղատացւոյն եւ Թալիլեայ բժշկին եւ եօթն կուսանացն, որք յԱնկիւրիա կատարեցան",
   "status": "fixed"
  },
@@ -2051,7 +2051,7 @@
   "approved_en": "Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
   "approved_hy": "Սրբոցն Թէոպոմպայ եպիսկոպոսին եւ Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
   "id": "theopemptus_the_bishop_of",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոպոմպայ եպիսկոպոսին եւ Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
   "status": "fixed"
  },
@@ -2059,7 +2059,7 @@
   "approved_en": "Sts. Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht",
   "approved_hy": "Սրբոցն Տրդատայ թագաւորին մերոյ եւ Աշխենի տիկնոջն եւ Խոսրովիդխտոյն",
   "id": "tiridates_trdat_the_king",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Տրդատայ թագաւորին մերոյ եւ Աշխենի տիկնոջն եւ Խոսրովիդխտոյն",
   "status": "fixed"
  },
@@ -2067,7 +2067,7 @@
   "approved_en": "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
   "approved_hy": "Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ",
   "id": "twelve_prophets_hosea_amos",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ",
   "status": "fixed"
  },
@@ -2075,7 +2075,7 @@
   "approved_en": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
   "approved_hy": "Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
   "id": "vahan_of_goghtn_eugenia",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
   "status": "fixed"
  },
@@ -2083,7 +2083,7 @@
   "approved_en": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
   "approved_hy": "Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "id": "vahan_of_goghtn_gordius",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
   "status": "fixed"
  },
@@ -2099,7 +2099,7 @@
   "approved_en": "Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
   "approved_hy": "Սրբոց կուսանացն Փեբրոնեայ, Մարիանեայ եւ Շուշանայ` դստերն Մեծին Վարդանայ",
   "id": "virgins_febronia_mariana_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Փեբրոնեայ, Մարիանեայ եւ Շուշանայ` դստերն Մեծին Վարդանայ",
   "status": "fixed"
  },
@@ -2107,7 +2107,7 @@
   "approved_en": "Sts. Virgins Nune and Mane",
   "approved_hy": "Սրբոց կուսանացն Նունեայ եւ Մանեայ",
   "id": "virgins_nune_and_mane",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Նունեայ եւ Մանեայ",
   "status": "fixed"
  },
@@ -2115,7 +2115,7 @@
   "approved_en": "Sts. Virgins Thecla, Barbara and Pelagia",
   "approved_hy": "Սրբոց կուսանացն Թեկղի, Վառվառեայ եւ Պեղիգեայ",
   "id": "virgins_thecla_barbara_and",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Թեկղի, Վառվառեայ եւ Պեղիգեայ",
   "status": "fixed"
  },
@@ -2123,7 +2123,7 @@
   "approved_en": "Sts. Voskians the Priests",
   "approved_hy": "Սրբոց Ոսկեանց քահանայիցն",
   "id": "voskian",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ոսկեանց քահանայիցն",
   "status": "fixed"
  },
@@ -2587,7 +2587,7 @@
   "approved_en": "The Children of Bethlehem. Sts. Acacius the Martyr, Mocius the Priest and Codratus the Soldier",
   "approved_hy": "Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին",
   "id": "children_of_bethlehem_sts",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին",
   "status": "fixed"
  },
@@ -2595,7 +2595,7 @@
   "approved_en": "The Hermit St. Anton",
   "approved_hy": "Սրբոյն Անտոնի ճգնաւորին",
   "id": "hermit_st_anton",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Անտոնի ճգնաւորին",
   "status": "fixed"
  },
@@ -2603,7 +2603,7 @@
   "approved_en": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
   "approved_hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
   "id": "hermits_sts_anton_tryphon",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES | spelling ('Tryphon'/'Onuphrius') aligned with the sibling row 'The Hermits Saints Triphon, Barsauma and Onouphrius' for consistency (same two names).",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | spelling ('Tryphon'/'Onuphrius') aligned with the sibling row 'The Hermits Saints Triphon, Barsauma and Onouphrius' for consistency (same two names).",
   "source_hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
   "status": "fixed"
  },
@@ -2611,7 +2611,7 @@
   "approved_en": "The Hermit Sts. Tryphon, Barsauma and Onuphrius",
   "approved_hy": "Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
   "id": "hermit_sts_tryphon_barsauma",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
   "status": "fixed"
  },
@@ -2627,7 +2627,7 @@
   "approved_en": "The Holy Apostles Andrew and Philip",
   "approved_hy": "Սրբոց առաքելոցն Անդրէի եւ Փիլիպպոսի",
   "id": "apostles_andrew_and_philip",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց առաքելոցն Անդրէի եւ Փիլիպպոսի",
   "status": "fixed"
  },
@@ -2643,7 +2643,7 @@
   "approved_en": "The Holy Virgins Juliana and Basilla, and Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "approved_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
   "id": "virgins_juliana_and_basilla_2",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
   "status": "fixed"
  },
@@ -2651,7 +2651,7 @@
   "approved_en": "The Holy Virgins Juliana and Basilla, and Sts. virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
   "approved_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
   "id": "virgins_juliana_and_basilla_3",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
   "status": "fixed"
  },
@@ -2819,7 +2819,7 @@
   "approved_en": "Third day of the Fast of Nativity",
   "approved_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
   "id": "third_day_of_the_4",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
   "status": "fixed"
  },
@@ -3035,7 +3035,7 @@
   "approved_en": "Twelve Holy Apostles of Christ and St. Paul, the Thirteenth Apostle",
   "approved_hy": "Սրբոց երկոտասան առաքելոցն Քրիստոսի եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն",
   "id": "twelve_holy_apostles_of",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց երկոտասան առաքելոցն Քրիստոսի եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն",
   "status": "fixed"
  },
@@ -3171,7 +3171,7 @@
   "approved_en": "Eighth day of Nativity",
   "approved_hy": "Ը օր Ս. Ծննդեան",
   "id": "eighth_day_of_nativity",
-  "note": "registered correction; see dev/source_corrections._FEAST_TEXT_FIXES",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ը օր Ս. Ծննդեան",
   "status": "fixed"
  }

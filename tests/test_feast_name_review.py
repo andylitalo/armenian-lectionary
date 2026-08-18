@@ -16,8 +16,9 @@ The two directions matter differently:
     cannot slip past review by simply not being in the file.
 
 Editing ``approved_en`` in the TSV is how a reviewer states a decision; the test then fails
-until the fold is registered in ``dev/source_corrections._FEAST_TEXT_FIXES`` and the
-artifacts are rebuilt (CLAUDE.md gives the order). That failure is the point.
+until the artifacts are rebuilt (CLAUDE.md gives the order). For a whole component the
+row itself is the registration -- ``build_ground_truth.py`` freezes ``approved_en`` and
+``apply_ground_truth`` serves it. That failure is the point.
 
 The TSV is checked in and needs no cache, so the served-name direction runs anywhere. The
 coverage direction needs ``dev/reference_data/`` and skips without it.

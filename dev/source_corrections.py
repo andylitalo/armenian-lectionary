@@ -190,94 +190,37 @@ _FEAST_SPELLING_FIXES = {
 
 
 # --------------------------------------------------------------------------- #
-# Source TEXT repairs, beyond single misspelled words
+# Source TEXT repairs beyond single misspelled words used to live here, as a hand-written
+# dict of substring replacements. They are now ordinary rows in dev/feast_name_review.tsv:
+# a reviewer edits ``approved_en``, ``dev/build_ground_truth.py`` freezes it, and
+# ``_ground_truth_fixes`` below picks it up. One registry, stated where the decision is
+# made, instead of the same fold written in two places.
 #
-# Found by ``dev/audit_source_anomalies.py``, which reads the source rather than the
-# engine. It matters now in a way it did not before: the engine reproduces the source's
-# feast string on 9496/9496 days, so from here on every error the source makes is an error
-# the engine serves. Each entry below is the source contradicting ITSELF -- its own
-# Armenian name for the same feast, its own wording for the same saint elsewhere, or plain
-# arithmetic -- never an editorial preference. Where the right form could not be
-# established that way it is left alone and listed in the script's output instead.
+# The evidence for each is in docs/feast-name-corrections.md (sections 1-6) and in the
+# row's own ``note``. Removing the dict was verified, not assumed: with it emptied, every
+# shipped artifact rebuilds byte-identically and the whole suite passes, because every
+# string it matched has a reviewed row whose approved text already carries the fix -- which
+# ``tests/test_feast_name_review`` guarantees, since every component the source publishes
+# must have a row.
 #
-# Grouped by what makes each one certain:
-#
-#   * FACTUAL, contradicted by the source's own Armenian. The hy name is an independent
-#     rendering of the same day by the same publisher, which makes it an oracle:
-#       - the Council of Ephesus is dated "(AD 341)" in English and "(431 թ.)" in Armenian.
-#         431 is the historical council; 341 is a digit transposition.
-#       - Pentecost reads "(Fifteenth day of Eastertide)" in English and
-#         "յիսներորդ օր" (fiftieth) in Armenian. Fiftieth is also what the day IS -- it is
-#         Easter+49, and the source's own Eastertide count reaches "Forty Ninth" the day
-#         before. "Pentecost" means fiftieth.
-#
-#   * GRAMMATICAL, where the Armenian settles the intended sense:
-#       - "the poor mans John and Alexis" -> "poor men"; hy "կամաւոր աղքատացն" is plural.
-#       - "many faithfuls" -> "faithful"; hy "ժողովրդոցն" (the people).
-#       - "Gregory of Theologian" -> "Gregory the Theologian"; hy "Գրիգորի Աստուածաբանին".
-#       - "Saint Patriarchs" / "Saint Virgins" -> "Saints ..."; both hy forms are plural
-#         (Սրբոց հայրապետացն / Սրբոց կուսանացն), and the source itself writes "Saints
-#         Virgins Nune and Mane" on other days.
-#       - "Clement the Bishop Rome" -> "Bishop of Rome"; a dropped preposition.
-#
-#   * MECHANICAL slips:
-#       - "Saints Saints Jacoc" -- the word typed twice.
-#       - "Saints St. Aret" -- two titles stacked on one name.
-#       - "Discovery of the Holy Cross." -- a trailing period no other component has.
-#       - "Fast day, Remembrance of the Ten Virgins" -- the day's fast marker comma-joined
-#         into the commemoration. The source's own Armenian for that day separates them
-#         with FEAST_SEP, as does its English on all 2139 other fast days.
-#
-#   * ONE SAINT, TWO SPELLINGS -- the source disagreeing with itself about a name:
-#       - the Apostle is "Philip" in one component and "Phillip" in another;
-#       - St. Nicholas of Myra is "Nicolas" in one and "Nicholas" in two others (hy
-#         Նիկողայոս throughout);
-#       - the Catholicos of Aghvank is "Gregoris" here and "Grigoris" elsewhere
-#         (hy Գրիգորիսի) -- the same fold the "Grogoris" entry above already makes.
-#     Each is folded to the form the source uses more often, which is also the standard
-#     English one.
-#
-# NOT fixed, because no evidence establishes the intended form -- see the audit script's
-# output: "Jacoc" (hy Յակովկայ), "Theodoron" (hy Աստուածատրոյ), "coming out of Pit",
-# "Twelve Holy Doctors of Church", and the source's lowercase "Saints martyrs" /
-# "Saints virgins". Those are left exactly as the source states them.
+# ``_FEAST_SPELLING_FIXES`` above stays. It is the single-word register, and unlike the
+# multi-word repairs it is the only remaining producer of the ALTERNATE key in
+# ``_ground_truth_fixes`` -- the one that lets a fold fire on artifact text that was
+# already run through an older correction chain.
 # --------------------------------------------------------------------------- #
-_FEAST_TEXT_FIXES = {
-    # factual
-    "Council of Ephesus (AD 341)": "Council of Ephesus (AD 431)",
-    "PENTECOST (Fifteenth day of Eastertide)": "PENTECOST (Fiftieth day of Eastertide)",
-    # grammatical
-    "the poor mans ": "the poor men ",
-    "many faithfuls": "many faithful",
-    "Gregory of Theologian": "Gregory the Theologian",
-    "Saint Patriarchs ": "Saints Patriarchs ",
-    "Saint Virgins ": "Saints Virgins ",
-    "Clement the Bishop Rome": "Clement the Bishop of Rome",
-    # mechanical
-    "Saints Saints ": "Saints ",
-    "Saints St. Aret": "Saints Aret",
-    "Discovery of the Holy Cross.": "Discovery of the Holy Cross",
-    "Fast day, Remembrance of the Ten Virgins":
-        "Fast day — Remembrance of the Ten Virgins",
-    # one saint, two spellings
-    "Phillip": "Philip",
-    "Nicolas ": "Nicholas ",
-    "Gregoris ": "Grigoris ",
-}
+
 
 
 def normalize_feast_spelling(text):
-    """Fold the source's known English feast-text errors to the corrected form.
+    """Fold the source's known single-word misspellings to the corrected form.
 
-    Two registers, applied in order: single misspelled words (``_FEAST_SPELLING_FIXES``)
-    then multi-word repairs (``_FEAST_TEXT_FIXES``). Every replacement is idempotent, so
-    applying this twice is the same as applying it once.
+    Multi-word repairs used to run here too; they are reviewed rows in
+    dev/feast_name_review.tsv now, applied by ``apply_ground_truth``. Every replacement is
+    idempotent, so applying this twice is the same as applying it once.
     """
     if not text:
         return text
     for wrong, right in _FEAST_SPELLING_FIXES.items():
-        text = text.replace(wrong, right)
-    for wrong, right in _FEAST_TEXT_FIXES.items():
         text = text.replace(wrong, right)
     return text
 
@@ -450,7 +393,7 @@ def apply_book_name_fixes(readings):
 #
 # ``dev/feast_name_ground_truth.json`` is the frozen approved-name mapping (built by
 # ``dev/build_ground_truth.py``): raw feast-name component -> the English text a human
-# has signed off on. Unlike ``_FEAST_TEXT_FIXES``/``_FEAST_SPELLING_FIXES`` above (a small,
+# has signed off on. Unlike ``_FEAST_SPELLING_FIXES`` above (a small,
 # individually-commented set, each justified by the source contradicting itself), this
 # covers every component in the 2001-2026 corpus and folds in a style decision too
 # ("Saint"/"Saints" -> "St."/"Sts."), so it is generated rather than hand-curated.
