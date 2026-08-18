@@ -2004,7 +2004,39 @@ _OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 # bare "Fast day" in English, one string standing for six observances, and the id had to be
 # recovered from the DATE. That is registered as a repair now
 # (source_corrections.illuminator_fast_label), which is what lets this be a plain dict.
-_TEXT_TO_OBSERVANCE_ID = {v["en"]: sid for sid, v in _OBSERVANCE_CATALOG.items()}
+# Display text -> its own {en, hy}, and display text -> the OBSERVANCE it names. They are
+# different maps because they answer different questions. A commemoration the source spells
+# several ways (the same liturgical day with a longer or shorter companion list) is ONE
+# observance with one id, and its alternate spellings ride along as ``variants`` -- so the
+# id is single, while each spelling still resolves to its own Armenian rather than being
+# flattened onto the primary's.
+def _observance_indexes(catalog):
+    """``(text -> that spelling's {en, hy}, text -> the observance's id)``."""
+    names, ids = {}, {}
+    for sid, entry in catalog.items():
+        for form in (entry, *entry.get("variants", ())):
+            names[form["en"]] = form
+            ids[form["en"]] = sid
+    return names, ids
+
+
+_TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID = _observance_indexes(_OBSERVANCE_CATALOG)
+_OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
+
+
+def _observance_names():
+    """The text index, rebuilt if ``_OBSERVANCE_CATALOG`` has been swapped underneath it.
+
+    Derived state that must not go stale: tests substitute a small catalog to exercise
+    resolution, and an index frozen at import would keep answering from the shipped one.
+    An identity check per call is cheaper than rebuilding, and cannot silently disagree.
+    """
+    global _TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID, _OBSERVANCE_INDEX_FOR
+    if _OBSERVANCE_INDEX_FOR is not _OBSERVANCE_CATALOG:
+        _TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID = _observance_indexes(
+            _OBSERVANCE_CATALOG)
+        _OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
+    return _TEXT_TO_OBSERVANCE_NAMES
 
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
@@ -2100,7 +2132,7 @@ def _resolve_observance_names(label: str, language: str) -> str:
         return label
     resolved = []
     for part in label.split(_FEAST_SEP):
-        entry = _OBSERVANCE_CATALOG.get(_TEXT_TO_OBSERVANCE_ID.get(part))
+        entry = _observance_names().get(part)
         resolved.append(entry.get(language, part) if entry else part)
     return _FEAST_SEP.join(resolved)
 

@@ -274,6 +274,77 @@ component needs no further change.
 
 ---
 
+---
+
+## 7. One commemoration, several companion lists — merged onto one id
+
+Not a text correction: the served names are unchanged. This is an **identity** fix.
+
+The source spells a few commemorations with a longer or shorter companion list, and prints
+both across years for the same liturgical day — "Sts. Cyricus and His Mother Julitta" on
+one year's Jan 21, and the same plus "and Sts. Gordius, Polyeuctus and Grigoris" on
+another's. Because ids were minted per distinct display string, each spelling became its
+own observance. A consumer that persisted `cyricus_and_his_mother_2` had no way to know it
+was the same feast as `cyricus_and_his_mother`.
+
+**The propers settle it.** Within each group the stored readings are byte-identical:
+
+| Observance | Merged in | Readings |
+|---|---|---|
+| `cyricus_and_his_mother` | `_2`, `_3` | Proverbs 14.1-6 · Zechariah 8.4-5 · Isaiah 60.8-9 · Hebrews 2.14-18 · Luke 9.44-48 |
+| `vahan_of_goghtn` | `_eugenia`, `_gordius` | Proverbs 7.1-7 · Ezekiel 12.17-19 · Romans 8.12-27 · Luke 9.23-27 |
+| `hermit_st_anton` | `hermits_sts_anton_tryphon` | Proverbs 21.15-24 · Isaiah 19.19-21 · Hebrews 11.32-40 · Matthew 10.37-42 |
+| `fathers_sts_athanasius_and` | `_2` | Proverbs 11.2-11 · Isaiah 61.3-7 · Hebrews 13.7-9 · John 16.33-17.8 |
+| `atom` | `atom_and_his_soldiers` | Wisdom 6.11-20 · Isaiah 18.7-19.7 · 2 Cor 4.10-5.5 · John 16.1-4 |
+
+Seven ids retired, 387 → 380, each declared in `_RETIRED_IDS`. It was safe to do only
+because the catalog's keys had never been served as ids; after #24 exposes them it would
+not be.
+
+### What the readings test also ruled OUT
+
+The same evidence kept two candidates apart, which is why it is a test and not a formality:
+
+- **`atom_and_his_soldiers_2`** ("…and Sts. Sukiasians the Martyrs") carries those four
+  readings **plus six more** — Leviticus 12.6-8, Proverbs 8.22-34, Ezekiel 44.1-2,
+  Malachi 3.1-4, Galatians 3.24-29, Luke 2.22-40. Those are the Presentation of the Lord,
+  and the dates serving it are Feb 13, the eve of Տեառնընդառաջ. A **concurrence** — two
+  commemorations on one day — not a longer companion list. Kept separate.
+- **`discovery_of_relics_of`** was swept in by `_FEAST_CANON_RULES`' Anton predicate
+  (`"Anton" in c and "Hermit" in c`), which is a comparison heuristic, not an identity
+  claim. Disjoint readings. Kept separate.
+
+### Display text is untouched
+
+A merge that flattened the names would drop companion saints the source actually states, on
+about 79 days. So identity is single but text is not: each spelling ships as a `variants`
+entry under its observance, keeping its own `en` **and** `hy`.
+
+```json
+"cyricus_and_his_mother": {
+  "en": "Sts. Cyricus and His Mother Julitta",
+  "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
+  "variants": [{"en": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, …",
+                "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, …"}]
+}
+```
+
+`engine._observance_names()` resolves display text per spelling; `ids_for_text` resolves
+identity per observance, many-to-one. Verified: the served name in both languages, and
+every reading, is byte-identical to before the merge across all 27 years.
+
+The grouping is **stated**, not inferred — a `variant_of` column in
+`dev/feast_name_review.tsv`, beside the id it belongs to. A row has an `id` or a
+`variant_of`, never both.
+
+### It also gave the Armenian comparison its missing equivalence
+
+`dev/hy_discrepancy.diff_components` had no analogue of `canonical_commem` and
+[declined to invent a fuzzy one](../dev/hy_discrepancy.py). A declared variant group is not
+fuzzy, so it can now match a source spelling to an engine spelling of the same observance.
+Contradictions **11 → 6**; those days report as `VARIANT_NAME`, visible but not counted as
+defects.
+
 ## Open questions — NOT corrected
 
 These are recorded in `dev/feast_name_review.tsv` with `status = review`. The source stands

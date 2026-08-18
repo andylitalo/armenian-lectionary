@@ -22,15 +22,22 @@ reviewed Armenian correction no longer reads as a defect. That is what took the 
 12 to 11 and the exact floor from 407 to 409; it was not expressible while ``approved_hy``
 was an override filled on 3 rows of 397 rather than a decision stated on every one.
 
-The residue is still not all engine defect. The 11 contradictions are:
+Armenian also has the second half of that now: merging the companion-list variants onto one
+observance id gave ``diff_components`` a declared equivalence to match on, which is the
+Armenian analogue of ``canonical_commem`` and took the count 11 -> 6. Those days are
+reported as VARIANT_NAME instead, so they stay visible without being counted as defects.
 
-  * 7 days where the shipped table's commemoration enumerates a different companion list
-    than the year the cache sampled -- the same class ``canonical_commem`` folds away on
-    the English side, which has no Armenian analogue;
-  * 2 word-form variants (``Առաջաւորի``/``Առաջաւորաց``) where the engine serves the
-    source's dominant spelling, but which the DOMINANT_FORM classifier is deliberately too
-    crude to group -- it compares spacing and case, not morphology;
-  * 2 single-day punctuation differences.
+The residue is still not all engine defect. The 6 contradictions are:
+
+  * 2 days where the source GLUED two commemorations that each have their own id (Sargis +
+    Atom, Eugenius + Andrew) and the engine serves only the first. A real difference, not a
+    spelling: the source states a commemoration we drop;
+  * 2 word-form variants (``Առաջաւորի``/``Առաջաւորաց``, ``Ծննդեան``/``Ս. Ծննդեան``) where
+    the engine serves the source's dominant spelling, but which the DOMINANT_FORM
+    classifier is deliberately too crude to group -- it compares spacing and case, not
+    morphology;
+  * 2 segmentation differences, where the engine splits a day into components on different
+    boundaries than the source's Armenian does.
 
 (The deliberate ``Ա``-for-``Բ`` Sunday-after-Pentecost ordinal correction used to be a
 twelfth. It is now folded, along with ``Սկիզբն պահոց`` -> ``Սկիզբն շաբաթական պահոց``.)
@@ -59,13 +66,20 @@ from tests._reference_cache import requires_reference_cache_hy          # noqa: 
 
 # Days where the engine emits an Armenian component the source does not have.
 # Monotonic DOWN. The target is 0, as on the English side.
-HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "11"))
+HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "6"))
 
 # Days where the engine drops an Armenian component the source states. Monotonic DOWN.
 HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "2"))
 
 # Days carrying the right components in a different order. Monotonic DOWN.
 HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
+
+# Days where the source names the same OBSERVANCE with a different declared spelling -- a
+# longer or shorter companion list for one commemoration. Correct as served: the catalog
+# states the two are one observance (feast_name_review.tsv's variant_of) and the propers are
+# byte-identical, so the day the cache sampled decides nothing. Monotonic DOWN anyway: a
+# rise means a new spelling appeared that nobody grouped.
+HY_VARIANT_NAME_CEILING = int(os.environ.get("HY_VARIANT_NAME_CEILING", "5"))
 
 # Days where the source spells a name several ways and we serve its dominant form. Correct,
 # but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
@@ -127,6 +141,15 @@ class TestRawArmenianFeastName(unittest.TestCase):
             n, HY_ORDER_CEILING,
             f"{n} days serve the right Armenian components in the wrong order (ceiling "
             f"{HY_ORDER_CEILING}); run `python dev/hy_discrepancy.py --list`")
+
+    def test_variant_names_within_ratchet(self):
+        n = self.tally["VARIANT_NAME"]
+        self.assertLessEqual(
+            n, HY_VARIANT_NAME_CEILING,
+            f"{n} days name the same observance with a different declared spelling "
+            f"(ceiling {HY_VARIANT_NAME_CEILING}); these are not defects, but a rise means "
+            "a spelling appeared that no reviewer has grouped -- run "
+            "`python dev/hy_discrepancy.py --list`")
 
     def test_dominant_form_within_ratchet(self):
         n = self.tally["DOMINANT_FORM"]

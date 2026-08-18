@@ -27,11 +27,19 @@ def _catalog():
 def _text_to_id():
     """English component -> id.
 
-    One entry per component: no two observances share an English text, an invariant
-    dev/build_observance_catalog.py enforces. That is what lets a storage tier -- which has
-    text and no date -- resolve identity on its own.
+    One entry per component, INCLUDING each observance's alternate spellings: no two
+    observances share an English text, an invariant dev/build_observance_catalog.py
+    enforces. That is what lets a storage tier -- which has text and no date -- resolve
+    identity on its own.
+
+    Many-to-one on purpose. A commemoration the source spells with a longer or shorter
+    companion list is one observance, so every spelling of it resolves to the same id.
     """
-    return {v["en"]: sid for sid, v in _catalog().items()}
+    by_text = {}
+    for sid, entry in _catalog().items():
+        for form in (entry, *entry.get("variants", ())):
+            by_text[form["en"]] = sid
+    return by_text
 
 
 def ids_for_text(text):

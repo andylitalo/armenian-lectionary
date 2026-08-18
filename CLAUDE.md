@@ -22,7 +22,7 @@ with no install step.
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy, variants?}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -173,6 +173,13 @@ Working rules:
   leaves a served observance unaddressable.
 - **Retiring an id is declared**, in `_RETIRED_IDS` with the reason, or the build fails
   naming it. Reviving one fails too.
+- **One observance, not one display string.** Where the source spells a commemoration
+  several ways — the same liturgical day with a longer or shorter companion list — the
+  alternates carry `variant_of` (the primary's id) instead of an `id`, and ship as
+  `variants` under it, each keeping its own `en` and `hy`. Identity is single; display text
+  stays exact. A row has an `id` or a `variant_of`, never both. Group only on evidence that
+  it is one day: identical propers settled the five in docs §7, and kept two look-alikes
+  apart.
 
 Invariants the build enforces, each of which was violable before: ids unique, English
 unique (no two observances under one display string), no component carrying `_FEAST_SEP` in

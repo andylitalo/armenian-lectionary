@@ -81,7 +81,7 @@
     "support_years": 23,
     "anchor": "head",
     "observance_ids": [
-     "hermits_sts_anton_tryphon"
+     "hermit_st_anton"
     ]
    },
    {
@@ -101,7 +101,7 @@
     "support_years": 19,
     "anchor": "head",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother"
     ]
    },
    {
@@ -133,7 +133,7 @@
     "support_years": 15,
     "anchor": "head",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn"
     ]
    },
    {
@@ -516,7 +516,7 @@
     "support_years": 7,
     "anchor": "head",
     "observance_ids": [
-     "cyricus_and_his_mother_2"
+     "cyricus_and_his_mother"
     ]
    },
    {
@@ -536,7 +536,7 @@
     "support_years": 9,
     "anchor": "skip",
     "observance_ids": [
-     "vahan_of_goghtn_eugenia"
+     "vahan_of_goghtn"
     ]
    },
    {

@@ -22,7 +22,10 @@ with a day the review process has never seen (2027, or a future re-fetched year)
 
 Each entry:
     id          the observance's frozen catalog id, or "" for a row that is not a single
-                served observance (a whole day, or a minority spelling the engine overrides)
+                served observance (a whole day, a minority spelling the engine overrides,
+                or an alternate name -- see ``variant_of``)
+    variant_of  the id this row is an ALTERNATE NAME for: the same commemoration spelled
+                with a longer companion list, shipping under that id rather than its own
     approved_en the reviewed English text the engine should serve for this component
     status      ok | fixed | review -- review means the note asks an unresolved question;
                 a component may still be served even under review (the source's own text,
@@ -56,6 +59,7 @@ def main():
     for r in rows:
         ground_truth[r["source_en"]] = {
             "id": r["id"],
+            "variant_of": r["variant_of"],
             "approved_en": r["approved_en"],
             "status": r["status"],
             "note": r["note"],

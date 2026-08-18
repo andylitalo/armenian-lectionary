@@ -100,6 +100,19 @@ _RETIRED_IDS = {
     "theodore_the_general":
         "published once, on 2016-02-13; every other year at that coordinate says Theodore "
         "the TYRON, which is what the table serves -- a source one-off, not an observance",
+    # MERGED: an alternate name, not a second observance. The source spells these
+    # commemorations with a longer or shorter companion list and prints both across years
+    # for the same liturgical day; the propers settle it, being byte-identical within each
+    # group (docs/feast-name-corrections.md section 7). They now ship as ``variants`` of the
+    # id named here, so the display text is unchanged and only the identity is single.
+    "cyricus_and_his_mother_2": "merged into cyricus_and_his_mother (identical propers)",
+    "cyricus_and_his_mother_3": "merged into cyricus_and_his_mother (identical propers)",
+    "vahan_of_goghtn_eugenia": "merged into vahan_of_goghtn (identical propers)",
+    "vahan_of_goghtn_gordius": "merged into vahan_of_goghtn (identical propers)",
+    "fathers_sts_athanasius_and_2":
+        "merged into fathers_sts_athanasius_and (identical propers)",
+    "hermits_sts_anton_tryphon": "merged into hermit_st_anton (identical propers)",
+    "atom_and_his_soldiers": "merged into atom (identical propers)",
 }
 
 
@@ -141,15 +154,26 @@ def served_components():
 
 
 def build_catalog(ground_truth):
-    """``(catalog, problems)`` -- the projection, and every invariant it violates."""
+    """``(catalog, problems)`` -- the projection, and every invariant it violates.
+
+    One entry per OBSERVANCE, not per display string. A commemoration the source spells
+    several ways (a longer or shorter companion list for the same liturgical day) is one
+    entry whose alternate spellings hang off it as ``variants``, each keeping its own
+    ``en``/``hy`` so display text stays exact while identity stays single.
+    """
     catalog, problems = {}, []
     by_id, by_en = {}, {}
 
+    def names_of(row):
+        en, hy = row.get("approved_en"), row.get("approved_hy")
+        return en, hy
+
+    # Primaries first: a variant cannot be attached before its observance exists.
     for source, row in sorted(ground_truth.items()):
-        sid, en = row.get("id"), row.get("approved_en")
+        sid = row.get("id")
         if not sid:
             continue
-        hy = row.get("approved_hy")
+        en, hy = names_of(row)
         if not en:
             problems.append(f"{sid}: has an id but no approved English")
             continue
@@ -179,13 +203,42 @@ def build_catalog(ground_truth):
         by_id[sid], by_en[en] = source, sid
         catalog[sid] = {"en": en, "hy": hy.replace(_FEAST_SEP, _INTERNAL_SEP)}
 
+    for source, row in sorted(ground_truth.items()):
+        primary = row.get("variant_of")
+        if not primary:
+            continue
+        if row.get("id"):
+            problems.append(f"{primary}: a row has BOTH an id and a variant_of; it is "
+                            "either its own observance or an alternate name for one")
+            continue
+        en, hy = names_of(row)
+        if not en or not hy:
+            problems.append(f"variant of {primary}: missing approved text for {source!r}")
+            continue
+        if primary not in catalog:
+            problems.append(f"{en!r} is a variant of {primary!r}, which is not an "
+                            "observance -- variant_of must name a row that has an id")
+            continue
+        if en in by_en:
+            problems.append(
+                f"variant {en!r} of {primary} is already the English of {by_en[en]}")
+            continue
+        by_en[en] = primary
+        catalog[primary].setdefault("variants", []).append(
+            {"en": en, "hy": hy.replace(_FEAST_SEP, _INTERNAL_SEP)})
+
+    for entry in catalog.values():
+        if "variants" in entry:
+            entry["variants"].sort(key=lambda v: v["en"])
+
     return catalog, problems
 
 
 def audit(catalog, ground_truth):
     """Coverage against what the engine actually serves, and against what has shipped."""
     findings = []
-    approved_ids = {row["approved_en"]: row.get("id")
+    # A variant is covered by the observance it names, so it counts as resolvable text.
+    approved_ids = {row["approved_en"]: (row.get("id") or row.get("variant_of"))
                     for row in ground_truth.values() if row.get("approved_en")}
     served = served_components()
 
@@ -219,7 +272,8 @@ def audit(catalog, ground_truth):
 
 def mint(ground_truth):
     """Assign ids to served components that have none, writing them back to the TSV."""
-    approved_ids = {row["approved_en"]: row.get("id")
+    # A variant is covered by the observance it names, so it counts as resolvable text.
+    approved_ids = {row["approved_en"]: (row.get("id") or row.get("variant_of"))
                     for row in ground_truth.values() if row.get("approved_en")}
     used = {sid for sid in approved_ids.values() if sid}
     new = {text: _slug(text, used)

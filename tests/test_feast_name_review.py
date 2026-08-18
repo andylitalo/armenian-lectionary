@@ -104,14 +104,18 @@ class TestApprovedNames(unittest.TestCase):
     def test_every_id_less_row_says_why(self):
         """An empty ``id`` is a statement, so it has to be a legible one.
 
-        Four rows carry no id, none of them by oversight: one is a whole day whose halves
-        are separately identified, three are glued or one-off source variants nothing
-        emits or stores. Without the reason written down, an id missing on purpose and an
-        id missing by accident look identical -- and the accident is the one that makes a
-        served observance unaddressable.
+        Four rows carry no id and no ``variant_of``, none of them by oversight: one is a
+        whole day whose halves are separately identified, three are glued or one-off
+        source variants nothing emits or stores. Without the reason written down, an id
+        missing on purpose and an id missing by accident look identical -- and the
+        accident is the one that makes a served observance unaddressable.
+
+        A row with ``variant_of`` is exempt: it has no id because it is an alternate name
+        for one, which the column already says.
         """
         silent = [r["source_en"] for r in self.rows
-                  if not r["id"].strip() and "no id" not in r["note"]]
+                  if not r["id"].strip() and not r["variant_of"].strip()
+                  and "no id" not in r["note"]]
         self.assertEqual(
             silent[:5], [],
             f"{len(silent)} row(s) have no id and no note explaining why. Add the reason "
@@ -135,6 +139,37 @@ class TestApprovedNames(unittest.TestCase):
             passed_through[:5], [],
             f"{len(passed_through)} source component(s) do not resolve to their approved "
             "text through the lookup, so the raw spelling would reach a caller")
+
+    def test_variants_ship_under_a_real_observance(self):
+        """An alternate name resolves to its observance, and keeps its own text.
+
+        Merging these ids is what stops a consumer seeing one commemoration as three
+        feasts. It only works if the merge is identity-only: the variant must still serve
+        the exact English AND Armenian the source published for it, not the primary's.
+        Flattening the display text would drop companion saints the source actually names.
+        """
+        import json
+        import os
+        cat_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                "armenian_lectionary", "data", "observance_catalog.json")
+        with open(cat_path, encoding="utf-8") as fh:
+            catalog = json.load(fh)
+        by_text = {f["en"]: (sid, f)
+                   for sid, e in catalog.items()
+                   for f in (e, *e.get("variants", ()))}
+
+        variants = [r for r in self.rows if r["variant_of"].strip()]
+        self.assertTrue(variants, "the variant grouping was dropped from every row")
+        for row in variants:
+            self.assertFalse(row["id"].strip(),
+                             f"{row['source_en']!r} has both an id and a variant_of")
+            self.assertIn(row["variant_of"], catalog,
+                          f"{row['source_en']!r} points at a non-observance")
+            sid, form = by_text.get(row["approved_en"], (None, None))
+            self.assertEqual(sid, row["variant_of"],
+                             f"{row['approved_en']!r} does not resolve to its observance")
+            self.assertEqual(form["hy"], row["approved_hy"].replace(" \u2014 ", "; "),
+                             f"{row['approved_en']!r} lost its own Armenian in the merge")
 
     def test_open_questions_are_still_flagged(self):
         """The unresolved rows keep their question until someone answers it."""

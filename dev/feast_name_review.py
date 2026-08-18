@@ -40,6 +40,13 @@ IS the registration -- ``dev/build_ground_truth.py`` freezes it and ``apply_grou
 serves it, with no second entry anywhere. That failure is deliberate: it is what stops a
 reviewed decision from being quietly lost the next time the artifacts are rebuilt.
 
+``variant_of`` names the observance a row is an ALTERNATE NAME for. The source spells a
+few commemorations with a longer or shorter companion list ("Sts. Cyricus and His Mother
+Julitta" vs. the same plus "and Sts. Gordius, Polyeuctus and Grigoris") and prints both
+across years for the same liturgical day, with identical propers. Those are one observance,
+so only the primary row carries an ``id``; the variants carry ``variant_of`` instead and
+ship as alternate spellings under it. A row has an ``id`` or a ``variant_of``, never both.
+
 ``id`` is the observance's frozen catalog id -- the key a consumer stores instead of the
 display text, which moves. It is STATED here, never derived from the text, which is what
 lets a name be corrected without the identity moving with it. Assign one only for a
@@ -80,8 +87,8 @@ from armenian_lectionary.engine import (                                # noqa: 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "feast_name_review.tsv")
-FIELDS = ("status", "days", "last", "source_en", "id", "approved_en", "source_hy",
-          "approved_hy", "note")
+FIELDS = ("status", "days", "last", "source_en", "id", "variant_of", "approved_en",
+          "source_hy", "approved_hy", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
 # Each is a name that reads oddly but that nothing available settles: the Armenian is
@@ -384,6 +391,7 @@ def build_rows():
             "last": last[src],
             "source_en": src,
             "id": (prior or {}).get("id") or "",
+            "variant_of": (prior or {}).get("variant_of") or "",
             "approved_en": approved,
             "source_hy": source_hy,
             # Defaults to the scrape only on a row that has never carried a decision;

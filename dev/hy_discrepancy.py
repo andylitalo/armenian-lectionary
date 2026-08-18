@@ -23,6 +23,12 @@ Findings are classified, strongest first:
 
   * ``CONTRADICTION`` -- the engine emits an Armenian component the source does not have.
   * ``OMISSION`` -- the source states a component the engine drops.
+  * ``VARIANT_NAME`` -- the source names the same OBSERVANCE with a different declared
+    spelling (a longer or shorter companion list). Not a defect: the catalog states the two
+    are one observance and the propers are byte-identical, so the day the cache happened to
+    sample decides nothing. It is the Armenian analogue of what ``canonical_commem`` does
+    for English, and it is enumerated rather than inferred -- only text a reviewer grouped
+    in ``feast_name_review.tsv``'s ``variant_of`` column can match this way.
   * ``ORDER`` -- the same components in a different order.
   * ``DOMINANT_FORM`` -- the source spells one name several ways and the engine serves the
     one it uses most often. Not a defect: it is the same policy the English side applies to
@@ -59,6 +65,7 @@ Usage:
 
 import collections
 import datetime
+import functools
 import glob
 import json
 import os
@@ -69,7 +76,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from armenian_lectionary.engine import (                                # noqa: E402
     _FEAST_SEP, compute_armenian_lectionary,
 )
-from dev.build_observance_catalog import _INTERNAL_SEP                  # noqa: E402
+from dev.build_observance_catalog import CATALOG_PATH, _INTERNAL_SEP   # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
 from dev.source_corrections import ground_truth_hy_fixes                # noqa: E402
 
@@ -135,15 +142,32 @@ def _dominant_forms(witnesses):
     return {shape: variants.most_common(1)[0][0] for shape, variants in by_shape.items()}
 
 
+@functools.lru_cache(maxsize=1)
+def _hy_to_observance():
+    """``{Armenian spelling -> the observance id it names}``, primaries and variants alike.
+
+    Only spellings the catalog declares, which is what keeps this from being the fuzzy
+    match the module otherwise refuses. A commemoration the source writes with a longer or
+    shorter companion list is ONE observance -- stated in feast_name_review.tsv's
+    ``variant_of`` column and confirmed by the propers being byte-identical within each
+    group -- so its spellings are the same fact, not a near-miss worth reporting.
+    """
+    with open(CATALOG_PATH, encoding="utf-8") as fh:
+        catalog = json.load(fh)
+    return {form["hy"]: sid
+            for sid, entry in catalog.items()
+            for form in (entry, *entry.get("variants", ()))}
+
+
 def diff_components(src_comps, eng_comps):
-    """``(contradictions, omissions)``: what the engine asserts that the source lacks, and
-    what the source states that the engine drops.
+    """``(contradictions, omissions, variants)``: what the engine asserts that the source
+    lacks, what the source states that the engine drops, and the (source, engine) pairs
+    that are two declared spellings of one observance.
 
     Matching is exact and greedy in component order, so a component is never counted as
-    both. There is no correction-equivalence pass as there is on the English side: the
-    Armenian has no ``canonical_commem``, and inventing a fuzzy match here would hide
-    exactly the kind of near-miss (a minority spelling variant, a lost sub-component) this
-    module exists to surface.
+    both. Exact text first; then, for what is left, exact OBSERVANCE -- two spellings the
+    catalog declares to be one observance are one observance here too. That second pass is
+    enumerated, never inferred: it can only match text a reviewer grouped by hand.
     """
     unmatched_src = list(src_comps)
     contradictions = []
@@ -152,7 +176,18 @@ def diff_components(src_comps, eng_comps):
             unmatched_src.remove(eng)
         else:
             contradictions.append(eng)
-    return contradictions, unmatched_src
+
+    by_hy = _hy_to_observance()
+    still_wrong, variants = [], []
+    for eng in contradictions:
+        sid = by_hy.get(eng)
+        same = next((s for s in unmatched_src if sid and by_hy.get(s) == sid), None)
+        if same is None:
+            still_wrong.append(eng)
+        else:
+            unmatched_src.remove(same)
+            variants.append((same, eng))
+    return still_wrong, unmatched_src, variants
 
 
 def _is_dominant_form(contradictions, omissions, dominant):
@@ -184,7 +219,7 @@ def collect():
             continue
 
         src_comps, eng_comps = components(src), components(eng)
-        contradictions, omissions = diff_components(src_comps, eng_comps)
+        contradictions, omissions, variants = diff_components(src_comps, eng_comps)
         if eng.replace(_INTERNAL_SEP, _FEAST_SEP) == src:
             kind = "INTERNAL_DELIMITER"
         elif _is_dominant_form(contradictions, omissions, dominant):
@@ -193,17 +228,21 @@ def collect():
             kind = "CONTRADICTION"
         elif omissions:
             kind = "OMISSION"
+        elif variants:
+            kind = "VARIANT_NAME"
         else:
             kind = "ORDER"
         findings.append({
             "iso": iso, "kind": kind, "src": src, "eng": eng,
             "contradictions": contradictions, "omissions": omissions,
+            "variants": variants,
         })
 
     return {"compared": compared, "exact": exact, "findings": findings}
 
 
-KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "DOMINANT_FORM", "INTERNAL_DELIMITER")
+KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "VARIANT_NAME", "DOMINANT_FORM",
+         "INTERNAL_DELIMITER")
 
 
 def counts(data):

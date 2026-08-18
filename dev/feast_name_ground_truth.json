@@ -5,7 +5,8 @@
   "id": "ascension_of_our_lord",
   "note": "",
   "source_hy": "ՀԱՄԲԱՐՁՈՒՄՆ ՔՐԻՍՏՈՍԻ ԱՍՏՈՒԾՈՅ ՄԵՐՈՅ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "ASSUMPTION OF THE HOLY MOTHER OF GOD": {
   "approved_en": "ASSUMPTION OF THE HOLY MOTHER OF GOD",
@@ -13,7 +14,8 @@
   "id": "assumption_of_the_holy",
   "note": "",
   "source_hy": "ՎԵՐԱՓՈԽՈՒՄՆ Ս. ԱՍՏՈՒԱԾԱԾՆԻ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Annunciation to the Virgin Mary": {
   "approved_en": "Annunciation to the Virgin Mary",
@@ -21,7 +23,8 @@
   "id": "annunciation_to_the_virgin",
   "note": "",
   "source_hy": "Աւետումն սրբուհւոյ Աստուածածնի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Appearance of the Holy Cross": {
   "approved_en": "Appearance of the Holy Cross",
@@ -29,7 +32,8 @@
   "id": "appearance_of_the_holy",
   "note": "",
   "source_hy": "Տօն Երեւման ս. խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Begining of the Fast": {
   "approved_en": "Beginning of the Weekly Fasts",
@@ -37,7 +41,8 @@
   "id": "beginning_of_the_fast",
   "note": "registered correction, justified as a DISAMBIGUATION rather than by the source contradicting itself -- see docs/feast-name-corrections.md section 6. The source's 'Beginning of the Fast' (hy 'Սկիզբն պահոց') names no fast, and both languages are equally terse, so there was nothing to correct it against. It is the 41st day of Eastertide, always the Friday right after Ascension, and it ends the Eastertide dispensation from the weekly Wed/Fri fast. Not 'after Eastertide': the day is IN Eastertide (41 of 50); the dispensation ends at Ascension, not Pentecost.",
   "source_hy": "Սկիզբն պահոց",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Beheading of St. John the Forerunner (the Baptist)": {
   "approved_en": "Beheading of St. John the Forerunner (the Baptist)",
@@ -45,7 +50,8 @@
   "id": "beheading_of_st_john",
   "note": "",
   "source_hy": "Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)": {
   "approved_en": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
@@ -53,7 +59,8 @@
   "id": "commemoration_of_150_fathers",
   "note": "",
   "source_hy": "Կոստանդնուպոլսոյ ս. ժողովոյն հարիւր յիսուն հայրապետացն (381 թ.)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)": {
   "approved_en": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 431)",
@@ -61,7 +68,8 @@
   "id": "commemoration_of_200_fathers",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Եփեսոսի ս. ժողովոյն երկու հարիւր հայրապետացն (431 թ.)",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)": {
   "approved_en": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
@@ -69,7 +77,8 @@
   "id": "commemoration_of_318_fathers",
   "note": "'Nicea' -- the usual English is Nicaea (or Nicea). Accepted as a variant, not folded. Confirm the preferred form.",
   "source_hy": "Նիկիոյ սուրբ ժողովոյն երեք հարիւր տասն եւ ութ հայրապետացն (325 թ.)",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits": {
   "approved_en": "Discovery of Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
@@ -77,7 +86,8 @@
   "id": "discovery_of_relics_of",
   "note": "'Herbivorous Hermits' renders hy 'խոտաճարակացն' literally (grass-eating). The usual English is 'the Seven Grass-eating Hermits'. Preferred form?",
   "source_hy": "Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից կաթողիկոսին եւ սրբոց հարցն Թաթլոյ, Վարոսի, Թումասու, Անտոնի, Կրօնիդեայ եւ եօթն խոտաճարակացն, որք յԻննակնեայ վանսն կատարեցան",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Discovery of the Holy Cross.": {
   "approved_en": "Discovery of the Holy Cross",
@@ -85,7 +95,8 @@
   "id": "discovery_of_the_holy",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գիւտ խաչի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "EXALTATION OF THE HOLY CROSS": {
   "approved_en": "EXALTATION OF THE HOLY CROSS",
@@ -93,7 +104,8 @@
   "id": "exaltation_of_the_holy",
   "note": "",
   "source_hy": "ԽԱՉՎԵՐԱՑ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eighteenth day of Eastertide": {
   "approved_en": "Eighteenth day of Eastertide",
@@ -101,7 +113,8 @@
   "id": "eighteenth_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԸ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eighteenth day of Great Lent": {
   "approved_en": "Eighteenth day of Great Lent",
@@ -109,7 +122,8 @@
   "id": "eighteenth_day_of_great",
   "note": "",
   "source_hy": "ԺԸ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eighth Sunday after the Holy Cross": {
   "approved_en": "Eighth Sunday after the Holy Cross",
@@ -117,7 +131,8 @@
   "id": "eighth_sunday_after_the",
   "note": "",
   "source_hy": "Ը կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eighth day of Great Lent": {
   "approved_en": "Eighth day of Great Lent",
@@ -125,7 +140,8 @@
   "id": "eighth_day_of_great",
   "note": "",
   "source_hy": "Ը օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eleventh Sunday after the Holy Cross": {
   "approved_en": "Eleventh Sunday after the Holy Cross",
@@ -133,7 +149,8 @@
   "id": "eleventh_sunday_after_the",
   "note": "",
   "source_hy": "ԺԱ կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eleventh day of Eastertide": {
   "approved_en": "Eleventh day of Eastertide",
@@ -141,7 +158,8 @@
   "id": "eleventh_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԱ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eleventh day of Great Lent": {
   "approved_en": "Eleventh day of Great Lent",
@@ -149,7 +167,8 @@
   "id": "eleventh_day_of_great",
   "note": "",
   "source_hy": "ԺԱ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Fast of Advent": {
   "approved_en": "Eve of Fast of Advent",
@@ -157,7 +176,8 @@
   "id": "eve_of_fast_of",
   "note": "REVERTED: matches the engine's deliberate dual-form reproduction (engine._advent_eve_label) -- the source writes this two ways depending on whether Heesnak falls 9 or 10 weeks after Exaltation, and the engine reproduces both exactly rather than normalizing to one (verified, see engine.py comment). Do not fold to 'the Fast'.",
   "source_hy": "Բարեկենդան Յիսնակի պահոցն",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Eve of Fast of Assumption of the Holy Mother of God": {
   "approved_en": "Eve of Fast of Assumption of the Holy Mother of God",
@@ -165,7 +185,8 @@
   "id": "eve_of_fast_of_2",
   "note": "",
   "source_hy": "Բարեկենդան Սուրբ Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Fast of Catechumens": {
   "approved_en": "Eve of Fast of Catechumens",
@@ -173,7 +194,8 @@
   "id": "eve_of_fast_of_3",
   "note": "",
   "source_hy": "Բարեկենդան Առաջաւորաց պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Fast of Exaltation of Holy Cross": {
   "approved_en": "Eve of Fast of Exaltation of Holy Cross",
@@ -181,7 +203,8 @@
   "id": "eve_of_fast_of_4",
   "note": "",
   "source_hy": "Բարեկենդան Ս. Խաչի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Fast of Nativity": {
   "approved_en": "Eve of Fast of Nativity",
@@ -189,7 +212,8 @@
   "id": "eve_of_fast_of_5",
   "note": "",
   "source_hy": "Բարեկենդան Սուրբ Ծննդեան պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Fast of Prophet Elijah": {
   "approved_en": "Eve of Fast of Prophet Elijah",
@@ -197,7 +221,8 @@
   "id": "eve_of_fast_of_6",
   "note": "",
   "source_hy": "Բարեկենդան Եղիական պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Fast of Saint Gregory the Illuminator": {
   "approved_en": "Eve of Fast of St. Gregory the Illuminator",
@@ -205,7 +230,8 @@
   "id": "eve_of_fast_of_7",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Eve of Fast of Saint James the bishop of Nisibis": {
   "approved_en": "Eve of Fast of St. James the bishop of Nisibis",
@@ -213,7 +239,8 @@
   "id": "eve_of_fast_of_8",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բարեկենդան Ս. Յակովբայ պահոց",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Eve of Fast of Transfiguration": {
   "approved_en": "Eve of Fast of Transfiguration",
@@ -221,7 +248,8 @@
   "id": "eve_of_fast_of_9",
   "note": "",
   "source_hy": "Բարեկենդան Վարդավառի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Fast of the Holy Cross of Varag": {
   "approved_en": "Eve of Fast of the Holy Cross of Varag",
@@ -229,7 +257,8 @@
   "id": "eve_of_fast_of_10",
   "note": "",
   "source_hy": "Բարեկենդան Վարագայ ս. խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of Great Lent": {
   "approved_en": "Eve of Great Lent",
@@ -237,7 +266,8 @@
   "id": "eve_of_great_lent",
   "note": "",
   "source_hy": "Բուն բարեկենդան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of the Fast of Advent": {
   "approved_en": "Eve of the Fast of Advent",
@@ -245,7 +275,8 @@
   "id": "eve_of_the_fast",
   "note": "",
   "source_hy": "Բարեկենդան Յիսնակի պահոցն",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of the Nativity and Theophany of our Lord Jesus Christ": {
   "approved_en": "Eve of the Nativity and Theophany of our Lord Jesus Christ",
@@ -253,7 +284,8 @@
   "id": "eve_of_the_nativity",
   "note": "",
   "source_hy": "Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի — Նաւակատիք",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Eve of the Resurrection of our Lord Jesus Christ": {
   "approved_en": "Eve of the Resurrection of our Lord Jesus Christ",
@@ -261,7 +293,8 @@
   "id": "eve_of_the_resurrection",
   "note": "",
   "source_hy": "",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fast day": {
   "approved_en": "Fast day",
@@ -269,7 +302,8 @@
   "id": "fast_day",
   "note": "TWO open questions, both deferred as their own change. (a) Is a fast marker a NAME at all? It is arguably an attribute of the day -- served in its own field, the way is-a-fast already is -- rather than a component of what the observance is called. (b) If it stays a name, the ordinary-time instances should say which fast: 1,575 of the 2,108 served days are the generated Wed/Fri position label (784 Wed, 783 Fri, plus 8 Advent-fast weekdays on Dec 9), and those are the weekly fast, not a generic one. The remaining 533 are stored table text inside Holy Week and the week-long fasts, where Wed/Fri is not the reason -- so the two groups need different answers and cannot be folded together. Not corrected here because either answer rewrites Liturgical Day on >2,000 days, needs an engine._POSITION_FAMILIES change plus a table rebuild, and would move the omission ratchet in test_feast_name_raw off 0. See the 'Begining of the Fast' row, which is blocked on the same decision.",
   "source_hy": "Պահք",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Fast day, Remembrance of the Ten Virgins": {
   "approved_en": "Fast day — Remembrance of the Ten Virgins",
@@ -277,7 +311,8 @@
   "id": "",
   "note": "no id: a whole DAY, not one observance -- the source comma-joined the day's fast marker to its commemoration, and a registered correction splits them. Both halves are their own rows with their own ids (fast_day, remembrance_of_the_ten), so the day resolves component-wise to the pair.",
   "source_hy": "Պահք — Յիշատակ տասն կուսանացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Feast day": {
   "approved_en": "Fast day",
@@ -285,7 +320,8 @@
   "id": "fast_day",
   "note": "The source's own one-letter typo for 'Fast day'. Three independent witnesses: the string appears on no other date in the 9,861-day corpus; its Mon/Tue/Wed/Fri weekday set is the Advent-fast schedule, and the marker is absent on Thu/Sat, which a FEAST marker could not be (it is the same feast every year); and the Armenian in the next column reads Պահք (fast). Registered in source_corrections.POSITION_LABEL_FIXES (anchored on the component separator, so it cannot also rewrite 'Feast day of the Discovery of the Belt...'), with the matching engine._POSITION_FAMILIES Dec-9 template edited to emit 'Fast day'. See docs/feast-name-corrections.md section 1.",
   "source_hy": "Պահք",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Feast day of the Discovery of the Belt of the Holy Mother of God": {
   "approved_en": "Feast day of the Discovery of the Belt of the Holy Mother of God",
@@ -293,7 +329,8 @@
   "id": "feast_day_of_the",
   "note": "",
   "source_hy": "Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of All Saints, the old and the new, the known and the unknown": {
   "approved_en": "Feast of All Sts., the old and the new, the known and the unknown",
@@ -301,7 +338,8 @@
   "id": "feast_of_all_sts",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Տօն ամենայն սրբոց` հնոց եւ նորոց, յայտից եւ անյայտից",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator": {
   "approved_en": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
@@ -309,7 +347,8 @@
   "id": "feast_of_dedication_of",
   "note": "",
   "source_hy": "Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին — Նաւակատիք",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of Discovery of Saint Gregory's Relics": {
   "approved_en": "Feast of Discovery of St. Gregory's Relics",
@@ -317,7 +356,8 @@
   "id": "feast_of_discovery_of",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գիւտ նշխարաց սրբոյն Գրիգորի Լուսաւորչին մերոյ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Feast of Holy Church in Dedication of Holy Cross": {
   "approved_en": "Feast of Holy Church in Dedication of Holy Cross",
@@ -325,7 +365,8 @@
   "id": "feast_of_holy_church",
   "note": "",
   "source_hy": "Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին — Նաւակատիք",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of Holy Etchmiadzin": {
   "approved_en": "Feast of Holy Etchmiadzin",
@@ -333,7 +374,8 @@
   "id": "feast_of_holy_etchmiadzin",
   "note": "",
   "source_hy": "Տօն Կաթուղիկէ Սուրբ Էջմիածնի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of Naming of Our Lord Jesus Christ": {
   "approved_en": "Feast of Naming of Our Lord Jesus Christ",
@@ -341,7 +383,8 @@
   "id": "feast_of_naming_of",
   "note": "",
   "source_hy": "Տօն Անուանակոչութեան Տեառն մերոյ Յիսուսի Քրիստոսի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of the Birth of Holy Virgin Mary from Anna": {
   "approved_en": "Feast of the Birth of Holy Virgin Mary from Anna",
@@ -349,7 +392,8 @@
   "id": "feast_of_the_birth",
   "note": "",
   "source_hy": "Տօն Ծննդեան սրբուհւոյ Կուսին Մարիամու յԱննայէ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of the Birth of St. John the Forerunner (Baptist)": {
   "approved_en": "Feast of the Birth of St. John the Forerunner (Baptist)",
@@ -357,7 +401,8 @@
   "id": "feast_of_the_birth_2",
   "note": "",
   "source_hy": "Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of the Discovery of St. Mary’s Box": {
   "approved_en": "Feast of the Discovery of St. Mary's Box",
@@ -365,7 +410,8 @@
   "id": "feast_of_the_discovery",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գիւտ տփոյ սրբուհւոյ Աստուածածնի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Feast of the Holy Church": {
   "approved_en": "Feast of the Holy Church",
@@ -373,7 +419,8 @@
   "id": "feast_of_the_holy",
   "note": "",
   "source_hy": "Տօն է Ս. Եկեղեցւոյ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of the Holy Cross": {
   "approved_en": "Feast of the Holy Cross",
@@ -381,7 +428,8 @@
   "id": "feast_of_the_holy_2",
   "note": "",
   "source_hy": "Տօն է Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Feast of the Holy Cross of Varag": {
   "approved_en": "Feast of the Holy Cross of Varag",
@@ -389,7 +437,8 @@
   "id": "feast_of_the_holy_3",
   "note": "",
   "source_hy": "Տօն Վարագայ ս. խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fiest of the Conception of the Holy Virgin Mary by Anna": {
   "approved_en": "Feast of the Conception of the Holy Virgin Mary by Anna",
@@ -397,7 +446,8 @@
   "id": "feast_of_the_conception",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Յղութիւն սրբուհւոյ Աստուածածնի յԱննայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Fifteenth day of Great Lent": {
   "approved_en": "Fifteenth day of Great Lent",
@@ -405,7 +455,8 @@
   "id": "fifteenth_day_of_great",
   "note": "",
   "source_hy": "ԺԵ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday": {
   "approved_en": "Fifth Sunday",
@@ -413,7 +464,8 @@
   "id": "fifth_sunday",
   "note": "",
   "source_hy": "Ե կիւրակէ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday after Nativity": {
   "approved_en": "Fifth Sunday after Nativity",
@@ -421,7 +473,8 @@
   "id": "fifth_sunday_after_nativity",
   "note": "",
   "source_hy": "Ե կիւրակէ զկնի Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday after Pentecost": {
   "approved_en": "Fifth Sunday after Pentecost",
@@ -429,7 +482,8 @@
   "id": "fifth_sunday_after_pentecost",
   "note": "",
   "source_hy": "Ե կիւրակէ զկնի Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday after Transfiguration": {
   "approved_en": "Fifth Sunday after Transfiguration",
@@ -437,7 +491,8 @@
   "id": "fifth_sunday_after_transfiguration",
   "note": "",
   "source_hy": "Ե կիւրակէ զկնի Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday after the Assumption": {
   "approved_en": "Fifth Sunday after the Assumption",
@@ -445,7 +500,8 @@
   "id": "fifth_sunday_after_the",
   "note": "",
   "source_hy": "Ե կիւրակէ զկնի Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday after the Holy Cross": {
   "approved_en": "Fifth Sunday after the Holy Cross",
@@ -453,7 +509,8 @@
   "id": "fifth_sunday_after_the_2",
   "note": "",
   "source_hy": "Ե կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday of Advent": {
   "approved_en": "Fifth Sunday of Advent",
@@ -461,7 +518,8 @@
   "id": "fifth_sunday_of_advent",
   "note": "",
   "source_hy": "Ե կիւրակէ Յիսնակի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth Sunday of Great Lent. Sunday of the Judge": {
   "approved_en": "Fifth Sunday of Great Lent. Sunday of the Judge",
@@ -469,7 +527,8 @@
   "id": "fifth_sunday_of_great",
   "note": "",
   "source_hy": "Ե կիւրակէ Քառասնորդական պահոց (Դատաւորին)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of Advent": {
   "approved_en": "Fifth day of Advent",
@@ -477,7 +536,8 @@
   "id": "fifth_day_of_advent",
   "note": "",
   "source_hy": "Ե օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of Easter": {
   "approved_en": "Fifth day of Easter",
@@ -485,7 +545,8 @@
   "id": "fifth_day_of_easter",
   "note": "",
   "source_hy": "Ե օր Զատկի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of Great Lent": {
   "approved_en": "Fifth day of Great Lent",
@@ -493,7 +554,8 @@
   "id": "fifth_day_of_great",
   "note": "",
   "source_hy": "Ե օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of Nativity": {
   "approved_en": "Fifth day of Nativity",
@@ -501,7 +563,8 @@
   "id": "fifth_day_of_nativity",
   "note": "",
   "source_hy": "Ե օր Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of Pentecost": {
   "approved_en": "Fifth day of Pentecost",
@@ -509,7 +572,8 @@
   "id": "fifth_day_of_pentecost",
   "note": "",
   "source_hy": "Ե օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of the Assumption": {
   "approved_en": "Fifth day of the Assumption",
@@ -517,7 +581,8 @@
   "id": "fifth_day_of_the",
   "note": "",
   "source_hy": "Ե օր Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of the Fast of Advent": {
   "approved_en": "Fifth day of the Fast of Advent",
@@ -525,7 +590,8 @@
   "id": "fifth_day_of_the_2",
   "note": "",
   "source_hy": "Ե օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of the Fast of Assumption": {
   "approved_en": "Fifth day of the Fast of Assumption",
@@ -533,7 +599,8 @@
   "id": "fifth_day_of_the_3",
   "note": "",
   "source_hy": "Ե օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of the Fast of Nativity": {
   "approved_en": "Fifth day of the Fast of Nativity",
@@ -541,7 +608,8 @@
   "id": "fifth_day_of_the_4",
   "note": "",
   "source_hy": "Ե օր Ս. Ծննդեան պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Fifth day of the Fast of St. Gregory the Illuminator",
@@ -549,7 +617,8 @@
   "id": "illuminator_fast_day_5",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Ե օր Լուսաւորչի պահոց",
-  "status": "generated"
+  "status": "generated",
+  "variant_of": ""
  },
  "Fifth day of the Fast of the Catechumens": {
   "approved_en": "Fifth day of the Fast of the Catechumens",
@@ -557,7 +626,8 @@
   "id": "fifth_day_of_the_5",
   "note": "",
   "source_hy": "Ե օր Առաջաւորաց պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of the Fast of the Holy Cross": {
   "approved_en": "Fifth day of the Fast of the Holy Cross",
@@ -565,7 +635,8 @@
   "id": "fifth_day_of_the_6",
   "note": "",
   "source_hy": "Ե օր Ս. Խաչի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fifth day of the Fast of the Transifiguration": {
   "approved_en": "Fifth day of the Fast of the Transfiguration",
@@ -573,7 +644,8 @@
   "id": "fifth_day_of_the_7",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ե օր Վարդավառի պահոց",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "First Sunday after Nativity": {
   "approved_en": "First Sunday after Nativity",
@@ -581,7 +653,8 @@
   "id": "first_sunday_after_nativity",
   "note": "",
   "source_hy": "Ա կիւրակէ զկնի Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First Sunday of Advent": {
   "approved_en": "First Sunday of Advent",
@@ -589,7 +662,8 @@
   "id": "first_sunday_of_advent",
   "note": "",
   "source_hy": "Ա կիւրակէ Յիսնակի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of Advent": {
   "approved_en": "First day of Advent",
@@ -597,7 +671,8 @@
   "id": "first_day_of_advent",
   "note": "",
   "source_hy": "Ա օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of Great Lent": {
   "approved_en": "First day of Great Lent",
@@ -605,7 +680,8 @@
   "id": "first_day_of_great",
   "note": "",
   "source_hy": "Ա օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of the Fast of Advent": {
   "approved_en": "First day of the Fast of Advent",
@@ -613,7 +689,8 @@
   "id": "first_day_of_the",
   "note": "",
   "source_hy": "Ա օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of the Fast of Assumption": {
   "approved_en": "First day of the Fast of Assumption",
@@ -621,7 +698,8 @@
   "id": "first_day_of_the_2",
   "note": "",
   "source_hy": "Ա օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of the Fast of Nativity": {
   "approved_en": "First day of the Fast of Nativity",
@@ -629,7 +707,8 @@
   "id": "first_day_of_the_3",
   "note": "",
   "source_hy": "Ա օր Ս. Ծննդեան պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "First day of the Fast of St. Gregory the Illuminator",
@@ -637,7 +716,8 @@
   "id": "illuminator_fast_day_1",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Ա օր Լուսաւորչի պահոց",
-  "status": "generated"
+  "status": "generated",
+  "variant_of": ""
  },
  "First day of the Fast of the Catechumens": {
   "approved_en": "First day of the Fast of the Catechumens",
@@ -645,7 +725,8 @@
   "id": "first_day_of_the_4",
   "note": "",
   "source_hy": "Ա օր Առաջաւորաց պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of the Fast of the Holy Cross": {
   "approved_en": "First day of the Fast of the Holy Cross",
@@ -653,7 +734,8 @@
   "id": "first_day_of_the_5",
   "note": "",
   "source_hy": "Ա օր Ս. Խաչի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "First day of the Fast of the Transfiguration": {
   "approved_en": "First day of the Fast of the Transfiguration",
@@ -661,7 +743,8 @@
   "id": "first_day_of_the_6",
   "note": "",
   "source_hy": "Ա օր Վարդավառի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fortieth day of Eastertide": {
   "approved_en": "Fortieth day of Eastertide",
@@ -669,7 +752,8 @@
   "id": "fortieth_day_of_eastertide",
   "note": "",
   "source_hy": "Խ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fortieth day of Great Lent": {
   "approved_en": "Fortieth day of Great Lent",
@@ -677,7 +761,8 @@
   "id": "fortieth_day_of_great",
   "note": "",
   "source_hy": "Խ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty Eighth day of Eastertide": {
   "approved_en": "Forty Eighth day of Eastertide",
@@ -685,7 +770,8 @@
   "id": "forty_eighth_day_of",
   "note": "",
   "source_hy": "ԽԸ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty Fifth day of Eastertide": {
   "approved_en": "Forty Fifth day of Eastertide",
@@ -693,7 +779,8 @@
   "id": "forty_fifth_day_of",
   "note": "",
   "source_hy": "ԽԵ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty First day of Eastertide": {
   "approved_en": "Forty First day of Eastertide",
@@ -701,7 +788,8 @@
   "id": "forty_first_day_of",
   "note": "",
   "source_hy": "ԽԱ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty First day of Great Lent": {
   "approved_en": "Forty First day of Great Lent",
@@ -709,7 +797,8 @@
   "id": "forty_first_day_of_2",
   "note": "",
   "source_hy": "ԽԱ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty Fourth day of Eastertide": {
   "approved_en": "Forty Fourth day of Eastertide",
@@ -717,7 +806,8 @@
   "id": "forty_fourth_day_of",
   "note": "",
   "source_hy": "ԽԴ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty Ninth day of Eastertide": {
   "approved_en": "Forty Ninth day of Eastertide",
@@ -725,7 +815,8 @@
   "id": "forty_ninth_day_of",
   "note": "",
   "source_hy": "ԽԹ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty Second day of Eastertide": {
   "approved_en": "Forty Second day of Eastertide",
@@ -733,7 +824,8 @@
   "id": "forty_second_day_of",
   "note": "",
   "source_hy": "ԽԲ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty Seventh day of Eastertide": {
   "approved_en": "Forty Seventh day of Eastertide",
@@ -741,7 +833,8 @@
   "id": "forty_seventh_day_of",
   "note": "",
   "source_hy": "ԽԷ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Forty Sixth day of Eastertide": {
   "approved_en": "Forty Sixth day of Eastertide",
@@ -749,7 +842,8 @@
   "id": "forty_sixth_day_of",
   "note": "",
   "source_hy": "ԽԶ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourteenth day of Eastertide": {
   "approved_en": "Fourteenth day of Eastertide",
@@ -757,7 +851,8 @@
   "id": "fourteenth_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԴ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday (Red Sunday)": {
   "approved_en": "Fourth Sunday (Red Sunday)",
@@ -765,7 +860,8 @@
   "id": "fourth_sunday_red_sunday",
   "note": "",
   "source_hy": "Դ կիւրակէ (Կարմիր կիւրակէ)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday after Assumption": {
   "approved_en": "Fourth Sunday after Assumption",
@@ -773,7 +869,8 @@
   "id": "fourth_sunday_after_assumption",
   "note": "",
   "source_hy": "Դ կիւրակէ զկնի Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday after Nativity": {
   "approved_en": "Fourth Sunday after Nativity",
@@ -781,7 +878,8 @@
   "id": "fourth_sunday_after_nativity",
   "note": "",
   "source_hy": "Դ կիւրակէ զկնի Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday after Pentecost": {
   "approved_en": "Fourth Sunday after Pentecost",
@@ -789,7 +887,8 @@
   "id": "fourth_sunday_after_pentecost",
   "note": "",
   "source_hy": "Դ կիւրակէ զկնի Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday after Transfiguration": {
   "approved_en": "Fourth Sunday after Transfiguration",
@@ -797,7 +896,8 @@
   "id": "fourth_sunday_after_transfiguration",
   "note": "",
   "source_hy": "Դ կիւրակէ զկնի Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday after the Holy Cross": {
   "approved_en": "Fourth Sunday after the Holy Cross",
@@ -805,7 +905,8 @@
   "id": "fourth_sunday_after_the",
   "note": "",
   "source_hy": "Դ կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday of Advent": {
   "approved_en": "Fourth Sunday of Advent",
@@ -813,7 +914,8 @@
   "id": "fourth_sunday_of_advent",
   "note": "",
   "source_hy": "Դ կիւրակէ Յիսնակի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth Sunday of Great Lent. Sunday of the Steward": {
   "approved_en": "Fourth Sunday of Great Lent. Sunday of the Steward",
@@ -821,7 +923,8 @@
   "id": "fourth_sunday_of_great",
   "note": "",
   "source_hy": "Դ կիւրակէ Քառասնորդական պահոց (Տնտեսին)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of Advent": {
   "approved_en": "Fourth day of Advent",
@@ -829,7 +932,8 @@
   "id": "fourth_day_of_advent",
   "note": "",
   "source_hy": "Դ օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of Easter": {
   "approved_en": "Fourth day of Easter",
@@ -837,7 +941,8 @@
   "id": "fourth_day_of_easter",
   "note": "",
   "source_hy": "Դ օր Զատկի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of Great Lent": {
   "approved_en": "Fourth day of Great Lent",
@@ -845,7 +950,8 @@
   "id": "fourth_day_of_great",
   "note": "",
   "source_hy": "Դ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of Nativity": {
   "approved_en": "Fourth day of Nativity",
@@ -853,7 +959,8 @@
   "id": "fourth_day_of_nativity",
   "note": "",
   "source_hy": "Դ օր Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of Pentecost": {
   "approved_en": "Fourth day of Pentecost",
@@ -861,7 +968,8 @@
   "id": "fourth_day_of_pentecost",
   "note": "",
   "source_hy": "Դ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of the Assumption": {
   "approved_en": "Fourth day of the Assumption",
@@ -869,7 +977,8 @@
   "id": "fourth_day_of_the",
   "note": "",
   "source_hy": "Դ օր Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of the Fast of Advent": {
   "approved_en": "Fourth day of the Fast of Advent",
@@ -877,7 +986,8 @@
   "id": "fourth_day_of_the_2",
   "note": "",
   "source_hy": "Դ օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of the Fast of Assumption": {
   "approved_en": "Fourth day of the Fast of Assumption",
@@ -885,7 +995,8 @@
   "id": "fourth_day_of_the_3",
   "note": "",
   "source_hy": "Դ օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of the Fast of Nativity": {
   "approved_en": "Fourth day of the Fast of Nativity",
@@ -893,7 +1004,8 @@
   "id": "fourth_day_of_the_4",
   "note": "",
   "source_hy": "Դ օր Ս. Ծննդեան պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Fourth day of the Fast of St. Gregory the Illuminator",
@@ -901,7 +1013,8 @@
   "id": "illuminator_fast_day_4",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Դ օր Լուսաւորչի պահոց",
-  "status": "generated"
+  "status": "generated",
+  "variant_of": ""
  },
  "Fourth day of the Fast of the Catechumens": {
   "approved_en": "Fourth day of the Fast of the Catechumens",
@@ -909,7 +1022,8 @@
   "id": "fourth_day_of_the_5",
   "note": "",
   "source_hy": "Դ օր Առաջաւորաց պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of the Fast of the Holy Cross": {
   "approved_en": "Fourth day of the Fast of the Holy Cross",
@@ -917,7 +1031,8 @@
   "id": "fourth_day_of_the_6",
   "note": "",
   "source_hy": "Դ օր Ս. Խաչի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Fourth day of the Fast of the Transfiguration": {
   "approved_en": "Fourth day of the Fast of the Transfiguration",
@@ -925,7 +1040,8 @@
   "id": "fourth_day_of_the_7",
   "note": "",
   "source_hy": "Դ օր Վարդավառի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Great Friday": {
   "approved_en": "Great Friday",
@@ -933,7 +1049,8 @@
   "id": "great_friday",
   "note": "",
   "source_hy": "Աւագ ուրբաթ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Great Monday": {
   "approved_en": "Great Monday",
@@ -941,7 +1058,8 @@
   "id": "great_monday",
   "note": "",
   "source_hy": "Աւագ երկուշաբթի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Great Saturday": {
   "approved_en": "Great Saturday",
@@ -949,7 +1067,8 @@
   "id": "great_saturday",
   "note": "",
   "source_hy": "",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Great Thursday": {
   "approved_en": "Great Thursday",
@@ -957,7 +1076,8 @@
   "id": "great_thursday",
   "note": "",
   "source_hy": "Աւագ հինգշաբթի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Great Tuesday": {
   "approved_en": "Great Tuesday",
@@ -965,7 +1085,8 @@
   "id": "great_tuesday",
   "note": "",
   "source_hy": "Աւագ երեքշաբթի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Great Wednesday": {
   "approved_en": "Great Wednesday",
@@ -973,7 +1094,8 @@
   "id": "great_wednesday",
   "note": "",
   "source_hy": "Աւագ չորեքշաբթի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Apostle Thomas": {
   "approved_en": "Holy Apostle Thomas",
@@ -981,7 +1103,8 @@
   "id": "apostle_thomas",
   "note": "",
   "source_hy": "Սրբոյն Թովմայի առաքելոյն",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Apostles James and Simon": {
   "approved_en": "Holy Apostles James and Simon",
@@ -989,7 +1112,8 @@
   "id": "apostles_james_and_simon",
   "note": "",
   "source_hy": "Սրբոց առաքելոցն Յակովբայ եւ Շմաւոնի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia": {
   "approved_en": "Holy Apostles Thaddeus and Bartholomew, First Illuminators of Armenia",
@@ -997,7 +1121,8 @@
   "id": "apostles_thaddeus_and_bartholomew",
   "note": "",
   "source_hy": "Սրբոց առաքելոցն եւ առաջին լուսաւորչացն մերոց Թադէոսի եւ Բարդուղիմէոսի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Apostles Thomas, James and Simon": {
   "approved_en": "Holy Apostles Thomas, James and Simon",
@@ -1005,7 +1130,8 @@
   "id": "apostles_thomas_james_and",
   "note": "",
   "source_hy": "Սրբոց առաքելոցն Թովմայի, Յակովբայ եւ Շմաւոնի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Archangels Gabriel and Michael and all the heavenly Angels": {
   "approved_en": "Holy Archangels Gabriel and Michael and all the heavenly Angels",
@@ -1013,7 +1139,8 @@
   "id": "archangels_gabriel_and_michael",
   "note": "",
   "source_hy": "Սրբոց հրեշտակապետացն Գաբրիելի եւ Միքայելի եւ ամենայն երկնային զօրացն",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Evangelists Matthew, Mark, Luke and John": {
   "approved_en": "Holy Evangelists Matthew, Mark, Luke and John",
@@ -1021,7 +1148,8 @@
   "id": "evangelists_matthew_mark_luke",
   "note": "",
   "source_hy": "Սրբոց աւետարանչացն Մատթէոսի, Մարկոսի, Ղուկասու եւ Յովհաննու",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Fathers Saints Athanasius and Cyril of Alexandria": {
   "approved_en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
@@ -1029,15 +1157,17 @@
   "id": "fathers_sts_athanasius_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory of Theologian": {
   "approved_en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
   "approved_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
-  "id": "fathers_sts_athanasius_and_2",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "id": "",
+  "note": "alternate name for fathers_sts_athanasius_and: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": "fathers_sts_athanasius_and"
  },
  "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist": {
   "approved_en": "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist",
@@ -1045,7 +1175,8 @@
   "id": "prophets_ezekiel_ezra_and",
   "note": "",
   "source_hy": "Սրբոց մարգարէիցն Եզեկիէլի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful": {
   "approved_en": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
@@ -1053,7 +1184,8 @@
   "id": "translators_mesrop_yeghishe_moses",
   "note": "",
   "source_hy": "Սրբոց Թարգմանչաց վարդապետացն մերոց Մեսրովբայ, Եղիշէի, Մովսիսի Քերթողին, Դաւթի Անյաղթ փիլիսոփային, Գրիգորի Նարեկացւոյն եւ Ներսիսի Կլայեցւոյն: Տօն ազգային եւ եկեղեցական` ի յիշատակ գիւտի նշանագրացն հայոց եւ թարգմանութեան Սուրբ Գրոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Holy Translators Saints Sahak and Mesrop": {
   "approved_en": "Holy Translators Sts. Sahak and Mesrop",
@@ -1061,7 +1193,8 @@
   "id": "translators_sts_sahak_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց թարգմանչացն մերոց Սահակայ եւ Մեսրովբայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST": {
   "approved_en": "NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST",
@@ -1069,7 +1202,8 @@
   "id": "nativity_and_theophany_of",
   "note": "",
   "source_hy": "ՏՕՆ ԾՆՆԴԵԱՆ ԵՒ ԱՍՏՈՒԱԾԱՅԱՅՏՆՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Nineteenth day of Eastertide": {
   "approved_en": "Nineteenth day of Eastertide",
@@ -1077,7 +1211,8 @@
   "id": "nineteenth_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԹ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Nineteenth day of Great Lent": {
   "approved_en": "Nineteenth day of Great Lent",
@@ -1085,7 +1220,8 @@
   "id": "nineteenth_day_of_great",
   "note": "",
   "source_hy": "ԺԹ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Ninth Sunday after the Holy Cross": {
   "approved_en": "Ninth Sunday after the Holy Cross",
@@ -1093,7 +1229,8 @@
   "id": "ninth_sunday_after_the",
   "note": "",
   "source_hy": "Թ կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Ninth day of Assumption": {
   "approved_en": "Ninth day of Assumption",
@@ -1101,7 +1238,8 @@
   "id": "ninth_day_of_assumption",
   "note": "",
   "source_hy": "Թ օր Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Ninth day of Eastertide": {
   "approved_en": "Ninth day of Eastertide",
@@ -1109,7 +1247,8 @@
   "id": "ninth_day_of_eastertide",
   "note": "",
   "source_hy": "Թ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Ninth day of Great Lent": {
   "approved_en": "Ninth day of Great Lent",
@@ -1117,7 +1256,8 @@
   "id": "ninth_day_of_great",
   "note": "",
   "source_hy": "Թ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Octave of Easter (New Sunday)": {
   "approved_en": "Octave of Easter (New Sunday)",
@@ -1125,7 +1265,8 @@
   "id": "octave_of_easter_new",
   "note": "",
   "source_hy": "Ը օր Զատկի. Կրկնազատիկ (Նոր կիւրակէ)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "PENTECOST (Fifteenth day of Eastertide)": {
   "approved_en": "PENTECOST (Fiftieth day of Eastertide)",
@@ -1133,7 +1274,8 @@
   "id": "pentecost_fiftieth_day_of",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "ՀՈԳԵԳԱԼՈՒՍՏ (Պենտեկոստէ` յիսներորդ օր ի Զատկէն)",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "PRESENTATION OF OUR LORD TO THE TEMPLE": {
   "approved_en": "PRESENTATION OF OUR LORD TO THE TEMPLE",
@@ -1141,7 +1283,8 @@
   "id": "presentation_of_our_lord",
   "note": "",
   "source_hy": "ՏԵԱՌՆԸՆԴԱՌԱՋ (տօն քառասնօրեայ գալստեանն Քրիստոսի ի Տաճարն)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "PRESENTATION of the Holy Mother of God to the Temple": {
   "approved_en": "Presentation of the Holy Mother of God to the Temple",
@@ -1149,7 +1292,8 @@
   "id": "presentation_of_the_holy",
   "note": "The source shouts this name in 19 years and title-cases it in the other 7; the engine already folds to title case (docs/feast-name-corrections.md section 5), so this row's approved text now says so instead of contradicting it. Recording it here also collapses the two catalog entries the split was minting into one -- and the surviving entry keeps THIS row's Armenian, which is the well-formed majority form. The title-cased row carried 'ս.Աստուածածնի' (lowercase, no space after the abbreviation dot), the 1-of-7 malformation that dev/fetch_translations.py happened to sample, and was serving it on every Nov 21.",
   "source_hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Palm Sunday": {
   "approved_en": "Palm Sunday",
@@ -1157,7 +1301,8 @@
   "id": "palm_sunday",
   "note": "",
   "source_hy": "ԾԱՂԿԱԶԱՐԴ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Presentation of the Holy Mother of God to the Temple": {
   "approved_en": "Presentation of the Holy Mother of God to the Temple",
@@ -1165,7 +1310,8 @@
   "id": "presentation_of_the_holy",
   "note": "",
   "source_hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)": {
   "approved_en": "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)",
@@ -1173,7 +1319,8 @@
   "id": "resurrection_of_our_lord",
   "note": "",
   "source_hy": "ՅԱՐՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Զատիկ)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of Prophet Elijah": {
   "approved_en": "Remembrance of Prophet Elijah",
@@ -1181,7 +1328,8 @@
   "id": "remembrance_of_prophet_elijah",
   "note": "",
   "source_hy": "Յիշատակ Եղիայի մարգարէին",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Armenian Genocide (1915)": {
   "approved_en": "Remembrance of the Armenian Genocide (1915)",
@@ -1189,7 +1337,8 @@
   "id": "remembrance_of_the_armenian",
   "note": "",
   "source_hy": "Յիշատակ Հայոց ցեղասպանութեան (1915) բիւրաւոր նահատակացն",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Dead": {
   "approved_en": "Remembrance of the Dead",
@@ -1197,7 +1346,8 @@
   "id": "remembrance_of_the_dead",
   "note": "",
   "source_hy": "Յիշատակ մեռելոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Last Supper": {
   "approved_en": "Remembrance of the Last Supper",
@@ -1205,7 +1355,8 @@
   "id": "remembrance_of_the_last",
   "note": "",
   "source_hy": "Յիշատակ վերջին ընթրեաց Տեառն մերոյ Յիսուսի Քրիստոսի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church": {
   "approved_en": "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church",
@@ -1213,7 +1364,8 @@
   "id": "remembrance_of_the_old",
   "note": "",
   "source_hy": "Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ — Նաւակատիք",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ": {
   "approved_en": "Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ",
@@ -1221,7 +1373,8 @@
   "id": "remembrance_of_the_passion",
   "note": "",
   "source_hy": "Յիշատակ չարչարանաց, խաչելութեան եւ թաղման Տեառն մերոյ Յիսուսի Քրիստոսի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Prophet Jonah": {
   "approved_en": "Remembrance of the Prophet Jonah",
@@ -1229,7 +1382,8 @@
   "id": "remembrance_of_the_prophet",
   "note": "",
   "source_hy": "Յիշատակ Յովնանու մարգարէին",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Raising of Lazarus": {
   "approved_en": "Remembrance of the Raising of Lazarus",
@@ -1237,7 +1391,8 @@
   "id": "remembrance_of_the_raising",
   "note": "",
   "source_hy": "Յիշատակ յարութեան Ղազարու",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Remembrance of the Ten Virgins": {
   "approved_en": "Remembrance of the Ten Virgins",
@@ -1245,7 +1400,8 @@
   "id": "remembrance_of_the_ten",
   "note": "",
   "source_hy": "Յիշատակ տասն կուսանացն",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Saint Abgar the Witness and the First Christian King": {
   "approved_en": "St. Abgar the Witness and the First Christian King",
@@ -1253,7 +1409,8 @@
   "id": "abgar_the_witness_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Աբգարու նախավկայ եւ ի Քրիստոս անդրանիկ հաւատացեալ թագաւորին մերոյ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Elisha the Prophet": {
   "approved_en": "St. Elisha the Prophet",
@@ -1261,7 +1418,8 @@
   "id": "elisha_the_prophet",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Եղիսէի մարգարէին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Gregory of Theologian": {
   "approved_en": "St. Gregory the Theologian",
@@ -1269,7 +1427,8 @@
   "id": "gregory_the_theologian",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Գրիգորի Աստուածաբանին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel": {
   "approved_en": "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel",
@@ -1277,7 +1436,8 @@
   "id": "gregory_the_illuminator_s_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', not 'Aristakes'/'Housik' -- but Armenian Church diocese sites are inconsistent between transliteration conventions (cf. Ghevond vs Ghevont). Worth a call: Wikipedia form or church-website form?",
   "source_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saint Gregory the Illuminator’s Commitment to the Pit": {
   "approved_en": "St. Gregory the Illuminator's Commitment to the Pit",
@@ -1285,7 +1445,8 @@
   "id": "gregory_the_illuminator_s",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Isaiah the Prophet": {
   "approved_en": "St. Isaiah the Prophet",
@@ -1293,7 +1454,8 @@
   "id": "isaiah_the_prophet",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Եսայեայ մարգարէին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint James the Apostle and His Brother John the Evangelist": {
   "approved_en": "St. James the Apostle and His Brother John the Evangelist",
@@ -1301,7 +1463,8 @@
   "id": "james_the_apostle_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Որդւոցն Որոտման Յակովբայ առաքելոյն եւ Յովհաննու աւետարանչին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Jeremiah the Prophet": {
   "approved_en": "St. Jeremiah the Prophet",
@@ -1309,7 +1472,8 @@
   "id": "jeremiah_the_prophet",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Երեմիայի մարգարէին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint John Chrysostom": {
   "approved_en": "St. John Chrysostom",
@@ -1317,7 +1481,8 @@
   "id": "john_chrysostom",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Յովհաննու Ոսկեբերան հայրապետին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Nicolas Wonderworker the Bishop of Myra": {
   "approved_en": "St. Nicholas Wonderworker the Bishop of Myra",
@@ -1325,7 +1490,8 @@
   "id": "nicholas_wonderworker_the_bishop",
   "note": "Reads 'Nicholas Wonderworker' after the spelling fold; the other two components naming him say 'the Wonderworker'. Add the article?",
   "source_hy": "Սրբոյն Նիկողայոսի Զմիւռնացւոյ սքանչելագործ հայրապետին",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saint Patriarchs Barlaam, Anthimus and Irenaeus": {
   "approved_en": "Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
@@ -1333,7 +1499,8 @@
   "id": "patriarchs_barlaam_anthimus_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Բարաղամու, Անթիմոսի եւ Երանոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv": {
   "approved_en": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
@@ -1341,7 +1508,8 @@
   "id": "patriarchs_ignatius_the_bishop",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides": {
   "approved_en": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
@@ -1349,7 +1517,8 @@
   "id": "patriarchs_ignatius_the_bishop_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Sahak I the Parthian, Patriarch of Armenia": {
   "approved_en": "St. Sahak I the Parthian, Patriarch of Armenia",
@@ -1357,7 +1526,8 @@
   "id": "sahak_i_the_parthian",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Իսահակայ Պարթեւի հայրապետին մերոյ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers": {
   "approved_en": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
@@ -1365,7 +1535,8 @@
   "id": "sargis",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints Atom and his soldiers": {
   "approved_en": "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Sts. Atom and his soldiers",
@@ -1373,7 +1544,8 @@
   "id": "",
   "note": "no id (retired sargis_the_warrior_and): the source glued two commemorations into one string on 2008-01-21 alone. The engine serves only the first half there, and both halves already have ids of their own (sargis, atom), so nothing emits or stores this text -- an id on it could never be matched.",
   "source_hy": "Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն եւ սրբոց Ատովմեանց զօրավարացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Stephen the Proto-Deacon and the First Martyr": {
   "approved_en": "St. Stephen the Proto-Deacon and the First Martyr",
@@ -1381,7 +1553,8 @@
   "id": "stephen_the_proto_deacon",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ստեփաննոսի Նախավկային եւ առաջին մարտիրոսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Theodore the General": {
   "approved_en": "St. Theodore the General",
@@ -1389,7 +1562,8 @@
   "id": "",
   "note": "no id (retired theodore_the_general): published on exactly one day out of 9,861 (2016-02-13), where every other year at that coordinate says Theodore the TYRON -- which is what the table serves (id theodore_the_tyron). A source one-off, not a second observance.",
   "source_hy": "Սրբոյն Թէոդորոսի զօրավարին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Theodore the Tyron": {
   "approved_en": "St. Theodore the Tyron",
@@ -1397,7 +1571,8 @@
   "id": "theodore_the_tyron",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Թէոդորոսի զօրավարին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Theodoron the Martyr": {
   "approved_en": "St. Theodoron the Martyr",
@@ -1405,7 +1580,8 @@
   "id": "theodoron_the_martyr",
   "note": "hy 'Աստուածատրոյ' is Astvatsatur, 'God-given' -- the Armenian name usually rendered Theodore. 'Theodoron' looks like a half-declined Greek form. Should this be 'Theodore the Martyr', or is Theodoron the intended distinct form?",
   "source_hy": "Սրբոյն Աստուածատրոյ վկային",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saint Vahan of Goghtn": {
   "approved_en": "St. Vahan of Goghtn",
@@ -1413,7 +1589,8 @@
   "id": "vahan_of_goghtn",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Վահանայ Գողթնացւոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saint Virgins Juliana and Basilla": {
   "approved_en": "Sts. Virgins Juliana and Basilla",
@@ -1421,7 +1598,8 @@
   "id": "virgins_juliana_and_basilla",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saint Zechariah the Prophet": {
   "approved_en": "St. Zechariah the Prophet",
@@ -1429,7 +1607,8 @@
   "id": "zechariah_the_prophet",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Զաքարիայի մարգարէին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian": {
   "approved_en": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian",
@@ -1437,7 +1616,8 @@
   "id": "abraham_and_khoren_moneyless",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": {
   "approved_en": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
@@ -1445,7 +1625,8 @@
   "id": "abraham_and_khoren_moneyless_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs": {
   "approved_en": "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
@@ -1453,7 +1634,8 @@
   "id": "adrian_and_his_wife",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Անդրիանոսի եւ կնոջ նորա Անատոլայ եւ Թէոդորոսի եւ Ելեւթիւրոսի վկայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr": {
   "approved_en": "Sts. Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
@@ -1461,7 +1643,8 @@
   "id": "akepsimas_the_bishop_joseph",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Ակիփսիմեայ եպիսկոպոսին եւ Յովսեփայ քահանային, Այիթալայ սարկաւագին եւ Պղատոնի վկային",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her": {
   "approved_en": "Sts. Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
@@ -1469,7 +1652,8 @@
   "id": "anastasius_the_priest_varus",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Անաստասայ քահանային, Վարոսի, Թէոդորիտեայ եւ որդւոց նորա եւ որք ընդ նմա կատարեցան",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": {
   "approved_en": "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
@@ -1477,7 +1661,8 @@
   "id": "andrew_the_general_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs": {
   "approved_en": "Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
@@ -1485,7 +1670,8 @@
   "id": "athenogenes_the_bishop_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Աթանագինեայ եպիսկոպոսին եւ տասն աշակերտացն եւ հինգ վկայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Atom and his soldiers": {
   "approved_en": "Sts. Atom and his soldiers",
@@ -1493,15 +1679,17 @@
   "id": "atom",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Atom and his soldiers, and Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen": {
   "approved_en": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
   "approved_hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
-  "id": "atom_and_his_soldiers",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "id": "",
+  "note": "alternate name for atom: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": "atom"
  },
  "Saints Atom and his soldiers, and Saints Sukiasians the Martyrs": {
   "approved_en": "Sts. Atom and his soldiers, and Sts. Sukiasians the Martyrs",
@@ -1509,7 +1697,8 @@
   "id": "atom_and_his_soldiers_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ատովմեանց զօրավարացն եւ Սուքիասեանց վկայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian": {
   "approved_en": "Sts. Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
@@ -1517,7 +1706,8 @@
   "id": "basil_the_great_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Callistratus and his companions, and Lukianos the Priest": {
   "approved_en": "Sts. Callistratus and his companions, and Lukianos the Priest",
@@ -1525,7 +1715,8 @@
   "id": "callistratus_and_his_companions",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կալիստրատոսի եւ քառասուն եւ ինն վկայիցն եւ Ղունկիանոսի քահանային",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina": {
   "approved_en": "Sts. Clement the Bishop of Rome and Pancratius the Bishop of Taormina",
@@ -1533,7 +1724,8 @@
   "id": "clement_the_bishop_of",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կղեմայ հայրապետին եւ Բագարատայ Տոռոմենոյ եպիսկոպոսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Constantine the Emperor and his mother Helen": {
   "approved_en": "Sts. Constantine the Emperor and his mother Helen",
@@ -1541,7 +1733,8 @@
   "id": "constantine_the_emperor_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կոստանդիանոսի թագաւորին եւ մօրն նորա Հեղինեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East": {
   "approved_en": "Sts. Cornelius the Centurion, Simeon the Relative of Christ, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
@@ -1549,7 +1742,8 @@
   "id": "cornelius_the_centurion_simeon",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East": {
   "approved_en": "Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
@@ -1557,7 +1751,8 @@
   "id": "cornelius_the_centurion_simeon_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina": {
   "approved_en": "Sts. Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
@@ -1565,7 +1760,8 @@
   "id": "cyprian_the_bishop_the",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիպրիանոսի եպիսկոպոսին եւ քառասուն եւ հինգ վկայիցն եւ սրբոց կուսանացն Յուստիանեայ, Եւփիմեայ եւ Քրիստինեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Cyricus and His Mother Julitta": {
   "approved_en": "Sts. Cyricus and His Mother Julitta",
@@ -1573,23 +1769,26 @@
   "id": "cyricus_and_his_mother",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris": {
   "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Gordius, Polyeuctus and Grigoris",
   "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
-  "id": "cyricus_and_his_mother_2",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "id": "",
+  "note": "alternate name for cyricus_and_his_mother: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": "cyricus_and_his_mother"
  },
  "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": {
   "approved_en": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
   "approved_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
-  "id": "cyricus_and_his_mother_3",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "id": "",
+  "note": "alternate name for cyricus_and_his_mother: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": "cyricus_and_his_mother"
  },
  "Saints Cyril of Jerusalem, Cyril the Bishop and Anna": {
   "approved_en": "Sts. Cyril of Jerusalem, Cyril the Bishop and Anna",
@@ -1597,7 +1796,8 @@
   "id": "cyril_of_jerusalem_cyril",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints David of Dvin and the Martyrs Eulampius and Eulampia": {
   "approved_en": "Sts. David of Dvin and the Martyrs Eulampius and Eulampia",
@@ -1605,7 +1805,8 @@
   "id": "david_of_dvin_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Դաւթի Դւնեցւոյն եւ սրբոց վկայիցն Ղամբէոսի եւ Ղամբէուհւոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints David the Prophet-King and James the Apostle": {
   "approved_en": "Sts. David the Prophet-King and James the Apostle",
@@ -1613,7 +1814,8 @@
   "id": "david_the_prophet_king",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դաւթի մարգարէին եւ Յակովբայ Տեառնեղբայր առաքելոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Demetrios the Martyr and Basil the Priest": {
   "approved_en": "Sts. Demetrios the Martyr and Basil the Priest",
@@ -1621,7 +1823,8 @@
   "id": "demetrios_the_martyr_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դեմետրեայ վկային եւ Բասիլիսկոսի քահանային",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Dionysius the Areopagite and the Apostles Timothy and Titus": {
   "approved_en": "Sts. Dionysius the Areopagite and the Apostles Timothy and Titus",
@@ -1629,7 +1832,8 @@
   "id": "dionysius_the_areopagite_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դիոնիսիոսի Արիսպագացւոյն եւ առաքելոցն Տիմոթէոսի եւ Տիտոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples": {
   "approved_en": "Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
@@ -1637,7 +1841,8 @@
   "id": "epiphanius_bishop_of_cyprus",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եպիփանու Կիպրացւոյն, Բաբելայ հայրապետին եւ երից աշակերտաց նորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": {
   "approved_en": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
@@ -1645,7 +1850,8 @@
   "id": "eugenia_the_virgin_her",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila": {
   "approved_en": "Sts. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs, and Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
@@ -1653,7 +1859,8 @@
   "id": "eugenia_the_virgin_her_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն, նաեւ սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Eugenios, Makarios, Valerian, Candidus and Aquila": {
   "approved_en": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
@@ -1661,7 +1868,8 @@
   "id": "eugenius_macarius_valerius_candidus",
   "note": "same 5-martyr group as the row 'Saints Eugenia...and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila' (registered fix folds that one to Eugenius/Macarius/Valerius/Candidus/Aquila) -- folded to match for consistency, since this row's different raw spelling wasn't caught by that exact-text fold. Note: the standard Orthodox 'Eugene/Candidus/Valerian/Aquila of Trebizond' group is only 4 people, no Macarius -- Armenian tradition may add a 5th, or this may be a distinct pairing; worth a sanity check, not just a spelling question.",
   "source_hy": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Eugenius, Marcarius, Alerius, Canditus and Aquila, and Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs": {
   "approved_en": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila, and Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
@@ -1669,7 +1877,8 @@
   "id": "",
   "note": "no id (retired eugenius_macarius_valerius_candidus_2): the source glued two commemorations into one string on 2009-01-27 alone. The engine serves only the first half there, and both halves already have ids of their own (eugenius_macarius_valerius_candidus, andrew_the_general_and).",
   "source_hy": "Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ, նաեւ սրբոցն Անդրէի զօրավարին եւ բանակի նորին, Կալինիկոսի եւ Դոմետեայ վկայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine": {
   "approved_en": "Sts. Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
@@ -1677,7 +1886,8 @@
   "id": "eustachius_his_wife_theopista",
   "note": "'Catherine' is suspect: the Armenian is 'Նեքտարինեայ' (genitive), which starts with Ն (N), not Կ (K) as 'Catherine'/Կատարինէ would -- no web source found connecting a 'Catherine' to this pairing with Hermione (Eustace's own known family are his sons Agapius/Agapitus and Theopistus, no daughters named Hermione or Catherine, so this may be a second, independent commemoration glued onto his day). Could not determine the intended English name (maybe a Nectaria/Nectarina -- no such saint found either); flagging rather than guessing.",
   "source_hy": "Սրբոցն Եւստաթէոսի եւ կնոջ նորա Թէոփիստեայ եւ երկուց որդւոցն եւ սրբոց կուսանացն Երմոնեայ եւ Նեքտարինեայ",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia": {
   "approved_en": "Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
@@ -1685,7 +1895,8 @@
   "id": "eustratius_auxentius_eugenius_orestes",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": {
   "approved_en": "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
@@ -1693,7 +1904,8 @@
   "id": "forefathers_adam_abel_seth",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց նախահարցն Ադամայ, Աբելի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակովբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուելի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գեդէոնի եւ այլոց սրբոց նախահարցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Forty Martyrs of Sebastia": {
   "approved_en": "Sts. Forty Martyrs of Sebastia",
@@ -1701,7 +1913,8 @@
   "id": "forty_martyrs_of_sebastia",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Gayiane and her companions": {
   "approved_en": "Sts. Gayane and her companions",
@@ -1709,7 +1922,8 @@
   "id": "gayane_and_her_companions",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Գայիանեանց",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Gennaro the Bishop and Mercurius the Warrior": {
   "approved_en": "Sts. Gennaro the Bishop and Mercurius the Warrior",
@@ -1717,7 +1931,8 @@
   "id": "gennaro_the_bishop_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles": {
   "approved_en": "Sts. Gennaro the Bishop and Mercurius the Warrior, and Sts. Jacoc and Themistocles",
@@ -1725,7 +1940,8 @@
   "id": "gennaro_the_bishop_and_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints George the Warrior, Adauctus and Romanus the Melodist": {
   "approved_en": "Sts. George the Warrior, Adauctus and Romanus the Melodist",
@@ -1733,7 +1949,8 @@
   "id": "george_the_warrior_adauctus",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գէորգայ քաջամարտիկ զօրավարին, Ադոկտոսի եւ Ռոմանոսի երգեցողին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Ghevond the Priest and His Companions": {
   "approved_en": "Sts. Ghevond the Priest and His Companions",
@@ -1741,7 +1958,8 @@
   "id": "ghevond",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ղեւոնդեանց քահանայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop": {
   "approved_en": "Sts. Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop",
@@ -1749,7 +1967,8 @@
   "id": "gregory_and_nicholas_the",
   "note": "'and other Nicholas' -- hy 'միւս Նիկողայոսի' is 'the other Nicholas'. Add the article?",
   "source_hy": "Սրբոցն Նիկողայոսի եւ Գրիգորի սքանչելագործ հայրապետացն եւ միւս Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop": {
   "approved_en": "Sts. Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop",
@@ -1757,7 +1976,8 @@
   "id": "gregory_the_wonderworker_nicholas",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գրիգորի Սքանչելագործին, Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier": {
   "approved_en": "Sts. Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
@@ -1765,7 +1985,8 @@
   "id": "gurias_samonas_and_habibus",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գուրիասայ, Սամունասայ, Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին եւ Հիւսիքոսի զինաւորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Hipparchus and his Companions Who were Martyred in Samosata": {
   "approved_en": "St. Hipparchus and his companions who were martyred in Samosata",
@@ -1773,7 +1994,8 @@
   "id": "hipparchus_and_his_companions",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples": {
   "approved_en": "Sts. Hipparchus and his Companions Who were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
@@ -1781,7 +2003,8 @@
   "id": "hipparchus_and_his_companions_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Hripsime and her companions": {
   "approved_en": "Sts. Hripsime and her companions",
@@ -1789,7 +2012,8 @@
   "id": "hripsime_and_her_companions",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Հռիփսիմեանց",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Jacoc and Themistocles": {
   "approved_en": "Sts. Jacoc and Themistocles",
@@ -1797,7 +2021,8 @@
   "id": "jacoc_and_themistocles",
   "note": "'Jacoc' is not an English name. hy 'Յակովկայ' is the genitive of Յակովիկ (a diminutive of Jacob/James), so this is plausibly 'Jacob' -- but 'Jacovk' or 'Hakovik' would transliterate the Armenian more closely. Which?",
   "source_hy": "Սրբոցն Յակովկայ եւ Իրաւափառայ",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop": {
   "approved_en": "Sts. James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
@@ -1805,7 +2030,8 @@
   "id": "james_of_nisibis_marouke",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Յակովբայ Մծբնայ հայրապետին, Մարուգէի ճգնաւորին եւ Մելիտոսի եպիսկոպոսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores": {
   "approved_en": "Sts. Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
@@ -1813,7 +2039,8 @@
   "id": "joachim_and_anna_parents",
   "note": "'and of Myrophores' is hard to parse; the Myrophores are the myrrh-bearing women. 'and of the Myrophores'?",
   "source_hy": "Սրբոցն Յովակիմայ եւ Աննայի` ծնողաց սուրբ Աստուածածնի, եւ կանանցն իւղաբերից",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints John the Forerunner (Baptist) and Bishop Atanagine": {
   "approved_en": "Sts. John the Forerunner (Baptist) and Bishop Atanagine",
@@ -1821,7 +2048,8 @@
   "id": "john_the_forerunner_baptist",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints John the Forerunner (Baptist) and Job the Righteous": {
   "approved_en": "Sts. John the Forerunner (Baptist) and Job the Righteous",
@@ -1829,7 +2057,8 @@
   "id": "john_the_forerunner_baptist_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev": {
   "approved_en": "Sts. John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev",
@@ -1837,7 +2066,8 @@
   "id": "john_the_patriarch_of",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Յովհաննու Երուսաղեմայ հայրապետին եւ հայրապետին մերոյ Յովհաննու Օձնեցւոյն եւ վարդապետացն մերոց Յովհաննու Որոտնեցւոյն եւ Գրիգորի Տաթեւացւոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary": {
   "approved_en": "Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
@@ -1845,7 +2075,8 @@
   "id": "longinus_the_centurion_joseph",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Ղունկիանոսի հարիւրապետին, որ հաւատաց ի խաչելութիւնն Քրիստոսի, եւ Յովսեփայ աստուածահօրն, Յովսեփայ Արեմաթացւոյն եւ բարեկամին Քրիստոսի Ղազարու եւ քերցն նորա Մարթայի եւ Մարիամու",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul": {
   "approved_en": "Sts. Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
@@ -1853,7 +2084,8 @@
   "id": "lucian_the_priest_tarachus",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ղունկիանոսի քահանային եւ սրբոցն Տարագրոսի, Պրոպոսի, Անդրոնիկոսի, Ոնեսիմեայ եւ այլոց աշակերտացն սրբոյն Պօղոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": {
   "approved_en": "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
@@ -1861,7 +2093,8 @@
   "id": "maccabees_eleazar_the_priest",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Մակաբայեցւոցն` Եղիազարու քահանային եւ Շամունեայ եւ եօթն որդւոց նորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Mamas, Philomenos and Simeon the Stylite": {
   "approved_en": "Sts. Mamas, Philomenos and Simeon the Stylite",
@@ -1869,7 +2102,8 @@
   "id": "mamas_philomenos_and_simeon",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մամասայ, Փիլիկտիմոնի եւ Սիմէոնի Սիւնակեցոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen": {
   "approved_en": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
@@ -1877,7 +2111,8 @@
   "id": "mark_the_bishop_pionius",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon": {
   "approved_en": "Sts. Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
@@ -1885,7 +2120,8 @@
   "id": "meletius_bishop_of_antioch",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մելիտոսի Անտիոքայ հայրապետին եւ Մինասայ Եգիպտացւոյն եւ միւս Մելիտոսի եպիսկոպոսին, Բուրայ քահանային եւ Շինու սարկաւագին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis": {
   "approved_en": "Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
@@ -1893,7 +2129,8 @@
   "id": "menas_hermogenes_eugraphus_and",
   "note": "Corrected to 'the poor men'. But hy 'կամաւոր աղքատացն' is the VOLUNTARY poor -- 'the voluntary poor John and Alexis' may be the intended sense. Confirm.",
   "source_hy": "Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Menas, Hermongenes, Eugraphius and the poor mans John and Alexis": {
   "approved_en": "Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
@@ -1901,7 +2138,8 @@
   "id": "menas_hermogenes_eugraphus_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs": {
   "approved_en": "Sts. Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
@@ -1909,7 +2147,8 @@
   "id": "metrophanes_alexander_and_paul",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Մետրոփանոսի, Աղեքսանդրոսի եւ Պօղոսի խոստովանողին եւ սրբոց նօտարացն Մարկիանոսի եւ Մարտիրոնի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Nerses the Great Patriarch and Bishop Khad": {
   "approved_en": "Sts. Nerses the Great Patriarch and Bishop Khad",
@@ -1917,7 +2156,8 @@
   "id": "nerses_the_great_patriarch",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ներսիսի Մեծի հայրապետին մերոյ եւ Խադայ եպիսկոպոսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin": {
   "approved_en": "Sts. Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
@@ -1925,7 +2165,8 @@
   "id": "pantaleimon_the_physician_hermolaus",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Պանդալէոնի բժշկին, Երմողեայ քահանային եւ Եւպրակսեայ կուսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Peter and Paul the Apostles": {
   "approved_en": "Sts. Peter and Paul the Apostles",
@@ -1933,7 +2174,8 @@
   "id": "peter_and_paul_the",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց առաքելոցն Պետրոսի եւ Պօղոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon": {
   "approved_en": "Sts. Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
@@ -1941,7 +2183,8 @@
   "id": "peter_the_patriarch_blaise",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Պետրոսի հայրապետին, Վլասայ եպիսկոպոսին եւ Աբիսողոմայ սարկաւագին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles": {
   "approved_en": "Sts. Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
@@ -1949,7 +2192,8 @@
   "id": "phocas_the_patriarch_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Փոկասու հայրապետին եւ Երանոսի հետեւողին առաքելոցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Princes Sahak and Joseph and the Martyrs Sargius and Bacchus": {
   "approved_en": "Sts. Princes Sahak and Joseph and the Martyrs Sergius and Bacchus",
@@ -1957,7 +2201,8 @@
   "id": "princes_sahak_and_joseph",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց իշխանացն Սահակայ եւ Յովսեփայ եւ սրբոց վկայիցն Սարգսի եւ Բագոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Prophet Daniel and his Companions Shadrach, Meshach and Abednego": {
   "approved_en": "Sts. Prophet Daniel and his Companions Shadrach, Meshach and Abednego",
@@ -1965,7 +2210,8 @@
   "id": "prophet_daniel_and_his",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Severianus of Sebastia and Babylas and his 84 Disciples": {
   "approved_en": "Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
@@ -1973,7 +2219,8 @@
   "id": "severianus_of_sebastia_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape": {
   "approved_en": "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
@@ -1981,7 +2228,8 @@
   "id": "sophia_and_her_three",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Սոփիայ եւ երից դստերացն Պիստոսի, Էլպիսի եւ Ագապեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints St. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina": {
   "approved_en": "Sts. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
@@ -1989,7 +2237,8 @@
   "id": "aret_and_his_companions",
   "note": "The doubled title was dropped. 'Aret' renders hy 'Խարիթեանցն'; the saint is usually Arethas of Najran in English. 'Saints Arethas and His Companions'?",
   "source_hy": "Սրբոց Խարիթեանցն եւ սրբոց վկայիցն Արտեմեայ եւ Քրիստափորի եւ երկուց կանանցն Կալինիկեայ եւ Ակիւլինեայ",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus": {
   "approved_en": "Sts. Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
@@ -1997,7 +2246,8 @@
   "id": "stephen_of_oulnia_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Ստեփաննոսի Ուլնեցւոյն եւ սրբոց վկայիցն Գոհարինեայ, Ծամիդեսի, Տուքիկոսի եւ Ռատիկոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls": {
   "approved_en": "Sts. Stephen, Bishop of Rome and the priests, deacons and many faithful",
@@ -2005,7 +2255,8 @@
   "id": "stephen_bishop_of_rome",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Ստեփաննոսի Հռովմայ հայրապետին եւ քահանայիցն եւ սարկաւագացն եւ ժողովրդոցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Sukiasians the Martyrs": {
   "approved_en": "Sts. Sukiasians the Martyrs",
@@ -2013,7 +2264,8 @@
   "id": "sukias",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Սուքիասեանց վկայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin": {
   "approved_en": "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin",
@@ -2021,7 +2273,8 @@
   "id": "thaddeus_apostle_of_armenia",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus": {
   "approved_en": "Sts. Theodoret the Priest of Antioch, Zenon the soldier, Macarius, Eudoxius and Romulus",
@@ -2029,7 +2282,8 @@
   "id": "theodoret_the_priest_of",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոդիտոնի քահանային, Զենոնի զինաւորին, Մակարայ, Եւդոքսեայ եւ Ռամելայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Theodosius and the Children of Ephesus": {
   "approved_en": "Sts. Theodosius and the Children of Ephesus",
@@ -2037,7 +2291,8 @@
   "id": "theodosius_and_the_children",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոդոսի թագաւորին եւ մանկանցն Եփեսոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra": {
   "approved_en": "Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
@@ -2045,7 +2300,8 @@
   "id": "theodotus_of_galatia_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոդիտոնի Գաղատացւոյն եւ Թալիլեայ բժշկին եւ եօթն կուսանացն, որք յԱնկիւրիա կատարեցան",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides": {
   "approved_en": "Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
@@ -2053,7 +2309,8 @@
   "id": "theopemptus_the_bishop_of",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Թէոպոմպայ եպիսկոպոսին եւ Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht": {
   "approved_en": "Sts. Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht",
@@ -2061,7 +2318,8 @@
   "id": "tiridates_trdat_the_king",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Տրդատայ թագաւորին մերոյ եւ Աշխենի տիկնոջն եւ Խոսրովիդխտոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": {
   "approved_en": "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
@@ -2069,23 +2327,26 @@
   "id": "twelve_prophets_hosea_amos",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs": {
   "approved_en": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
   "approved_hy": "Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
-  "id": "vahan_of_goghtn_eugenia",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "id": "",
+  "note": "alternate name for vahan_of_goghtn: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": "vahan_of_goghtn"
  },
  "Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris": {
   "approved_en": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
   "approved_hy": "Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
-  "id": "vahan_of_goghtn_gordius",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "id": "",
+  "note": "alternate name for vahan_of_goghtn: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": "vahan_of_goghtn"
  },
  "Saints Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle": {
   "approved_en": "Sts. Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle",
@@ -2093,7 +2354,8 @@
   "id": "vardan_the_general_and",
   "note": "Uses a hyphen where the source's own component separator is an em-dash. Left as published because it sits INSIDE a component, but it may be meant as a break.",
   "source_hy": "Սրբոց Վարդանանց զօրավարացն մերոց` հազար երեսուն եւ վեց վկայիցն, որք կատարեցան ի մեծի պատերազմին",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan": {
   "approved_en": "Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
@@ -2101,7 +2363,8 @@
   "id": "virgins_febronia_mariana_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Փեբրոնեայ, Մարիանեայ եւ Շուշանայ` դստերն Մեծին Վարդանայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Virgins Nune and Mane": {
   "approved_en": "Sts. Virgins Nune and Mane",
@@ -2109,7 +2372,8 @@
   "id": "virgins_nune_and_mane",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Նունեայ եւ Մանեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Virgins Thecla, Barbara and Pelagia": {
   "approved_en": "Sts. Virgins Thecla, Barbara and Pelagia",
@@ -2117,7 +2381,8 @@
   "id": "virgins_thecla_barbara_and",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Թեկղի, Վառվառեայ եւ Պեղիգեայ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints Voskians the Priests": {
   "approved_en": "Sts. Voskians the Priests",
@@ -2125,7 +2390,8 @@
   "id": "voskian",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Ոսկեանց քահանայիցն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Saints martyrs Antoninus, Theophilus, Anicetus and Potinus": {
   "approved_en": "Sts. martyrs Antoninus, Theophilus, Anicetus and Potinus",
@@ -2133,7 +2399,8 @@
   "id": "martyrs_antoninus_theophilus_anicetus",
   "note": "Lowercase 'martyrs' where 'Saints Virgins' and 'Saints Princes' are capitalised. Capitalise for consistency, or leave as published?",
   "source_hy": "Սրբոց վկայիցն Անտոնինոսի, Թէոփիլոսի, Անիքտոսի եւ Փոտինոսի",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia": {
   "approved_en": "Sts. virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
@@ -2141,7 +2408,8 @@
   "id": "virgins_indes_and_domna",
   "note": "Lowercase 'virgins' -- same question as the row above.",
   "source_hy": "Սրբոց կուսանացն Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Second Sunday after Nativity": {
   "approved_en": "Second Sunday after Nativity",
@@ -2149,7 +2417,8 @@
   "id": "second_sunday_after_nativity",
   "note": "",
   "source_hy": "Բ կիւրակէ զկնի Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second Sunday after Pentecost": {
   "approved_en": "Second Sunday after Pentecost",
@@ -2157,7 +2426,8 @@
   "id": "second_sunday_after_pentecost",
   "note": "",
   "source_hy": "Ա կիւրակէ զկնի Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second Sunday after Transfiguration": {
   "approved_en": "Second Sunday after Transfiguration",
@@ -2165,7 +2435,8 @@
   "id": "second_sunday_after_transfiguration",
   "note": "",
   "source_hy": "Բ կիւրակէ զկնի Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second Sunday after the Assumption": {
   "approved_en": "Second Sunday after the Assumption",
@@ -2173,7 +2444,8 @@
   "id": "second_sunday_after_the",
   "note": "",
   "source_hy": "Բ կիւրակէ զկնի Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second Sunday after the Holy Cross": {
   "approved_en": "Second Sunday after the Holy Cross",
@@ -2181,7 +2453,8 @@
   "id": "second_sunday_after_the_2",
   "note": "",
   "source_hy": "Բ կիւրակէ զկնի Ս. Խաչին",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second Sunday of Advent": {
   "approved_en": "Second Sunday of Advent",
@@ -2189,7 +2462,8 @@
   "id": "second_sunday_of_advent",
   "note": "",
   "source_hy": "Բ կիւրակէ Յիսնակի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second Sunday of Great Lent, Sunday of the Expulsion": {
   "approved_en": "Second Sunday of Great Lent. Sunday of the Expulsion",
@@ -2197,7 +2471,8 @@
   "id": "second_sunday_of_great",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES (period, not colon) -- already a deliberate fix (comma->period, source's own 25 other occurrences use period). A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "source_hy": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Second Sunday of Great Lent. Sunday of the Expulsion": {
   "approved_en": "Second Sunday of Great Lent. Sunday of the Expulsion",
@@ -2205,7 +2480,8 @@
   "id": "second_sunday_of_great",
   "note": "",
   "source_hy": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of Advent": {
   "approved_en": "Second day of Advent",
@@ -2213,7 +2489,8 @@
   "id": "second_day_of_advent",
   "note": "",
   "source_hy": "Բ օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of Easter": {
   "approved_en": "Second day of Easter",
@@ -2221,7 +2498,8 @@
   "id": "second_day_of_easter",
   "note": "",
   "source_hy": "Բ օր Զատկի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of Great Lent": {
   "approved_en": "Second day of Great Lent",
@@ -2229,7 +2507,8 @@
   "id": "second_day_of_great",
   "note": "",
   "source_hy": "Բ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of Nativity": {
   "approved_en": "Second day of Nativity",
@@ -2237,7 +2516,8 @@
   "id": "second_day_of_nativity",
   "note": "",
   "source_hy": "Բ օր Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of Pentecost": {
   "approved_en": "Second day of Pentecost",
@@ -2245,7 +2525,8 @@
   "id": "second_day_of_pentecost",
   "note": "",
   "source_hy": "Բ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of Transfiguration": {
   "approved_en": "Second day of Transfiguration",
@@ -2253,7 +2534,8 @@
   "id": "second_day_of_transfiguration",
   "note": "",
   "source_hy": "Բ օր Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of the Assumption": {
   "approved_en": "Second day of the Assumption",
@@ -2261,7 +2543,8 @@
   "id": "second_day_of_the",
   "note": "",
   "source_hy": "Բ օր Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of the Fast of Advent": {
   "approved_en": "Second day of the Fast of Advent",
@@ -2269,7 +2552,8 @@
   "id": "second_day_of_the_2",
   "note": "",
   "source_hy": "Բ օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of the Fast of Assumption": {
   "approved_en": "Second day of the Fast of Assumption",
@@ -2277,7 +2561,8 @@
   "id": "second_day_of_the_3",
   "note": "",
   "source_hy": "Բ օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of the Fast of Nativity": {
   "approved_en": "Second day of the Fast of Nativity",
@@ -2285,7 +2570,8 @@
   "id": "second_day_of_the_4",
   "note": "",
   "source_hy": "Բ օր Ս. Ծննդեան պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Second day of the Fast of St. Gregory the Illuminator",
@@ -2293,7 +2579,8 @@
   "id": "illuminator_fast_day_2",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Բ օր Լուսաւորչի պահոց",
-  "status": "generated"
+  "status": "generated",
+  "variant_of": ""
  },
  "Second day of the Fast of the Catechumens": {
   "approved_en": "Second day of the Fast of the Catechumens",
@@ -2301,7 +2588,8 @@
   "id": "second_day_of_the_5",
   "note": "",
   "source_hy": "Բ օր Առաջաւորաց պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of the Fast of the Holy Cross": {
   "approved_en": "Second day of the Fast of the Holy Cross",
@@ -2309,7 +2597,8 @@
   "id": "second_day_of_the_6",
   "note": "",
   "source_hy": "Բ օր Ս. Խաչի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Second day of the Fast of the Transfiguration": {
   "approved_en": "Second day of the Fast of the Transfiguration",
@@ -2317,7 +2606,8 @@
   "id": "second_day_of_the_7",
   "note": "",
   "source_hy": "Բ օր Վարդավառի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventeenth day of Eastertide": {
   "approved_en": "Seventeenth day of Eastertide",
@@ -2325,7 +2615,8 @@
   "id": "seventeenth_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԷ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventeenth day of Great Lent": {
   "approved_en": "Seventeenth day of Great Lent",
@@ -2333,7 +2624,8 @@
   "id": "seventeenth_day_of_great",
   "note": "",
   "source_hy": "ԺԷ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh Sunday after Nativity": {
   "approved_en": "Seventh Sunday after Nativity",
@@ -2341,7 +2633,8 @@
   "id": "seventh_sunday_after_nativity",
   "note": "",
   "source_hy": "Է կիւրակէ զկնի Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh Sunday after Transfiguration": {
   "approved_en": "Seventh Sunday after Transfiguration",
@@ -2349,7 +2642,8 @@
   "id": "seventh_sunday_after_transfiguration",
   "note": "",
   "source_hy": "Է կիւրակէ զկնի Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh Sunday after the Holy Cross": {
   "approved_en": "Seventh Sunday after the Holy Cross",
@@ -2357,7 +2651,8 @@
   "id": "seventh_sunday_after_the",
   "note": "",
   "source_hy": "Է կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh Sunday of Advent": {
   "approved_en": "Seventh Sunday of Advent",
@@ -2365,7 +2660,8 @@
   "id": "seventh_sunday_of_advent",
   "note": "",
   "source_hy": "Է կիւրակէ Յիսնակի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh Sunday of Eastertide. Second Palm Sunday": {
   "approved_en": "Seventh Sunday of Eastertide. Second Palm Sunday",
@@ -2373,7 +2669,8 @@
   "id": "seventh_sunday_of_eastertide",
   "note": "",
   "source_hy": "Է կիւրակէ. Երկրորդ ծաղկազարդ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh day of Easter": {
   "approved_en": "Seventh day of Easter",
@@ -2381,7 +2678,8 @@
   "id": "seventh_day_of_easter",
   "note": "",
   "source_hy": "Է օր Զատկի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh day of Nativity": {
   "approved_en": "Seventh day of Nativity",
@@ -2389,7 +2687,8 @@
   "id": "seventh_day_of_nativity",
   "note": "",
   "source_hy": "Է օր Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh day of Pentecost": {
   "approved_en": "Seventh day of Pentecost",
@@ -2397,7 +2696,8 @@
   "id": "seventh_day_of_pentecost",
   "note": "",
   "source_hy": "Է օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventh day of the Assumption": {
   "approved_en": "Seventh day of the Assumption",
@@ -2405,7 +2705,8 @@
   "id": "seventh_day_of_the",
   "note": "",
   "source_hy": "Է օր Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Seventy Two Holy Disciples of Christ": {
   "approved_en": "Seventy Two Holy Disciples of Christ",
@@ -2413,7 +2714,8 @@
   "id": "seventy_two_holy_disciples",
   "note": "",
   "source_hy": "Սրբոց եօթանասնից եւ երկուց աշակերտացն Քրիստոսի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixteenth day of Eastertide": {
   "approved_en": "Sixteenth day of Eastertide",
@@ -2421,7 +2723,8 @@
   "id": "sixteenth_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԶ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixteenth day of Great Lent": {
   "approved_en": "Sixteenth day of Great Lent",
@@ -2429,7 +2732,8 @@
   "id": "sixteenth_day_of_great",
   "note": "",
   "source_hy": "ԺԶ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth Sunday after Nativity": {
   "approved_en": "Sixth Sunday after Nativity",
@@ -2437,7 +2741,8 @@
   "id": "sixth_sunday_after_nativity",
   "note": "",
   "source_hy": "Զ կիւրակէ զկնի Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth Sunday after Pentecost": {
   "approved_en": "Sixth Sunday after Pentecost",
@@ -2445,7 +2750,8 @@
   "id": "sixth_sunday_after_pentecost",
   "note": "",
   "source_hy": "Զ կիւրակէ զկնի Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth Sunday after Transfiguration": {
   "approved_en": "Sixth Sunday after Transfiguration",
@@ -2453,7 +2759,8 @@
   "id": "sixth_sunday_after_transfiguration",
   "note": "",
   "source_hy": "Զ կիւրակէ զկնի Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth Sunday after the Holy Cross": {
   "approved_en": "Sixth Sunday after the Holy Cross",
@@ -2461,7 +2768,8 @@
   "id": "sixth_sunday_after_the",
   "note": "",
   "source_hy": "Զ կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth Sunday of Advent": {
   "approved_en": "Sixth Sunday of Advent",
@@ -2469,7 +2777,8 @@
   "id": "sixth_sunday_of_advent",
   "note": "",
   "source_hy": "Զ կիւրակէ Յիսնակի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth Sunday of Eastertide": {
   "approved_en": "Sixth Sunday of Eastertide",
@@ -2477,7 +2786,8 @@
   "id": "sixth_sunday_of_eastertide",
   "note": "",
   "source_hy": "Զ կիւրակէ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth Sunday of Great Lent, Sunday of the Advent": {
   "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
@@ -2485,7 +2795,8 @@
   "id": "sixth_sunday_of_great",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES ('...Sunday of the Advent', period not colon). 'Sunday of the Second Coming' would be a real theological content change to an already-reviewed label, not a mechanical fix -- needs explicit sign-off, not a silent ground-truth edit. A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Sixth Sunday of Great Lent. Sunday of the Advent": {
   "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
@@ -2493,7 +2804,8 @@
   "id": "sixth_sunday_of_great",
   "note": "",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth day of Easter": {
   "approved_en": "Sixth day of Easter",
@@ -2501,7 +2813,8 @@
   "id": "sixth_day_of_easter",
   "note": "",
   "source_hy": "Զ օր Զատկի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth day of Great Lent": {
   "approved_en": "Sixth day of Great Lent",
@@ -2509,7 +2822,8 @@
   "id": "sixth_day_of_great",
   "note": "",
   "source_hy": "Զ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth day of Nativity": {
   "approved_en": "Sixth day of Nativity",
@@ -2517,7 +2831,8 @@
   "id": "sixth_day_of_nativity",
   "note": "",
   "source_hy": "Զ օր Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth day of Pentecost": {
   "approved_en": "Sixth day of Pentecost",
@@ -2525,7 +2840,8 @@
   "id": "sixth_day_of_pentecost",
   "note": "",
   "source_hy": "Զ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth day of the Assumption": {
   "approved_en": "Sixth day of the Assumption",
@@ -2533,7 +2849,8 @@
   "id": "sixth_day_of_the",
   "note": "",
   "source_hy": "Զ օր Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Sixth day of the Fast of Nativity": {
   "approved_en": "Sixth day of the Fast of Nativity",
@@ -2541,7 +2858,8 @@
   "id": "sixth_day_of_the_2",
   "note": "",
   "source_hy": "Զ օր Ս. Ծննդեան պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Staint Gregory the Illuminator's coming out of Pit": {
   "approved_en": "St. Gregory the Illuminator's coming out of Pit",
@@ -2549,7 +2867,8 @@
   "id": "gregory_the_illuminator_s_3",
   "note": "Missing article, and lowercase 'coming' where the companion feast reads 'Commitment to the Pit'. 'Coming out of the Pit'? Left alone as the source's own wording rather than silently rewritten.",
   "source_hy": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "TRANSFIGURATION OF OUR LORD (Vardavar)": {
   "approved_en": "TRANSFIGURATION OF OUR LORD (Vardavar)",
@@ -2557,7 +2876,8 @@
   "id": "transfiguration_of_our_lord",
   "note": "",
   "source_hy": "ՊԱՅԾԱՌԱԿԵՐՊՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Վարդավառ)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Tenth Sunday after the Holy Cross": {
   "approved_en": "Tenth Sunday after the Holy Cross",
@@ -2565,7 +2885,8 @@
   "id": "tenth_sunday_after_the",
   "note": "",
   "source_hy": "Ժ կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Tenth day of Eastertide": {
   "approved_en": "Tenth day of Eastertide",
@@ -2573,7 +2894,8 @@
   "id": "tenth_day_of_eastertide",
   "note": "",
   "source_hy": "Ժ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Tenth day of Great Lent": {
   "approved_en": "Tenth day of Great Lent",
@@ -2581,7 +2903,8 @@
   "id": "tenth_day_of_great",
   "note": "",
   "source_hy": "Ժ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "The Children of Bethlehem. Saints Acacius the Martyr, Mocius the Priest and Codratus the Soldier": {
   "approved_en": "The Children of Bethlehem. Sts. Acacius the Martyr, Mocius the Priest and Codratus the Soldier",
@@ -2589,7 +2912,8 @@
   "id": "children_of_bethlehem_sts",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "The Hermit Saints Anton": {
   "approved_en": "The Hermit St. Anton",
@@ -2597,15 +2921,17 @@
   "id": "hermit_st_anton",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոյն Անտոնի ճգնաւորին",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius": {
   "approved_en": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
   "approved_hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
-  "id": "hermits_sts_anton_tryphon",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | spelling ('Tryphon'/'Onuphrius') aligned with the sibling row 'The Hermits Saints Triphon, Barsauma and Onouphrius' for consistency (same two names).",
+  "id": "",
+  "note": "alternate name for hermit_st_anton: the same commemoration with a longer companion list. Identical propers -- see docs/feast-name-corrections.md section 7. | reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | spelling ('Tryphon'/'Onuphrius') aligned with the sibling row 'The Hermits Saints Triphon, Barsauma and Onouphrius' for consistency (same two names).",
   "source_hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": "hermit_st_anton"
  },
  "The Hermits Saints Triphon, Barsauma and Onouphrius": {
   "approved_en": "The Hermit Sts. Tryphon, Barsauma and Onuphrius",
@@ -2613,7 +2939,8 @@
   "id": "hermit_sts_tryphon_barsauma",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus": {
   "approved_en": "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus",
@@ -2621,7 +2948,8 @@
   "id": "apostles_ananias_matthias_barnabas",
   "note": "",
   "source_hy": "Սրբոց առաքելոցն Անանիայի, Մատթէի, Բառնաբայ, Փիլիպպոսի, Յովհաննու, Շիղայի եւ Սիւղիանոսի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "The Holy Apostles Andrew and Phillip": {
   "approved_en": "The Holy Apostles Andrew and Philip",
@@ -2629,7 +2957,8 @@
   "id": "apostles_andrew_and_philip",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց առաքելոցն Անդրէի եւ Փիլիպպոսի",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others": {
   "approved_en": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
@@ -2637,7 +2966,8 @@
   "id": "fathers_of_egypt_paul",
   "note": "",
   "source_hy": "Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "The Holy Virgins Juliana and Basilla, and Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": {
   "approved_en": "The Holy Virgins Juliana and Basilla, and Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
@@ -2645,7 +2975,8 @@
   "id": "virgins_juliana_and_basilla_2",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "The Holy Virgins Juliana and Basilla, and Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia": {
   "approved_en": "The Holy Virgins Juliana and Basilla, and Sts. virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
@@ -2653,7 +2984,8 @@
   "id": "virgins_juliana_and_basilla_3",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "The Saintly Princes Sahak and Hamazasp": {
   "approved_en": "The Saintly Princes Sahak and Hamazasp",
@@ -2661,7 +2993,8 @@
   "id": "saintly_princes_sahak_and",
   "note": "",
   "source_hy": "Սրբոց իշխանացն Սահակայ եւ Համազասպայ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria": {
   "approved_en": "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria",
@@ -2669,7 +3002,8 @@
   "id": "twelve_holy_doctors_of",
   "note": "'of Church' is missing an article -- 'of the Church'. Also the longest name served, at 289 characters.",
   "source_hy": "Սրբոց երկոտասանից վարդապետացն Ռեթէոսի, Դիոնիսիոսի, Սեղբեստրոսի, Աթանասի, Կիւրղի Երուսաղեմացւոյն, Եփրեմի Խուրին Ասորւոյ, Բարսղի Կեսարացւոյն, Գրիգորի Նիւսացւոյն, Գրիգորի Աստուածաբանին, Եպիփանու Կիպրացւոյն, Յովհաննու Ոսկեբերանին եւ Կիւրղի Աղեքսանդրացւոյն",
-  "status": "review"
+  "status": "review",
+  "variant_of": ""
  },
  "Third Sunday after Assumption": {
   "approved_en": "Third Sunday after Assumption",
@@ -2677,7 +3011,8 @@
   "id": "third_sunday_after_assumption",
   "note": "",
   "source_hy": "Գ կիւրակէ զկնի Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third Sunday after Nativity": {
   "approved_en": "Third Sunday after Nativity",
@@ -2685,7 +3020,8 @@
   "id": "third_sunday_after_nativity",
   "note": "",
   "source_hy": "Գ կիւրակէ զկնի Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third Sunday after Pentecost": {
   "approved_en": "Third Sunday after Pentecost",
@@ -2693,7 +3029,8 @@
   "id": "third_sunday_after_pentecost",
   "note": "",
   "source_hy": "Գ կիւրակէ զկնի Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third Sunday after Transfiguration": {
   "approved_en": "Third Sunday after Transfiguration",
@@ -2701,7 +3038,8 @@
   "id": "third_sunday_after_transfiguration",
   "note": "",
   "source_hy": "Գ կիւրակէ զկնի Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third Sunday after the Holy Cross": {
   "approved_en": "Third Sunday after the Holy Cross",
@@ -2709,7 +3047,8 @@
   "id": "third_sunday_after_the",
   "note": "",
   "source_hy": "Գ կիւրակէ զկնի Ս. Խաչի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third Sunday of Advent": {
   "approved_en": "Third Sunday of Advent",
@@ -2717,7 +3056,8 @@
   "id": "third_sunday_of_advent",
   "note": "",
   "source_hy": "Գ կիւրակէ Յիսնակի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third Sunday of Great Lent. Sunday of the Prodigal Son": {
   "approved_en": "Third Sunday of Great Lent. Sunday of the Prodigal Son",
@@ -2725,7 +3065,8 @@
   "id": "third_sunday_of_great",
   "note": "",
   "source_hy": "Գ կիւրակէ Քառասնորդական պահոց (Անառակին)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third Sunday. Sunday of the World temple (Green Sunday)": {
   "approved_en": "Third Sunday. Sunday of the World temple (Green Sunday)",
@@ -2733,7 +3074,8 @@
   "id": "third_sunday_sunday_of",
   "note": "",
   "source_hy": "Գ կիւրակէ. Աշխարհամատրան (Կանաչ կիւրակէ)",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of Advent": {
   "approved_en": "Third day of Advent",
@@ -2741,7 +3083,8 @@
   "id": "third_day_of_advent",
   "note": "",
   "source_hy": "Գ օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of Easter": {
   "approved_en": "Third day of Easter",
@@ -2749,7 +3092,8 @@
   "id": "third_day_of_easter",
   "note": "",
   "source_hy": "Գ օր Զատկի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of Great Lent": {
   "approved_en": "Third day of Great Lent",
@@ -2757,7 +3101,8 @@
   "id": "third_day_of_great",
   "note": "",
   "source_hy": "Գ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of Nativity": {
   "approved_en": "Third day of Nativity",
@@ -2765,7 +3110,8 @@
   "id": "third_day_of_nativity",
   "note": "",
   "source_hy": "Գ օր Ս. Ծննդեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of Pentecost": {
   "approved_en": "Third day of Pentecost",
@@ -2773,7 +3119,8 @@
   "id": "third_day_of_pentecost",
   "note": "",
   "source_hy": "Գ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of Transfiguration": {
   "approved_en": "Third day of Transfiguration",
@@ -2781,7 +3128,8 @@
   "id": "third_day_of_transfiguration",
   "note": "",
   "source_hy": "Գ օր Վարդավառի",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of the Assumption": {
   "approved_en": "Third day of the Assumption",
@@ -2789,7 +3137,8 @@
   "id": "third_day_of_the",
   "note": "",
   "source_hy": "Գ օր Վերափոխման",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of the Fast of Advent": {
   "approved_en": "Third day of the Fast of Advent",
@@ -2797,7 +3146,8 @@
   "id": "third_day_of_the_2",
   "note": "",
   "source_hy": "Գ օր Յիսնակի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of the Fast of Assumption": {
   "approved_en": "Third day of the Fast of Assumption",
@@ -2805,7 +3155,8 @@
   "id": "third_day_of_the_3",
   "note": "",
   "source_hy": "Գ օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of the Fast of Nativity": {
   "approved_en": "Third day of the Fast of Nativity",
@@ -2813,7 +3164,8 @@
   "id": "third_day_of_the_4",
   "note": "",
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of the Fast of Nativity.": {
   "approved_en": "Third day of the Fast of Nativity",
@@ -2821,7 +3173,8 @@
   "id": "third_day_of_the_4",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Third day of the Fast of St. Gregory the Illuminator": {
   "approved_en": "Third day of the Fast of St. Gregory the Illuminator",
@@ -2829,7 +3182,8 @@
   "id": "illuminator_fast_day_3",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Գ օր Լուսաւորչի պահոց",
-  "status": "generated"
+  "status": "generated",
+  "variant_of": ""
  },
  "Third day of the Fast of the Catechumens": {
   "approved_en": "Third day of the Fast of the Catechumens",
@@ -2837,7 +3191,8 @@
   "id": "third_day_of_the_5",
   "note": "",
   "source_hy": "Գ օր Առաջաւորաց պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of the Fast of the Holy Cross": {
   "approved_en": "Third day of the Fast of the Holy Cross",
@@ -2845,7 +3200,8 @@
   "id": "third_day_of_the_6",
   "note": "",
   "source_hy": "Գ օր Ս. Խաչի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Third day of the Fast of the Transfiguration": {
   "approved_en": "Third day of the Fast of the Transfiguration",
@@ -2853,7 +3209,8 @@
   "id": "third_day_of_the_7",
   "note": "",
   "source_hy": "Գ օր Վարդավառի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirteenth day of Eastertide": {
   "approved_en": "Thirteenth day of Eastertide",
@@ -2861,7 +3218,8 @@
   "id": "thirteenth_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԳ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirteenth day of Great Lent": {
   "approved_en": "Thirteenth day of Great Lent",
@@ -2869,7 +3227,8 @@
   "id": "thirteenth_day_of_great",
   "note": "",
   "source_hy": "ԺԳ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirtieth day of Eastertide": {
   "approved_en": "Thirtieth day of Eastertide",
@@ -2877,7 +3236,8 @@
   "id": "thirtieth_day_of_eastertide",
   "note": "",
   "source_hy": "Լ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirtieth day of Great Lent": {
   "approved_en": "Thirtieth day of Great Lent",
@@ -2885,7 +3245,8 @@
   "id": "thirtieth_day_of_great",
   "note": "",
   "source_hy": "Լ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Eighth day of Eastertide": {
   "approved_en": "Thirty Eighth day of Eastertide",
@@ -2893,7 +3254,8 @@
   "id": "thirty_eighth_day_of",
   "note": "",
   "source_hy": "ԼԸ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Eighth day of Great Lent": {
   "approved_en": "Thirty Eighth day of Great Lent",
@@ -2901,7 +3263,8 @@
   "id": "thirty_eighth_day_of_2",
   "note": "",
   "source_hy": "ԼԸ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Fifth day of Eastertide": {
   "approved_en": "Thirty Fifth day of Eastertide",
@@ -2909,7 +3272,8 @@
   "id": "thirty_fifth_day_of",
   "note": "",
   "source_hy": "ԼԵ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty First day of Eastertide": {
   "approved_en": "Thirty First day of Eastertide",
@@ -2917,7 +3281,8 @@
   "id": "thirty_first_day_of",
   "note": "",
   "source_hy": "ԼԱ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty First day of Great Lent": {
   "approved_en": "Thirty First day of Great Lent",
@@ -2925,7 +3290,8 @@
   "id": "thirty_first_day_of_2",
   "note": "",
   "source_hy": "ԼԱ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Fourth day of Eastertide": {
   "approved_en": "Thirty Fourth day of Eastertide",
@@ -2933,7 +3299,8 @@
   "id": "thirty_fourth_day_of",
   "note": "",
   "source_hy": "ԼԴ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Fourth day of Great Lent": {
   "approved_en": "Thirty Fourth day of Great Lent",
@@ -2941,7 +3308,8 @@
   "id": "thirty_fourth_day_of_2",
   "note": "",
   "source_hy": "ԼԴ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Ninth day of Eastertide": {
   "approved_en": "Thirty Ninth day of Eastertide",
@@ -2949,7 +3317,8 @@
   "id": "thirty_ninth_day_of",
   "note": "",
   "source_hy": "ԼԹ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Ninth day of Great Lent": {
   "approved_en": "Thirty Ninth day of Great Lent",
@@ -2957,7 +3326,8 @@
   "id": "thirty_ninth_day_of_2",
   "note": "",
   "source_hy": "ԼԹ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Second day of Eastertide": {
   "approved_en": "Thirty Second day of Eastertide",
@@ -2965,7 +3335,8 @@
   "id": "thirty_second_day_of",
   "note": "",
   "source_hy": "ԼԲ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Second day of Great Lent": {
   "approved_en": "Thirty Second day of Great Lent",
@@ -2973,7 +3344,8 @@
   "id": "thirty_second_day_of_2",
   "note": "",
   "source_hy": "ԼԲ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Seventh day of Eastertide": {
   "approved_en": "Thirty Seventh day of Eastertide",
@@ -2981,7 +3353,8 @@
   "id": "thirty_seventh_day_of",
   "note": "",
   "source_hy": "ԼԷ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Seventh day of Great Lent": {
   "approved_en": "Thirty Seventh day of Great Lent",
@@ -2989,7 +3362,8 @@
   "id": "thirty_seventh_day_of_2",
   "note": "",
   "source_hy": "ԼԷ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Sixth day of Great Lent": {
   "approved_en": "Thirty Sixth day of Great Lent",
@@ -2997,7 +3371,8 @@
   "id": "thirty_sixth_day_of",
   "note": "",
   "source_hy": "ԼԶ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Third day of Eastertide": {
   "approved_en": "Thirty Third day of Eastertide",
@@ -3005,7 +3380,8 @@
   "id": "thirty_third_day_of",
   "note": "",
   "source_hy": "ԼԳ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Thirty Third day of Great Lent": {
   "approved_en": "Thirty Third day of Great Lent",
@@ -3013,7 +3389,8 @@
   "id": "thirty_third_day_of_2",
   "note": "",
   "source_hy": "ԼԳ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twelfth day of Eastertide": {
   "approved_en": "Twelfth day of Eastertide",
@@ -3021,7 +3398,8 @@
   "id": "twelfth_day_of_eastertide",
   "note": "",
   "source_hy": "ԺԲ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twelfth day of Great Lent": {
   "approved_en": "Twelfth day of Great Lent",
@@ -3029,7 +3407,8 @@
   "id": "twelfth_day_of_great",
   "note": "",
   "source_hy": "ԺԲ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twelve Holy Apostles of Christ and Saint Paul, the Thirteenth Apostle": {
   "approved_en": "Twelve Holy Apostles of Christ and St. Paul, the Thirteenth Apostle",
@@ -3037,7 +3416,8 @@
   "id": "twelve_holy_apostles_of",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց երկոտասան առաքելոցն Քրիստոսի եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  },
  "Twentieth day of Eastertide": {
   "approved_en": "Twentieth day of Eastertide",
@@ -3045,7 +3425,8 @@
   "id": "twentieth_day_of_eastertide",
   "note": "",
   "source_hy": "Ի օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twentieth day of Great Lent": {
   "approved_en": "Twentieth day of Great Lent",
@@ -3053,7 +3434,8 @@
   "id": "twentieth_day_of_great",
   "note": "",
   "source_hy": "Ի օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Eighth day of Eastertide": {
   "approved_en": "Twenty Eighth day of Eastertide",
@@ -3061,7 +3443,8 @@
   "id": "twenty_eighth_day_of",
   "note": "",
   "source_hy": "ԻԸ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Fifth day of Eastertide": {
   "approved_en": "Twenty Fifth day of Eastertide",
@@ -3069,7 +3452,8 @@
   "id": "twenty_fifth_day_of",
   "note": "",
   "source_hy": "ԻԵ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Fifth day of Great Lent": {
   "approved_en": "Twenty Fifth day of Great Lent",
@@ -3077,7 +3461,8 @@
   "id": "twenty_fifth_day_of_2",
   "note": "",
   "source_hy": "ԻԵ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty First day of Eastertide": {
   "approved_en": "Twenty First day of Eastertide",
@@ -3085,7 +3470,8 @@
   "id": "twenty_first_day_of",
   "note": "",
   "source_hy": "ԻԱ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Fourth day of Eastertide": {
   "approved_en": "Twenty Fourth day of Eastertide",
@@ -3093,7 +3479,8 @@
   "id": "twenty_fourth_day_of",
   "note": "",
   "source_hy": "ԻԴ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Fourth day of Great Lent. Median day of Lent": {
   "approved_en": "Twenty Fourth day of Great Lent. Median day of Lent",
@@ -3101,7 +3488,8 @@
   "id": "twenty_fourth_day_of_2",
   "note": "",
   "source_hy": "ԻԴ օր Մեծի պահոց: Միջինք",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Ninth day of Great Lent": {
   "approved_en": "Twenty Ninth day of Great Lent",
@@ -3109,7 +3497,8 @@
   "id": "twenty_ninth_day_of",
   "note": "",
   "source_hy": "ԻԹ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Second day of Great Lent": {
   "approved_en": "Twenty Second day of Great Lent",
@@ -3117,7 +3506,8 @@
   "id": "twenty_second_day_of",
   "note": "",
   "source_hy": "ԻԲ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Seventh day of Eastertide": {
   "approved_en": "Twenty Seventh day of Eastertide",
@@ -3125,7 +3515,8 @@
   "id": "twenty_seventh_day_of",
   "note": "",
   "source_hy": "ԻԷ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Seventh day of Great Lent": {
   "approved_en": "Twenty Seventh day of Great Lent",
@@ -3133,7 +3524,8 @@
   "id": "twenty_seventh_day_of_2",
   "note": "",
   "source_hy": "ԻԷ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Sixth day of Eastertide": {
   "approved_en": "Twenty Sixth day of Eastertide",
@@ -3141,7 +3533,8 @@
   "id": "twenty_sixth_day_of",
   "note": "",
   "source_hy": "ԻԶ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Sixth day of Great Lent": {
   "approved_en": "Twenty Sixth day of Great Lent",
@@ -3149,7 +3542,8 @@
   "id": "twenty_sixth_day_of_2",
   "note": "",
   "source_hy": "ԻԶ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Third day of Eastertide": {
   "approved_en": "Twenty Third day of Eastertide",
@@ -3157,7 +3551,8 @@
   "id": "twenty_third_day_of",
   "note": "",
   "source_hy": "ԻԳ օր Յինանց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Twenty Third day of Great Lent": {
   "approved_en": "Twenty Third day of Great Lent",
@@ -3165,7 +3560,8 @@
   "id": "twenty_third_day_of_2",
   "note": "",
   "source_hy": "ԻԳ օր Մեծի պահոց",
-  "status": "ok"
+  "status": "ok",
+  "variant_of": ""
  },
  "Еighth day of Nativity": {
   "approved_en": "Eighth day of Nativity",
@@ -3173,6 +3569,7 @@
   "id": "eighth_day_of_nativity",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ը օր Ս. Ծննդեան",
-  "status": "fixed"
+  "status": "fixed",
+  "variant_of": ""
  }
 }
