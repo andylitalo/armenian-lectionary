@@ -2018,12 +2018,12 @@ _OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 # bare "Fast day" in English, one string standing for six observances, and the id had to be
 # recovered from the DATE. That is registered as a repair now
 # (source_corrections.illuminator_fast_label), which is what lets this be a plain dict.
-# Display text -> its own {en, hy}, and display text -> the OBSERVANCE it names. They are
-# different maps because they answer different questions. A commemoration the source spells
-# several ways (the same liturgical day with a longer or shorter companion list) is ONE
-# observance with one id, and its alternate spellings ride along as ``variants`` -- so the
-# id is single, while each spelling still resolves to its own Armenian rather than being
-# flattened onto the primary's.
+# Display text -> its own {en, hy}, and display text -> the OBSERVANCE it names. One key
+# set, because one observance is one CANON: where the source prints a longer or shorter
+# companion list for the same liturgical day, that is the Tonats'oyts packing several First
+# Volume canons onto one line, not one observance under two names. The packed line is a
+# _FEAST_SEP join whose components each resolve here on their own
+# (docs/feast-name-corrections.md section 7).
 def _observance_indexes(catalog):
     """``(text -> that spelling's {en, hy}, text -> the observance's id)``."""
     names = {entry["en"]: entry for entry in catalog.values()}

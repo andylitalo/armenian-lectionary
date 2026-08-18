@@ -100,11 +100,6 @@ _RETIRED_IDS = {
     "theodore_the_general":
         "published once, on 2016-02-13; every other year at that coordinate says Theodore "
         "the TYRON, which is what the table serves -- a source one-off, not an observance",
-    # MERGED: an alternate name, not a second observance. The source spells these
-    # commemorations with a longer or shorter companion list and prints both across years
-    # for the same liturgical day; the propers settle it, being byte-identical within each
-    # group (docs/feast-name-corrections.md section 7). They now ship as ``variants`` of the
-    # id named here, so the display text is unchanged and only the identity is single.
     # Ids minted for a PACKED DAY, not an observance. The Tonats'oyts squeezes the
     # post-Theophany saint pool into a gap whose length varies with the taregir, so one
     # line can carry several First Volume canons; the old build minted an id per distinct
