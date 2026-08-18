@@ -2227,6 +2227,50 @@ def _apply_position_label(label: str, d: datetime.date) -> str:
     return _FEAST_SEP.join([position] + parts)
 
 
+# Observances fixed to a civil date that the source's ENGLISH never names, though its
+# Armenian does. Unlike a position or eve label these are not computed from the calendar
+# and not abbreviated from a longer printed form -- they are days the source's English
+# simply omits, so they are declared here, one entry per date, and counted by their own
+# ratchet (dev/observance_ids._ADDED_OBSERVANCES, FEAST_ADDITION_CEILING).
+#
+# Jan 1: the source's Armenian prints "Կաղանդ. տարեմուտ" (Kaghand, New Year) and its
+# English prints nothing at all, so the day reached callers as its position label alone.
+# The observance kept on it is the Prayer of Thanks and Pomegranate Blessing, instituted
+# by Karekin II in 2015 and now served in every Armenian church at the turn of the year.
+# See docs/feast-name-corrections.md section 9, including what that name asserts that the
+# source's own text does not.
+_FIXED_DATE_OBSERVANCES = {
+    (1, 1): "Blessing of the Pomegranates",
+}
+
+
+def fixed_date_label(d: datetime.date):
+    """``d``'s fixed civil-date observance, or ``None``.
+
+    Public because the review document, the catalog build and the verifiers all have to
+    enumerate exactly what the engine can emit, and a second copy of this mapping would
+    drift.
+    """
+    return _FIXED_DATE_OBSERVANCES.get((d.month, d.day))
+
+
+def _apply_fixed_date_label(label: str, d: datetime.date) -> str:
+    """Insert ``d``'s fixed civil-date observance ahead of the commemoration.
+
+    Position first, then this, then the commemoration -- the order the source's own
+    Armenian uses on Jan 1 ("Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ ..."). Runs after
+    :func:`_apply_position_label` so the position component is already at the head.
+    """
+    fixed = fixed_date_label(d)
+    if fixed is None:
+        return label
+    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    if fixed in parts:
+        return _FEAST_SEP.join(parts)
+    head = parts[:1] if parts and _is_position_component(parts[0]) else []
+    return _FEAST_SEP.join(head + [fixed] + parts[len(head):])
+
+
 def _is_position_component(component: str) -> bool:
     """True if a stored component is already a calendar-position label."""
     return bool(_POSITION_COMPONENT_RE.match(component))
@@ -2293,8 +2337,10 @@ def compute_armenian_lectionary(target_date: datetime.date,
             f"(override with LECTIONARY_MIN_YEAR / LECTIONARY_MAX_YEAR)")
     result = _compute_lectionary(target_date)
     result["Liturgical Day"] = _apply_eve_label(
-        _apply_position_label(
-            _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+        _apply_fixed_date_label(
+            _apply_position_label(
+                _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+                target_date),
             target_date),
         target_date)
     result["Mode"] = calculate_liturgical_mode(target_date)

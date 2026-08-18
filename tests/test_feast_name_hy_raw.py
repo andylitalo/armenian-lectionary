@@ -41,8 +41,10 @@ The 3 that remain are all source-side, and all accepted:
     disagreeing with itself, not a defect -- see docs/feast-name-corrections.md section 8;
   * 1 segmentation difference (2005-01-01), where the source's Armenian glues ``Կաղանդ.
     տարեմուտ`` (New Year's Day) onto the saints that follow while the English carries it
-    with the day count. A boundary disagreement, not a spelling: New Year's Day wants its
-    own observance, which is a separate change (docs section 8).
+    with the day count. Jan 1 now serves that as its own observance
+    (``blessing_of_the_pomegranates``, docs section 9), which fixed the other two Jan 1 days
+    outright; this one stays because the source glues the New Year to the SAINTS here rather
+    than printing it as its own component, and a row holds one source_hy, not two.
 
 (The deliberate ``Ա``-for-``Բ`` Sunday-after-Pentecost ordinal correction used to be a
 twelfth. It is now folded, along with ``Սկիզբն պահոց`` -> ``Սկիզբն շաբաթական պահոց``.)
@@ -93,13 +95,13 @@ HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "5"))
 # catalog's own delimiter rather than the component separator. Monotonic DOWN, but only
 # reachable by a source change: these are correct as served.
 #
-# This one went 6 -> 7, the single exception the "never raise a ceiling" rule allows,
-# because nothing got worse: 2002-04-07 MOVED here out of CONTRADICTION when
-# octave_of_easter_new's internal break was normalized to _INTERNAL_SEP (it had shipped the
-# period the sampled day happened to use, so the delimiter read-back could not fire). The
-# sum of the two counts is unchanged at 12, and the stronger of them went down.
+# It went 6 -> 7 once, the single exception the "never raise a ceiling" rule allows, because
+# nothing got worse: 2002-04-07 MOVED here out of CONTRADICTION when octave_of_easter_new's
+# internal break was normalized to _INTERNAL_SEP. It is back down to 5 now that Jan 1's
+# "Կաղանդ. տարեմուտ" is its own observance instead of a note glued inside the position
+# label's Armenian (docs section 9).
 HY_INTERNAL_DELIMITER_CEILING = int(
-    os.environ.get("HY_INTERNAL_DELIMITER_CEILING", "7"))
+    os.environ.get("HY_INTERNAL_DELIMITER_CEILING", "5"))
 
 # Days whose Armenian name matches the source byte for byte (under the registered
 # orthography reversal). Monotonic UP.
@@ -111,7 +113,7 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # The floor is 413 rather than the 414 a full cache now reports: the days gained since it
 # was set at 407 are reproducible anywhere except one, which came from the cache growing
 # 433 -> 435 days.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "410"))
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "412"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.

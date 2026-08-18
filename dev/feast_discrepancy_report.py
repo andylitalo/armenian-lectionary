@@ -40,10 +40,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                    # noqa: E402
 from dev.feast_names import ORD                                     # noqa: E402
-from dev.observance_ids import pool_of_text                         # noqa: E402
+from dev.observance_ids import is_added_text, pool_of_text          # noqa: E402
 from dev.source_corrections import canonical_commem                 # noqa: E402
 from armenian_lectionary.engine import (                            # noqa: E402
-    _FEAST_SEP, compute_armenian_lectionary,
+    _FEAST_SEP, compute_armenian_lectionary, MAX_YEAR, MIN_YEAR,
 )
 
 OUT_PATH = os.path.join(
@@ -79,12 +79,13 @@ def is_position(component):
 def diff_components(src_comps, eng_comps):
     """Align the engine's components against the source's.
 
-    Returns ``(contradictions, omissions, deliberate, expansions)``: components the engine
-    asserts and the source lacks, components the source has and the engine drops, (src,
-    eng) pairs that differ only under the registered corrections, and the components the
-    engine adds by expanding the Second Volume's brevity into the First Volume's canons.
-    Matching is greedy in component order -- exact first, then correction-equivalent, then
-    packed-pool -- so a component is never counted twice.
+    Returns ``(contradictions, omissions, deliberate, expansions, additions)``: components
+    the engine asserts and the source lacks, components the source has and the engine
+    drops, (src, eng) pairs that differ only under the registered corrections, the
+    components the engine adds by expanding the Second Volume's brevity into the First
+    Volume's canons, and the declared fixed-date observances the source's English never
+    names. Matching is greedy in component order -- exact first, then
+    correction-equivalent, then packed-pool -- so a component is never counted twice.
 
     The third pass is what keeps a packed day honest. The source may print one head canon
     where the engine serves that canon plus the others packed onto the same day; the
@@ -111,12 +112,15 @@ def diff_components(src_comps, eng_comps):
         contradictions.append(eng)
 
     pools = [p for p in (pool_of_text(s) for s in matched_src) if p]
-    still_wrong, expansions = [], []
+    still_wrong, expansions, additions = [], [], []
     for eng in contradictions:
+        if is_added_text(eng):
+            additions.append(eng)
+            continue
         pool = pool_of_text(eng)
         (expansions if pool is not None and pool in pools else still_wrong).append(eng)
 
-    return still_wrong, unmatched_src, deliberate, expansions
+    return still_wrong, unmatched_src, deliberate, expansions, additions
 
 
 def is_casing_only(contradictions, omissions):
@@ -165,7 +169,7 @@ def collect():
     """Walk the whole cache once; return per-day findings plus the flag lists."""
     days = load_all()
     findings, storage, untranslated = [], [], []
-    compared = skipped = exact = expanded = 0
+    compared = skipped = exact = expanded = added = 0
 
     for iso in sorted(days):
         d = datetime.date.fromisoformat(iso)
@@ -186,10 +190,12 @@ def collect():
             continue
         compared += 1
 
-        contradictions, omissions, deliberate, expansions = diff_components(
+        contradictions, omissions, deliberate, expansions, additions = diff_components(
             components(src), components(eng))
         if expansions:
             expanded += 1
+        if additions:
+            added += 1
         if not contradictions and not omissions:
             exact += 1                      # byte-exact, or exact under the folds
             continue
@@ -204,13 +210,13 @@ def collect():
             "iso": iso, "src": src, "eng": eng, "tier": res_en["Source"],
             "contradictions": contradictions, "omissions": omissions,
             "deliberate": deliberate, "expansions": expansions,
-            "kind": kind, "cause": cause,
+            "additions": additions, "kind": kind, "cause": cause,
         })
 
     return {
         "days": days, "findings": findings, "storage": storage,
         "untranslated": untranslated, "compared": compared,
-        "skipped": skipped, "exact": exact, "expanded": expanded,
+        "skipped": skipped, "exact": exact, "expanded": expanded, "added": added,
         "total": len(days),
     }
 
@@ -227,11 +233,13 @@ def context_table(days, iso, span=2):
             "|---|---|---|---|"]
     for delta in range(-span, span + 1):
         d = centre + datetime.timedelta(days=delta)
+        if not MIN_YEAR <= d.year <= MAX_YEAR:
+            continue        # a Jan 1 or Dec 31 finding reaches past the supported range
         key = d.isoformat()
         src = (days.get(key, {}).get("feast") or "").strip() or "_(no ground truth)_"
         eng = compute_armenian_lectionary(d)["Liturgical Day"]
 
-        contradictions, omissions, _, _ = diff_components(
+        contradictions, omissions, _, _, _ = diff_components(
             components(days.get(key, {}).get("feast") or ""), components(eng))
         if contradictions and is_casing_only(contradictions, omissions):
             mark, shown = " ⚠ casing", eng

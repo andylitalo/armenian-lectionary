@@ -105,3 +105,20 @@ def pool_of_text(text):
         return None
     return next((pool for pool in _PACKED_POOLS if sid in pool), None)
 
+
+# Observances the engine ADDS: served on a fixed civil date that the source's English never
+# names on any day. Not a correction -- there is no printed English to correct -- so
+# apply_ground_truth has no way to register them and they would otherwise read as a
+# contradiction on every occurrence. Declared here instead, and counted by their own ratchet
+# (tests/test_feast_name_raw.FEAST_ADDITION_CEILING) so the number stays visible.
+#
+# The bar is deliberately high: the source must state the day in its OTHER language, so the
+# addition is a translation gap rather than an editorial opinion, and docs section 9 must
+# say what the served name asserts beyond what the source's text does.
+_ADDED_OBSERVANCES = frozenset({"blessing_of_the_pomegranates"})
+
+
+def is_added_text(text):
+    """True if the component is a declared addition (see ``_ADDED_OBSERVANCES``)."""
+    return _text_to_id().get(text) in _ADDED_OBSERVANCES
+

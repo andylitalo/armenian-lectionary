@@ -399,28 +399,78 @@ Neither of the first two is correctable in `feast_name_review.tsv` as it stands:
 dropped word, on purpose. `dev/audit_hy_variants.py` is the standing check that we are
 serving the majority form everywhere.
 
-### `Կաղանդ. տարեմուտ` — New Year's Day wants its own observance
+## 9. Additions — a day the English source names on no day at all
 
-The last Armenian segmentation difference, 2005-01-01. The source's Armenian glues
-`Կաղանդ. տարեմուտ` onto the saints that follow (`— Կաղանդ. տարեմուտ Սրբոցն Բարսղի …`) while
-its English never names New Year's Day at all, so the pairing landed it inside the position
-label's Armenian: `third_day_of_the_4` ships `Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ`.
+Every other correction in this document rewrites text the source printed. This one supplies
+text it never printed in English, and that is a different kind of act, so it gets its own
+category, its own registry and its own ratchet.
 
-It should be its own observance — not least because the **Blessing of the Pomegranates** was
-inaugurated on it in 2015. Three facts constrain the fix:
+**Jan 1.** The source's Armenian prints `Կաղանդ. տարեմուտ` — *Kaghand, the turn of the
+year* — and its English prints nothing. Three cached Armenian days attest it (2001, 2002,
+2005) and on two of them it stands as its own component with no saint attached:
 
-- `Կաղանդ. տարեմուտ` is witnessed on **Jan 1 only** (2001, 2002, 2005), and on two of those
-  the Armenian is exactly `Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ`, with no saint attached.
-  So it is a **fixed civil date**, not a property of the position label or of Basil's canon.
-- It cannot ride on `basil_the_great_and`: that canon is served on Dec 22, 30, 31 and Jan 1–4.
-- `Third day of the Fast of Nativity` is Jan 1 in 23 of the 27 years, not all of them.
+```
+2001-01-01 hy:  Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ
+2001-01-01 en:  Third day of the Fast of Nativity
+```
 
-So it needs a **date-fixed overlay** in the engine, alongside `_position_label` and
-`_eve_label` — and, unlike those, one that adds a component the English source never
-publishes on any day. There is no registration path for that today: `apply_ground_truth`
-corrects text the source printed, and here there is nothing to correct, so the component
-would read as a contradiction on 27 days with the 0-contradiction contract no way to absorb
-it. That is a declared new category with its own ratchet, and it is its own change.
+So the day reached English callers as a bare position label, and the pairing in
+`dev/fetch_translations.py` — which matches whole strings when the component counts differ —
+folded the Armenian into the position label's own entry: `third_day_of_the_4` shipped
+`Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ`. A civil-date observance hidden inside a
+calendar-position label, in one language only.
+
+### What it is called, and what that asserts
+
+It ships as **`Blessing of the Pomegranates`** / **`Նռնօրհնէք`**, id
+`blessing_of_the_pomegranates` — the *Prayer of Thanks and Pomegranate Blessing*
+(`Գոհաբանական մաղթանք եւ նռնօրհնէք`), instituted by Karekin II and served at midnight at the
+turn of the year in every Armenian church since about 2015.
+
+**Be clear about what that does and does not follow from the source.** The Tōnats'oyts names
+the civil day (`Կաղանդ. տարեմուտ`); it does not name the rite, which postdates the 1915
+edition by a century. Naming the observance for the rite is an editorial decision about what
+the day *is*, of the same kind as §6's `Beginning of the Weekly Fasts`, and it carries one
+known cost: the engine serves it on Jan 1 of every year in range, including the fourteen
+that precede the rite's institution. The alternative — serving `New Year's Day` before 2015
+and the rite's name after — would put two ids on one day and make a consumer's stored id
+depend on which year it first saw. A single stable id was judged worth the anachronism. One
+line in `engine._FIXED_DATE_OBSERVANCES` reverses that if the judgement changes.
+
+### How it is registered
+
+There is no printed English to correct, so `apply_ground_truth` has no hook: the component
+would read as a contradiction on every Jan 1, against a contract that requires zero. It is
+therefore declared in two places and counted in a third:
+
+| | |
+|---|---|
+| `engine._FIXED_DATE_OBSERVANCES` | `{(1, 1): "Blessing of the Pomegranates"}` — the only source of the mapping; `fixed_date_label()` is public so the review file, the catalog build and the verifiers enumerate it rather than keeping copies |
+| `dev/observance_ids._ADDED_OBSERVANCES` | the ids the discrepancy reports may see without the source's English backing them |
+| `FEAST_ADDITION_DAYS` | **an equality, not a ceiling** — exactly 26 days (Jan 1, 2001–2026; 2027 has no oracle) |
+
+The equality is the point. An addition is excluded from the contradiction count by
+construction, so nothing else in the suite would notice the overlay firing on the wrong
+days. A count that drifts *either way* fails.
+
+`engine._apply_fixed_date_label` inserts it after the position label and before the
+commemoration — the order the source's own Armenian uses on Jan 1.
+
+The bar for a future entry: the source must state the day in its **other** language, so the
+addition closes a translation gap rather than expressing an opinion; and this section must
+say what the served name asserts beyond what the source's text does.
+
+### What it fixed on the Armenian side
+
+`third_day_of_the_4` gives up the glued note and is just `Գ օր Ս. Ծննդեան պահոց`. Because
+the new row carries `source_hy = Կաղանդ. տարեմուտ` and `approved_hy = Նռնօրհնէք`,
+`ground_truth_hy_fixes` folds the source spelling and both bare Jan 1 days score exact:
+`INTERNAL_DELIMITER` 7 → 5, exact 411 → 413.
+
+2005-01-01 is the one Jan 1 that stays a contradiction, and for a reason no row can express:
+there the source glues the New Year onto the **saints** (`Կաղանդ. տարեմուտ Սրբոցն Բարսղի …`)
+rather than printing it as its own component, and a review row holds one `source_hy`, not
+one per year.
 
 ## Open questions — NOT corrected
 

@@ -84,6 +84,7 @@ from dev.source_corrections import (                                   # noqa: E
 )
 from armenian_lectionary.engine import (                                # noqa: E402
     _FEAST_SEP, FEAST_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
+    fixed_date_label,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -326,6 +327,17 @@ def source_armenian_map():
     return {en: forms.most_common(1)[0][0] for en, forms in votes.items()}
 
 
+# The source's own Armenian for a composed label its ENGLISH never prints. There is no
+# English key to pair on, so the scrape-derived maps cannot answer and the witness has to be
+# stated -- but it IS the source's text, quoted from the day it appears on, not an
+# invention. Keeping it in source_hy is what lets approved_hy register a fold, so the
+# Armenian side scores the day as exact rather than as a contradiction.
+COMPOSED_SOURCE_HY = {
+    # Jan 1, from dev/reference_data_hy/{2001,2002,2005}-01-01.json.
+    "Blessing of the Pomegranates": "Կաղանդ. տարեմուտ",
+}
+
+
 def armenian_for(approved, hy):
     """The source's Armenian for ``approved``, per component.
 
@@ -344,6 +356,9 @@ def armenian_for(approved, hy):
 def generated_components():
     """{component -> (days, last date)} for labels the ENGINE composes, over the full range.
 
+    Position labels, eve notes, and the fixed civil-date observances the source's English
+    omits entirely (engine._FIXED_DATE_OBSERVANCES).
+
     The cache cannot enumerate these. A position label the source prints less specifically
     than its own Armenian is corrected on read (source_corrections.illuminator_fast_label),
     so the served component exists on no cached day under that spelling -- yet it is a
@@ -357,7 +372,7 @@ def generated_components():
     end = datetime.date(MAX_YEAR, 12, 31)
     while d <= end:
         iso = d.isoformat()
-        for label in (_position_label(d), _eve_label(d)):
+        for label in (_position_label(d), _eve_label(d), fixed_date_label(d)):
             if label:
                 days[label] += 1
                 if label not in last or iso > last[label]:
@@ -484,7 +499,7 @@ def build_rows():
         # That form is the evidence for the split AND the key ground_truth_hy_fixes needs
         # to fold the source before comparing, so it must come from the raw pairing.
         source_hy = (raw_hy.get(src) if _FEAST_SEP in approved else None) \
-            or armenian_for(approved, hy)
+            or armenian_for(approved, hy) or COMPOSED_SOURCE_HY.get(src, "")
         rows.append({
             "status": status,
             "days": days[src],

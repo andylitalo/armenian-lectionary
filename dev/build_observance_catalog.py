@@ -50,7 +50,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
-    _FEAST_SEP, _eve_label, _position_label, MAX_YEAR, MIN_YEAR,
+    _FEAST_SEP, _eve_label, _position_label, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
 DEV_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -163,7 +163,8 @@ def served_components(ground_truth):
     texts = set()
     d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
     while d <= end:
-        texts.update(label for label in (_position_label(d), _eve_label(d)) if label)
+        texts.update(label for label in (_position_label(d), _eve_label(d),
+                                         fixed_date_label(d)) if label)
         d += datetime.timedelta(days=1)
     whole = {row["approved_en"] for row in ground_truth.values() if row.get("approved_en")}
     for approved in whole:

@@ -240,6 +240,16 @@ identically, and the engine regenerates it per date as an overlay in
 | calendar position — "Fourth Sunday after Nativity", "Sixth day of the Fast of Nativity", "Third day of the Fast of St. Gregory the Illuminator", "Fast day" | `engine._position_label` | head | `dev/verify_position_labels.py` |
 | eve note — "Eve of Fast of Advent", "Eve of Great Lent" | `engine._eve_label` | tail | `dev/verify_eve_labels.py` |
 
+A third overlay is not a table problem but a **translation gap**: `engine._FIXED_DATE_OBSERVANCES`
+adds an observance on a fixed civil date that the source's *English* names on no day at all,
+though its Armenian does — currently Jan 1's `Blessing of the Pomegranates`. There is no
+printed English to correct, so it cannot go through `apply_ground_truth`; it is declared in
+the engine, listed in `dev/observance_ids._ADDED_OBSERVANCES`, and pinned by
+`FEAST_ADDITION_DAYS` as an **equality** (exactly 26 days), because an addition is excluded
+from the contradiction count by construction and nothing else would notice it firing on the
+wrong days. Adding one requires the source to state the day in its other language, plus a
+write-up in docs §9 of what the served name asserts beyond what the source's text does.
+
 Storing them asserted the modal year's count for every year — the defect that shipped
 41 wrong names. If you add a family to either, run its verifier: MISMATCH and EXTRA must
 stay 0, and so must the END-TO-END LOST count, which is the number that actually matters

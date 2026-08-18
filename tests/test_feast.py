@@ -34,8 +34,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                        # noqa: E402
 from dev.feast_names import commemoration_of                           # noqa: E402
+from dev.observance_ids import is_added_text                           # noqa: E402
 from dev.source_corrections import canonical_commem                     # noqa: E402
-from armenian_lectionary.engine import compute_armenian_lectionary      # noqa: E402
+from armenian_lectionary.engine import (                                # noqa: E402
+    _FEAST_SEP, compute_armenian_lectionary,
+)
 from tests._reference_cache import requires_reference_cache             # noqa: E402
 
 # Lower bound on processed reference days; guards against silent data loss.
@@ -49,8 +52,25 @@ VACUOUS_CEILING = int(os.environ.get("FEAST_VACUOUS_CEILING", "5100"))
 
 
 def _commem(feast_str):
-    """Canonical, casefolded commemoration for comparison (applied to both sides)."""
-    return canonical_commem(commemoration_of(feast_str)).casefold()
+    """Canonical, casefolded commemoration for comparison (applied to both sides).
+
+    Declared fixed-date additions are dropped first. They sit in the commemoration position
+    but the source's English names them on no day at all, so leaving them in would make
+    every Jan 1 read as a mismatch here -- a fact already counted, once, by
+    tests/test_feast_name_raw.FEAST_ADDITION_DAYS. Dropping them keeps this test measuring
+    what it is for: whether the commemoration the source DID print is the one we serve.
+    """
+    return canonical_commem(commemoration_of(_strip_added(feast_str))).casefold()
+
+
+def _strip_added(feast_str):
+    """The feast string without any declared fixed-date addition.
+
+    Must run BEFORE commemoration_of, which mashes the component separator away -- strip it
+    after and the addition fuses onto the saint beside it.
+    """
+    return _FEAST_SEP.join(c for c in (feast_str or "").split(_FEAST_SEP)
+                           if c and not is_added_text(c))
 
 
 @requires_reference_cache
@@ -69,7 +89,7 @@ class TestFeastCommemoration(unittest.TestCase):
             if not feast:
                 continue
             total += 1
-            src = canonical_commem(commemoration_of(feast))
+            src = canonical_commem(commemoration_of(_strip_added(feast)))
             if "\x00" in src:
                 unsegmented.append((iso, feast))
             got = compute_armenian_lectionary(
@@ -77,7 +97,8 @@ class TestFeastCommemoration(unittest.TestCase):
             if not _commem(feast) and not _commem(got):
                 vacuous += 1
             elif _commem(feast) != _commem(got):
-                mismatches.append((iso, src, canonical_commem(commemoration_of(got))))
+                mismatches.append(
+                    (iso, src, canonical_commem(commemoration_of(_strip_added(got)))))
 
         # No silent data loss.
         self.assertGreaterEqual(

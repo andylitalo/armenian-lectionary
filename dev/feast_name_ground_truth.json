@@ -47,6 +47,14 @@
   "source_hy": "Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի",
   "status": "ok"
  },
+ "Blessing of the Pomegranates": {
+  "approved_en": "Blessing of the Pomegranates",
+  "approved_hy": "Նռնօրհնէք",
+  "id": "blessing_of_the_pomegranates",
+  "note": "declared civil-date observance on Jan 1: the source's Armenian prints \"Կաղանդ. տարեմուտ\" (Kaghand, the New Year) and its English prints nothing, so the day reached callers as its position label alone. Named for the rite kept on it -- the Prayer of Thanks and Pomegranate Blessing, instituted by Karekin II in 2015. That is a decision about what the day IS, not a reading of what the source says; see docs section 9.",
+  "source_hy": "Կաղանդ. տարեմուտ",
+  "status": "generated"
+ },
  "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)": {
   "approved_en": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
   "approved_hy": "Կոստանդնուպոլսոյ ս. ժողովոյն հարիւր յիսուն հայրապետացն (381 թ.)",
@@ -2817,17 +2825,17 @@
  },
  "Third day of the Fast of Nativity": {
   "approved_en": "Third day of the Fast of Nativity",
-  "approved_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
+  "approved_hy": "Գ օր Ս. Ծննդեան պահոց",
   "id": "third_day_of_the_4",
-  "note": "",
+  "note": "the source's Armenian glues the New Year onto this position label; it is its own observance (blessing_of_the_pomegranates), so the label keeps only the day count. See docs section 9.",
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
   "status": "ok"
  },
  "Third day of the Fast of Nativity.": {
   "approved_en": "Third day of the Fast of Nativity",
-  "approved_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
+  "approved_hy": "Գ օր Ս. Ծննդեան պահոց",
   "id": "third_day_of_the_4",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "the source's Armenian glues the New Year onto this position label; it is its own observance (blessing_of_the_pomegranates), so the label keeps only the day count. See docs section 9.",
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
   "status": "fixed"
  },
