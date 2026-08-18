@@ -81,6 +81,13 @@ HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "4"))
 # Days carrying the right components in a different order. Monotonic DOWN.
 HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
 
+# Days where the source states a component the engine deliberately does not serve. Exactly
+# the two cached Jan 1 days before 2015 on which sacredtradition.am prints "Կաղանդ.
+# տարեմուտ" -- a civil New Year note the 1915 Tonatsoyts does not carry (docs section 9).
+# An EQUALITY: a decline is excluded from the omission count by construction, so nothing
+# else would notice it spreading to days it was never meant to cover.
+HY_DECLINED_DAYS = int(os.environ.get("HY_DECLINED_DAYS", "2"))
+
 # Days where the source names one canon of a packed pool and the engine serves others from
 # the same pool. Correct as served: the Second Volume prints only the first saints "for the
 # sake of brevity" and its preface (Sixth) says to celebrate the companions the First Volume
@@ -113,7 +120,7 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # The floor is 413 rather than the 414 a full cache now reports: the days gained since it
 # was set at 407 are reproducible anywhere except one, which came from the cache growing
 # 433 -> 435 days.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "413"))
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "412"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.
@@ -153,6 +160,16 @@ class TestRawArmenianFeastName(unittest.TestCase):
             n, HY_ORDER_CEILING,
             f"{n} days serve the right Armenian components in the wrong order (ceiling "
             f"{HY_ORDER_CEILING}); run `python dev/hy_discrepancy.py --list`")
+
+    def test_declines_are_exactly_the_declared_days(self):
+        n = self.tally["DECLINED"]
+        self.assertEqual(
+            n, HY_DECLINED_DAYS,
+            f"{n} days drop a component the engine declines to serve, expected exactly "
+            f"{HY_DECLINED_DAYS}. A decline is excluded from the omission count by "
+            "construction, so a change either way means "
+            "observance_ids._DECLINED_SOURCE_HY now covers days it should not, or has "
+            "stopped covering days it should.")
 
     def test_expansions_within_ratchet(self):
         n = self.tally["EXPANSION"]

@@ -23,6 +23,10 @@ Findings are classified, strongest first:
 
   * ``CONTRADICTION`` -- the engine emits an Armenian component the source does not have.
   * ``OMISSION`` -- the source states a component the engine drops.
+  * ``DECLINED`` -- the source states a component the engine deliberately does not serve
+    (``observance_ids._DECLINED_SOURCE_HY``). Not a defect and not an oversight: the only
+    entry is the civil New Year, which sacredtradition.am prints on Jan 1 and the 1915
+    Tonatsoyts does not carry at all.
   * ``EXPANSION`` -- the source named one canon of a packed pool and the engine serves
     others from the same pool. Not a defect: the Second Volume prints only the first saints
     "for the sake of brevity" and its preface (Sixth) says to celebrate the companions the
@@ -77,7 +81,7 @@ from armenian_lectionary.engine import (                                # noqa: 
     _FEAST_SEP, compute_armenian_lectionary,
 )
 from dev.build_observance_catalog import CATALOG_PATH, _INTERNAL_SEP   # noqa: E402
-from dev.observance_ids import _PACKED_POOLS                           # noqa: E402
+from dev.observance_ids import _PACKED_POOLS, is_declined_hy           # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
 from dev.source_corrections import ground_truth_hy_fixes                # noqa: E402
 
@@ -227,6 +231,8 @@ def collect():
             kind = "DOMINANT_FORM"
         elif contradictions:
             kind = "CONTRADICTION"
+        elif omissions and all(is_declined_hy(o) for o in omissions):
+            kind = "DECLINED"
         elif omissions:
             kind = "OMISSION"
         elif expansions:
@@ -242,7 +248,7 @@ def collect():
     return {"compared": compared, "exact": exact, "findings": findings}
 
 
-KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "EXPANSION", "DOMINANT_FORM",
+KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "EXPANSION", "DECLINED", "DOMINANT_FORM",
          "INTERNAL_DELIMITER")
 
 

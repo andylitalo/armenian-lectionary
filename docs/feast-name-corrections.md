@@ -381,12 +381,38 @@ states them explicitly, page by page: p.588 prints
 Grigoris."* The engine would render the packing from that list through the catalog, and keep
 the head canon's readings, which is what the source itself does.
 
-**Why that is its own commit.** Not the packing data — the *generator*.
-`dev/build_second_volume_cycles.py` and `dev/saint_schedule.py` are the two builders CLAUDE.md
-records as not reproducing their checked-in artifacts from the present cache: regenerating
-them moves 2016-07-30 from `second-volume-cycle` to `generative-saint`. That drift predates
-this work and has to be resolved before their output can be widened, or a name change would
-smuggle in a readings change.
+**The generator no longer blocks it.** `dev/build_second_volume_cycles.py` was the reason
+this was deferred: CLAUDE.md recorded that re-running it did not reproduce its checked-in
+artifact, and that regenerating moved 2016-07-30 from `second-volume-cycle` to
+`generative-saint`. That no longer happens. Re-running it now produces a **behaviour-neutral
+superset** — 8 added entries and 1 zone change, all in the Julian-Easter `03-25` cycle, a
+year-type that never occurs in 2001–2027 and so has no cached year to validate against.
+Across the whole range: 0 days change tier, 0 change name, 0 change readings, and the build
+is byte-idempotent.
+
+Two things keep it that way:
+
+- the build now **refuses to run without `dev/reference_data/`**. `_drop_cache_contradicted`
+  is the only thing making the tier cache-consistent, and it used to return 0 silently when
+  the cache was absent — shipping ~269 entries ground truth contradicts, in an artifact that
+  looked exactly like a valid one. That silence is how the artifact drifted from its
+  generator in the first place;
+- `tests/test_second_volume_cycles.py` re-runs the build and asserts the committed file
+  comes back identical.
+
+`dev/saint_schedule.py` is **still** in that state and stays on the do-not-run list:
+regenerating it changes 155 days' tier or name and **72 days' readings**. Measured, not
+assumed.
+
+### Why the difference is safe to leave in the meantime
+
+Because the packing decides the name and not the propers, and that is now asserted rather
+than argued: `tests/test_observance_readings.py` takes every day whose served name differs
+from the source's — 57 of them — and requires the readings still to match exactly. It passes
+on all of them, `second-volume-cycle` included. Neither of the other two contracts covers
+this: the raw-name tests measure names against the source and `test_full_dataset` measures
+readings against the source, so each day stays individually explicable on its own axis while
+the two quietly drift apart.
 
 ### Two packings the engine now gets right
 
@@ -454,22 +480,41 @@ folded the Armenian into the position label's own entry: `third_day_of_the_4` sh
 `Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ`. A civil-date observance hidden inside a
 calendar-position label, in one language only.
 
-### What it is called, and what that asserts
+### What it is called, and from when
 
 It ships as **`Blessing of the Pomegranates`** / **`Նռնօրհնէք`**, id
 `blessing_of_the_pomegranates` — the *Prayer of Thanks and Pomegranate Blessing*
 (`Գոհաբանական մաղթանք եւ նռնօրհնէք`), instituted by Karekin II and served at midnight at the
-turn of the year in every Armenian church since about 2015.
+turn of the year in every Armenian church **since 2015**.
 
-**Be clear about what that does and does not follow from the source.** The Tōnats'oyts names
-the civil day (`Կաղանդ. տարեմուտ`); it does not name the rite, which postdates the 1915
-edition by a century. Naming the observance for the rite is an editorial decision about what
-the day *is*, of the same kind as §6's `Beginning of the Weekly Fasts`, and it carries one
-known cost: the engine serves it on Jan 1 of every year in range, including the fourteen
-that precede the rite's institution. The alternative — serving `New Year's Day` before 2015
-and the rite's name after — would put two ids on one day and make a consumer's stored id
-depend on which year it first saw. A single stable id was judged worth the anachronism. One
-line in `engine._FIXED_DATE_OBSERVANCES` reverses that if the judgement changes.
+`_FIXED_DATE_OBSERVANCES` therefore carries a **first year** alongside each name, and Jan 1
+before 2015 is its position label alone. A year gate is unusual here — the rest of the engine
+is a function of the liturgical calendar, not of history — and it earns the exception because
+the institution of a feast is a real, datable event, rare enough to spell out rather than
+smooth over. Serving a rite before it existed is not a rounding error; it is a claim about
+what the Church did in a year it did not do it.
+
+### What happens to `Կաղանդ. տարեմուտ`
+
+Nothing: the engine declines to serve it, and says so.
+
+The civil New Year is what sacredtradition.am prints there in Armenian, but **the 1915
+Tōnats'oyts does not carry it** — `grabar-ocr/corpus` has no occurrence of `Կաղանդ` on any of
+its 189 pages, in either the Grabar or the translation. So it is the scrape's addition, not
+the book's, and before 2015 the day has no observance to name.
+
+Declining is declared, not silent: `dev/observance_ids._DECLINED_SOURCE_HY` is the mirror of
+`_ADDED_OBSERVANCES` — there the engine states what the source omits, here it omits what the
+source states, and both have to be registered or the accuracy ratchets stop meaning
+"unexplained". The two affected cached days (2001-01-01, 2002-01-01) report as `DECLINED`
+rather than `OMISSION`, pinned by `HY_DECLINED_DAYS = 2` as an **equality** for the same
+reason the addition count is one.
+
+The set holds both spellings — `Կաղանդ. տարեմուտ` and `Նռնօրհնէք` — because the reports fold
+registered Armenian corrections onto the source before comparing, so the component may
+already have been renamed by the time it is classified. That fold is not dead weight: it is
+what will keep 2015 onward exact, since the source goes on printing the civil New Year and
+knows nothing of the rite.
 
 ### How it is registered
 
@@ -481,7 +526,7 @@ therefore declared in two places and counted in a third:
 |---|---|
 | `engine._FIXED_DATE_OBSERVANCES` | `{(1, 1): "Blessing of the Pomegranates"}` — the only source of the mapping; `fixed_date_label()` is public so the review file, the catalog build and the verifiers enumerate it rather than keeping copies |
 | `dev/observance_ids._ADDED_OBSERVANCES` | the ids the discrepancy reports may see without the source's English backing them |
-| `FEAST_ADDITION_DAYS` | **an equality, not a ceiling** — exactly 26 days (Jan 1, 2001–2026; 2027 has no oracle) |
+| `FEAST_ADDITION_DAYS` | **an equality, not a ceiling** — exactly 12 days (Jan 1, 2015–2026; 2027 has no oracle) |
 
 The equality is the point. An addition is excluded from the contradiction count by
 construction, so nothing else in the suite would notice the overlay firing on the wrong
@@ -498,8 +543,8 @@ say what the served name asserts beyond what the source's text does.
 
 `third_day_of_the_4` gives up the glued note and is just `Գ օր Ս. Ծննդեան պահոց`. Because
 the new row carries `source_hy = Կաղանդ. տարեմուտ` and `approved_hy = Նռնօրհնէք`,
-`ground_truth_hy_fixes` folds the source spelling and both bare Jan 1 days score exact:
-`INTERNAL_DELIMITER` 7 → 5, exact 411 → 413.
+`ground_truth_hy_fixes` folds the source spelling, which is what will keep Jan 1 exact from
+2015 once the Armenian cache samples one of those years. `INTERNAL_DELIMITER` 7 → 5.
 
 2005-01-01 is the one Jan 1 that stays a contradiction, and for a reason no row can express:
 there the source glues the New Year onto the **saints** (`Կաղանդ. տարեմուտ Սրբոցն Բարսղի …`)

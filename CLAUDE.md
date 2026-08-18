@@ -223,11 +223,17 @@ The catalog comes **before** the table, not after: `dev/build_table.py` stamps a
 `observance_ids` list onto every entry and fails loudly on a component the catalog does not
 cover. And `feast_name_review.py` comes first, because a correction that introduces new
 served text needs a row (and an id) before anything downstream can resolve it.
-`dev/saint_schedule.py` and `dev/build_second_volume_cycles.py` are deliberately NOT in
-that list: they do not currently reproduce their checked-in artifacts from the present
-cache, and regenerating them moves readings provenance (2016-07-30 drops from
-`second-volume-cycle` to `generative-saint`). That drift predates this work and needs its
-own reviewed change.
+`dev/build_second_volume_cycles.py` used to be excluded from that list for not reproducing
+its checked-in artifact; it does now, and `tests/test_second_volume_cycles.py` keeps it that
+way by re-running the build and comparing. It stays out of the *routine* order only because
+it reads the grabar-ocr translation rather than anything in this repo, so nothing above can
+invalidate it. It refuses to run without `dev/reference_data/`: the cache-consistency filter
+is the only thing keeping the tier honest, and it used to skip silently and ship ~269
+entries ground truth contradicts.
+
+`dev/saint_schedule.py` **is** still excluded, and measurably so: regenerating it changes 155
+days' tier or name and 72 days' readings. That drift predates this work and needs its own
+reviewed change.
 
 Two kinds of name component are **not** stored in the table, because a table key is a
 liturgical coordinate shared by civil years that disagree about them. `build_table.
@@ -241,14 +247,22 @@ identically, and the engine regenerates it per date as an overlay in
 | eve note — "Eve of Fast of Advent", "Eve of Great Lent" | `engine._eve_label` | tail | `dev/verify_eve_labels.py` |
 
 A third overlay is not a table problem but a **translation gap**: `engine._FIXED_DATE_OBSERVANCES`
-adds an observance on a fixed civil date that the source's *English* names on no day at all,
-though its Armenian does — currently Jan 1's `Blessing of the Pomegranates`. There is no
-printed English to correct, so it cannot go through `apply_ground_truth`; it is declared in
-the engine, listed in `dev/observance_ids._ADDED_OBSERVANCES`, and pinned by
-`FEAST_ADDITION_DAYS` as an **equality** (exactly 26 days), because an addition is excluded
-from the contradiction count by construction and nothing else would notice it firing on the
-wrong days. Adding one requires the source to state the day in its other language, plus a
-write-up in docs §9 of what the served name asserts beyond what the source's text does.
+adds an observance on a fixed civil date that the source's *English* names on no day at all —
+currently Jan 1's `Blessing of the Pomegranates`. There is no printed English to correct, so
+it cannot go through `apply_ground_truth`; it is declared in the engine, listed in
+`dev/observance_ids._ADDED_OBSERVANCES`, and pinned by `FEAST_ADDITION_DAYS` as an
+**equality**, because an addition is excluded from the contradiction count by construction
+and nothing else would notice it firing on the wrong days. Each entry carries the **first
+year it applies** (2015 for the Pomegranates, the year the rite was instituted) — the one
+place the engine is a function of history rather than of the calendar, because the
+institution of a feast is a datable event and serving a rite before it existed is a claim
+about a year, not a rounding error.
+
+Its mirror is `dev/observance_ids._DECLINED_SOURCE_HY`: source text the engine deliberately
+does **not** serve (the civil New Year, which sacredtradition.am prints and the 1915
+Tōnats'oyts does not carry at all). Same reasoning — omitting what the source states needs
+declaring, or the omission ratchet stops meaning "unexplained" — and the same equality
+pinning, `HY_DECLINED_DAYS`. Adding to either set requires a write-up in docs §9.
 
 Storing them asserted the modal year's count for every year — the defect that shipped
 41 wrong names. If you add a family to either, run its verifier: MISMATCH and EXTRA must

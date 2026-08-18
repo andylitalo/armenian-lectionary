@@ -122,3 +122,28 @@ def is_added_text(text):
     """True if the component is a declared addition (see ``_ADDED_OBSERVANCES``)."""
     return _text_to_id().get(text) in _ADDED_OBSERVANCES
 
+
+# Source text we deliberately DO NOT serve. The mirror of ``_ADDED_OBSERVANCES``: there the
+# engine states what the source omits, here it omits what the source states, and both need
+# declaring or the accuracy ratchets stop meaning "unexplained".
+#
+# Armenian strings rather than ids, because a thing we do not serve has no id to name it by.
+#
+# "Կաղանդ. տարեմուտ" -- sacredtradition.am prints the civil New Year on Jan 1 in Armenian
+# (and nothing in English). The 1915 Tonatsoyts does not: grabar-ocr/corpus has no
+# occurrence of Կաղանդ on any of its 189 pages. So it is the scrape's addition, not the
+# book's. From 2015 the engine serves the rite actually kept on that day instead
+# (blessing_of_the_pomegranates); before it was instituted, the day is its position label
+# alone. See docs/feast-name-corrections.md section 9.
+# Both spellings: what the source prints, and what our own review row renames it to. The
+# reports fold registered Armenian corrections onto the source BEFORE comparing, so by the
+# time a component reaches here it may already read "Նռնօրհնէք" -- and that fold is not
+# dead weight, it is what keeps 2015 onward exact, since sacredtradition.am goes on printing
+# the civil New Year there and knows nothing of the rite.
+_DECLINED_SOURCE_HY = frozenset({"Կաղանդ. տարեմուտ", "Նռնօրհնէք"})
+
+
+def is_declined_hy(text):
+    """True if the Armenian component is one the engine deliberately does not serve."""
+    return text in _DECLINED_SOURCE_HY
+

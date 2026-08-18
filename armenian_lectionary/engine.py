@@ -2231,27 +2231,38 @@ def _apply_position_label(label: str, d: datetime.date) -> str:
 # Armenian does. Unlike a position or eve label these are not computed from the calendar
 # and not abbreviated from a longer printed form -- they are days the source's English
 # simply omits, so they are declared here, one entry per date, and counted by their own
-# ratchet (dev/observance_ids._ADDED_OBSERVANCES, FEAST_ADDITION_CEILING).
+# ratchet (dev/observance_ids._ADDED_OBSERVANCES, FEAST_ADDITION_DAYS).
 #
-# Jan 1: the source's Armenian prints "Կաղանդ. տարեմուտ" (Kaghand, New Year) and its
-# English prints nothing at all, so the day reached callers as its position label alone.
-# The observance kept on it is the Prayer of Thanks and Pomegranate Blessing, instituted
-# by Karekin II in 2015 and now served in every Armenian church at the turn of the year.
-# See docs/feast-name-corrections.md section 9, including what that name asserts that the
-# source's own text does not.
+# Each entry carries the first year it applies. That is unusual -- the rest of the engine
+# is a function of the liturgical calendar, not of history -- and it is here because the
+# introduction of a new feast is a real, datable event, rare enough to be worth spelling
+# out rather than smoothing over. Serving a rite before it was instituted is not a rounding
+# error; it is a claim about what the Church did in a year it did not do it.
+#
+# Jan 1: the Prayer of Thanks and Pomegranate Blessing, instituted by Karekin II and served
+# at the turn of the year in every Armenian church SINCE 2015. Before that the engine names
+# nothing on Jan 1 beyond the day's position. sacredtradition.am prints "Կաղանդ. տարեմուտ"
+# there in Armenian (and nothing in English), but the 1915 Tonatsoyts itself carries no such
+# entry -- grabar-ocr/corpus has no occurrence of Կաղանդ on any of its 189 pages -- so the
+# civil New Year is the scrape's addition, not the book's, and it is not served. See
+# docs/feast-name-corrections.md section 9.
 _FIXED_DATE_OBSERVANCES = {
-    (1, 1): "Blessing of the Pomegranates",
+    (1, 1): ("Blessing of the Pomegranates", 2015),
 }
 
 
 def fixed_date_label(d: datetime.date):
-    """``d``'s fixed civil-date observance, or ``None``.
+    """``d``'s fixed civil-date observance, or ``None`` before the year it was instituted.
 
     Public because the review document, the catalog build and the verifiers all have to
     enumerate exactly what the engine can emit, and a second copy of this mapping would
     drift.
     """
-    return _FIXED_DATE_OBSERVANCES.get((d.month, d.day))
+    entry = _FIXED_DATE_OBSERVANCES.get((d.month, d.day))
+    if entry is None:
+        return None
+    name, first_year = entry
+    return name if d.year >= first_year else None
 
 
 def _apply_fixed_date_label(label: str, d: datetime.date) -> str:

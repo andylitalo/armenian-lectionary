@@ -64,7 +64,8 @@ from tests._reference_cache import requires_reference_cache           # noqa: E4
 OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "5"))
 
 # Days serving a DECLARED fixed-date observance the source's English never names. Jan 1's
-# Blessing of the Pomegranates, on all 26 days of ground truth (2027 has no oracle). Not a
+# Blessing of the Pomegranates, on the 12 days of ground truth from 2015 -- the year the
+# rite was instituted -- through 2026 (2027 has no oracle). Not a
 # contradiction: the source states the day in Armenian and drops it in English, so this is a
 # translation gap the engine closes -- see docs/feast-name-corrections.md section 9 and
 # dev/observance_ids._ADDED_OBSERVANCES.
@@ -73,7 +74,7 @@ OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "5"))
 # not declared correctly, so a count that drifts either way means the overlay has started
 # firing on the wrong days -- which no other assertion here would notice, because an
 # addition is excluded from the contradiction count by construction.
-FEAST_ADDITION_DAYS = int(os.environ.get("FEAST_ADDITION_DAYS", "26"))
+FEAST_ADDITION_DAYS = int(os.environ.get("FEAST_ADDITION_DAYS", "12"))
 
 # Days whose raw name matches the source exactly (or under the registered folds).
 # Monotonic UP. 9,491 of 9,496: the 5 shortfalls are the packed-day omissions above, which
@@ -163,7 +164,7 @@ class TestRawFeastName(unittest.TestCase):
         self.assertEqual(
             n, FEAST_ADDITION_DAYS,
             f"{n} days serve a declared fixed-date addition, expected exactly "
-            f"{FEAST_ADDITION_DAYS} (Jan 1, 2001-2026). A change either way means "
+            f"{FEAST_ADDITION_DAYS} (Jan 1, 2015-2026). A change either way means "
             "engine._FIXED_DATE_OBSERVANCES fires on days it should not, or stopped firing "
             "on days it should -- neither shows up as a contradiction, because an addition "
             "is excluded from that count by construction.")
