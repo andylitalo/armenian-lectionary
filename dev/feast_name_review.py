@@ -40,12 +40,12 @@ IS the registration -- ``dev/build_ground_truth.py`` freezes it and ``apply_grou
 serves it, with no second entry anywhere. That failure is deliberate: it is what stops a
 reviewed decision from being quietly lost the next time the artifacts are rebuilt.
 
-``variant_of`` names the observance a row is an ALTERNATE NAME for. The source spells a
-few commemorations with a longer or shorter companion list ("Sts. Cyricus and His Mother
-Julitta" vs. the same plus "and Sts. Gordius, Polyeuctus and Grigoris") and prints both
-across years for the same liturgical day, with identical propers. Those are one observance,
-so only the primary row carries an ``id``; the variants carry ``variant_of`` instead and
-ship as alternate spellings under it. A row has an ``id`` or a ``variant_of``, never both.
+A PACKED DAY gets no id. The Tonats'oyts sets each saint's feast out as its own canon
+(First Volume pp.460-462, 464-465) and the Second Volume packs several onto one line when
+the taregir leaves few days for them, naming only the first "for the sake of brevity"
+(preface, Sixth). The approved name splits that line back into its canons on the component
+separator; each canon keeps its own id and the join gets none, exactly as with the
+comma-joined "Fast day, Remembrance of the Ten Virgins".
 
 ``id`` is the observance's frozen catalog id -- the key a consumer stores instead of the
 display text, which moves. It is STATED here, never derived from the text, which is what
@@ -88,7 +88,7 @@ from armenian_lectionary.engine import (                                # noqa: 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "feast_name_review.tsv")
-FIELDS = ("status", "days", "last", "source_en", "id", "variant_of", "approved_en",
+FIELDS = ("status", "days", "last", "source_en", "id", "approved_en",
           "source_hy", "approved_hy", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
@@ -232,30 +232,48 @@ OPEN_QUESTIONS = {
 # Three of these carried an id in 1.3.0 and are retired by name in
 # build_observance_catalog._RETIRED_IDS. The reason is stated in both places on purpose: a
 # reviewer reading the TSV never opens that file.
+# Why a row carries no id. A packed day is the common case: the Tonats'oyts sets each
+# saint's feast out as its own canon (First Volume pp.460-462, 464-465) and the Second
+# Volume packs several onto one line when the taregir leaves few days for them, naming only
+# the first "for the sake of brevity" (preface, Sixth). The approved name splits the line
+# back into its canons on _FEAST_SEP; each canon keeps its own id and the join gets none.
+_PACKED_DAY = (
+    "no id: a whole DAY, not one observance -- the Tonats'oyts packs several First Volume "
+    "canons onto this line. The approved name splits them on the component separator and "
+    "each canon keeps its own id, so the day resolves component-wise. See docs section 7.")
+
 NO_ID_REASONS = {
     "Fast day, Remembrance of the Ten Virgins":
         "no id: a whole DAY, not one observance -- the source comma-joined the day's fast "
         "marker to its commemoration, and a registered correction splits them. Both halves "
         "are their own rows with their own ids (fast_day, remembrance_of_the_ten), so the "
         "day resolves component-wise to the pair.",
-    "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints "
-    "Atom and his soldiers":
-        "no id (retired sargis_the_warrior_and): the source glued two commemorations into "
-        "one string on 2008-01-21 alone. The engine serves only the first half there, and "
-        "both halves already have ids of their own (sargis, atom), so nothing emits or "
-        "stores this text -- an id on it could never be matched.",
     "Saint Theodore the General":
         "no id (retired theodore_the_general): published on exactly one day out of 9,861 "
         "(2016-02-13), where every other year at that coordinate says Theodore the TYRON "
         "-- which is what the table serves (id theodore_the_tyron). A source one-off, not "
         "a second observance.",
-    "Saints Eugenius, Marcarius, Alerius, Canditus and Aquila, and Saints Andrew the "
-    "General and his army, and Callinicus and Diomedes the Martyrs":
-        "no id (retired eugenius_macarius_valerius_candidus_2): the source glued two "
-        "commemorations into one string on 2009-01-27 alone. The engine serves only the "
-        "first half there, and both halves already have ids of their own "
-        "(eugenius_macarius_valerius_candidus, andrew_the_general_and).",
 }
+NO_ID_REASONS.update({src: _PACKED_DAY for src in (
+    "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers, and Saints "
+    "Atom and his soldiers",
+    "Saints Eugenius, Marcarius, Alerius, Canditus and Aquila, and Saints Andrew the "
+    "General and his army, and Callinicus and Diomedes the Martyrs",
+    "Saints Atom and his soldiers, and Saints Mark the Bishop, Pionius the Priest, Cyril "
+    "and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "Saints Atom and his soldiers, and Saints Sukiasians the Martyrs",
+    "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris",
+    "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, "
+    "Polyeuctus and Grigoris",
+    "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers "
+    "Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Marcarius, Alerius, "
+    "Canditus and Aquila",
+    "Saints Vahan of Goghtn, Eugenia the Virgin, Her Father Phillip and her mother "
+    "Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs",
+    "Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+    "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+    "Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory of Theologian",
+)})
 
 
 def corrected(text):
@@ -399,18 +417,37 @@ def build_rows():
         days[label] = gen_days[label]
         last[label] = gen_last[label]
 
-    # Observances the source names both in full and in abbreviation (preface, Sixth). Every
-    # row in such a group approves the SAME full name, so the approved-keyed Armenian map
-    # cannot tell them apart -- key those rows on their own source text instead. Scoped to
-    # declared variant groups on purpose: casing-typo pairs like the Presentation's two
-    # spellings also share an approved name, but there the approved-keyed map is the better
-    # answer, because it votes across every year rather than the one day the Armenian cache
-    # sampled.
-    variant_groups = {row["variant_of"] for row in existing.values()
-                      if row.get("variant_of")}
+    # Halves of a SPLIT approved name. The Tonats'oyts packs several First Volume canons
+    # onto one line when the taregir leaves few days for them (preface, Sixth), so a
+    # correction may resolve one source string into several observances joined on
+    # _FEAST_SEP. Each half is then a served component and needs its own row and id -- even
+    # where the source never publishes it alone, as with Gordius/Polyeuctus/Grigoris, whom
+    # it always prints behind Cyricus or Vahan. Keyed by their own text: there is no rawer
+    # form, exactly as with a generated label.
+    approved_of = {src: (existing.get(src) or {}).get("approved_en")
+                   or (src if src in generated_only else corrected(src))
+                   for src in list(days)}
+    known = set(approved_of.values())
+    split_only = collections.Counter()
+    split_last = {}
+    for src, approved in approved_of.items():
+        parts = [p.strip() for p in approved.split(_FEAST_SEP) if p.strip()]
+        if len(parts) < 2:
+            continue
+        for part in parts:
+            if part in known or part in days:
+                continue
+            split_only[part] += days[src]
+            if part not in split_last or last[src] > split_last[part]:
+                split_last[part] = last[src]
+    for part, n in split_only.items():
+        days[part] = n
+        last[part] = split_last[part]
+    composed_only = generated_only | set(split_only)
+
 
     for src in sorted(days):
-        served = src if src in generated_only else corrected(src)
+        served = src if src in composed_only else corrected(src)
         prior = existing.get(src)
         approved = (prior or {}).get("approved_en") or served
         note = (prior or {}).get("note") or ""
@@ -426,18 +463,27 @@ def build_rows():
         if src in NO_ID_REASONS and not note:
             note = NO_ID_REASONS[src]
         status = "review" if src in OPEN_QUESTIONS else (
+            "split" if src in split_only else
             "generated" if src in generated_only else
             "fixed" if served != src else "ok")
         if not note and status == "fixed":
             note = ("reviewed correction: this row IS the registration -- "
                     "build_ground_truth.py freezes approved_en and apply_ground_truth serves it")
+        if not note and status == "split":
+            note = ("one half of a packed day; the source never publishes this canon alone, "
+                    "but the engine serves it as its own component -- see docs section 7")
         if not note and status == "generated":
             note = ("engine-composed label; the source prints a less specific English "
                     "text here -- see dev/source_corrections")
 
-        in_variant_group = bool(
-            {(prior or {}).get("id"), (prior or {}).get("variant_of")} & variant_groups)
-        source_hy = (raw_hy.get(src) if in_variant_group else None) \
+        # A PACKED day: the approved name splits the line into its canons, so the
+        # approved-keyed Armenian map cannot answer for it -- it is keyed on whole
+        # corrected English names, and this row's is a join of several. Falling through to
+        # armenian_for would synthesise source_hy by joining the halves' Armenian, making
+        # it equal approved_hy and quietly erasing the glued form the source published.
+        # That form is the evidence for the split AND the key ground_truth_hy_fixes needs
+        # to fold the source before comparing, so it must come from the raw pairing.
+        source_hy = (raw_hy.get(src) if _FEAST_SEP in approved else None) \
             or armenian_for(approved, hy)
         rows.append({
             "status": status,
@@ -445,7 +491,6 @@ def build_rows():
             "last": last[src],
             "source_en": src,
             "id": (prior or {}).get("id") or "",
-            "variant_of": (prior or {}).get("variant_of") or "",
             "approved_en": approved,
             "source_hy": source_hy,
             # Defaults to the scrape only on a row that has never carried a decision;

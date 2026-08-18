@@ -23,14 +23,11 @@ Findings are classified, strongest first:
 
   * ``CONTRADICTION`` -- the engine emits an Armenian component the source does not have.
   * ``OMISSION`` -- the source states a component the engine drops.
-  * ``VARIANT_NAME`` -- the source names the same OBSERVANCE with a different declared
-    companion set. Not a defect: the catalog states the two are one observance and the
-    propers are byte-identical, so the day the cache happened to sample decides nothing. It
-    is the Armenian analogue of what ``canonical_commem`` does for English, and it is
-    enumerated rather than inferred -- only text a reviewer grouped in
-    ``feast_name_review.tsv``'s ``variant_of`` column can match this way. Rare now that the
-    Second Volume's abbreviations resolve to the full companion list: what is left is the
-    one group whose two sets are not nested, where no printed full list exists.
+  * ``EXPANSION`` -- the source named one canon of a packed pool and the engine serves
+    others from the same pool. Not a defect: the Second Volume prints only the first saints
+    "for the sake of brevity" and its preface (Sixth) says to celebrate the companions the
+    First Volume sets down. Enumerated rather than inferred -- only ids a reviewer placed in
+    ``observance_ids._PACKED_POOLS`` can match this way.
   * ``ORDER`` -- the same components in a different order.
   * ``DOMINANT_FORM`` -- the source spells one name several ways and the engine serves the
     one it uses most often. Not a defect: it is the same policy the English side applies to
@@ -80,6 +77,7 @@ from armenian_lectionary.engine import (                                # noqa: 
     _FEAST_SEP, compute_armenian_lectionary,
 )
 from dev.build_observance_catalog import CATALOG_PATH, _INTERNAL_SEP   # noqa: E402
+from dev.observance_ids import _PACKED_POOLS                           # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
 from dev.source_corrections import ground_truth_hy_fixes                # noqa: E402
 
@@ -146,51 +144,51 @@ def _dominant_forms(witnesses):
 
 
 @functools.lru_cache(maxsize=1)
-def _hy_to_observance():
-    """``{Armenian spelling -> the observance id it names}``, primaries and variants alike.
+def _hy_pool():
+    """``{Armenian spelling -> the packed pool its observance belongs to}``.
 
-    Only spellings the catalog declares, which is what keeps this from being the fuzzy
-    match the module otherwise refuses. A commemoration the source writes with a longer or
-    shorter companion list is ONE observance -- stated in feast_name_review.tsv's
-    ``variant_of`` column and confirmed by the propers being byte-identical within each
-    group -- so its spellings are the same fact, not a near-miss worth reporting.
+    The Armenian side of ``observance_ids._PACKED_POOLS``: the First Volume canons the
+    Second Volume packs onto one day, naming only the first for brevity. Only spellings the
+    catalog declares, which is what keeps this from being the fuzzy match the module
+    otherwise refuses.
     """
     with open(CATALOG_PATH, encoding="utf-8") as fh:
         catalog = json.load(fh)
-    return {form["hy"]: sid
-            for sid, entry in catalog.items()
-            for form in (entry, *entry.get("variants", ()))}
+    pools = {}
+    for sid, entry in catalog.items():
+        pool = next((p for p in _PACKED_POOLS if sid in p), None)
+        if pool is not None:
+            pools[entry["hy"]] = pool
+    return pools
 
 
 def diff_components(src_comps, eng_comps):
-    """``(contradictions, omissions, variants)``: what the engine asserts that the source
-    lacks, what the source states that the engine drops, and the (source, engine) pairs
-    that are two declared spellings of one observance.
+    """``(contradictions, omissions, expansions)``: what the engine asserts that the source
+    lacks, what the source states that the engine drops, and the components the engine adds
+    by expanding the Second Volume's brevity into the First Volume's canons.
 
-    Matching is exact and greedy in component order, so a component is never counted as
-    both. Exact text first; then, for what is left, exact OBSERVANCE -- two spellings the
-    catalog declares to be one observance are one observance here too. That second pass is
-    enumerated, never inferred: it can only match text a reviewer grouped by hand.
+    Matching is exact and greedy in component order, so a component is never counted twice.
+    Exact text first; then, for what is left, the declared packed pool -- if the source
+    named one canon of a pool and the engine serves others from the same pool, that is the
+    Tonats'oyts' own instruction (preface, Sixth), not an invention. Enumerated, never
+    inferred: only ids a reviewer put in a pool can match this way.
     """
     unmatched_src = list(src_comps)
-    contradictions = []
+    contradictions, matched = [], []
     for eng in eng_comps:
         if eng in unmatched_src:
             unmatched_src.remove(eng)
+            matched.append(eng)
         else:
             contradictions.append(eng)
 
-    by_hy = _hy_to_observance()
-    still_wrong, variants = [], []
+    by_hy = _hy_pool()
+    pools = [p for p in (by_hy.get(m) for m in matched) if p]
+    still_wrong, expansions = [], []
     for eng in contradictions:
-        sid = by_hy.get(eng)
-        same = next((s for s in unmatched_src if sid and by_hy.get(s) == sid), None)
-        if same is None:
-            still_wrong.append(eng)
-        else:
-            unmatched_src.remove(same)
-            variants.append((same, eng))
-    return still_wrong, unmatched_src, variants
+        pool = by_hy.get(eng)
+        (expansions if pool is not None and pool in pools else still_wrong).append(eng)
+    return still_wrong, unmatched_src, expansions
 
 
 def _is_dominant_form(contradictions, omissions, dominant):
@@ -222,7 +220,7 @@ def collect():
             continue
 
         src_comps, eng_comps = components(src), components(eng)
-        contradictions, omissions, variants = diff_components(src_comps, eng_comps)
+        contradictions, omissions, expansions = diff_components(src_comps, eng_comps)
         if eng.replace(_INTERNAL_SEP, _FEAST_SEP) == src:
             kind = "INTERNAL_DELIMITER"
         elif _is_dominant_form(contradictions, omissions, dominant):
@@ -231,20 +229,20 @@ def collect():
             kind = "CONTRADICTION"
         elif omissions:
             kind = "OMISSION"
-        elif variants:
-            kind = "VARIANT_NAME"
+        elif expansions:
+            kind = "EXPANSION"
         else:
             kind = "ORDER"
         findings.append({
             "iso": iso, "kind": kind, "src": src, "eng": eng,
             "contradictions": contradictions, "omissions": omissions,
-            "variants": variants,
+            "expansions": expansions,
         })
 
     return {"compared": compared, "exact": exact, "findings": findings}
 
 
-KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "VARIANT_NAME", "DOMINANT_FORM",
+KINDS = ("CONTRADICTION", "OMISSION", "ORDER", "EXPANSION", "DOMINANT_FORM",
          "INTERNAL_DELIMITER")
 
 

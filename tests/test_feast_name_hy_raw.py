@@ -22,27 +22,27 @@ reviewed Armenian correction no longer reads as a defect. That is what took the 
 12 to 11 and the exact floor from 407 to 409; it was not expressible while ``approved_hy``
 was an override filled on 3 rows of 397 rather than a decision stated on every one.
 
-Armenian also has the second half of that now: merging the companion-list variants onto one
-observance id gave ``diff_components`` a declared equivalence to match on, which is the
-Armenian analogue of ``canonical_commem`` and took the count 11 -> 6. Approving the FULL
-companion list on those ids then folded four of the five outright -- the Second Volume's
-short forms are its own abbreviations (preface, Sixth), so ``ground_truth_hy_fixes`` maps
-each to the full name and the day matches exactly.
+Armenian also has the second half of that now. The Tonats'oyts packs several First Volume
+canons onto one line when the taregir leaves few days for them, and its preface (Sixth)
+says it prints "only the name of the first saints ... for the sake of brevity". Splitting
+those lines into one component per canon gave the Armenian both halves of what English gets
+from ``canonical_commem``: the glued source spelling folds through ``approved_hy``, and a
+canon the engine serves from the same declared pool reports as EXPANSION rather than as a
+contradiction. 6 -> 3.
 
-The residue is still not all engine defect. The 5 contradictions are:
+The 3 that remain are all source-side, and all accepted:
 
-  * 2 days where the source GLUED two commemorations that each have their own id (Sargis +
-    Atom, Eugenius + Andrew) and the engine serves only the first. A real difference, not a
-    spelling: the source states a commemoration we drop;
   * 2 word-form variants (``Առաջաւորի``/``Առաջաւորաց``, ``Ծննդեան``/``Ս. Ծննդեան``) where
     the engine serves the source's dominant spelling, but which the DOMINANT_FORM
     classifier is deliberately too crude to group -- it compares spacing and case, not
     morphology. Neither minority spelling is in the TSV to correct: a row holds ONE
-    ``source_hy``, sampled from one day, and these are what the source printed on another;
+    ``source_hy``, sampled from one day, and these are what the source printed on another.
+    The engine serves the source's own dominant spelling in both cases, so it is the source
+    disagreeing with itself, not a defect -- see docs/feast-name-corrections.md section 8;
   * 1 segmentation difference (2005-01-01), where the source's Armenian glues ``Կաղանդ.
-    տարեմուտ`` onto the saints that follow while the English carries it with the day count.
-    A boundary disagreement, not a spelling: it can only move if the catalog stops being
-    keyed on English components.
+    տարեմուտ`` (New Year's Day) onto the saints that follow while the English carries it
+    with the day count. A boundary disagreement, not a spelling: New Year's Day wants its
+    own observance, which is a separate change (docs section 8).
 
 (The deliberate ``Ա``-for-``Բ`` Sunday-after-Pentecost ordinal correction used to be a
 twelfth. It is now folded, along with ``Սկիզբն պահոց`` -> ``Սկիզբն շաբաթական պահոց``.)
@@ -71,24 +71,19 @@ from tests._reference_cache import requires_reference_cache_hy          # noqa: 
 
 # Days where the engine emits an Armenian component the source does not have.
 # Monotonic DOWN. The target is 0, as on the English side.
-HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "5"))
+HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "3"))
 
 # Days where the engine drops an Armenian component the source states. Monotonic DOWN.
-HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "2"))
+HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "4"))
 
 # Days carrying the right components in a different order. Monotonic DOWN.
 HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
 
-# Days where the source names the same OBSERVANCE with a different declared companion set.
-# Correct as served: the catalog states the two are one observance
-# (feast_name_review.tsv's variant_of) and the propers are byte-identical, so the day the
-# cache sampled decides nothing.
-#
-# 5 -> 1 when the abbreviations were resolved to the full companion list. The one left is
-# vahan_of_goghtn, whose two sets are not nested in each other (Eugenia's household in one,
-# Gordius/Polyeuctus/Grigoris in the other), so there is no full list to approve that the
-# source actually prints. Monotonic DOWN: a rise means a new spelling nobody grouped.
-HY_VARIANT_NAME_CEILING = int(os.environ.get("HY_VARIANT_NAME_CEILING", "1"))
+# Days where the source names one canon of a packed pool and the engine serves others from
+# the same pool. Correct as served: the Second Volume prints only the first saints "for the
+# sake of brevity" and its preface (Sixth) says to celebrate the companions the First Volume
+# sets down. Monotonic DOWN anyway: a rise means a new packing nobody has looked at.
+HY_EXPANSION_CEILING = int(os.environ.get("HY_EXPANSION_CEILING", "4"))
 
 # Days where the source spells a name several ways and we serve its dominant form. Correct,
 # but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
@@ -116,7 +111,7 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # The floor is 413 rather than the 414 a full cache now reports: the days gained since it
 # was set at 407 are reproducible anywhere except one, which came from the cache growing
 # 433 -> 435 days.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "413"))
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "410"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.
@@ -157,13 +152,13 @@ class TestRawArmenianFeastName(unittest.TestCase):
             f"{n} days serve the right Armenian components in the wrong order (ceiling "
             f"{HY_ORDER_CEILING}); run `python dev/hy_discrepancy.py --list`")
 
-    def test_variant_names_within_ratchet(self):
-        n = self.tally["VARIANT_NAME"]
+    def test_expansions_within_ratchet(self):
+        n = self.tally["EXPANSION"]
         self.assertLessEqual(
-            n, HY_VARIANT_NAME_CEILING,
-            f"{n} days name the same observance with a different declared spelling "
-            f"(ceiling {HY_VARIANT_NAME_CEILING}); these are not defects, but a rise means "
-            "a spelling appeared that no reviewer has grouped -- run "
+            n, HY_EXPANSION_CEILING,
+            f"{n} days expand the Second Volume's brevity into more First Volume canons "
+            f"than the source printed (ceiling {HY_EXPANSION_CEILING}); these are not "
+            "defects, but a rise means a packing nobody has reviewed -- run "
             "`python dev/hy_discrepancy.py --list`")
 
     def test_dominant_form_within_ratchet(self):

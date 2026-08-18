@@ -37,16 +37,27 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.feast_discrepancy_report import collect, is_position         # noqa: E402
 from tests._reference_cache import requires_reference_cache           # noqa: E402
 
-# Days the engine drops a source component on. Now zero: the last 15 were an
-# "Eve of <Fast>" note on a fixed-date feast whose table key could not keep it, and
-# engine._eve_label regenerates those per date (dev/verify_eve_labels.py).
-# Monotonic DOWN -- lower it whenever a fix lands, never raise it.
-OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "0"))
+# Days the engine drops a source component on. Monotonic DOWN -- lower it whenever a fix
+# lands, never raise it.
+#
+# It WAS raised once, 0 -> 5, and only because the measurement got better rather than the
+# engine worse. Splitting a packed day into its First Volume canons (docs section 7) made
+# each canon its own component; before that the engine served one long string and
+# canonical_commem's deliberately crude predicates ("Vahan of Goghtn" in c) folded any two
+# companion sets to equality. The 5 days were already wrong on origin/main and it can be
+# checked directly -- e.g. 2008-07-28, where main serves "Sts. Vahan of Goghtn, Eugenia the
+# Virgin, ..." and the source prints "Saints Vahan of Goghtn, Gordius, Polyeuctus and
+# Grigoris". Same feast id, different canons packed onto the day.
+#
+# What they have in common: the engine serves ONE packing per liturgical coordinate, and
+# which canons the source names varies by year-type. Closing them means per-year packing
+# data, which is a readings-provenance change and belongs in its own commit.
+OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "5"))
 
 # Days whose raw name matches the source exactly (or under the registered folds).
-# Monotonic UP. Now every compared day: the engine reproduces the source's feast name
-# string for all 9,496 days of ground truth.
-EXACT_FLOOR = int(os.environ.get("FEAST_EXACT_FLOOR", "9496"))
+# Monotonic UP. 9,491 of 9,496: the 5 shortfalls are the packed-day omissions above, which
+# used to score as exact only because the fold could not see the difference.
+EXACT_FLOOR = int(os.environ.get("FEAST_EXACT_FLOOR", "9491"))
 
 # Days with a source feast name to compare against. Guards against a shrinking cache
 # silently shrinking the oracle.

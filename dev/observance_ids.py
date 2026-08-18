@@ -27,19 +27,11 @@ def _catalog():
 def _text_to_id():
     """English component -> id.
 
-    One entry per component, INCLUDING each observance's alternate spellings: no two
-    observances share an English text, an invariant dev/build_observance_catalog.py
-    enforces. That is what lets a storage tier -- which has text and no date -- resolve
-    identity on its own.
-
-    Many-to-one on purpose. A commemoration the source spells with a longer or shorter
-    companion list is one observance, so every spelling of it resolves to the same id.
+    One entry per component: no two observances share an English text, an invariant
+    dev/build_observance_catalog.py enforces. That is what lets a storage tier -- which
+    has text and no date -- resolve identity on its own.
     """
-    by_text = {}
-    for sid, entry in _catalog().items():
-        for form in (entry, *entry.get("variants", ())):
-            by_text[form["en"]] = sid
-    return by_text
+    return {entry["en"]: sid for sid, entry in _catalog().items()}
 
 
 def ids_for_text(text):
@@ -59,3 +51,57 @@ def ids_for_text(text):
                 "rerun dev/build_observance_catalog.py")
         ids.append(by_text[component])
     return ids
+
+
+# --------------------------------------------------------------------------- #
+# Packed pools
+#
+# The Tonats'oyts sets these out as SEPARATE canons, each with its own propers: the
+# post-Theophany insertions at First Volume pp.460-462 and the pre-Lent cohort at
+# pp.464-465. The Second Volume then packs them onto however many days the taregir leaves
+# between the fixed Theophany and the movable Fast of the Catechumens, and its preface
+# (Sixth, p.556) says it prints "only the name of the first saints in many places for the
+# sake of brevity", instructing the reader to celebrate the companions from the First
+# Volume anyway.
+#
+# So a day where the source prints one head canon and the engine serves that canon plus the
+# others packed with it is the book's own instruction, not an invention -- but it IS a
+# difference from the printed string, so it is declared here and counted rather than
+# folded silently. The engine serves one packing per liturgical coordinate; which canons
+# the source names varies by year-type, and reconciling that is a readings question.
+#
+# Membership is by id and enumerated from the First Volume, never inferred from text.
+# --------------------------------------------------------------------------- #
+
+_PACKED_POOLS = (
+    # First Volume pp.460-462 -- inserted after the Theophany octave.
+    frozenset({
+        "hermit_st_anton", "hermit_sts_tryphon_barsauma", "theodosius_and_the_children",
+        "cyricus_and_his_mother", "vahan_of_goghtn", "fathers_sts_athanasius_and",
+        "gregory_the_theologian", "gordius_polyeuctus_and_grigoris",
+        "eugenia_the_virgin_her", "eugenius_macarius_valerius_candidus",
+        # Andrew's own canon is at p.527, in the Assumption cycle -- but the Second
+        # Volume's preface (Seventh, p.556) names him among the feasts that "frequently
+        # shift and are celebrated in various and different intervals", and the source
+        # does pack him into the January run (2009-01-27). Declared here on that warrant,
+        # not on a First Volume page.
+        "andrew_the_general_and",
+    }),
+    # First Volume pp.464-465 -- the pre-Lent martyr cohort.
+    frozenset({"sargis", "atom", "mark_the_bishop_pionius", "sukias", "voskian",
+               "ghevond"}),
+)
+
+
+def pool_of_text(text):
+    """The packed pool the component belongs to, or ``None``.
+
+    Text, not id, because the callers are the discrepancy reports, which compare strings.
+    Unknown text is not an error here (the source publishes spellings that reach nothing);
+    it simply belongs to no pool.
+    """
+    sid = _text_to_id().get(text)
+    if sid is None:
+        return None
+    return next((pool for pool in _PACKED_POOLS if sid in pool), None)
+

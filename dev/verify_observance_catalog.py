@@ -91,7 +91,10 @@ def live_generated_components():
 
 
 def prelent_components():
-    return {label for _sid, _off, _may_shift, label, _reads in _PRELENT_COHORT}
+    # A cohort label may itself be two packed canons joined on _FEAST_SEP, so split it --
+    # the catalog holds one entry per canon, never per packed day.
+    return {c for _sid, _off, _may_shift, label, _reads in _PRELENT_COHORT
+            for c in components_of(label)}
 
 
 def embedded_components():
@@ -101,10 +104,7 @@ def embedded_components():
 def main():
     with open(CATALOG_PATH, encoding="utf-8") as fh:
         catalog = json.load(fh)
-    # Variants are served text too: an observance the source also prints with a
-    # different companion set ships its alternates under the same id.
-    catalog_texts = {form["en"] for entry in catalog.values()
-                     for form in (entry, *entry.get("variants", ()))}
+    catalog_texts = {entry["en"] for entry in catalog.values()}
 
     served = (table_components() | schedule_components() | live_generated_components()
               | prelent_components() | embedded_components())

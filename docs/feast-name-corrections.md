@@ -276,115 +276,151 @@ component needs no further change.
 
 ---
 
-## 7. One commemoration, several companion lists — merged onto one id
+## 7. Packed days — one line, several canons
 
-Not a text correction: the served names are unchanged. This is an **identity** fix.
+Ids were minted per distinct display string, so a commemoration the source spells several
+ways became several observances. The source prints "Sts. Cyricus and His Mother Julitta" on
+one year's Jan 21 and the same plus "and Sts. Gordius, Polyeuctus and Grigoris" on
+another's. `cyricus_and_his_mother`, `_2` and `_3` were one feast, and a consumer
+persisting `_2` had no way to learn it.
 
-The source spells a few commemorations with a longer or shorter companion list, and prints
-both across years for the same liturgical day — "Sts. Cyricus and His Mother Julitta" on
-one year's Jan 21, and the same plus "and Sts. Gordius, Polyeuctus and Grigoris" on
-another's. Because ids were minted per distinct display string, each spelling became its
-own observance. A consumer that persisted `cyricus_and_his_mother_2` had no way to know it
-was the same feast as `cyricus_and_his_mother`.
-
-**The propers settle it.** Within each group the stored readings are byte-identical:
-
-| Observance | Merged in | Readings |
-|---|---|---|
-| `cyricus_and_his_mother` | `_2`, `_3` | Proverbs 14.1-6 · Zechariah 8.4-5 · Isaiah 60.8-9 · Hebrews 2.14-18 · Luke 9.44-48 |
-| `vahan_of_goghtn` | `_eugenia`, `_gordius` | Proverbs 7.1-7 · Ezekiel 12.17-19 · Romans 8.12-27 · Luke 9.23-27 |
-| `hermit_st_anton` | `hermits_sts_anton_tryphon` | Proverbs 21.15-24 · Isaiah 19.19-21 · Hebrews 11.32-40 · Matthew 10.37-42 |
-| `fathers_sts_athanasius_and` | `_2` | Proverbs 11.2-11 · Isaiah 61.3-7 · Hebrews 13.7-9 · John 16.33-17.8 |
-| `atom` | `atom_and_his_soldiers` | Wisdom 6.11-20 · Isaiah 18.7-19.7 · 2 Cor 4.10-5.5 · John 16.1-4 |
-
-Seven ids retired, 387 → 380, each declared in `_RETIRED_IDS`. It was safe to do only
-because the catalog's keys had never been served as ids; after #24 exposes them it would
-not be.
-
-### What the readings test also ruled OUT
-
-The same evidence kept two candidates apart, which is why it is a test and not a formality:
-
-- **`atom_and_his_soldiers_2`** ("…and Sts. Sukiasians the Martyrs") carries those four
-  readings **plus six more** — Leviticus 12.6-8, Proverbs 8.22-34, Ezekiel 44.1-2,
-  Malachi 3.1-4, Galatians 3.24-29, Luke 2.22-40. Those are the Presentation of the Lord,
-  and the dates serving it are Feb 13, the eve of Տեառնընդառաջ. A **concurrence** — two
-  commemorations on one day — not a longer companion list. Kept separate.
-- **`discovery_of_relics_of`** was swept in by `_FEAST_CANON_RULES`' Anton predicate
-  (`"Anton" in c and "Hermit" in c`), which is a comparison heuristic, not an identity
-  claim. Disjoint readings. Kept separate.
-
-### The short forms are the book's own abbreviations
-
-The Tōnats'oyts explains the varying strings itself. Volume II's preface, **Sixth**
-(p.556, `grabar-ocr/corpus/book.english.md`):
+**The Tōnats'oyts explains the varying strings itself**, in the Second Volume's preface,
+**Sixth** (p.556, `grabar-ocr/corpus/book.english.md`):
 
 > The feasts of the Saints for the most part are set down **plurally** in our Tonatsuyts
-> from its original state, that is, two, three, four, five… **which are always celebrated
-> together indivisibly**… But when we mention such in this Second Volume, **we have placed
-> only the name of the first saints in many places for the sake of brevity**; nevertheless,
-> when you encounter such feasts in this Second Volume, you must celebrate, along with the
-> first-named saint, all the other companions following him.
+> from its original state… **which are always celebrated together indivisibly**… But when
+> we mention such in this Second Volume, **we have placed only the name of the first saints
+> in many places for the sake of brevity**; nevertheless… you must celebrate, along with
+> the first-named saint, all the other companions following him, **and commemorate their
+> names by that canon as they are set down in the First Volume**.
 
 — `զանուն առաջնոց սրբոցն միայն եդաք ի բազում տեղիս վասն կարճելոյ բանին`
 (`book.grabar.md:7683`).
 
-So `"always celebrated together indivisibly"` is the book stating the very criterion the
-readings test measures, and the short strings are its shorthand, not different days. The
-approved name is therefore the **full companion list**, and every abbreviation is a key
-into it rather than a value we serve:
+That last clause is the operative one. **Each saint is its own canon**, and the First
+Volume proves it: pp.460–462 sets out Anton · Theodosius and the Children of Ephesus ·
+Cyriacus and Julietta · Vahan of Goghtn · Tryphon, Parsamas and Onuphrius · Athanasius and
+Cyril · Gordius, Polyeuctus and Grigoris · Eugenia's household · Gregory the Theologian ·
+Eugenius and companions — ten consecutive canons, each with its own propers. pp.464–465
+does the same for the pre-Lent cohort, including the Atomian Generals and the Mark/Pionius
+group separately.
+
+**Why they run together.** That pool has to fit between the fixed Theophany and the movable
+Fast of the Catechumens, and the gap changes length with the taregir. So each Second Volume
+year-type *packs* the canons onto however many days it has, and abbreviates the resulting
+line. A line like `Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris` is therefore a
+**day**, not an observance.
+
+So the observance is the canon and the id follows the canon:
 
 ```
-approved_en:  Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius,
-              Polyeuctus and Grigoris
-              ← "Saints Cyricus and His Mother Julitta"
-              ← "Saints Cyricus and His Mother Julitta, and Saints Gordius, Polyeuctus and Grigoris"
+approved_en:  Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris
+              ← "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris"
 ```
 
-Four groups collapse this way — `cyricus_and_his_mother`, `atom`, `hermit_st_anton`,
-`fathers_sts_athanasius_and` — and the served spellings drop 387 → 382. The engine's
-hardcoded pre-Lent cohort label for `atom` moved with them, since that tier composes its
-text rather than reading it from the table.
+Eleven rows split this way; each keeps `id` empty and says why, exactly as the comma-joined
+`Fast day, Remembrance of the Ten Virgins` already did. Twelve ids retired into
+`_RETIRED_IDS`, all of them minted for a packed line rather than an observance, and one id
+minted for the canon the source never prints alone (`gordius_polyeuctus_and_grigoris` —
+always behind Cyricus or Vahan, so `source_hy` is empty and its Armenian is stated from the
+run it appears in).
 
-**One group cannot.** `vahan_of_goghtn`'s two sets are not nested in each other — Eugenia
-the Virgin's household in one, Gordius/Polyeuctus/Grigoris in the other — so naming the
-union would assert saints the source never puts on that day, and naming either would drop
-the other. Those two keep their own `en` and `hy` as `variants` under the id:
+### What the readings evidence settled
 
-```json
-"vahan_of_goghtn": {
-  "en": "St. Vahan of Goghtn",
-  "hy": "Սրբոյն Վահանայ Գողթնացւոյն",
-  "variants": [{"en": "Sts. Vahan of Goghtn, Eugenia the Virgin, …", "hy": "…"},
-               {"en": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris", "hy": "…"}]
-}
-```
+The propers within each former group are byte-identical, which is what made the merge look
+right in the first place — and it stays informative: it says the day's readings are the
+**head canon's**, which is how the packing works. It also kept two look-alikes apart.
+`atom_and_his_soldiers_2` ("…and Sts. Sukiasians the Martyrs") carries those four readings
+**plus six more** — Leviticus 12.6-8, Proverbs 8.22-34, Ezekiel 44.1-2, Malachi 3.1-4,
+Galatians 3.24-29, Luke 2.22-40 — which are the Presentation of the Lord, on Feb 13, the
+eve of Տեառնընդառաջ. And `discovery_of_relics_of` was swept in only by `_FEAST_CANON_RULES`'
+crude Anton predicate (`"Anton" in c and "Hermit" in c`); disjoint readings, different feast.
 
-`engine._observance_names()` resolves display text per spelling; `ids_for_text` resolves
-identity per observance, many-to-one. The grouping is **stated**, not inferred — a
-`variant_of` column in `dev/feast_name_review.tsv`, beside the id it belongs to. A row has
-an `id` or a `variant_of`, never both.
+### The declared pools, and what they let the reports see
 
-### The abbreviation also broke the Armenian witness column
+`dev/observance_ids._PACKED_POOLS` enumerates the two pools by **id**, from the First Volume
+pages above. A day where the source prints one head canon and the engine serves that canon
+plus the others packed with it is then reported as an **EXPANSION** — the book's own
+instruction, visible and ratcheted, not folded into silence. Andrew the General is in the
+first pool on a different warrant: his canon is at p.527, in the Assumption cycle, but the
+preface (**Seventh**) names him among the feasts that "frequently shift and are celebrated
+in various and different intervals", and the source does pack him into the January run.
 
-Promoting the full name exposed a defect in `dev/feast_name_review.armenian_for`: it looked
-`source_hy` up by the row's **approved** English, so once several rows approved the same
-name they all received the same Armenian — erasing the record of what the source actually
-printed for each, which is the evidence a correction rests on. Rows in a declared variant
-group now key on their own source text (`source_armenian_map`). Scoped to those groups on
-purpose: casing-typo pairs like the Presentation's two spellings also share an approved
-name, but there the approved-keyed map is the better answer, because it votes across every
-year rather than the single day the Armenian cache sampled.
+This is also what makes the remaining gap measurable. **The engine serves one packing per
+liturgical coordinate**, and which canons the source names varies by year-type. Five English
+days (and four Armenian) now report as OMISSION for that reason. They were already wrong on
+`origin/main` — 2008-07-28 serves Vahan with Eugenia's household where the source prints
+Vahan with Gordius — but `canonical_commem`'s deliberately crude predicates folded any two
+companion sets to equality, so nothing could see it. Closing them needs per-year packing
+data, which moves readings provenance and belongs in its own commit.
 
-### It also gave the Armenian comparison its missing equivalence
+### Two packings the engine now gets right
 
-`dev/hy_discrepancy.diff_components` had no analogue of `canonical_commem` and
-[declined to invent a fuzzy one](../dev/hy_discrepancy.py). A declared variant group is not
-fuzzy, so it can now match a source spelling to an engine spelling of the same observance.
-Contradictions **11 → 6**; those days report as `VARIANT_NAME`, visible but not counted as
-defects. Approving the full companion list then folded four of the five outright — the
-abbreviation now resolves through `ground_truth_hy_fixes` and the day matches exactly — so
-`VARIANT_NAME` is down to the one non-nested group and exact matches are up to 414 of 435.
+- **2008-01-21**, Sargis + Atom. Both are pre-Lent cohort canons at fixed Easter offsets;
+  when the Presentation blocks Atom's slot he shifts onto Sargis's, and
+  `_prelent_cohort_layout` used to let the senior win and drop the junior. It now joins the
+  two labels on `_FEAST_SEP`. The senior keeps the day's id and its readings, so a merge
+  cannot move a reading.
+- **2009-01-27**, Eugenius + Andrew the General — the floating feast of preface Seventh,
+  added to the `PN`-zone schedule label so the second-volume-cycle tier serves both.
+
+### The Armenian witness column, three times over
+
+`dev/feast_name_review.armenian_for` looks `source_hy` up in a map keyed on the **corrected**
+English, and that has now failed in three distinct ways, each erasing the column that is
+supposed to be the independent witness justifying a correction:
+
+1. correcting a name **emptied** it (the map is re-keyed by `dev/fetch_translations.py`,
+   which is why it is step 1 of the rebuild order);
+2. approving one name for several source strings **duplicated** it across them;
+3. splitting a line into canons **synthesised** it by joining the halves' Armenian, which
+   makes `source_hy` equal `approved_hy` and so registers no fold at all — leaving the
+   source's glued spelling reading as a contradiction on every packed day.
+
+Rows whose approved name contains `_FEAST_SEP` now take `source_hy` from a raw-keyed pairing
+(`source_armenian_map`) instead. Scoped there on purpose: the Presentation's casing-typo
+pair also shares an approved name, but for that one the approved-keyed map is better,
+because it votes across every year rather than the single day the Armenian cache sampled.
+
+## 8. Accepted differences from the source
+
+Not everything that differs is a defect, and three of these are the source disagreeing with
+itself. They are listed here so that "we looked and decided" is on the record.
+
+| Day(s) | Difference | Decision |
+|---|---|---|
+| 2003-02-13 | `Դ օր Առաջաւորի պահոց` vs `Առաջաւորաց` — genitive singular against genitive plural of the Fast of the Catechumens (1 witness against 2) | serve the majority |
+| 2011-02-13 | `Ե կիւրակէ զկնի Ծննդեան` missing the `Ս.`, and `Բարեկենդան Առաջաւորի պահոցն` against 5 witnesses for `Առաջաւորաց պահոց` | serve the majority |
+| Nov 21 | `ս.Աստուածածնի` / `ս. Աստուածածնի` / `Ս. Աստուածածնի` | serve the majority (§4b) |
+
+Neither of the first two is correctable in `feast_name_review.tsv` as it stands: a row holds
+**one** `source_hy`, sampled from one day, and these are what the source printed on another.
+`DOMINANT_FORM` cannot group them either — it compares spacing and case, not declension or a
+dropped word, on purpose. `dev/audit_hy_variants.py` is the standing check that we are
+serving the majority form everywhere.
+
+### `Կաղանդ. տարեմուտ` — New Year's Day wants its own observance
+
+The last Armenian segmentation difference, 2005-01-01. The source's Armenian glues
+`Կաղանդ. տարեմուտ` onto the saints that follow (`— Կաղանդ. տարեմուտ Սրբոցն Բարսղի …`) while
+its English never names New Year's Day at all, so the pairing landed it inside the position
+label's Armenian: `third_day_of_the_4` ships `Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ`.
+
+It should be its own observance — not least because the **Blessing of the Pomegranates** was
+inaugurated on it in 2015. Three facts constrain the fix:
+
+- `Կաղանդ. տարեմուտ` is witnessed on **Jan 1 only** (2001, 2002, 2005), and on two of those
+  the Armenian is exactly `Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ`, with no saint attached.
+  So it is a **fixed civil date**, not a property of the position label or of Basil's canon.
+- It cannot ride on `basil_the_great_and`: that canon is served on Dec 22, 30, 31 and Jan 1–4.
+- `Third day of the Fast of Nativity` is Jan 1 in 23 of the 27 years, not all of them.
+
+So it needs a **date-fixed overlay** in the engine, alongside `_position_label` and
+`_eve_label` — and, unlike those, one that adds a component the English source never
+publishes on any day. There is no registration path for that today: `apply_ground_truth`
+corrects text the source printed, and here there is nothing to correct, so the component
+would read as a contradiction on 27 days with the 0-contradiction contract no way to absorb
+it. That is a declared new category with its own ratchet, and it is its own change.
 
 ## Open questions — NOT corrected
 

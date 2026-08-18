@@ -105,14 +105,23 @@ _RETIRED_IDS = {
     # for the same liturgical day; the propers settle it, being byte-identical within each
     # group (docs/feast-name-corrections.md section 7). They now ship as ``variants`` of the
     # id named here, so the display text is unchanged and only the identity is single.
-    "cyricus_and_his_mother_2": "merged into cyricus_and_his_mother (identical propers)",
-    "cyricus_and_his_mother_3": "merged into cyricus_and_his_mother (identical propers)",
-    "vahan_of_goghtn_eugenia": "merged into vahan_of_goghtn (identical propers)",
-    "vahan_of_goghtn_gordius": "merged into vahan_of_goghtn (identical propers)",
+    # Ids minted for a PACKED DAY, not an observance. The Tonats'oyts squeezes the
+    # post-Theophany saint pool into a gap whose length varies with the taregir, so one
+    # line can carry several First Volume canons; the old build minted an id per distinct
+    # line. Each canon keeps its own id and the join gets none, exactly as with the
+    # comma-joined "Fast day, Remembrance of the Ten Virgins".
+    "cyricus_and_his_mother_2": "a packed day; Cyricus and the Gordius canon each keep an id",
+    "cyricus_and_his_mother_3": "a packed day; Cyricus, Vahan and Gordius each keep an id",
+    "vahan_of_goghtn_eugenia": "a packed day; Vahan and the Eugenia canon each keep an id",
+    "vahan_of_goghtn_gordius": "a packed day; Vahan and the Gordius canon each keep an id",
     "fathers_sts_athanasius_and_2":
-        "merged into fathers_sts_athanasius_and (identical propers)",
-    "hermits_sts_anton_tryphon": "merged into hermit_st_anton (identical propers)",
-    "atom_and_his_soldiers": "merged into atom (identical propers)",
+        "a packed day; Athanasius/Cyril and Gregory the Theologian each keep an id",
+    "hermits_sts_anton_tryphon":
+        "a packed day; Anton and the Tryphon canon each keep an id",
+    "atom_and_his_soldiers": "a packed day; Atom and the Mark canon each keep an id",
+    "eugenia_the_virgin_her_2":
+        "a packed day; the Eugenia and Eugenius canons each keep an id",
+    "atom_and_his_soldiers_2": "a packed day; Atom and the Sukiasians each keep an id",
 }
 
 
@@ -138,18 +147,33 @@ def load_ground_truth():
         return json.load(fh)
 
 
-def served_components():
+def served_components(ground_truth):
     """Every distinct component the engine can emit as a single observance.
 
-    Two origins, both enumerated rather than transcribed: the reviewed text of everything
-    the source published, and the position/eve labels the engine composes per date (which
-    the source may print less specifically -- see source_corrections.illuminator_fast_label).
+    Two origins, both enumerated rather than transcribed: the position/eve labels the
+    engine composes per date (which the source may print less specifically -- see
+    source_corrections.illuminator_fast_label), and the COMPONENTS of every approved name.
+
+    Components, not whole approved names: a correction may resolve one source string into
+    several observances joined on _FEAST_SEP, because the Tonats'oyts packs several First
+    Volume canons onto one line when the taregir leaves few days for them. Each half is a
+    served observance and needs an id, including the halves the source never publishes
+    alone -- which is precisely the case that reading only whole approved names misses.
     """
     texts = set()
     d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
     while d <= end:
         texts.update(label for label in (_position_label(d), _eve_label(d)) if label)
         d += datetime.timedelta(days=1)
+    whole = {row["approved_en"] for row in ground_truth.values() if row.get("approved_en")}
+    for approved in whole:
+        parts = [p.strip() for p in approved.split(_FEAST_SEP) if p.strip()]
+        if len(parts) > 1:
+            # Only the halves a split PRODUCED. A whole approved name is already a row, and
+            # that row states its id or states why it has none -- sweeping those back in
+            # would remint ids for text that reaches nothing, which is what _RETIRED_IDS
+            # exists to keep out.
+            texts.update(part for part in parts if part not in whole)
     return texts
 
 
@@ -157,14 +181,9 @@ def build_catalog(ground_truth):
     """``(catalog, problems)`` -- the projection, and every invariant it violates.
 
     One entry per OBSERVANCE, not per display string. A commemoration the source spells
-    several ways (a longer or shorter companion list for the same liturgical day) is one
-    entry, and its short forms are ABBREVIATIONS: the row approves the full list, so the
-    short text is a key into the catalog and never a value in it.
-
-    ``variants`` survives for the one case that is not an abbreviation -- two companion
-    sets the source prints for one id that are not nested in each other, where naming the
-    union would assert saints the source never puts on that day. Those keep their own
-    ``en``/``hy``, so display text stays exact while identity stays single.
+    several ways is one entry per CANON: the Tonats'oyts packs several First Volume canons
+    onto one line when the taregir leaves few days for them, and the row approves the
+    _FEAST_SEP-joined split, so each canon resolves to its own id and the join gets none.
     """
     catalog, problems = {}, []
     by_id, by_en = {}, {}
@@ -208,51 +227,15 @@ def build_catalog(ground_truth):
         by_id[sid], by_en[en] = source, sid
         catalog[sid] = {"en": en, "hy": hy.replace(_FEAST_SEP, _INTERNAL_SEP)}
 
-    for source, row in sorted(ground_truth.items()):
-        primary = row.get("variant_of")
-        if not primary:
-            continue
-        if row.get("id"):
-            problems.append(f"{primary}: a row has BOTH an id and a variant_of; it is "
-                            "either its own observance or an alternate name for one")
-            continue
-        en, hy = names_of(row)
-        if not en or not hy:
-            problems.append(f"variant of {primary}: missing approved text for {source!r}")
-            continue
-        if primary not in catalog:
-            problems.append(f"{en!r} is a variant of {primary!r}, which is not an "
-                            "observance -- variant_of must name a row that has an id")
-            continue
-        if en == catalog[primary]["en"]:
-            # The ordinary case, and what the Second Volume's own preface describes: the
-            # source printed an ABBREVIATION of this observance on some days, and the row
-            # approves the full name. The short form is a key into the catalog, never a
-            # value in it -- apply_ground_truth has already resolved it by the time the
-            # engine looks anything up, so there is nothing to add here.
-            continue
-        if en in by_en:
-            problems.append(
-                f"variant {en!r} of {primary} is already the English of {by_en[en]}")
-            continue
-        by_en[en] = primary
-        catalog[primary].setdefault("variants", []).append(
-            {"en": en, "hy": hy.replace(_FEAST_SEP, _INTERNAL_SEP)})
-
-    for entry in catalog.values():
-        if "variants" in entry:
-            entry["variants"].sort(key=lambda v: v["en"])
-
     return catalog, problems
 
 
 def audit(catalog, ground_truth):
     """Coverage against what the engine actually serves, and against what has shipped."""
     findings = []
-    # A variant is covered by the observance it names, so it counts as resolvable text.
-    approved_ids = {row["approved_en"]: (row.get("id") or row.get("variant_of"))
+    approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
-    served = served_components()
+    served = served_components(ground_truth)
 
     unregistered = sorted(t for t in served if not approved_ids.get(t))
     if unregistered:
@@ -284,12 +267,12 @@ def audit(catalog, ground_truth):
 
 def mint(ground_truth):
     """Assign ids to served components that have none, writing them back to the TSV."""
-    # A variant is covered by the observance it names, so it counts as resolvable text.
-    approved_ids = {row["approved_en"]: (row.get("id") or row.get("variant_of"))
+    approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
     used = {sid for sid in approved_ids.values() if sid}
     new = {text: _slug(text, used)
-           for text in sorted(served_components()) if not approved_ids.get(text)}
+           for text in sorted(served_components(ground_truth))
+           if not approved_ids.get(text)}
     if not new:
         return {}
 

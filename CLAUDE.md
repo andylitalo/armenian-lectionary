@@ -22,7 +22,7 @@ with no install step.
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy, variants?}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -173,19 +173,24 @@ Working rules:
   leaves a served observance unaddressable.
 - **Retiring an id is declared**, in `_RETIRED_IDS` with the reason, or the build fails
   naming it. Reviving one fails too.
-- **One observance, not one display string.** Where the source spells a commemoration
-  several ways — the same liturgical day with a longer or shorter companion list — the
-  alternates carry `variant_of` (the primary's id) instead of an `id`. A row has an `id` or
-  a `variant_of`, never both. Group only on evidence that it is one day: identical propers
-  settled the five in docs §7, and kept two look-alikes apart.
-  - The short forms are the **Tōnats'oyts' own abbreviations** — Volume II's preface, Sixth
-    (p.556): the saints are "always celebrated together indivisibly", and the Second Volume
-    prints "only the name of the first saints … for the sake of brevity". So `approved_en`
-    and `approved_hy` carry the **full companion list** on every row in the group, and the
-    abbreviation is a key into the catalog, never a value in it.
-  - `variants` survives for the one group whose companion sets are **not nested**
-    (`vahan_of_goghtn`), where naming the union would assert saints the source never puts
-    on that day. Those alternates ship under the id keeping their own `en` and `hy`.
+- **One observance is one CANON, not one printed line.** The Tōnats'oyts sets each saint's
+  feast out as its own canon (First Volume pp.460–462, 464–465) and the Second Volume packs
+  several onto one line when the taregir leaves few days for them, naming only the first
+  "for the sake of brevity" (preface, Sixth, p.556). So a line like `Sts. Vahan of Goghtn,
+  Gordius, Polyeuctus and Grigoris` is a **day**. Its `approved_en`/`approved_hy` split it
+  on `_FEAST_SEP`, each canon keeps its own id, and the row itself gets none — the same
+  shape as the comma-joined `Fast day, Remembrance of the Ten Virgins`. Group or split only
+  on First Volume evidence, never on how similar two strings look.
+  - A canon the source never publishes alone still needs a row and an id;
+    `feast_name_review.py` emits one (`status = split`) from the halves of a split approved
+    name, and its Armenian is stated by hand because there is no standalone scrape of it.
+  - `dev/observance_ids._PACKED_POOLS` enumerates the two pools **by id**. It is what lets
+    the discrepancy reports call a day where the engine serves more canons than the source
+    printed an `EXPANSION` rather than a contradiction — the book's own instruction, kept
+    visible and ratcheted.
+  - The engine serves **one packing per liturgical coordinate**; which canons the source
+    names varies by year-type. That is the residual 5 English / 4 Armenian omissions, and
+    closing it is a readings-provenance change (docs §7).
 
 Invariants the build enforces, each of which was violable before: ids unique, English
 unique (no two observances under one display string), no component carrying `_FEAST_SEP` in

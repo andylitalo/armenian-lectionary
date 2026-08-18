@@ -1707,11 +1707,13 @@ _PRELENT_COHORT = (
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     # The full companion list, as the observance catalog approves it: the Second Volume
-     # prints "the Atomian Generals, and Bishop Mark, Pion, and the others" and its
-     # preface (Sixth) says to commemorate the companions the First Volume sets down.
-     "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril "
-     "and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+     # Two First Volume canons (pp.464-465), packed onto one day and joined on _FEAST_SEP
+     # so each resolves to its own observance id. The Second Volume prints "the Atomian
+     # Generals, and Bishop Mark, Pion, and the others"; its preface (Sixth) says to
+     # celebrate the companions the First Volume sets down.
+     "Sts. Atom and his soldiers" + _FEAST_SEP
+     + "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, "
+       "and Martyrs Abdelmseh, Ormistan and Sayen",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,
@@ -1756,7 +1758,15 @@ def _prelent_cohort_layout(year):
             if (d2 - e).days not in _PRELENT_OFFSETS:
                 continue                                # shifted off the cohort entirely
             d = d2
-        layout.setdefault(d, (sid, label, reads))       # senior placed first wins a merge
+        if d in layout:
+            # Two canons land on one day. The source prints both -- "Saint Sargis ... and
+            # Saints Atom and his soldiers" -- so serve both, joined on _FEAST_SEP so each
+            # resolves to its own observance id. The senior keeps the day's id and its
+            # readings; only the name grows, so a merge cannot move a reading.
+            senior_id, senior_label, senior_reads = layout[d]
+            layout[d] = (senior_id, senior_label + _FEAST_SEP + label, senior_reads)
+            continue
+        layout[d] = (sid, label, reads)                 # senior is placed first
     return layout
 
 
@@ -2016,11 +2026,8 @@ _OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 # flattened onto the primary's.
 def _observance_indexes(catalog):
     """``(text -> that spelling's {en, hy}, text -> the observance's id)``."""
-    names, ids = {}, {}
-    for sid, entry in catalog.items():
-        for form in (entry, *entry.get("variants", ())):
-            names[form["en"]] = form
-            ids[form["en"]] = sid
+    names = {entry["en"]: entry for entry in catalog.values()}
+    ids = {entry["en"]: sid for sid, entry in catalog.items()}
     return names, ids
 
 

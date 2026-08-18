@@ -104,18 +104,15 @@ class TestApprovedNames(unittest.TestCase):
     def test_every_id_less_row_says_why(self):
         """An empty ``id`` is a statement, so it has to be a legible one.
 
-        Four rows carry no id and no ``variant_of``, none of them by oversight: one is a
-        whole day whose halves are separately identified, three are glued or one-off
-        source variants nothing emits or stores. Without the reason written down, an id
-        missing on purpose and an id missing by accident look identical -- and the
-        accident is the one that makes a served observance unaddressable.
-
-        A row with ``variant_of`` is exempt: it has no id because it is an alternate name
-        for one, which the column already says.
+        Most id-less rows are PACKED DAYS -- one line carrying several First Volume canons,
+        whose approved name splits them so each canon resolves to its own id. The rest are
+        a comma-joined day and a one-off source spelling nothing emits or stores. Without
+        the reason written down, an id missing on purpose and an id missing by accident
+        look identical -- and the accident is the one that makes a served observance
+        unaddressable.
         """
         silent = [r["source_en"] for r in self.rows
-                  if not r["id"].strip() and not r["variant_of"].strip()
-                  and "no id" not in r["note"]]
+                  if not r["id"].strip() and "no id" not in r["note"]]
         self.assertEqual(
             silent[:5], [],
             f"{len(silent)} row(s) have no id and no note explaining why. Add the reason "
@@ -140,13 +137,15 @@ class TestApprovedNames(unittest.TestCase):
             f"{len(passed_through)} source component(s) do not resolve to their approved "
             "text through the lookup, so the raw spelling would reach a caller")
 
-    def test_variants_ship_under_a_real_observance(self):
-        """An alternate name resolves to its observance, and keeps its own text.
+    def test_packed_days_resolve_to_their_canons(self):
+        """A packed day carries no id, and every canon it names has one.
 
-        Merging these ids is what stops a consumer seeing one commemoration as three
-        feasts. It only works if the merge is identity-only: the variant must still serve
-        the exact English AND Armenian the source published for it, not the primary's.
-        Flattening the display text would drop companion saints the source actually names.
+        This is what stops a consumer seeing one commemoration as several observances, and
+        the other way round: the Tonats'oyts packs several First Volume canons onto one
+        line when the taregir leaves few days for them (preface, Sixth), so the line is a
+        DAY and the canons are the observances. Splitting it is only safe if each half
+        actually resolves -- an unresolvable half would make a served observance
+        unaddressable, silently.
         """
         import json
         import os
@@ -154,22 +153,23 @@ class TestApprovedNames(unittest.TestCase):
                                 "armenian_lectionary", "data", "observance_catalog.json")
         with open(cat_path, encoding="utf-8") as fh:
             catalog = json.load(fh)
-        by_text = {f["en"]: (sid, f)
-                   for sid, e in catalog.items()
-                   for f in (e, *e.get("variants", ()))}
+        by_text = {e["en"]: sid for sid, e in catalog.items()}
 
-        variants = [r for r in self.rows if r["variant_of"].strip()]
-        self.assertTrue(variants, "the variant grouping was dropped from every row")
-        for row in variants:
-            self.assertFalse(row["id"].strip(),
-                             f"{row['source_en']!r} has both an id and a variant_of")
-            self.assertIn(row["variant_of"], catalog,
-                          f"{row['source_en']!r} points at a non-observance")
-            sid, form = by_text.get(row["approved_en"], (None, None))
-            self.assertEqual(sid, row["variant_of"],
-                             f"{row['approved_en']!r} does not resolve to its observance")
-            self.assertEqual(form["hy"], row["approved_hy"].replace(" \u2014 ", "; "),
-                             f"{row['approved_en']!r} lost its own Armenian in the merge")
+        packed = [r for r in self.rows if _FEAST_SEP in r["approved_en"]]
+        self.assertTrue(packed, "the packed-day splits were dropped from every row")
+        for row in packed:
+            self.assertFalse(
+                row["id"].strip(),
+                f"{row['source_en']!r} is a packed DAY and must not carry an id")
+            en_parts = [c.strip() for c in row["approved_en"].split(_FEAST_SEP)]
+            hy_parts = [c.strip() for c in row["approved_hy"].split(_FEAST_SEP)]
+            self.assertEqual(
+                len(en_parts), len(hy_parts),
+                f"{row['source_en']!r} splits into {len(en_parts)} English canons but "
+                f"{len(hy_parts)} Armenian ones")
+            for part in en_parts:
+                self.assertIn(part, by_text,
+                              f"{part!r} is a canon of a packed day with no observance id")
 
     def test_open_questions_are_still_flagged(self):
         """The unresolved rows keep their question until someone answers it."""

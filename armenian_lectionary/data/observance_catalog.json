@@ -80,12 +80,8 @@
   "hy": "Սրբոցն Աթանագինեայ եպիսկոպոսին եւ տասն աշակերտացն եւ հինգ վկայիցն"
  },
  "atom": {
-  "en": "Sts. Atom and his soldiers, and Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
-  "hy": "Սրբոց Ատովմեանց զօրավարացն եւ սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի"
- },
- "atom_and_his_soldiers_2": {
-  "en": "Sts. Atom and his soldiers, and Sts. Sukiasians the Martyrs",
-  "hy": "Սրբոց Ատովմեանց զօրավարացն եւ Սուքիասեանց վկայիցն"
+  "en": "Sts. Atom and his soldiers",
+  "hy": "Սրբոց Ատովմեանց զօրավարացն"
  },
  "basil_the_great_and": {
   "en": "Sts. Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
@@ -140,8 +136,8 @@
   "hy": "Սրբոցն Կիպրիանոսի եպիսկոպոսին եւ քառասուն եւ հինգ վկայիցն եւ սրբոց կուսանացն Յուստիանեայ, Եւփիմեայ եւ Քրիստինեայ"
  },
  "cyricus_and_his_mother": {
-  "en": "Sts. Cyricus and His Mother Julitta, and Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
-  "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի"
+  "en": "Sts. Cyricus and His Mother Julitta",
+  "hy": "Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի"
  },
  "cyril_of_jerusalem_cyril": {
   "en": "Sts. Cyril of Jerusalem, Cyril the Bishop and Anna",
@@ -214,10 +210,6 @@
  "eugenia_the_virgin_her": {
   "en": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
   "hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն"
- },
- "eugenia_the_virgin_her_2": {
-  "en": "Sts. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs, and Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
-  "hy": "Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն, նաեւ սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ"
  },
  "eugenius_macarius_valerius_candidus": {
   "en": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
@@ -304,8 +296,8 @@
   "hy": "Սրբոց հարցն եգիպտացւոց Պօղոսի, Պօղայ, Մակարայ, Եւագրի, Յովհաննու Գբնեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմենի եւ այլոց սրբոց հարցն"
  },
  "fathers_sts_athanasius_and": {
-  "en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria and Gregory the Theologian",
-  "hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի եւ Գրիգորի Աստուածաբանին"
+  "en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
+  "hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի"
  },
  "feast_day_of_the": {
   "en": "Feast day of the Discovery of the Belt of the Holy Mother of God",
@@ -643,6 +635,10 @@
   "en": "Sts. Ghevond the Priest and His Companions",
   "hy": "Սրբոց Ղեւոնդեանց քահանայիցն"
  },
+ "gordius_polyeuctus_and_grigoris": {
+  "en": "Sts. Gordius, Polyeuctus and Grigoris",
+  "hy": "Սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի"
+ },
  "great_friday": {
   "en": "Great Friday",
   "hy": "Աւագ ուրբաթ"
@@ -696,8 +692,8 @@
   "hy": "Սրբոցն Գուրիասայ, Սամունասայ, Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին եւ Հիւսիքոսի զինաւորին"
  },
  "hermit_st_anton": {
-  "en": "The Hermits Sts. Anton, Tryphon, Barsauma and Onuphrius",
-  "hy": "Սրբոցն Անտոնի, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն"
+  "en": "The Hermit St. Anton",
+  "hy": "Սրբոյն Անտոնի ճգնաւորին"
  },
  "hermit_sts_tryphon_barsauma": {
   "en": "The Hermit Sts. Tryphon, Barsauma and Onuphrius",
@@ -1477,17 +1473,7 @@
  },
  "vahan_of_goghtn": {
   "en": "St. Vahan of Goghtn",
-  "hy": "Սրբոյն Վահանայ Գողթնացւոյն",
-  "variants": [
-   {
-    "en": "Sts. Vahan of Goghtn, Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
-    "hy": "Սրբոցն Վահանայ Գողթնացւոյն, Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն"
-   },
-   {
-    "en": "Sts. Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
-    "hy": "Սրբոցն Վահանայ Գողթնացւոյն եւ սրբոցն վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի"
-   }
-  ]
+  "hy": "Սրբոյն Վահանայ Գողթնացւոյն"
  },
  "vardan_the_general_and": {
   "en": "Sts. Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle",
