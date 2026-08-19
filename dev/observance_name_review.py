@@ -1,20 +1,29 @@
 """DEV-ONLY: build and refresh ``dev/observance_name_review.tsv`` -- our OWN ground truth
-for the English feast names.
+for the English observance (feast and fast) names.
 
 Why a second ground truth. ``dev/reference_data/`` is sacredtradition.am's, and the engine
 now reproduces it on 9496/9496 days -- which means it reproduces its typos too. That cache
 answers "does the engine match the source?"; it cannot answer "is the name right?". This
-file answers the second question: one row per distinct feast-name component, with the
+file answers the second question: one row per distinct observance-name component, with the
 approved English spelling a human has signed off on. ``tests/test_observance_name_review.py``
 holds the engine to it.
 
-Columns:
+Why a TSV, and why this column order. It stays a spreadsheet-editable, one-row-per-line
+format on purpose: it round-trips through Numbers/Excel/Google Sheets (this file is hand-
+reviewed there, see docs/sources/*.numbers) and diffs one line per edit in git, unlike JSON
+or YAML where a single field edit ripples through indentation. TSV over CSV specifically
+because ``source_en``/``approved_en``/``note`` routinely contain commas in ordinary prose
+but never a literal tab, so there is no quoting/escaping to get wrong.
+
+Columns, in file order:
 
   status     ok        served text equals the source's, and has been read and accepted
              fixed     a registered correction changed it (see dev/source_corrections)
              review    an open question -- the ``note`` says what is uncertain
-  days       how many days in 2001-2026 carry this component
-  last       latest date carrying it, for looking it up on sacredtradition.am
+  id         the observance's frozen catalog id (see below); placed right after
+             ``status`` because it is the row's identity, not part of either language pair
+  day_count  how many days in 2001-2026 carry this component
+  last_date  latest date carrying it, for looking it up on sacredtradition.am
   source_en  EXACTLY what the source publishes in English, before any correction
   approved_en the English the engine must serve. THIS COLUMN IS THE GROUND TRUTH.
   source_hy  the source's own Armenian for the same component, as an independent witness
@@ -89,7 +98,7 @@ from armenian_lectionary.engine import (                                # noqa: 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "observance_name_review.tsv")
-FIELDS = ("status", "days", "last", "source_en", "id", "approved_en",
+FIELDS = ("status", "id", "day_count", "last_date", "source_en", "approved_en",
           "source_hy", "approved_hy", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
@@ -515,8 +524,8 @@ def build_rows():
             or COMPOSED_SOURCE_HY.get(src, "")
         rows.append({
             "status": status,
-            "days": days[src],
-            "last": last[src],
+            "day_count": days[src],
+            "last_date": last[src],
             "source_en": src,
             "id": (prior or {}).get("id") or "",
             "approved_en": approved,

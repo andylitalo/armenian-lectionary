@@ -31,7 +31,7 @@ A mined piece that is just an existing row's text missing its title ("Theodoron 
 Martyr" vs. the row "Saint Theodoron the Martyr") is folded into that row via
 ``TITLE_ALIASES`` rather than kept as a separate one -- same person, same review question.
 
-Every atomic row's ``days``/``last`` are summed/maxed across EVERY occurrence, standalone
+Every atomic row's ``day_count``/``last_date`` are summed/maxed across EVERY occurrence, standalone
 or embedded, so the count reflects true commemoration frequency (Theodoron: 4 standalone +
 18 combined-with-Abraham's-group + 4 combined-with-Juliana's-group = 26, i.e. every year).
 
@@ -179,14 +179,14 @@ def build_atomic_rows():
         prior = by_source.get(leaf)
         if prior is not None:
             row = dict(prior)
-            row["days"] = leaf_days[leaf]
-            row["last"] = leaf_last[leaf]
+            row["day_count"] = leaf_days[leaf]
+            row["last_date"] = leaf_last[leaf]
         else:
             approved = corrected(leaf)
             row = {
                 "status": "ok",
-                "days": leaf_days[leaf],
-                "last": leaf_last[leaf],
+                "day_count": leaf_days[leaf],
+                "last_date": leaf_last[leaf],
                 "source_en": leaf,
                 "id": "",
                 "approved_en": approved,
