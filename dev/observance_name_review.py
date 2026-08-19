@@ -111,19 +111,10 @@ OPEN_QUESTIONS = {
         "(a diminutive of Jacob/James), so this is plausibly 'Jacob' -- but 'Jacovk' or "
         "'Hakovik' would transliterate the Armenian more closely. Which?",
     "Saint Theodoron the Martyr":
-        "hy 'Աստուածատրոյ' is Astvatsatur, 'God-given' -- checked against grabar-ocr's "
-        "corpus/book.grabar.md (25 independent occurrences across cycles): the Armenian "
-        "is invariant, no alternate declension that would explain a '-oron' ending, so "
-        "'Theodoron' is not a transliteration of some distinct Armenian form. But it is "
-        "also not a one-off scrape slip -- sacredtradition.am spells it 'Theodoron' "
-        "consistently, here and in the two rows that carry this saint packed with others "
-        "(abraham_and_khoren_moneyless_2, virgins_juliana_and_basilla_2). And grabar-ocr's "
-        "own independent English MT does not converge on 'Theodore' either: across "
-        "different pages it glosses the same Armenian variously as 'Astvatsatur', "
-        "'Adeodatus', 'Theodore', and 'Theodotos' (corpus/book.english.md), so there is no "
-        "single external convention to adopt in its place. Left open as a genuine editorial "
-        "call between an unexplained-but-consistent source spelling and several competing "
-        "conventional renderings, not a source contradiction to correct.",
+        "hy 'Աստուածատրոյ' is Astvatsatur, 'God-given', usually rendered Theodore -- "
+        "checked against grabar-ocr and left open as a genuine editorial call, not a "
+        "source contradiction. See docs/observance-name-corrections.md, Open questions, "
+        "'Saint Theodoron the Martyr'.",
     "Staint Gregory the Illuminator's coming out of Pit":
         "Missing article, and lowercase 'coming' where the companion feast reads "
         "'Commitment to the Pit'. 'Coming out of the Pit'? Left alone as the source's "
@@ -171,63 +162,30 @@ OPEN_QUESTIONS = {
 
     "Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in "
     "Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East":
-        "possible duplicate, NOT merged: checked against grabar-ocr's "
-        "corpus/book.grabar.md -- every independent taregir occurrence of this group (6 "
-        "samples) is labeled day 2 of the December cycle, never day 8, and the Armenian "
-        "itself is sometimes abbreviated with 'եւայլն' (etc.) in place of spelling out "
-        "the full list -- suggestive that this and the companion row "
-        "(cornelius_the_centurion_simeon_2, which drops 'the Relative of Christ') are the "
-        "same commemoration, with sacredtradition.am's own English wording varying by "
-        "year the way its Armenian sometimes does. NOT unified: making the two rows' "
-        "approved_en identical trips build_observance_catalog.py's one-string-per-id "
-        "invariant, which would force retiring one id -- and that script's own comment "
-        "says _RETIRED_IDS 'stops being a place to add to' once ids are shipped and a "
-        "consumer may be persisting them (1.3.0 already shipped this one). That call "
-        "belongs to whoever owns that consumer relationship, not to this name-review "
-        "pass. Recommendation for that decision: the evidence above supports merging "
-        "into this id and retiring cornelius_the_centurion_simeon_2, once someone has "
-        "confirmed no downstream consumer depends on it.",
+        "possible duplicate, NOT merged -- checked against grabar-ocr; merging would "
+        "trip build_observance_catalog.py's one-string-per-id invariant and force "
+        "retiring a shipped id, which is a bigger call than a name-review pass should "
+        "make unilaterally. See docs/observance-name-corrections.md, Open questions, "
+        "'Cornelius, Simeon, and \"the Relative of Christ\"'.",
     "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop "
     "of Smyrna, and the Martyrs that perished in the East":
-        "possible duplicate, NOT merged: checked against grabar-ocr's "
-        "corpus/book.grabar.md -- every independent taregir occurrence of this group (6 "
-        "samples) is labeled day 2 of the December cycle, never day 8, and the Armenian "
-        "itself is sometimes abbreviated with 'եւայլն' (etc.) in place of spelling out "
-        "the full list -- suggestive that this and the companion row "
-        "(cornelius_the_centurion_simeon, which spells out 'the Relative of Christ') are "
-        "the same commemoration, with sacredtradition.am's own English wording varying "
-        "by year the way its Armenian sometimes does. NOT unified: making the two rows' "
-        "approved_en identical trips build_observance_catalog.py's one-string-per-id "
-        "invariant, which would force retiring one id -- and that script's own comment "
-        "says _RETIRED_IDS 'stops being a place to add to' once ids are shipped and a "
-        "consumer may be persisting them (1.3.0 already shipped this one). That call "
-        "belongs to whoever owns that consumer relationship, not to this name-review "
-        "pass. Recommendation for that decision: the evidence above supports merging "
-        "this id into cornelius_the_centurion_simeon and retiring this one, once someone "
-        "has confirmed no downstream consumer depends on it.",
+        "possible duplicate, NOT merged -- checked against grabar-ocr; merging would "
+        "trip build_observance_catalog.py's one-string-per-id invariant and force "
+        "retiring a shipped id, which is a bigger call than a name-review pass should "
+        "make unilaterally. See docs/observance-name-corrections.md, Open questions, "
+        "'Cornelius, Simeon, and \"the Relative of Christ\"'.",
     # Found during the atomic-unit / Wikipedia-verification review pass.
     "Saint Virgins Juliana and Basilla":
-        "not a duplicate: checked against grabar-ocr's corpus/book.grabar.md -- the "
-        "standalone row and both packed rows (virgins_juliana_and_basilla_2/_3) share "
-        "the identical Armenian nucleus 'Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ', so "
-        "this is one commemoration, not two occasions. The 'Saint Virgins' vs 'The Holy "
-        "Virgins' split is sacredtradition's own English wording varying by year -- left "
-        "uncorrected since neither phrasing is independently more attested than the "
-        "other (grabar-ocr's own Armenian doesn't distinguish English conventions).",
+        "not a duplicate: checked against grabar-ocr, same Armenian nucleus as both "
+        "packed variants -- see docs/observance-name-corrections.md, Open questions, "
+        "'Saint Virgins Juliana and Basilla -- resolved: not a duplicate'.",
     "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop":
-        "flagged for maintainer sign-off, not corrected here: checked against grabar-ocr's "
-        "corpus/book.grabar.md at both calendar positions this pairing occupies (day 5 of "
-        "December and the November position, 7 independent taregir samples) -- EVERY "
-        "occurrence includes 'միւս Նիկողայոսի հայրապետին' (the OTHER Nicholas the Bishop), "
-        "i.e. the 4-person form the companion row (gregory_and_nicholas_the) already "
-        "serves. This row's own source_hy is internally consistent (matches its own "
-        "3-person English), so it is not a self-contradiction sacredtradition.am's own "
-        "text would flag -- but it may still be sacredtradition's own undercount on this "
-        "date, corroborated by an independent primary source rather than by the row's own "
-        "two languages disagreeing. Left as a review row rather than corrected unilaterally: "
-        "changing what is served on 19 real days needs the same source_corrections "
-        "registration and sign-off any other content fix gets, not a silent rewrite during "
-        "a name-format review pass.",
+        "flagged for maintainer sign-off, not corrected here: checked against grabar-ocr, "
+        "every sampled occurrence has the 4-person form the companion row "
+        "(gregory_and_nicholas_the) serves -- this row's own text is internally "
+        "consistent, so not a source contradiction, but may be sacredtradition's own "
+        "undercount. See docs/observance-name-corrections.md, Open questions, "
+        "'The Wonderworkers -- one Nicholas, or two?'.",
     "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, "
     "Housik, Grogoris and Daniel":
         "Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', "
@@ -262,23 +220,11 @@ OPEN_QUESTIONS = {
         "sign-off before it could go anywhere, and even then requires an engine.py edit "
         "since a text correction here has no effect on what is served.",
     "Fast day":
-        "ONE open question remains; the other is resolved. (a) Is a fast marker a NAME "
-        "at all? Still open -- it is arguably an attribute of the day, served in its own "
-        "field the way is-a-fast already is, rather than a component of what the "
-        "observance is called. (b) RESOLVED by the fast-day-split change: the bare "
-        "marker is no longer composed at all. The 730 Wednesday + 725 Friday ordinary-"
-        "time instances now serve their own weekday labels (ids wednesday_fast/"
-        "friday_fast); the Fast of Prophet Elijah, Fast of St. Gregory the Illuminator, "
-        "and Fast of St. James of Nisibis each got their own per-day day-count label "
-        "family (420 days combined); and the marker is dropped entirely on Holy Week "
-        "and Dec 9, which keep their own established names. This row's day_count (2141) "
-        "is unaffected by that change: it counts the SOURCE's own raw scraped text, not "
-        "what the engine composes -- the engine no longer serves this exact string on "
-        "any day, so the row now exists only to record what sacredtradition.am "
-        "publishes. 'Beginning of the Weekly Fasts' (the Friday after Ascension) was "
-        "named in anticipation of this landing and needs no further change: it reads "
-        "'... -- Friday Fast -- Beginning of the Weekly Fasts' as designed. See "
-        "docs/observance-name-corrections.md section 10.",
+        "ONE open question remains; the other is resolved by the fast-day-split change "
+        "(section 10). This row's day_count (2141) now counts only the SOURCE's own raw "
+        "scraped text, not what the engine composes. See "
+        "docs/observance-name-corrections.md, Open questions, 'Fast day -- a name, or "
+        "an attribute?'.",
 }
 
 # Why a row has no ``id`` -- keyed by the SOURCE spelling, like OPEN_QUESTIONS, so the

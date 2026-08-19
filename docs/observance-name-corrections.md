@@ -655,12 +655,12 @@ as published until someone who reads Armenian decides. Enter the preferred Engli
 | Component | Question |
 |---|---|
 | `Saints Jacoc and Themistocles` | `Jacoc` is not an English name. `Յակովկայ` is the genitive of `Յակովիկ`, a diminutive of Jacob/James — so `Jacob`? Or a closer transliteration, `Jacovk` / `Hakovik`? |
-| `Saint Theodoron the Martyr` | `Աստուածատրոյ` is *Astvatsatur*, "God-given", usually rendered **Theodore**. Is `Theodoron` intended, or a half-declined Greek form? |
+| `Saint Theodoron the Martyr` | Checked against grabar-ocr — see below. |
 | `Saint Gregory the Illuminator's coming out of Pit` | Missing article, and lowercase `coming` where the companion feast reads `Commitment to the Pit`. `Coming out of the Pit`? |
 | `Saints Aret and His Companions …` | `Aret` renders `Խարիթեանցն`; the saint is usually **Arethas** of Najran in English. |
 | `… and the poor men John and Alexis` | `կամաւոր աղքատացն` is the **voluntary** poor — perhaps `the voluntary poor John and Alexis`. |
 | `The Twelve Holy Doctors of Church: …` | `of Church` wants an article — `of the Church`. Also the longest name served, 289 characters. |
-| `Saints Gregory and Nicholas the Wonderworkers, and other Nicholas …` | `միւս Նիկողայոսի` is "**the** other Nicholas". |
+| `Saints Gregory and Nicholas the Wonderworkers, and other Nicholas …` | `միւս Նիկողայոսի` is "**the** other Nicholas". Checked against grabar-ocr — see below. |
 | `Saint Nicholas Wonderworker the Bishop of Myra` | The other two components naming him say `the Wonderworker`. |
 | `Saints Joachim and Anna, … and of Myrophores` | The Myrophores are the myrrh-bearing women (`կանանցն իւղաբերից`) — `and of the Myrophores`? |
 | `… the Seven Herbivorous Hermits` | Renders `խոտաճարակացն` literally (grass-eating). Usual English: `the Seven Grass-eating Hermits`. |
@@ -669,6 +669,74 @@ as published until someone who reads Armenian decides. Enter the preferred Engli
 | `Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)` | `Nicea` vs `Nicaea` — confirm the preferred form. |
 
 Two of these are larger than a spelling, and blocked on each other.
+
+### `Saint Theodoron the Martyr` — an unexplained but consistent spelling
+
+`Աստուածատրոյ` is *Astvatsatur*, "God-given", usually rendered **Theodore**. Checked
+against grabar-ocr's `corpus/book.grabar.md`: the Armenian is invariant across 25
+independent occurrences, with no alternate declension that would explain a `-oron`
+ending, so `Theodoron` is not a transliteration of some distinct Armenian form. But it
+is also not a one-off scrape slip — sacredtradition.am spells it `Theodoron`
+consistently, here and in the two rows that carry this saint packed with others
+(`abraham_and_khoren_moneyless_2`, `virgins_juliana_and_basilla_2`). And grabar-ocr's
+own independent English MT (`corpus/book.english.md`) does not converge on `Theodore`
+either: across different pages it glosses the same Armenian variously as `Astvatsatur`,
+`Adeodatus`, `Theodore`, and `Theodotos`, so there is no single external convention to
+adopt in its place. Left open as a genuine editorial call between an
+unexplained-but-consistent source spelling and several competing conventional
+renderings, not a source contradiction to correct.
+
+### The Wonderworkers — one Nicholas, or two?
+
+`gregory_and_nicholas_the` (`Saints Gregory and Nicholas the Wonderworkers, and other
+Nicholas the Bishop and Myron the Bishop`) names four people; the companion row
+`gregory_the_wonderworker_nicholas` (`Saints Gregory the Wonderworker, Nicholas the
+Bishop and Myron the Bishop`) names three, dropping "and the other Nicholas the
+Bishop." Checked against grabar-ocr's `corpus/book.grabar.md` at both calendar
+positions this pairing occupies (day 5 of December and a November position, 7
+independent taregir samples): every occurrence includes `միւս Նիկողայոսի հայրապետին`
+("the OTHER Nicholas the Bishop") — the four-person form.
+`gregory_the_wonderworker_nicholas`'s own `source_hy` is internally consistent with its
+own three-person English, so this is not a self-contradiction sacredtradition.am's own
+text would flag — but it may be sacredtradition's own undercount on this date,
+corroborated by an independent primary source rather than by a row's own two languages
+disagreeing. Not corrected here: changing what is served on 19 real days needs the same
+registration and sign-off any other correction in this document gets, not a silent
+rewrite during a name-format review pass.
+
+### Cornelius, Simeon, and "the Relative of Christ"
+
+`cornelius_the_centurion_simeon` (`… Simeon the Relative of Christ, martyred in
+Jerusalem …`) and `cornelius_the_centurion_simeon_2` (`… Simeon, martyred in
+Jerusalem …`, dropping the epithet) serve on different civil dates but share
+byte-identical `approved_hy`. Checked against grabar-ocr's `corpus/book.grabar.md`:
+every independent taregir occurrence of this group (6 samples) is labeled day 2 of the
+December cycle, never day 8, and the Armenian itself is sometimes abbreviated with
+`եւայլն` ("etc.") in place of spelling out the full list — suggestive that these two
+rows are the same commemoration, with sacredtradition.am's English wording varying by
+year the way its own Armenian sometimes does.
+
+Not merged: making the two rows' `approved_en` identical trips
+`build_observance_catalog.py`'s one-string-per-id invariant, which would force
+retiring one of the two ids — and that script's own comment says its retirement table
+"stops being a place to add to" once ids are shipped and a consumer may be persisting
+them (1.3.0 already shipped this one). That call belongs to whoever owns the
+downstream-consumer relationship, not to a name-review pass. Recommendation for that
+decision: the evidence above supports merging into `cornelius_the_centurion_simeon`
+and retiring `cornelius_the_centurion_simeon_2`, once someone has confirmed no
+consumer depends on the latter.
+
+### `Saint Virgins Juliana and Basilla` — resolved: not a duplicate
+
+Flagged as a possible duplicate of `The Holy Virgins Juliana and Basilla` (a different
+phrasing, only ever seen glued to other saints — see §7). Checked against grabar-ocr's
+`corpus/book.grabar.md`: the standalone row and both packed variants
+(`virgins_juliana_and_basilla_2`/`_3`) share the identical Armenian nucleus `Սրբոց
+կուսանացն Յուլիանեայ եւ Վասիլուհւոյ`, so this is one commemoration, not two occasions.
+The `Saint(s) Virgins`/`The Holy Virgins` split is sacredtradition's own English
+wording varying by year, not evidence of a second occasion. No correction applied:
+neither phrasing is independently more attested than the other, and grabar-ocr's
+Armenian does not itself distinguish between English conventions.
 
 ### `Fast day` — a name, or an attribute?
 
