@@ -307,7 +307,7 @@ def named_fast_label_hy(date_iso):
 #
 # This is the one label in the engine with NO source witness of any kind -- not an eve, not
 # an other-language statement, not a differently-worded year. The source prints "Fast day"
-# on 757 Wednesdays and 756 Fridays and "Պահք" on both, and nowhere says which. The warrant
+# on 730 Wednesdays and 725 Fridays and "Պահք" on both, and nowhere says which. The warrant
 # is therefore the calendar alone: the day IS the weekly Wednesday or Friday fast, that is
 # established by its date, and the added word states only that. A §6 disambiguation on the
 # weakest evidence any correction in this document rests on -- see the write-up there, and
@@ -315,8 +315,15 @@ def named_fast_label_hy(date_iso):
 # because it is declared HERE.
 #
 # Scoped to the days the engine actually splits: the marker is correct and complete on
-# Holy Week, the Assumption octave, post-Ascension Eastertide and Dec 9, where the weekday
-# is not the reason for the fast and the split would be false.
+# Holy Week, the Fast of Prophet Elijah and Dec 9, where the weekday is not the reason for
+# the fast and the split would be false.
+#
+# Two families are excluded for a WEAKER reason, and it is worth being honest about which:
+# the Assumption octave's 4th/6th day and post-Ascension Eastertide's 46th/48th ARE the
+# weekly Wed/Fri fast (the source marks only those two weekdays of each octave, leaving the
+# Mon/Tue/Thu unmarked). They keep the bare marker not because the split would be false but
+# because their position slot is already held by the source's own day count, which lives in
+# stored table text this fold does not reach. 108 days. Declared in docs section 6c.
 # --------------------------------------------------------------------------- #
 _WEEKLY_FAST_LABELS = {2: "Wednesday Fast", 4: "Friday Fast"}
 _WEEKLY_FAST_LABELS_HY = {2: "Չորեքշաբթիի պահք", 4: "Ուրբաթի պահք"}

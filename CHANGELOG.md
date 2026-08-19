@@ -9,36 +9,42 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 ### Changed (BREAKING)
 - **The ordinary-time weekly fast says which weekday it is**
   ([docs §6c](docs/feast-name-corrections.md)). `Fast day` / `Պահք` becomes
-  `Wednesday Fast` / `Չորեքշաբթիի պահք` on 757 days and `Friday Fast` / `Ուրբաթի պահք` on
-  756.
+  `Wednesday Fast` / `Չորեքշաբթիի պահք` on 730 days and `Friday Fast` / `Ուրբաթի պահք` on
+  725.
 
   **This is the weakest-evidenced change in the project and the only one with no source
   witness of any kind.** Every other correction rests on something sacredtradition.am
   itself says somewhere — the other language, another year, an eve, a companion feast.
   Here there is nothing: the source prints the same two words on both weekdays in both
-  languages on all 1,513 days. The warrant is the calendar alone, and it is declared as
+  languages on all 1,455 days. The warrant is the calendar alone, and it is declared as
   such rather than presented as a reading of the source.
 
   Scope is the whole risk, so it is drawn narrowly. The split claims only the terminal
   Wed/Fri fallthrough. It does **not** touch Holy Week (marked on every one of its days,
   so the weekday is not the reason — Great Wednesday and Great Friday keep the bare marker
   via an explicit entry), any named fast (already claimed by its own day-count family), or
-  the 460 days where the source prints the marker *alongside* its own day count
-  (`Fourth day of the Assumption — Fast day`, where the second component is not redundant
-  with the first). `tests/test_language.py::TestWeeklyFastWeekdaySplit` pins each exclusion.
+  the 518 days where the source prints the marker *alongside* its own day count
+  (`Second day of the Fast of Prophet Elijah — Fast day`, where the second component is not
+  redundant with the first). `tests/test_language.py::TestWeeklyFastWeekdaySplit` pins each
+  exclusion.
+
+  **108 of those 518 are a declared loose end, not a settled exclusion** — the Assumption
+  octave's Wednesday and Friday and post-Ascension Eastertide's are the weekly fast by the
+  same argument, but reached through stored table text this release does not rewrite. See
+  docs §6c.
 
   Also fixes 16 summer Wed/Fri days whose entire stored name was `Fast day`: the marker
   satisfies `_POSITION_COMPONENT_RE`, so it was returned as an already-resolved position
   and the split never ran. `_apply_position_label` now drops a stored bare marker when —
   and only when — the computed position is one of the two split labels.
 
-  **Major bump because this rewrites `Liturgical Day` on 1,513 days.** A consumer keying
+  **Major bump because this rewrites `Liturgical Day` on 1,455 days.** A consumer keying
   rows on that string loses every one of them, which is what 1.3.0 did to bahk. Consumers
   should migrate to `ObservanceIds` (`wednesday_fast` / `friday_fast`) first; the ids are
   stable across this change and the display text is not.
 
 ### Still open
-- Whether a fast marker belongs in a *name* at all. The 460 stored instances are the case
+- Whether a fast marker belongs in a *name* at all. The 518 unsplit instances are the case
   against: the source states `Fourth day of the Assumption — Fast day` and the marker is
   not redundant with the day count — it is an attribute wearing a name's clothes. The right
   fix is a field served beside `Liturgical Day`, the way `Season` and `Mode` already are, so
@@ -95,7 +101,7 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   entries with **0 orphans and 0 unused**. `tests/test_language.py` pins it.
 
 ### Unchanged, deliberately
-- The ordinary-time Wed/Fri `Fast day` marker (1,513 days) is **not** split into
+- The ordinary-time Wed/Fri `Fast day` marker (1,455 days) is **not** split into
   `Wednesday Fast` / `Friday Fast`. Unlike the three named fasts, the weekly fast has no
   eve and no other-language witness to take a name from — the source never distinguishes
   the two weekdays in either language — so that split would be editorial in a way nothing

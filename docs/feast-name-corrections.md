@@ -354,20 +354,20 @@ the reason `HY_CONTRADICTION_CEILING` and `HY_EXACT_FLOOR` stand exactly where t
 | en | `Fast day` | **`Wednesday Fast`** / **`Friday Fast`** |
 | hy | `Պահք` | **`Չորեքշաբթիի պահք`** / **`Ուրբաթի պահք`** |
 
-1,513 days — 757 Wednesdays, 756 Fridays.
+1,455 days — 730 Wednesdays, 725 Fridays.
 
 **This is the weakest-evidenced change in this document, and it is the only one with no
 source witness of any kind.** Every other entry above — including §6 and §6b, which already
 stretch the rule — rests on something the source itself says somewhere: the other language,
 another year, an eve, a companion feast. Here there is nothing. The source prints the same
-two words on both weekdays, in both languages, on all 1,513 days, and nowhere indicates
+two words on both weekdays, in both languages, on all 1,455 days, and nowhere indicates
 which. The warrant is the calendar alone.
 
 Against the four conditions:
 
 **1. The text does not identify the observance.** `Fast day` is the same string the source
-uses for Holy Week, the Assumption octave and post-Ascension Eastertide — 460 further days
-where the weekday is not the reason for the fast at all.
+uses for Holy Week and for the Fast of Prophet Elijah — 324 further served days, where the
+fast is the season rather than the weekday.
 
 **2. Neither language is more specific.** Emphatically: `Պահք` is one word.
 
@@ -388,9 +388,21 @@ means something other than "it is Wednesday":
   they keep the bare marker.
 - **Any named fast.** A Wed/Fri inside Great Lent, the Fast of Nativity, Nisibis and the
   rest is a day *of that fast*; those families already precede the fallthrough.
-- **Dec 9, and the 460 stored instances.** The source itself prints the marker alongside
-  its own day count — `Fourth day of the Assumption — Fast day` — and the second component
-  is not redundant with the first. Those are untouched.
+- **Dec 9, and the 518 unsplit instances.** The source itself prints the marker alongside
+  its own day count — `Second day of the Fast of Prophet Elijah — Fast day` — and the
+  second component is not redundant with the first. Those are untouched.
+
+**108 of those 518 are a known loose end, not a settled exclusion.** Four
+days a year — the Wednesday and Friday of the Assumption octave (`Fourth`/`Sixth day of
+the Assumption`) and the two post-Ascension Eastertide ones (`Forty Sixth`/`Forty Eighth
+day of Eastertide`) — carry the marker on a Wed or Fri that is inside **no** named fast.
+Those are the weekly cycle showing through a day count, and the argument that splits the
+other 1,455 applies to them unchanged. The tell is that the source marks *only* those two
+weekdays of each octave: the Assumption octave's Monday, Tuesday, Thursday and Saturday
+have no marker, while the genuinely seasonal Fast of Prophet Elijah is marked on all five
+of its weekdays. They are left alone here because this change is confined to the generated
+fallthrough — rewriting stored table text is a different operation with a different blast
+radius, and it is recorded under the open questions rather than done quietly.
 
 One subtlety worth recording: on 16 summer Wed/Fri days the *entire* stored name is
 `Fast day`. The marker satisfies `_POSITION_COMPONENT_RE`, so it was returned as an
@@ -403,7 +415,7 @@ labels, which state the same fact.
 by asking the engine which days it actually splits, so the registry cannot drift from the
 behaviour. `dev/verify_position_labels.py` reads `MISMATCH 0 / EXTRA 0 / 0 LOST`.
 
-**Consumer cost, stated plainly.** This rewrites `Liturgical Day` on 1,513 days. A consumer
+**Consumer cost, stated plainly.** This rewrites `Liturgical Day` on 1,455 days. A consumer
 keying rows on that string loses every one of them — which is exactly what 1.3.0 did to
 bahk, and the reason this is the last of the three to land rather than the first. It should
 not ship before the catalog ids are reachable through the API.
@@ -720,23 +732,30 @@ Two of these are larger than a spelling, and blocked on each other.
 
 ### `Fast day` — a name, or an attribute?
 
-Served on **1,973 days**, and the two halves of that number want different answers:
+Served on **1,973 days** before §6c, and the parts of that number want different answers:
 
 | Origin | Days | What it means there |
 |---|---|---|
-| generated position label (`engine._POSITION_FAMILIES` terminal fallthrough) | 1,513 | the **weekly** fast — 757 Wed, 756 Fri |
-| stored table text | 460 | Holy Week, the Assumption octave, post-Ascension Eastertide — where the weekday is not the reason, and where the source itself prints the marker *alongside* its own day count (`Fourth day of the Assumption — Fast day`) |
+| generated position label (`engine._POSITION_FAMILIES` terminal fallthrough) | 1,455 | the **weekly** fast — 730 Wed, 725 Fri. §6c splits these |
+| the marker is the whole head, or sits beside a *seasonal* day count | 410 | Holy Week (189), the Fast of Prophet Elijah (135), and 86 where `Fast day` is itself the head. The fast is the season, not the weekday |
+| the marker sits beside a day count on a Wed/Fri inside **no** named fast | 108 | the Assumption octave's 4th/6th day and post-Ascension Eastertide's 46th/48th. These *are* the weekly fast, but reached through stored text §6c does not touch — see below |
 
 So there are really two questions. **(a)** Is a fast marker part of what an observance is
 *called*, or an attribute of the day that belongs in its own field? **(b)** If it stays a
-name, the 1,513 ordinary-time instances should say which fast they are, rather than sharing
-one string with the 460 that are a different thing.
+name, the weekly instances should say which fast they are, rather than sharing one string
+with the seasonal ones that are a different thing.
 
-**(b) is now answered**, in two steps. §5 and §6b named every week-long fast that had no
-per-day name (Illuminator, Nisibis, Prophet Elijah), so the marker no longer stands in for a
-*named* fast anywhere; §6c split the remaining ordinary-time instances by weekday.
+**(b) is answered for the 1,455**, in two steps. §5 and §6b named every week-long fast that
+had no per-day name (Illuminator, Nisibis, Prophet Elijah), so the marker no longer stands
+in for a *named* fast anywhere; §6c split the remaining ordinary-time instances by weekday.
+**It is not answered for the 108** — the Assumption octave's Wed and Fri and post-Ascension
+Eastertide's — which are the weekly fast by the same argument but still share one string
+with the 410 seasonal ones. They are unreached because §6c only rewrites the *generated*
+position label, and on those days the position slot is already taken by the source's own
+day count. Finishing (b) means rewriting stored table text, a different operation with a
+different blast radius; §6c deliberately does not do it.
 
-**(a) is not settled by any of it, and the 460 stored instances are why.** On
+**(a) is not settled by any of it, and the 518 unsplit instances are why.** On
 `Fourth day of the Assumption — Fast day` the source states both components, and the second
 is not redundant with the first — the day count says where in the octave you are, the marker
 says the day is a fast. No amount of better wording removes the need for that second fact,

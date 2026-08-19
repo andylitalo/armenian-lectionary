@@ -357,11 +357,17 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
                 self.assertTrue(served.startswith(("Wednesday Fast", "Friday Fast")), served)
 
     def test_the_marker_still_reaches_days_the_split_does_not_claim(self):
-        """The 460 stored instances the source states alongside its own day count.
+        """The 518 instances the split does not claim, most beside the source's own day count.
 
         "Fourth day of the Assumption — Fast day" is the source's own wording, and the
         second component is not redundant with the first. Dropping it would be an omission,
         not a cleanup -- which is why the supersede step is scoped to the split.
+
+        Note this particular day is one of the 108 that ARE the weekly fast (Aug 19 2026 is
+        a Wednesday, inside no named fast) and are left unsplit only because the position
+        slot is held by stored text. It is asserted here as an is-not-a-will-be: docs 6c
+        declares it a loose end, so if a later change splits it, this test should be the
+        thing that notices.
         """
         served = compute_armenian_lectionary(
             datetime.date(2026, 8, 19))["Liturgical Day"]
