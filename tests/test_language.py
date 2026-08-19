@@ -87,11 +87,11 @@ class TestResolveObservanceNames(unittest.TestCase):
 
     def test_composite_resolves_component_by_component(self):
         """Unknown components stay English rather than dropping the whole name."""
-        label = "Some Sunday" + engine._FEAST_SEP + \
+        label = "Some Sunday" + engine._OBSERVANCE_SEP + \
             "Remembrance of the Armenian Genocide (1915)"
         self.assertEqual(
             engine._resolve_observance_names(label, "hy"),
-            "Some Sunday" + engine._FEAST_SEP + "ՀՀ եղեռն")
+            "Some Sunday" + engine._OBSERVANCE_SEP + "ՀՀ եղեռն")
 
     def test_unknown_unchanged(self):
         self.assertEqual(engine._resolve_observance_names("Mystery", "hy"), "Mystery")
@@ -222,7 +222,7 @@ class TestShippedMapsOrthography(unittest.TestCase):
         # The maintainer's canonical example.
         self.assertEqual(books.get("John"), "Աւետարան ըստ Յովհաննէսի")
 
-    def test_feasts_use_mashtots_orthography(self):
+    def test_observances_use_mashtots_orthography(self):
         # Feast titles are entered in traditional orthography at the source but carry a
         # few proper-noun reform slips (Դանիել/Եզեկիել/Անգե, հավատ). The shipped map must
         # be a fixed point of the specific-word reversal that dev applies on a re-scrape:
@@ -241,13 +241,13 @@ class TestNamedFastDayCountLabels(unittest.TestCase):
     each carry their own day-count label in English now ("Nth day of the Fast of ..."),
     rather than a bare "Fast day" -- so the id is recoverable from the English text
     alone, with no date-scoping needed (contrast the previous design, which resolved a
-    shared "Fast day" text from the date; see docs/feast-name-corrections.md).
+    shared "Fast day" text from the date; see docs/observance-name-corrections.md).
 
     Neither fast's per-day wording is attested in the source (English or Armenian); both
     are a deliberate, documented invention. Armenian does not distinguish the day within
     either fast (or the renamed Fast of Prophet Elijah): each fast serves ONE fixed
     Armenian phrase for all its days, supplied directly in the TSV's ``approved_hy``
-    rather than sourced (see docs/feast-name-corrections.md section 10). This is an
+    rather than sourced (see docs/observance-name-corrections.md section 10). This is an
     explicit override of the Illuminator fast's own source-attested per-day ordinal
     (still recorded as ``source_hy`` -- see ``source_corrections.illuminator_fast_label``
     and section 5), not an absence of one.

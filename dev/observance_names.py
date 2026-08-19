@@ -16,7 +16,7 @@ compare only the **commemoration component** -- the saint/feast identity -- whic
 reproducible. ``commemoration_of`` strips the position/eve/status noise; ``commem_key``
 casefolds it for comparison.
 
-Not shipped (dev tooling); imported by tests/test_feast.py and dev/feast_audit.py.
+Not shipped (dev tooling); imported by tests/test_observance.py and dev/observance_audit.py.
 """
 
 import re
@@ -38,7 +38,7 @@ _SEASONS = sorted([
     "the Fast of St. Gregory the Illuminator",
     "the Assumption",
     # Engine-invented (no source witness) -- the Wed/Fri split + named-fast day-count
-    # relabeling; see docs/feast-name-corrections.md.
+    # relabeling; see docs/observance-name-corrections.md.
     "the Fast of Prophet Elijah", "the Fast of St. Gregory the Illuminator",
     "the Fast of St. James of Nisibis",
 ], key=len, reverse=True)
@@ -144,7 +144,7 @@ def commemoration_of(feast_str):
     if not feast_str:
         return ""
     # The fetch layer now joins the source's <br>-delimited components with " — " (see
-    # fetch_reference.FEAST_SEP); the engine emits the same. Re-mash to the separatorless
+    # fetch_reference.OBSERVANCE_SEP); the engine emits the same. Re-mash to the separatorless
     # form this extractor's position/eve stripping expects -- and so a legacy mashed string
     # (no separator) canonicalizes identically. The separator carries no commemoration.
     s = feast_str.replace(" — ", "")

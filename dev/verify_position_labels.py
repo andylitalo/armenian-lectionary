@@ -29,10 +29,10 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                       # noqa: E402
-from dev.feast_names import is_position                                # noqa: E402
+from dev.observance_names import is_position                                # noqa: E402
 from dev.source_corrections import expected_fast_marker_components     # noqa: E402
 from armenian_lectionary.engine import (                               # noqa: E402
-    _FEAST_SEP, _position_label, compute_armenian_lectionary,
+    _OBSERVANCE_SEP, _position_label, compute_armenian_lectionary,
 )
 
 _BARE_FAST_MARKERS = ("Fast day", "Feast day")
@@ -40,7 +40,7 @@ _BARE_FAST_MARKERS = ("Fast day", "Feast day")
 
 def source_position(feast_str):
     """The position component the source printed for a day, or None."""
-    for c in [x.strip() for x in (feast_str or "").split(_FEAST_SEP) if x.strip()]:
+    for c in [x.strip() for x in (feast_str or "").split(_OBSERVANCE_SEP) if x.strip()]:
         if is_position(c):
             return c
     return None
@@ -69,7 +69,7 @@ def main():
         if src in _BARE_FAST_MARKERS:
             # A bare "Fast day"/"Feast day" marker is now deliberately reclassified into
             # a weekday split, a named-fast day-count label, or nothing at all -- see
-            # engine._POSITION_FAMILIES and docs/feast-name-corrections.md. Not a
+            # engine._POSITION_FAMILIES and docs/observance-name-corrections.md. Not a
             # mismatch to report; counted separately, and checked end-to-end below.
             reclassified += 1
             continue
@@ -102,9 +102,9 @@ def main():
             continue
         served = compute_armenian_lectionary(
             datetime.date.fromisoformat(iso))["Liturgical Day"]
-        served_parts = [c.strip() for c in served.split(_FEAST_SEP)]
+        served_parts = [c.strip() for c in served.split(_OBSERVANCE_SEP)]
         if src in _BARE_FAST_MARKERS:
-            full_src = [c.strip() for c in feast.split(_FEAST_SEP) if c.strip()]
+            full_src = [c.strip() for c in feast.split(_OBSERVANCE_SEP) if c.strip()]
             expected = expected_fast_marker_components(iso, full_src)
             ok = all(e in served_parts for e in expected)
         elif src.endswith("day of Pentecost"):
@@ -118,7 +118,7 @@ def main():
             served_lost += 1
 
     print(f"matched  {matched}")
-    print(f"reclassified {reclassified}   (bare fast marker; see docs/feast-name-corrections.md)")
+    print(f"reclassified {reclassified}   (bare fast marker; see docs/observance-name-corrections.md)")
     print(f"MISMATCH {len(mismatch)}   (must be 0 -- engine contradicts the source)")
     print(f"EXTRA    {len(extra)}   (must be 0 -- engine labels a day the source does not)")
     print(f"missing  {len(missing)}   (generator does not produce it; may still be served "

@@ -1,6 +1,6 @@
 """Accuracy lock over the raw ARMENIAN feast name.
 
-``tests/test_feast_name_raw.py`` does this for English and holds it at 9,496 of 9,496
+``tests/test_observance_name_raw.py`` does this for English and holds it at 9,496 of 9,496
 days. Armenian had no equivalent, and the gap was not academic: consolidating display text
 onto the id-keyed observance catalog (#17/#18) changed ``language="hy"`` on 145 days and
 regressed it on ~118 of them, and every test in the suite stayed green. The old flat map
@@ -10,7 +10,7 @@ rejoin silently dropped the richer Armenian form. Nothing was watching.
 
 This test watches. Classification lives in ``dev/hy_discrepancy`` so the test and the
 report can never drift, mirroring how the English test delegates to
-``dev/feast_discrepancy_report``.
+``dev/observance_discrepancy_report``.
 
 Why these are ratchets and not zeroes
 -------------------------------------
@@ -38,7 +38,7 @@ The 3 that remain are all source-side, and all accepted:
     morphology. Neither minority spelling is in the TSV to correct: a row holds ONE
     ``source_hy``, sampled from one day, and these are what the source printed on another.
     The engine serves the source's own dominant spelling in both cases, so it is the source
-    disagreeing with itself, not a defect -- see docs/feast-name-corrections.md section 8;
+    disagreeing with itself, not a defect -- see docs/observance-name-corrections.md section 8;
   * 1 segmentation difference (2005-01-01), where the source's Armenian glues ``Կաղանդ.
     տարեմուտ`` (New Year's Day) onto the saints that follow while the English carries it
     with the day count. Jan 1 now serves that as its own observance
@@ -55,7 +55,7 @@ Armenian correction is not an exception to that -- register it in ``approved_hy`
 the fold picks it up and the ceiling goes DOWN.
 
 CONTRADICTION/OMISSION moved deliberately once more, for the Wednesday/Friday Fast split
-and the named-fast day-count relabeling (docs/feast-name-corrections.md section 10) --
+and the named-fast day-count relabeling (docs/observance-name-corrections.md section 10) --
 the first time either has moved for a reason other than an unreviewed source change or a
 newly-registered fold. ``ground_truth_hy_fixes`` only folds a SOURCE string into its
 ``approved_hy``; it has nothing to fold when the source's own text is the same
@@ -96,11 +96,11 @@ from tests._reference_cache import requires_reference_cache_hy          # noqa: 
 
 # Days where the engine emits an Armenian component the source does not have.
 # Monotonic DOWN, except for the +16 documented above -- see
-# docs/feast-name-corrections.md section 10.
+# docs/observance-name-corrections.md section 10.
 HY_CONTRADICTION_CEILING = int(os.environ.get("HY_CONTRADICTION_CEILING", "19"))
 
 # Days where the engine drops an Armenian component the source states. Monotonic DOWN,
-# except for the +17 documented above -- see docs/feast-name-corrections.md section 10.
+# except for the +17 documented above -- see docs/observance-name-corrections.md section 10.
 HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "21"))
 
 # Days carrying the right components in a different order. Monotonic DOWN.
@@ -143,7 +143,7 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # and is what moves when a real fix lands: 409 + 6 = 415.
 #
 # The floor is 379 rather than the 412 it was before the Wednesday/Friday Fast split and
-# named-fast relabeling (docs/feast-name-corrections.md section 10): 33 days move out of
+# named-fast relabeling (docs/observance-name-corrections.md section 10): 33 days move out of
 # "exact" and into CONTRADICTION/OMISSION above by deliberate choice, not regression --
 # see that section for the day-counts.
 HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "379"))
@@ -154,7 +154,7 @@ HY_EXPECTED_COMPARED = int(os.environ.get("HY_EXPECTED_COMPARED_DAYS", "433"))
 
 
 @requires_reference_cache_hy
-class TestRawArmenianFeastName(unittest.TestCase):
+class TestRawArmenianObservanceName(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.data = collect()

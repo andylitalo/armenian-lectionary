@@ -38,7 +38,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                               # noqa: E402
-    DATA_PATH, _EMBEDDED_FEAST, _FEAST_SEP, _PRELENT_COHORT, _eve_label, _position_label,
+    DATA_PATH, _EMBEDDED_FEAST, _OBSERVANCE_SEP, _PRELENT_COHORT, _eve_label, _position_label,
     fixed_date_label,
 )
 
@@ -52,7 +52,7 @@ MIN_YEAR, MAX_YEAR = 2001, 2027
 
 
 def components_of(feast_str):
-    return [c.strip() for c in (feast_str or "").split(_FEAST_SEP) if c.strip()]
+    return [c.strip() for c in (feast_str or "").split(_OBSERVANCE_SEP) if c.strip()]
 
 
 def table_components():
@@ -95,7 +95,7 @@ def live_generated_components():
 
 
 def prelent_components():
-    # A cohort label may itself be two packed canons joined on _FEAST_SEP, so split it --
+    # A cohort label may itself be two packed canons joined on _OBSERVANCE_SEP, so split it --
     # the catalog holds one entry per canon, never per packed day.
     return {c for _sid, _off, _may_shift, label, _reads in _PRELENT_COHORT
             for c in components_of(label)}

@@ -1,11 +1,11 @@
-"""DEV-ONLY: build and refresh ``dev/feast_name_review.tsv`` -- our OWN ground truth
+"""DEV-ONLY: build and refresh ``dev/observance_name_review.tsv`` -- our OWN ground truth
 for the English feast names.
 
 Why a second ground truth. ``dev/reference_data/`` is sacredtradition.am's, and the engine
 now reproduces it on 9496/9496 days -- which means it reproduces its typos too. That cache
 answers "does the engine match the source?"; it cannot answer "is the name right?". This
 file answers the second question: one row per distinct feast-name component, with the
-approved English spelling a human has signed off on. ``tests/test_feast_name_review.py``
+approved English spelling a human has signed off on. ``tests/test_observance_name_review.py``
 holds the engine to it.
 
 Columns:
@@ -34,7 +34,7 @@ as a table), edit ``approved_en`` (or ``approved_hy``) where the text should rea
 differently, and say why in ``note``. Nothing else needs touching -- leave the ``source_*``
 columns alone, they are the record of what was published.
 
-A changed ``approved_en`` makes ``tests/test_feast_name_review.py`` fail with the row that
+A changed ``approved_en`` makes ``tests/test_observance_name_review.py`` fail with the row that
 disagrees; rebuilding (see CLAUDE.md) makes it pass again. For a whole component the row
 IS the registration -- ``dev/build_ground_truth.py`` freezes it and ``apply_ground_truth``
 serves it, with no second entry anywhere. That failure is deliberate: it is what stops a
@@ -63,8 +63,8 @@ and ``note`` are carried over by ``source_en`` key, and a row whose approved tex
 matches what the engine serves is reported rather than overwritten.
 
 Usage:
-    python dev/feast_name_review.py             # refresh (preserving edits)
-    python dev/feast_name_review.py --check     # report drift, write nothing
+    python dev/observance_name_review.py             # refresh (preserving edits)
+    python dev/observance_name_review.py --check     # report drift, write nothing
 """
 
 import collections
@@ -83,12 +83,12 @@ from dev.source_corrections import (                                   # noqa: E
     apply_ground_truth, normalize_confusables, normalize_position_label,
 )
 from armenian_lectionary.engine import (                                # noqa: E402
-    _FEAST_SEP, FEAST_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
+    _OBSERVANCE_SEP, FEAST_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
     fixed_date_label,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REVIEW_PATH = os.path.join(HERE, "feast_name_review.tsv")
+REVIEW_PATH = os.path.join(HERE, "observance_name_review.tsv")
 FIELDS = ("status", "days", "last", "source_en", "id", "approved_en",
           "source_hy", "approved_hy", "note")
 
@@ -214,7 +214,7 @@ OPEN_QUESTIONS = {
         "groups need different answers and cannot be folded together. Not corrected here "
         "because either answer rewrites Liturgical Day on >2,000 days, needs an "
         "engine._POSITION_FAMILIES change plus a table rebuild, and would move the "
-        "omission ratchet in test_feast_name_raw off 0. 'Beginning of the Weekly Fasts' "
+        "omission ratchet in test_observance_name_raw off 0. 'Beginning of the Weekly Fasts' "
         "(the Friday after Ascension) is already named on the assumption this lands: once "
         "Wed/Fri carry their own labels that day reads '... -- Friday Fast -- Beginning "
         "of the Weekly Fasts' and needs no further change.",
@@ -237,7 +237,7 @@ OPEN_QUESTIONS = {
 # saint's feast out as its own canon (First Volume pp.460-462, 464-465) and the Second
 # Volume packs several onto one line when the taregir leaves few days for them, naming only
 # the first "for the sake of brevity" (preface, Sixth). The approved name splits the line
-# back into its canons on _FEAST_SEP; each canon keeps its own id and the join gets none.
+# back into its canons on _OBSERVANCE_SEP; each canon keeps its own id and the join gets none.
 _PACKED_DAY = (
     "no id: a whole DAY, not one observance -- the Tonats'oyts packs several First Volume "
     "canons onto this line. The approved name splits them on the component separator and "
@@ -320,8 +320,8 @@ def source_armenian_map():
         if not en_text or not hy_text:
             continue
         votes[en_text][hy_text] += 1
-        en_parts = [c.strip() for c in en_text.split(_FEAST_SEP)]
-        hy_parts = [c.strip() for c in hy_text.split(_FEAST_SEP)]
+        en_parts = [c.strip() for c in en_text.split(_OBSERVANCE_SEP)]
+        hy_parts = [c.strip() for c in hy_text.split(_OBSERVANCE_SEP)]
         if len(en_parts) == len(hy_parts) > 1:
             for en_part, hy_part in zip(en_parts, hy_parts):
                 votes[en_part][hy_part] += 1
@@ -358,9 +358,9 @@ def armenian_for(approved, hy):
     """
     if approved in hy:
         return hy[approved]
-    parts = [p.strip() for p in approved.split(_FEAST_SEP) if p.strip()]
+    parts = [p.strip() for p in approved.split(_OBSERVANCE_SEP) if p.strip()]
     if len(parts) > 1 and all(p in hy for p in parts):
-        return _FEAST_SEP.join(hy[p] for p in parts)
+        return _OBSERVANCE_SEP.join(hy[p] for p in parts)
     return ""
 
 
@@ -400,7 +400,7 @@ def source_components():
         with open(path, encoding="utf-8") as fh:
             rec = json.load(fh)
         iso = rec["date"]
-        for comp in [c.strip() for c in (rec.get("feast") or "").split(_FEAST_SEP)
+        for comp in [c.strip() for c in (rec.get("feast") or "").split(_OBSERVANCE_SEP)
                      if c.strip()]:
             days[comp] += 1
             if comp not in last or iso > last[comp]:
@@ -446,7 +446,7 @@ def build_rows():
     # Halves of a SPLIT approved name. The Tonats'oyts packs several First Volume canons
     # onto one line when the taregir leaves few days for them (preface, Sixth), so a
     # correction may resolve one source string into several observances joined on
-    # _FEAST_SEP. Each half is then a served component and needs its own row and id -- even
+    # _OBSERVANCE_SEP. Each half is then a served component and needs its own row and id -- even
     # where the source never publishes it alone, as with Gordius/Polyeuctus/Grigoris, whom
     # it always prints behind Cyricus or Vahan. Keyed by their own text: there is no rawer
     # form, exactly as with a generated label.
@@ -457,7 +457,7 @@ def build_rows():
     split_only = collections.Counter()
     split_last = {}
     for src, approved in approved_of.items():
-        parts = [p.strip() for p in approved.split(_FEAST_SEP) if p.strip()]
+        parts = [p.strip() for p in approved.split(_OBSERVANCE_SEP) if p.strip()]
         if len(parts) < 2:
             continue
         for part in parts:

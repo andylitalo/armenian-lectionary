@@ -27,7 +27,7 @@ import functools
 import json
 import os
 
-from armenian_lectionary.engine import _FEAST_SEP, _apply_position_label
+from armenian_lectionary.engine import _OBSERVANCE_SEP, _apply_position_label
 
 # cache reading string -> source (Tōnats'oyts First Vol p.464-465) reading string.
 # Applied ONLY on first-volume-cohort days (scoped by the shipping tier, not by text).
@@ -76,10 +76,10 @@ def apply_reading_order(date_iso, readings):
 
 
 # --------------------------------------------------------------------------- #
-# Feast-NAME canonicalization (for tests/test_feast.py)
+# Feast-NAME canonicalization (for tests/test_observance.py)
 #
 # The engine serves the feast/fast name of the day as "Liturgical Day". The test
-# compares the *commemoration component* (dev/feast_names.commemoration_of) of that
+# compares the *commemoration component* (dev/observance_names.commemoration_of) of that
 # value against the sacredtradition.am scrape (the value bahk uses for AI context).
 #
 # A handful of fixed saint-keys are enumerated INCONSISTENTLY -- on BOTH sides. The
@@ -196,7 +196,7 @@ def normalize_confusables(text):
 # "Feast day of the Discovery of the Belt of the Holy Mother of God" (a different feast, 26
 # other days) into a nonsense "Fast day of the Discovery ...". It is registered as a
 # component-exact ground-truth row instead -- see apply_ground_truth and
-# docs/feast-name-corrections.md section 1.
+# docs/observance-name-corrections.md section 1.
 # --------------------------------------------------------------------------- #
 POSITION_LABEL_FIXES = {
     "day of the Fast of Nativity.": "day of the Fast of Nativity",
@@ -273,9 +273,9 @@ def normalize_position_label(text, date_iso=""):
         # Component-exact, not a substring replace: the bare label is what is ambiguous,
         # and rewriting it inside a longer component would corrupt a name that merely
         # contains the words.
-        text = _FEAST_SEP.join(
+        text = _OBSERVANCE_SEP.join(
             specific if part.strip() == _AMBIGUOUS_FAST_LABEL else part
-            for part in text.split(_FEAST_SEP))
+            for part in text.split(_OBSERVANCE_SEP))
     return text
 
 
@@ -287,7 +287,7 @@ def normalize_position_label(text, date_iso=""):
 #                     (the Armenian feast names carry Latin digits/parens, e.g. "(381 թ.)");
 #   * the Armenian block U+0530-U+058F -- letters AND Armenian punctuation;
 #   * the Armenian ligatures U+FB13-U+FB17 (եւ etc.);
-#   * the em-dash U+2014 -- the FEAST_SEP joining a feast's <br>-delimited components.
+#   * the em-dash U+2014 -- the OBSERVANCE_SEP joining a feast's <br>-delimited components.
 # Anything else (Cyrillic/Greek homoglyphs, curly quotes, zero-width joiners, ...) is a
 # contaminant. Positively validating against this allow-list is more robust than chasing a
 # growing blacklist of specific confusables.
@@ -297,7 +297,7 @@ def _is_expected_char(c):
     return (c.isascii()
             or 0x0530 <= o <= 0x058F        # Armenian block (letters + punctuation)
             or 0xFB13 <= o <= 0xFB17        # Armenian ligatures (եւ etc.)
-            or c == "—")               # em-dash FEAST_SEP
+            or c == "—")               # em-dash OBSERVANCE_SEP
 
 
 def unexpected_chars(text):
@@ -339,9 +339,9 @@ def apply_book_name_fixes(readings):
 
 
 # --------------------------------------------------------------------------- #
-# Ground-truth component names, reviewed via dev/feast_name_review.tsv
+# Ground-truth component names, reviewed via dev/observance_name_review.tsv
 #
-# ``dev/feast_name_ground_truth.json`` is the frozen approved-name mapping (built by
+# ``dev/observance_name_ground_truth.json`` is the frozen approved-name mapping (built by
 # ``dev/build_ground_truth.py``): raw feast-name component -> the English text a human
 # has signed off on. Unlike ``_FEAST_SPELLING_FIXES`` above (a small,
 # individually-commented set, each justified by the source contradicting itself), this
@@ -363,10 +363,10 @@ def apply_book_name_fixes(readings):
 # pattern) -- and some, like the Advent eve's deliberate dual form, are correct exactly as
 # the engine already reproduces them and must NOT be folded to one spelling. Rows where
 # this applies are marked in the TSV's ``note`` rather than silently included here; see
-# ``docs/feast-name-corrections.md``.
+# ``docs/observance-name-corrections.md``.
 # --------------------------------------------------------------------------- #
 _GROUND_TRUTH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "feast_name_ground_truth.json")
+                                   "observance_name_ground_truth.json")
 
 
 @functools.lru_cache(maxsize=1)
@@ -433,14 +433,14 @@ def apply_ground_truth(text):
     """Resolve every component of ``text`` to its approved English name.
 
     Whole-component lookup, nothing else. Every distinct component the source publishes has
-    a review row -- ``tests/test_feast_name_review`` requires it -- so for cached text the
+    a review row -- ``tests/test_observance_name_review`` requires it -- so for cached text the
     lookup always hits, and text it does not know is passed through untouched so that a
     newly appearing name shows up for review instead of being silently rewritten.
     """
     if not text:
         return text
     lookup = _ground_truth_lookup()
-    return _FEAST_SEP.join(lookup.get(c, c) for c in text.split(_FEAST_SEP))
+    return _OBSERVANCE_SEP.join(lookup.get(c, c) for c in text.split(_OBSERVANCE_SEP))
 
 
 def apply_source_corrections(day):
@@ -486,7 +486,7 @@ def expected_fast_marker_components(date_iso, src_components):
 
     Neither is compared literally anymore -- both are a deliberate, documented departure
     from the source's own wording (see ``engine._POSITION_FAMILIES``/
-    ``_apply_position_label`` and ``docs/feast-name-corrections.md``):
+    ``_apply_position_label`` and ``docs/observance-name-corrections.md``):
 
       * a bare marker becomes a weekday split ("Wednesday Fast"/"Friday Fast"), a
         named-fast day-count label ("Nth day of the Fast of ..."), or nothing at all,
@@ -495,7 +495,7 @@ def expected_fast_marker_components(date_iso, src_components):
         Fast of Prophet Elijah", same ordinal, to match the existing eve label's wording.
 
     Dev-tooling comparisons (``dev/verify_position_labels.py``,
-    ``dev/feast_discrepancy_report.py``) should reconcile through this helper rather
+    ``dev/observance_discrepancy_report.py``) should reconcile through this helper rather
     than comparing the source's text directly, so these intentional changes don't
     register as regressions. The bare-marker case delegates to the real engine function
     so it can never drift from runtime behavior; the Pentecost rename is a fixed text
@@ -512,6 +512,6 @@ def expected_fast_marker_components(date_iso, src_components):
         return renamed
     d = datetime.date.fromisoformat(date_iso)
     residual = [c for c in renamed if c not in _BARE_FAST_MARKERS]
-    stored = _FEAST_SEP.join(residual) if residual else "(commemoration)"
+    stored = _OBSERVANCE_SEP.join(residual) if residual else "(commemoration)"
     resolved = _apply_position_label(stored, d)
-    return [c for c in resolved.split(_FEAST_SEP) if c and c != "(commemoration)"]
+    return [c for c in resolved.split(_OBSERVANCE_SEP) if c and c != "(commemoration)"]

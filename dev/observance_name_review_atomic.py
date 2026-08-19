@@ -1,7 +1,7 @@
-"""DEV-ONLY: derive ``dev/feast_name_review_atomic.tsv`` from ``dev/feast_name_review.tsv``,
+"""DEV-ONLY: derive ``dev/observance_name_review_atomic.tsv`` from ``dev/observance_name_review.tsv``,
 for reviewing one saint/feast at a time.
 
-Why. A handful of ``feast_name_review.tsv`` rows are not one feast: the SOURCE itself
+Why. A handful of ``observance_name_review.tsv`` rows are not one feast: the SOURCE itself
 concatenates two independent, otherwise-standalone commemorations with ", and " (or "; and
 ") when they fall on the same day (e.g. the 2008-01-21 row is literally "<Sargis's own
 row>, and <Atom's own row>", each of which is ALSO its own row elsewhere, unglued).
@@ -37,19 +37,19 @@ or embedded, so the count reflects true commemoration frequency (Theodoron: 4 st
 
 This file is DERIVED, not a second ground truth: review and edit ``approved``/``note`` in
 the ATOMIC file, then hand-apply the same edit to the matching row(s) in
-``feast_name_review.tsv`` (by ``source``) before registering fixes -- ``tests.
-test_feast_name_review`` only ever reads the parent file. A row synthesized purely from
+``observance_name_review.tsv`` (by ``source``) before registering fixes -- ``tests.
+test_observance_name_review`` only ever reads the parent file. A row synthesized purely from
 mining (never attested alone) has no independent Armenian witness, so its ``armenian``
 column is left blank with a note.
 
 Once atomic names are approved, the glued rows need their OWN registered fix in
 the row's ``approved_en``: replace the source's ", and " (or whichever
-connector) with ``armenian_lectionary.engine._FEAST_SEP`` (an em dash, " -- " here only
+connector) with ``armenian_lectionary.engine._OBSERVANCE_SEP`` (an em dash, " -- " here only
 because this docstring is plain ASCII) between the two approved atomic names. That is a
 separate, later step -- this script only produces the file to review against.
 
 Usage:
-    python dev/feast_name_review_atomic.py             # write the atomic-view TSV
+    python dev/observance_name_review_atomic.py             # write the atomic-view TSV
 """
 
 import collections
@@ -59,11 +59,11 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from dev.feast_name_review import (                                    # noqa: E402
+from dev.observance_name_review import (                                    # noqa: E402
     FIELDS, HERE, armenian_map, build_rows, corrected, source_components,
 )
 
-ATOMIC_PATH = os.path.join(HERE, "feast_name_review_atomic.tsv")
+ATOMIC_PATH = os.path.join(HERE, "observance_name_review_atomic.tsv")
 
 # Only these connectors reliably mean "the source glued two independent commemorations".
 CONNECTORS = (", and ", "; and ")
@@ -221,7 +221,7 @@ def main():
     write_path(atomic_rows)
     print(f"wrote {ATOMIC_PATH}")
     print(f"{len(atomic_rows)} atomic rows ({len(mined)} newly mined, not present as their "
-          "own row in dev/feast_name_review.tsv):")
+          "own row in dev/observance_name_review.tsv):")
     for f in sorted(mined):
         canon = TITLE_ALIASES.get(f, f)
         print(f"  {f}" + (f"  [folded into existing row: {canon}]" if canon != f else ""))
