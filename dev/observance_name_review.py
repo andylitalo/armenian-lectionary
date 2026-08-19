@@ -111,9 +111,19 @@ OPEN_QUESTIONS = {
         "(a diminutive of Jacob/James), so this is plausibly 'Jacob' -- but 'Jacovk' or "
         "'Hakovik' would transliterate the Armenian more closely. Which?",
     "Saint Theodoron the Martyr":
-        "hy 'Աստուածատրոյ' is Astvatsatur, 'God-given' -- the Armenian name usually "
-        "rendered Theodore. 'Theodoron' looks like a half-declined Greek form. Should "
-        "this be 'Theodore the Martyr', or is Theodoron the intended distinct form?",
+        "hy 'Աստուածատրոյ' is Astvatsatur, 'God-given' -- checked against grabar-ocr's "
+        "corpus/book.grabar.md (25 independent occurrences across cycles): the Armenian "
+        "is invariant, no alternate declension that would explain a '-oron' ending, so "
+        "'Theodoron' is not a transliteration of some distinct Armenian form. But it is "
+        "also not a one-off scrape slip -- sacredtradition.am spells it 'Theodoron' "
+        "consistently, here and in the two rows that carry this saint packed with others "
+        "(abraham_and_khoren_moneyless_2, virgins_juliana_and_basilla_2). And grabar-ocr's "
+        "own independent English MT does not converge on 'Theodore' either: across "
+        "different pages it glosses the same Armenian variously as 'Astvatsatur', "
+        "'Adeodatus', 'Theodore', and 'Theodotos' (corpus/book.english.md), so there is no "
+        "single external convention to adopt in its place. Left open as a genuine editorial "
+        "call between an unexplained-but-consistent source spelling and several competing "
+        "conventional renderings, not a source contradiction to correct.",
     "Staint Gregory the Illuminator's coming out of Pit":
         "Missing article, and lowercase 'coming' where the companion feast reads "
         "'Commitment to the Pit'. 'Coming out of the Pit'? Left alone as the source's "
@@ -159,25 +169,65 @@ OPEN_QUESTIONS = {
         "The doubled title was dropped. 'Aret' renders hy 'Խարիթեանցն'; the saint is "
         "usually Arethas of Najran in English. 'Saints Arethas and His Companions'?",
 
-    # Found during the atomic-unit / Wikipedia-verification review pass.
-    "Saint Virgins Juliana and Basilla":
-        "possible duplicate: the same two saints are also named 'The Holy Virgins Juliana "
-        "and Basilla' elsewhere in the corpus (a different phrasing, never published "
-        "alone). Same commemoration worded inconsistently across years, or two different "
-        "occasions?",
     "Saints Cornelius the Centurion, Simeon the Relative of Christ, martyred in "
     "Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East":
-        "possible duplicate: the companion row drops 'the Relative of Christ' from "
-        "Simeon's name. Same group worded inconsistently across years, or intentional?",
+        "possible duplicate, NOT merged: checked against grabar-ocr's "
+        "corpus/book.grabar.md -- every independent taregir occurrence of this group (6 "
+        "samples) is labeled day 2 of the December cycle, never day 8, and the Armenian "
+        "itself is sometimes abbreviated with 'եւայլն' (etc.) in place of spelling out "
+        "the full list -- suggestive that this and the companion row "
+        "(cornelius_the_centurion_simeon_2, which drops 'the Relative of Christ') are the "
+        "same commemoration, with sacredtradition.am's own English wording varying by "
+        "year the way its Armenian sometimes does. NOT unified: making the two rows' "
+        "approved_en identical trips build_observance_catalog.py's one-string-per-id "
+        "invariant, which would force retiring one id -- and that script's own comment "
+        "says _RETIRED_IDS 'stops being a place to add to' once ids are shipped and a "
+        "consumer may be persisting them (1.3.0 already shipped this one). That call "
+        "belongs to whoever owns that consumer relationship, not to this name-review "
+        "pass. Recommendation for that decision: the evidence above supports merging "
+        "into this id and retiring cornelius_the_centurion_simeon_2, once someone has "
+        "confirmed no downstream consumer depends on it.",
     "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop "
     "of Smyrna, and the Martyrs that perished in the East":
-        "possible duplicate: the companion row includes 'the Relative of Christ' after "
-        "Simeon's name. Same group worded inconsistently across years, or intentional?",
+        "possible duplicate, NOT merged: checked against grabar-ocr's "
+        "corpus/book.grabar.md -- every independent taregir occurrence of this group (6 "
+        "samples) is labeled day 2 of the December cycle, never day 8, and the Armenian "
+        "itself is sometimes abbreviated with 'եւայլն' (etc.) in place of spelling out "
+        "the full list -- suggestive that this and the companion row "
+        "(cornelius_the_centurion_simeon, which spells out 'the Relative of Christ') are "
+        "the same commemoration, with sacredtradition.am's own English wording varying "
+        "by year the way its Armenian sometimes does. NOT unified: making the two rows' "
+        "approved_en identical trips build_observance_catalog.py's one-string-per-id "
+        "invariant, which would force retiring one id -- and that script's own comment "
+        "says _RETIRED_IDS 'stops being a place to add to' once ids are shipped and a "
+        "consumer may be persisting them (1.3.0 already shipped this one). That call "
+        "belongs to whoever owns that consumer relationship, not to this name-review "
+        "pass. Recommendation for that decision: the evidence above supports merging "
+        "this id into cornelius_the_centurion_simeon and retiring this one, once someone "
+        "has confirmed no downstream consumer depends on it.",
+    # Found during the atomic-unit / Wikipedia-verification review pass.
+    "Saint Virgins Juliana and Basilla":
+        "not a duplicate: checked against grabar-ocr's corpus/book.grabar.md -- the "
+        "standalone row and both packed rows (virgins_juliana_and_basilla_2/_3) share "
+        "the identical Armenian nucleus 'Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ', so "
+        "this is one commemoration, not two occasions. The 'Saint Virgins' vs 'The Holy "
+        "Virgins' split is sacredtradition's own English wording varying by year -- left "
+        "uncorrected since neither phrasing is independently more attested than the "
+        "other (grabar-ocr's own Armenian doesn't distinguish English conventions).",
     "Saints Gregory the Wonderworker, Nicholas the Bishop and Myron the Bishop":
-        "possible duplicate: the companion row names a second, 'other' Nicholas "
-        "('Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop "
-        "and Myron the Bishop'). Same group worded inconsistently across years, or a "
-        "genuinely different day?",
+        "flagged for maintainer sign-off, not corrected here: checked against grabar-ocr's "
+        "corpus/book.grabar.md at both calendar positions this pairing occupies (day 5 of "
+        "December and the November position, 7 independent taregir samples) -- EVERY "
+        "occurrence includes 'միւս Նիկողայոսի հայրապետին' (the OTHER Nicholas the Bishop), "
+        "i.e. the 4-person form the companion row (gregory_and_nicholas_the) already "
+        "serves. This row's own source_hy is internally consistent (matches its own "
+        "3-person English), so it is not a self-contradiction sacredtradition.am's own "
+        "text would flag -- but it may still be sacredtradition's own undercount on this "
+        "date, corroborated by an independent primary source rather than by the row's own "
+        "two languages disagreeing. Left as a review row rather than corrected unilaterally: "
+        "changing what is served on 19 real days needs the same source_corrections "
+        "registration and sign-off any other content fix gets, not a silent rewrite during "
+        "a name-format review pass.",
     "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, "
     "Housik, Grogoris and Daniel":
         "Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', "
