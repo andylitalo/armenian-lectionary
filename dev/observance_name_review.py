@@ -212,21 +212,23 @@ OPEN_QUESTIONS = {
         "sign-off before it could go anywhere, and even then requires an engine.py edit "
         "since a text correction here has no effect on what is served.",
     "Fast day":
-        "TWO open questions, both deferred as their own change. (a) Is a fast marker a "
-        "NAME at all? It is arguably an attribute of the day -- served in its own field, "
-        "the way is-a-fast already is -- rather than a component of what the observance "
-        "is called. (b) If it stays a name, the ordinary-time instances should say which "
-        "fast: 1,575 of the 2,108 served days are the generated Wed/Fri position label "
-        "(784 Wed, 783 Fri, plus 8 Advent-fast weekdays on Dec 9), and those are the "
-        "weekly fast, not a generic one. The remaining 533 are stored table text inside "
-        "Holy Week and the week-long fasts, where Wed/Fri is not the reason -- so the two "
-        "groups need different answers and cannot be folded together. Not corrected here "
-        "because either answer rewrites Liturgical Day on >2,000 days, needs an "
-        "engine._POSITION_FAMILIES change plus a table rebuild, and would move the "
-        "omission ratchet in test_observance_name_raw off 0. 'Beginning of the Weekly Fasts' "
-        "(the Friday after Ascension) is already named on the assumption this lands: once "
-        "Wed/Fri carry their own labels that day reads '... -- Friday Fast -- Beginning "
-        "of the Weekly Fasts' and needs no further change.",
+        "ONE open question remains; the other is resolved. (a) Is a fast marker a NAME "
+        "at all? Still open -- it is arguably an attribute of the day, served in its own "
+        "field the way is-a-fast already is, rather than a component of what the "
+        "observance is called. (b) RESOLVED by the fast-day-split change: the bare "
+        "marker is no longer composed at all. The 730 Wednesday + 725 Friday ordinary-"
+        "time instances now serve their own weekday labels (ids wednesday_fast/"
+        "friday_fast); the Fast of Prophet Elijah, Fast of St. Gregory the Illuminator, "
+        "and Fast of St. James of Nisibis each got their own per-day day-count label "
+        "family (420 days combined); and the marker is dropped entirely on Holy Week "
+        "and Dec 9, which keep their own established names. This row's day_count (2141) "
+        "is unaffected by that change: it counts the SOURCE's own raw scraped text, not "
+        "what the engine composes -- the engine no longer serves this exact string on "
+        "any day, so the row now exists only to record what sacredtradition.am "
+        "publishes. 'Beginning of the Weekly Fasts' (the Friday after Ascension) was "
+        "named in anticipation of this landing and needs no further change: it reads "
+        "'... -- Friday Fast -- Beginning of the Weekly Fasts' as designed. See "
+        "docs/observance-name-corrections.md section 10.",
 }
 
 # Why a row has no ``id`` -- keyed by the SOURCE spelling, like OPEN_QUESTIONS, so the

@@ -672,26 +672,24 @@ Two of these are larger than a spelling, and blocked on each other.
 
 ### `Fast day` — a name, or an attribute?
 
-Served on **2,108 days**, and the two halves of that number want different answers:
+This used to be two questions. **(b)** — if the marker stays a name, ordinary-time
+instances should say which fast, rather than sharing one string with the week-long
+named fasts — is **resolved**: §10 lands exactly that, splitting the bare marker into
+`Wednesday Fast`/`Friday Fast` and per-fast day-count label families. **(a)** is still
+open: is a fast marker part of what an observance is *called* at all, or an attribute of
+the day that belongs in its own field (the way `is-a-fast` already is)? §10 answered (b)
+without taking a position on (a) — it still serves a *name*, just a more specific one.
 
-| Origin | Days | What it means there |
-|---|---|---|
-| generated position label (`engine._POSITION_FAMILIES` terminal fallthrough) | 1,575 | the **weekly** fast — 784 Wed, 783 Fri, plus 8 Advent-fast weekdays around Dec 9 |
-| stored table text | 533 | Holy Week and the week-long fasts (Elijah, Assumption, post-Ascension Eastertide), where the weekday is not the reason |
+The `fast_day` row in `dev/observance_name_review.tsv` (`source_en = "Fast day"`,
+`status = review`) stays open for (a) alone, and its `day_count` (2,141) no longer
+describes anything the engine serves — the split means the engine never composes this
+exact bare string on any date any more. The count is what it always was: how many days
+*sacredtradition.am's own scrape* carries the literal text, which §10 does not change
+and could not — it is a fact about the source, not the engine.
 
-So there are really two questions. **(a)** Is a fast marker part of what an observance is
-*called*, or an attribute of the day that belongs in its own field? **(b)** If it stays a
-name, the 1,575 ordinary-time instances should say which fast they are, rather than sharing
-one string with the 533 that are a different thing — the same argument that unblocked the
-Illuminator fast in §5, one level up.
-
-Not corrected here. Either answer rewrites `Liturgical Day` on more than 2,000 days, needs
-an `engine._POSITION_FAMILIES` change plus a table rebuild for the stored half, and moves
-`test_observance_name_raw`'s omission ratchet off 0. It needs its own reviewed change.
-
-§6 is already named on the assumption that it lands: `Beginning of the Weekly Fasts`, the
-Friday after Ascension, reads `… — Friday Fast — Beginning of the Weekly Fasts` once
-Wed/Fri carry their own labels, and needs no further change then.
+§6's `Beginning of the Weekly Fasts` was named in anticipation of this split landing;
+it now has, so the Friday after Ascension reads `… — Friday Fast — Beginning of the
+Weekly Fasts` as designed, with nothing further to change there.
 
 ## Reviewing
 
