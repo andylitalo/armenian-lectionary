@@ -959,6 +959,14 @@
   "source_hy": "Դ օր Վարդավառի պահոց",
   "status": "ok"
  },
+ "Friday Fast": {
+  "approved_en": "Friday Fast",
+  "approved_hy": "Ուրբաթի պահք",
+  "id": "friday_fast",
+  "note": "the weekly fast, split by weekday. The ONLY label in the engine with no source witness of any kind: the source prints \"Fast day\" on 757 Wednesdays and 756 Fridays and \"Պահք\" on both, and nowhere says which -- no eve names it, and the Armenian is no more specific than the English. So the warrant is the calendar alone (the day IS the weekly Wednesday or Friday fast, established by its date), which makes this the weakest evidence any correction in docs/feast-name-corrections.md rests on; it is declared as such rather than presented as a reading of the source. approved_hy is supplied by the maintainer, there being nothing to scrape. Scoped to the days the engine actually splits -- the bare marker is correct and complete on Holy Week, the Assumption octave, post-Ascension Eastertide and Dec 9, where the weekday is not the reason for the fast. Registered in source_corrections.weekly_fast_label / weekly_fast_label_hy. See docs/feast-name-corrections.md section 6c.",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Great Friday": {
   "approved_en": "Great Friday",
   "approved_hy": "Աւագ ուրբաթ",
@@ -3222,6 +3230,14 @@
   "note": "",
   "source_hy": "ԻԳ օր Մեծի պահոց",
   "status": "ok"
+ },
+ "Wednesday Fast": {
+  "approved_en": "Wednesday Fast",
+  "approved_hy": "Չորեքշաբթիի պահք",
+  "id": "wednesday_fast",
+  "note": "the weekly fast, split by weekday. The ONLY label in the engine with no source witness of any kind: the source prints \"Fast day\" on 757 Wednesdays and 756 Fridays and \"Պահք\" on both, and nowhere says which -- no eve names it, and the Armenian is no more specific than the English. So the warrant is the calendar alone (the day IS the weekly Wednesday or Friday fast, established by its date), which makes this the weakest evidence any correction in docs/feast-name-corrections.md rests on; it is declared as such rather than presented as a reading of the source. approved_hy is supplied by the maintainer, there being nothing to scrape. Scoped to the days the engine actually splits -- the bare marker is correct and complete on Holy Week, the Assumption octave, post-Ascension Eastertide and Dec 9, where the weekday is not the reason for the fast. Registered in source_corrections.weekly_fast_label / weekly_fast_label_hy. See docs/feast-name-corrections.md section 6c.",
+  "source_hy": "",
+  "status": "generated"
  },
  "Еighth day of Nativity": {
   "approved_en": "Eighth day of Nativity",

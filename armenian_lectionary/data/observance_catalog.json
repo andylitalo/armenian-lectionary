@@ -619,6 +619,10 @@
   "en": "Fourth Sunday (Red Sunday)",
   "hy": "Դ կիւրակէ (Կարմիր կիւրակէ)"
  },
+ "friday_fast": {
+  "en": "Friday Fast",
+  "hy": "Ուրբաթի պահք"
+ },
  "gayane_and_her_companions": {
   "en": "Sts. Gayane and her companions",
   "hy": "Սրբոց կուսանացն Գայիանեանց"
@@ -1534,6 +1538,10 @@
  "voskian": {
   "en": "Sts. Voskians the Priests",
   "hy": "Սրբոց Ոսկեանց քահանայիցն"
+ },
+ "wednesday_fast": {
+  "en": "Wednesday Fast",
+  "hy": "Չորեքշաբթիի պահք"
  },
  "zechariah_the_prophet": {
   "en": "St. Zechariah the Prophet",

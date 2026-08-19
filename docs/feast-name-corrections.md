@@ -267,10 +267,18 @@ design exists to provide.
 rebuild order was run end to end from the cache and reproduces every artifact byte for
 byte, with `build_table.py` self-validating at 0 wrong over 9,496 days.
 
-This name is provisional in one direction only: it anticipates the [`Fast day`
-question](#fast-day--a-name-or-an-attribute) below. If the weekly Wed/Fri fasts get their
-own labels, the day reads `… — Friday Fast — Beginning of the Weekly Fasts` and this
-component needs no further change.
+When this was written it anticipated the [`Fast day`
+question](#fast-day--a-name-or-an-attribute) below, predicting that once the weekly Wed/Fri
+fasts got their own labels the day would read `… — Friday Fast — Beginning of the Weekly
+Fasts`. §6c landed that split and **the prediction did not come true**: Easter+40 is inside
+Eastertide, so the `Nth day of Eastertide` family claims it long before the terminal Wed/Fri
+fallthrough is reached, and the day still reads `Forty First day of Eastertide — Beginning
+of the Weekly Fasts`. (The same is true of every other Eastertide Wed/Fri.)
+
+That costs the §6 name nothing — `Weekly` is what distinguishes the fast being announced
+from the ten week-long ones, and no neighbouring component was ever going to supply it —
+but the anticipated composition is not where the disambiguation comes from, and this
+paragraph should not be read as if it were.
 
 ### 6b. Two named fasts the source's day labels leave unnamed
 
@@ -338,6 +346,67 @@ mechanism, generalized to both windows) and, for Elijah, through the review rows
 the reason `HY_CONTRADICTION_CEILING` and `HY_EXACT_FLOOR` stand exactly where they did.
 `dev/verify_position_labels.py` reads `MISMATCH 0 / EXTRA 0 / 0 LOST`, and
 `dev/feast_discrepancy_report.py` `0 contradictions`.
+
+### 6c. The weekly fast, split by weekday
+
+| | Source | Served |
+|---|---|---|
+| en | `Fast day` | **`Wednesday Fast`** / **`Friday Fast`** |
+| hy | `Պահք` | **`Չորեքշաբթիի պահք`** / **`Ուրբաթի պահք`** |
+
+1,513 days — 757 Wednesdays, 756 Fridays.
+
+**This is the weakest-evidenced change in this document, and it is the only one with no
+source witness of any kind.** Every other entry above — including §6 and §6b, which already
+stretch the rule — rests on something the source itself says somewhere: the other language,
+another year, an eve, a companion feast. Here there is nothing. The source prints the same
+two words on both weekdays, in both languages, on all 1,513 days, and nowhere indicates
+which. The warrant is the calendar alone.
+
+Against the four conditions:
+
+**1. The text does not identify the observance.** `Fast day` is the same string the source
+uses for Holy Week, the Assumption octave and post-Ascension Eastertide — 460 further days
+where the weekday is not the reason for the fast at all.
+
+**2. Neither language is more specific.** Emphatically: `Պահք` is one word.
+
+**3. The calendar establishes what it is.** The day is the weekly Wednesday or Friday fast,
+and which one it is follows from its date. This is the condition the change actually rests
+on, and it is doing more work here than anywhere else in the document — everywhere else,
+condition 3 corroborates a name the source supplied, and here it *is* the name.
+
+**4. The added words state only that.** One weekday name.
+
+**Scope is the whole risk, so it is drawn narrowly.** The split claims only the terminal
+Wed/Fri fallthrough. Three cases are explicitly excluded, each because the marker there
+means something other than "it is Wednesday":
+
+- **Holy Week.** Great Wednesday and Great Friday would otherwise fall through to the
+  split. Holy Week is marked on *every* one of its days, Sunday through Saturday, so the
+  weekday is not the reason — an explicit `_POSITION_FAMILIES` entry heads them off and
+  they keep the bare marker.
+- **Any named fast.** A Wed/Fri inside Great Lent, the Fast of Nativity, Nisibis and the
+  rest is a day *of that fast*; those families already precede the fallthrough.
+- **Dec 9, and the 460 stored instances.** The source itself prints the marker alongside
+  its own day count — `Fourth day of the Assumption — Fast day` — and the second component
+  is not redundant with the first. Those are untouched.
+
+One subtlety worth recording: on 16 summer Wed/Fri days the *entire* stored name is
+`Fast day`. The marker satisfies `_POSITION_COMPONENT_RE`, so it was returned as an
+already-resolved position and the split never ran. `_apply_position_label` now drops a
+stored bare marker when — and only when — the computed position is one of the two split
+labels, which state the same fact.
+
+**Ratchets: none moved**, on the same terms as §6b.
+`source_corrections.weekly_fast_label` / `weekly_fast_label_hy` register the fold, scoped
+by asking the engine which days it actually splits, so the registry cannot drift from the
+behaviour. `dev/verify_position_labels.py` reads `MISMATCH 0 / EXTRA 0 / 0 LOST`.
+
+**Consumer cost, stated plainly.** This rewrites `Liturgical Day` on 1,513 days. A consumer
+keying rows on that string loses every one of them — which is exactly what 1.3.0 did to
+bahk, and the reason this is the last of the three to land rather than the first. It should
+not ship before the catalog ids are reachable through the API.
 
 ---
 
@@ -663,30 +732,18 @@ So there are really two questions. **(a)** Is a fast marker part of what an obse
 name, the 1,513 ordinary-time instances should say which fast they are, rather than sharing
 one string with the 460 that are a different thing.
 
-**Half of (b) is now answered**, and answering it is what §5 and §6b did: every week-long
-fast that had no per-day name has one (Illuminator, Nisibis, Prophet Elijah), so the marker
-no longer stands in for a *named* fast anywhere. What remains under this heading is the
-ordinary-time Wed/Fri weekly fast, and it is the harder half, because unlike those three it
-has **no eve and no other-language witness to take a name from** — the source never
-distinguishes a Wednesday from a Friday, in either language. A `Wednesday Fast` /
-`Friday Fast` split would therefore be editorial in a way nothing in this document yet is:
-not a disambiguation drawn from what the source says elsewhere, but a distinction the
-source does not draw at all.
+**(b) is now answered**, in two steps. §5 and §6b named every week-long fast that had no
+per-day name (Illuminator, Nisibis, Prophet Elijah), so the marker no longer stands in for a
+*named* fast anywhere; §6c split the remaining ordinary-time instances by weekday.
 
-Nor is (a) settled by any of it. The 460 stored instances are the case that shows the
-marker is carrying information no name supplies: on `Fourth day of the Assumption — Fast
-day` the source states both, and the second one is not redundant with the first. That is an
-attribute wearing a name's clothes, and the right fix is a field, not better wording.
-
-Not corrected here. Either answer rewrites `Liturgical Day` on ~1,500 days and, for the
-stored half, drops a component the source states — moving `test_feast_name_raw`'s omission
-ratchet off 0. It needs its own reviewed change, and it needs the ids to be reachable
-first: a text-keyed consumer cannot absorb a rename on 1,500 days, which is the whole
-lesson of 1.3.0.
-
-§6 is already named on the assumption that it lands: `Beginning of the Weekly Fasts`, the
-Friday after Ascension, reads `… — Friday Fast — Beginning of the Weekly Fasts` once
-Wed/Fri carry their own labels, and needs no further change then.
+**(a) is not settled by any of it, and the 460 stored instances are why.** On
+`Fourth day of the Assumption — Fast day` the source states both components, and the second
+is not redundant with the first — the day count says where in the octave you are, the marker
+says the day is a fast. No amount of better wording removes the need for that second fact,
+because it is not a name: it is an attribute wearing a name's clothes. The right fix is a
+field, served beside `Liturgical Day` the way `Season` and `Mode` already are, so a
+fasting calendar can ask "is this a fast day" without parsing English prose. That is the
+change still outstanding, and §6c deliberately does not pretend to be it.
 
 ## Reviewing
 

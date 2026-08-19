@@ -1167,7 +1167,7 @@ _ANY = None          # unbounded end of a family's offset window
 # imported at runtime); the ordinal words are this module's own _ORDINAL_WORDS.
 _POSITION_COMPONENT_RE = re.compile(
     r"^(?:" + "|".join(_ORDINAL_WORDS) + r")\s+(?:day of|Sunday)\b"
-    r"|^(?:Fast|Feast) day$")
+    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$")
 
 
 def _theophany_closing(d: datetime.date) -> datetime.date:
@@ -1307,7 +1307,19 @@ _POSITION_FAMILIES = (
     # reads "Պահք". Folded in source_corrections.POSITION_LABEL_FIXES; see
     # docs/feast-name-corrections.md section 1.
     ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Fast day", (12, 9)),
-    ("E", (_ANY, _ANY), (2, 4), None, 0, "Fast day"),
+    # Holy Week's own Wed/Fri keep the bare marker rather than the weekday split below.
+    # Great Wednesday and Great Friday are not the weekly fast -- they are inside Holy
+    # Week, which the source marks on every one of its days, Sunday through Saturday. The
+    # split says "this is the weekly Wednesday fast", which would be false here.
+    ("E", (-6, -1), (2, 4), None, 0, "Fast day"),
+    # A Wed/Fri no season above has claimed IS the weekly fast, and now says which day of
+    # it. The source draws no distinction -- one string, both weekdays, in both languages --
+    # so unlike every other label in this file the wording comes from the calendar alone
+    # rather than from something the source says elsewhere. Registered as a section 6
+    # disambiguation in source_corrections.weekly_fast_label / weekly_fast_label_hy; see
+    # docs/feast-name-corrections.md.
+    ("E", (_ANY, _ANY), (2,), None, 0, "Wednesday Fast"),
+    ("E", (_ANY, _ANY), (4,), None, 0, "Friday Fast"),
 )
 
 
@@ -2222,6 +2234,11 @@ def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
 
 _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 
+# The undifferentiated marker, and the weekday split that supersedes it. Both name the same
+# fact, so a day the split claims must not also carry the marker it replaced.
+_BARE_FAST_MARKERS = ("Fast day", "Feast day")
+_WEEKDAY_FAST_LABELS = ("Wednesday Fast", "Friday Fast")
+
 
 def _apply_position_label(label: str, d: datetime.date) -> str:
     """Head ``label`` with ``d``'s regenerated calendar-position label.
@@ -2241,6 +2258,13 @@ def _apply_position_label(label: str, d: datetime.date) -> str:
     if position is None:
         return label
     parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    if position in _WEEKDAY_FAST_LABELS:
+        # The split states what the stored marker stated, and states which weekday. Left
+        # in, the marker would satisfy the position-component test below and suppress the
+        # split entirely -- which is what it did on 16 summer Wed/Fri days whose whole
+        # stored name was "Fast day". Scoped to the split: everywhere else the marker is
+        # the most specific thing known about the day and is served exactly as stored.
+        parts = [p for p in parts if p not in _BARE_FAST_MARKERS]
     if any(_is_position_component(p) for p in parts):
         return _FEAST_SEP.join(parts) if parts else label
     return _FEAST_SEP.join([position] + parts)
