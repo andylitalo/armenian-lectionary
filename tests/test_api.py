@@ -67,6 +67,23 @@ class TestReadingsAPI(unittest.TestCase):
                 self.assertEqual(first["citation"], "John 20.1-18")
                 self.assertIs(type(first["start_chapter"]), int)
 
+    def test_observance_ids_survive_json_boundary_and_do_not_vary_by_language(self):
+        """An HTTP consumer keys stored data on these, so they must cross JSON unchanged."""
+        bodies = {}
+        for language in ("en", "hy"):
+            response = self.client.get(
+                "/readings?date=2004-11-21&language=" + language)
+            self.assertEqual(response.status_code, 200)
+            bodies[language] = response.get_json()
+
+        self.assertEqual(
+            bodies["en"]["ObservanceIds"],
+            ["eleventh_sunday_after_the", "presentation_of_the_holy", "eve_of_fast_of"])
+        self.assertEqual(bodies["en"]["ObservanceIds"], bodies["hy"]["ObservanceIds"])
+        # Guard against the two agreeing because nothing was translated.
+        self.assertNotEqual(
+            bodies["en"]["Liturgical Day"], bodies["hy"]["Liturgical Day"])
+
 
 if __name__ == "__main__":
     unittest.main()

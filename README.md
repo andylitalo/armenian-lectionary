@@ -85,6 +85,37 @@ comparison (`dev/feast_names.py`); a small set of reviewed companion-enumeration
 transliteration variants are reconciled symmetrically (`dev/source_corrections.canonical_commem`).
 Naming nuances may still be refined as experts review. Audit with `python dev/feast_audit.py`.
 
+### Stable observance ids
+
+Feast names get corrected. 1.3.0 alone folded `Saint(s)` to `St(s).` across the whole
+corpus and fixed 122 component spellings, and it regenerates calendar-position labels per
+date. That is the engine getting *more* right, but it is a problem for anyone who stored
+the name: a consumer keying rows on `"Liturgical Day"` finds every one of those rows
+unreachable after the upgrade, with whatever it hung off them stranded, and nothing errors.
+
+As of **1.4.0** every result also carries `"ObservanceIds"` — the stable id of each name
+component, in order, unchanged by `language`:
+
+```python
+>>> compute_armenian_lectionary(datetime.date(2004, 11, 21))["ObservanceIds"]
+['eleventh_sunday_after_the', 'presentation_of_the_holy', 'eve_of_fast_of']
+```
+
+A day is identified by the **whole ordered list**, not by one id: 1,750 of the 9,861 days
+in range name two to four observances at once (a calendar position, a commemoration, an eve
+note). Join them however you like — the engine does not impose a separator.
+
+The contract is that **a published id keeps meaning the same observance forever.** Ids are
+stated in the `id` column of `dev/feast_name_review.tsv`, beside the human decision about
+what the observance is called, and `dev/build_observance_catalog.py` builds the catalog as
+a straight projection of that column — correcting a name edits the approved text and the id
+stays put, because nothing recomputes it. The build refuses to write a catalog that drops a
+published id or revives a retired one. `tests/test_observance_ids.py` drives that path.
+
+`ObservanceIds` is `[]` when any component cannot be resolved, so a non-empty list is always
+a complete key rather than one with a hole in it. Inside the supported range every component
+resolves; gate on the empty list rather than assuming.
+
 ### Eight-mode cycle
 
 Every result includes a structured `"Mode"` object. Its `"Tone"` is the canonical
@@ -158,7 +189,7 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
 ```json
 {
   "Date": "2026-06-01",
-  "Liturgical Day": "Saints Hripsime and her companions",
+  "Liturgical Day": "Sts. Hripsime and her companions",
   "Mode": {
     "Tone": "ԱԿ",
     "Number": 2
@@ -178,6 +209,7 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
     {"book": "Isaiah", "start_chapter": 61, "start_verse": 10,
      "end_chapter": 62, "end_verse": 3, "citation": "Isaiah 61.10-62.3"}
   ],
+  "ObservanceIds": ["hripsime_and_her_companions"],
   "Source": "validated-table"
 }
 ```
@@ -189,6 +221,10 @@ sub-reference, so a consumer does not have to parse citation strings like
 independent of `language`. A composite citation — currently only the Daniel/Azariah
 reading, `"Daniel 3.1-23, Azariah. 1-68"` — expands to two dicts sharing that
 `citation` string, the back-pointer to their shared `ReadingsList` entry.
+
+`ObservanceIds` names each `"Liturgical Day"` component by its stable catalog id, in the
+same order and independent of `language`. **Key stored data on these, not on the name** —
+see [Stable observance ids](#stable-observance-ids).
 
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.

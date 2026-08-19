@@ -22,7 +22,7 @@ with no install step.
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). Two runtime roles: the resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`), and the source of the `ObservanceIds` every result carries (`engine._observance_ids`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback, and `ObservanceIds == []`). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -140,10 +140,14 @@ specifically — `status = generated` marks the latter.
 
 `observance_catalog.json` is the `id -> {en, hy}` table the engine resolves Armenian
 through, and its keys are meant to be what a consumer stores instead of display text.
-That only works if an id never moves. bahk keyed `Feast` on the name, and 1.3.0's
-corrections made 158 of its 429 stored names unreachable, stranding curated icons and
-generated contexts behind them with nothing raised; an id that shifted when its text was
-corrected would reproduce that exactly, only harder to notice.
+Since 1.4.0 that is not just an internal convention: every result also carries
+`ObservanceIds` (`engine._observance_ids`), the same ids served as a public contract, so
+this file's keys are what a consumer should key stored data on. That only works if an id
+never moves. bahk keyed `Feast` on the name, and 1.3.0's corrections made 158 of its 429
+stored names unreachable, stranding curated icons and generated contexts behind them with
+nothing raised; an id that shifted when its text was corrected would reproduce that
+exactly, only harder to notice. `tests/test_observance_ids.py` covers both the field and
+the freeze, including that a rebuild reproduces the shipped catalog byte for byte.
 
 So the id lives in the **`id` column of `dev/feast_name_review.tsv`**, beside the human
 decision about what the observance is called, and the catalog is a straight projection:
