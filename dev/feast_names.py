@@ -36,6 +36,11 @@ _SEASONS = sorted([
     "the Fast of the Transifiguration",           # sacredtradition.am spelling variant
     "the Fast of Assumption", "the Fast of Nativity", "the Fast of Advent",
     "the Fast of St. Gregory the Illuminator",
+    # Named in the engine, not by the source's own day labels: the source heads these days
+    # "Fast day" (Nisibis) or counts them from Pentecost (Elijah), and the fast is named by
+    # its own eve. See docs/feast-name-corrections.md section 6.
+    "the Fast of St. James the bishop of Nisibis",
+    "the Fast of Prophet Elijah",
     "the Assumption",
 ], key=len, reverse=True)
 

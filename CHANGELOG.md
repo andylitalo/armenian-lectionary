@@ -4,6 +4,71 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] — 2026-08-18
+
+### Changed
+- **Two more week-long fasts are named on their own days**
+  ([docs §6b](docs/feast-name-corrections.md)). The Fast of St. James the bishop of
+  Nisibis (Heesnak+22…+26) read a bare `Fast day` in English and a bare `Պահք` in
+  Armenian; the week after Pentecost was counted `Nth day of Pentecost`, which is true and
+  does not say which fast the reader is in. Both now carry a day-count label in both
+  languages:
+
+  | Days | Was | Now |
+  |---|---|---|
+  | Heesnak+22…+26 | `Fast day` / `Պահք` | `Nth day of the Fast of St. James the bishop of Nisibis` / `Ն օր Ս. Յակովբայ պահոց` |
+  | Pentecost+1…+6 | `Nth day of Pentecost` / `Ն օր Հոգեգալստեան` | `Nth day of the Fast of Prophet Elijah` / `Ն օր Եղիական պահոց` |
+
+  Neither name is invented. Each is the source's **own eve** for that fast, carried onto
+  the days it opens — `Eve of Fast of Saint James the bishop of Nisibis` /
+  `Բարեկենդան Ս. Յակովբայ պահոց` and `Eve of Fast of Prophet Elijah` /
+  `Բարեկենդան Եղիական պահոց`. Both fasts have the same shape as the Fast of St. Gregory
+  the Illuminator named in 1.3.0, closing on the saint's own commemoration. A §6
+  disambiguation, registered in `source_corrections.named_fast_label` (English) and the new
+  `normalize_position_label_hy` (Armenian), and pinned by
+  `tests/test_language.py`'s two new cases — which assert that each fast's eve and its days
+  read as the SAME fast name in both languages, since that agreement is the entire warrant.
+
+  **This is a display-text change on ~295 days.** A consumer keying rows on
+  `"Liturgical Day"` will see 6 names/year replaced and 5 names/year appear. See below on
+  why that is now recoverable.
+
+- **Dec 9 keeps its place in the Nisibis day count** on the 12 of 27 supported years it
+  falls inside that window: `Third day of the Fast of St. James the bishop of Nisibis —
+  Feast of the Conception of the Holy Virgin Mary by Anna`. Previously the day served the
+  bare marker there, which would now leave the fast's ordinal with a hole in it
+  (`First, Second, —, Fourth, Fifth`). The 1.3.0 `Feast day`→`Fast day` typo fold is
+  unaffected and still tested; on years Dec 9 falls outside the window it still serves the
+  corrected marker.
+
+### Fixed
+- **Renaming an observance no longer mints a second id for it.**
+  `dev/feast_name_review.build_rows` compared the engine's generated labels only against
+  the *frozen* ground truth, so on the pass that introduces a rename — and the review file
+  is refreshed BEFORE `build_ground_truth.py`, per CLAUDE.md's order — the new text looked
+  like a brand-new observance and got its own row and its own id. One observance,
+  addressable under two keys, which is the exact failure ids exist to prevent. Pending
+  `approved_en` values are now consulted too. Without this the Prophet Elijah rename would
+  have stranded `second_day_of_pentecost` … `seventh_day_of_pentecost`; with it, **those
+  six ids do not move** — only their text changed — and the catalog rebuilds to 385
+  entries with **0 orphans and 0 unused**. `tests/test_language.py` pins it.
+
+### Unchanged, deliberately
+- The ordinary-time Wed/Fri `Fast day` marker (1,513 days) is **not** split into
+  `Wednesday Fast` / `Friday Fast`. Unlike the three named fasts, the weekly fast has no
+  eve and no other-language witness to take a name from — the source never distinguishes
+  the two weekdays in either language — so that split would be editorial in a way nothing
+  in `docs/feast-name-corrections.md` yet is. It also cannot be absorbed by a text-keyed
+  consumer until the catalog ids are reachable through the API. Recorded as an open
+  question in that document.
+- **No ratchet was loosened.** Every difference from the source introduced here is
+  registered rather than absorbed into a wider ceiling. `HY_CONTRADICTION_CEILING` (3),
+  `HY_OMISSION_CEILING` (4) and `HY_EXACT_FLOOR` (412) stand exactly where they did;
+  `dev/verify_position_labels.py` reads `MISMATCH 0 / EXTRA 0 / 0 LOST` and
+  `dev/feast_discrepancy_report.py` `0 contradictions`. `build_table.py` self-validates at
+  **0 wrong** over 9,496 days, and every shipped artifact rebuilds byte for byte from the
+  documented order.
+
 ## [1.3.0] — 2026-08-12
 
 ### Added

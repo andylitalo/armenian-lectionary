@@ -1232,7 +1232,13 @@ _POSITION_FAMILIES = (
     ("E", (35, 35), _SUN, "sundays", 1, "{ord} Sunday of Eastertide"),
     ("E", (42, 42), _SUN, "sundays", 1, "{ord} Sunday of Eastertide. Second Palm Sunday"),
     ("E", (8, 48), _MON_TO_SAT, "days", 1, "{ord} day of Eastertide"),
-    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of Pentecost"),
+    # The six weekdays after Pentecost are the Fast of Prophet Elijah. The source counts
+    # them "Nth day of Pentecost" -- true, but it does not say which fast the reader is in,
+    # while the source's OWN eve on Pentecost itself says "Eve of Fast of Prophet Elijah"
+    # (_EVE_FAMILIES below). Renamed to agree with that eve, same ordinal; the catalog ids
+    # are unchanged, because this is the same observance under a more specific name. A §6
+    # disambiguation -- see docs/feast-name-corrections.md.
+    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Fast of Prophet Elijah"),
     # -- Winter first: the Nativity arc outranks the autumn anchors it overlaps.
     # Jan 6-13 is the Nativity octave, not the tail of Advent; and once Heesnak has
     # passed, a Sunday is "of Advent", not still "after the Holy Cross".
@@ -1247,6 +1253,19 @@ _POSITION_FAMILIES = (
     ("HE", (1, 5), _MON_TO_FRI, "days", 0, "{ord} day of Advent", (11, 21)),
     ("HE", (1, 5), _MON_TO_FRI, "days", 0, "{ord} day of the Fast of Advent"),
     ("HE", (7, 49), _SUN, "sundays", 0, "{ord} Sunday of Advent"),
+    # The Fast of St. James the bishop of Nisibis: five weekdays in the middle of Advent,
+    # opening the day after its Sunday eve (Heesnak+21, in _EVE_FAMILIES) and closing
+    # before the saint's own commemoration on the Saturday (+27) -- the same shape as the
+    # Fast of St. Gregory the Illuminator below, and confirmed on every year in the cache
+    # (saint-fixed text on +22..+26, all of it headed by a bare "Fast day").
+    #
+    # Neither language names these days beyond that marker, so the wording is taken from
+    # the source's own eve, which does name the fast. Placed BEFORE the Dec-9 entry at the
+    # bottom: Dec 9 lands inside this window in 12 of the 27 supported years, and it is a
+    # day of this fast on those years like any other -- letting the Dec-9 marker win would
+    # punch a hole in the ordinal ("First, Second, —, Fourth, Fifth").
+    ("HE", (22, 26), _MON_TO_FRI, "days", -21,
+     "{ord} day of the Fast of St. James the bishop of Nisibis"),
     # -- Transfiguration / Assumption / Exaltation (latest anchor first) --------
     ("EX", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Holy Cross"),
     ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday after the Holy Cross"),

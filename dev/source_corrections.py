@@ -230,31 +230,91 @@ POSITION_LABEL_FIXES_BY_DATE = {
 #
 # Date-scoped, for the reason the Eastertide fix above is: "Fast day" is the correct and
 # complete label on every other fast day in the corpus.
+#
+# The Fast of St. James the bishop of Nisibis (Heesnak+22..+26) is the same repair with one
+# witness fewer: its five weekdays read "Fast day" in English AND a bare "Պահք" in Armenian,
+# so there is no other-language statement to appeal to. What names it instead is the
+# source's own EVE on the Sunday before -- "Eve of Fast of Saint James the bishop of
+# Nisibis" / "Բարեկենդան Ս. Յակովբայ պահոց" -- which states, in both languages, exactly
+# which fast the five days that follow belong to. The window is fixed independently by the
+# cache on every year in range (saint-fixed text on +22..+26, the eve at +21, the saint's
+# own commemoration at +27). That makes it a §6 disambiguation rather than a §1
+# contradiction: both languages are equally unspecific ON THESE DAYS, and what the days are
+# is established from the calendar and the source's own surrounding text, not from
+# preference. The wording is the eve's, verbatim, so the eve and the days it opens read as
+# one fast.
 # --------------------------------------------------------------------------- #
-_ILLUMINATOR_FAST_WINDOW = (22, 26)      # Pentecost+21 is the Sunday eve; Mon-Fri follow
 _ILLUMINATOR_FAST_ORDINALS = ("First", "Second", "Third", "Fourth", "Fifth")
-_ILLUMINATOR_FAST_TEMPLATE = "{ord} day of the Fast of St. Gregory the Illuminator"
 _AMBIGUOUS_FAST_LABEL = "Fast day"
 
+# anchor -> (window inclusive, label template). Both fasts open the day after a Sunday eve
+# at anchor+21 and close before the saint's own commemoration on the Saturday at +27.
+_NAMED_FAST_WINDOWS = (
+    ("PE", (22, 26), "{ord} day of the Fast of St. Gregory the Illuminator"),
+    ("HE", (22, 26), "{ord} day of the Fast of St. James the bishop of Nisibis"),
+)
 
-def illuminator_fast_label(date_iso):
-    """The specific label for a weekday of the Fast of St. Gregory the Illuminator.
 
-    ``None`` on every other date, including the fast's own Sunday eve (which the source
+def named_fast_label(date_iso):
+    """The specific label for a weekday of the Illuminator or Nisibis fast.
+
+    ``None`` on every other date, including each fast's own Sunday eve (which the source
     names in full already) and the Saturday that closes it.
     """
     if not date_iso:
         return None
-    from armenian_lectionary.engine import calculate_gregorian_easter
+    from armenian_lectionary.engine import _POSITION_ANCHORS
 
     d = datetime.date.fromisoformat(date_iso)
-    pentecost = calculate_gregorian_easter(d.year) + datetime.timedelta(days=49)
-    lo, hi = _ILLUMINATOR_FAST_WINDOW
-    offset = (d - pentecost).days
-    if not lo <= offset <= hi:
+    for akey, (lo, hi), template in _NAMED_FAST_WINDOWS:
+        offset = (d - _POSITION_ANCHORS[akey](d)).days
+        if lo <= offset <= hi:
+            return template.format(ord=_ILLUMINATOR_FAST_ORDINALS[offset - lo])
+    return None
+
+
+def illuminator_fast_label(date_iso):
+    """Back-compatible alias; see ``named_fast_label``."""
+    return named_fast_label(date_iso)
+
+
+# The Armenian half of the Nisibis repair. The Illuminator fast needs no entry here: the
+# source's own Armenian already prints its per-day ordinal ("Ա օր Լուսաւորչի պահոց"), which
+# is exactly what is served. Nisibis reads a bare "Պահք" on all five days, so -- as with the
+# English -- the fold is date-scoped and cannot be expressed as the text->text map in
+# ``ground_truth_hy_fixes``: one source string resolves to five different components
+# depending on the date.
+_AMBIGUOUS_FAST_LABEL_HY = "Պահք"
+_NISIBIS_FAST_ORDINALS_HY = ("Ա", "Բ", "Գ", "Դ", "Ե")
+_NISIBIS_FAST_TEMPLATE_HY = "{ord} օր Ս. Յակովբայ պահոց"
+
+
+def named_fast_label_hy(date_iso):
+    """The specific Armenian label for a weekday of the Nisibis fast, else ``None``."""
+    if not date_iso:
         return None
-    return _ILLUMINATOR_FAST_TEMPLATE.format(
-        ord=_ILLUMINATOR_FAST_ORDINALS[offset - lo])
+    from armenian_lectionary.engine import _POSITION_ANCHORS
+
+    d = datetime.date.fromisoformat(date_iso)
+    offset = (d - _POSITION_ANCHORS["HE"](d)).days
+    if not 22 <= offset <= 26:
+        return None
+    return _NISIBIS_FAST_TEMPLATE_HY.format(ord=_NISIBIS_FAST_ORDINALS_HY[offset - 22])
+
+
+def normalize_position_label_hy(text, date_iso=""):
+    """Fold the source's bare Armenian fast marker to the named-fast label it stands for.
+
+    Component-exact, for the same reason the English fold is: the bare word is what is
+    ambiguous, and rewriting it inside a longer component would corrupt a name that merely
+    contains it.
+    """
+    specific = named_fast_label_hy(date_iso)
+    if not text or not specific:
+        return text
+    return _FEAST_SEP.join(
+        specific if part.strip() == _AMBIGUOUS_FAST_LABEL_HY else part
+        for part in text.split(_FEAST_SEP))
 
 
 def normalize_position_label(text, date_iso=""):
@@ -268,7 +328,7 @@ def normalize_position_label(text, date_iso=""):
         text = text.replace(wrong, right)
     for wrong, right in POSITION_LABEL_FIXES_BY_DATE.get(date_iso, {}).items():
         text = text.replace(wrong, right)
-    specific = illuminator_fast_label(date_iso)
+    specific = named_fast_label(date_iso)
     if specific:
         # Component-exact, not a substring replace: the bare label is what is ambiguous,
         # and rewriting it inside a longer component would corrupt a name that merely

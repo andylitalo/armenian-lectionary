@@ -512,12 +512,12 @@
   "status": "ok"
  },
  "Fifth day of Pentecost": {
-  "approved_en": "Fifth day of Pentecost",
-  "approved_hy": "Ե օր Հոգեգալստեան",
+  "approved_en": "Fifth day of the Fast of Prophet Elijah",
+  "approved_hy": "Ե օր Եղիական պահոց",
   "id": "fifth_day_of_pentecost",
-  "note": "",
+  "note": "renamed to the fast the source's OWN eve names on Pentecost itself (\"Eve of Fast of Prophet Elijah\"): the source's day count is true but does not say which fast the reader is in. A section 6 disambiguation, not a contradiction -- the ordinal is unchanged, and the id is unchanged because this is the same observance under a more specific name. approved_hy mirrors the English on the frame the source itself uses for every other named fast (\"Ե օր Լուսաւորչի պահոց\"). See docs/feast-name-corrections.md section 6.",
   "source_hy": "Ե օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "fixed"
  },
  "Fifth day of the Assumption": {
   "approved_en": "Fifth day of the Assumption",
@@ -557,6 +557,14 @@
   "id": "illuminator_fast_day_5",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Ե օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Fifth day of the Fast of St. James the bishop of Nisibis": {
+  "approved_en": "Fifth day of the Fast of St. James the bishop of Nisibis",
+  "approved_hy": "Ե օր Ս. Յակովբայ պահոց",
+  "id": "nisibis_fast_day_5",
+  "note": "engine-composed label: the source heads all five of these days with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian, so neither language names the fast on the days themselves. The fast IS named by the source's own eve on the Sunday before (\"Eve of Fast of Saint James the bishop of Nisibis\"), and its window is fixed by the cache on every year in range: saint-fixed text on Heesnak+22..+26, the eve at +21, the saint's own commemoration at +27. Wording taken from that eve verbatim so the eve and the days it opens read as one fast. approved_hy uses the fast name from that same eve verbatim (\"Բարեկենդան Ս. Յակովբայ պահոց\"), in the ordinal-day frame the source uses for every other named fast (\"Ա օր Լուսաւորչի պահոց\"); there is no standalone scrape of the day labels themselves, hence the empty source_hy. See docs/feast-name-corrections.md section 6.",
+  "source_hy": "",
   "status": "generated"
  },
  "Fifth day of the Fast of the Catechumens": {
@@ -645,6 +653,14 @@
   "id": "illuminator_fast_day_1",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Ա օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "First day of the Fast of St. James the bishop of Nisibis": {
+  "approved_en": "First day of the Fast of St. James the bishop of Nisibis",
+  "approved_hy": "Ա օր Ս. Յակովբայ պահոց",
+  "id": "nisibis_fast_day_1",
+  "note": "engine-composed label: the source heads all five of these days with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian, so neither language names the fast on the days themselves. The fast IS named by the source's own eve on the Sunday before (\"Eve of Fast of Saint James the bishop of Nisibis\"), and its window is fixed by the cache on every year in range: saint-fixed text on Heesnak+22..+26, the eve at +21, the saint's own commemoration at +27. Wording taken from that eve verbatim so the eve and the days it opens read as one fast. approved_hy uses the fast name from that same eve verbatim (\"Բարեկենդան Ս. Յակովբայ պահոց\"), in the ordinal-day frame the source uses for every other named fast (\"Ա օր Լուսաւորչի պահոց\"); there is no standalone scrape of the day labels themselves, hence the empty source_hy. See docs/feast-name-corrections.md section 6.",
+  "source_hy": "",
   "status": "generated"
  },
  "First day of the Fast of the Catechumens": {
@@ -864,12 +880,12 @@
   "status": "ok"
  },
  "Fourth day of Pentecost": {
-  "approved_en": "Fourth day of Pentecost",
-  "approved_hy": "Դ օր Հոգեգալստեան",
+  "approved_en": "Fourth day of the Fast of Prophet Elijah",
+  "approved_hy": "Դ օր Եղիական պահոց",
   "id": "fourth_day_of_pentecost",
-  "note": "",
+  "note": "renamed to the fast the source's OWN eve names on Pentecost itself (\"Eve of Fast of Prophet Elijah\"): the source's day count is true but does not say which fast the reader is in. A section 6 disambiguation, not a contradiction -- the ordinal is unchanged, and the id is unchanged because this is the same observance under a more specific name. approved_hy mirrors the English on the frame the source itself uses for every other named fast (\"Ե օր Լուսաւորչի պահոց\"). See docs/feast-name-corrections.md section 6.",
   "source_hy": "Դ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "fixed"
  },
  "Fourth day of the Assumption": {
   "approved_en": "Fourth day of the Assumption",
@@ -909,6 +925,14 @@
   "id": "illuminator_fast_day_4",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Դ օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Fourth day of the Fast of St. James the bishop of Nisibis": {
+  "approved_en": "Fourth day of the Fast of St. James the bishop of Nisibis",
+  "approved_hy": "Դ օր Ս. Յակովբայ պահոց",
+  "id": "nisibis_fast_day_4",
+  "note": "engine-composed label: the source heads all five of these days with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian, so neither language names the fast on the days themselves. The fast IS named by the source's own eve on the Sunday before (\"Eve of Fast of Saint James the bishop of Nisibis\"), and its window is fixed by the cache on every year in range: saint-fixed text on Heesnak+22..+26, the eve at +21, the saint's own commemoration at +27. Wording taken from that eve verbatim so the eve and the days it opens read as one fast. approved_hy uses the fast name from that same eve verbatim (\"Բարեկենդան Ս. Յակովբայ պահոց\"), in the ordinal-day frame the source uses for every other named fast (\"Ա օր Լուսաւորչի պահոց\"); there is no standalone scrape of the day labels themselves, hence the empty source_hy. See docs/feast-name-corrections.md section 6.",
+  "source_hy": "",
   "status": "generated"
  },
  "Fourth day of the Fast of the Catechumens": {
@@ -2248,12 +2272,12 @@
   "status": "ok"
  },
  "Second day of Pentecost": {
-  "approved_en": "Second day of Pentecost",
-  "approved_hy": "Բ օր Հոգեգալստեան",
+  "approved_en": "Second day of the Fast of Prophet Elijah",
+  "approved_hy": "Բ օր Եղիական պահոց",
   "id": "second_day_of_pentecost",
-  "note": "",
+  "note": "renamed to the fast the source's OWN eve names on Pentecost itself (\"Eve of Fast of Prophet Elijah\"): the source's day count is true but does not say which fast the reader is in. A section 6 disambiguation, not a contradiction -- the ordinal is unchanged, and the id is unchanged because this is the same observance under a more specific name. approved_hy mirrors the English on the frame the source itself uses for every other named fast (\"Ե օր Լուսաւորչի պահոց\"). See docs/feast-name-corrections.md section 6.",
   "source_hy": "Բ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "fixed"
  },
  "Second day of Transfiguration": {
   "approved_en": "Second day of Transfiguration",
@@ -2301,6 +2325,14 @@
   "id": "illuminator_fast_day_2",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Բ օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Second day of the Fast of St. James the bishop of Nisibis": {
+  "approved_en": "Second day of the Fast of St. James the bishop of Nisibis",
+  "approved_hy": "Բ օր Ս. Յակովբայ պահոց",
+  "id": "nisibis_fast_day_2",
+  "note": "engine-composed label: the source heads all five of these days with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian, so neither language names the fast on the days themselves. The fast IS named by the source's own eve on the Sunday before (\"Eve of Fast of Saint James the bishop of Nisibis\"), and its window is fixed by the cache on every year in range: saint-fixed text on Heesnak+22..+26, the eve at +21, the saint's own commemoration at +27. Wording taken from that eve verbatim so the eve and the days it opens read as one fast. approved_hy uses the fast name from that same eve verbatim (\"Բարեկենդան Ս. Յակովբայ պահոց\"), in the ordinal-day frame the source uses for every other named fast (\"Ա օր Լուսաւորչի պահոց\"); there is no standalone scrape of the day labels themselves, hence the empty source_hy. See docs/feast-name-corrections.md section 6.",
+  "source_hy": "",
   "status": "generated"
  },
  "Second day of the Fast of the Catechumens": {
@@ -2400,12 +2432,12 @@
   "status": "ok"
  },
  "Seventh day of Pentecost": {
-  "approved_en": "Seventh day of Pentecost",
-  "approved_hy": "Է օր Հոգեգալստեան",
+  "approved_en": "Seventh day of the Fast of Prophet Elijah",
+  "approved_hy": "Է օր Եղիական պահոց",
   "id": "seventh_day_of_pentecost",
-  "note": "",
+  "note": "renamed to the fast the source's OWN eve names on Pentecost itself (\"Eve of Fast of Prophet Elijah\"): the source's day count is true but does not say which fast the reader is in. A section 6 disambiguation, not a contradiction -- the ordinal is unchanged, and the id is unchanged because this is the same observance under a more specific name. approved_hy mirrors the English on the frame the source itself uses for every other named fast (\"Ե օր Լուսաւորչի պահոց\"). See docs/feast-name-corrections.md section 6.",
   "source_hy": "Է օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "fixed"
  },
  "Seventh day of the Assumption": {
   "approved_en": "Seventh day of the Assumption",
@@ -2528,12 +2560,12 @@
   "status": "ok"
  },
  "Sixth day of Pentecost": {
-  "approved_en": "Sixth day of Pentecost",
-  "approved_hy": "Զ օր Հոգեգալստեան",
+  "approved_en": "Sixth day of the Fast of Prophet Elijah",
+  "approved_hy": "Զ օր Եղիական պահոց",
   "id": "sixth_day_of_pentecost",
-  "note": "",
+  "note": "renamed to the fast the source's OWN eve names on Pentecost itself (\"Eve of Fast of Prophet Elijah\"): the source's day count is true but does not say which fast the reader is in. A section 6 disambiguation, not a contradiction -- the ordinal is unchanged, and the id is unchanged because this is the same observance under a more specific name. approved_hy mirrors the English on the frame the source itself uses for every other named fast (\"Ե օր Լուսաւորչի պահոց\"). See docs/feast-name-corrections.md section 6.",
   "source_hy": "Զ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "fixed"
  },
  "Sixth day of the Assumption": {
   "approved_en": "Sixth day of the Assumption",
@@ -2784,12 +2816,12 @@
   "status": "ok"
  },
  "Third day of Pentecost": {
-  "approved_en": "Third day of Pentecost",
-  "approved_hy": "Գ օր Հոգեգալստեան",
+  "approved_en": "Third day of the Fast of Prophet Elijah",
+  "approved_hy": "Գ օր Եղիական պահոց",
   "id": "third_day_of_pentecost",
-  "note": "",
+  "note": "renamed to the fast the source's OWN eve names on Pentecost itself (\"Eve of Fast of Prophet Elijah\"): the source's day count is true but does not say which fast the reader is in. A section 6 disambiguation, not a contradiction -- the ordinal is unchanged, and the id is unchanged because this is the same observance under a more specific name. approved_hy mirrors the English on the frame the source itself uses for every other named fast (\"Ե օր Լուսաւորչի պահոց\"). See docs/feast-name-corrections.md section 6.",
   "source_hy": "Գ օր Հոգեգալստեան",
-  "status": "ok"
+  "status": "fixed"
  },
  "Third day of Transfiguration": {
   "approved_en": "Third day of Transfiguration",
@@ -2845,6 +2877,14 @@
   "id": "illuminator_fast_day_3",
   "note": "engine-composed label; the source prints a less specific English text here -- see dev/source_corrections",
   "source_hy": "Գ օր Լուսաւորչի պահոց",
+  "status": "generated"
+ },
+ "Third day of the Fast of St. James the bishop of Nisibis": {
+  "approved_en": "Third day of the Fast of St. James the bishop of Nisibis",
+  "approved_hy": "Գ օր Ս. Յակովբայ պահոց",
+  "id": "nisibis_fast_day_3",
+  "note": "engine-composed label: the source heads all five of these days with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian, so neither language names the fast on the days themselves. The fast IS named by the source's own eve on the Sunday before (\"Eve of Fast of Saint James the bishop of Nisibis\"), and its window is fixed by the cache on every year in range: saint-fixed text on Heesnak+22..+26, the eve at +21, the saint's own commemoration at +27. Wording taken from that eve verbatim so the eve and the days it opens read as one fast. approved_hy uses the fast name from that same eve verbatim (\"Բարեկենդան Ս. Յակովբայ պահոց\"), in the ordinal-day frame the source uses for every other named fast (\"Ա օր Լուսաւորչի պահոց\"); there is no standalone scrape of the day labels themselves, hence the empty source_hy. See docs/feast-name-corrections.md section 6.",
+  "source_hy": "",
   "status": "generated"
  },
  "Third day of the Fast of the Catechumens": {

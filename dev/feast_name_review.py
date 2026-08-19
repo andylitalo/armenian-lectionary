@@ -438,6 +438,16 @@ def build_rows():
     # folded ("Saint" -> "St.") never equals the generated label, and treating those as new
     # would duplicate rows that already exist under their raw key.
     already = {corrected(src) for src in days}
+    # ...and a rename this file registers but build_ground_truth.py has not frozen yet. The
+    # review file is refreshed BEFORE the ground truth (CLAUDE.md's rebuild order), so on
+    # the pass that introduces a rename ``corrected`` still returns the OLD text while the
+    # engine already generates the new one. Without this, that pass adds a SECOND row for
+    # the renamed observance and mints a second id for it -- the id split that keeps one
+    # observance addressable under two keys, which is the thing ids exist to prevent.
+    # Keyed on source_en != approved_en so a genuine generated row, whose approved name IS
+    # its own text, still round-trips instead of being dropped as already-known.
+    already |= {r["approved_en"] for src, r in existing.items()
+                if r.get("approved_en") and r["approved_en"] != src}
     generated_only = set(gen_days) - already
     for label in generated_only:
         days[label] = gen_days[label]

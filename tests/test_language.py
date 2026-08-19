@@ -294,6 +294,163 @@ class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
                 self.assertIsNone(source_corrections.illuminator_fast_label(
                     (pentecost + datetime.timedelta(days=offset)).isoformat()))
 
+
+class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
+    """The Fast of St. James the bishop of Nisibis counts its five weekdays, like the
+    Illuminator fast above -- but with one witness fewer.
+
+    The source heads all five days "Fast day" in English AND a bare "Պահք" in Armenian, so
+    unlike the Illuminator there is no other-language statement to appeal to. What names
+    the fast is the source's own EVE on the Sunday before, in both languages, and the
+    window is fixed independently by the cache every year (eve at Heesnak+21, saint-fixed
+    text on +22..+26, the saint's own commemoration at +27). Registered as a section 6
+    disambiguation in ``source_corrections.named_fast_label`` /
+    ``named_fast_label_hy``; this pins the served result of both halves.
+    """
+
+    _ORDINALS = (("First", "Ա"), ("Second", "Բ"), ("Third", "Գ"),
+                 ("Fourth", "Դ"), ("Fifth", "Ե"))
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG:
+            self.skipTest("observance catalog not present")
+
+    def _heesnak(self, year):
+        return engine.sunday_closest_to(year, 11, 18)
+
+    def test_each_fast_day_carries_its_ordinal_in_both_languages(self):
+        for year in (2001, 2015, 2026):
+            heesnak = self._heesnak(year)
+            for n, (word, letter) in enumerate(self._ORDINALS, start=1):
+                day = heesnak + datetime.timedelta(days=21 + n)
+                with self.subTest(year=year, ordinal=n):
+                    en = compute_armenian_lectionary(day)["Liturgical Day"]
+                    hy = compute_armenian_lectionary(
+                        day, language="hy")["Liturgical Day"]
+                    self.assertTrue(
+                        en.startswith(
+                            f"{word} day of the Fast of St. James the bishop of Nisibis"),
+                        f"{day} served {en!r}")
+                    self.assertTrue(
+                        hy.startswith(f"{letter} օր Ս. Յակովբայ պահոց"),
+                        f"{day} served {hy!r}")
+
+    def test_the_day_count_matches_the_eve_that_names_the_fast(self):
+        """The eve and the days it opens must read as ONE fast, in both languages.
+
+        This is the whole warrant for the wording: the label is not independently
+        attested, it is the eve's own name for the fast carried onto the days it opens. If
+        the two ever drift apart, the justification is gone -- and a consumer grouping a
+        fast by name would no longer see the eve and its days as the same thing.
+        """
+        heesnak = self._heesnak(2026)
+        eve = heesnak + datetime.timedelta(days=21)
+        for lang, fast in (("en", "Fast of St. James the bishop of Nisibis"),
+                           ("hy", "Ս. Յակովբայ պահոց")):
+            with self.subTest(lang=lang):
+                eve_label = compute_armenian_lectionary(
+                    eve, language=lang)["Liturgical Day"]
+                self.assertIn(fast, eve_label, f"eve served {eve_label!r}")
+                for n in range(1, 6):
+                    day = heesnak + datetime.timedelta(days=21 + n)
+                    served = compute_armenian_lectionary(
+                        day, language=lang)["Liturgical Day"]
+                    self.assertIn(fast, served, f"{day} served {served!r}")
+
+    def test_window_is_closed_at_both_ends(self):
+        """Heesnak+21 is the eve and +27 is the saint's own day; neither is a fast day."""
+        heesnak = self._heesnak(2026)
+        for offset in (21, 27):
+            with self.subTest(offset=offset):
+                iso = (heesnak + datetime.timedelta(days=offset)).isoformat()
+                self.assertIsNone(source_corrections.named_fast_label(iso))
+                self.assertIsNone(source_corrections.named_fast_label_hy(iso))
+
+    def test_december_ninth_keeps_its_place_in_the_count(self):
+        """Dec 9 inside the window is a day of this fast, not an exception to it.
+
+        Suppressing it there would leave the ordinal with a hole in 12 of the 27 supported
+        years; the Conception feast rides alongside instead. Mirrored, for the served
+        English, by tests/test_feast.TestDecemberNinthFastMarker.
+        """
+        for year in (2015, 2020, 2026):
+            with self.subTest(year=year):
+                served = compute_armenian_lectionary(
+                    datetime.date(year, 12, 9), language="hy")["Liturgical Day"]
+                self.assertIn("օր Ս. Յակովբայ պահոց", served)
+
+
+class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
+    """The week after Pentecost is the Fast of Prophet Elijah, and now says so.
+
+    The source counts these days "Nth day of Pentecost" / "Ն օր Հոգեգալստեան" -- true, and
+    it does not say which fast the reader is in. Its own eve on Pentecost itself does
+    ("Eve of Fast of Prophet Elijah" / "Բարեկենդան Եղիական պահոց"), and the Sunday that
+    closes the week is the Remembrance of Prophet Elijah, so the fast is named for the
+    saint it ends on -- the same shape as the Illuminator and Nisibis fasts.
+
+    Registered on the review rows themselves (``approved_en``/``approved_hy`` on the six
+    ``*_of_pentecost`` rows), which is why their ids do NOT move: same observance, more
+    specific name. ``tests/test_observance_ids`` would catch it if they did.
+    """
+
+    _ORDINALS = (("Second", "Բ"), ("Third", "Գ"), ("Fourth", "Դ"),
+                 ("Fifth", "Ե"), ("Sixth", "Զ"), ("Seventh", "Է"))
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG:
+            self.skipTest("observance catalog not present")
+
+    def _pentecost(self, year):
+        return engine.calculate_gregorian_easter(year) + datetime.timedelta(days=49)
+
+    def test_each_fast_day_carries_its_ordinal_in_both_languages(self):
+        for year in (2001, 2014, 2026):
+            pentecost = self._pentecost(year)
+            for offset, (word, letter) in enumerate(self._ORDINALS, start=1):
+                day = pentecost + datetime.timedelta(days=offset)
+                with self.subTest(year=year, offset=offset):
+                    en = compute_armenian_lectionary(day)["Liturgical Day"]
+                    hy = compute_armenian_lectionary(
+                        day, language="hy")["Liturgical Day"]
+                    self.assertTrue(
+                        en.startswith(f"{word} day of the Fast of Prophet Elijah"),
+                        f"{day} served {en!r}")
+                    self.assertTrue(hy.startswith(f"{letter} օր Եղիական պահոց"),
+                                    f"{day} served {hy!r}")
+
+    def test_the_day_count_matches_the_eve_that_names_the_fast(self):
+        for lang, fast in (("en", "Fast of Prophet Elijah"), ("hy", "Եղիական պահոց")):
+            with self.subTest(lang=lang):
+                pentecost = self._pentecost(2026)
+                eve = compute_armenian_lectionary(
+                    pentecost, language=lang)["Liturgical Day"]
+                self.assertIn(fast, eve, f"eve served {eve!r}")
+                for offset in range(1, 7):
+                    day = pentecost + datetime.timedelta(days=offset)
+                    served = compute_armenian_lectionary(
+                        day, language=lang)["Liturgical Day"]
+                    self.assertIn(fast, served, f"{day} served {served!r}")
+
+    def test_the_rename_did_not_move_the_ids(self):
+        """The point of the whole exercise: correcting a name must not restate the key.
+
+        A consumer that persisted ``second_day_of_pentecost`` for the Monday after
+        Pentecost must still resolve it after the rename. Minting a new id here instead
+        would strand exactly what 1.3.0 stranded.
+        """
+        from dev.observance_ids import ids_for_text
+        for word, slug in (("Second", "second_day_of_pentecost"),
+                           ("Seventh", "seventh_day_of_pentecost")):
+            with self.subTest(word=word):
+                self.assertEqual(
+                    ids_for_text(f"{word} day of the Fast of Prophet Elijah"), [slug])
+        # ...and the pre-rename display text must NOT resolve to a second id. It is
+        # retired wording, not a second live observance -- the duplicate row that would
+        # have created one is what dev/feast_name_review.build_rows now suppresses.
+        with self.assertRaises(KeyError):
+            ids_for_text("Second day of Pentecost")
+
     def test_no_two_observances_share_an_english_name(self):
         """What the repair buys: the catalog's English is now a key, not a hint.
 

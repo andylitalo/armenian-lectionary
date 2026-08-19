@@ -272,6 +272,73 @@ question](#fast-day--a-name-or-an-attribute) below. If the weekly Wed/Fri fasts 
 own labels, the day reads `… — Friday Fast — Beginning of the Weekly Fasts` and this
 component needs no further change.
 
+### 6b. Two named fasts the source's day labels leave unnamed
+
+The same warrant, applied twice more — and to the same underlying complaint as §5, which
+this extends rather than repeats. §5 covered the Fast of St. Gregory the Illuminator, where
+the source's *Armenian* counted the days its English left bare. Two more week-long fasts
+had no per-day name in **either** language:
+
+| | Days | Source, English | Source, Armenian | Served |
+|---|---|---|---|---|
+| **Fast of St. James the bishop of Nisibis** | Heesnak+22…+26 | `Fast day` | `Պահք` | `Nth day of the Fast of St. James the bishop of Nisibis` / `Ն օր Ս. Յակովբայ պահոց` |
+| **Fast of Prophet Elijah** | Pentecost+1…+6 | `Nth day of Pentecost` | `Ն օր Հոգեգալստեան` | `Nth day of the Fast of Prophet Elijah` / `Ն օր Եղիական պահոց` |
+
+Both meet the four conditions, and both are named by **the source's own eve**, which is
+what keeps this a disambiguation rather than an invention:
+
+**1. The text does not identify the observance.** Nisibis reads `Fast day` — the same two
+words the source prints on 2,139 ordinary Wed/Fri days. Elijah's `Nth day of Pentecost` is
+true and still does not say which fast the reader is in.
+
+**2. Neither language is more specific.** This is what separates both from §5. Nisibis is
+`Պահք` in Armenian, no better than the English. Elijah's Armenian counts from Pentecost
+exactly as its English does.
+
+**3. The calendar establishes what each is — and so does the source's own surrounding
+text.** Neither name is invented; each is lifted verbatim from the eve the source itself
+prints on the Sunday before:
+
+- `Eve of Fast of Saint James the bishop of Nisibis` / `Բարեկենդան Ս. Յակովբայ պահոց`
+- `Eve of Fast of Prophet Elijah` / `Բարեկենդան Եղիական պահոց`
+
+The windows are fixed independently by the cache on every year in range. Both fasts have
+the identical shape, and it is the shape §5's fast already has: a Sunday eve at anchor+21,
+five or six fast days, and **the saint's own commemoration closing it** — St. James of
+Nisibis on Heesnak+27, the Remembrance of Prophet Elijah on the Sunday after Pentecost+6,
+the Discovery of the Relics on Pentecost+27. A fast named for the saint it ends on is not a
+reading of preference; it is what the surrounding days say.
+
+**4. The added words state only that.** The eve's own wording for the fast, carried onto
+the days it opens, with the ordinal the source was already counting. Nothing else changes —
+`tests/test_language.py` pins the eve and its days to the same fast name in both languages,
+because if those ever drift apart the warrant above is gone.
+
+**Ids do not move.** Elijah is a rename of six components the source already published, so
+`second_day_of_pentecost` … `seventh_day_of_pentecost` keep their ids and only their text
+changes — the property the stated-id design exists to provide, and the one 1.3.0 broke for
+bahk. Nisibis is five genuinely new components and gets five new ids
+(`nisibis_fast_day_1`…`_5`). The catalog rebuilds to **385 entries with 0 orphans and 0
+unused**, so nothing was stranded and nothing shipped that no day resolves to.
+
+**Dec 9 keeps its place in the Nisibis count.** It falls inside that window in 12 of the 27
+supported years, and on those years it is a day of the fast like the four around it, with
+the Conception feast alongside: `Third day of the Fast of St. James the bishop of Nisibis —
+Feast of the Conception of the Holy Virgin Mary by Anna`. Suppressing the day-count there
+to preserve the §1 `Feast day`→`Fast day` marker would leave the ordinal with a hole in it
+— `First, Second, —, Fourth, Fifth`. The §1 typo fold is unaffected and still tested: it
+normalizes the raw scrape before any of this runs, and on the years Dec 9 falls *outside*
+the window the corrected marker is still what the day serves.
+
+**Ratchets: none moved.** Every difference from the source introduced here is registered,
+not absorbed. English resolves through `source_corrections.named_fast_label` (the §5
+mechanism, generalized to both windows) and, for Elijah, through the review rows'
+`approved_en`. Armenian needed the same thing and did not have it, so
+`normalize_position_label_hy` is its counterpart — the first date-scoped Armenian fold, and
+the reason `HY_CONTRADICTION_CEILING` and `HY_EXACT_FLOOR` stand exactly where they did.
+`dev/verify_position_labels.py` reads `MISMATCH 0 / EXTRA 0 / 0 LOST`, and
+`dev/feast_discrepancy_report.py` `0 contradictions`.
+
 ---
 
 ---
@@ -584,22 +651,38 @@ Two of these are larger than a spelling, and blocked on each other.
 
 ### `Fast day` — a name, or an attribute?
 
-Served on **2,108 days**, and the two halves of that number want different answers:
+Served on **1,973 days**, and the two halves of that number want different answers:
 
 | Origin | Days | What it means there |
 |---|---|---|
-| generated position label (`engine._POSITION_FAMILIES` terminal fallthrough) | 1,575 | the **weekly** fast — 784 Wed, 783 Fri, plus 8 Advent-fast weekdays around Dec 9 |
-| stored table text | 533 | Holy Week and the week-long fasts (Elijah, Assumption, post-Ascension Eastertide), where the weekday is not the reason |
+| generated position label (`engine._POSITION_FAMILIES` terminal fallthrough) | 1,513 | the **weekly** fast — 757 Wed, 756 Fri |
+| stored table text | 460 | Holy Week, the Assumption octave, post-Ascension Eastertide — where the weekday is not the reason, and where the source itself prints the marker *alongside* its own day count (`Fourth day of the Assumption — Fast day`) |
 
 So there are really two questions. **(a)** Is a fast marker part of what an observance is
 *called*, or an attribute of the day that belongs in its own field? **(b)** If it stays a
-name, the 1,575 ordinary-time instances should say which fast they are, rather than sharing
-one string with the 533 that are a different thing — the same argument that unblocked the
-Illuminator fast in §5, one level up.
+name, the 1,513 ordinary-time instances should say which fast they are, rather than sharing
+one string with the 460 that are a different thing.
 
-Not corrected here. Either answer rewrites `Liturgical Day` on more than 2,000 days, needs
-an `engine._POSITION_FAMILIES` change plus a table rebuild for the stored half, and moves
-`test_feast_name_raw`'s omission ratchet off 0. It needs its own reviewed change.
+**Half of (b) is now answered**, and answering it is what §5 and §6b did: every week-long
+fast that had no per-day name has one (Illuminator, Nisibis, Prophet Elijah), so the marker
+no longer stands in for a *named* fast anywhere. What remains under this heading is the
+ordinary-time Wed/Fri weekly fast, and it is the harder half, because unlike those three it
+has **no eve and no other-language witness to take a name from** — the source never
+distinguishes a Wednesday from a Friday, in either language. A `Wednesday Fast` /
+`Friday Fast` split would therefore be editorial in a way nothing in this document yet is:
+not a disambiguation drawn from what the source says elsewhere, but a distinction the
+source does not draw at all.
+
+Nor is (a) settled by any of it. The 460 stored instances are the case that shows the
+marker is carrying information no name supplies: on `Fourth day of the Assumption — Fast
+day` the source states both, and the second one is not redundant with the first. That is an
+attribute wearing a name's clothes, and the right fix is a field, not better wording.
+
+Not corrected here. Either answer rewrites `Liturgical Day` on ~1,500 days and, for the
+stored half, drops a component the source states — moving `test_feast_name_raw`'s omission
+ratchet off 0. It needs its own reviewed change, and it needs the ids to be reachable
+first: a text-keyed consumer cannot absorb a rename on 1,500 days, which is the whole
+lesson of 1.3.0.
 
 §6 is already named on the assumption that it lands: `Beginning of the Weekly Fasts`, the
 Friday after Ascension, reads `… — Friday Fast — Beginning of the Weekly Fasts` once
