@@ -284,6 +284,29 @@ prints for it can drift across years of different length, per `_position_label`'
 docstring), so they still fail the one-to-one check and stay excluded, falling back to
 their literal template text.
 
+Two more collisions, both real and both handled, rather than accepted as loss:
+
+- **A position label and an eve note can share a day's readings by construction, not
+  coincidence.** Pentecost+21 is a Sunday every year (21 is a multiple of 7), so "Third
+  Sunday after Pentecost" and "Eve of Fast of St. Gregory the Illuminator" carry
+  identical readings on *every* occurrence of either, forever — not a rare accident to
+  exclude, but a permanent structural fact. `_observance_id_from_readings` folds a `kind`
+  ("position"/"eve") into the hash, so the two are keyed in separate namespaces and both
+  resolve independently even though the underlying readings never differ.
+- **Some position labels have no readings to hash at all.** A few days in the ferial
+  track of the Fast of the Catechumens (Aṙաջավորաց պահք) carry no scripture — a
+  validated, intentional aliturgical day, not missing data — so there is no reading
+  content to key by, and two *different* such days (different offsets) would otherwise
+  collide on the same empty signature. Those are indexed instead by calendar
+  **coordinate** (`engine._position_coordinate`: the position family's own anchor key and
+  day-offset, refactored out of `_position_label` so both share one matching loop),
+  hashed by `engine._observance_id_from_coordinate` in a namespace that cannot collide
+  with a readings-based hash by construction. The coordinate is exactly as stable as
+  readings are for every other entry — it is a pure function of the calendar, never of
+  which reading or saint happens to land on it — `_resolve_generated_text` only falls
+  back to it when `readings` is empty, never as a second attempt after a real readings
+  lookup misses.
+
 `engine._resolve_generated_text` does the lookup at request time;
 `_apply_position_label`/`_apply_eve_label` only let it override a stored, validated table
 value when it actually resolves to something *different* from the literal default — that

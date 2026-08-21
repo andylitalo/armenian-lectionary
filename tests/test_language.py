@@ -388,9 +388,22 @@ class TestEveryReadingsIndexedIdResolvesThroughTheCatalog(unittest.TestCase):
         while d <= end and len(cls.date_for_hash) < len(target_hashes):
             readings = compute_armenian_lectionary(d).get("ReadingsList")
             if readings:
-                h = engine._observance_id_from_readings(readings)
-                if h in target_hashes and h not in cls.date_for_hash:
-                    cls.date_for_hash[h] = d
+                # A hash is namespaced by "position" or "eve" (engine.
+                # _observance_id_from_readings): a day's readings can match either kind's
+                # hash, independently, so both must be tried.
+                for kind in ("position", "eve"):
+                    h = engine._observance_id_from_readings(readings, kind)
+                    if h in target_hashes and h not in cls.date_for_hash:
+                        cls.date_for_hash[h] = d
+            else:
+                # An aliturgical day has no readings to hash at all -- those entries are
+                # keyed by calendar coordinate instead (engine._position_coordinate /
+                # _observance_id_from_coordinate).
+                coordinate = engine._position_coordinate(d)
+                if coordinate:
+                    h = engine._observance_id_from_coordinate(*coordinate)
+                    if h in target_hashes and h not in cls.date_for_hash:
+                        cls.date_for_hash[h] = d
             d += datetime.timedelta(days=1)
 
     def setUp(self):

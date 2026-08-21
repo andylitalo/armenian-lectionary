@@ -1329,6 +1329,39 @@ def _position_anchor_days(year: int) -> set:
     }
 
 
+def _position_label_and_coordinate(d: datetime.date):
+    """``(text, (akey, offset))`` for ``d``'s calendar-position label, or ``(None, None)``
+    where no verified rule applies. Shared by :func:`_position_label` (text only) and
+    :func:`_position_coordinate` (the coordinate only), so the family-matching loop exists
+    in exactly one place.
+
+    ``(akey, offset)`` is the position family's own anchor key and day-offset -- a second,
+    calendar-only identity for the SAME observance that ``text`` names, useful when there
+    is no readings-based one available (see :func:`_position_coordinate`'s docstring).
+    """
+    if d in _position_anchor_days(d.year):
+        return None, None
+    for family in _POSITION_FAMILIES:
+        akey, (lo, hi), weekdays, counter, adjust, template = family[:6]
+        civil = family[6] if len(family) > 6 else None    # optional (month, day) guard
+        if civil is not None and (d.month, d.day) != civil:
+            continue
+        if weekdays is not None and d.weekday() not in weekdays:
+            continue
+        anchor = _POSITION_ANCHORS[akey](d)
+        offset = (d - anchor).days
+        if (lo is not None and offset < lo) or (hi is not None and offset > hi):
+            continue
+        if counter is None:                  # fixed label, no ordinal to compute
+            return template, (akey, offset)
+        raw = offset if counter == "days" else _count_sundays_after(anchor, d)
+        n = raw + adjust
+        if not 1 <= n <= len(_ORDINAL_WORDS):
+            return None, None
+        return template.format(ord=_ORDINAL_WORDS[n - 1]), (akey, offset)
+    return None, None
+
+
 def _position_label(d: datetime.date):
     """The source's calendar-position label for ``d``, or ``None`` where no verified rule
     applies (an ordinary-time saint weekday, a season-heading feast, or a family whose
@@ -1343,27 +1376,23 @@ def _position_label(d: datetime.date):
     happens to equal the default", which matters because a stored, validated table entry
     is trusted verbatim in the first case and must not be, in the second.
     """
-    if d in _position_anchor_days(d.year):
-        return None
-    for family in _POSITION_FAMILIES:
-        akey, (lo, hi), weekdays, counter, adjust, template = family[:6]
-        civil = family[6] if len(family) > 6 else None    # optional (month, day) guard
-        if civil is not None and (d.month, d.day) != civil:
-            continue
-        if weekdays is not None and d.weekday() not in weekdays:
-            continue
-        anchor = _POSITION_ANCHORS[akey](d)
-        offset = (d - anchor).days
-        if (lo is not None and offset < lo) or (hi is not None and offset > hi):
-            continue
-        if counter is None:                  # fixed label, no ordinal to compute
-            return template
-        raw = offset if counter == "days" else _count_sundays_after(anchor, d)
-        n = raw + adjust
-        if not 1 <= n <= len(_ORDINAL_WORDS):
-            return None
-        return template.format(ord=_ORDINAL_WORDS[n - 1])
-    return None
+    return _position_label_and_coordinate(d)[0]
+
+
+def _position_coordinate(d: datetime.date):
+    """``(akey, offset)`` for ``d``'s calendar-position label, or ``None``.
+
+    A fallback identity for observances :func:`_resolve_generated_text` cannot key by
+    readings at all: some days in the ferial track of the Fast of the Catechumens carry NO
+    scripture (an aliturgical day, validated as intentional -- see
+    ``_FIXED_DATE_OBSERVANCES``'s sibling note in ``_compute_lectionary``), so there is no
+    reading content whatsoever to hash, and two DIFFERENT such days (different offsets)
+    would otherwise collide on the same empty signature. ``(akey, offset)`` is unique to
+    the family and day-offset the same way readings are unique to the observance, and is
+    just as stable -- the calendar coordinate a position family fires on never changes,
+    only the wording chosen for it might.
+    """
+    return _position_label_and_coordinate(d)[1]
 
 
 # ---------------------------------------------------------------------------
@@ -2032,29 +2061,56 @@ _OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 _OBSERVANCE_ID_BY_READINGS = _load_json_map(OBSERVANCE_READINGS_INDEX_PATH)
 
 
-def _observance_id_from_readings(readings):
+def _observance_id_from_readings(readings, kind):
     """A stable key for an offset-determined observance, derived from its own (immutable)
     readings rather than its (renameable) display text.
 
     Readings are never renamed the way display text is, so this key never needs to be
     frozen or snapshotted: recomputing it from the current readings always reproduces the
     same value, at any point in the future, by anyone who has those readings.
+
+    ``kind`` ("position" or "eve") is folded into the hash because a position label and an
+    eve note can share a day's readings by CONSTRUCTION, not coincidence -- Pentecost+21 is
+    a Sunday every year (21 is a multiple of 7), so "Third Sunday after Pentecost" and "Eve
+    of Fast of St. Gregory the Illuminator" always carry the identical readings, forever.
+    Without ``kind`` the two would permanently collide and both would be excluded from the
+    index; with it, each is keyed within its own namespace and both resolve independently,
+    even though the underlying readings are the same value on every occurrence of either.
     """
-    return hashlib.sha1("|".join(readings).encode()).hexdigest()[:12]
+    return hashlib.sha1((kind + "|" + "|".join(readings)).encode()).hexdigest()[:12]
 
 
-def _resolve_generated_text(default_text, readings):
+def _observance_id_from_coordinate(akey, offset):
+    """A stable key for a position label with NO readings to key by at all -- an
+    aliturgical day (see :func:`_position_coordinate`). Namespaced separately from
+    :func:`_observance_id_from_readings` (prefix ``"coord|"`` vs. a bare ``kind``) so the
+    two hash spaces cannot collide with each other by construction, not just by luck.
+    """
+    return hashlib.sha1(f"coord|{akey}|{offset}".encode()).hexdigest()[:12]
+
+
+def _resolve_generated_text(default_text, readings, kind, coordinate=None):
     """``default_text`` (a position/eve label's literal template output), or the catalog's
-    current text for it if ``readings`` identifies a served, catalogued observance.
+    current text for it if ``readings`` (or, failing that, ``coordinate``) identifies a
+    served, catalogued observance.
 
     ``readings`` is ``None`` for every caller that wants the literal calendar-rule text
     (the dev verification scripts, which check the rule itself against source evidence, not
     whatever override is currently being served) -- resolution only happens for the real
-    serving path, ``compute_armenian_lectionary``.
+    serving path, ``compute_armenian_lectionary``. ``kind`` is "position" or "eve"; see
+    :func:`_observance_id_from_readings`.
+
+    ``coordinate`` -- ``d``'s ``(akey, offset)``, from :func:`_position_coordinate` -- is
+    consulted only when ``readings`` is empty (an aliturgical day), never as a second
+    attempt after a readings lookup miss: a miss there means "not one of the observances
+    this mechanism covers," which the coordinate must not silently override.
     """
-    if not readings:
+    if readings:
+        sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_readings(readings, kind))
+    elif coordinate:
+        sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_coordinate(*coordinate))
+    else:
         return default_text
-    sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_readings(readings))
     return _OBSERVANCE_CATALOG.get(sid, {}).get("en", default_text) if sid else default_text
 
 
@@ -2271,15 +2327,25 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     regenerated one: :func:`_position_label`'s own docstring admits some families are "not
     exact on every occurrence", so the validated, cross-year-agreed STORED value is trusted
     over a fresh recomputation, not the other way round. The one exception is a catalogued
-    rename (``readings`` lets :func:`_resolve_generated_text` find one): that reflects a
-    human decision about what to call this observance, current as of the last catalog
-    rebuild, which must win even over a stored value -- so it is the only case where the
-    stored position component gets overwritten.
+    rename (``readings`` lets :func:`_resolve_generated_text` find one -- or, on a day with
+    NO readings at all, ``d``'s calendar coordinate does): that reflects a human decision
+    about what to call this observance, current as of the last catalog rebuild, which must
+    win even over a stored value -- so it is the only case where the stored position
+    component gets overwritten.
+
+    ``readings=None`` (the default) skips resolution entirely, distinct from
+    ``readings=[]``: the former means the caller never asked for it (every dev
+    verification script); the latter is a real, aliturgical day from the actual serving
+    path, which still needs :func:`_position_coordinate`'s fallback attempted.
     """
     position = _position_label(d)
     if position is None:
         return label
-    resolved = _resolve_generated_text(position, readings) if readings else position
+    if readings is None:
+        resolved = position
+    else:
+        resolved = _resolve_generated_text(
+            position, readings, "position", _position_coordinate(d))
     parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
     if any(_is_position_component(p) for p in parts):
         if resolved != position:                  # a catalogued rename overrides even a
@@ -2365,7 +2431,7 @@ def _apply_eve_label(label: str, d: datetime.date, readings=None) -> str:
     eve = _eve_label(d)
     if eve is None:
         return label
-    resolved = _resolve_generated_text(eve, readings) if readings else eve
+    resolved = _resolve_generated_text(eve, readings, "eve") if readings else eve
     parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
     if any(p.startswith("Eve of ") for p in parts):
         if resolved != eve:

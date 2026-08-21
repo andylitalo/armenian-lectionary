@@ -60,7 +60,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
-    _FEAST_SEP, _eve_label, _observance_id_from_readings, _position_label,
+    _FEAST_SEP, _eve_label, _observance_id_from_coordinate,
+    _observance_id_from_readings, _position_coordinate, _position_label,
     compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
@@ -221,6 +222,16 @@ def build_readings_index(ground_truth):
     That second call is the (currently) only way to get a date's readings independent of its
     position/eve label text, since readings are resolved by _compute_lectionary before any
     label is applied.
+
+    A position label whose dominant-tier readings come up EMPTY (some days in the ferial
+    track of the Fast of the Catechumens carry no scripture at all -- an aliturgical day,
+    validated as intentional, not missing data) has no reading content to hash in the first
+    place. Those are indexed instead by their calendar COORDINATE
+    (engine._position_coordinate: the position family's own anchor key and day-offset),
+    checked for the same one-to-one correspondence readings get -- trivially satisfied here,
+    since a family's coordinate is a pure function of the calendar, never of which saint or
+    reading happens to land on it. engine._observance_id_from_coordinate hashes it in a
+    namespace that cannot collide with a readings-based hash by construction.
     """
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
@@ -234,35 +245,54 @@ def build_readings_index(ground_truth):
     def id_for_literal_text(text):
         return approved_ids.get(text) or ids_by_source.get(text)
 
-    # text -> {Source tier: [readings, ...]}, so the dominant tier can be picked per label
-    # before the stability checks run.
-    occurrences_by_text = {}
+    # (kind, text) -> {Source tier: [readings, ...]}, so the dominant tier can be picked
+    # per label before the stability checks run. ``kind`` ("position"/"eve") keeps the two
+    # collision checks below from colliding a position label with an eve note that shares
+    # its day's readings by CONSTRUCTION rather than coincidence -- Pentecost+21 is a
+    # Sunday every year (21 is a multiple of 7), so "Third Sunday after Pentecost" and "Eve
+    # of Fast of St. Gregory the Illuminator" always carry the identical readings. Without
+    # the namespace both would permanently collide and neither could ever be indexed; with
+    # it, each resolves independently within its own kind, matching
+    # engine._observance_id_from_readings's own kind parameter.
+    occurrences_by_key = {}
+    coordinates_by_text = {}                          # position-only; see the docstring
     d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
     while d <= end:
-        for label in (_position_label(d), _eve_label(d)):
+        for kind, label in (("position", _position_label(d)), ("eve", _eve_label(d))):
             if label and id_for_literal_text(label):
                 result = compute_armenian_lectionary(d)
                 readings = tuple(result["ReadingsList"])
-                by_tier = occurrences_by_text.setdefault(label, {})
+                by_tier = occurrences_by_key.setdefault((kind, label), {})
                 by_tier.setdefault(result["Source"], []).append(readings)
+                if kind == "position":
+                    coordinates_by_text.setdefault(label, set()).add(_position_coordinate(d))
         d += datetime.timedelta(days=1)
 
-    readings_by_text, texts_by_readings = {}, {}
-    for text, by_tier in occurrences_by_text.items():
+    readings_by_key, keys_by_readings = {}, {}
+    for key, by_tier in occurrences_by_key.items():
         dominant_tier = max(by_tier, key=lambda tier: len(by_tier[tier]))
         readings_set = set(by_tier[dominant_tier])
-        readings_by_text[text] = readings_set
+        readings_by_key[key] = readings_set
+        kind, _text = key
         for readings in readings_set:
-            texts_by_readings.setdefault(readings, set()).add(text)
+            keys_by_readings.setdefault((kind, readings), set()).add(key)
 
     index = {}
-    for text, readings_set in readings_by_text.items():
+    for (kind, text), readings_set in readings_by_key.items():
         if len(readings_set) != 1:
             continue                              # not offset-determined; leave unresolvable
         (readings,) = readings_set
-        if not readings or len(texts_by_readings[readings]) != 1:
-            continue                              # those readings also carry another text
-        index[_observance_id_from_readings(list(readings))] = id_for_literal_text(text)
+        if readings:
+            if len(keys_by_readings[(kind, readings)]) != 1:
+                continue                          # those readings also carry another text
+            index[_observance_id_from_readings(list(readings), kind)] = (
+                id_for_literal_text(text))
+        elif kind == "position":
+            coords = coordinates_by_text[text]
+            if len(coords) != 1 or None in coords:
+                continue                          # not a single stable calendar coordinate
+            (akey, offset), = coords
+            index[_observance_id_from_coordinate(akey, offset)] = id_for_literal_text(text)
     return index
 
 
