@@ -35,6 +35,16 @@ Deliberately excluded: _PLACEHOLDER_LABELS ("(commemoration)", "(movable ordinar
 reading)") and the "{season} (day not yet in validated table)" fallback -- internal
 absence-markers, not observances, with nothing to translate. They never reach the TSV.
 
+Also writes armenian_lectionary/data/observance_readings_index.json, a SEPARATE
+readings-hash -> id index (see build_readings_index) covering the subset of position/eve
+ids whose readings are the same on every date they are served (a dedicated fast weekday or
+an eve, never a day sharing its table key with a rotating saint). It exists so
+engine._position_label/_eve_label can find an already-stated id from a date's own
+(immutable) readings instead of from its (renameable) display text -- see
+engine._resolve_generated_text. Unlike the catalog above, this index is safe to fully
+regenerate on every run: readings, unlike text, are never corrected, so recomputing it
+always reproduces the same keys.
+
 Usage:
     python dev/build_observance_catalog.py            # project and verify
     python dev/build_observance_catalog.py --mint     # also assign ids to new observances
@@ -50,7 +60,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
-    _FEAST_SEP, _eve_label, _position_label, MAX_YEAR, MIN_YEAR, fixed_date_label,
+    _FEAST_SEP, _eve_label, _observance_id_from_readings, _position_label,
+    compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
 DEV_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -59,6 +70,8 @@ GROUND_TRUTH_PATH = os.path.join(DEV_DIR, "feast_name_ground_truth.json")
 REVIEW_PATH = os.path.join(DEV_DIR, "feast_name_review.tsv")
 CATALOG_PATH = os.path.join(REPO_ROOT, "armenian_lectionary", "data",
                             "observance_catalog.json")
+READINGS_INDEX_PATH = os.path.join(REPO_ROOT, "armenian_lectionary", "data",
+                                   "observance_readings_index.json")
 
 # _FEAST_SEP is the ENGINE's component join, and a catalog entry is ONE component. Any
 # entry whose own text contains it is a category error, and it shows: the source's Armenian
@@ -173,6 +186,86 @@ def served_components(ground_truth):
     return texts
 
 
+def build_readings_index(ground_truth):
+    """readings-hash -> catalog id, for every position/eve label whose OWN readings (within
+    its dominant source tier -- see below) are in a ONE-TO-ONE correspondence with it across
+    every date served in MIN_YEAR..MAX_YEAR: the same text always carries the same readings
+    there, AND those readings never recur under a DIFFERENT text.
+
+    Restricting to each label's dominant tier first is what makes that correspondence
+    possible to state at all. A day inside the Fast of St. James the bishop of Nisibis can
+    coincide with the fixed civil date of the Conception of the Holy Virgin (12 of 27
+    supported years), which OUTRANKS the fast day and replaces its readings wholesale with
+    its own ("Source" flips from "validated-table" to "validated-composite") -- the fast
+    day's position label is still served as text that year, but that year's readings belong
+    to the Conception, not to the fast day, and indexing them under the fast day's id would
+    be wrong regardless of whether they happen to collide with anything else. Filtering each
+    label to only the tier it is served under on most of its occurrences drops exactly those
+    displaced years from consideration; the label is still fully indexed from its other,
+    undisplaced occurrences. (Elijah and Illuminator have no such displacement -- every
+    occurrence is "validated-table" -- so this filter is a no-op for them.)
+
+    That is a different problem from the Sunday-after-Nativity/Transfiguration/Assumption
+    families, whose own ``_position_label`` docstring admits their counting rule is "not
+    exact on every occurrence": there the instability is WITHIN one tier (validated-table
+    every time -- the reading a lectio-continua slot carries stays put, but the Sunday-count
+    the source prints for it can drift across years of different length), so tier-filtering
+    does not and should not rescue them. Requiring an exact one-to-one correspondence within
+    the dominant tier is what correctly leaves those excluded -- they fall back to their
+    literal template text via engine._resolve_generated_text, exactly as an uncatalogued
+    label already does, so this is safe to run unattended as new families are added.
+
+    Loads _position_label/_eve_label with NO readings argument (the literal calendar-rule
+    text, matching how the catalog's ids were originally minted from that same text), then
+    separately fetches each date's ReadingsList and Source via compute_armenian_lectionary.
+    That second call is the (currently) only way to get a date's readings independent of its
+    position/eve label text, since readings are resolved by _compute_lectionary before any
+    label is applied.
+    """
+    approved_ids = {row["approved_en"]: row.get("id")
+                    for row in ground_truth.values() if row.get("approved_en")}
+    # Fall back to the row's own (immutable) source_en key -- see audit()'s matching
+    # comment -- so a row already renamed (approved_en no longer equal to the literal text
+    # engine.py still composes) still gets its id indexed here, keeping it resolvable
+    # through a SECOND rebuild after the first rename rather than dropping out of the index.
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
+
+    def id_for_literal_text(text):
+        return approved_ids.get(text) or ids_by_source.get(text)
+
+    # text -> {Source tier: [readings, ...]}, so the dominant tier can be picked per label
+    # before the stability checks run.
+    occurrences_by_text = {}
+    d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
+    while d <= end:
+        for label in (_position_label(d), _eve_label(d)):
+            if label and id_for_literal_text(label):
+                result = compute_armenian_lectionary(d)
+                readings = tuple(result["ReadingsList"])
+                by_tier = occurrences_by_text.setdefault(label, {})
+                by_tier.setdefault(result["Source"], []).append(readings)
+        d += datetime.timedelta(days=1)
+
+    readings_by_text, texts_by_readings = {}, {}
+    for text, by_tier in occurrences_by_text.items():
+        dominant_tier = max(by_tier, key=lambda tier: len(by_tier[tier]))
+        readings_set = set(by_tier[dominant_tier])
+        readings_by_text[text] = readings_set
+        for readings in readings_set:
+            texts_by_readings.setdefault(readings, set()).add(text)
+
+    index = {}
+    for text, readings_set in readings_by_text.items():
+        if len(readings_set) != 1:
+            continue                              # not offset-determined; leave unresolvable
+        (readings,) = readings_set
+        if not readings or len(texts_by_readings[readings]) != 1:
+            continue                              # those readings also carry another text
+        index[_observance_id_from_readings(list(readings))] = id_for_literal_text(text)
+    return index
+
+
 def build_catalog(ground_truth):
     """``(catalog, problems)`` -- the projection, and every invariant it violates.
 
@@ -231,9 +324,17 @@ def audit(catalog, ground_truth):
     findings = []
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
+    # A renamed engine-composed row (its approved_en no longer equal to the LITERAL text
+    # engine.py still composes -- see build_readings_index) is still registered: source_en
+    # is its immutable identity key, left untouched by a rename per the review workflow, so
+    # falling back to it here is what keeps a rename from reading as "unregistered" the
+    # moment it lands, before the readings index has had a chance to pick it up.
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
     served = served_components(ground_truth)
 
-    unregistered = sorted(t for t in served if not approved_ids.get(t))
+    unregistered = sorted(
+        t for t in served if not (approved_ids.get(t) or ids_by_source.get(t)))
     if unregistered:
         findings.append(
             f"{len(unregistered)} component(s) the engine serves have no id: "
@@ -265,10 +366,15 @@ def mint(ground_truth):
     """Assign ids to served components that have none, writing them back to the TSV."""
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
+    # See audit()'s matching comment: a renamed engine-composed row is found by its
+    # immutable source_en, not by approved_en, so a rename is never mistaken for a new,
+    # unminted observance.
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
     used = {sid for sid in approved_ids.values() if sid}
     new = {text: _slug(text, used)
            for text in sorted(served_components(ground_truth))
-           if not approved_ids.get(text)}
+           if not (approved_ids.get(text) or ids_by_source.get(text))}
     if not new:
         return {}
 
@@ -310,6 +416,12 @@ def main():
         json.dump(catalog, fh, ensure_ascii=False, indent=1, sort_keys=True)
         fh.write("\n")
     print(f"wrote {len(catalog)} observances to {CATALOG_PATH}")
+
+    readings_index = build_readings_index(ground_truth)
+    with open(READINGS_INDEX_PATH, "w", encoding="utf-8") as fh:
+        json.dump(readings_index, fh, ensure_ascii=False, indent=1, sort_keys=True)
+        fh.write("\n")
+    print(f"wrote {len(readings_index)} readings-keyed id(s) to {READINGS_INDEX_PATH}")
     return 0
 
 

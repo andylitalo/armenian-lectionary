@@ -232,8 +232,6 @@ POSITION_LABEL_FIXES_BY_DATE = {
 # complete label on every other fast day in the corpus.
 # --------------------------------------------------------------------------- #
 _ILLUMINATOR_FAST_WINDOW = (22, 26)      # Pentecost+21 is the Sunday eve; Mon-Fri follow
-_ILLUMINATOR_FAST_ORDINALS = ("First", "Second", "Third", "Fourth", "Fifth")
-_ILLUMINATOR_FAST_TEMPLATE = "{ord} day of the Fast of St. Gregory the Illuminator"
 _AMBIGUOUS_FAST_LABEL = "Fast day"
 
 
@@ -242,19 +240,23 @@ def illuminator_fast_label(date_iso):
 
     ``None`` on every other date, including the fast's own Sunday eve (which the source
     names in full already) and the Saturday that closes it.
+
+    Delegates to ``engine._position_label`` (with no ``readings`` argument, so the literal
+    calendar-rule text -- not a catalogued rename) rather than keeping its own copy of the
+    window and template: those already live in ``engine._POSITION_FAMILIES``, and a second,
+    hand-synced copy here is exactly the kind of duplication that drifts silently the day
+    one of the two is edited and the other is not.
     """
     if not date_iso:
         return None
-    from armenian_lectionary.engine import calculate_gregorian_easter
+    from armenian_lectionary.engine import _POSITION_ANCHORS, _position_label
 
     d = datetime.date.fromisoformat(date_iso)
-    pentecost = calculate_gregorian_easter(d.year) + datetime.timedelta(days=49)
     lo, hi = _ILLUMINATOR_FAST_WINDOW
-    offset = (d - pentecost).days
+    offset = (d - _POSITION_ANCHORS["PE"](d)).days
     if not lo <= offset <= hi:
         return None
-    return _ILLUMINATOR_FAST_TEMPLATE.format(
-        ord=_ILLUMINATOR_FAST_ORDINALS[offset - lo])
+    return _position_label(d)
 
 
 def normalize_position_label(text, date_iso=""):

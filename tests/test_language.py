@@ -317,5 +317,49 @@ class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
         self.assertEqual(ids_for_text("Fast day"), ["fast_day"])
 
 
+class TestGeneratedLabelsResolveThroughTheCatalog(unittest.TestCase):
+    """A rename of a position/eve label is a TSV edit, not an engine.py edit.
+
+    ``engine._position_label``/``_eve_label`` find a served observance's id from its own
+    READINGS (see ``engine._observance_id_from_readings``/``_resolve_generated_text``),
+    not from the literal template text -- so once ``observance_readings_index.json`` maps
+    that id, editing the catalog's ``en`` for it (what a TSV rebuild does) is enough to
+    change what ``compute_armenian_lectionary`` serves. This proves exactly that, with no
+    change to ``armenian_lectionary/engine.py`` itself.
+    """
+
+    # Pentecost+23 = the fast's day 2 (the window opens at Pentecost+22).
+    DAY = (engine.calculate_gregorian_easter(2026) + datetime.timedelta(days=49 + 23))
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG or not engine._OBSERVANCE_ID_BY_READINGS:
+            self.skipTest("observance catalog or readings index not present")
+        self._orig_catalog = engine._OBSERVANCE_CATALOG
+        self.addCleanup(setattr, engine, "_OBSERVANCE_CATALOG", self._orig_catalog)
+
+    def test_editing_the_catalog_changes_served_text_with_no_engine_change(self):
+        before = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
+        self.assertIn("Second day of the Fast of St. Gregory the Illuminator", before)
+
+        engine._OBSERVANCE_CATALOG = {
+            **self._orig_catalog,
+            "illuminator_fast_day_2": {
+                **self._orig_catalog["illuminator_fast_day_2"],
+                "en": "Second day of the Fast of the Renamed Illuminator",
+            },
+        }
+        after = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
+        self.assertIn("Second day of the Fast of the Renamed Illuminator", after)
+        self.assertNotIn("Second day of the Fast of St. Gregory the Illuminator", after)
+
+    def test_an_uncatalogued_id_falls_back_to_the_literal_template(self):
+        """Removing an id from the catalog degrades to the literal text, not a KeyError."""
+        engine._OBSERVANCE_CATALOG = {
+            sid: v for sid, v in self._orig_catalog.items()
+            if sid != "illuminator_fast_day_2"}
+        served = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
+        self.assertIn("Second day of the Fast of St. Gregory the Illuminator", served)
+
+
 if __name__ == "__main__":
     unittest.main()

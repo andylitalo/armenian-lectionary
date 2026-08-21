@@ -19,13 +19,33 @@ casefolds it for comparison.
 Not shipped (dev tooling); imported by tests/test_feast.py and dev/feast_audit.py.
 """
 
+import os
 import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from armenian_lectionary import engine                                # noqa: E402
 
 # Ordinal words that head a "Nth day of <Season>" / "Nth Sunday after/of <Anchor>" label.
 ORD = (r"(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|"
        r"Eleventh|Twelfth|Thirteenth|Fourteenth|Fifteenth|Sixteenth|Seventeenth|"
        r"Eighteenth|Nineteenth|Twentieth|Twenty [A-Z][a-z]+|Thirtieth|Thirty [A-Z][a-z]+|"
        r"Fortieth|Forty [A-Z][a-z]+|Fiftieth)")
+
+_ORD_DAY_OF_RE = re.compile(r"^\w+ day of (.+)$")
+
+
+def _served_season_name(catalog_id, fallback):
+    """The bare season/fast name behind a "{ord} day of <name>" catalog id, read from the
+    LIVE catalog rather than hardcoded, so a rename (edit dev/feast_name_review.tsv's
+    approved_en, rebuild) is picked up here automatically instead of drifting from a copy.
+    Falls back to ``fallback`` if the catalog or the id is absent (a thin checkout).
+    """
+    entry = engine._OBSERVANCE_CATALOG.get(catalog_id)
+    m = _ORD_DAY_OF_RE.match(entry["en"]) if entry else None
+    return m.group(1) if m else fallback
+
 
 # Season names following "Nth day of ...". Longest-first so specific ones win.
 _SEASONS = sorted([
@@ -35,7 +55,7 @@ _SEASONS = sorted([
     "the Fast of the Holy Cross", "the Fast of the Transfiguration",
     "the Fast of the Transifiguration",           # sacredtradition.am spelling variant
     "the Fast of Assumption", "the Fast of Nativity", "the Fast of Advent",
-    "the Fast of St. Gregory the Illuminator",
+    _served_season_name("illuminator_fast_day_1", "the Fast of St. Gregory the Illuminator"),
     "the Assumption",
 ], key=len, reverse=True)
 
