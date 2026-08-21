@@ -60,7 +60,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
-    _FEAST_SEP, _eve_label, _observance_id_from_coordinate,
+    _FEAST_SEP, _compute_lectionary, _eve_label, _observance_id_from_coordinate,
     _observance_id_from_readings, _position_coordinate, _position_label,
     compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
@@ -232,6 +232,24 @@ def build_readings_index(ground_truth):
     since a family's coordinate is a pure function of the calendar, never of which saint or
     reading happens to land on it. engine._observance_id_from_coordinate hashes it in a
     namespace that cannot collide with a readings-based hash by construction.
+
+    A dominant tier is not always enough on its own. "Eve of Great Lent" disagrees on 2 of
+    27 years (2010, 2021) -- Feb 14, when the FIXED civil date of the Presentation of the
+    Lord happens to land on Great Lent's own eve and outranks it -- but "Source" stays
+    "validated-table" both ways, so tier-filtering cannot see this one (unlike Nisibis /
+    Dec 9, where "Source" itself flips). Rather than lower the bar to "close enough," a
+    disagreeing occurrence is EXPLAINED, and excluded from the count rather than counted
+    against it, only when that date's own pre-overlay commemoration
+    (_compute_lectionary(d)["Liturgical Day"], BEFORE the eve/position text is added) is
+    independently, globally stable in its OWN readings across every one of ITS OWN
+    occurrences (checked over the whole date range, not just the ones that also happen to
+    carry this label) -- i.e. the Presentation of the Lord always reads the same four
+    verses on Feb 14 whether or not that date happens to also be an eve. That is a
+    verified fact about a SEPARATE observance, not a loosened threshold on this one: the
+    label's own remaining, unexplained occurrences must still agree EXACTLY, or it stays
+    excluded. This does not rescue the Sunday-after-X families either -- their disagreeing
+    years share no such independently stable competing commemoration; they are simply
+    the label's own genuine variance.
     """
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
@@ -245,37 +263,77 @@ def build_readings_index(ground_truth):
     def id_for_literal_text(text):
         return approved_ids.get(text) or ids_by_source.get(text)
 
-    # (kind, text) -> {Source tier: [readings, ...]}, so the dominant tier can be picked
-    # per label before the stability checks run. ``kind`` ("position"/"eve") keeps the two
-    # collision checks below from colliding a position label with an eve note that shares
-    # its day's readings by CONSTRUCTION rather than coincidence -- Pentecost+21 is a
-    # Sunday every year (21 is a multiple of 7), so "Third Sunday after Pentecost" and "Eve
-    # of Fast of St. Gregory the Illuminator" always carry the identical readings. Without
-    # the namespace both would permanently collide and neither could ever be indexed; with
-    # it, each resolves independently within its own kind, matching
-    # engine._observance_id_from_readings's own kind parameter.
+    # (kind, text) -> {Source tier: [(readings, pre-overlay commemoration), ...]}, so the
+    # dominant tier can be picked per label before the stability checks run. ``kind``
+    # ("position"/"eve") keeps the two collision checks below from colliding a position
+    # label with an eve note that shares its day's readings by CONSTRUCTION rather than
+    # coincidence -- Pentecost+21 is a Sunday every year (21 is a multiple of 7), so "Third
+    # Sunday after Pentecost" and "Eve of Fast of St. Gregory the Illuminator" always carry
+    # the identical readings. Without the namespace both would permanently collide and
+    # neither could ever be indexed; with it, each resolves independently within its own
+    # kind, matching engine._observance_id_from_readings's own kind parameter.
+    #
+    # commemoration_readings is built from EVERY date, not just labeled ones: it is what
+    # lets a disagreeing occurrence be checked against an independently, globally stable
+    # competing commemoration (see the docstring above).
     occurrences_by_key = {}
     coordinates_by_text = {}                          # position-only; see the docstring
+    commemoration_readings = {}
+    commemoration_dates = {}
     d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
     while d <= end:
+        base = _compute_lectionary(d)
+        readings = tuple(base["ReadingsList"])         # unaffected by any overlay
+        commem = base["Liturgical Day"]
+        commemoration_readings.setdefault(commem, set()).add(readings)
+        commemoration_dates.setdefault(commem, set()).add(d)
         for kind, label in (("position", _position_label(d)), ("eve", _eve_label(d))):
             if label and id_for_literal_text(label):
-                result = compute_armenian_lectionary(d)
-                readings = tuple(result["ReadingsList"])
                 by_tier = occurrences_by_key.setdefault((kind, label), {})
-                by_tier.setdefault(result["Source"], []).append(readings)
+                by_tier.setdefault(base["Source"], []).append((readings, commem, d))
                 if kind == "position":
                     coordinates_by_text.setdefault(label, set()).add(_position_coordinate(d))
         d += datetime.timedelta(days=1)
 
-    readings_by_key, keys_by_readings = {}, {}
+    # Collision registration must see every tier a label was EVER served under, not just
+    # its dominant one: a minority tier (a best-guess continuum falling back for a date the
+    # validated table doesn't cover, say) can still reuse the same reading pool as some
+    # other, fully-resolved label. Dropping those occurrences before the collision check --
+    # rather than merely before the stability check -- would let that other label's id
+    # claim a reading that is not actually unique to it, silently.
+    keys_by_readings = {}
+    for key, by_tier in occurrences_by_key.items():
+        kind, _text = key
+        for occurrences in by_tier.values():
+            for r, _commem, _d in occurrences:
+                keys_by_readings.setdefault((kind, r), set()).add(key)
+
+    readings_by_key = {}
     for key, by_tier in occurrences_by_key.items():
         dominant_tier = max(by_tier, key=lambda tier: len(by_tier[tier]))
-        readings_set = set(by_tier[dominant_tier])
+        occurrences = by_tier[dominant_tier]
+        readings_set = {r for r, _commem, _d in occurrences}
+        if len(readings_set) != 1:
+            # Explain away a disagreeing occurrence only if its OWN reading equals what
+            # its pre-overlay commemoration reads on EVERY ONE of that commemoration's own
+            # occurrences globally, AND that commemoration is independently attested on a
+            # date that does NOT also carry this label -- otherwise a one-off coincidence
+            # (a rare commemoration that happens to appear only alongside this label, with
+            # nothing to compare it to) could pass the singleton check trivially and wrongly
+            # explain away what is actually this label's own genuine variance. This also
+            # correctly refuses to explain away a SELF-referential "commemoration" -- a
+            # civil-year-unanimous table entry that already bakes this very label's own text
+            # into its stored "feast" field, which would otherwise look tautologically
+            # "stable" and explain the label away using nothing but itself.
+            these_dates = {d for _r, _commem, d in occurrences}
+            unexplained = {
+                r for r, commem, _d in occurrences
+                if commemoration_readings.get(commem) != {r}
+                or not (commemoration_dates.get(commem, set()) - these_dates)
+            }
+            if unexplained:
+                readings_set = unexplained
         readings_by_key[key] = readings_set
-        kind, _text = key
-        for readings in readings_set:
-            keys_by_readings.setdefault((kind, readings), set()).add(key)
 
     index = {}
     for (kind, text), readings_set in readings_by_key.items():

@@ -306,6 +306,27 @@ Two more collisions, both real and both handled, rather than accepted as loss:
   which reading or saint happens to land on it — `_resolve_generated_text` only falls
   back to it when `readings` is empty, never as a second attempt after a real readings
   lookup misses.
+- **A dominant `Source` tier is not always enough.** "Eve of Great Lent" disagrees on 2
+  of 27 years (2010, 2021) — the Presentation of the Lord, a *fixed civil date* (Feb 14),
+  happens to land on Great Lent's own eve that year and outranks it — but `Source` stays
+  `validated-table` both ways, so tier-filtering alone cannot see it (unlike Nisibis/Dec
+  9, where `Source` itself flips to `validated-composite`). `build_readings_index`
+  attributes a disagreeing occurrence to the competing observance instead of counting it
+  as inconsistency, but only when that attribution is independently *provable*, not
+  assumed: the date's pre-overlay commemoration
+  (`_compute_lectionary(d)["Liturgical Day"]`, before any eve/position text is added)
+  must have exactly one reading set across *every one* of its own occurrences globally,
+  **and** occur on at least one date that does not also carry this label — proof the
+  reading genuinely belongs to something else, not a one-off coincidence, and not a
+  self-referential trap where a civil-year-unanimous table entry already bakes this very
+  label's own text into its stored `"feast"` field (which would otherwise look
+  tautologically "stable" using nothing but itself). This is not a lowered consistency
+  bar — a label's remaining, unexplained occurrences still must agree *exactly* — it is a
+  more precise count of which occurrences actually test the label's own identity.
+  Collision detection runs across every tier a label was *ever* served under, not just
+  its dominant one, so a rare minority-tier occurrence (a best-guess continuum tier
+  filling in for a date the validated table doesn't cover, say) can never let a
+  *different* label's id claim a reading that isn't actually unique to it.
 
 `engine._resolve_generated_text` does the lookup at request time;
 `_apply_position_label`/`_apply_eve_label` only let it override a stored, validated table
@@ -321,6 +342,37 @@ source_corrections.illuminator_fast_label` calls `engine._position_label` direct
 than keeping its own copy of the window and template, for the same duplication reason;
 `dev/feast_names._SEASONS` derives the Illuminator fast's bare name from the live catalog
 rather than a hardcoded literal, so it does not go stale the day a rename ships.
+
+#### Index coverage
+
+"Index coverage" is a **separate axis from accuracy**, not a measure of it:
+`tests/test_feast_name_raw.py`/`test_feast_name_hy_raw.py` already guarantee served text
+matches sacredtradition.am on every day, covered label or not (0 contradictions, hard
+requirement). Coverage instead measures how many of the position/eve labels the engine
+can currently produce would pick up a *future* TSV rename with no `engine.py` edit.
+Currently **161 of 205** (run `python3 -c "import json; print(len(json.load(open(
+'armenian_lectionary/data/observance_readings_index.json'))))"` for the live count).
+
+The remaining 44 have no independently verifiable stable reading at all, even after the
+commemoration-attribution check above — genuine variance in the source's own counting,
+not a gap in the mechanism:
+
+- `"Fast day"` itself — not one observance to begin with; it labels ~1,575 unrelated days.
+- The Sunday-after-Nativity/Transfiguration/Assumption/Pentecost families and the Advent
+  Sunday count — `_position_label`'s own docstring already flags their counting rule as
+  "not exact on every occurrence": the season's length depends on the movable Easter
+  date, so the lectio-continua sequence compresses or skips in a short year, and neither
+  the same ordinal maps to the same reading nor different ordinals map to different
+  readings, reliably.
+- The Great Lent, Nativity-fast, Catechumens-fast, and Assumption day-counts, and a few
+  Easter/Eastertide day-counts — the same shape of drift, one level down.
+
+None of this is rescuable by refining the readings-index mechanism further: the
+text↔reading relationship for these families genuinely isn't stable in the data, so
+there is no signal — readings, coordinate, or otherwise — left to key on. Making these
+renameable via the TSV alone would need a structurally different mechanism (a literal,
+hand-maintained `(family, offset) -> id` table embedded in `engine.py`, decoupled from
+both text and readings) — a larger, separate undertaking, out of scope here.
 
 A third overlay is not a table problem but a **translation gap**: `engine._FIXED_DATE_OBSERVANCES`
 adds an observance on a fixed civil date that the source's *English* names on no day at all —
