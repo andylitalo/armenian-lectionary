@@ -212,33 +212,48 @@ POSITION_LABEL_FIXES_BY_DATE = {
 }
 
 # --------------------------------------------------------------------------- #
-# Fast of St. Gregory the Illuminator: the source is more specific in Armenian than in
-# English, on the same day.
+# Named fasts the source's own English does not distinguish from an ordinary "Fast day".
 #
-# It heads the fast's five weekdays (Pentecost+22..+26) "Ա/Բ/Գ/Դ/Ե օր Լուսաւորչի պահոց" --
-# First..Fifth day of the Fast of the Illuminator -- while its English says only "Fast
-# day", the same two words it prints on 2,139 ordinary Wed/Fri fast days. One English
-# string, six different observances. The source contradicting its own other-language
-# statement of the same fact is the standing justification for a repair here (Ephesus
-# "AD 341" vs "431", Pentecost "Fifteenth day of Eastertide" vs fiftieth); this is that,
-# applied to a position label rather than to a commemoration.
+# The Fast of St. Gregory the Illuminator (Pentecost+22..+26) is more specific in Armenian
+# than in English, on the same day: it heads the fast's five weekdays "Ա/Բ/Գ/Դ/Ե օր
+# Լուսաւորչի պահոց" -- First..Fifth day of the Fast of the Illuminator -- while its English
+# says only "Fast day", the same two words it prints on ordinary Wed/Fri fast days. One
+# English string, six different observances. The source contradicting its own
+# other-language statement of the same fact is the standing justification for a repair
+# here (Ephesus "AD 341" vs "431", Pentecost "Fifteenth day of Eastertide" vs fiftieth);
+# this is that, applied to a position label rather than to a commemoration.
+#
+# The Fast of St. James the bishop of Nisibis (Heesnak+22..+26) is the same repair with one
+# witness fewer: its five weekdays read "Fast day" in English AND a bare "Պահք" in
+# Armenian, so there is no other-language statement to appeal to. What names it instead is
+# the source's own EVE on the Sunday before -- "Eve of Fast of St. James the bishop of
+# Nisibis" / "Բարեկենդան Ս. Յակովբայ պահոց" -- which states, in both languages, exactly
+# which fast the five days that follow belong to. See
+# docs/observance-name-corrections.md section 6b.
 #
 # This is not only a nicety. While the English was ambiguous, no consumer could tell the
-# six apart by text, and the engine carried a date-scoped side channel to recover the
-# distinction for its own Armenian resolution. Saying in English what the source already
-# says in Armenian retires that channel.
+# affected days apart by text, and the engine carried a date-scoped side channel to
+# recover the distinction for its own Armenian resolution. Saying in English what the
+# source already says (in Armenian, or in its own eve) retires that channel.
 #
 # Date-scoped, for the reason the Eastertide fix above is: "Fast day" is the correct and
 # complete label on every other fast day in the corpus.
 # --------------------------------------------------------------------------- #
-_ILLUMINATOR_FAST_WINDOW = (22, 26)      # Pentecost+21 is the Sunday eve; Mon-Fri follow
 _AMBIGUOUS_FAST_LABEL = "Fast day"
 
+# anchor -> day-offset window (inclusive) where the source's bare "Fast day" stands for a
+# more specific, named fast. Pentecost+21 / Heesnak+21 is each fast's Sunday eve; Mon-Fri
+# follow.
+_NAMED_FAST_WINDOWS = {
+    "PE": (22, 26),   # Fast of St. Gregory the Illuminator
+    "HE": (22, 26),   # Fast of St. James the bishop of Nisibis
+}
 
-def illuminator_fast_label(date_iso):
-    """The specific label for a weekday of the Fast of St. Gregory the Illuminator.
 
-    ``None`` on every other date, including the fast's own Sunday eve (which the source
+def named_fast_label(date_iso):
+    """The specific label for a weekday of the Illuminator or Nisibis fast.
+
+    ``None`` on every other date, including each fast's own Sunday eve (which the source
     names in full already) and the Saturday that closes it.
 
     Delegates to ``engine._position_label`` (with no ``readings`` argument, so the literal
@@ -252,11 +267,35 @@ def illuminator_fast_label(date_iso):
     from armenian_lectionary.engine import _POSITION_ANCHORS, _position_label
 
     d = datetime.date.fromisoformat(date_iso)
-    lo, hi = _ILLUMINATOR_FAST_WINDOW
-    offset = (d - _POSITION_ANCHORS["PE"](d)).days
-    if not lo <= offset <= hi:
+    for akey, (lo, hi) in _NAMED_FAST_WINDOWS.items():
+        offset = (d - _POSITION_ANCHORS[akey](d)).days
+        if lo <= offset <= hi:
+            return _position_label(d)
+    return None
+
+
+# The Armenian half of the Nisibis repair. The Illuminator fast needs no entry here: its
+# Armenian already prints its own per-day ordinal ("Ա օր Լուսաւորչի պահոց"), so the
+# unfolded scrape already reads as the specific label. Nisibis reads a bare "Պահք" on all
+# five days, so -- as with the English -- the fold is date-scoped and cannot be expressed
+# as a text->text map in ``ground_truth_hy_fixes``: one source string resolves to five
+# different components depending on the date.
+_AMBIGUOUS_FAST_LABEL_HY = "Պահք"
+_NISIBIS_FAST_ORDINALS_HY = ("Ա", "Բ", "Գ", "Դ", "Ե")
+_NISIBIS_FAST_TEMPLATE_HY = "{ord} օր Ս. Յակովբայ պահոց"
+
+
+def named_fast_label_hy(date_iso):
+    """The specific Armenian label for a weekday of the Nisibis fast, else ``None``."""
+    if not date_iso:
         return None
-    return _position_label(d)
+    from armenian_lectionary.engine import _POSITION_ANCHORS
+
+    d = datetime.date.fromisoformat(date_iso)
+    offset = (d - _POSITION_ANCHORS["HE"](d)).days
+    if not 22 <= offset <= 26:
+        return None
+    return _NISIBIS_FAST_TEMPLATE_HY.format(ord=_NISIBIS_FAST_ORDINALS_HY[offset - 22])
 
 
 def normalize_position_label(text, date_iso=""):
@@ -270,7 +309,7 @@ def normalize_position_label(text, date_iso=""):
         text = text.replace(wrong, right)
     for wrong, right in POSITION_LABEL_FIXES_BY_DATE.get(date_iso, {}).items():
         text = text.replace(wrong, right)
-    specific = illuminator_fast_label(date_iso)
+    specific = named_fast_label(date_iso)
     if specific:
         # Component-exact, not a substring replace: the bare label is what is ambiguous,
         # and rewriting it inside a longer component would corrupt a name that merely
@@ -279,6 +318,21 @@ def normalize_position_label(text, date_iso=""):
             specific if part.strip() == _AMBIGUOUS_FAST_LABEL else part
             for part in text.split(_OBSERVANCE_SEP))
     return text
+
+
+def normalize_position_label_hy(text, date_iso=""):
+    """Fold the source's bare Armenian fast marker to the named-fast label it stands for.
+
+    Component-exact, for the same reason the English fold is: the bare word is what is
+    ambiguous, and rewriting it inside a longer component would corrupt a name that merely
+    contains it.
+    """
+    specific = named_fast_label_hy(date_iso)
+    if not text or not specific:
+        return text
+    return _OBSERVANCE_SEP.join(
+        specific if part.strip() == _AMBIGUOUS_FAST_LABEL_HY else part
+        for part in text.split(_OBSERVANCE_SEP))
 
 
 # --------------------------------------------------------------------------- #
@@ -423,12 +477,20 @@ def ground_truth_hy_fixes():
     Exact, whole-component, and enumerated. It is NOT the fuzzy equivalence pass
     ``dev.hy_discrepancy.diff_components`` declines to grow: every entry is one row a
     reviewer signed, so folding it hides nothing that was not already decided in the open.
+
+    Excludes rows whose ``source_hy`` is the bare Nisibis marker
+    (``_AMBIGUOUS_FAST_LABEL_HY``): its five rows all share that identical raw text but
+    need five DIFFERENT ``approved_hy`` depending on the date, which a flat text->text dict
+    cannot express -- keying on it here would let whichever row happens to be read last
+    silently win and overwrite the other four's correction. ``normalize_position_label_hy``
+    is the date-scoped mechanism for exactly this case; this registry stays out of its way.
     """
     with open(_GROUND_TRUTH_PATH, encoding="utf-8") as fh:
         data = json.load(fh)
     return {v["source_hy"]: v["approved_hy"] for v in data.values()
             if v.get("source_hy") and v.get("approved_hy")
-            and v["source_hy"] != v["approved_hy"]}
+            and v["source_hy"] != v["approved_hy"]
+            and v["source_hy"] != _AMBIGUOUS_FAST_LABEL_HY}
 
 
 def apply_ground_truth(text):

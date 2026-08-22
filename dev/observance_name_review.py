@@ -342,14 +342,20 @@ COMPOSED_SOURCE_HY = {
 def armenian_for(approved, hy):
     """The source's Armenian for ``approved``, per component. The FALLBACK, not the default.
 
-    Reached by 6 rows, and only for text the source never published in the form we serve,
+    Reached by 11 rows, and only for text the source never published in the form we serve,
     where there is no raw English to pair on:
 
-      * the five Illuminator fast weekdays, whose English the engine composes because the
-        source prints a bare "Fast day" there (see source_corrections.illuminator_fast_label).
-        ``feast_names_hy.json`` is keyed on the CORRECTED English, which is exactly why
-        ``dev/fetch_translations.py`` runs first in the rebuild order -- so the approved name
-        is the only key that can answer, and here it is the right one;
+      * the five Illuminator and five Nisibis fast weekdays, whose English the engine
+        composes because the source prints a bare "Fast day" there (see
+        source_corrections.named_fast_label). ``feast_names_hy.json`` is keyed on the
+        CORRECTED English, which is exactly why ``dev/fetch_translations.py`` runs first in
+        the rebuild order -- so the approved name is the only key that can answer. For
+        Illuminator that answer is already the specific Armenian (the source is specific
+        there); for Nisibis, where the source is a bare "Պահք" in EITHER language, this
+        fallback still only recovers the source's OWN (ambiguous) text as ``source_hy`` --
+        correct for that column, but ``approved_hy`` for those five rows is a human
+        decision stated directly, the same date-scoped repair
+        ``source_corrections.normalize_position_label_hy`` applies at comparison time;
       * "Fast day, Remembrance of the Ten Virgins", where a correction splits one component
         in two, so the joined form was never scraped as a single string even though both
         halves were. That is what the per-component join below is for.
@@ -371,7 +377,7 @@ def generated_components():
     omits entirely (engine._FIXED_DATE_OBSERVANCES).
 
     The cache cannot enumerate these. A position label the source prints less specifically
-    than its own Armenian is corrected on read (source_corrections.illuminator_fast_label),
+    than its own Armenian is corrected on read (source_corrections.named_fast_label),
     so the served component exists on no cached day under that spelling -- yet it is a
     component the engine serves and therefore needs a reviewed name and an id like any
     other. Enumerated by calling the generators, so no ordinal or season combination is
@@ -437,7 +443,18 @@ def build_rows():
     # Compared against the CORRECTED cache text: the raw spelling of a row whose name was
     # folded ("Saint" -> "St.") never equals the generated label, and treating those as new
     # would duplicate rows that already exist under their raw key.
+    #
+    # ...and a rename this file registers but build_ground_truth.py has not frozen yet. The
+    # review file is refreshed BEFORE the ground truth (CLAUDE.md's rebuild order), so on
+    # the pass that introduces a rename ``corrected`` still returns the OLD text while the
+    # engine already generates the new one. Without this, that pass adds a SECOND row for
+    # the renamed observance and mints a second id for it -- the id split that keeps one
+    # observance addressable under two keys, which is the thing ids exist to prevent.
+    # Keyed on source_en != approved_en so a genuine generated row, whose approved name IS
+    # its own text, still round-trips instead of being dropped as already-known.
     already = {corrected(src) for src in days}
+    already |= {r["approved_en"] for src, r in existing.items()
+                if r.get("approved_en") and r["approved_en"] != src}
     generated_only = set(gen_days) - already
     for label in generated_only:
         days[label] = gen_days[label]

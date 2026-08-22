@@ -189,7 +189,7 @@ class TestObservanceCatalogShape(unittest.TestCase):
         be exempt: the source printed a bare "Fast day" for each weekday of the Fast of St.
         Gregory the Illuminator while naming the ordinal in Armenian, so they were resolved
         from the date instead. That repair is registered now
-        (source_corrections.illuminator_fast_label), which is what lets this admit no
+        (source_corrections.named_fast_label), which is what lets this admit no
         exception -- and an exception is exactly what a consumer keying on ids cannot see.
         """
         seen = {}

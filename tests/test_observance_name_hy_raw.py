@@ -96,7 +96,14 @@ HY_EXPANSION_CEILING = int(os.environ.get("HY_EXPANSION_CEILING", "4"))
 
 # Days where the source spells a name several ways and we serve its dominant form. Correct,
 # but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
-HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "4"))
+#
+# It went 4 -> 7 once, the same exception the internal-delimiter ceiling below documents,
+# because nothing got worse: naming the Fast of St. James the bishop of Nisibis gave
+# dev/fetch_translations.py five new representative dates to sample, three of which land on
+# Dec 9 and surface the ALREADY-registered Ս./ս. capitalization variant on the Conception
+# feast (docs/observance-name-corrections.md section 4) -- not a new spelling, just three
+# more days the cache had never sampled before.
+HY_DOMINANT_FORM_CEILING = int(os.environ.get("HY_DOMINANT_FORM_CEILING", "7"))
 
 # Days identical to the source except that a catalog entry's internal break uses the
 # catalog's own delimiter rather than the component separator. Monotonic DOWN, but only
