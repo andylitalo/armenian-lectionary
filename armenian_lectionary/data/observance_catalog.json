@@ -380,8 +380,8 @@
   "hy": "Ե օր Ս. Ծննդեան"
  },
  "fifth_day_of_pentecost": {
-  "en": "Fifth day of Pentecost",
-  "hy": "Ե օր Հոգեգալստեան"
+  "en": "Fifth day of the Fast of Prophet Elijah",
+  "hy": "Ե օր Եղիական պահոց"
  },
  "fifth_day_of_the": {
   "en": "Fifth day of the Assumption",
@@ -410,6 +410,10 @@
  "fifth_day_of_the_7": {
   "en": "Fifth day of the Fast of the Transfiguration",
   "hy": "Ե օր Վարդավառի պահոց"
+ },
+ "fifth_day_of_the_8": {
+  "en": "Fifth day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Ե օր Ս. Յակովբայ պահոց"
  },
  "fifth_sunday": {
   "en": "Fifth Sunday",
@@ -474,6 +478,10 @@
  "first_day_of_the_6": {
   "en": "First day of the Fast of the Transfiguration",
   "hy": "Ա օր Վարդավառի պահոց"
+ },
+ "first_day_of_the_7": {
+  "en": "First day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Ա օր Ս. Յակովբայ պահոց"
  },
  "first_sunday_after_nativity": {
   "en": "First Sunday after Nativity",
@@ -556,8 +564,8 @@
   "hy": "Դ օր Ս. Ծննդեան"
  },
  "fourth_day_of_pentecost": {
-  "en": "Fourth day of Pentecost",
-  "hy": "Դ օր Հոգեգալստեան"
+  "en": "Fourth day of the Fast of Prophet Elijah",
+  "hy": "Դ օր Եղիական պահոց"
  },
  "fourth_day_of_the": {
   "en": "Fourth day of the Assumption",
@@ -586,6 +594,10 @@
  "fourth_day_of_the_7": {
   "en": "Fourth day of the Fast of the Transfiguration",
   "hy": "Դ օր Վարդավառի պահոց"
+ },
+ "fourth_day_of_the_8": {
+  "en": "Fourth day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Դ օր Ս. Յակովբայ պահոց"
  },
  "fourth_sunday_after_assumption": {
   "en": "Fourth Sunday after Assumption",
@@ -976,8 +988,8 @@
   "hy": "Բ օր Ս. Ծննդեան"
  },
  "second_day_of_pentecost": {
-  "en": "Second day of Pentecost",
-  "hy": "Բ օր Հոգեգալստեան"
+  "en": "Second day of the Fast of Prophet Elijah",
+  "hy": "Բ օր Եղիական պահոց"
  },
  "second_day_of_the": {
   "en": "Second day of the Assumption",
@@ -1006,6 +1018,10 @@
  "second_day_of_the_7": {
   "en": "Second day of the Fast of the Transfiguration",
   "hy": "Բ օր Վարդավառի պահոց"
+ },
+ "second_day_of_the_8": {
+  "en": "Second day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Բ օր Ս. Յակովբայ պահոց"
  },
  "second_day_of_transfiguration": {
   "en": "Second day of Transfiguration",
@@ -1056,8 +1072,8 @@
   "hy": "Է օր Ս. Ծննդեան"
  },
  "seventh_day_of_pentecost": {
-  "en": "Seventh day of Pentecost",
-  "hy": "Է օր Հոգեգալստեան"
+  "en": "Seventh day of the Fast of Prophet Elijah",
+  "hy": "Է օր Եղիական պահոց"
  },
  "seventh_day_of_the": {
   "en": "Seventh day of the Assumption",
@@ -1112,8 +1128,8 @@
   "hy": "Զ օր Ս. Ծննդեան"
  },
  "sixth_day_of_pentecost": {
-  "en": "Sixth day of Pentecost",
-  "hy": "Զ օր Հոգեգալստեան"
+  "en": "Sixth day of the Fast of Prophet Elijah",
+  "hy": "Զ օր Եղիական պահոց"
  },
  "sixth_day_of_the": {
   "en": "Sixth day of the Assumption",
@@ -1228,8 +1244,8 @@
   "hy": "Գ օր Ս. Ծննդեան"
  },
  "third_day_of_pentecost": {
-  "en": "Third day of Pentecost",
-  "hy": "Գ օր Հոգեգալստեան"
+  "en": "Third day of the Fast of Prophet Elijah",
+  "hy": "Գ օր Եղիական պահոց"
  },
  "third_day_of_the": {
   "en": "Third day of the Assumption",
@@ -1258,6 +1274,10 @@
  "third_day_of_the_7": {
   "en": "Third day of the Fast of the Transfiguration",
   "hy": "Գ օր Վարդավառի պահոց"
+ },
+ "third_day_of_the_8": {
+  "en": "Third day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Գ օր Ս. Յակովբայ պահոց"
  },
  "third_day_of_transfiguration": {
   "en": "Third day of Transfiguration",

@@ -294,12 +294,35 @@ class TestDecemberNinthFastMarker(unittest.TestCase):
     _CONCEPTION = "Feast of the Conception of the Holy Virgin Mary by Anna"
 
     def test_marker_is_fast_on_advent_fast_weekdays(self):
-        # Mon, Tue, Wed, Fri Dec 9ths across the supported window.
-        for year in (2013, 2014, 2015, 2016):
+        """Dec 9 OUTSIDE the Nisibis window: the bare marker, never the "Feast day" typo.
+
+        Mon/Tue/Wed Dec 9ths always fall INSIDE the Fast of St. James the bishop of
+        Nisibis (Heesnak+22..+24) across every supported year -- see
+        test_marker_is_superseded_inside_the_nisibis_fast below -- so only Friday Dec 9ths
+        (Heesnak+19) remain to exercise the bare marker here.
+        """
+        for year in (2016, 2022):
             with self.subTest(year=year):
                 label = compute_armenian_lectionary(
                     datetime.date(year, 12, 9))["Liturgical Day"]
                 self.assertEqual(label, f"Fast day — {self._CONCEPTION}")
+
+    def test_marker_is_superseded_inside_the_nisibis_fast(self):
+        """Dec 9 INSIDE the Nisibis window keeps its place in that fast's day count.
+
+        The marker is true but unspecific, and on these years the day is a day of a named
+        fast like the four around it. Serving the bare marker here instead would leave the
+        fast's ordinal with a hole in it -- "First, Second, --, Fourth, Fifth" -- on 12 of
+        the 27 supported years. See docs/observance-name-corrections.md section 6b.
+        """
+        for year, ordinal in ((2013, "First"), (2014, "Second"), (2015, "Third")):
+            d = datetime.date(year, 12, 9)
+            with self.subTest(year=year):
+                label = compute_armenian_lectionary(d)["Liturgical Day"]
+                self.assertEqual(
+                    label,
+                    f"{ordinal} day of the Fast of St. James the bishop of Nisibis"
+                    f" — {self._CONCEPTION}")
 
     def test_no_marker_on_thursday_or_saturday(self):
         for year in (2017, 2021):        # Sat, Thu

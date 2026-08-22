@@ -158,7 +158,7 @@ def served_components(ground_truth):
 
     Two origins, both enumerated rather than transcribed: the position/eve labels the
     engine composes per date (which the source may print less specifically -- see
-    source_corrections.illuminator_fast_label), and the COMPONENTS of every approved name.
+    source_corrections.named_fast_label), and the COMPONENTS of every approved name.
 
     Components, not whole approved names: a correction may resolve one source string into
     several observances joined on _OBSERVANCE_SEP, because the Tonats'oyts packs several First
