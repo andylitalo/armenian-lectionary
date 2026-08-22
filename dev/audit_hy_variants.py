@@ -1,7 +1,7 @@
 """DEV-ONLY: report catalog entries whose Armenian is a MINORITY variant of what the
 source actually publishes.
 
-Why this can happen at all. ``feast_names_hy.json`` is built by pairing each English feast
+Why this can happen at all. ``observance_names_hy.json`` is built by pairing each English feast
 string with the Armenian of one representative day (``dev/fetch_translations.py``). When
 the source spells a name two ways across the years -- and it does: ``Ս. Աստուածածնի`` in
 four cached years, ``ս. Աստուածածնի`` in two, ``ս.Աստուածածնի`` in one -- the pairing
@@ -16,7 +16,7 @@ shipped Armenian is not the most frequent form. It compares COMPONENTS, not whol
 a name is judged on its own evidence rather than on the company it keeps.
 
 Fix what it reports in ``observance_name_review.tsv``'s ``approved_hy`` column (with the counts in
-the comment) and rebuild -- never by editing ``feast_names_hy.json``, which
+the comment) and rebuild -- never by editing ``observance_names_hy.json``, which
 ``dev/fetch_translations.py`` regenerates from the cache.
 
 Not every flagged row is a defect: the source genuinely writes a couple of names two ways

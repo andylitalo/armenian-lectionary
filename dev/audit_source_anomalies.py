@@ -47,7 +47,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all                                       # noqa: E402
 from dev.source_corrections import apply_source_corrections            # noqa: E402
 from armenian_lectionary.engine import (                               # noqa: E402
-    _OBSERVANCE_SEP, FEAST_NAMES_HY_PATH,
+    _OBSERVANCE_SEP, OBSERVANCE_NAMES_HY_PATH,
 )
 
 WORDLIST = "/usr/share/dict/words"
@@ -279,9 +279,9 @@ def detect_unknown_words(comps, words):
 
 
 def _hy_map():
-    if not os.path.exists(FEAST_NAMES_HY_PATH):
+    if not os.path.exists(OBSERVANCE_NAMES_HY_PATH):
         return {}
-    with open(FEAST_NAMES_HY_PATH, encoding="utf-8") as fh:
+    with open(OBSERVANCE_NAMES_HY_PATH, encoding="utf-8") as fh:
         data = json.load(fh)
     return data.get("feasts", data) if isinstance(data, dict) else {}
 
@@ -339,7 +339,7 @@ def main():
     if words is None:
         print(f"(no {WORDLIST}; UNKNOWN WORD detector skipped)")
     if not hy:
-        print("(no feast_names_hy.json; the two cross-language detectors are skipped)")
+        print("(no observance_names_hy.json; the two cross-language detectors are skipped)")
     print()
 
     checks = (

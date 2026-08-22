@@ -31,15 +31,15 @@ DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 # Armenian ("hy") name maps, scraped from sacredtradition.am by
 # dev/fetch_translations.py. Each degrades to {} if absent; language="hy" then falls
-# back to the English name. FEAST maps a whole scraped feast string OR a single
+# back to the English name. OBSERVANCE maps a whole scraped feast/fast string OR a single
 # OBSERVANCE_SEP component -> its Armenian form; BOOK maps an English book head -> Armenian.
-# FEAST_NAMES_HY_PATH is no longer consulted at runtime at all: #18 moved feast-name
+# OBSERVANCE_NAMES_HY_PATH is no longer consulted at runtime at all: #18 moved name
 # resolution onto the id catalog (see OBSERVANCE_CATALOG_PATH below), so the map it points
 # at is now a dev-time input to dev/build_observance_catalog.py and a shipped data file
 # that tests/test_language.py's orthography guards check. The PATH is kept for both of
 # those; the eager load is not, since nothing at runtime reads the result.
-FEAST_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "data", "feast_names_hy.json")
+OBSERVANCE_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                        "data", "observance_names_hy.json")
 BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "data", "book_names_hy.json")
 
