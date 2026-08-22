@@ -562,7 +562,7 @@
  "Fifth day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Fifth day of the Fast of St. James the bishop of Nisibis",
   "approved_hy": "Ե օր Ս. Յակովբայ պահոց",
-  "id": "fifth_day_of_the_8",
+  "id": "james_nisibis_day_5",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
   "status": "generated"
@@ -658,7 +658,7 @@
  "First day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "First day of the Fast of St. James the bishop of Nisibis",
   "approved_hy": "Ա օր Ս. Յակովբայ պահոց",
-  "id": "first_day_of_the_7",
+  "id": "james_nisibis_day_1",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
   "status": "generated"
@@ -930,7 +930,7 @@
  "Fourth day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Fourth day of the Fast of St. James the bishop of Nisibis",
   "approved_hy": "Դ օր Ս. Յակովբայ պահոց",
-  "id": "fourth_day_of_the_8",
+  "id": "james_nisibis_day_4",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
   "status": "generated"
@@ -2330,7 +2330,7 @@
  "Second day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Second day of the Fast of St. James the bishop of Nisibis",
   "approved_hy": "Բ օր Ս. Յակովբայ պահոց",
-  "id": "second_day_of_the_8",
+  "id": "james_nisibis_day_2",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
   "status": "generated"
@@ -2882,7 +2882,7 @@
  "Third day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Third day of the Fast of St. James the bishop of Nisibis",
   "approved_hy": "Գ օր Ս. Յակովբայ պահոց",
-  "id": "third_day_of_the_8",
+  "id": "james_nisibis_day_3",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
   "status": "generated"

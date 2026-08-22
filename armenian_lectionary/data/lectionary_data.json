@@ -20359,7 +20359,7 @@
    "46:5": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -20439,7 +20439,7 @@
    "47:5": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -20469,7 +20469,7 @@
    "46:6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -20539,7 +20539,7 @@
    "49:6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -20559,7 +20559,7 @@
    "50:5": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -20610,7 +20610,7 @@
    "49:5": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -20620,7 +20620,7 @@
    "51:6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -20690,7 +20690,7 @@
    "48:5": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -20720,7 +20720,7 @@
    "47:6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -20750,7 +20750,7 @@
    "51:5": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -20770,7 +20770,7 @@
    "52:6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -20951,7 +20951,7 @@
    "48:6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -21071,7 +21071,7 @@
    "50:6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -21151,7 +21151,7 @@
    "5": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -21181,7 +21181,7 @@
    "6": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -21754,7 +21754,7 @@
    "52:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -21777,7 +21777,7 @@
    "52:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -21812,7 +21812,7 @@
    "51:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -22041,7 +22041,7 @@
    "48:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -22054,7 +22054,7 @@
    "48:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -22187,7 +22187,7 @@
    "46:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -22387,7 +22387,7 @@
    "49:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -22503,7 +22503,7 @@
    "50:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -22604,7 +22604,7 @@
    "51:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -22627,7 +22627,7 @@
    "46:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -22701,7 +22701,7 @@
    "47:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -22846,7 +22846,7 @@
    "52:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -23008,7 +23008,7 @@
    "48:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -23188,7 +23188,7 @@
    "46:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -23235,7 +23235,7 @@
    "49:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -23248,7 +23248,7 @@
    "47:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -23294,7 +23294,7 @@
    "47:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -23332,7 +23332,7 @@
    "49:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -23573,7 +23573,7 @@
    "50:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -23731,7 +23731,7 @@
    "52:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -23754,7 +23754,7 @@
    "52:4:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -23789,7 +23789,7 @@
    "51:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -24018,7 +24018,7 @@
    "48:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -24031,7 +24031,7 @@
    "48:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -24164,7 +24164,7 @@
    "46:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -24364,7 +24364,7 @@
    "49:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -24480,7 +24480,7 @@
    "50:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -24581,7 +24581,7 @@
    "51:4:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -24604,7 +24604,7 @@
    "46:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -24678,7 +24678,7 @@
    "47:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -24823,7 +24823,7 @@
    "52:4:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -24985,7 +24985,7 @@
    "48:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -25165,7 +25165,7 @@
    "46:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -25212,7 +25212,7 @@
    "49:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -25225,7 +25225,7 @@
    "47:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -25271,7 +25271,7 @@
    "47:3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -25309,7 +25309,7 @@
    "49:3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -25550,7 +25550,7 @@
    "50:3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -25697,7 +25697,7 @@
    "3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -25710,7 +25710,7 @@
    "3:Tue": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -25771,7 +25771,7 @@
    "3:Mon": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -25843,7 +25843,7 @@
    "3:Thu": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -51263,7 +51263,7 @@
    "52:25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -51296,7 +51296,7 @@
    "52:23": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -51351,7 +51351,7 @@
    "51:25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -51458,7 +51458,7 @@
    "46:24": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -51675,7 +51675,7 @@
    "48:23": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -51738,7 +51738,7 @@
    "48:22": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -51854,7 +51854,7 @@
    "47:24": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -51944,7 +51944,7 @@
    "46:23": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -51979,7 +51979,7 @@
    "46:26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -52192,7 +52192,7 @@
    "49:26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -52288,7 +52288,7 @@
    "49:25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -52301,7 +52301,7 @@
    "50:24": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -52512,7 +52512,7 @@
    "49:24": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -52522,7 +52522,7 @@
    "50:23": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -52535,7 +52535,7 @@
    "51:26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -52726,7 +52726,7 @@
    "48:24": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -52786,7 +52786,7 @@
    "51:22": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -52809,7 +52809,7 @@
    "47:26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -52829,7 +52829,7 @@
    "46:25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -52925,7 +52925,7 @@
    "47:25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -53050,7 +53050,7 @@
    "51:24": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -53178,7 +53178,7 @@
    "52:22": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -53233,7 +53233,7 @@
    "52:26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -53423,7 +53423,7 @@
    "48:25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -53652,7 +53652,7 @@
    "46:22": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -53761,7 +53761,7 @@
    "49:23": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -53785,7 +53785,7 @@
    "47:22": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -53839,7 +53839,7 @@
    "47:23": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -53877,7 +53877,7 @@
    "49:22": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -53938,7 +53938,7 @@
    "48:26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -54292,7 +54292,7 @@
    "50:25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -54433,7 +54433,7 @@
    "50:26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",
@@ -54556,7 +54556,7 @@
    "25": {
     "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
-     "fourth_day_of_the_8",
+     "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
     ],
     "readings": [
@@ -54579,7 +54579,7 @@
    "23": {
     "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
     "observance_ids": [
-     "second_day_of_the_8",
+     "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_2"
     ],
     "readings": [
@@ -54668,7 +54668,7 @@
    "24": {
     "feast": "Third day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "third_day_of_the_8"
+     "james_nisibis_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 2.1-17",
@@ -54712,7 +54712,7 @@
    "22": {
     "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the poor men John and Alexis",
     "observance_ids": [
-     "first_day_of_the_7",
+     "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
     ],
     "readings": [
@@ -54768,7 +54768,7 @@
    "26": {
     "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
     "observance_ids": [
-     "fifth_day_of_the_8"
+     "james_nisibis_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Thessalonians 3.1-18",

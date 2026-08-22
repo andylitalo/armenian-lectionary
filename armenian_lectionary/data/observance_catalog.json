@@ -411,10 +411,6 @@
   "en": "Fifth day of the Fast of the Transfiguration",
   "hy": "Ե օր Վարդավառի պահոց"
  },
- "fifth_day_of_the_8": {
-  "en": "Fifth day of the Fast of St. James the bishop of Nisibis",
-  "hy": "Ե օր Ս. Յակովբայ պահոց"
- },
  "fifth_sunday": {
   "en": "Fifth Sunday",
   "hy": "Ե կիւրակէ"
@@ -478,10 +474,6 @@
  "first_day_of_the_6": {
   "en": "First day of the Fast of the Transfiguration",
   "hy": "Ա օր Վարդավառի պահոց"
- },
- "first_day_of_the_7": {
-  "en": "First day of the Fast of St. James the bishop of Nisibis",
-  "hy": "Ա օր Ս. Յակովբայ պահոց"
  },
  "first_sunday_after_nativity": {
   "en": "First Sunday after Nativity",
@@ -594,10 +586,6 @@
  "fourth_day_of_the_7": {
   "en": "Fourth day of the Fast of the Transfiguration",
   "hy": "Դ օր Վարդավառի պահոց"
- },
- "fourth_day_of_the_8": {
-  "en": "Fourth day of the Fast of St. James the bishop of Nisibis",
-  "hy": "Դ օր Ս. Յակովբայ պահոց"
  },
  "fourth_sunday_after_assumption": {
   "en": "Fourth Sunday after Assumption",
@@ -754,6 +742,26 @@
  "jacoc_and_themistocles": {
   "en": "Sts. Jacoc and Themistocles",
   "hy": "Սրբոցն Յակովկայ եւ Իրաւափառայ"
+ },
+ "james_nisibis_day_1": {
+  "en": "First day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Ա օր Ս. Յակովբայ պահոց"
+ },
+ "james_nisibis_day_2": {
+  "en": "Second day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Բ օր Ս. Յակովբայ պահոց"
+ },
+ "james_nisibis_day_3": {
+  "en": "Third day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Գ օր Ս. Յակովբայ պահոց"
+ },
+ "james_nisibis_day_4": {
+  "en": "Fourth day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Դ օր Ս. Յակովբայ պահոց"
+ },
+ "james_nisibis_day_5": {
+  "en": "Fifth day of the Fast of St. James the bishop of Nisibis",
+  "hy": "Ե օր Ս. Յակովբայ պահոց"
  },
  "james_of_nisibis_marouke": {
   "en": "Sts. James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
@@ -1019,10 +1027,6 @@
   "en": "Second day of the Fast of the Transfiguration",
   "hy": "Բ օր Վարդավառի պահոց"
  },
- "second_day_of_the_8": {
-  "en": "Second day of the Fast of St. James the bishop of Nisibis",
-  "hy": "Բ օր Ս. Յակովբայ պահոց"
- },
  "second_day_of_transfiguration": {
   "en": "Second day of Transfiguration",
   "hy": "Բ օր Վարդավառի"
@@ -1274,10 +1278,6 @@
  "third_day_of_the_7": {
   "en": "Third day of the Fast of the Transfiguration",
   "hy": "Գ օր Վարդավառի պահոց"
- },
- "third_day_of_the_8": {
-  "en": "Third day of the Fast of St. James the bishop of Nisibis",
-  "hy": "Գ օր Ս. Յակովբայ պահոց"
  },
  "third_day_of_transfiguration": {
   "en": "Third day of Transfiguration",

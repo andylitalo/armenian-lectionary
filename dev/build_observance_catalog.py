@@ -57,9 +57,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
-    _OBSERVANCE_SEP, _compute_lectionary, _eve_label, _observance_id_from_coordinate,
-    _observance_id_from_readings, _position_coordinate, _position_label,
-    compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
+    _OBSERVANCE_SEP, _ORDINAL_WORDS, _compute_lectionary, _eve_label,
+    _observance_id_from_coordinate, _observance_id_from_readings, _position_coordinate,
+    _position_label, compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
 DEV_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -131,6 +131,22 @@ _RETIRED_IDS = {
 }
 
 
+# A "{ord} day of ..." label's first 4 words are almost always the same four filler
+# words ("first/second/... day of") shared by a dozen unrelated fasts -- _STRIP_PREFIX
+# does nothing for them since they don't start with an article/honorific. Slugging THAT
+# span produced ids like "first_day_of_the_7", where the "_7" is only load-bearing
+# because six other, unrelated fasts got there first; nothing in the id names which fast
+# it actually is. Detected and handled specially: slug the FAST'S OWN name instead (a
+# stopword filter, not a fixed word count, since "the bishop of" is exactly as
+# uninformative here as "day of the" is above) and encode the ordinal as a number, the
+# same shape "illuminator_fast_day_1" already uses by hand.
+_ORD_DAY_OF_RE = re.compile(
+    r"^(?P<ord>[A-Za-z]+) day of (?:the )?(?:Fast of )?(?P<rest>.+)$")
+_ORDINAL_TO_N = {word: i + 1 for i, word in enumerate(_ORDINAL_WORDS)}
+_SLUG_STOPWORDS = frozenset(
+    "of the a an fast day bishop saint st sts holy".split())
+
+
 def _slug(text, used):
     """A short id for an observance that has none yet. Only reached under ``--mint``.
 
@@ -139,11 +155,18 @@ def _slug(text, used):
     the whole catalog would renumber every colliding entry the moment a new one sorted
     ahead of it. Stated ids are what make that impossible.
     """
-    s = _STRIP_PREFIX.sub("", text.replace(_OBSERVANCE_SEP, " ").lower())
-    base = "_".join(_NON_WORD.sub("_", s).strip("_").split("_")[:4]) or "observance"
-    sid, n = base, 2
+    m = _ORD_DAY_OF_RE.match(text)
+    n = _ORDINAL_TO_N.get(m.group("ord")) if m else None
+    if m and n:
+        rest = _NON_WORD.sub(" ", m.group("rest").lower()).split()
+        words = [w for w in rest if w not in _SLUG_STOPWORDS]
+        base = "_".join(words[:2] or ["observance"]) + f"_day_{n}"
+    else:
+        s = _STRIP_PREFIX.sub("", text.replace(_OBSERVANCE_SEP, " ").lower())
+        base = "_".join(_NON_WORD.sub("_", s).strip("_").split("_")[:4]) or "observance"
+    sid, k = base, 2
     while sid in used:
-        sid, n = f"{base}_{n}", n + 1
+        sid, k = f"{base}_{k}", k + 1
     used.add(sid)
     return sid
 

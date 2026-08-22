@@ -548,8 +548,8 @@ class TestNisibisAndElijahRenamesResolveThroughTheCatalog(unittest.TestCase):
         # (that occurrence isn't index-covered), not a wrong one; picking a clean year keeps
         # this test about the rename mechanism, not about composite-day tier exclusion.
         heesnak = self._heesnak(2017)
-        ids = ("first_day_of_the_7", "second_day_of_the_8", "third_day_of_the_8",
-               "fourth_day_of_the_8", "fifth_day_of_the_8")
+        ids = ("james_nisibis_day_1", "james_nisibis_day_2", "james_nisibis_day_3",
+               "james_nisibis_day_4", "james_nisibis_day_5")
         for n, sid in enumerate(ids, start=1):
             yield sid, heesnak + datetime.timedelta(days=21 + n)
 
@@ -587,11 +587,11 @@ class TestNisibisAndElijahRenamesResolveThroughTheCatalog(unittest.TestCase):
         entry can supply the served ``hy`` text.
         """
         heesnak = self._heesnak(2017)      # clean year -- see _nisibis_cases
-        nisibis_day = heesnak + datetime.timedelta(days=21 + 2)      # second_day_of_the_8
+        nisibis_day = heesnak + datetime.timedelta(days=21 + 2)      # james_nisibis_day_2
         pentecost = self._pentecost(2026)
         elijah_day = pentecost + datetime.timedelta(days=1)          # second_day_of_pentecost
 
-        for sid, day in (("second_day_of_the_8", nisibis_day),
+        for sid, day in (("james_nisibis_day_2", nisibis_day),
                          ("second_day_of_pentecost", elijah_day)):
             with self.subTest(id=sid):
                 original_hy = self._orig_catalog[sid]["hy"]
