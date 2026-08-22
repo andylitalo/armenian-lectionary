@@ -477,6 +477,69 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
                     ids_for_text(f"{word} day of the Fast of Prophet Elijah"), [slug])
 
 
+class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
+    """The last fast eve whose days the source left unnamed (docs §6d).
+
+    Nine of the ten fast eves in ``engine._EVE_FAMILIES`` are followed by a named day
+    count. The Fast of the Holy Cross of Varag was the tenth: the source names it on its
+    own eve and then heads all five days it opens with a bare "Fast day" / "Պահք".
+
+    Two of those five are a Wednesday and a Friday, so before this family existed they fell
+    through to the weekly split and were served as the ORDINARY weekly fast -- a day of a
+    named fast wearing the name of a different one. That is what the last test here guards,
+    and it is the reason this class is not merely cosmetic.
+    """
+
+    ORDINALS = (("First", "Ա"), ("Second", "Բ"), ("Third", "Գ"),
+                ("Fourth", "Դ"), ("Fifth", "Ե"))
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG:
+            self.skipTest("observance catalog not present")
+
+    def _eve(self, year):
+        """The Sunday at EX+7 -- the eve the fast's five weekdays follow."""
+        return engine._POSITION_ANCHORS["EX"](
+            datetime.date(year, 9, 14)) + datetime.timedelta(days=7)
+
+    def test_five_weekdays_are_named_in_both_languages(self):
+        for year in (2001, 2015, 2026):
+            eve = self._eve(year)
+            for k, (word, letter) in enumerate(self.ORDINALS, start=1):
+                d = eve + datetime.timedelta(days=k)
+                with self.subTest(date=d):
+                    en = compute_armenian_lectionary(d)["Liturgical Day"]
+                    hy = compute_armenian_lectionary(
+                        d, language="hy")["Liturgical Day"]
+                    self.assertTrue(
+                        en.startswith(
+                            f"{word} day of the Fast of the Holy Cross of Varag"),
+                        f"{d} served {en!r}")
+                    self.assertTrue(
+                        hy.startswith(f"{letter} օր Վարագայ ս. խաչի պահոց"),
+                        f"{d} served {hy!r}")
+
+    def test_the_eve_still_names_the_fast(self):
+        """The witness the day labels are taken from, asserted so it cannot quietly move."""
+        for year in (2001, 2026):
+            eve = self._eve(year)
+            with self.subTest(date=eve):
+                self.assertEqual(
+                    engine._eve_label(eve), "Eve of Fast of the Holy Cross of Varag")
+
+    def test_its_wednesday_and_friday_are_not_the_weekly_fast(self):
+        """The defect §6d fixed: two days of this fast were served as the weekly one."""
+        for year in (2001, 2015, 2026):
+            eve = self._eve(year)
+            for k in (3, 5):                      # the Wednesday and the Friday
+                d = eve + datetime.timedelta(days=k)
+                with self.subTest(date=d):
+                    self.assertIn(d.weekday(), (2, 4))
+                    served = compute_armenian_lectionary(d)["Liturgical Day"]
+                    for split in ("Wednesday Fast", "Friday Fast"):
+                        self.assertNotIn(split, served, served)
+
+
 class TestWeeklyFastWeekdaySplit(unittest.TestCase):
     """The ordinary-time Wed/Fri marker says which weekday's fast it is.
 
@@ -542,7 +605,7 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
                 self.assertTrue(served.startswith(("Wednesday Fast", "Friday Fast")), served)
 
     def test_the_marker_still_reaches_days_the_split_does_not_claim(self):
-        """The 518 instances the split does not claim, most beside the source's own day count.
+        """The 437 instances the split does not claim, most beside the source's own day count.
 
         "Fourth day of the Assumption — Fast day" is the source's own wording, and the
         second component is not redundant with the first. Dropping it would be an omission,

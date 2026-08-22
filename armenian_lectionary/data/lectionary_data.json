@@ -29554,9 +29554,9 @@
   },
   "ExFerL": {
    "69:4": {
-    "feast": "Friday Fast",
+    "feast": "Fifth day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "friday_fast"
+     "cross_varag_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.30-12.9",
@@ -29564,9 +29564,9 @@
     ]
    },
    "62:4": {
-    "feast": "Friday Fast",
+    "feast": "Fifth day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "friday_fast"
+     "cross_varag_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.30-12.9",
@@ -29594,9 +29594,9 @@
     ]
    },
    "69:3": {
-    "feast": "Wednesday Fast",
+    "feast": "Third day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "wednesday_fast"
+     "cross_varag_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.10-23",
@@ -29664,9 +29664,9 @@
     ]
    },
    "62:3": {
-    "feast": "Wednesday Fast",
+    "feast": "Third day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "wednesday_fast"
+     "cross_varag_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.10-23",
@@ -30096,9 +30096,9 @@
   },
   "ExFer": {
    "4": {
-    "feast": "Friday Fast",
+    "feast": "Fifth day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "friday_fast"
+     "cross_varag_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.30-12.9",
@@ -30126,9 +30126,9 @@
     ]
    },
    "3": {
-    "feast": "Wednesday Fast",
+    "feast": "Third day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "wednesday_fast"
+     "cross_varag_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.10-23",
@@ -38448,9 +38448,9 @@
     ]
    },
    "fast_daysaints_mamas:09-21": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -38506,9 +38506,9 @@
     ]
    },
    "fast_daysaints_mamas:09-22": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -38883,9 +38883,9 @@
     ]
    },
    "fast_daysaints_virgins:09-20": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -39237,9 +39237,9 @@
     ]
    },
    "fast_daysaints_virgins:09-25": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -39274,9 +39274,9 @@
     ]
    },
    "fast_daysaints_mamas:09-24": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -39417,9 +39417,9 @@
     ]
    },
    "fast_daysaint_patriarchs:09-26": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -39586,9 +39586,9 @@
     ]
    },
    "fast_daysaints_virgins:09-23": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -39717,9 +39717,9 @@
     ]
    },
    "fast_daysaints_virgins:09-22": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -39900,9 +39900,9 @@
     ]
    },
    "fast_daysaint_patriarchs:09-24": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -39951,9 +39951,9 @@
     ]
    },
    "fast_daysaint_patriarchs:09-27": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -40105,9 +40105,9 @@
     ]
    },
    "fast_daysaints_mamas:09-25": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -40141,9 +40141,9 @@
     ]
    },
    "fast_daysaint_patriarchs:09-23": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -40178,9 +40178,9 @@
     ]
    },
    "fast_daysaints_mamas:09-20": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -40335,9 +40335,9 @@
     ]
    },
    "fast_daysaints_mamas:09-19": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -40562,9 +40562,9 @@
     ]
    },
    "fast_daysaints_virgins:09-26": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -40685,9 +40685,9 @@
     ]
    },
    "fast_daysaint_patriarchs:09-22": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -40794,9 +40794,9 @@
     ]
    },
    "fast_daysaint_patriarchs:09-25": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -40867,9 +40867,9 @@
     ]
    },
    "fast_daysaint_patriarchs:09-28": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -40954,9 +40954,9 @@
     ]
    },
    "fast_daysaints_virgins:09-21": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -41027,9 +41027,9 @@
     ]
    },
    "fast_daysaints_mamas:09-23": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -41077,9 +41077,9 @@
     ]
    },
    "fast_daysaints_virgins:09-24": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -41438,9 +41438,9 @@
     ]
    },
    "2:fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -41474,9 +41474,9 @@
     ]
    },
    "6:fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -41770,9 +41770,9 @@
     ]
    },
    "0:fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -42040,9 +42040,9 @@
     ]
    },
    "1:fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -42077,9 +42077,9 @@
     ]
    },
    "5:fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -42185,9 +42185,9 @@
     ]
    },
    "5:fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -42210,9 +42210,9 @@
     ]
    },
    "1:fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -42223,9 +42223,9 @@
     ]
    },
    "1:fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -42393,9 +42393,9 @@
     ]
    },
    "6:fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -42500,9 +42500,9 @@
     ]
    },
    "4:fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -42631,9 +42631,9 @@
     ]
    },
    "2:fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -42693,9 +42693,9 @@
     ]
    },
    "3:fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -42766,9 +42766,9 @@
     ]
    },
    "4:fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -42919,9 +42919,9 @@
     ]
    },
    "3:fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -42932,9 +42932,9 @@
     ]
    },
    "6:fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -43277,9 +43277,9 @@
     ]
    },
    "3:fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -43328,9 +43328,9 @@
     ]
    },
    "2:fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -43341,9 +43341,9 @@
     ]
    },
    "5:fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -43631,9 +43631,9 @@
     ]
    },
    "0:fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -43801,9 +43801,9 @@
     ]
    },
    "4:fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -43948,9 +43948,9 @@
     ]
    },
    "0:fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -44167,9 +44167,9 @@
     ]
    },
    "fast_daysaints_mamas": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -44286,9 +44286,9 @@
     ]
    },
    "fast_daysaints_virgins": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -44347,9 +44347,9 @@
     ]
    },
    "fast_daysaint_patriarchs": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -44614,9 +44614,9 @@
     ]
    },
    "Mon:09-21": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -44672,9 +44672,9 @@
     ]
    },
    "Mon:09-22": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -45049,9 +45049,9 @@
     ]
    },
    "Tue:09-20": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -45415,9 +45415,9 @@
     ]
    },
    "Tue:09-25": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -45452,9 +45452,9 @@
     ]
    },
    "Mon:09-24": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -45595,9 +45595,9 @@
     ]
    },
    "Thu:09-26": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -45764,9 +45764,9 @@
     ]
    },
    "Tue:09-23": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -45895,9 +45895,9 @@
     ]
    },
    "Tue:09-22": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -46078,9 +46078,9 @@
     ]
    },
    "Thu:09-24": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -46129,9 +46129,9 @@
     ]
    },
    "Thu:09-27": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -46283,9 +46283,9 @@
     ]
    },
    "Mon:09-25": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -46319,9 +46319,9 @@
     ]
    },
    "Thu:09-23": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -46356,9 +46356,9 @@
     ]
    },
    "Mon:09-20": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -46513,9 +46513,9 @@
     ]
    },
    "Mon:09-19": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -46740,9 +46740,9 @@
     ]
    },
    "Tue:09-26": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -46875,9 +46875,9 @@
     ]
    },
    "Thu:09-22": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -46995,9 +46995,9 @@
     ]
    },
    "Thu:09-25": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -47068,9 +47068,9 @@
     ]
    },
    "Thu:09-28": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -47167,9 +47167,9 @@
     ]
    },
    "Tue:09-21": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -47240,9 +47240,9 @@
     ]
    },
    "Mon:09-23": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -47290,9 +47290,9 @@
     ]
    },
    "Tue:09-24": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -47687,9 +47687,9 @@
     ]
    },
    "62:1:Mon": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -47934,9 +47934,9 @@
     ]
    },
    "69:1:Tue": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -48090,9 +48090,9 @@
     ]
    },
    "62:1:Tue": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -48162,9 +48162,9 @@
     ]
    },
    "62:1:Thu": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -48274,9 +48274,9 @@
     ]
    },
    "69:1:Thu": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -48287,9 +48287,9 @@
     ]
    },
    "69:1:Mon": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -48565,9 +48565,9 @@
     ]
    },
    "62:7:Mon": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -48812,9 +48812,9 @@
     ]
    },
    "69:8:Tue": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -48968,9 +48968,9 @@
     ]
    },
    "62:7:Tue": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -49040,9 +49040,9 @@
     ]
    },
    "62:7:Thu": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -49152,9 +49152,9 @@
     ]
    },
    "69:8:Thu": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -49165,9 +49165,9 @@
     ]
    },
    "69:8:Mon": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -49715,9 +49715,9 @@
     ]
    },
    "1:Mon": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -49858,9 +49858,9 @@
     ]
    },
    "1:Tue": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -49919,9 +49919,9 @@
     ]
    },
    "1:Thu": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [
@@ -50520,9 +50520,9 @@
     ]
    },
    "12": {
-    "feast": "Friday Fast",
+    "feast": "Fifth day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "friday_fast"
+     "cross_varag_day_5"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.30-12.9",
@@ -50683,9 +50683,9 @@
     ]
    },
    "10": {
-    "feast": "Wednesday Fast",
+    "feast": "Third day of the Fast of the Holy Cross of Varag",
     "observance_ids": [
-     "wednesday_fast"
+     "cross_varag_day_3"
     ],
     "readings": [
      "St. Paul's Second Epistle to the Corinthians 11.10-23",
@@ -50704,9 +50704,9 @@
     ]
    },
    "8": {
-    "feast": "Fast day — Sts. Mamas, Philomenos and Simeon the Stylite",
+    "feast": "First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_1",
      "mamas_philomenos_and_simeon"
     ],
     "readings": [
@@ -51031,9 +51031,9 @@
     ]
    },
    "9": {
-    "feast": "Fast day — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
+    "feast": "Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_2",
      "virgins_febronia_mariana_and"
     ],
     "readings": [
@@ -51142,9 +51142,9 @@
     ]
    },
    "11": {
-    "feast": "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
+    "feast": "Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus",
     "observance_ids": [
-     "fast_day",
+     "cross_varag_day_4",
      "patriarchs_barlaam_anthimus_and"
     ],
     "readings": [

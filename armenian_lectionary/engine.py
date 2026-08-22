@@ -1262,6 +1262,16 @@ _POSITION_FAMILIES = (
     ("HE", (7, 49), _SUN, "sundays", 0, "{ord} Sunday of Advent"),
     # -- Transfiguration / Assumption / Exaltation (latest anchor first) --------
     ("EX", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Holy Cross"),
+    # The five weekdays after the Sunday at EX+7 are the Fast of the Holy Cross of Varag.
+    # The source names that fast on its OWN eve -- _EVE_FAMILIES' ("EX", 7, "Eve of Fast of
+    # the Holy Cross of Varag") -- and then heads all five days it opens with a bare "Fast
+    # day" (and a bare "Պահք"), the only fast eve in the file whose days it leaves unnamed.
+    # Named to agree with that eve, the same §6b disambiguation applied to Nisibis and the
+    # Fast of Prophet Elijah. Two of these five are a Wed and a Fri, so without this family
+    # they fall through to the weekly split below and are served as the ORDINARY weekly
+    # fast -- a day of a named fast, labelled as the thing it is not.
+    ("EX", (8, 12), _MON_TO_FRI, "days", -7,
+     "{ord} day of the Fast of the Holy Cross of Varag"),
     ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday after the Holy Cross"),
     ("AS", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of Assumption"),
     ("AS", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Assumption"),

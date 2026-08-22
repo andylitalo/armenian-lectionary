@@ -9,35 +9,50 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 ### Changed (BREAKING — warrants a major bump at release)
 - **The ordinary-time weekly fast says which weekday it is**
   ([docs §6c](docs/observance-name-corrections.md)). `Fast day` / `Պահք` becomes
-  `Wednesday Fast` / `Չորեքշաբթիի պահք` on 730 days and `Friday Fast` / `Ուրբաթի պահք` on
-  725.
+  `Wednesday Fast` / `Չորեքշաբթիի պահք` on 703 days and `Friday Fast` / `Ուրբաթի պահք` on
+  698.
 
   **This is the weakest-evidenced change in the project and the only one with no source
   witness of any kind.** Every other correction rests on something sacredtradition.am
   itself says somewhere — the other language, another year, an eve, a companion feast.
   Here there is nothing: the source prints the same two words on both weekdays in both
-  languages on all 1,455 days. The warrant is the calendar alone, and it is declared as
+  languages on all 1,401 days. The warrant is the calendar alone, and it is declared as
   such rather than presented as a reading of the source.
 
   Scope is the whole risk, so it is drawn narrowly. The split claims only the terminal
   Wed/Fri fallthrough. It does **not** touch Holy Week (marked on every one of its days,
   so the weekday is not the reason — Great Wednesday and Great Friday keep the bare marker
   via an explicit entry), any named fast (already claimed by its own day-count family), or
-  the 518 days where the source prints the marker *alongside* its own day count
+  the 437 days where the source prints the marker *alongside* its own day count
   (`Second day of the Fast of Prophet Elijah — Fast day`, where the second component is not
   redundant with the first). `tests/test_language.py::TestWeeklyFastWeekdaySplit` pins each
   exclusion.
 
-  **108 of those 518 are a declared loose end, not a settled exclusion** — the Assumption
+  **108 of those 437 are a declared loose end, not a settled exclusion** — the Assumption
   octave's Wednesday and Friday and post-Ascension Eastertide's are the weekly fast by the
   same argument, but reached through stored table text this change does not rewrite. See
   docs §6c.
 
   **Consumers should migrate to `ObservanceIds` first.** A consumer keying rows on the
-  display string loses all 1,455, which is what 1.3.0 did to bahk (158 of 429 stored names
+  display string loses all 1,401, which is what 1.3.0 did to bahk (158 of 429 stored names
   stranded). The ids `wednesday_fast` / `friday_fast` are stable across this change.
 
 ### Fixed
+- **The Fast of the Holy Cross of Varag is named, and stops being served as the weekly
+  fast** ([docs §6d](docs/observance-name-corrections.md)). The source names this fast on
+  its own eve (`Eve of Fast of the Holy Cross of Varag` / `Բարեկենդան Վարագայ ս. խաչի`) and
+  then heads all five days that eve opens with a bare `Fast day` / `Պահք`. It was the only
+  one of the ten fast eves in `engine._EVE_FAMILIES` whose days the engine left unnamed.
+
+  Two of those five days are a Wednesday and a Friday, so they fell through to the weekly
+  split above and were served as `Wednesday Fast` / `Friday Fast` — days *of a named fast*
+  labelled as the ordinary weekly one. Naming the fast removes 54 days from the split
+  (1,455 → 1,401) and names 81 more that were bare, including the three September
+  commemorations (`Fast day — Sts. Mamas, Philomenos and Simeon the Stylite` and its
+  siblings). The position generator's residue drops from 208 days to 130, all now Holy Week.
+
+  Same §6b disambiguation as Nisibis and Prophet Elijah: the wording is the source's own,
+  carried from the eve onto the days it announces. Ids `cross_varag_day_1`…`_5`.
 - **`_generative_continua` no longer names a calendar-derived component in its own words.**
   The Fast-of-the-Assumption Wed/Fri continua tier returned a frozen `"Fast day"` instead of
   asking `engine._position_label` — the defect `build_table.unanimous_feast` prevents for
