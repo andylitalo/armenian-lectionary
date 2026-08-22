@@ -29,17 +29,12 @@ import re
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                          "data", "lectionary_data.json")
 
-# Armenian ("hy") name maps, scraped from sacredtradition.am by
-# dev/fetch_translations.py. Each degrades to {} if absent; language="hy" then falls
-# back to the English name. OBSERVANCE maps a whole scraped feast/fast string OR a single
-# OBSERVANCE_SEP component -> its Armenian form; BOOK maps an English book head -> Armenian.
-# OBSERVANCE_NAMES_HY_PATH is no longer consulted at runtime at all: #18 moved name
-# resolution onto the id catalog (see OBSERVANCE_CATALOG_PATH below), so the map it points
-# at is now a dev-time input to dev/build_observance_catalog.py and a shipped data file
-# that tests/test_language.py's orthography guards check. The PATH is kept for both of
-# those; the eager load is not, since nothing at runtime reads the result.
-OBSERVANCE_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                        "data", "observance_names_hy.json")
+# Armenian ("hy") name map for Bible book heads, scraped from sacredtradition.am by
+# dev/fetch_translations.py. Degrades to {} if absent; language="hy" then falls back to
+# the English name. Its feast/fast counterpart (the map dev/fetch_translations.py calls
+# OBSERVANCE_MAP_PATH) is dev-tooling input only -- #18 moved name resolution onto the id
+# catalog (see OBSERVANCE_CATALOG_PATH below) -- so it lives under dev/, not here: nothing
+# at runtime ever reads it, unlike this one.
 BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "data", "book_names_hy.json")
 

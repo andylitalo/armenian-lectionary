@@ -25,10 +25,10 @@ with no install step.
 | `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
-| `armenian_lectionary/data/observance_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/observance_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
 | `Dockerfile` / `.dockerignore` | Container image for Cloud Run (`pip install .` + gunicorn on `0.0.0.0:$PORT`). |
 | `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image and package. Writes the shipped JSON via the engine's PATH constants. |
+| `dev/observance_names_hy.json` | Dev-only Armenian feast/fast map, scraped by `dev/fetch_translations.py` (`OBSERVANCE_MAP_PATH`). Never read at runtime and not bundled into the wheel — unlike its book-name counterpart below, superseded here by `observance_catalog.json`. Feeds the `source_hy` column in `dev/observance_name_review.tsv`, `dev/audit_source_anomalies.py`'s cross-language contradiction detectors, and `tests/test_language.py`'s orthography guards. |
 | `tests/` | `unittest` suite. |
 | `.github/workflows/release.yml` | Builds and publishes to PyPI (Trusted Publishing) on a `v*` tag. |
 
@@ -450,7 +450,7 @@ bundled under `armenian_lectionary/data/`). Build and check locally:
 ```bash
 pip install build twine
 python -m build                       # -> dist/*.whl, dist/*.tar.gz
-python -m zipfile -l dist/*.whl       # confirm all seven data/*.json are bundled
+python -m zipfile -l dist/*.whl       # confirm all eight data/*.json are bundled
 twine check dist/*
 ```
 

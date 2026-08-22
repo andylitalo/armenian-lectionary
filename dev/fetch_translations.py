@@ -1,8 +1,10 @@
 """DEV-ONLY: scrape sacredtradition.am for the Armenian (``hy``) names of every
-feast and Bible book the engine can emit, and build the shipped translation tables.
+feast and Bible book the engine can emit, and build the two translation tables.
 
-NOT imported by the app at runtime. The runtime stays offline: this tool writes two
-static JSON maps that the engine loads to answer ``language="hy"`` requests.
+NOT imported by the app at runtime. The runtime stays offline. Of the two maps this
+writes, only ``book_names_hy.json`` is loaded by the engine at import, to answer
+``language="hy"`` requests; ``observance_names_hy.json`` is dev-tooling input only (see
+its own PATH comment below) and lives under ``dev/``, not in the shipped package.
 
 How it works
 ------------
@@ -16,7 +18,7 @@ and Armenian reading *i* are the same citation with only the book name translate
   2. fetch each representative date once at ``iL=0``;
   3. pair English<->Armenian by matching the numeric tail, voting the book-head and
      feast-name translations; and
-  4. write ``armenian_lectionary/data/{observance_names_hy,book_names_hy}.json``.
+  4. write ``dev/observance_names_hy.json`` and ``armenian_lectionary/data/book_names_hy.json``.
 
 Usage:
     python dev/fetch_translations.py            # build both maps (uses hy cache)
@@ -51,7 +53,10 @@ HERE = os.path.dirname(__file__)
 REF_DIR = os.path.join(HERE, "reference_data")
 HY_CACHE_DIR = os.path.join(HERE, "reference_data_hy")
 DATA_DIR = os.path.join(os.path.dirname(HERE), "armenian_lectionary", "data")
-OBSERVANCE_MAP_PATH = os.path.join(DATA_DIR, "observance_names_hy.json")
+# dev-tooling input only (never read at runtime -- see engine.py's OBSERVANCE_CATALOG_PATH
+# comment), so it lives under dev/ and is not bundled into the shipped wheel, unlike
+# BOOK_MAP_PATH below.
+OBSERVANCE_MAP_PATH = os.path.join(HERE, "observance_names_hy.json")
 BOOK_MAP_PATH = os.path.join(DATA_DIR, "book_names_hy.json")
 
 # iL=0 -> Classical Armenian (iL=2 is English, iL=1 Russian). Everything else in the
