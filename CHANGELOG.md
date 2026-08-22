@@ -4,6 +4,49 @@ All notable changes to **armenian-lectionary** are documented here. The format i
 based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed (BREAKING — warrants a major bump at release)
+- **The ordinary-time weekly fast says which weekday it is**
+  ([docs §6c](docs/observance-name-corrections.md)). `Fast day` / `Պահք` becomes
+  `Wednesday Fast` / `Չորեքշաբթիի պահք` on 730 days and `Friday Fast` / `Ուրբաթի պահք` on
+  725.
+
+  **This is the weakest-evidenced change in the project and the only one with no source
+  witness of any kind.** Every other correction rests on something sacredtradition.am
+  itself says somewhere — the other language, another year, an eve, a companion feast.
+  Here there is nothing: the source prints the same two words on both weekdays in both
+  languages on all 1,455 days. The warrant is the calendar alone, and it is declared as
+  such rather than presented as a reading of the source.
+
+  Scope is the whole risk, so it is drawn narrowly. The split claims only the terminal
+  Wed/Fri fallthrough. It does **not** touch Holy Week (marked on every one of its days,
+  so the weekday is not the reason — Great Wednesday and Great Friday keep the bare marker
+  via an explicit entry), any named fast (already claimed by its own day-count family), or
+  the 518 days where the source prints the marker *alongside* its own day count
+  (`Second day of the Fast of Prophet Elijah — Fast day`, where the second component is not
+  redundant with the first). `tests/test_language.py::TestWeeklyFastWeekdaySplit` pins each
+  exclusion.
+
+  **108 of those 518 are a declared loose end, not a settled exclusion** — the Assumption
+  octave's Wednesday and Friday and post-Ascension Eastertide's are the weekly fast by the
+  same argument, but reached through stored table text this change does not rewrite. See
+  docs §6c.
+
+  **Consumers should migrate to `ObservanceIds` first.** A consumer keying rows on the
+  display string loses all 1,455, which is what 1.3.0 did to bahk (158 of 429 stored names
+  stranded). The ids `wednesday_fast` / `friday_fast` are stable across this change.
+
+### Fixed
+- **`_generative_continua` no longer names a calendar-derived component in its own words.**
+  The Fast-of-the-Assumption Wed/Fri continua tier returned a frozen `"Fast day"` instead of
+  asking `engine._position_label` — the defect `build_table.unanimous_feast` prevents for
+  the table, reached from a readings tier where nothing was checking. Harmless while the
+  rule printed the same literal; with the weekday split it made 16 summer Wed/Fri days
+  disagree with the rule *and* suppressed the split on them (the marker matches
+  `_POSITION_COMPONENT_RE`, so it was taken for an already-resolved position).
+  `tests/test_coordinate_index.py`'s table-vs-rule sweep now covers those days.
+
 ## [1.3.0] — 2026-08-12
 
 ### Added

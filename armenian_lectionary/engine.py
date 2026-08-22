@@ -1173,7 +1173,7 @@ _ANY = None          # unbounded end of a family's offset window
 # imported at runtime); the ordinal words are this module's own _ORDINAL_WORDS.
 _POSITION_COMPONENT_RE = re.compile(
     r"^(?:" + "|".join(_ORDINAL_WORDS) + r")\s+(?:day of|Sunday)\b"
-    r"|^(?:Fast|Feast) day$")
+    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$")
 
 
 def _theophany_closing(d: datetime.date) -> datetime.date:
@@ -1313,7 +1313,19 @@ _POSITION_FAMILIES = (
     # reads "Պահք". Folded in source_corrections.POSITION_LABEL_FIXES; see
     # docs/observance-name-corrections.md section 1.
     ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Fast day", (12, 9)),
-    ("E", (_ANY, _ANY), (2, 4), None, 0, "Fast day"),
+    # Holy Week's own Wed/Fri keep the bare marker rather than the weekday split below.
+    # Great Wednesday and Great Friday are not the weekly fast -- they are inside Holy
+    # Week, which the source marks on every one of its days, Sunday through Saturday. The
+    # split says "this is the weekly Wednesday fast", which would be false here.
+    ("E", (-6, -1), (2, 4), None, 0, "Fast day"),
+    # A Wed/Fri no season above has claimed IS the weekly fast, and now says which day of
+    # it. The source draws no distinction -- one string, both weekdays, in both languages --
+    # so unlike every other label in this file the wording comes from the calendar alone
+    # rather than from something the source says elsewhere. Registered as a section 6
+    # disambiguation in source_corrections.weekly_fast_label / weekly_fast_label_hy; see
+    # docs/observance-name-corrections.md.
+    ("E", (_ANY, _ANY), (2,), None, 0, "Wednesday Fast"),
+    ("E", (_ANY, _ANY), (4,), None, 0, "Friday Fast"),
 )
 
 
@@ -2694,7 +2706,16 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     if gc is not None:
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Fast day",
+            # The position label, not a frozen "Fast day": this is a calendar-derived
+            # component, and a readings tier stating one in its own words is the defect
+            # build_table.unanimous_feast exists to prevent -- it just was not reachable
+            # from the table, so nothing caught it. The literal was correct until the
+            # weekly fast learned its weekday, at which point these 16 Wed/Fri days
+            # disagreed with the rule that names every other one of them, and the marker
+            # (matching _POSITION_COMPONENT_RE) suppressed the split rather than losing
+            # to it. Asking _position_label makes drift impossible by construction.
+            # The fallback keeps the contract that a served name is never empty.
+            "Liturgical Day": _position_label(target_date) or "Fast day",
             "Season": "Fast of the Assumption",
             "Readings": _group_readings(gc),
             "ReadingsList": gc,

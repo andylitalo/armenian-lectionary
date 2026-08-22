@@ -298,6 +298,58 @@ def named_fast_label_hy(date_iso):
     return _NISIBIS_FAST_TEMPLATE_HY.format(ord=_NISIBIS_FAST_ORDINALS_HY[offset - 22])
 
 
+# --------------------------------------------------------------------------- #
+# The weekly Wed/Fri fast: the source draws no distinction, in either language.
+#
+# This is the one label in the engine with NO source witness of any kind -- not an eve, not
+# an other-language statement, not a differently-worded year. The source prints "Fast day"
+# on 730 Wednesdays and 725 Fridays and "Պահք" on both, and nowhere says which. The warrant
+# is therefore the calendar alone: the day IS the weekly Wednesday or Friday fast, that is
+# established by its date, and the added word states only that. A section 6 disambiguation
+# on the weakest evidence any correction in that document rests on -- see the write-up
+# there, and note that the ratchets treat this as a registered fold rather than as a
+# contradiction only because it is declared HERE.
+#
+# Scoped to the days the engine actually splits, by asking the engine rather than keeping a
+# second copy of the window: the marker is correct and complete on Holy Week, the Fast of
+# Prophet Elijah and Dec 9, where the weekday is not the reason for the fast and the split
+# would be false.
+#
+# Two families are excluded for a WEAKER reason, and it is worth being honest about which:
+# the Assumption octave's 4th/6th day and post-Ascension Eastertide's 46th/48th ARE the
+# weekly Wed/Fri fast (the source marks only those two weekdays of each octave, leaving the
+# Mon/Tue/Thu unmarked). They keep the bare marker not because the split would be false but
+# because their position slot is already held by the source's own day count, which lives in
+# stored table text this fold does not reach. 108 days. Declared in docs section 6c.
+# --------------------------------------------------------------------------- #
+_WEEKLY_FAST_LABELS = ("Wednesday Fast", "Friday Fast")
+_WEEKLY_FAST_LABELS_HY = {
+    "Wednesday Fast": "Չորեքշաբթիի պահք",
+    "Friday Fast": "Ուրբաթի պահք",
+}
+
+
+def weekly_fast_label(date_iso):
+    """The weekday-specific label for an ordinary-time weekly fast day, else ``None``.
+
+    Asks ``engine._position_label`` what the day is rather than re-deriving it, so the
+    registry cannot drift from the behaviour it registers: if the engine ever stops
+    splitting a day, this stops folding it on the same commit.
+    """
+    if not date_iso:
+        return None
+    from armenian_lectionary.engine import _position_label
+
+    label = _position_label(datetime.date.fromisoformat(date_iso))
+    return label if label in _WEEKLY_FAST_LABELS else None
+
+
+def weekly_fast_label_hy(date_iso):
+    """The Armenian half of the weekday split, keyed off the English so the two agree."""
+    english = weekly_fast_label(date_iso)
+    return _WEEKLY_FAST_LABELS_HY.get(english) if english else None
+
+
 def normalize_position_label(text, date_iso=""):
     """Fold the source's self-contradicting position labels to the form it uses elsewhere.
 
@@ -309,7 +361,7 @@ def normalize_position_label(text, date_iso=""):
         text = text.replace(wrong, right)
     for wrong, right in POSITION_LABEL_FIXES_BY_DATE.get(date_iso, {}).items():
         text = text.replace(wrong, right)
-    specific = named_fast_label(date_iso)
+    specific = named_fast_label(date_iso) or weekly_fast_label(date_iso)
     if specific:
         # Component-exact, not a substring replace: the bare label is what is ambiguous,
         # and rewriting it inside a longer component would corrupt a name that merely
@@ -327,7 +379,7 @@ def normalize_position_label_hy(text, date_iso=""):
     ambiguous, and rewriting it inside a longer component would corrupt a name that merely
     contains it.
     """
-    specific = named_fast_label_hy(date_iso)
+    specific = named_fast_label_hy(date_iso) or weekly_fast_label_hy(date_iso)
     if not text or not specific:
         return text
     return _OBSERVANCE_SEP.join(
