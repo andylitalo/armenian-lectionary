@@ -35,6 +35,13 @@ Deliberately excluded: _PLACEHOLDER_LABELS ("(commemoration)", "(movable ordinar
 reading)") and the "{season} (day not yet in validated table)" fallback -- internal
 absence-markers, not observances, with nothing to translate. They never reach the TSV.
 
+Also writes armenian_lectionary/data/observance_readings_index.json, a SEPARATE
+readings-hash -> id index (see build_readings_index) letting engine._resolve_generated_text
+find an already-stated id from a date's own (immutable) readings instead of from its
+(renameable) display text. Unlike the catalog above, this index is safe to fully
+regenerate on every run: readings, unlike text, are never corrected, so recomputing it
+always reproduces the same keys.
+
 Usage:
     python dev/build_observance_catalog.py            # project and verify
     python dev/build_observance_catalog.py --mint     # also assign ids to new observances
@@ -50,7 +57,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
-    _FEAST_SEP, _eve_label, _position_label, MAX_YEAR, MIN_YEAR, fixed_date_label,
+    _FEAST_SEP, _compute_lectionary, _eve_label, _observance_id_from_coordinate,
+    _observance_id_from_readings, _position_coordinate, _position_label,
+    compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
 DEV_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -59,6 +68,8 @@ GROUND_TRUTH_PATH = os.path.join(DEV_DIR, "feast_name_ground_truth.json")
 REVIEW_PATH = os.path.join(DEV_DIR, "feast_name_review.tsv")
 CATALOG_PATH = os.path.join(REPO_ROOT, "armenian_lectionary", "data",
                             "observance_catalog.json")
+READINGS_INDEX_PATH = os.path.join(REPO_ROOT, "armenian_lectionary", "data",
+                                   "observance_readings_index.json")
 
 # _FEAST_SEP is the ENGINE's component join, and a catalog entry is ONE component. Any
 # entry whose own text contains it is a category error, and it shows: the source's Armenian
@@ -173,6 +184,136 @@ def served_components(ground_truth):
     return texts
 
 
+def build_readings_index(ground_truth):
+    """readings-hash -> catalog id, for every position/eve label whose readings uniquely
+    identify it: the same text always carries the same readings, and those readings never
+    recur under a different text. Checked within each label's DOMINANT ``Source`` tier,
+    with two further refinements needed to make the correspondence hold in practice:
+
+    - **Displacement by a fixed civil date.** A day inside the Fast of St. James the
+      bishop of Nisibis can coincide with the Conception of the Holy Virgin (12 of 27
+      years), which outranks it and replaces its readings wholesale (``Source`` flips
+      ``validated-table`` -> ``validated-composite``); those years are excluded from the
+      label's signature. This alone doesn't cover a coincidence that does NOT change
+      ``Source`` -- e.g. "Eve of Great Lent" disagrees on 2 of 27 years because the
+      Presentation of the Lord (a fixed civil date) happens to fall on it, but both stay
+      ``validated-table``. A disagreeing occurrence is excluded there only when it is
+      independently provable to belong elsewhere: its pre-overlay commemoration
+      (``_compute_lectionary(d)["Liturgical Day"]``) must have exactly one reading set
+      across ALL its own occurrences globally, on at least one date that does not also
+      carry this label -- the second condition rules out a SELF-referential
+      "commemoration" (a civil-year-unanimous table entry that already bakes this
+      label's own text into its stored ``"feast"`` field, which would otherwise look
+      tautologically stable). Neither mechanism lowers the bar: a label's remaining,
+      unexplained occurrences must still agree exactly, which is why the
+      Sunday-after-Nativity/Transfiguration/Assumption families stay excluded -- their
+      own ``_position_label`` docstring admits their count is "not exact on every
+      occurrence," and their disagreement has no competing observance to attribute it to.
+    - **Cross-tier collisions.** Detected across every tier a label was ever served
+      under, not just its dominant one -- a minority tier (a best-guess continuum filling
+      in for an unvalidated date) can still reuse another label's reading pool.
+
+    A position label whose dominant-tier readings come up EMPTY (some ferial days of the
+    Fast of the Catechumens carry no scripture at all -- a validated, intentional
+    aliturgical day) is indexed instead by calendar COORDINATE
+    (``engine._position_coordinate``: the position family's own anchor key and
+    day-offset, hashed by ``engine._observance_id_from_coordinate`` in a namespace that
+    cannot collide with a readings-based hash) -- a pure function of the calendar, exactly
+    as stable as readings are for every other entry.
+
+    ``kind`` ("position"/"eve") is folded into every hash because the two can share a
+    day's readings by construction: Pentecost+21 is a Sunday every year, so "Third Sunday
+    after Pentecost" and "Eve of Fast of St. Gregory the Illuminator" always carry
+    identical readings.
+
+    Loads ``_position_label``/``_eve_label`` with no ``readings`` argument (the literal
+    calendar-rule text, matching how the catalog's ids were originally minted), then
+    separately fetches each date's readings, ``Source``, and pre-overlay commemoration via
+    ``_compute_lectionary``/``compute_armenian_lectionary``, since readings are resolved
+    before any position/eve label is applied.
+    """
+    approved_ids = {row["approved_en"]: row.get("id")
+                    for row in ground_truth.values() if row.get("approved_en")}
+    # See audit()'s matching comment: falls back to the row's immutable source_en so an
+    # already-renamed row still gets its id indexed here.
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
+
+    def id_for_literal_text(text):
+        return approved_ids.get(text) or ids_by_source.get(text)
+
+    # (kind, text) -> {Source tier: [(readings, pre-overlay commemoration), ...]}, so the
+    # dominant tier can be picked per label before the stability checks run. See the
+    # docstring for why "kind" is part of the key.
+    #
+    # commemoration_readings is built from EVERY date, not just labeled ones: it is what
+    # lets a disagreeing occurrence be checked against an independently, globally stable
+    # competing commemoration.
+    occurrences_by_key = {}
+    coordinates_by_text = {}                          # position-only; see the docstring
+    commemoration_readings = {}
+    commemoration_dates = {}
+    d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
+    while d <= end:
+        base = _compute_lectionary(d)
+        readings = tuple(base["ReadingsList"])         # unaffected by any overlay
+        commem = base["Liturgical Day"]
+        commemoration_readings.setdefault(commem, set()).add(readings)
+        commemoration_dates.setdefault(commem, set()).add(d)
+        for kind, label in (("position", _position_label(d)), ("eve", _eve_label(d))):
+            if label and id_for_literal_text(label):
+                by_tier = occurrences_by_key.setdefault((kind, label), {})
+                by_tier.setdefault(base["Source"], []).append((readings, commem, d))
+                if kind == "position":
+                    coordinates_by_text.setdefault(label, set()).add(_position_coordinate(d))
+        d += datetime.timedelta(days=1)
+
+    # Every tier, not just each key's dominant one -- see the docstring's cross-tier note.
+    keys_by_readings = {}
+    for key, by_tier in occurrences_by_key.items():
+        kind, _text = key
+        for occurrences in by_tier.values():
+            for r, _commem, _d in occurrences:
+                keys_by_readings.setdefault((kind, r), set()).add(key)
+
+    readings_by_key = {}
+    for key, by_tier in occurrences_by_key.items():
+        dominant_tier = max(by_tier, key=lambda tier: len(by_tier[tier]))
+        occurrences = by_tier[dominant_tier]
+        readings_set = {r for r, _commem, _d in occurrences}
+        if len(readings_set) != 1:
+            # Explain away a disagreeing occurrence only per the docstring's two
+            # conditions: independently stable, and attested outside this label's own
+            # dates (which also rules out a self-referential "commemoration").
+            these_dates = {d for _r, _commem, d in occurrences}
+            unexplained = {
+                r for r, commem, _d in occurrences
+                if commemoration_readings.get(commem) != {r}
+                or not (commemoration_dates.get(commem, set()) - these_dates)
+            }
+            if unexplained:
+                readings_set = unexplained
+        readings_by_key[key] = readings_set
+
+    index = {}
+    for (kind, text), readings_set in readings_by_key.items():
+        if len(readings_set) != 1:
+            continue                              # not offset-determined; leave unresolvable
+        (readings,) = readings_set
+        if readings:
+            if len(keys_by_readings[(kind, readings)]) != 1:
+                continue                          # those readings also carry another text
+            index[_observance_id_from_readings(list(readings), kind)] = (
+                id_for_literal_text(text))
+        elif kind == "position":
+            coords = coordinates_by_text[text]
+            if len(coords) != 1 or None in coords:
+                continue                          # not a single stable calendar coordinate
+            (akey, offset), = coords
+            index[_observance_id_from_coordinate(akey, offset)] = id_for_literal_text(text)
+    return index
+
+
 def build_catalog(ground_truth):
     """``(catalog, problems)`` -- the projection, and every invariant it violates.
 
@@ -231,9 +372,16 @@ def audit(catalog, ground_truth):
     findings = []
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
+    # A renamed engine-composed row (approved_en no longer equal to the literal text
+    # engine.py composes) is still registered: source_en is its immutable identity key,
+    # left untouched by a rename, so falling back to it keeps a fresh rename from reading
+    # as "unregistered" before the readings index has had a chance to pick it up.
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
     served = served_components(ground_truth)
 
-    unregistered = sorted(t for t in served if not approved_ids.get(t))
+    unregistered = sorted(
+        t for t in served if not (approved_ids.get(t) or ids_by_source.get(t)))
     if unregistered:
         findings.append(
             f"{len(unregistered)} component(s) the engine serves have no id: "
@@ -265,10 +413,15 @@ def mint(ground_truth):
     """Assign ids to served components that have none, writing them back to the TSV."""
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
+    # See audit()'s matching comment: a renamed engine-composed row is found by its
+    # immutable source_en, not by approved_en, so a rename is never mistaken for a new,
+    # unminted observance.
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
     used = {sid for sid in approved_ids.values() if sid}
     new = {text: _slug(text, used)
            for text in sorted(served_components(ground_truth))
-           if not approved_ids.get(text)}
+           if not (approved_ids.get(text) or ids_by_source.get(text))}
     if not new:
         return {}
 
@@ -310,6 +463,12 @@ def main():
         json.dump(catalog, fh, ensure_ascii=False, indent=1, sort_keys=True)
         fh.write("\n")
     print(f"wrote {len(catalog)} observances to {CATALOG_PATH}")
+
+    readings_index = build_readings_index(ground_truth)
+    with open(READINGS_INDEX_PATH, "w", encoding="utf-8") as fh:
+        json.dump(readings_index, fh, ensure_ascii=False, indent=1, sort_keys=True)
+        fh.write("\n")
+    print(f"wrote {len(readings_index)} readings-keyed id(s) to {READINGS_INDEX_PATH}")
     return 0
 
 

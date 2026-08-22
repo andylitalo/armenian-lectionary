@@ -317,5 +317,135 @@ class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
         self.assertEqual(ids_for_text("Fast day"), ["fast_day"])
 
 
+class TestGeneratedLabelsResolveThroughTheCatalog(unittest.TestCase):
+    """A rename of a position/eve label is a TSV edit, not an engine.py edit.
+
+    ``engine._position_label``/``_eve_label`` find a served observance's id from its own
+    READINGS (see ``engine._observance_id_from_readings``/``_resolve_generated_text``),
+    not from the literal template text -- so once ``observance_readings_index.json`` maps
+    that id, editing the catalog's ``en`` for it (what a TSV rebuild does) is enough to
+    change what ``compute_armenian_lectionary`` serves. This proves exactly that, with no
+    change to ``armenian_lectionary/engine.py`` itself.
+    """
+
+    # Pentecost+23 = the fast's day 2 (the window opens at Pentecost+22).
+    DAY = (engine.calculate_gregorian_easter(2026) + datetime.timedelta(days=49 + 23))
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG or not engine._OBSERVANCE_ID_BY_READINGS:
+            self.skipTest("observance catalog or readings index not present")
+        self._orig_catalog = engine._OBSERVANCE_CATALOG
+        self.addCleanup(setattr, engine, "_OBSERVANCE_CATALOG", self._orig_catalog)
+
+    def test_editing_the_catalog_changes_served_text_with_no_engine_change(self):
+        before = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
+        self.assertIn("Second day of the Fast of St. Gregory the Illuminator", before)
+
+        engine._OBSERVANCE_CATALOG = {
+            **self._orig_catalog,
+            "illuminator_fast_day_2": {
+                **self._orig_catalog["illuminator_fast_day_2"],
+                "en": "Second day of the Fast of the Renamed Illuminator",
+            },
+        }
+        after = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
+        self.assertIn("Second day of the Fast of the Renamed Illuminator", after)
+        self.assertNotIn("Second day of the Fast of St. Gregory the Illuminator", after)
+
+    def test_an_uncatalogued_id_falls_back_to_the_literal_template(self):
+        """Removing an id from the catalog degrades to the literal text, not a KeyError."""
+        engine._OBSERVANCE_CATALOG = {
+            sid: v for sid, v in self._orig_catalog.items()
+            if sid != "illuminator_fast_day_2"}
+        served = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
+        self.assertIn("Second day of the Fast of St. Gregory the Illuminator", served)
+
+
+class TestEveryReadingsIndexedIdResolvesThroughTheCatalog(unittest.TestCase):
+    """Every entry in observance_readings_index.json actually overrides, not just one.
+
+    TestGeneratedLabelsResolveThroughTheCatalog proves the MECHANISM on a single
+    hand-picked id (Illuminator day 2); this proves COVERAGE across the whole index. A gap
+    here would mean dev/build_observance_catalog.py's stability checks let an entry
+    through that does not actually round-trip at request time -- a hash collision the
+    build-time check missed, or a date the build-time walk sampled that does not
+    reproduce the same readings at request time.
+
+    One pass over the full MIN_YEAR..MAX_YEAR range finds one representative date per
+    indexed hash (mirroring how dev/build_observance_catalog.py's own walk works); the
+    test itself then substitutes a sentinel English string for each entry's catalog id in
+    turn and confirms that date's served text picks it up.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        if not engine._OBSERVANCE_CATALOG or not engine._OBSERVANCE_ID_BY_READINGS:
+            raise unittest.SkipTest("observance catalog or readings index not present")
+        target_hashes = set(engine._OBSERVANCE_ID_BY_READINGS)
+        cls.date_for_hash = {}
+        d = datetime.date(engine.MIN_YEAR, 1, 1)
+        end = datetime.date(engine.MAX_YEAR, 12, 31)
+        while d <= end and len(cls.date_for_hash) < len(target_hashes):
+            readings = compute_armenian_lectionary(d).get("ReadingsList")
+            if readings:
+                # A hash is namespaced by "position" or "eve" (engine.
+                # _observance_id_from_readings): a day's readings can match either kind's
+                # hash, independently, so both must be tried.
+                for kind in ("position", "eve"):
+                    h = engine._observance_id_from_readings(readings, kind)
+                    if h in target_hashes and h not in cls.date_for_hash:
+                        cls.date_for_hash[h] = d
+            else:
+                # An aliturgical day has no readings to hash at all -- those entries are
+                # keyed by calendar coordinate instead (engine._position_coordinate /
+                # _observance_id_from_coordinate).
+                coordinate = engine._position_coordinate(d)
+                if coordinate:
+                    h = engine._observance_id_from_coordinate(*coordinate)
+                    if h in target_hashes and h not in cls.date_for_hash:
+                        cls.date_for_hash[h] = d
+            d += datetime.timedelta(days=1)
+
+    def setUp(self):
+        self._orig_catalog = engine._OBSERVANCE_CATALOG
+        self.addCleanup(setattr, engine, "_OBSERVANCE_CATALOG", self._orig_catalog)
+
+    def test_every_indexed_entry_has_a_representative_date(self):
+        """The build-time walk and this test's walk must agree on what is reachable.
+
+        An index entry with no representative date here would mean
+        dev/build_observance_catalog.py minted it from a date range this test cannot
+        reproduce (a different MIN_YEAR/MAX_YEAR, most likely) -- worth failing loudly on
+        rather than silently skipping.
+        """
+        unreachable = set(engine._OBSERVANCE_ID_BY_READINGS) - set(self.date_for_hash)
+        self.assertEqual(
+            unreachable, set(),
+            f"{len(unreachable)} readings-index id(s) have no date producing their hash "
+            f"in {engine.MIN_YEAR}-{engine.MAX_YEAR}")
+
+    def test_every_indexed_id_overrides_on_its_representative_date(self):
+        failures = []
+        for h, day in self.date_for_hash.items():
+            sid = engine._OBSERVANCE_ID_BY_READINGS[h]
+            if sid not in self._orig_catalog:
+                failures.append((sid, day, "id not in observance catalog"))
+                continue
+            sentinel = f"RENAMED__{sid}"
+            engine._OBSERVANCE_CATALOG = {
+                **self._orig_catalog,
+                sid: {**self._orig_catalog[sid], "en": sentinel},
+            }
+            with self.subTest(id=sid, date=day):
+                served = compute_armenian_lectionary(day)["Liturgical Day"]
+                if sentinel not in served:
+                    failures.append((sid, day, served))
+            engine._OBSERVANCE_CATALOG = self._orig_catalog
+        self.assertEqual(
+            failures, [],
+            f"{len(failures)}/{len(self.date_for_hash)} readings-indexed id(s) did not "
+            "override on their representative date")
+
+
 if __name__ == "__main__":
     unittest.main()

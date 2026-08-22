@@ -21,6 +21,7 @@ runtime owns it; the dev table-builder imports these helpers.
 import calendar
 import datetime
 import functools
+import hashlib
 import json
 import os
 import re
@@ -48,6 +49,16 @@ BOOK_NAMES_HY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # data file here -- then _resolve_observance_names leaves every component in English.
 OBSERVANCE_CATALOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                        "data", "observance_catalog.json")
+
+# readings-hash -> catalog id, for the subset of the catalog whose observance is fully
+# determined by its offset from a movable anchor (a dedicated fast weekday or an eve, never
+# a day sharing its table key with a rotating saint). Lets _position_label/_eve_label find
+# a served observance's id from its own (immutable, never-renamed) readings instead of from
+# its (renameable) display text -- see dev/build_observance_catalog.py. Degrades to {} if
+# absent, matching every other optional data file here -- then position/eve resolution
+# always falls back to the literal template text.
+OBSERVANCE_READINGS_INDEX_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "data", "observance_readings_index.json")
 
 SUPPORTED_LANGUAGES = ("en", "hy")
 
@@ -1318,15 +1329,18 @@ def _position_anchor_days(year: int) -> set:
     }
 
 
-def _position_label(d: datetime.date):
-    """The source's calendar-position label for ``d``, or ``None`` where no verified rule
-    applies (an ordinary-time saint weekday, a season-heading feast, or a family whose
-    counting rule is not exact on every occurrence in the ground truth).
+def _position_label_and_coordinate(d: datetime.date):
+    """``(text, (akey, offset))`` for ``d``'s calendar-position label, or ``(None, None)``
+    where no verified rule applies. Shared by :func:`_position_label` (text only) and
+    :func:`_position_coordinate` (the coordinate only), so the family-matching loop exists
+    in exactly one place.
 
-    ``None`` is a normal, safe answer: the day is then named by its commemoration alone.
+    ``(akey, offset)`` is the position family's own anchor key and day-offset -- a second,
+    calendar-only identity for the SAME observance that ``text`` names, useful when there
+    is no readings-based one available (see :func:`_position_coordinate`'s docstring).
     """
     if d in _position_anchor_days(d.year):
-        return None
+        return None, None
     for family in _POSITION_FAMILIES:
         akey, (lo, hi), weekdays, counter, adjust, template = family[:6]
         civil = family[6] if len(family) > 6 else None    # optional (month, day) guard
@@ -1339,13 +1353,46 @@ def _position_label(d: datetime.date):
         if (lo is not None and offset < lo) or (hi is not None and offset > hi):
             continue
         if counter is None:                  # fixed label, no ordinal to compute
-            return template
+            return template, (akey, offset)
         raw = offset if counter == "days" else _count_sundays_after(anchor, d)
         n = raw + adjust
         if not 1 <= n <= len(_ORDINAL_WORDS):
-            return None
-        return template.format(ord=_ORDINAL_WORDS[n - 1])
-    return None
+            return None, None
+        return template.format(ord=_ORDINAL_WORDS[n - 1]), (akey, offset)
+    return None, None
+
+
+def _position_label(d: datetime.date):
+    """The source's calendar-position label for ``d``, or ``None`` where no verified rule
+    applies (an ordinary-time saint weekday, a season-heading feast, or a family whose
+    counting rule is not exact on every occurrence in the ground truth).
+
+    ``None`` is a normal, safe answer: the day is then named by its commemoration alone.
+
+    Always the literal, un-overridden template text -- a caller that wants a catalogued
+    rename applied resolves it separately via :func:`_resolve_generated_text`, passing
+    ``d``'s ``ReadingsList``. Keeping this function pure and readings-independent is what
+    lets :func:`_apply_position_label` tell "no override exists" apart from "the override
+    happens to equal the default", which matters because a stored, validated table entry
+    is trusted verbatim in the first case and must not be, in the second.
+    """
+    return _position_label_and_coordinate(d)[0]
+
+
+def _position_coordinate(d: datetime.date):
+    """``(akey, offset)`` for ``d``'s calendar-position label, or ``None``.
+
+    A fallback identity for observances :func:`_resolve_generated_text` cannot key by
+    readings at all: some days in the ferial track of the Fast of the Catechumens carry NO
+    scripture (an aliturgical day, validated as intentional -- see
+    ``_FIXED_DATE_OBSERVANCES``'s sibling note in ``_compute_lectionary``), so there is no
+    reading content whatsoever to hash, and two DIFFERENT such days (different offsets)
+    would otherwise collide on the same empty signature. ``(akey, offset)`` is unique to
+    the family and day-offset the same way readings are unique to the observance, and is
+    just as stable -- the calendar coordinate a position family fires on never changes,
+    only the wording chosen for it might.
+    """
+    return _position_label_and_coordinate(d)[1]
 
 
 # ---------------------------------------------------------------------------
@@ -1395,6 +1442,9 @@ def _eve_label(d: datetime.date):
     Exact on every occurrence in the ground truth: 338/338 across 2001-2026, with no
     mismatch and no day labelled an eve that the source does not (see
     ``dev/verify_eve_labels.py``).
+
+    Always the literal, un-overridden text -- see :func:`_position_label`'s docstring for
+    why a caller wanting a catalogued rename resolves it separately.
     """
     if (d.month, d.day) in _EVE_CIVIL:
         return _EVE_CIVIL[(d.month, d.day)]
@@ -2008,6 +2058,57 @@ _BOOK_NAMES_HY = _load_json_map(BOOK_NAMES_HY_PATH)
 
 _OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 
+_OBSERVANCE_ID_BY_READINGS = _load_json_map(OBSERVANCE_READINGS_INDEX_PATH)
+
+
+def _observance_id_from_readings(readings, kind):
+    """A stable key for an offset-determined observance, derived from its own (immutable)
+    readings rather than its (renameable) display text -- never needs freezing or
+    snapshotting, since recomputing it from the same readings always reproduces the same
+    value.
+
+    ``kind`` ("position" or "eve") is folded into the hash because the two can share a
+    day's readings by CONSTRUCTION, not coincidence: Pentecost+21 is a Sunday every year
+    (21 is a multiple of 7), so "Third Sunday after Pentecost" and "Eve of Fast of St.
+    Gregory the Illuminator" always carry identical readings. Without ``kind`` the two
+    would permanently collide; with it, each resolves independently in its own namespace.
+    """
+    return hashlib.sha1((kind + "|" + "|".join(readings)).encode()).hexdigest()[:12]
+
+
+def _observance_id_from_coordinate(akey, offset):
+    """A stable key for a position label with NO readings to key by at all -- an
+    aliturgical day (see :func:`_position_coordinate`). Namespaced separately from
+    :func:`_observance_id_from_readings` (prefix ``"coord|"`` vs. a bare ``kind``) so the
+    two hash spaces cannot collide with each other by construction, not just by luck.
+    """
+    return hashlib.sha1(f"coord|{akey}|{offset}".encode()).hexdigest()[:12]
+
+
+def _resolve_generated_text(default_text, readings, kind, coordinate=None):
+    """``default_text`` (a position/eve label's literal template output), or the catalog's
+    current text for it if ``readings`` (or, failing that, ``coordinate``) identifies a
+    served, catalogued observance.
+
+    ``readings`` is ``None`` for every caller that wants the literal calendar-rule text
+    (the dev verification scripts, which check the rule itself against source evidence, not
+    whatever override is currently being served) -- resolution only happens for the real
+    serving path, ``compute_armenian_lectionary``. ``kind`` is "position" or "eve"; see
+    :func:`_observance_id_from_readings`.
+
+    ``coordinate`` -- ``d``'s ``(akey, offset)``, from :func:`_position_coordinate` -- is
+    consulted only when ``readings`` is empty (an aliturgical day), never as a second
+    attempt after a readings lookup miss: a miss there means "not one of the observances
+    this mechanism covers," which the coordinate must not silently override.
+    """
+    if readings:
+        sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_readings(readings, kind))
+    elif coordinate:
+        sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_coordinate(*coordinate))
+    else:
+        return default_text
+    return _OBSERVANCE_CATALOG.get(sid, {}).get("en", default_text) if sid else default_text
+
 
 # Reverse lookup: a served English component -> its stable id. Built once at import time.
 #
@@ -2204,7 +2305,7 @@ def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
 _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 
 
-def _apply_position_label(label: str, d: datetime.date) -> str:
+def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     """Head ``label`` with ``d``'s regenerated calendar-position label.
 
     The table stores only the components that are invariant for a liturgical coordinate
@@ -2217,14 +2318,33 @@ def _apply_position_label(label: str, d: datetime.date) -> str:
     name. That is the point: a day whose entire source name was its position ("Fourth
     Sunday after Nativity") previously fell through to "(commemoration)" or "(movable
     ordinary-time reading)", which bahk had to discard as "no feast".
+
+    A stored position component is kept verbatim rather than replaced by a fresh
+    recomputation: some families are not exact on every occurrence (see
+    :func:`_position_label`), so the validated STORED value is trusted over regeneration.
+    The one exception is a catalogued rename (found via ``readings`` or, on a day with no
+    readings, ``d``'s calendar coordinate) -- a human decision current as of the last
+    catalog rebuild, which overrides even a stored value.
+
+    ``readings=None`` (the default) skips resolution entirely, distinct from
+    ``readings=[]``: the former means the caller never asked for it (every dev
+    verification script); the latter is a real, aliturgical day from the actual serving
+    path, which still needs :func:`_position_coordinate`'s fallback attempted.
     """
     position = _position_label(d)
     if position is None:
         return label
+    if readings is None:
+        resolved = position
+    else:
+        resolved = _resolve_generated_text(
+            position, readings, "position", _position_coordinate(d))
     parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
     if any(_is_position_component(p) for p in parts):
+        if resolved != position:                  # a catalogued rename overrides even a
+            parts = [resolved if _is_position_component(p) else p for p in parts]
         return _FEAST_SEP.join(parts) if parts else label
-    return _FEAST_SEP.join([position] + parts)
+    return _FEAST_SEP.join([resolved] + parts)
 
 
 # Observances fixed to a civil date that the source's ENGLISH never names, though its
@@ -2287,21 +2407,30 @@ def _is_position_component(component: str) -> bool:
     return bool(_POSITION_COMPONENT_RE.match(component))
 
 
-def _apply_eve_label(label: str, d: datetime.date) -> str:
+def _apply_eve_label(label: str, d: datetime.date, readings=None) -> str:
     """Append ``d``'s regenerated ``Eve of ...`` component to ``label``.
 
     The source prints the eve last, after the commemoration, so this appends where
     :func:`_apply_position_label` prepends. A name that already carries an eve keeps it
     untouched -- either the table kept it (every year sharing the key agreed) or a
-    composite named the day, and in both cases the stored wording is the validated one.
+    composite named the day, and in both cases the stored wording is normally the
+    validated one, trusted over a fresh recomputation for the same reason
+    :func:`_apply_position_label` trusts a stored position component. The one exception is
+    a catalogued rename (``readings`` lets :func:`_resolve_generated_text` find one), which
+    overrides even a stored eve component.
+
+    ``readings`` behaves exactly as it does for :func:`_apply_position_label`.
     """
     eve = _eve_label(d)
     if eve is None:
         return label
+    resolved = _resolve_generated_text(eve, readings, "eve") if readings else eve
     parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
     if any(p.startswith("Eve of ") for p in parts):
+        if resolved != eve:
+            parts = [resolved if p.startswith("Eve of ") else p for p in parts]
         return _FEAST_SEP.join(parts) if parts else label
-    return _FEAST_SEP.join(parts + [eve]) if parts else eve
+    return _FEAST_SEP.join(parts + [resolved]) if parts else resolved
 
 
 def compute_armenian_lectionary(target_date: datetime.date,
@@ -2347,13 +2476,14 @@ def compute_armenian_lectionary(target_date: datetime.date,
             f"{MIN_YEAR}-{MAX_YEAR}; readings are validated only for those years "
             f"(override with LECTIONARY_MIN_YEAR / LECTIONARY_MAX_YEAR)")
     result = _compute_lectionary(target_date)
+    readings = result.get("ReadingsList", [])
     result["Liturgical Day"] = _apply_eve_label(
         _apply_fixed_date_label(
             _apply_position_label(
                 _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
-                target_date),
+                target_date, readings),
             target_date),
-        target_date)
+        target_date, readings)
     result["Mode"] = calculate_liturgical_mode(target_date)
     result["ReadingsRefs"] = _build_readings_refs(result.get("ReadingsList", []))
     return _localize(result, language)

@@ -23,6 +23,7 @@ with no install step.
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
 | `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -215,7 +216,7 @@ python dev/fetch_translations.py               # feast/book *_names_hy.json (off
                                                #   from dev/reference_data_hy/)
 python dev/feast_name_review.py                # refresh the TSV (never discards edits)
 python dev/build_ground_truth.py               # freeze feast_name_review.tsv edits
-python dev/build_observance_catalog.py         # observance_catalog.json
+python dev/build_observance_catalog.py         # observance_catalog.json + observance_readings_index.json
 python dev/build_table.py                      # lectionary_data.json
 python dev/refresh_artifact_names.py --write   # saint_schedule labels
 ```
@@ -245,6 +246,123 @@ identically, and the engine regenerates it per date as an overlay in
 |---|---|---|---|
 | calendar position — "Fourth Sunday after Nativity", "Sixth day of the Fast of Nativity", "Third day of the Fast of St. Gregory the Illuminator", "Fast day" | `engine._position_label` | head | `dev/verify_position_labels.py` |
 | eve note — "Eve of Fast of Advent", "Eve of Great Lent" | `engine._eve_label` | tail | `dev/verify_eve_labels.py` |
+
+### A rename is a TSV edit, not an `engine.py` edit
+
+For Armenian, a position/eve label never comes from `engine.py` directly: `engine.
+_resolve_observance_names` looks the served English text up in `observance_catalog.json`
+and substitutes that id's `hy`, so correcting `approved_hy` and rebuilding is enough —
+`engine.py` never mentions the Armenian words at all. English used to be the exception:
+`_position_label`/`_eve_label`'s literal template text was *always* what got served, so
+correcting an English position/eve label meant editing the template in `engine.py`, not
+just `dev/feast_name_review.tsv`'s `approved_en`.
+
+`engine._apply_position_label`/`_apply_eve_label` close that gap the same way, for the
+subset of labels it is safe to: those genuinely determined by their offset alone (a
+dedicated fast weekday, an eve), never a label sharing its table key with a rotating
+saint. The key that makes it safe is not the display text (which is exactly what a rename
+changes) but the day's own **readings** — canonical, never corrected, so a hash of them
+(`engine._observance_id_from_readings`) is a stable lookup key forever, with nothing to
+freeze or snapshot.
+
+`dev/build_observance_catalog.py`'s `build_readings_index` writes
+`observance_readings_index.json`, a `readings-hash -> id` index, checked in both
+directions per label: the same text must always carry the same readings, AND those
+readings must never recur under a different text. Both checks run **within each label's
+own dominant `Source` tier**, not across all of its occurrences pooled together — that
+distinction is what lets the index cover every day of the Fast of St. James the bishop of
+Nisibis despite Dec 9 (the Conception of the Holy Virgin, a fixed civil date) falling
+inside that fast's window in 12 of 27 supported years: on those years Dec 9 outranks the
+fast day and replaces its readings wholesale (`Source` flips `validated-table` ->
+`validated-composite`), so those years are simply excluded from the label's readings
+signature rather than treated as instability — the label is still fully, uniquely
+identified by its readings on its other, undisplaced occurrences. The
+Sunday-after-Nativity/Transfiguration/Assumption families are a different problem this
+does NOT rescue: their instability is *within* one tier (`validated-table` every time —
+the reading a lectio-continua slot carries stays put, but the Sunday-count the source
+prints for it can drift across years of different length, per `_position_label`'s own
+docstring), so they still fail the one-to-one check and stay excluded, falling back to
+their literal template text.
+
+Three more collisions, each real and each handled:
+
+- **A position label and an eve note can share a day's readings by construction.**
+  Pentecost+21 is a Sunday every year (21 is a multiple of 7), so "Third Sunday after
+  Pentecost" and "Eve of Fast of St. Gregory the Illuminator" carry identical readings on
+  *every* occurrence of either, forever. `_observance_id_from_readings` folds a `kind`
+  ("position"/"eve") into the hash, so the two are keyed in separate namespaces and
+  resolve independently despite the shared readings.
+- **Some position labels have no readings to hash.** A few days in the ferial track of
+  the Fast of the Catechumens (Aṙաջավորաց պահք) carry no scripture — a validated,
+  intentional aliturgical day, not missing data. Those are indexed instead by calendar
+  **coordinate** (`engine._position_coordinate`: the position family's own anchor key and
+  day-offset, refactored out of `_position_label` so both share one matching loop), hashed
+  by `engine._observance_id_from_coordinate` in a namespace that cannot collide with a
+  readings-based hash. The coordinate is a pure function of the calendar, so it's exactly
+  as stable as readings are elsewhere; `_resolve_generated_text` only falls back to it
+  when `readings` is empty, never after a real readings lookup misses.
+- **A dominant `Source` tier is not always enough.** "Eve of Great Lent" disagrees on 2
+  of 27 years (2010, 2021) — the Presentation of the Lord, a *fixed civil date* (Feb 14),
+  happens to land on Great Lent's own eve and outranks it — but `Source` stays
+  `validated-table` both ways, so tier-filtering alone can't see it (unlike Nisibis/Dec 9,
+  where `Source` flips to `validated-composite`). `build_readings_index` attributes a
+  disagreeing occurrence to the competing observance only when that's independently
+  *provable*: the date's pre-overlay commemoration
+  (`_compute_lectionary(d)["Liturgical Day"]`, before any eve/position text is added) must
+  have exactly one reading set across *every* one of its own occurrences globally, **and**
+  occur on at least one date that does not also carry this label — the second condition
+  rules out a self-referential trap where a civil-year-unanimous table entry already bakes
+  this very label's own text into its stored `"feast"` field. A label's remaining,
+  unexplained occurrences must still agree *exactly*. Collision detection runs across
+  every tier a label was *ever* served under, not just its dominant one, since a
+  minority-tier occurrence (a best-guess continuum filling in for an unvalidated date) can
+  still reuse another label's reading pool.
+
+`engine._resolve_generated_text` does the lookup at request time;
+`_apply_position_label`/`_apply_eve_label` only let it override a stored, validated table
+value when it actually resolves to something *different* from the literal default — that
+default is otherwise trusted over a fresh recomputation, for the same reason the table
+overlay exists in the first place.
+
+Practically: to rename an English position/eve label already covered by the readings
+index (`illuminator_fast_day_*`, `nisibis_fast_day_*` once PR #28 lands, and similar),
+edit `approved_en` in `dev/feast_name_review.tsv` and rebuild (`build_ground_truth.py`
+then `build_observance_catalog.py`) — `engine.py` does not change. `dev/
+source_corrections.illuminator_fast_label` calls `engine._position_label` directly rather
+than keeping its own copy of the window and template, for the same duplication reason;
+`dev/feast_names._SEASONS` derives the Illuminator fast's bare name from the live catalog
+rather than a hardcoded literal, so it does not go stale the day a rename ships.
+
+#### Index coverage
+
+"Index coverage" is a **separate axis from accuracy**, not a measure of it:
+`tests/test_feast_name_raw.py`/`test_feast_name_hy_raw.py` already guarantee served text
+matches sacredtradition.am on every day, covered label or not (0 contradictions, hard
+requirement). Coverage instead measures how many of the position/eve labels the engine
+can currently produce would pick up a *future* TSV rename with no `engine.py` edit.
+Currently **161 of 205** (run `python3 -c "import json; print(len(json.load(open(
+'armenian_lectionary/data/observance_readings_index.json'))))"` for the live count).
+
+The remaining 44 have no independently verifiable stable reading at all, even after the
+commemoration-attribution check above — genuine variance in the source's own counting,
+not a gap in the mechanism:
+
+- `"Fast day"` itself — not one observance to begin with; it labels ~1,575 unrelated days.
+- The Sunday-after-Nativity/Transfiguration/Assumption/Pentecost families and the Advent
+  Sunday count — `_position_label`'s own docstring already flags their counting rule as
+  "not exact on every occurrence": the season's length depends on the movable Easter
+  date, so the lectio-continua sequence compresses or skips in a short year, and neither
+  the same ordinal maps to the same reading nor different ordinals map to different
+  readings, reliably.
+- The Great Lent, Nativity-fast, Catechumens-fast, and Assumption day-counts, and a few
+  Easter/Eastertide day-counts — the same shape of drift, one level down.
+
+None of this is rescuable by refining the readings-index mechanism further: the
+text↔reading relationship for these families genuinely isn't stable in the data, so
+there is no signal — readings, coordinate, or otherwise — left to key on. Making these
+renameable via the TSV alone would need a structurally different mechanism (a literal,
+hand-maintained `(family, offset) -> id` table embedded in `engine.py`, decoupled from
+both text and readings) — a larger, separate undertaking, out of scope here.
 
 A third overlay is not a table problem but a **translation gap**: `engine._FIXED_DATE_OBSERVANCES`
 adds an observance on a fixed civil date that the source's *English* names on no day at all —
