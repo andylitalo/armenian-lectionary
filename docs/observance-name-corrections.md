@@ -263,7 +263,7 @@ changed in both languages and the identity did not, which is the property the st
 design exists to provide.
 
 `lectionary_data.json` stores this component on 8 entries (`E:40` and `EB:0–6:40`), and
-`feast_names_hy.json` re-keys its two entries onto the corrected English. The documented
+`observance_names_hy.json` re-keys its two entries onto the corrected English. The documented
 rebuild order was run end to end from the cache and reproduces every artifact byte for
 byte, with `build_table.py` self-validating at 0 wrong over 9,496 days.
 

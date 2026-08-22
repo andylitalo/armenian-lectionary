@@ -77,13 +77,13 @@ class TestSourceTextIsClean(unittest.TestCase):
     def test_english_and_armenian_agree_on_years(self):
         """The strongest check here: the source stating a year twice, differently."""
         if not self.hy:
-            self.skipTest("no feast_names_hy.json")
+            self.skipTest("no observance_names_hy.json")
         self._assert_clean(audit.detect_digit_disagreement(self.comps, self.hy),
                            "years the English and Armenian names disagree on")
 
     def test_english_and_armenian_agree_on_ordinals(self):
         if not self.hy:
-            self.skipTest("no feast_names_hy.json")
+            self.skipTest("no observance_names_hy.json")
         self._assert_clean(audit.detect_ordinal_disagreement(self.comps, self.hy),
                            "ordinals the English and Armenian names disagree on")
 

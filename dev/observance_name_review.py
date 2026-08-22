@@ -83,7 +83,7 @@ from dev.source_corrections import (                                   # noqa: E
     apply_ground_truth, normalize_confusables, normalize_position_label,
 )
 from armenian_lectionary.engine import (                                # noqa: E402
-    _OBSERVANCE_SEP, FEAST_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
+    _OBSERVANCE_SEP, OBSERVANCE_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
     fixed_date_label,
 )
 
@@ -292,7 +292,7 @@ def source_armenian_map():
     """``{raw English component -> the Armenian the source printed beside it}``.
 
     The primary source of the ``source_hy`` column, and keyed the way that column is
-    defined: on the row's OWN source text. ``feast_names_hy.json`` is keyed on the
+    defined: on the row's OWN source text. ``observance_names_hy.json`` is keyed on the
     CORRECTED English instead -- which is what makes the rebuild order work, and what makes
     it the wrong key here. Deriving the witness from the approved name destroyed it three
     separate times: correcting a name emptied the column, approving one name for several
@@ -347,7 +347,7 @@ def armenian_for(approved, hy):
 
       * the five Illuminator fast weekdays, whose English the engine composes because the
         source prints a bare "Fast day" there (see source_corrections.illuminator_fast_label).
-        ``feast_names_hy.json`` is keyed on the CORRECTED English, which is exactly why
+        ``observance_names_hy.json`` is keyed on the CORRECTED English, which is exactly why
         ``dev/fetch_translations.py`` runs first in the rebuild order -- so the approved name
         is the only key that can answer, and here it is the right one;
       * "Fast day, Remembrance of the Ten Virgins", where a correction splits one component
@@ -409,9 +409,9 @@ def source_components():
 
 
 def armenian_map():
-    if not os.path.exists(FEAST_NAMES_HY_PATH):
+    if not os.path.exists(OBSERVANCE_NAMES_HY_PATH):
         return {}
-    with open(FEAST_NAMES_HY_PATH, encoding="utf-8") as fh:
+    with open(OBSERVANCE_NAMES_HY_PATH, encoding="utf-8") as fh:
         data = json.load(fh)
     return data.get("feasts", data) if isinstance(data, dict) else {}
 
