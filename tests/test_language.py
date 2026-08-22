@@ -1,7 +1,7 @@
 """Unit tests for the language kwarg and the English->Armenian localization layer.
 
 Self-contained: the translation functions are exercised with small injected maps so
-these pass without the scraped data/*_names_hy.json files present.
+these pass without the scraped *_names_hy.json files present.
 """
 import datetime
 import os
@@ -13,17 +13,19 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from armenian_lectionary import compute_armenian_lectionary  # noqa: E402
 from armenian_lectionary import engine  # noqa: E402
 from dev import source_corrections  # noqa: E402
+from dev.fetch_translations import OBSERVANCE_MAP_PATH  # noqa: E402
 
 
 def _observance_names_hy():
-    """The shipped Armenian feast/fast map, loaded from disk.
+    """The dev-tooling Armenian feast/fast map, loaded from disk.
 
-    The engine no longer loads this at import -- nothing at runtime reads it since feast
-    names resolve through the observance catalog. The guards below check the shipped FILE,
-    which is still a dev-time input to dev/build_observance_catalog.py, so they read it
+    The engine never loads this at import -- nothing at runtime reads it since feast
+    names resolve through the observance catalog, and it lives under dev/, not in the
+    shipped package. The guards below check the FILE anyway (it's still a dev-time input
+    to dev/observance_name_review.py and dev/audit_source_anomalies.py), so they read it
     themselves rather than keeping an unused module global alive to hang a test on.
     """
-    return engine._load_json_map(engine.OBSERVANCE_NAMES_HY_PATH)
+    return engine._load_json_map(OBSERVANCE_MAP_PATH)
 
 
 class TestTranslateReading(unittest.TestCase):

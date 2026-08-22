@@ -78,12 +78,13 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import REF_DIR                                        # noqa: E402
+from dev.fetch_translations import OBSERVANCE_MAP_PATH                 # noqa: E402
 from dev.hy_discrepancy import REF_DIR_HY                             # noqa: E402
 from dev.source_corrections import (                                   # noqa: E402
     apply_ground_truth, normalize_confusables, normalize_position_label,
 )
 from armenian_lectionary.engine import (                                # noqa: E402
-    _OBSERVANCE_SEP, OBSERVANCE_NAMES_HY_PATH, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
+    _OBSERVANCE_SEP, MAX_YEAR, MIN_YEAR, _eve_label, _position_label,
     fixed_date_label,
 )
 
@@ -415,9 +416,9 @@ def source_components():
 
 
 def armenian_map():
-    if not os.path.exists(OBSERVANCE_NAMES_HY_PATH):
+    if not os.path.exists(OBSERVANCE_MAP_PATH):
         return {}
-    with open(OBSERVANCE_NAMES_HY_PATH, encoding="utf-8") as fh:
+    with open(OBSERVANCE_MAP_PATH, encoding="utf-8") as fh:
         data = json.load(fh)
     return data.get("feasts", data) if isinstance(data, dict) else {}
 

@@ -45,10 +45,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                       # noqa: E402
+from dev.fetch_translations import OBSERVANCE_MAP_PATH                 # noqa: E402
 from dev.source_corrections import apply_source_corrections            # noqa: E402
-from armenian_lectionary.engine import (                               # noqa: E402
-    _OBSERVANCE_SEP, OBSERVANCE_NAMES_HY_PATH,
-)
+from armenian_lectionary.engine import _OBSERVANCE_SEP                 # noqa: E402
 
 WORDLIST = "/usr/share/dict/words"
 
@@ -279,9 +278,9 @@ def detect_unknown_words(comps, words):
 
 
 def _hy_map():
-    if not os.path.exists(OBSERVANCE_NAMES_HY_PATH):
+    if not os.path.exists(OBSERVANCE_MAP_PATH):
         return {}
-    with open(OBSERVANCE_NAMES_HY_PATH, encoding="utf-8") as fh:
+    with open(OBSERVANCE_MAP_PATH, encoding="utf-8") as fh:
         data = json.load(fh)
     return data.get("feasts", data) if isinstance(data, dict) else {}
 
