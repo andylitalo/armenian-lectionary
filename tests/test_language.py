@@ -638,21 +638,24 @@ class TestEveryReadingsIndexedIdResolvesThroughTheCatalog(unittest.TestCase):
         end = datetime.date(engine.MAX_YEAR, 12, 31)
         while d <= end and len(cls.date_for_hash) < len(target_hashes):
             readings = compute_armenian_lectionary(d).get("ReadingsList")
-            if readings:
-                # A hash is namespaced by "position" or "eve" (engine.
-                # _observance_id_from_readings): a day's readings can match either kind's
-                # hash, independently, so both must be tried.
-                for kind in ("position", "eve"):
-                    h = engine._observance_id_from_readings(readings, kind)
-                    if h in target_hashes and h not in cls.date_for_hash:
-                        cls.date_for_hash[h] = d
-            else:
-                # An aliturgical day has no readings to hash at all -- those entries are
-                # keyed by calendar coordinate instead (engine._position_coordinate /
-                # _observance_id_from_coordinate).
-                coordinate = engine._position_coordinate(d)
-                if coordinate:
-                    h = engine._observance_id_from_coordinate(*coordinate)
+            # A hash is namespaced by "position" or "eve" (engine.
+            # _observance_id_from_readings): a day's readings can match either kind's
+            # hash, independently, so both must be tried.
+            #
+            # Both routes are tried on every day, not readings-first-else-coordinate: a
+            # coordinate entry is no longer only the aliturgical fallback it once was
+            # (engine._position_coordinate / _eve_coordinate), so a day can carry
+            # readings and still be some entry's only representative.
+            coordinates = {"position": engine._position_coordinate(d),
+                           "eve": engine._eve_coordinate(d)}
+            for kind in ("position", "eve"):
+                hashes = []
+                if readings:
+                    hashes.append(engine._observance_id_from_readings(readings, kind))
+                if coordinates[kind]:
+                    hashes.append(engine._observance_id_from_coordinate(
+                        *coordinates[kind], kind=kind))
+                for h in hashes:
                     if h in target_hashes and h not in cls.date_for_hash:
                         cls.date_for_hash[h] = d
             d += datetime.timedelta(days=1)
