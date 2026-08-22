@@ -26,7 +26,7 @@ from dev.analyze import load_all  # noqa: E402
 # Reuse the runtime calendar math (and key-resolution) so the table is built and
 # keyed exactly as the app reads it.
 from armenian_lectionary.engine import (  # noqa: E402
-    coords_for, WINDOWS, PRECEDENCE, _lookup, DATA_PATH, _FEAST_SEP as FEAST_SEP,
+    coords_for, WINDOWS, PRECEDENCE, _lookup, DATA_PATH, _OBSERVANCE_SEP as OBSERVANCE_SEP,
 )
 
 
@@ -51,9 +51,9 @@ def unanimous_feast(items):
     it counts from an anchor whose distance to this coordinate changes year to year.
     Shipping ``modal_feast`` therefore asserted the *modal* year's ordinal for every year,
     which is wrong wherever the ordinal differs (34 days across 2001-2026; see
-    dev/feast_discrepancy_report.py).
+    dev/observance_discrepancy_report.py).
 
-    So a calendar-derived component (``feast_names.is_calendar_component``: position label
+    So a calendar-derived component (``observance_names.is_calendar_component``: position label
     or eve note) survives only if EVERY year sharing the key states it identically. The
     table then never asserts a label it cannot reproduce -- the same discipline the
     readings side already enforces via the 0-wrong contract -- and the dropped labels are
@@ -67,20 +67,20 @@ def unanimous_feast(items):
     can regenerate its way out of. Those variants are reconciled where reviewed, by
     ``source_corrections.canonical_commem``.
     """
-    from dev.feast_names import is_calendar_component
+    from dev.observance_names import is_calendar_component
 
-    per_year = [[c.strip() for c in day["feast"].strip().split(FEAST_SEP) if c.strip()]
+    per_year = [[c.strip() for c in day["feast"].strip().split(OBSERVANCE_SEP) if c.strip()]
                 for _, day in items]
     if not per_year:
         return ""
 
     kept = []
-    for component in [c.strip() for c in modal_feast(items).split(FEAST_SEP) if c.strip()]:
+    for component in [c.strip() for c in modal_feast(items).split(OBSERVANCE_SEP) if c.strip()]:
         if is_calendar_component(component) and not all(component in comps
                                                         for comps in per_year):
             continue
         kept.append(component)
-    return FEAST_SEP.join(kept)
+    return OBSERVANCE_SEP.join(kept)
 
 
 def _consistent(items, min_years):

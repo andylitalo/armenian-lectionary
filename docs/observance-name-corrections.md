@@ -8,7 +8,7 @@ stating plainly:
 
 This document records every place the engine deliberately does **not** reproduce the
 source, and the evidence for each. It is the companion to
-[`dev/feast_name_review.tsv`](../dev/feast_name_review.tsv), which lists all 392 distinct
+[`dev/observance_name_review.tsv`](../dev/observance_name_review.tsv), which lists all 392 distinct
 name components with the approved English spelling, the source's own Armenian, and the
 questions still open.
 
@@ -54,8 +54,8 @@ detectors) plus a read of all 187 commemoration components by hand — the corpu
 enough that exhaustive human review is practical, and two of the corrections below came
 only from that.
 Enforcement: `tests/test_source_text.py` (the detectors stay silent) and
-`tests/test_feast_name_review.py` (the engine serves the approved names).
-Registry: the `approved_en` / `approved_hy` columns of `dev/feast_name_review.tsv`, and
+`tests/test_observance_name_review.py` (the engine serves the approved names).
+Registry: the `approved_en` / `approved_hy` columns of `dev/observance_name_review.tsv`, and
 nothing else. `build_ground_truth.py` freezes the row and `apply_ground_truth` resolves a
 component by whole-component lookup — `source_en` and `approved_en` are both keys, and the
 answer is always `approved_en` verbatim. There is no substring pass and no word-level fold,
@@ -426,14 +426,14 @@ the two quietly drift apart.
 - **2008-01-21**, Sargis + Atom. Both are pre-Lent cohort canons at fixed Easter offsets;
   when the Presentation blocks Atom's slot he shifts onto Sargis's, and
   `_prelent_cohort_layout` used to let the senior win and drop the junior. It now joins the
-  two labels on `_FEAST_SEP`. The senior keeps the day's id and its readings, so a merge
+  two labels on `_OBSERVANCE_SEP`. The senior keeps the day's id and its readings, so a merge
   cannot move a reading.
 - **2009-01-27**, Eugenius + Andrew the General — the floating feast of preface Seventh,
   added to the `PN`-zone schedule label so the second-volume-cycle tier serves both.
 
 ### The Armenian witness column, three times over
 
-`dev/feast_name_review.armenian_for` looks `source_hy` up in a map keyed on the **corrected**
+`dev/observance_name_review.armenian_for` looks `source_hy` up in a map keyed on the **corrected**
 English, and that has now failed in three distinct ways, each erasing the column that is
 supposed to be the independent witness justifying a correction:
 
@@ -444,7 +444,7 @@ supposed to be the independent witness justifying a correction:
    makes `source_hy` equal `approved_hy` and so registers no fold at all — leaving the
    source's glued spelling reading as a contradiction on every packed day.
 
-Rows whose approved name contains `_FEAST_SEP` now take `source_hy` from a raw-keyed pairing
+Rows whose approved name contains `_OBSERVANCE_SEP` now take `source_hy` from a raw-keyed pairing
 (`source_armenian_map`) instead. Scoped there on purpose: the Presentation's casing-typo
 pair also shares an approved name, but for that one the approved-keyed map is better,
 because it votes across every year rather than the single day the Armenian cache sampled.
@@ -460,7 +460,7 @@ itself. They are listed here so that "we looked and decided" is on the record.
 | 2011-02-13 | `Ե կիւրակէ զկնի Ծննդեան` missing the `Ս.`, and `Բարեկենդան Առաջաւորի պահոցն` against 5 witnesses for `Առաջաւորաց պահոց` | serve the majority |
 | Nov 21 | `ս.Աստուածածնի` / `ս. Աստուածածնի` / `Ս. Աստուածածնի` | serve the majority (§4b) |
 
-Neither of the first two is correctable in `feast_name_review.tsv` as it stands: a row holds
+Neither of the first two is correctable in `observance_name_review.tsv` as it stands: a row holds
 **one** `source_hy`, sampled from one day, and these are what the source printed on another.
 `DOMINANT_FORM` cannot group them either — it compares spacing and case, not declension or a
 dropped word, on purpose. `dev/audit_hy_variants.py` is the standing check that we are
@@ -533,7 +533,7 @@ therefore declared in two places and counted in a third:
 |---|---|
 | `engine._FIXED_DATE_OBSERVANCES` | `{(1, 1): "Blessing of the Pomegranates"}` — the only source of the mapping; `fixed_date_label()` is public so the review file, the catalog build and the verifiers enumerate it rather than keeping copies |
 | `dev/observance_ids._ADDED_OBSERVANCES` | the ids the discrepancy reports may see without the source's English backing them |
-| `FEAST_ADDITION_DAYS` | **an equality, not a ceiling** — exactly 12 days (Jan 1, 2015–2026; 2027 has no oracle) |
+| `OBSERVANCE_ADDITION_DAYS` | **an equality, not a ceiling** — exactly 12 days (Jan 1, 2015–2026; 2027 has no oracle) |
 
 The equality is the point. An addition is excluded from the contradiction count by
 construction, so nothing else in the suite would notice the overlay firing on the wrong
@@ -560,7 +560,7 @@ one per year.
 
 ## Open questions — NOT corrected
 
-These are recorded in `dev/feast_name_review.tsv` with `status = review`. The source stands
+These are recorded in `dev/observance_name_review.tsv` with `status = review`. The source stands
 as published until someone who reads Armenian decides. Enter the preferred English in the
 `approved_en` column of that file.
 
@@ -599,7 +599,7 @@ Illuminator fast in §5, one level up.
 
 Not corrected here. Either answer rewrites `Liturgical Day` on more than 2,000 days, needs
 an `engine._POSITION_FAMILIES` change plus a table rebuild for the stored half, and moves
-`test_feast_name_raw`'s omission ratchet off 0. It needs its own reviewed change.
+`test_observance_name_raw`'s omission ratchet off 0. It needs its own reviewed change.
 
 §6 is already named on the assumption that it lands: `Beginning of the Weekly Fasts`, the
 Friday after Ascension, reads `… — Friday Fast — Beginning of the Weekly Fasts` once
@@ -608,18 +608,18 @@ Wed/Fri carry their own labels, and needs no further change then.
 ## Reviewing
 
 ```bash
-python dev/feast_name_review.py          # refresh the table (never discards edits)
-python dev/feast_name_review.py --check  # report rows the engine does not yet serve
-python dev/feast_name_review_atomic.py   # one saint per row, for reviewing them singly
+python dev/observance_name_review.py          # refresh the table (never discards edits)
+python dev/observance_name_review.py --check  # report rows the engine does not yet serve
+python dev/observance_name_review_atomic.py   # one saint per row, for reviewing them singly
 python dev/audit_source_anomalies.py     # hunt for NEW errors in the source
 python dev/audit_hy_variants.py          # catalog entries serving a minority Armenian form
 ```
 
-`feast_name_review_atomic.py` splits the rows where the SOURCE glued two independent
+`observance_name_review_atomic.py` splits the rows where the SOURCE glued two independent
 commemorations onto one day, so a reviewer sees each saint once instead of once per
 combination. Its output is derived and therefore not committed — run it when you want it.
 
-Edit `approved_en` in `dev/feast_name_review.tsv`, say why in `note`, and
-`tests/test_feast_name_review.py` will fail until the artifacts are rebuilt (CLAUDE.md
+Edit `approved_en` in `dev/observance_name_review.tsv`, say why in `note`, and
+`tests/test_observance_name_review.py` will fail until the artifacts are rebuilt (CLAUDE.md
 gives the order); the row itself is the registration. That failure is deliberate — it is what stops a reviewed decision from being
 lost the next time the artifacts are rebuilt.

@@ -1,6 +1,6 @@
 """Holds the engine to OUR reviewed feast names, not to sacredtradition.am's.
 
-``dev/feast_name_review.tsv`` is the one ground truth in this repo that is ours: a row per
+``dev/observance_name_review.tsv`` is the one ground truth in this repo that is ours: a row per
 distinct feast-name component with the English spelling a human has approved. Every other
 name test measures fidelity to the source, and the engine now reproduces the source on
 9496/9496 days -- so those tests would happily pass on a name the source spells wrong.
@@ -33,12 +33,12 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                               # noqa: E402
-    _FEAST_SEP, compute_armenian_lectionary,
+    _OBSERVANCE_SEP, compute_armenian_lectionary,
 )
 from tests._reference_cache import requires_reference_cache            # noqa: E402
 
 REVIEW_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                           "dev", "feast_name_review.tsv")
+                           "dev", "observance_name_review.tsv")
 
 MIN_YEAR = int(os.environ.get("LECTIONARY_MIN_YEAR", "2001"))
 MAX_YEAR = int(os.environ.get("LECTIONARY_MAX_YEAR", "2027"))
@@ -50,7 +50,7 @@ def _rows():
 
 
 def _components(text):
-    return [c.strip() for c in (text or "").split(_FEAST_SEP) if c.strip()]
+    return [c.strip() for c in (text or "").split(_OBSERVANCE_SEP) if c.strip()]
 
 
 class TestApprovedNames(unittest.TestCase):
@@ -84,10 +84,10 @@ class TestApprovedNames(unittest.TestCase):
         self.assertEqual(
             sorted(unapproved.items())[:10], [],
             f"{len(unapproved)} feast-name component(s) reach callers without an "
-            f"approved spelling in dev/feast_name_review.tsv. Either the reviewed name "
+            f"approved spelling in dev/observance_name_review.tsv. Either the reviewed name "
             "has not been applied (register the fold in dev/source_corrections and "
             "rebuild -- see CLAUDE.md), or a new name appeared and needs a review row "
-            "(python dev/feast_name_review.py)")
+            "(python dev/observance_name_review.py)")
 
     def test_every_row_has_an_approved_armenian(self):
         """``approved_hy`` is a decision on every row, not an override on a few.
@@ -116,7 +116,7 @@ class TestApprovedNames(unittest.TestCase):
         self.assertEqual(
             silent[:5], [],
             f"{len(silent)} row(s) have no id and no note explaining why. Add the reason "
-            "to dev/feast_name_review.NO_ID_REASONS so it survives a rebuild.")
+            "to dev/observance_name_review.NO_ID_REASONS so it survives a rebuild.")
 
     def test_source_text_never_reaches_a_served_name(self):
         """``source_en`` is a key and a record, never an ingredient.
@@ -155,14 +155,14 @@ class TestApprovedNames(unittest.TestCase):
             catalog = json.load(fh)
         by_text = {e["en"]: sid for sid, e in catalog.items()}
 
-        packed = [r for r in self.rows if _FEAST_SEP in r["approved_en"]]
+        packed = [r for r in self.rows if _OBSERVANCE_SEP in r["approved_en"]]
         self.assertTrue(packed, "the packed-day splits were dropped from every row")
         for row in packed:
             self.assertFalse(
                 row["id"].strip(),
                 f"{row['source_en']!r} is a packed DAY and must not carry an id")
-            en_parts = [c.strip() for c in row["approved_en"].split(_FEAST_SEP)]
-            hy_parts = [c.strip() for c in row["approved_hy"].split(_FEAST_SEP)]
+            en_parts = [c.strip() for c in row["approved_en"].split(_OBSERVANCE_SEP)]
+            hy_parts = [c.strip() for c in row["approved_hy"].split(_OBSERVANCE_SEP)]
             self.assertEqual(
                 len(en_parts), len(hy_parts),
                 f"{row['source_en']!r} splits into {len(en_parts)} English canons but "
@@ -186,7 +186,7 @@ class TestReviewCoversTheSource(unittest.TestCase):
     """Needs the ground-truth cache: checks the file has not fallen behind the source."""
 
     def test_every_source_component_has_a_row(self):
-        from dev.feast_name_review import source_components
+        from dev.observance_name_review import source_components
 
         days, _first = source_components()
         known = {r["source_en"] for r in _rows()}
@@ -194,7 +194,7 @@ class TestReviewCoversTheSource(unittest.TestCase):
         self.assertEqual(
             missing[:5], [],
             f"{len(missing)} feast component(s) in dev/reference_data have no row in "
-            "dev/feast_name_review.tsv -- run python dev/feast_name_review.py and review "
+            "dev/observance_name_review.tsv -- run python dev/observance_name_review.py and review "
             "the new rows")
 
 

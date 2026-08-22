@@ -10,7 +10,7 @@ by test_full_dataset.py; this locks the NAME.
 The scrape mashes several ``<br>``-separated components (a year-varying "Nth day of
 <Season>" position label, the commemoration, an "Eve of <Fast>" status note) into one
 string. This test compares only the COMMEMORATION component
-(dev/feast_names.commemoration_of), canonicalized on BOTH sides
+(dev/observance_names.commemoration_of), canonicalized on BOTH sides
 (dev/source_corrections.canonical_commem) to reconcile reviewed companion-enumeration
 variants: every day's engine commemoration equals the scraped commemoration across
 2001-2026.
@@ -18,11 +18,11 @@ variants: every day's engine commemoration equals the scraped commemoration acro
 That contract holds of the PROJECTION, not of the name. Because the position and eve
 components are stripped from both sides, over half the corpus reduces to ``"" == ""`` and
 is asserted about only vacuously -- which is how the engine came to ship a name the source
-contradicted on 41 days without this test noticing. ``tests/test_feast_name_raw.py`` locks
-the unprojected string that downstream actually stores, and ``tests/test_feast_contract.py``
+contradicted on 41 days without this test noticing. ``tests/test_observance_name_raw.py`` locks
+the unprojected string that downstream actually stores, and ``tests/test_observance_contract.py``
 adds the source-independent invariants; this file is now the narrowest of the three.
-Audit residual mismatches with ``python dev/feast_audit.py``, and see
-the full inventory (``python dev/feast_discrepancy_report.py``).
+Audit residual mismatches with ``python dev/observance_audit.py``, and see
+the full inventory (``python dev/observance_discrepancy_report.py``).
 """
 
 import datetime
@@ -33,11 +33,11 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                        # noqa: E402
-from dev.feast_names import commemoration_of                           # noqa: E402
+from dev.observance_names import commemoration_of                           # noqa: E402
 from dev.observance_ids import is_added_text                           # noqa: E402
 from dev.source_corrections import canonical_commem                     # noqa: E402
 from armenian_lectionary.engine import (                                # noqa: E402
-    _FEAST_SEP, compute_armenian_lectionary,
+    _OBSERVANCE_SEP, compute_armenian_lectionary,
 )
 from tests._reference_cache import requires_reference_cache             # noqa: E402
 
@@ -46,7 +46,7 @@ EXPECTED_TOTAL_DAYS = int(os.environ.get("EXPECTED_TOTAL_DAYS", "9495"))
 
 # Ceiling on days where BOTH commemorations are empty, so the comparison is vacuous.
 # Over half the corpus is a pure position/eve day with no commemoration, and this test
-# says nothing about those; tests/test_feast_name_raw.py is what actually locks them.
+# says nothing about those; tests/test_observance_name_raw.py is what actually locks them.
 # Monotonic DOWN -- if the projection starts discarding more, that is a regression.
 VACUOUS_CEILING = int(os.environ.get("FEAST_VACUOUS_CEILING", "5100"))
 
@@ -57,7 +57,7 @@ def _commem(feast_str):
     Declared fixed-date additions are dropped first. They sit in the commemoration position
     but the source's English names them on no day at all, so leaving them in would make
     every Jan 1 read as a mismatch here -- a fact already counted, once, by
-    tests/test_feast_name_raw.FEAST_ADDITION_DAYS. Dropping them keeps this test measuring
+    tests/test_observance_name_raw.OBSERVANCE_ADDITION_DAYS. Dropping them keeps this test measuring
     what it is for: whether the commemoration the source DID print is the one we serve.
     """
     return canonical_commem(commemoration_of(_strip_added(feast_str))).casefold()
@@ -69,12 +69,12 @@ def _strip_added(feast_str):
     Must run BEFORE commemoration_of, which mashes the component separator away -- strip it
     after and the addition fuses onto the saint beside it.
     """
-    return _FEAST_SEP.join(c for c in (feast_str or "").split(_FEAST_SEP)
+    return _OBSERVANCE_SEP.join(c for c in (feast_str or "").split(_OBSERVANCE_SEP)
                            if c and not is_added_text(c))
 
 
 @requires_reference_cache
-class TestFeastCommemoration(unittest.TestCase):
+class TestObservanceCommemoration(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.days = load_all()
@@ -117,7 +117,7 @@ class TestFeastCommemoration(unittest.TestCase):
         # both sides (a pure position/eve day) are compared, but the comparison is
         # vacuous -- it is satisfied by ANY pair of such names, which is how a placeholder
         # and a real label once matched. Those days are covered for real by
-        # test_feast_name_raw.py, which compares the unprojected string. Keep this ceiling
+        # test_observance_name_raw.py, which compares the unprojected string. Keep this ceiling
         # so the projection cannot quietly widen.
         self.assertLessEqual(
             vacuous, VACUOUS_CEILING,
@@ -192,10 +192,10 @@ class TestConfusables(unittest.TestCase):
         self.assertEqual(unexpected_chars("Tatоul"), ["о"])       # Cyrillic o (U+043E)
         self.assertEqual(unexpected_chars("Оrder"), ["О"])        # Cyrillic O (U+041E)
         self.assertEqual(unexpected_chars("Ηoly"), ["Η"])         # Greek Eta (U+0397)
-        # Passes everything legitimately in the data: English, the em-dash FEAST_SEP,
+        # Passes everything legitimately in the data: English, the em-dash OBSERVANCE_SEP,
         # Armenian script, and the Latin digits/parens the hy names carry.
         self.assertEqual(unexpected_chars("Eighth day of Nativity"), [])
-        self.assertEqual(unexpected_chars("A — B"), [])           # U+2014 FEAST_SEP
+        self.assertEqual(unexpected_chars("A — B"), [])           # U+2014 OBSERVANCE_SEP
         self.assertEqual(unexpected_chars("Ը օր Ս. Ծննդեան"), [])
         self.assertEqual(unexpected_chars("… (381 թ.)".replace("…", "")), [])
         self.assertEqual(unexpected_chars(""), [])
@@ -212,7 +212,7 @@ class TestConfusables(unittest.TestCase):
                 self.assertEqual(bad, [], f"unexpected {bad} in {ks}/{key} feast")
 
 
-class TestFeastSpelling(unittest.TestCase):
+class TestObservanceSpelling(unittest.TestCase):
     """Locks the English feast-name misspelling fixes (source shipped e.g. 'Theordore';
     the engine now serves the canonical 'Theodore'). Self-contained -- no reference cache."""
 
@@ -230,7 +230,7 @@ class TestFeastSpelling(unittest.TestCase):
         import json
         import os
         gt_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                               "dev", "feast_name_ground_truth.json")
+                               "dev", "observance_name_ground_truth.json")
         with open(gt_path, encoding="utf-8") as fh:
             ground_truth = json.load(fh)
         for typo in self._TYPOS:
@@ -283,7 +283,7 @@ class TestDecemberNinthFastMarker(unittest.TestCase):
     The source prints "Feast day" there, which is its own typo for "Fast day" -- the marker
     tracks the Advent-fast weekday set (present Mon/Tue/Wed/Fri, absent Thu/Sat) rather than
     the feast, which is the same feast every year; and the source's own Armenian reads
-    "Պահք". See docs/feast-name-corrections.md section 1.
+    "Պահք". See docs/observance-name-corrections.md section 1.
 
     This pins both halves of the fix together: the engine template
     (``_POSITION_FAMILIES``'s Dec-9 entry) and the source-side fold that keeps the raw-name

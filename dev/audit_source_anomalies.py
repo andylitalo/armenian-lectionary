@@ -47,7 +47,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dev.analyze import load_all                                       # noqa: E402
 from dev.source_corrections import apply_source_corrections            # noqa: E402
 from armenian_lectionary.engine import (                               # noqa: E402
-    _FEAST_SEP, FEAST_NAMES_HY_PATH,
+    _OBSERVANCE_SEP, FEAST_NAMES_HY_PATH,
 )
 
 WORDLIST = "/usr/share/dict/words"
@@ -91,7 +91,7 @@ def load_words():
 
 
 def components(feast):
-    return [c.strip() for c in (feast or "").split(_FEAST_SEP) if c.strip()]
+    return [c.strip() for c in (feast or "").split(_OBSERVANCE_SEP) if c.strip()]
 
 
 def corrected_days():

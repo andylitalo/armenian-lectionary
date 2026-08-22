@@ -2,7 +2,7 @@
 
 This is the contract that makes the remaining packing differences safe to leave alone. The
 Tonatsoyts packs several First Volume canons onto one day when the taregir leaves few days
-for them (docs/feast-name-corrections.md section 7), and which canons a given year-type
+for them (docs/observance-name-corrections.md section 7), and which canons a given year-type
 names varies. The engine serves one packing per liturgical coordinate, so on a handful of
 days it names a canon the source did not, or misses one the source did.
 

@@ -1,6 +1,6 @@
 """Accuracy lock over the RAW feast name -- the exact string downstream stores.
 
-``test_feast.py`` locks the *commemoration component* of ``"Liturgical Day"``. That
+``test_observance.py`` locks the *commemoration component* of ``"Liturgical Day"``. That
 projection deliberately discards the calendar-position label, the ``Eve of ...`` note and
 the engine's own placeholders, and it discards them from BOTH sides before comparing -- so
 on 53% of the corpus it compared ``"" == ""`` and asserted nothing. bahk persists the raw
@@ -8,11 +8,11 @@ string into ``Feast.name``, and the difference was not academic: the engine ship
 the source contradicted on 41 days across 2001-2026, and six more days as bare
 placeholders, all of it invisible to that test.
 
-This test compares the raw string, component by component on ``_FEAST_SEP``, after the
+This test compares the raw string, component by component on ``_OBSERVANCE_SEP``, after the
 registered ``dev/source_corrections`` folds are applied to both sides. Every remaining
 difference is therefore either counted by a ratchet or registered as a reviewed
 correction; nothing passes silently. The classification lives in
-``dev/feast_discrepancy_report`` so the test and the human-readable report can never drift.
+``dev/observance_discrepancy_report`` so the test and the human-readable report can never drift.
 
 The three contracts, strongest first:
 
@@ -34,7 +34,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from dev.feast_discrepancy_report import collect, is_position         # noqa: E402
+from dev.observance_discrepancy_report import collect, is_position         # noqa: E402
 from tests._reference_cache import requires_reference_cache           # noqa: E402
 
 # Days the engine drops a source component on. Monotonic DOWN -- lower it whenever a fix
@@ -67,14 +67,14 @@ OMISSION_FLOOR = int(os.environ.get("FEAST_OMISSION_FLOOR", "5"))
 # Blessing of the Pomegranates, on the 12 days of ground truth from 2015 -- the year the
 # rite was instituted -- through 2026 (2027 has no oracle). Not a
 # contradiction: the source states the day in Armenian and drops it in English, so this is a
-# translation gap the engine closes -- see docs/feast-name-corrections.md section 9 and
+# translation gap the engine closes -- see docs/observance-name-corrections.md section 9 and
 # dev/observance_ids._ADDED_OBSERVANCES.
 #
 # An EQUALITY, not a ceiling. An addition is served on every occurrence of its date or it is
 # not declared correctly, so a count that drifts either way means the overlay has started
 # firing on the wrong days -- which no other assertion here would notice, because an
 # addition is excluded from the contradiction count by construction.
-FEAST_ADDITION_DAYS = int(os.environ.get("FEAST_ADDITION_DAYS", "12"))
+OBSERVANCE_ADDITION_DAYS = int(os.environ.get("OBSERVANCE_ADDITION_DAYS", "12"))
 
 # Days whose raw name matches the source exactly (or under the registered folds).
 # Monotonic UP. 9,491 of 9,496: the 5 shortfalls are the packed-day omissions above, which
@@ -87,12 +87,12 @@ EXPECTED_COMPARED = int(os.environ.get("EXPECTED_COMPARED_DAYS", "9496"))
 
 # Cached days carrying NO source feast name. sacredtradition.am publishes nothing for 2027
 # (probed 2026-07-30: an empty page), so its 365 days have no oracle and are skipped here.
-# They are covered instead by tests/test_feast_contract.py, which needs no ground truth.
+# They are covered instead by tests/test_observance_contract.py, which needs no ground truth.
 EXPECTED_SKIPPED = int(os.environ.get("EXPECTED_SKIPPED_DAYS", "365"))
 
 
 @requires_reference_cache
-class TestRawFeastName(unittest.TestCase):
+class TestRawObservanceName(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.data = collect()
@@ -106,7 +106,7 @@ class TestRawFeastName(unittest.TestCase):
         self.assertEqual(
             [], [(f["iso"], f["contradictions"], f["omissions"]) for f in bad[:10]],
             f"{len(bad)} days ship a feast-name component the source does not have; "
-            "run dev/feast_discrepancy_report.py for the full list")
+            "run dev/observance_discrepancy_report.py for the full list")
 
     def test_no_unregistered_casing_variant(self):
         """Case-only differences must be registered in source_corrections, not tolerated."""
@@ -162,9 +162,9 @@ class TestRawFeastName(unittest.TestCase):
     def test_additions_are_exactly_the_declared_days(self):
         n = self.data["added"]
         self.assertEqual(
-            n, FEAST_ADDITION_DAYS,
+            n, OBSERVANCE_ADDITION_DAYS,
             f"{n} days serve a declared fixed-date addition, expected exactly "
-            f"{FEAST_ADDITION_DAYS} (Jan 1, 2015-2026). A change either way means "
+            f"{OBSERVANCE_ADDITION_DAYS} (Jan 1, 2015-2026). A change either way means "
             "engine._FIXED_DATE_OBSERVANCES fires on days it should not, or stopped firing "
             "on days it should -- neither shows up as a contradiction, because an addition "
             "is excluded from that count by construction.")

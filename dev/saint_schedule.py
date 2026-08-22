@@ -73,7 +73,7 @@ PIN_MIN_YEARS = 5
 def _slug(label):
     """A short, stable id slug from a feast label."""
     # Slugify the separatorless form so the internal id namespace is unaffected by the
-    # display separator (fetch_reference.FEAST_SEP) the feast labels now carry -- only the
+    # display separator (fetch_reference.OBSERVANCE_SEP) the feast labels now carry -- only the
     # human-readable `label` fields change, not the ids that key readings and the replay.
     label = label.replace(" — ", "").lower()
     label = re.sub(r"^(the\s+|saints?\s+|holy\s+|commemoration of\s+)+", "", label)

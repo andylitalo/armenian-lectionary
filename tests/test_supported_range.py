@@ -5,7 +5,7 @@ through to its internal absence-markers and returning them as if they were names
 ``compute_armenian_lectionary(date(2038, 2, 28))["Liturgical Day"]`` was
 ``"(commemoration)"``, and 2038-02-13 was ``"Feast (day not yet in validated table)"``.
 
-``tests/test_feast_contract.py`` forbids exactly those strings *inside* the range, on the
+``tests/test_observance_contract.py`` forbids exactly those strings *inside* the range, on the
 grounds that an internal marker is not a name and a consumer can only discard it. Outside
 the range it was the same defect with nothing looking.
 
