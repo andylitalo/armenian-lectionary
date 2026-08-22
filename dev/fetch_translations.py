@@ -16,7 +16,7 @@ and Armenian reading *i* are the same citation with only the book name translate
   2. fetch each representative date once at ``iL=0``;
   3. pair English<->Armenian by matching the numeric tail, voting the book-head and
      feast-name translations; and
-  4. write ``armenian_lectionary/data/{feast_names_hy,book_names_hy}.json``.
+  4. write ``armenian_lectionary/data/{observance_names_hy,book_names_hy}.json``.
 
 Usage:
     python dev/fetch_translations.py            # build both maps (uses hy cache)
@@ -51,7 +51,7 @@ HERE = os.path.dirname(__file__)
 REF_DIR = os.path.join(HERE, "reference_data")
 HY_CACHE_DIR = os.path.join(HERE, "reference_data_hy")
 DATA_DIR = os.path.join(os.path.dirname(HERE), "armenian_lectionary", "data")
-FEAST_MAP_PATH = os.path.join(DATA_DIR, "feast_names_hy.json")
+OBSERVANCE_MAP_PATH = os.path.join(DATA_DIR, "observance_names_hy.json")
 BOOK_MAP_PATH = os.path.join(DATA_DIR, "book_names_hy.json")
 
 # iL=0 -> Classical Armenian (iL=2 is English, iL=1 Russian). Everything else in the
@@ -304,7 +304,7 @@ def build(force: bool = False):
     # the maintainer decides fold-vs-allow rather than silently shipping it.
     from dev.source_corrections import unexpected_chars
     dirty = []
-    for name, m in (("feast_names_hy", feast_map), ("book_names_hy", book_map)):
+    for name, m in (("observance_names_hy", feast_map), ("book_names_hy", book_map)):
         for k, v in m.items():
             for label, s in (("key", k), ("value", v)):
                 bad = unexpected_chars(s)
@@ -315,11 +315,11 @@ def build(force: bool = False):
                          + "\n  ".join(dirty[:20]))
 
     os.makedirs(DATA_DIR, exist_ok=True)
-    with open(FEAST_MAP_PATH, "w", encoding="utf-8") as f:
+    with open(OBSERVANCE_MAP_PATH, "w", encoding="utf-8") as f:
         json.dump(feast_map, f, ensure_ascii=False, indent=2, sort_keys=True)
     with open(BOOK_MAP_PATH, "w", encoding="utf-8") as f:
         json.dump(book_map, f, ensure_ascii=False, indent=2, sort_keys=True)
-    print(f"\nWrote {len(feast_map)} feast names -> {FEAST_MAP_PATH}")
+    print(f"\nWrote {len(feast_map)} feast names -> {OBSERVANCE_MAP_PATH}")
     print(f"Wrote {len(book_map)} book names  -> {BOOK_MAP_PATH}")
 
 
