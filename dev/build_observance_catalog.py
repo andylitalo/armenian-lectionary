@@ -36,12 +36,9 @@ reading)") and the "{season} (day not yet in validated table)" fallback -- inter
 absence-markers, not observances, with nothing to translate. They never reach the TSV.
 
 Also writes armenian_lectionary/data/observance_readings_index.json, a SEPARATE
-readings-hash -> id index (see build_readings_index) covering the subset of position/eve
-ids whose readings are the same on every date they are served (a dedicated fast weekday or
-an eve, never a day sharing its table key with a rotating saint). It exists so
-engine._position_label/_eve_label can find an already-stated id from a date's own
-(immutable) readings instead of from its (renameable) display text -- see
-engine._resolve_generated_text. Unlike the catalog above, this index is safe to fully
+readings-hash -> id index (see build_readings_index) letting engine._resolve_generated_text
+find an already-stated id from a date's own (immutable) readings instead of from its
+(renameable) display text. Unlike the catalog above, this index is safe to fully
 regenerate on every run: readings, unlike text, are never corrected, so recomputing it
 always reproduces the same keys.
 
@@ -188,75 +185,57 @@ def served_components(ground_truth):
 
 
 def build_readings_index(ground_truth):
-    """readings-hash -> catalog id, for every position/eve label whose OWN readings (within
-    its dominant source tier -- see below) are in a ONE-TO-ONE correspondence with it across
-    every date served in MIN_YEAR..MAX_YEAR: the same text always carries the same readings
-    there, AND those readings never recur under a DIFFERENT text.
+    """readings-hash -> catalog id, for every position/eve label whose readings uniquely
+    identify it: the same text always carries the same readings, and those readings never
+    recur under a different text. Checked within each label's DOMINANT ``Source`` tier,
+    with two further refinements needed to make the correspondence hold in practice:
 
-    Restricting to each label's dominant tier first is what makes that correspondence
-    possible to state at all. A day inside the Fast of St. James the bishop of Nisibis can
-    coincide with the fixed civil date of the Conception of the Holy Virgin (12 of 27
-    supported years), which OUTRANKS the fast day and replaces its readings wholesale with
-    its own ("Source" flips from "validated-table" to "validated-composite") -- the fast
-    day's position label is still served as text that year, but that year's readings belong
-    to the Conception, not to the fast day, and indexing them under the fast day's id would
-    be wrong regardless of whether they happen to collide with anything else. Filtering each
-    label to only the tier it is served under on most of its occurrences drops exactly those
-    displaced years from consideration; the label is still fully indexed from its other,
-    undisplaced occurrences. (Elijah and Illuminator have no such displacement -- every
-    occurrence is "validated-table" -- so this filter is a no-op for them.)
+    - **Displacement by a fixed civil date.** A day inside the Fast of St. James the
+      bishop of Nisibis can coincide with the Conception of the Holy Virgin (12 of 27
+      years), which outranks it and replaces its readings wholesale (``Source`` flips
+      ``validated-table`` -> ``validated-composite``); those years are excluded from the
+      label's signature. This alone doesn't cover a coincidence that does NOT change
+      ``Source`` -- e.g. "Eve of Great Lent" disagrees on 2 of 27 years because the
+      Presentation of the Lord (a fixed civil date) happens to fall on it, but both stay
+      ``validated-table``. A disagreeing occurrence is excluded there only when it is
+      independently provable to belong elsewhere: its pre-overlay commemoration
+      (``_compute_lectionary(d)["Liturgical Day"]``) must have exactly one reading set
+      across ALL its own occurrences globally, on at least one date that does not also
+      carry this label -- the second condition rules out a SELF-referential
+      "commemoration" (a civil-year-unanimous table entry that already bakes this
+      label's own text into its stored ``"feast"`` field, which would otherwise look
+      tautologically stable). Neither mechanism lowers the bar: a label's remaining,
+      unexplained occurrences must still agree exactly, which is why the
+      Sunday-after-Nativity/Transfiguration/Assumption families stay excluded -- their
+      own ``_position_label`` docstring admits their count is "not exact on every
+      occurrence," and their disagreement has no competing observance to attribute it to.
+    - **Cross-tier collisions.** Detected across every tier a label was ever served
+      under, not just its dominant one -- a minority tier (a best-guess continuum filling
+      in for an unvalidated date) can still reuse another label's reading pool.
 
-    That is a different problem from the Sunday-after-Nativity/Transfiguration/Assumption
-    families, whose own ``_position_label`` docstring admits their counting rule is "not
-    exact on every occurrence": there the instability is WITHIN one tier (validated-table
-    every time -- the reading a lectio-continua slot carries stays put, but the Sunday-count
-    the source prints for it can drift across years of different length), so tier-filtering
-    does not and should not rescue them. Requiring an exact one-to-one correspondence within
-    the dominant tier is what correctly leaves those excluded -- they fall back to their
-    literal template text via engine._resolve_generated_text, exactly as an uncatalogued
-    label already does, so this is safe to run unattended as new families are added.
+    A position label whose dominant-tier readings come up EMPTY (some ferial days of the
+    Fast of the Catechumens carry no scripture at all -- a validated, intentional
+    aliturgical day) is indexed instead by calendar COORDINATE
+    (``engine._position_coordinate``: the position family's own anchor key and
+    day-offset, hashed by ``engine._observance_id_from_coordinate`` in a namespace that
+    cannot collide with a readings-based hash) -- a pure function of the calendar, exactly
+    as stable as readings are for every other entry.
 
-    Loads _position_label/_eve_label with NO readings argument (the literal calendar-rule
-    text, matching how the catalog's ids were originally minted from that same text), then
-    separately fetches each date's ReadingsList and Source via compute_armenian_lectionary.
-    That second call is the (currently) only way to get a date's readings independent of its
-    position/eve label text, since readings are resolved by _compute_lectionary before any
-    label is applied.
+    ``kind`` ("position"/"eve") is folded into every hash because the two can share a
+    day's readings by construction: Pentecost+21 is a Sunday every year, so "Third Sunday
+    after Pentecost" and "Eve of Fast of St. Gregory the Illuminator" always carry
+    identical readings.
 
-    A position label whose dominant-tier readings come up EMPTY (some days in the ferial
-    track of the Fast of the Catechumens carry no scripture at all -- an aliturgical day,
-    validated as intentional, not missing data) has no reading content to hash in the first
-    place. Those are indexed instead by their calendar COORDINATE
-    (engine._position_coordinate: the position family's own anchor key and day-offset),
-    checked for the same one-to-one correspondence readings get -- trivially satisfied here,
-    since a family's coordinate is a pure function of the calendar, never of which saint or
-    reading happens to land on it. engine._observance_id_from_coordinate hashes it in a
-    namespace that cannot collide with a readings-based hash by construction.
-
-    A dominant tier is not always enough on its own. "Eve of Great Lent" disagrees on 2 of
-    27 years (2010, 2021) -- Feb 14, when the FIXED civil date of the Presentation of the
-    Lord happens to land on Great Lent's own eve and outranks it -- but "Source" stays
-    "validated-table" both ways, so tier-filtering cannot see this one (unlike Nisibis /
-    Dec 9, where "Source" itself flips). Rather than lower the bar to "close enough," a
-    disagreeing occurrence is EXPLAINED, and excluded from the count rather than counted
-    against it, only when that date's own pre-overlay commemoration
-    (_compute_lectionary(d)["Liturgical Day"], BEFORE the eve/position text is added) is
-    independently, globally stable in its OWN readings across every one of ITS OWN
-    occurrences (checked over the whole date range, not just the ones that also happen to
-    carry this label) -- i.e. the Presentation of the Lord always reads the same four
-    verses on Feb 14 whether or not that date happens to also be an eve. That is a
-    verified fact about a SEPARATE observance, not a loosened threshold on this one: the
-    label's own remaining, unexplained occurrences must still agree EXACTLY, or it stays
-    excluded. This does not rescue the Sunday-after-X families either -- their disagreeing
-    years share no such independently stable competing commemoration; they are simply
-    the label's own genuine variance.
+    Loads ``_position_label``/``_eve_label`` with no ``readings`` argument (the literal
+    calendar-rule text, matching how the catalog's ids were originally minted), then
+    separately fetches each date's readings, ``Source``, and pre-overlay commemoration via
+    ``_compute_lectionary``/``compute_armenian_lectionary``, since readings are resolved
+    before any position/eve label is applied.
     """
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
-    # Fall back to the row's own (immutable) source_en key -- see audit()'s matching
-    # comment -- so a row already renamed (approved_en no longer equal to the literal text
-    # engine.py still composes) still gets its id indexed here, keeping it resolvable
-    # through a SECOND rebuild after the first rename rather than dropping out of the index.
+    # See audit()'s matching comment: falls back to the row's immutable source_en so an
+    # already-renamed row still gets its id indexed here.
     ids_by_source = {source: row.get("id")
                      for source, row in ground_truth.items() if row.get("id")}
 
@@ -264,18 +243,12 @@ def build_readings_index(ground_truth):
         return approved_ids.get(text) or ids_by_source.get(text)
 
     # (kind, text) -> {Source tier: [(readings, pre-overlay commemoration), ...]}, so the
-    # dominant tier can be picked per label before the stability checks run. ``kind``
-    # ("position"/"eve") keeps the two collision checks below from colliding a position
-    # label with an eve note that shares its day's readings by CONSTRUCTION rather than
-    # coincidence -- Pentecost+21 is a Sunday every year (21 is a multiple of 7), so "Third
-    # Sunday after Pentecost" and "Eve of Fast of St. Gregory the Illuminator" always carry
-    # the identical readings. Without the namespace both would permanently collide and
-    # neither could ever be indexed; with it, each resolves independently within its own
-    # kind, matching engine._observance_id_from_readings's own kind parameter.
+    # dominant tier can be picked per label before the stability checks run. See the
+    # docstring for why "kind" is part of the key.
     #
     # commemoration_readings is built from EVERY date, not just labeled ones: it is what
     # lets a disagreeing occurrence be checked against an independently, globally stable
-    # competing commemoration (see the docstring above).
+    # competing commemoration.
     occurrences_by_key = {}
     coordinates_by_text = {}                          # position-only; see the docstring
     commemoration_readings = {}
@@ -295,12 +268,7 @@ def build_readings_index(ground_truth):
                     coordinates_by_text.setdefault(label, set()).add(_position_coordinate(d))
         d += datetime.timedelta(days=1)
 
-    # Collision registration must see every tier a label was EVER served under, not just
-    # its dominant one: a minority tier (a best-guess continuum falling back for a date the
-    # validated table doesn't cover, say) can still reuse the same reading pool as some
-    # other, fully-resolved label. Dropping those occurrences before the collision check --
-    # rather than merely before the stability check -- would let that other label's id
-    # claim a reading that is not actually unique to it, silently.
+    # Every tier, not just each key's dominant one -- see the docstring's cross-tier note.
     keys_by_readings = {}
     for key, by_tier in occurrences_by_key.items():
         kind, _text = key
@@ -314,17 +282,9 @@ def build_readings_index(ground_truth):
         occurrences = by_tier[dominant_tier]
         readings_set = {r for r, _commem, _d in occurrences}
         if len(readings_set) != 1:
-            # Explain away a disagreeing occurrence only if its OWN reading equals what
-            # its pre-overlay commemoration reads on EVERY ONE of that commemoration's own
-            # occurrences globally, AND that commemoration is independently attested on a
-            # date that does NOT also carry this label -- otherwise a one-off coincidence
-            # (a rare commemoration that happens to appear only alongside this label, with
-            # nothing to compare it to) could pass the singleton check trivially and wrongly
-            # explain away what is actually this label's own genuine variance. This also
-            # correctly refuses to explain away a SELF-referential "commemoration" -- a
-            # civil-year-unanimous table entry that already bakes this very label's own text
-            # into its stored "feast" field, which would otherwise look tautologically
-            # "stable" and explain the label away using nothing but itself.
+            # Explain away a disagreeing occurrence only per the docstring's two
+            # conditions: independently stable, and attested outside this label's own
+            # dates (which also rules out a self-referential "commemoration").
             these_dates = {d for _r, _commem, d in occurrences}
             unexplained = {
                 r for r, commem, _d in occurrences
@@ -412,11 +372,10 @@ def audit(catalog, ground_truth):
     findings = []
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
-    # A renamed engine-composed row (its approved_en no longer equal to the LITERAL text
-    # engine.py still composes -- see build_readings_index) is still registered: source_en
-    # is its immutable identity key, left untouched by a rename per the review workflow, so
-    # falling back to it here is what keeps a rename from reading as "unregistered" the
-    # moment it lands, before the readings index has had a chance to pick it up.
+    # A renamed engine-composed row (approved_en no longer equal to the literal text
+    # engine.py composes) is still registered: source_en is its immutable identity key,
+    # left untouched by a rename, so falling back to it keeps a fresh rename from reading
+    # as "unregistered" before the readings index has had a chance to pick it up.
     ids_by_source = {source: row.get("id")
                      for source, row in ground_truth.items() if row.get("id")}
     served = served_components(ground_truth)

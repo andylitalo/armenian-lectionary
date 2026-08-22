@@ -284,49 +284,39 @@ prints for it can drift across years of different length, per `_position_label`'
 docstring), so they still fail the one-to-one check and stay excluded, falling back to
 their literal template text.
 
-Two more collisions, both real and both handled, rather than accepted as loss:
+Three more collisions, each real and each handled:
 
-- **A position label and an eve note can share a day's readings by construction, not
-  coincidence.** Pentecost+21 is a Sunday every year (21 is a multiple of 7), so "Third
-  Sunday after Pentecost" and "Eve of Fast of St. Gregory the Illuminator" carry
-  identical readings on *every* occurrence of either, forever — not a rare accident to
-  exclude, but a permanent structural fact. `_observance_id_from_readings` folds a `kind`
-  ("position"/"eve") into the hash, so the two are keyed in separate namespaces and both
-  resolve independently even though the underlying readings never differ.
-- **Some position labels have no readings to hash at all.** A few days in the ferial
-  track of the Fast of the Catechumens (Aṙաջավորաց պահք) carry no scripture — a
-  validated, intentional aliturgical day, not missing data — so there is no reading
-  content to key by, and two *different* such days (different offsets) would otherwise
-  collide on the same empty signature. Those are indexed instead by calendar
+- **A position label and an eve note can share a day's readings by construction.**
+  Pentecost+21 is a Sunday every year (21 is a multiple of 7), so "Third Sunday after
+  Pentecost" and "Eve of Fast of St. Gregory the Illuminator" carry identical readings on
+  *every* occurrence of either, forever. `_observance_id_from_readings` folds a `kind`
+  ("position"/"eve") into the hash, so the two are keyed in separate namespaces and
+  resolve independently despite the shared readings.
+- **Some position labels have no readings to hash.** A few days in the ferial track of
+  the Fast of the Catechumens (Aṙաջավորաց պահք) carry no scripture — a validated,
+  intentional aliturgical day, not missing data. Those are indexed instead by calendar
   **coordinate** (`engine._position_coordinate`: the position family's own anchor key and
-  day-offset, refactored out of `_position_label` so both share one matching loop),
-  hashed by `engine._observance_id_from_coordinate` in a namespace that cannot collide
-  with a readings-based hash by construction. The coordinate is exactly as stable as
-  readings are for every other entry — it is a pure function of the calendar, never of
-  which reading or saint happens to land on it — `_resolve_generated_text` only falls
-  back to it when `readings` is empty, never as a second attempt after a real readings
-  lookup misses.
+  day-offset, refactored out of `_position_label` so both share one matching loop), hashed
+  by `engine._observance_id_from_coordinate` in a namespace that cannot collide with a
+  readings-based hash. The coordinate is a pure function of the calendar, so it's exactly
+  as stable as readings are elsewhere; `_resolve_generated_text` only falls back to it
+  when `readings` is empty, never after a real readings lookup misses.
 - **A dominant `Source` tier is not always enough.** "Eve of Great Lent" disagrees on 2
   of 27 years (2010, 2021) — the Presentation of the Lord, a *fixed civil date* (Feb 14),
-  happens to land on Great Lent's own eve that year and outranks it — but `Source` stays
-  `validated-table` both ways, so tier-filtering alone cannot see it (unlike Nisibis/Dec
-  9, where `Source` itself flips to `validated-composite`). `build_readings_index`
-  attributes a disagreeing occurrence to the competing observance instead of counting it
-  as inconsistency, but only when that attribution is independently *provable*, not
-  assumed: the date's pre-overlay commemoration
-  (`_compute_lectionary(d)["Liturgical Day"]`, before any eve/position text is added)
-  must have exactly one reading set across *every one* of its own occurrences globally,
-  **and** occur on at least one date that does not also carry this label — proof the
-  reading genuinely belongs to something else, not a one-off coincidence, and not a
-  self-referential trap where a civil-year-unanimous table entry already bakes this very
-  label's own text into its stored `"feast"` field (which would otherwise look
-  tautologically "stable" using nothing but itself). This is not a lowered consistency
-  bar — a label's remaining, unexplained occurrences still must agree *exactly* — it is a
-  more precise count of which occurrences actually test the label's own identity.
-  Collision detection runs across every tier a label was *ever* served under, not just
-  its dominant one, so a rare minority-tier occurrence (a best-guess continuum tier
-  filling in for a date the validated table doesn't cover, say) can never let a
-  *different* label's id claim a reading that isn't actually unique to it.
+  happens to land on Great Lent's own eve and outranks it — but `Source` stays
+  `validated-table` both ways, so tier-filtering alone can't see it (unlike Nisibis/Dec 9,
+  where `Source` flips to `validated-composite`). `build_readings_index` attributes a
+  disagreeing occurrence to the competing observance only when that's independently
+  *provable*: the date's pre-overlay commemoration
+  (`_compute_lectionary(d)["Liturgical Day"]`, before any eve/position text is added) must
+  have exactly one reading set across *every* one of its own occurrences globally, **and**
+  occur on at least one date that does not also carry this label — the second condition
+  rules out a self-referential trap where a civil-year-unanimous table entry already bakes
+  this very label's own text into its stored `"feast"` field. A label's remaining,
+  unexplained occurrences must still agree *exactly*. Collision detection runs across
+  every tier a label was *ever* served under, not just its dominant one, since a
+  minority-tier occurrence (a best-guess continuum filling in for an unvalidated date) can
+  still reuse another label's reading pool.
 
 `engine._resolve_generated_text` does the lookup at request time;
 `_apply_position_label`/`_apply_eve_label` only let it override a stored, validated table

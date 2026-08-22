@@ -2063,19 +2063,15 @@ _OBSERVANCE_ID_BY_READINGS = _load_json_map(OBSERVANCE_READINGS_INDEX_PATH)
 
 def _observance_id_from_readings(readings, kind):
     """A stable key for an offset-determined observance, derived from its own (immutable)
-    readings rather than its (renameable) display text.
+    readings rather than its (renameable) display text -- never needs freezing or
+    snapshotting, since recomputing it from the same readings always reproduces the same
+    value.
 
-    Readings are never renamed the way display text is, so this key never needs to be
-    frozen or snapshotted: recomputing it from the current readings always reproduces the
-    same value, at any point in the future, by anyone who has those readings.
-
-    ``kind`` ("position" or "eve") is folded into the hash because a position label and an
-    eve note can share a day's readings by CONSTRUCTION, not coincidence -- Pentecost+21 is
-    a Sunday every year (21 is a multiple of 7), so "Third Sunday after Pentecost" and "Eve
-    of Fast of St. Gregory the Illuminator" always carry the identical readings, forever.
-    Without ``kind`` the two would permanently collide and both would be excluded from the
-    index; with it, each is keyed within its own namespace and both resolve independently,
-    even though the underlying readings are the same value on every occurrence of either.
+    ``kind`` ("position" or "eve") is folded into the hash because the two can share a
+    day's readings by CONSTRUCTION, not coincidence: Pentecost+21 is a Sunday every year
+    (21 is a multiple of 7), so "Third Sunday after Pentecost" and "Eve of Fast of St.
+    Gregory the Illuminator" always carry identical readings. Without ``kind`` the two
+    would permanently collide; with it, each resolves independently in its own namespace.
     """
     return hashlib.sha1((kind + "|" + "|".join(readings)).encode()).hexdigest()[:12]
 
@@ -2323,15 +2319,12 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     Sunday after Nativity") previously fell through to "(commemoration)" or "(movable
     ordinary-time reading)", which bahk had to discard as "no feast".
 
-    A stored position component is normally kept verbatim, not replaced with the freshly
-    regenerated one: :func:`_position_label`'s own docstring admits some families are "not
-    exact on every occurrence", so the validated, cross-year-agreed STORED value is trusted
-    over a fresh recomputation, not the other way round. The one exception is a catalogued
-    rename (``readings`` lets :func:`_resolve_generated_text` find one -- or, on a day with
-    NO readings at all, ``d``'s calendar coordinate does): that reflects a human decision
-    about what to call this observance, current as of the last catalog rebuild, which must
-    win even over a stored value -- so it is the only case where the stored position
-    component gets overwritten.
+    A stored position component is kept verbatim rather than replaced by a fresh
+    recomputation: some families are not exact on every occurrence (see
+    :func:`_position_label`), so the validated STORED value is trusted over regeneration.
+    The one exception is a catalogued rename (found via ``readings`` or, on a day with no
+    readings, ``d``'s calendar coordinate) -- a human decision current as of the last
+    catalog rebuild, which overrides even a stored value.
 
     ``readings=None`` (the default) skips resolution entirely, distinct from
     ``readings=[]``: the former means the caller never asked for it (every dev
