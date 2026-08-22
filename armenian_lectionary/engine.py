@@ -2392,6 +2392,25 @@ def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
 
 _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 
+# The undifferentiated fast marker, which is NOT served -- from the table or from the
+# position families -- on any day that has a name besides it.
+#
+# It is an attribute of the day wearing a name's clothes. Where the day is the weekly fast
+# and nothing else, the split labels above say so specifically. Everywhere else the marker
+# only restates what the rest of the name already establishes: "Great Thursday" is inside
+# Holy Week, "Third day of the Fast of Prophet Elijah" is a day of a fast, and neither
+# needs a second component to say "and it is a fast". Nothing is lost that the calendar
+# does not already determine -- whether a day is a fast is a function of the date, which
+# this engine computes, not a fact only the source knew.
+#
+# The families that emit it are kept rather than deleted: they claim their days (Holy
+# Week's own Wed/Fri, Dec 9's Advent-fast weekdays) so those days do NOT fall through to
+# the weekly split below, which would label them the ordinary weekly fast. They claim and
+# emit nothing, which is exactly what they are for.
+#
+# Declared in dev/source_corrections.DECLINED_SOURCE_EN / _HY; see docs section 6e.
+_BARE_FAST_MARKERS = ("Fast day", "Feast day")
+
 
 def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     """Head ``label`` with ``d``'s regenerated calendar-position label.
@@ -2435,10 +2454,14 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     and a CI sweep, both bounded by ``MIN_YEAR``/``MAX_YEAR``, are not in the path when
     someone widens the range against an already-shipped index. This guard is.
     """
+    parts = [p for p in label.split(_OBSERVANCE_SEP)
+             if p and p not in _PLACEHOLDER_LABELS and p not in _BARE_FAST_MARKERS]
     position = _position_label(d)
-    if position is None:
-        return label
-    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    if position is None or position in _BARE_FAST_MARKERS:
+        # The bare marker is not served, from either source -- see _BARE_FAST_MARKERS.
+        # ``or label`` is unreachable in the supported range (no day's name is the marker
+        # and nothing else) and exists so this can never return an empty name.
+        return _OBSERVANCE_SEP.join(parts) or label
     stored = next((p for p in parts if _is_position_component(p)), None)
     if readings is None:
         resolved = position

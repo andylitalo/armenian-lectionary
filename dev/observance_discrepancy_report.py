@@ -40,7 +40,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                    # noqa: E402
 from dev.observance_names import ORD                                     # noqa: E402
-from dev.observance_ids import is_added_text, pool_of_text          # noqa: E402
+from dev.observance_ids import (                                    # noqa: E402
+    is_added_text, is_declined_en, pool_of_text)
 from dev.source_corrections import canonical_commem                 # noqa: E402
 from armenian_lectionary.engine import (                            # noqa: E402
     _OBSERVANCE_SEP, compute_armenian_lectionary, MAX_YEAR, MIN_YEAR,
@@ -120,6 +121,11 @@ def diff_components(src_comps, eng_comps):
         pool = pool_of_text(eng)
         (expansions if pool is not None and pool in pools else still_wrong).append(eng)
 
+    # A declared decline is not an omission. The engine drops the undifferentiated fast
+    # marker on every day that has another name (observance_ids._DECLINED_FAST_MARKERS_EN,
+    # docs section 6e); counting those as omissions would put 437 registered decisions into
+    # the budget reserved for accidents, which is the opposite of what a ratchet is for.
+    unmatched_src = [s for s in unmatched_src if not is_declined_en(s)]
     return still_wrong, unmatched_src, deliberate, expansions, additions
 
 

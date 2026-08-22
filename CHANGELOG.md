@@ -37,6 +37,27 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   display string loses all 1,401, which is what 1.3.0 did to bahk (158 of 429 stored names
   stranded). The ids `wednesday_fast` / `friday_fast` are stable across this change.
 
+- **The bare `Fast day` / `Պահք` marker is no longer served**
+  ([docs §6e](docs/observance-name-corrections.md)). 437 days lose a component the source
+  prints — `Great Thursday — Fast day — Remembrance of the Last Supper` becomes
+  `Great Thursday — Remembrance of the Last Supper`, `Դ օր Վերափոխման — Պահք` becomes
+  `Դ օր Վերափոխման`.
+
+  The marker is an attribute of the day wearing a name's clothes: on every day that has
+  another name it only restates what the rest already establishes, and whether a day is a
+  fast is a function of the date this engine already computes. The Assumption octave is the
+  proof it is not identity — day 3 (no marker) and day 6 (marker) have **identical**
+  readings, as do day 4 (marker) and day 7 (no marker).
+
+  Where the fast *is* the observance it is still named: the 1,388 days whose whole name was
+  the marker get `Wednesday Fast` / `Friday Fast` from the split above. No day is left
+  nameless — checked across 2001–2027.
+
+  Declared in `observance_ids._DECLINED_FAST_MARKERS_EN` / `_HY`. English ratchets are
+  unchanged (`0 contradictions, 5 omissions, 9491/9496 exact`); `HY_DECLINED_DAYS` moves
+  2 → 20 as an equality pin; `HY_EXACT_FLOOR` is now `exact + DECLINED` and is unmoved at
+  414. `test_no_position_label_is_ever_dropped` still asserts zero and still passes.
+
 ### Fixed
 - **The Fast of the Holy Cross of Varag is named, and stops being served as the weekly
   fast** ([docs §6d](docs/observance-name-corrections.md)). The source names this fast on

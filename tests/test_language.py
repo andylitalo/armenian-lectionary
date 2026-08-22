@@ -564,20 +564,25 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
                 self.assertTrue(compute_armenian_lectionary(
                     d, language="hy")["Liturgical Day"].startswith(hy))
 
-    def test_holy_week_keeps_the_bare_marker(self):
+    def test_holy_week_is_not_called_the_weekly_fast(self):
         """Great Wednesday and Great Friday are not the weekly fast.
 
         They are inside Holy Week, which the source marks on every one of its days --
         Sunday through Saturday, not just Wed/Fri. Calling them the weekly fast would be
         false, and they would fall through to the split without the explicit entry that
         heads them off.
+
+        That entry still matches and still emits "Fast day"; the marker is then dropped as
+        a declared decline (docs §6e), so what reaches the reader is the Holy Week name
+        alone. Both halves are asserted -- the day is not the weekly fast, and it carries no
+        marker restating what "Great Wednesday" already says.
         """
         for d in (datetime.date(2026, 4, 1), datetime.date(2026, 4, 3)):
             with self.subTest(date=d):
                 served = compute_armenian_lectionary(d)["Liturgical Day"]
-                self.assertIn("Fast day", served)
-                for split in ("Wednesday Fast", "Friday Fast"):
-                    self.assertNotIn(split, served, served)
+                self.assertTrue(served.startswith("Great "), served)
+                for absent in ("Wednesday Fast", "Friday Fast", "Fast day"):
+                    self.assertNotIn(absent, served, served)
 
     def test_a_named_fast_outranks_the_split(self):
         """A Wed/Fri inside a named fast is a day OF that fast, not a weekly fast day."""
@@ -604,23 +609,22 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
                 self.assertNotIn("Fast day", served, served)
                 self.assertTrue(served.startswith(("Wednesday Fast", "Friday Fast")), served)
 
-    def test_the_marker_still_reaches_days_the_split_does_not_claim(self):
-        """The 437 instances the split does not claim, most beside the source's own day count.
+    def test_a_day_the_split_does_not_claim_keeps_its_own_day_count(self):
+        """The split is scoped to the terminal fallthrough; it never rewrites a day count.
 
-        "Fourth day of the Assumption — Fast day" is the source's own wording, and the
-        second component is not redundant with the first. Dropping it would be an omission,
-        not a cleanup -- which is why the split is scoped to the terminal fallthrough.
+        Aug 19 2026 is a Wednesday inside no named fast, so it IS the weekly fast -- but the
+        source's own "Fourth day of the Assumption" holds the position slot, and that is the
+        component a reader needs. The split must not replace it, and the bare marker beside
+        it is not served (docs §6e), so the day is its day count and nothing else.
 
-        Note this particular day is one of the 108 that ARE the weekly fast (Aug 19 2026 is
-        a Wednesday, inside no named fast) and are left unsplit only because the position
-        slot is held by stored text. It is asserted here as an is, not a will-be: docs 6c
-        declares it a loose end, so if a later change splits it, this test should be the
-        thing that notices.
+        Asserting the day count is present is the point: this is the test that fails if the
+        split ever starts claiming days whose position the source already stated.
         """
         served = compute_armenian_lectionary(
             datetime.date(2026, 8, 19))["Liturgical Day"]
-        self.assertIn("Fast day", served)
-        self.assertIn("day of the Assumption", served)
+        self.assertEqual(served, "Fourth day of the Assumption")
+        for absent in ("Wednesday Fast", "Friday Fast", "Fast day"):
+            self.assertNotIn(absent, served, served)
 
 
 class TestGeneratedLabelsResolveThroughTheCatalog(unittest.TestCase):
