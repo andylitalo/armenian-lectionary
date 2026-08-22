@@ -35,7 +35,7 @@
   "approved_en": "Beginning of the Weekly Fasts",
   "approved_hy": "Սկիզբն շաբաթական պահոց",
   "id": "beginning_of_the_fast",
-  "note": "registered correction, justified as a DISAMBIGUATION rather than by the source contradicting itself -- see docs/feast-name-corrections.md section 6. The source's 'Beginning of the Fast' (hy 'Սկիզբն պահոց') names no fast, and both languages are equally terse, so there was nothing to correct it against. It is the 41st day of Eastertide, always the Friday right after Ascension, and it ends the Eastertide dispensation from the weekly Wed/Fri fast. Not 'after Eastertide': the day is IN Eastertide (41 of 50); the dispensation ends at Ascension, not Pentecost.",
+  "note": "registered correction, justified as a DISAMBIGUATION rather than by the source contradicting itself -- see docs/observance-name-corrections.md section 6. The source's 'Beginning of the Fast' (hy 'Սկիզբն պահոց') names no fast, and both languages are equally terse, so there was nothing to correct it against. It is the 41st day of Eastertide, always the Friday right after Ascension, and it ends the Eastertide dispensation from the weekly Wed/Fri fast. Not 'after Eastertide': the day is IN Eastertide (41 of 50); the dispensation ends at Ascension, not Pentecost.",
   "source_hy": "Սկիզբն պահոց",
   "status": "fixed"
  },
@@ -291,7 +291,7 @@
   "approved_en": "Fast day",
   "approved_hy": "Պահք",
   "id": "fast_day",
-  "note": "The source's own one-letter typo for 'Fast day'. Three independent witnesses: the string appears on no other date in the 9,861-day corpus; its Mon/Tue/Wed/Fri weekday set is the Advent-fast schedule, and the marker is absent on Thu/Sat, which a FEAST marker could not be (it is the same feast every year); and the Armenian in the next column reads Պահք (fast). Registered in source_corrections.POSITION_LABEL_FIXES (anchored on the component separator, so it cannot also rewrite 'Feast day of the Discovery of the Belt...'), with the matching engine._POSITION_FAMILIES Dec-9 template edited to emit 'Fast day'. See docs/feast-name-corrections.md section 1.",
+  "note": "The source's own one-letter typo for 'Fast day'. Three independent witnesses: the string appears on no other date in the 9,861-day corpus; its Mon/Tue/Wed/Fri weekday set is the Advent-fast schedule, and the marker is absent on Thu/Sat, which a FEAST marker could not be (it is the same feast every year); and the Armenian in the next column reads Պահք (fast). Registered in source_corrections.POSITION_LABEL_FIXES (anchored on the component separator, so it cannot also rewrite 'Feast day of the Discovery of the Belt...'), with the matching engine._POSITION_FAMILIES Dec-9 template edited to emit 'Fast day'. See docs/observance-name-corrections.md section 1.",
   "source_hy": "Պահք",
   "status": "fixed"
  },
@@ -1155,7 +1155,7 @@
   "approved_en": "Presentation of the Holy Mother of God to the Temple",
   "approved_hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
   "id": "presentation_of_the_holy",
-  "note": "The source shouts this name in 19 years and title-cases it in the other 7; the engine already folds to title case (docs/feast-name-corrections.md section 5), so this row's approved text now says so instead of contradicting it. Recording it here also collapses the two catalog entries the split was minting into one -- and the surviving entry keeps THIS row's Armenian, which is the well-formed majority form. The title-cased row carried 'ս.Աստուածածնի' (lowercase, no space after the abbreviation dot), the 1-of-7 malformation that dev/fetch_translations.py happened to sample, and was serving it on every Nov 21.",
+  "note": "The source shouts this name in 19 years and title-cases it in the other 7; the engine already folds to title case (docs/observance-name-corrections.md section 5), so this row's approved text now says so instead of contradicting it. Recording it here also collapses the two catalog entries the split was minting into one -- and the surviving entry keeps THIS row's Armenian, which is the well-formed majority form. The title-cased row carried 'ս.Աստուածածնի' (lowercase, no space after the abbreviation dot), the 1-of-7 malformation that dev/fetch_translations.py happened to sample, and was serving it on every Nov 21.",
   "source_hy": "Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն",
   "status": "fixed"
  },
