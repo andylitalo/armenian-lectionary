@@ -1450,20 +1450,25 @@ def _advent_eve_label(heesnak: datetime.date) -> str:
     return "Eve of the Fast of Advent" if weeks == 63 else "Eve of Fast of Advent"
 
 
-def _eve_label(d: datetime.date):
-    """The source's ``Eve of ...`` component for ``d``, or None.
+def _eve_label_and_coordinate(d: datetime.date):
+    """``(text, (akey, offset))`` for ``d``'s eve note, or ``(None, None)``.
 
-    Exact on every occurrence in the ground truth: 338/338 across 2001-2026, with no
-    mismatch and no day labelled an eve that the source does not (see
-    ``dev/verify_eve_labels.py``).
+    The eve twin of :func:`_position_label_and_coordinate`, and for the same reason: an
+    eve is already declared as an exact ``(anchor key, day offset)`` pair, so it carries a
+    second, calendar-only identity for free. Shared by :func:`_eve_label` (text only) and
+    :func:`_eve_coordinate` (the coordinate only), so the matching loop exists once.
 
-    Always the literal, un-overridden text -- see :func:`_position_label`'s docstring for
-    why a caller wanting a catalogued rename resolves it separately.
+    The two solar eves have no movable anchor and use ``("civil", month * 100 + day)``,
+    a namespace the anchor keys cannot collide with. The Advent eve is not in
+    ``_EVE_FAMILIES`` -- it is Heesnak itself, and :func:`_advent_eve_label` picks between
+    two wordings by how far Heesnak falls after Exaltation -- so its coordinate is that
+    same distance (``("EX", 63)`` or ``("EX", 70)``), which is exactly what separates the
+    two wordings.
     """
     if (d.month, d.day) in _EVE_CIVIL:
-        return _EVE_CIVIL[(d.month, d.day)]
+        return _EVE_CIVIL[(d.month, d.day)], ("civil", d.month * 100 + d.day)
     if d.weekday() not in (5, 6):   # every remaining eve is a Sunday, bar Holy Saturday
-        return None
+        return None, None
     for year in (d.year - 1, d.year, d.year + 1):
         easter = calculate_gregorian_easter(year)
         anchor = {
@@ -1476,10 +1481,36 @@ def _eve_label(d: datetime.date):
         }
         for akey, offset, label in _EVE_FAMILIES:
             if d == anchor[akey] + datetime.timedelta(days=offset):
-                return label
+                return label, (akey, offset)
         if d == anchor["HE"]:
-            return _advent_eve_label(anchor["HE"])
-    return None
+            return (_advent_eve_label(anchor["HE"]),
+                    ("EX", (anchor["HE"] - anchor["EX"]).days))
+    return None, None
+
+
+def _eve_label(d: datetime.date):
+    """The source's ``Eve of ...`` component for ``d``, or None.
+
+    Exact on every occurrence in the ground truth: 338/338 across 2001-2026, with no
+    mismatch and no day labelled an eve that the source does not (see
+    ``dev/verify_eve_labels.py``).
+
+    Always the literal, un-overridden text -- see :func:`_position_label`'s docstring for
+    why a caller wanting a catalogued rename resolves it separately.
+    """
+    return _eve_label_and_coordinate(d)[0]
+
+
+def _eve_coordinate(d: datetime.date):
+    """``(akey, offset)`` for ``d``'s eve note, or ``None``.
+
+    See :func:`_position_coordinate` for what a coordinate is for; an eve needs one for a
+    narrower reason than an aliturgical day does. An eve is always a Sunday (bar Holy
+    Saturday), so it shares the day with whatever feast that Sunday carries, and when a
+    fixed civil date outranks it the day's readings become that feast's -- leaving the eve
+    text served but its readings signature unrecognizable.
+    """
+    return _eve_label_and_coordinate(d)[1]
 
 
 def _annunciation_composite(d, tables=None):
@@ -2090,13 +2121,21 @@ def _observance_id_from_readings(readings, kind):
     return hashlib.sha1((kind + "|" + "|".join(readings)).encode()).hexdigest()[:12]
 
 
-def _observance_id_from_coordinate(akey, offset):
-    """A stable key for a position label with NO readings to key by at all -- an
-    aliturgical day (see :func:`_position_coordinate`). Namespaced separately from
-    :func:`_observance_id_from_readings` (prefix ``"coord|"`` vs. a bare ``kind``) so the
-    two hash spaces cannot collide with each other by construction, not just by luck.
+def _observance_id_from_coordinate(akey, offset, kind):
+    """A stable key for an observance identified by its calendar COORDINATE rather than
+    its readings -- an aliturgical day with nothing to hash (see
+    :func:`_position_coordinate`), or a day whose readings a fixed civil feast has taken
+    over (see :func:`_eve_coordinate`).
+
+    Namespaced away from :func:`_observance_id_from_readings` by the ``"coord|"`` prefix,
+    so the two hash spaces cannot collide with each other by construction, not just by
+    luck. ``kind`` is folded in for the same reason it is there -- and here the collision
+    is not hypothetical: Pentecost+21 is the coordinate of BOTH "Third Sunday after
+    Pentecost" and "Eve of Fast of St. Gregory the Illuminator", the same pair the
+    readings hash already has to separate, and for the same underlying reason (21 is a
+    multiple of 7, so the eve is always that Sunday).
     """
-    return hashlib.sha1(f"coord|{akey}|{offset}".encode()).hexdigest()[:12]
+    return hashlib.sha1(f"coord|{kind}|{akey}|{offset}".encode()).hexdigest()[:12]
 
 
 def _resolve_generated_text(default_text, readings, kind, coordinate=None):
@@ -2110,17 +2149,30 @@ def _resolve_generated_text(default_text, readings, kind, coordinate=None):
     serving path, ``compute_armenian_lectionary``. ``kind`` is "position" or "eve"; see
     :func:`_observance_id_from_readings`.
 
-    ``coordinate`` -- ``d``'s ``(akey, offset)``, from :func:`_position_coordinate` -- is
-    consulted only when ``readings`` is empty (an aliturgical day), never as a second
-    attempt after a readings lookup miss: a miss there means "not one of the observances
-    this mechanism covers," which the coordinate must not silently override.
+    ``coordinate`` -- ``d``'s ``(akey, offset)``, from :func:`_position_coordinate` or
+    :func:`_eve_coordinate` -- is tried when the readings lookup finds nothing, either
+    because there were no readings to hash (an aliturgical day) or because the hash
+    missed. A miss used to be treated as "not one of the observances this mechanism
+    covers", and the coordinate was withheld; but the far commoner cause is a fixed civil
+    feast outranking the day and replacing its readings wholesale, which says nothing
+    about whether the label is that observance -- it plainly still is, and the engine is
+    still serving its text. What that reading DOES mean is that the day's readings are no
+    longer evidence, so the coordinate is asked instead.
+
+    The two keys are not equally strong and are not treated as though they were. A
+    readings hit is per-occurrence evidence: readings come from the validated table,
+    independent of the rule that emitted the label. A coordinate hit only restates that
+    the rule fired here. Its backing is rule-level -- ``dev/verify_position_labels.py``
+    (6,216 matched, 0 MISMATCH, 0 EXTRA) and ``dev/verify_eve_labels.py`` (338/338) --
+    so the caller applies it under a guard rather than unconditionally; see
+    :func:`_apply_position_label`.
     """
+    sid = None
     if readings:
         sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_readings(readings, kind))
-    elif coordinate:
-        sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_coordinate(*coordinate))
-    else:
-        return default_text
+    if sid is None and coordinate:
+        sid = _OBSERVANCE_ID_BY_READINGS.get(
+            _observance_id_from_coordinate(*coordinate, kind=kind))
     return _OBSERVANCE_CATALOG.get(sid, {}).get("en", default_text) if sid else default_text
 
 
@@ -2344,16 +2396,33 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     ``readings=[]``: the former means the caller never asked for it (every dev
     verification script); the latter is a real, aliturgical day from the actual serving
     path, which still needs :func:`_position_coordinate`'s fallback attempted.
+
+    **The coordinate guard.** A coordinate lookup is only ever offered when the stored
+    label either carries no position component or carries one the rule agrees with. A
+    coordinate hit restates the rule rather than corroborating it (see
+    :func:`_resolve_generated_text`), so on the one occasion the two authorities visibly
+    disagree -- a stored, cross-year-validated component that is not what the rule would
+    print -- the stored value wins and no rename is applied, which is exactly the
+    behaviour before the coordinate route existed.
+
+    It never fires in the supported range: the table and the rule agree on all 6,312 days
+    that have both (``tests/test_coordinate_index.py``). It is here for the moment that
+    range moves. ``LECTIONARY_MAX_YEAR`` is env-overridable by design -- the deploy
+    runbook widens it with a one-line ``gcloud run services update``, and the engine's own
+    ``ValueError`` tells a library consumer to do the same -- so a build-time assertion
+    and a CI sweep, both bounded by ``MIN_YEAR``/``MAX_YEAR``, are not in the path when
+    someone widens the range against an already-shipped index. This guard is.
     """
     position = _position_label(d)
     if position is None:
         return label
+    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    stored = next((p for p in parts if _is_position_component(p)), None)
     if readings is None:
         resolved = position
     else:
-        resolved = _resolve_generated_text(
-            position, readings, "position", _position_coordinate(d))
-    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
+        coordinate = _position_coordinate(d) if stored in (None, position) else None
+        resolved = _resolve_generated_text(position, readings, "position", coordinate)
     if any(_is_position_component(p) for p in parts):
         if resolved != position:                  # a catalogued rename overrides even a
             parts = [resolved if _is_position_component(p) else p for p in parts]
@@ -2433,13 +2502,19 @@ def _apply_eve_label(label: str, d: datetime.date, readings=None) -> str:
     a catalogued rename (``readings`` lets :func:`_resolve_generated_text` find one), which
     overrides even a stored eve component.
 
-    ``readings`` behaves exactly as it does for :func:`_apply_position_label`.
+    ``readings`` behaves exactly as it does for :func:`_apply_position_label`, and the
+    coordinate guard documented there applies here too, against the stored eve component.
     """
     eve = _eve_label(d)
     if eve is None:
         return label
-    resolved = _resolve_generated_text(eve, readings, "eve") if readings else eve
     parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    stored = next((p for p in parts if p.startswith("Eve of ")), None)
+    if readings:
+        coordinate = _eve_coordinate(d) if stored in (None, eve) else None
+        resolved = _resolve_generated_text(eve, readings, "eve", coordinate)
+    else:
+        resolved = eve
     if any(p.startswith("Eve of ") for p in parts):
         if resolved != eve:
             parts = [resolved if p.startswith("Eve of ") else p for p in parts]

@@ -281,8 +281,10 @@ Sunday-after-Nativity/Transfiguration/Assumption families are a different proble
 does NOT rescue: their instability is *within* one tier (`validated-table` every time —
 the reading a lectio-continua slot carries stays put, but the Sunday-count the source
 prints for it can drift across years of different length, per `_position_label`'s own
-docstring), so they still fail the one-to-one check and stay excluded, falling back to
-their literal template text.
+docstring), so they still fail the one-to-one readings check. Most of them are picked up
+by the coordinate pass below instead; the Sunday-after-Nativity six and "Second Sunday
+after Pentecost" are not, because a drifting count is not a stable coordinate either, and
+they fall back to their literal template text.
 
 Three more collisions, each real and each handled:
 
@@ -292,15 +294,42 @@ Three more collisions, each real and each handled:
   *every* occurrence of either, forever. `_observance_id_from_readings` folds a `kind`
   ("position"/"eve") into the hash, so the two are keyed in separate namespaces and
   resolve independently despite the shared readings.
-- **Some position labels have no readings to hash.** A few days in the ferial track of
-  the Fast of the Catechumens (Aṙաջավորաց պահք) carry no scripture — a validated,
-  intentional aliturgical day, not missing data. Those are indexed instead by calendar
-  **coordinate** (`engine._position_coordinate`: the position family's own anchor key and
-  day-offset, refactored out of `_position_label` so both share one matching loop), hashed
-  by `engine._observance_id_from_coordinate` in a namespace that cannot collide with a
-  readings-based hash. The coordinate is a pure function of the calendar, so it's exactly
-  as stable as readings are elsewhere; `_resolve_generated_text` only falls back to it
-  when `readings` is empty, never after a real readings lookup misses.
+- **A day's readings are not always its own to be keyed by.** Some days have no readings
+  at all: the ferial track of the Fast of the Catechumens (Առաջավորաց պահք) carries no
+  scripture — a validated, intentional aliturgical day, not missing data. Far more often,
+  a fixed civil feast outranks the day and takes its readings, leaving the label served
+  but its signature unrecognizable. Both are handled by a second key, the calendar
+  **coordinate** (`engine._position_coordinate` / `engine._eve_coordinate`: the family's
+  own anchor key and day-offset, refactored out of `_position_label`/`_eve_label` so text
+  and coordinate share one matching loop), hashed by
+  `engine._observance_id_from_coordinate` in a namespace that cannot collide with a
+  readings-based hash. `build_readings_index` gives an entry to every label with one
+  stable coordinate no other label shares, and `_resolve_generated_text` tries it whenever
+  the readings lookup finds nothing — for empty readings *and* after a miss.
+  `kind` is folded into the coordinate hash for the same reason it is folded into the
+  readings hash, and here the collision is not hypothetical: Pentecost+21 is the
+  coordinate of both "Third Sunday after Pentecost" and "Eve of Fast of St. Gregory the
+  Illuminator".
+
+  The two keys are **not equally strong**, and the code does not pretend otherwise. A
+  readings hit is per-occurrence evidence — readings come from the validated table,
+  produced independently of the rule that emitted the label. A coordinate hit only
+  restates that the rule fired here; its backing is rule-level
+  (`dev/verify_position_labels.py`, 6,216 matched / 0 MISMATCH / 0 EXTRA, and
+  `dev/verify_eve_labels.py`, 338/338). Three things keep the weaker key honest, each
+  covering a moment the others do not:
+
+  | Guard | Where | Fires when |
+  |---|---|---|
+  | `_assert_routes_agree` | `build_readings_index` | a rebuild would write an index whose two routes name different observances — the build fails and writes nothing |
+  | `tests/test_coordinate_index.py` | CI | a change parts the table from the rule, or leaves a covered label-day unresolvable, anywhere in `MIN_YEAR`–`MAX_YEAR` |
+  | the coordinate guard | `_apply_position_label` / `_apply_eve_label` | at request time, a stored position/eve component disagrees with the rule — the stored value wins and no rename is applied |
+
+  The third exists because the first two are bounded by the supported range and the range
+  is **env-overridable by design**: the deploy runbook below widens it with a one-line
+  `gcloud run services update`, and the engine's own `ValueError` tells a library consumer
+  to do the same. Neither a build assertion nor a CI sweep is in the path then. In range
+  the guard never fires — the table and the rule agree on all 6,312 days that have both.
 - **A dominant `Source` tier is not always enough.** "Eve of Great Lent" disagrees on 2
   of 27 years (2010, 2021) — the Presentation of the Lord, a *fixed civil date* (Feb 14),
   happens to land on Great Lent's own eve and outranks it — but `Source` stays
@@ -324,8 +353,9 @@ value when it actually resolves to something *different* from the literal defaul
 default is otherwise trusted over a fresh recomputation, for the same reason the table
 overlay exists in the first place.
 
-Practically: to rename an English position/eve label already covered by the readings
-index (`illuminator_fast_day_*` and the Nisibis fast's ids, and similar), edit
+Practically: to rename an English position/eve label the index covers — which is now all
+but the 8 listed under *Index coverage*, `illuminator_fast_day_*` and `james_nisibis_day_*`
+among them — edit
 `approved_en` in `dev/observance_name_review.tsv` and rebuild (`build_ground_truth.py`
 then `build_observance_catalog.py`) — `engine.py` does not change. `dev/
 source_corrections.named_fast_label` calls `engine._position_label` directly rather
@@ -345,32 +375,33 @@ worked example: Nisibis needed both halves (no label existed at all); Elijah nee
 the `_POSITION_FAMILIES` template edit, since its position label was already served, just
 under a less specific name.
 
-#### A covered label can still have an uncovered occurrence
+#### Coverage is per-label; resolution is per-occurrence
 
-Coverage is a property of a **label**, not of each of its days. An indexed label resolves
-on the occurrences whose readings are its own; on an occurrence where something else
-supplied the day's readings, the hash misses and `_resolve_generated_text` returns the
-literal template text — so a TSV rename does not reach *that date*, even though the same
-rename reaches every other day of the same label. Serving is unaffected (the literal text
-is the correct text; that is what `verify_position_labels.py`'s 0 MISMATCH means) — only
-renameability is.
+Coverage is a property of a **label**; whether a rename actually reaches a given day is a
+property of that **occurrence**. The two came apart under the readings-only index: an
+indexed label resolved on the occurrences whose readings were its own, but on an
+occurrence where something else supplied the day's readings the hash missed and
+`_resolve_generated_text` returned the literal template text — so a TSV rename reached
+every other day of the same label and not that one. Serving was unaffected (the literal
+text is the correct text, which is what `verify_position_labels.py`'s 0 MISMATCH means);
+only renameability was.
 
-Across 2001-2027 this is **93 of ~4,300** served position/eve label-days, over **31
-labels** and **11 civil dates** (`Source` split: 44 `validated-composite`, 13
-`generative-composite`, 36 `validated-table`). The dominant cause is the displacement
-described above, seen from the occurrence side rather than the label side: Sep 8 (24
-days), Dec 9 (20), Feb 14 (12), Nov 20 (8), Apr 7 (7), Feb 13 (5). The rest is the
-Sunday-count drift of the "after Assumption" family, which is uncovered for its own
-reasons.
+That was **93 of ~4,300** served position/eve label-days, over **31 labels** and **11
+civil dates** — `Source` split 44 `validated-composite`, 13 `generative-composite`, 36
+`validated-table`; concentrated on Sep 8 (24 days), Dec 9 (20), Feb 14 (12), Nov 20 (8),
+Apr 7 (7), Feb 13 (5). The dominant cause was displacement by a fixed civil feast, seen
+from the occurrence side rather than the label side.
 
-**Practical consequence for tests.** A test that proves the rename mechanism works must
-not pick a year where the day under test is one of these occurrences, or it fails for a
-reason that has nothing to do with the mechanism. `tests/test_language.py`'s
-`TestNisibisAndElijahRenamesResolveThroughTheCatalog` uses **2017** for exactly this
-reason: Dec 9 falls in the Nisibis window in 12 of 27 years, and in 2026 it lands on the
-fast's Third day, whose readings are then the Conception's. 2017 puts Dec 9 (a Saturday,
-Heesnak+20) outside the window, so all five days are `validated-table` and the test
-isolates "does the rename propagate" from "is this occurrence displaced."
+The coordinate pass closes all 93: every covered label-day in range now resolves, pinned
+by `tests/test_coordinate_index.py`. The Dec-9/Nisibis case that motivated it is now
+ordinary — Dec 9 falls inside that fast's window in 12 of 27 years, and a rename reaches
+those days like any other.
+
+**This no longer constrains test-year choice**, which it used to. `tests/test_language.py`'s
+`TestNisibisAndElijahRenamesResolveThroughTheCatalog` still uses 2017, where Dec 9 (a
+Saturday, Heesnak+20) falls outside the window, so all five days are `validated-table` —
+but that is now belt-and-braces rather than a requirement, and a composite year would pass
+too.
 
 #### Index coverage
 
@@ -379,29 +410,29 @@ isolates "does the rename propagate" from "is this occurrence displaced."
 matches sacredtradition.am on every day, covered label or not (0 contradictions, hard
 requirement). Coverage instead measures how many of the position/eve labels the engine
 can currently produce would pick up a *future* TSV rename with no `engine.py` edit.
-Currently **166 of 210** (run `python3 -c "import json; print(len(json.load(open(
-'armenian_lectionary/data/observance_readings_index.json'))))"` for the live count).
+Currently **202 of 210** (run `python3 -c "import json; print(len(json.load(open(
+'armenian_lectionary/data/observance_readings_index.json'))))"` for the live entry count,
+which is larger — a label can hold both a readings entry and a coordinate entry).
 
-The remaining 44 have no independently verifiable stable reading at all, even after the
-commemoration-attribution check above — genuine variance in the source's own counting,
-not a gap in the mechanism:
+The remaining **8** have neither a stable reading nor a stable coordinate to key on. The
+day-count families the readings index used to miss (Great Lent, the Nativity, Catechumens
+and Assumption fasts, Eastertide) are all covered now: their ordinal is arithmetic in the
+offset, so one label sits on exactly one coordinate. What is left is the labels where that
+is not true either:
 
-- `"Fast day"` itself — not one observance to begin with; it labels ~1,513 unrelated days.
-- The Sunday-after-Nativity/Transfiguration/Assumption/Pentecost families and the Advent
-  Sunday count — `_position_label`'s own docstring already flags their counting rule as
-  "not exact on every occurrence": the season's length depends on the movable Easter
-  date, so the lectio-continua sequence compresses or skips in a short year, and neither
-  the same ordinal maps to the same reading nor different ordinals map to different
-  readings, reliably.
-- The Great Lent, Nativity-fast, Catechumens-fast, and Assumption day-counts, and a few
-  Easter/Eastertide day-counts — the same shape of drift, one level down.
+- `"Fast day"` — not one observance to begin with; it labels ~1,513 unrelated days, and so
+  sits on as many coordinates.
+- `First`–`Sixth Sunday after Nativity` and `Second Sunday after Pentecost` —
+  `_position_label`'s own docstring flags their counting rule as "not exact on every
+  occurrence": the season's length depends on the movable Easter date, so the same ordinal
+  falls at different offsets in different years. Neither the same ordinal mapping to the
+  same reading, nor one ordinal to one coordinate.
 
-None of this is rescuable by refining the readings-index mechanism further: the
-text↔reading relationship for these families genuinely isn't stable in the data, so
-there is no signal — readings, coordinate, or otherwise — left to key on. Making these
-renameable via the TSV alone would need a structurally different mechanism (a literal,
-hand-maintained `(family, offset) -> id` table embedded in `engine.py`, decoupled from
-both text and readings) — a larger, separate undertaking, out of scope here.
+These are not rescuable by refining either key: the text is not a stable function of the
+readings *or* of the calendar coordinate, so there is no signal left to hash. Making them
+renameable via the TSV alone would need a literal, hand-maintained `(family, ordinal) ->
+id` table in `engine.py`, decoupled from both — a separate undertaking, and a much smaller
+prize than it was at 44.
 
 A third overlay is not a table problem but a **translation gap**: `engine._FIXED_DATE_OBSERVANCES`
 adds an observance on a fixed civil date that the source's *English* names on no day at all —

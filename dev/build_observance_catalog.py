@@ -58,7 +58,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
     _OBSERVANCE_SEP, _ORDINAL_WORDS, _compute_lectionary, _eve_label,
-    _observance_id_from_coordinate, _observance_id_from_readings, _position_coordinate,
+    _eve_coordinate, _observance_id_from_coordinate, _observance_id_from_readings,
+    _position_coordinate,
     _position_label, compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
@@ -209,8 +210,11 @@ def served_components(ground_truth):
 
 def build_readings_index(ground_truth):
     """readings-hash -> catalog id, for every position/eve label whose readings uniquely
-    identify it: the same text always carries the same readings, and those readings never
-    recur under a different text. Checked within each label's DOMINANT ``Source`` tier,
+    identify it -- plus coordinate-hash -> catalog id for every label a stable calendar
+    coordinate uniquely identifies (see the coordinate pass below).
+
+    The readings half: the same text always carries the same readings, and those readings
+    never recur under a different text. Checked within each label's DOMINANT ``Source`` tier,
     with two further refinements needed to make the correspondence hold in practice:
 
     - **Displacement by a fixed civil date.** A day inside the Fast of St. James the
@@ -236,18 +240,30 @@ def build_readings_index(ground_truth):
       under, not just its dominant one -- a minority tier (a best-guess continuum filling
       in for an unvalidated date) can still reuse another label's reading pool.
 
-    A position label whose dominant-tier readings come up EMPTY (some ferial days of the
-    Fast of the Catechumens carry no scripture at all -- a validated, intentional
-    aliturgical day) is indexed instead by calendar COORDINATE
-    (``engine._position_coordinate``: the position family's own anchor key and
-    day-offset, hashed by ``engine._observance_id_from_coordinate`` in a namespace that
-    cannot collide with a readings-based hash) -- a pure function of the calendar, exactly
-    as stable as readings are for every other entry.
+    A second pass then indexes by calendar COORDINATE (``engine._position_coordinate`` /
+    ``engine._eve_coordinate``: the family's own anchor key and day-offset, hashed by
+    ``engine._observance_id_from_coordinate`` in a namespace that cannot collide with a
+    readings-based hash). Every label with one stable coordinate that no other label
+    shares gets an entry, whether or not the readings pass already covered it.
 
-    ``kind`` ("position"/"eve") is folded into every hash because the two can share a
-    day's readings by construction: Pentecost+21 is a Sunday every year, so "Third Sunday
-    after Pentecost" and "Eve of Fast of St. Gregory the Illuminator" always carry
-    identical readings.
+    That pass used to be reserved for labels with no readings to hash at all (the ferial
+    days of the Fast of the Catechumens, a validated aliturgical day). Reserving it left
+    93 label-days across 31 labels unresolvable -- days where a fixed civil feast outranks
+    the day and takes its readings, so the readings hash misses while the engine goes on
+    serving the label. The exclusions above keep those days from corrupting a label's
+    readings SIGNATURE, which is right; what they cannot do is give the day an identity,
+    and the coordinate can.
+
+    The two routes are not interchangeable and ``engine._resolve_generated_text`` does not
+    treat them as such -- readings are evidence, a coordinate is the labelling rule
+    restating itself. ``_assert_routes_agree`` is what keeps the weaker one honest: where
+    both resolve, they must name the same observance, or the build fails and writes
+    nothing.
+
+    ``kind`` ("position"/"eve") is folded into every hash, readings and coordinate alike,
+    because the two can share a day by construction: Pentecost+21 is a Sunday every year,
+    so "Third Sunday after Pentecost" and "Eve of Fast of St. Gregory the Illuminator"
+    always carry identical readings AND sit on the identical coordinate.
 
     Loads ``_position_label``/``_eve_label`` with no ``readings`` argument (the literal
     calendar-rule text, matching how the catalog's ids were originally minted), then
@@ -273,7 +289,9 @@ def build_readings_index(ground_truth):
     # lets a disagreeing occurrence be checked against an independently, globally stable
     # competing commemoration.
     occurrences_by_key = {}
-    coordinates_by_text = {}                          # position-only; see the docstring
+    coordinates_by_key = {}                  # (kind, text) -> {coordinate, ...}
+    keys_by_coordinate = {}                  # (kind, coordinate) -> {(kind, text), ...}
+    occurrence_coordinate = {}               # (kind, text, date) -> coordinate
     commemoration_readings = {}
     commemoration_dates = {}
     d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
@@ -283,12 +301,15 @@ def build_readings_index(ground_truth):
         commem = base["Liturgical Day"]
         commemoration_readings.setdefault(commem, set()).add(readings)
         commemoration_dates.setdefault(commem, set()).add(d)
-        for kind, label in (("position", _position_label(d)), ("eve", _eve_label(d))):
+        for kind, label, coordinate in (
+                ("position", _position_label(d), _position_coordinate(d)),
+                ("eve", _eve_label(d), _eve_coordinate(d))):
             if label and id_for_literal_text(label):
                 by_tier = occurrences_by_key.setdefault((kind, label), {})
                 by_tier.setdefault(base["Source"], []).append((readings, commem, d))
-                if kind == "position":
-                    coordinates_by_text.setdefault(label, set()).add(_position_coordinate(d))
+                coordinates_by_key.setdefault((kind, label), set()).add(coordinate)
+                keys_by_coordinate.setdefault((kind, coordinate), set()).add((kind, label))
+                occurrence_coordinate[(kind, label, d)] = coordinate
         d += datetime.timedelta(days=1)
 
     # Every tier, not just each key's dominant one -- see the docstring's cross-tier note.
@@ -323,18 +344,68 @@ def build_readings_index(ground_truth):
         if len(readings_set) != 1:
             continue                              # not offset-determined; leave unresolvable
         (readings,) = readings_set
-        if readings:
-            if len(keys_by_readings[(kind, readings)]) != 1:
-                continue                          # those readings also carry another text
-            index[_observance_id_from_readings(list(readings), kind)] = (
-                id_for_literal_text(text))
-        elif kind == "position":
-            coords = coordinates_by_text[text]
-            if len(coords) != 1 or None in coords:
-                continue                          # not a single stable calendar coordinate
-            (akey, offset), = coords
-            index[_observance_id_from_coordinate(akey, offset)] = id_for_literal_text(text)
+        if not readings:
+            continue                              # aliturgical: the coordinate pass has it
+        if len(keys_by_readings[(kind, readings)]) != 1:
+            continue                              # those readings also carry another text
+        index[_observance_id_from_readings(list(readings), kind)] = id_for_literal_text(text)
+
+    # Coordinate pass. Every label with one stable coordinate that no other label shares
+    # gets an entry, not only the aliturgical ones -- see the docstring.
+    coordinate_ids = {}
+    for key, coords in coordinates_by_key.items():
+        kind, text = key
+        if len(coords) != 1 or None in coords:
+            continue                          # not a single stable calendar coordinate
+        (coordinate,) = coords
+        if len(keys_by_coordinate[(kind, coordinate)]) != 1:
+            continue                          # another label sits on the same coordinate
+        akey, offset = coordinate
+        coordinate_ids[_observance_id_from_coordinate(akey, offset, kind)] = (
+            id_for_literal_text(text))
+
+    _assert_routes_agree(index, coordinate_ids, occurrences_by_key, occurrence_coordinate,
+                         id_for_literal_text)
+    index.update(coordinate_ids)
     return index
+
+
+def _assert_routes_agree(readings_ids, coordinate_ids, occurrences_by_key,
+                         occurrence_coordinate, id_for_literal_text):
+    """Fail the build if the two routes would ever name different observances.
+
+    The readings route is evidence and the coordinate route is the labelling rule
+    restated (see ``engine._resolve_generated_text``), so wherever both resolve, they are
+    two independent authorities answering one question and must answer it the same way.
+    They do, on every one of the ~4,300 label-days in range. If a table rebuild ever
+    parts them, that is the signal that one of the two is wrong -- and it has to stop the
+    build, because by the time it reaches a served name there is nothing left to notice
+    it: both routes produce a plausible observance name, and neither is marked.
+
+    Bounded by MIN_YEAR/MAX_YEAR, since that is what the sweep above walked.
+    """
+    conflicts = []
+    for (kind, text), by_tier in occurrences_by_key.items():
+        expected = id_for_literal_text(text)
+        for occurrences in by_tier.values():
+            for readings, _commem, d in occurrences:
+                coordinate = occurrence_coordinate.get((kind, text, d))
+                if coordinate is None:
+                    continue
+                akey, offset = coordinate
+                via_coordinate = coordinate_ids.get(
+                    _observance_id_from_coordinate(akey, offset, kind))
+                via_readings = readings_ids.get(
+                    _observance_id_from_readings(list(readings), kind)) if readings else None
+                if via_coordinate and via_readings and via_coordinate != via_readings:
+                    conflicts.append(
+                        f"{d} {kind} {text!r}: readings -> {via_readings}, "
+                        f"coordinate -> {via_coordinate} (expected {expected})")
+    if conflicts:
+        raise SystemExit(
+            "readings and coordinate routes disagree on "
+            f"{len(conflicts)} occurrence(s); the index was NOT written:\n  "
+            + "\n  ".join(conflicts[:20]))
 
 
 def build_catalog(ground_truth):
@@ -491,7 +562,9 @@ def main():
     with open(READINGS_INDEX_PATH, "w", encoding="utf-8") as fh:
         json.dump(readings_index, fh, ensure_ascii=False, indent=1, sort_keys=True)
         fh.write("\n")
-    print(f"wrote {len(readings_index)} readings-keyed id(s) to {READINGS_INDEX_PATH}")
+    # "resolvable", not "readings-keyed": the file holds readings hashes and coordinate
+    # hashes in one namespace-prefixed keyspace (see build_readings_index).
+    print(f"wrote {len(readings_index)} resolvable id(s) to {READINGS_INDEX_PATH}")
     return 0
 
 
