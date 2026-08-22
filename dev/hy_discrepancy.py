@@ -6,7 +6,7 @@ same reason: so the accuracy test and the human-readable numbers can never drift
 It was written after a refactor regressed ``language="hy"`` on ~118 days with nothing to
 catch it -- English had a 9,496-day contract and Armenian had none.
 
-Three normalizations are applied to the SOURCE before comparing, each matching a
+Four normalizations are applied to the SOURCE before comparing, each matching a
 deliberate, already-registered decision rather than papering over a defect:
 
   * ``dev/fetch_translations.to_mashtots_names`` -- the source types a handful of proper
@@ -16,6 +16,11 @@ deliberate, already-registered decision rather than papering over a defect:
   * ``source_corrections.ground_truth_hy_fixes`` -- the reviewed Armenian corrections, the
     counterpart of what ``canonical_commem`` does for English. Without it a correction a
     human signed and a regression nobody noticed are the same finding.
+  * ``source_corrections.normalize_position_label_hy`` -- the Armenian half of the
+    named-fast repair, and the only one of the four that is DATE-scoped. The Fast of
+    St. James the bishop of Nisibis reads a bare ``Պահք`` on all five of its days, so one
+    source string resolves to five different components and no text->text map can express
+    it. Same shape as ``normalize_position_label`` on the English side.
   * component splitting on ``_OBSERVANCE_SEP``, so a day is compared as a set of observances
     rather than one string -- the same projection the English test uses.
 
@@ -83,7 +88,9 @@ from armenian_lectionary.engine import (                                # noqa: 
 from dev.build_observance_catalog import CATALOG_PATH, _INTERNAL_SEP   # noqa: E402
 from dev.observance_ids import _PACKED_POOLS, is_declined_hy           # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
-from dev.source_corrections import ground_truth_hy_fixes                # noqa: E402
+from dev.source_corrections import (                                    # noqa: E402
+    ground_truth_hy_fixes, normalize_position_label_hy,
+)
 
 REF_DIR_HY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reference_data_hy")
 
@@ -105,19 +112,23 @@ def source_days():
     return days
 
 
-def source_feast(raw):
+def source_feast(raw, date_iso=""):
     """The source's Armenian for a day, as we have decided to read it.
 
-    Both normalizations are registered decisions, not fuzz: the orthography reversal
-    v1.2.3 applied to the shipped maps, and the reviewed Armenian corrections from
-    ``approved_hy``. Comparing against the unfolded scrape re-reports each of those as a
-    defect -- which is precisely what it did before this existed, since a deliberate
-    Armenian correction and a regression both read as "the engine emits a component the
-    source does not have".
+    All three normalizations are registered decisions, not fuzz: the orthography reversal
+    v1.2.3 applied to the shipped maps, the reviewed Armenian corrections from
+    ``approved_hy``, and the date-scoped named-fast fold. Comparing against the unfolded
+    scrape re-reports each of those as a defect -- which is precisely what it did before
+    this existed, since a deliberate Armenian correction and a regression both read as
+    "the engine emits a component the source does not have".
+
+    The date-scoped fold needs ``date_iso``; without it the Nisibis fast's bare ``Պահք``
+    reads as five contradictions a year rather than as the repair it is registered as.
     """
     fixes = ground_truth_hy_fixes()
-    return _OBSERVANCE_SEP.join(fixes.get(c, c)
-                           for c in to_mashtots_names(raw).split(_OBSERVANCE_SEP))
+    folded = _OBSERVANCE_SEP.join(fixes.get(c, c)
+                             for c in to_mashtots_names(raw).split(_OBSERVANCE_SEP))
+    return normalize_position_label_hy(folded, date_iso)
 
 
 def normalized(text):
@@ -133,8 +144,8 @@ def normalized(text):
 def component_witnesses():
     """``{armenian component: times the source publishes it}`` over the whole cache."""
     seen = collections.Counter()
-    for raw in source_days().values():
-        for component in components(source_feast(raw)):
+    for iso, raw in source_days().items():
+        for component in components(source_feast(raw, iso)):
             seen[component] += 1
     return seen
 
@@ -215,7 +226,7 @@ def collect():
     dominant = _dominant_forms(component_witnesses())
 
     for iso, raw in sorted(source_days().items()):
-        src = source_feast(raw)
+        src = source_feast(raw, iso)
         eng = compute_armenian_lectionary(
             datetime.date.fromisoformat(iso), language="hy")["Liturgical Day"]
         compared += 1

@@ -1238,7 +1238,14 @@ _POSITION_FAMILIES = (
     ("E", (35, 35), _SUN, "sundays", 1, "{ord} Sunday of Eastertide"),
     ("E", (42, 42), _SUN, "sundays", 1, "{ord} Sunday of Eastertide. Second Palm Sunday"),
     ("E", (8, 48), _MON_TO_SAT, "days", 1, "{ord} day of Eastertide"),
-    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of Pentecost"),
+    # The six weekdays after Pentecost are the Fast of Prophet Elijah, closing on the
+    # Remembrance of Prophet Elijah the following Sunday. The source counts them "Nth day
+    # of Pentecost" -- true, but it does not say which fast the reader is in, while the
+    # source's OWN eve on Pentecost itself does ("Eve of Fast of Prophet Elijah",
+    # _EVE_FAMILIES below). Renamed to agree with that eve, same ordinal; the catalog ids
+    # are unchanged, since this is the same observance under a more specific name. See
+    # docs/observance-name-corrections.md section 6b.
+    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Fast of Prophet Elijah"),
     # -- Winter first: the Nativity arc outranks the autumn anchors it overlaps.
     # Jan 6-13 is the Nativity octave, not the tail of Advent; and once Heesnak has
     # passed, a Sunday is "of Advent", not still "after the Holy Cross".
@@ -1275,10 +1282,22 @@ _POSITION_FAMILIES = (
     # The Fast of St. Gregory the Illuminator, opening the day after its Sunday eve
     # (Pentecost+21) and closing before the Discovery of the Relics on the Saturday. The
     # source prints only "Fast day" here in English while naming the ordinal in Armenian;
-    # source_corrections.illuminator_fast_label registers the repair, and this family
+    # source_corrections.named_fast_label registers the repair, and this family
     # regenerates the same label so the stored and overlaid values agree.
     ("PE", (22, 26), _MON_TO_FRI, "days", -21,
      "{ord} day of the Fast of St. Gregory the Illuminator"),
+    # The Fast of St. James the bishop of Nisibis: five weekdays in the middle of Advent,
+    # opening the day after its Sunday eve (Heesnak+21) and closing before the saint's own
+    # commemoration on the Saturday (+27) -- the same shape as the Illuminator fast above.
+    # The source prints only "Fast day" here in EITHER language (unlike the Illuminator,
+    # where Armenian already counted the days); source_corrections.named_fast_label /
+    # named_fast_label_hy register the repair from the source's own eve. Placed here,
+    # before the Dec-9 civil-date entry below: Dec 9 falls inside this window in 12 of the
+    # 27 supported years, and letting the Dec-9 marker win there would punch a hole in the
+    # fast's ordinal ("First, Second, --, Fourth, Fifth"). See
+    # docs/observance-name-corrections.md section 6b.
+    ("HE", (22, 26), _MON_TO_FRI, "days", -21,
+     "{ord} day of the Fast of St. James the bishop of Nisibis"),
     # -- Ordinary-time fast days (terminal fallthrough) -------------------------
     # A Wed/Fri no season above has claimed is simply a fast day. Verified exact on every
     # such day in the ground truth (1553/1553). Counter ``None`` = a fixed label, no ordinal.
@@ -2113,7 +2132,7 @@ def _resolve_generated_text(default_text, readings, kind, coordinate=None):
 # of the Fast of St. Gregory the Illuminator with their ordinal in Armenian but printed a
 # bare "Fast day" in English, one string standing for six observances, and the id had to be
 # recovered from the DATE. That is registered as a repair now
-# (source_corrections.illuminator_fast_label), which is what lets this be a plain dict.
+# (source_corrections.named_fast_label), which is what lets this be a plain dict.
 # Display text -> its own {en, hy}, and display text -> the OBSERVANCE it names. One key
 # set, because one observance is one CANON: where the source prints a longer or shorter
 # companion list for the same liturgical day, that is the Tonats'oyts packing several First
