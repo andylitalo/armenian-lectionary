@@ -345,6 +345,33 @@ worked example: Nisibis needed both halves (no label existed at all); Elijah nee
 the `_POSITION_FAMILIES` template edit, since its position label was already served, just
 under a less specific name.
 
+#### A covered label can still have an uncovered occurrence
+
+Coverage is a property of a **label**, not of each of its days. An indexed label resolves
+on the occurrences whose readings are its own; on an occurrence where something else
+supplied the day's readings, the hash misses and `_resolve_generated_text` returns the
+literal template text — so a TSV rename does not reach *that date*, even though the same
+rename reaches every other day of the same label. Serving is unaffected (the literal text
+is the correct text; that is what `verify_position_labels.py`'s 0 MISMATCH means) — only
+renameability is.
+
+Across 2001-2027 this is **93 of ~4,300** served position/eve label-days, over **31
+labels** and **11 civil dates** (`Source` split: 44 `validated-composite`, 13
+`generative-composite`, 36 `validated-table`). The dominant cause is the displacement
+described above, seen from the occurrence side rather than the label side: Sep 8 (24
+days), Dec 9 (20), Feb 14 (12), Nov 20 (8), Apr 7 (7), Feb 13 (5). The rest is the
+Sunday-count drift of the "after Assumption" family, which is uncovered for its own
+reasons.
+
+**Practical consequence for tests.** A test that proves the rename mechanism works must
+not pick a year where the day under test is one of these occurrences, or it fails for a
+reason that has nothing to do with the mechanism. `tests/test_language.py`'s
+`TestNisibisAndElijahRenamesResolveThroughTheCatalog` uses **2017** for exactly this
+reason: Dec 9 falls in the Nisibis window in 12 of 27 years, and in 2026 it lands on the
+fast's Third day, whose readings are then the Conception's. 2017 puts Dec 9 (a Saturday,
+Heesnak+20) outside the window, so all five days are `validated-table` and the test
+isolates "does the rename propagate" from "is this occurrence displaced."
+
 #### Index coverage
 
 "Index coverage" is a **separate axis from accuracy**, not a measure of it:
