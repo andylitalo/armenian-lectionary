@@ -1,7 +1,7 @@
 """DEV-ONLY: classify every difference between the served Armenian feast name and
 sacredtradition.am's own Armenian.
 
-The Armenian counterpart of ``dev/feast_discrepancy_report.py``, and it exists for the
+The Armenian counterpart of ``dev/observance_discrepancy_report.py``, and it exists for the
 same reason: so the accuracy test and the human-readable numbers can never drift apart.
 It was written after a refactor regressed ``language="hy"`` on ~118 days with nothing to
 catch it -- English had a 9,496-day contract and Armenian had none.
@@ -16,7 +16,7 @@ deliberate, already-registered decision rather than papering over a defect:
   * ``source_corrections.ground_truth_hy_fixes`` -- the reviewed Armenian corrections, the
     counterpart of what ``canonical_commem`` does for English. Without it a correction a
     human signed and a regression nobody noticed are the same finding.
-  * component splitting on ``_FEAST_SEP``, so a day is compared as a set of observances
+  * component splitting on ``_OBSERVANCE_SEP``, so a day is compared as a set of observances
     rather than one string -- the same projection the English test uses.
 
 Findings are classified, strongest first:
@@ -35,7 +35,7 @@ Findings are classified, strongest first:
   * ``ORDER`` -- the same components in a different order.
   * ``DOMINANT_FORM`` -- the source spells one name several ways and the engine serves the
     one it uses most often. Not a defect: it is the same policy the English side applies to
-    ``Phillip``/``Philip`` (docs/feast-name-corrections.md section 4), and the day the cache
+    ``Phillip``/``Philip`` (docs/observance-name-corrections.md section 4), and the day the cache
     happens to sample decides nothing. Separated out so the counts above mean
     "unexplained", not "everything that differs".
   * ``INTERNAL_DELIMITER`` -- identical to the source once the catalog's internal delimiter
@@ -78,7 +78,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                                # noqa: E402
-    _FEAST_SEP, compute_armenian_lectionary,
+    _OBSERVANCE_SEP, compute_armenian_lectionary,
 )
 from dev.build_observance_catalog import CATALOG_PATH, _INTERNAL_SEP   # noqa: E402
 from dev.observance_ids import _PACKED_POOLS, is_declined_hy           # noqa: E402
@@ -89,8 +89,8 @@ REF_DIR_HY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reference
 
 
 def components(feast_str):
-    """The feast string's ``_FEAST_SEP``-joined components, stripped and de-blanked."""
-    return [c.strip() for c in (feast_str or "").split(_FEAST_SEP) if c.strip()]
+    """The feast string's ``_OBSERVANCE_SEP``-joined components, stripped and de-blanked."""
+    return [c.strip() for c in (feast_str or "").split(_OBSERVANCE_SEP) if c.strip()]
 
 
 def source_days():
@@ -116,8 +116,8 @@ def source_feast(raw):
     source does not have".
     """
     fixes = ground_truth_hy_fixes()
-    return _FEAST_SEP.join(fixes.get(c, c)
-                           for c in to_mashtots_names(raw).split(_FEAST_SEP))
+    return _OBSERVANCE_SEP.join(fixes.get(c, c)
+                           for c in to_mashtots_names(raw).split(_OBSERVANCE_SEP))
 
 
 def normalized(text):
@@ -225,7 +225,7 @@ def collect():
 
         src_comps, eng_comps = components(src), components(eng)
         contradictions, omissions, expansions = diff_components(src_comps, eng_comps)
-        if eng.replace(_INTERNAL_SEP, _FEAST_SEP) == src:
+        if eng.replace(_INTERNAL_SEP, _OBSERVANCE_SEP) == src:
             kind = "INTERNAL_DELIMITER"
         elif _is_dominant_form(contradictions, omissions, dominant):
             kind = "DOMINANT_FORM"

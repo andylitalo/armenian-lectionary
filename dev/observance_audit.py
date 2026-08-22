@@ -1,12 +1,12 @@
 """DEV-ONLY audit of the engine's feast/fast NAME against the sacredtradition.am scrape.
 
-Drives the TDD loop behind tests/test_feast.py. For every cached day (2001-2026) it
-compares the commemoration component (dev/feast_names.commemoration_of, canonicalized
+Drives the TDD loop behind tests/test_observance.py. For every cached day (2001-2026) it
+compares the commemoration component (dev/observance_names.commemoration_of, canonicalized
 by dev/source_corrections.canonical_commem) of the engine's "Liturgical Day" against the
 scraped feast, and prints any residual mismatches grouped by Source tier. Not used by
 the app at runtime.
 
-    python dev/feast_audit.py
+    python dev/observance_audit.py
 """
 
 import collections
@@ -17,7 +17,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                        # noqa: E402
-from dev.feast_names import commemoration_of                            # noqa: E402
+from dev.observance_names import commemoration_of                            # noqa: E402
 from dev.source_corrections import canonical_commem                     # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary      # noqa: E402
 

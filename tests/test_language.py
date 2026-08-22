@@ -87,11 +87,11 @@ class TestResolveObservanceNames(unittest.TestCase):
 
     def test_composite_resolves_component_by_component(self):
         """Unknown components stay English rather than dropping the whole name."""
-        label = "Some Sunday" + engine._FEAST_SEP + \
+        label = "Some Sunday" + engine._OBSERVANCE_SEP + \
             "Remembrance of the Armenian Genocide (1915)"
         self.assertEqual(
             engine._resolve_observance_names(label, "hy"),
-            "Some Sunday" + engine._FEAST_SEP + "ՀՀ եղեռն")
+            "Some Sunday" + engine._OBSERVANCE_SEP + "ՀՀ եղեռն")
 
     def test_unknown_unchanged(self):
         self.assertEqual(engine._resolve_observance_names("Mystery", "hy"), "Mystery")
@@ -222,7 +222,7 @@ class TestShippedMapsOrthography(unittest.TestCase):
         # The maintainer's canonical example.
         self.assertEqual(books.get("John"), "Աւետարան ըստ Յովհաննէսի")
 
-    def test_feasts_use_mashtots_orthography(self):
+    def test_observances_use_mashtots_orthography(self):
         # Feast titles are entered in traditional orthography at the source but carry a
         # few proper-noun reform slips (Դանիել/Եզեկիել/Անգե, հավատ). The shipped map must
         # be a fixed point of the specific-word reversal that dev applies on a re-scrape:

@@ -10,7 +10,7 @@ import functools
 import json
 import os
 
-from armenian_lectionary.engine import _FEAST_SEP
+from armenian_lectionary.engine import _OBSERVANCE_SEP
 
 CATALOG_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -35,7 +35,7 @@ def _text_to_id():
 
 
 def ids_for_text(text):
-    """Ordered list of observance ids for a (possibly _FEAST_SEP-joined) served string.
+    """Ordered list of observance ids for a (possibly _OBSERVANCE_SEP-joined) served string.
 
     Raises KeyError, naming the missing component, rather than silently dropping it --
     an unresolvable component here means observance_catalog.json has drifted out of date
@@ -44,7 +44,7 @@ def ids_for_text(text):
     """
     by_text = _text_to_id()
     ids = []
-    for component in [c.strip() for c in (text or "").split(_FEAST_SEP) if c.strip()]:
+    for component in [c.strip() for c in (text or "").split(_OBSERVANCE_SEP) if c.strip()]:
         if component not in by_text:
             raise KeyError(
                 f"no observance_catalog.json entry for component {component!r}; "
@@ -110,7 +110,7 @@ def pool_of_text(text):
 # names on any day. Not a correction -- there is no printed English to correct -- so
 # apply_ground_truth has no way to register them and they would otherwise read as a
 # contradiction on every occurrence. Declared here instead, and counted by their own ratchet
-# (tests/test_feast_name_raw.FEAST_ADDITION_CEILING) so the number stays visible.
+# (tests/test_observance_name_raw.FEAST_ADDITION_CEILING) so the number stays visible.
 #
 # The bar is deliberately high: the source must state the day in its OTHER language, so the
 # addition is a translation gap rather than an editorial opinion, and docs section 9 must
@@ -134,7 +134,7 @@ def is_added_text(text):
 # occurrence of Կաղանդ on any of its 189 pages. So it is the scrape's addition, not the
 # book's. From 2015 the engine serves the rite actually kept on that day instead
 # (blessing_of_the_pomegranates); before it was instituted, the day is its position label
-# alone. See docs/feast-name-corrections.md section 9.
+# alone. See docs/observance-name-corrections.md section 9.
 # Both spellings: what the source prints, and what our own review row renames it to. The
 # reports fold registered Armenian corrections onto the source BEFORE comparing, so by the
 # time a component reaches here it may already read "Նռնօրհնէք" -- and that fold is not

@@ -29,15 +29,15 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                       # noqa: E402
-from dev.feast_names import is_position                                # noqa: E402
+from dev.observance_names import is_position                           # noqa: E402
 from armenian_lectionary.engine import (                               # noqa: E402
-    _FEAST_SEP, _position_label, compute_armenian_lectionary,
+    _OBSERVANCE_SEP, _position_label, compute_armenian_lectionary,
 )
 
 
 def source_position(feast_str):
     """The position component the source printed for a day, or None."""
-    for c in [x.strip() for x in (feast_str or "").split(_FEAST_SEP) if x.strip()]:
+    for c in [x.strip() for x in (feast_str or "").split(_OBSERVANCE_SEP) if x.strip()]:
         if is_position(c):
             return c
     return None
@@ -86,7 +86,7 @@ def main():
             continue
         served = compute_armenian_lectionary(
             datetime.date.fromisoformat(iso))["Liturgical Day"]
-        if src in [c.strip() for c in served.split(_FEAST_SEP)]:
+        if src in [c.strip() for c in served.split(_OBSERVANCE_SEP)]:
             served_ok += 1
         else:
             served_lost += 1

@@ -71,7 +71,7 @@ verse-boundary convention on the same pericope, not a missing reading. Gate on
 Every result also carries the **feast/fast name of the day** in the `"Liturgical Day"`
 field. As of **1.1.0** this name is locked against the same authoritative ground truth:
 the engine's commemoration matches the source on **all 9,495 days of 2001–2026 (100%)**,
-with no exceptions and no allowlist (`tests/test_feast.py`). The engine always serves a
+with no exceptions and no allowlist (`tests/test_observance.py`). The engine always serves a
 concrete, source-matched name — never a placeholder. As of **1.1.1** the name's
 components (calendar-position label, commemoration, eve/status note) are joined with a
 ` — ` separator that mirrors the source's own `<br>` structure — e.g. `Twentieth day of
@@ -81,9 +81,9 @@ The match is checked on the **commemoration component** — the saint/feast iden
 source string also prepends a *year-varying* calendar-position label ("Nth day of
 &lt;Season&gt;", "Nth Sunday after &lt;Anchor&gt;") that a static engine cannot
 byte-reproduce, so that positional prefix is normalized out on **both** sides before
-comparison (`dev/feast_names.py`); a small set of reviewed companion-enumeration and
+comparison (`dev/observance_names.py`); a small set of reviewed companion-enumeration and
 transliteration variants are reconciled symmetrically (`dev/source_corrections.canonical_commem`).
-Naming nuances may still be refined as experts review. Audit with `python dev/feast_audit.py`.
+Naming nuances may still be refined as experts review. Audit with `python dev/observance_audit.py`.
 
 ### Eight-mode cycle
 

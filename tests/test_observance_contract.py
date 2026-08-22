@@ -35,7 +35,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.source_corrections import unexpected_chars                   # noqa: E402
 from armenian_lectionary.engine import (                              # noqa: E402
-    _FEAST_SEP, compute_armenian_lectionary,
+    _OBSERVANCE_SEP, compute_armenian_lectionary,
 )
 
 # The supported window (armenian_lectionary/app.py's range guard, and the window bahk's
@@ -69,7 +69,7 @@ def _every_supported_date():
         d += datetime.timedelta(days=1)
 
 
-class TestFeastNameContract(unittest.TestCase):
+class TestObservanceNameContract(unittest.TestCase):
     """Invariants every served feast name must satisfy, on every supported date."""
 
     @classmethod
@@ -148,7 +148,7 @@ class TestFeastNameContract(unittest.TestCase):
         """
         bad = []
         for d, (en, hy) in self.names.items():
-            if len(en.split(_FEAST_SEP)) != len(hy.split(_FEAST_SEP)):
+            if len(en.split(_OBSERVANCE_SEP)) != len(hy.split(_OBSERVANCE_SEP)):
                 bad.append((d.isoformat(), en, hy))
         self.assertEqual(
             bad[:5], [],
@@ -175,7 +175,7 @@ class TestObservanceCatalogShape(unittest.TestCase):
         bad = [(sid, lang, entry[lang])
                for sid, entry in sorted(self.catalog.items())
                for lang in ("en", "hy")
-               if _FEAST_SEP in entry[lang]]
+               if _OBSERVANCE_SEP in entry[lang]]
         self.assertEqual(
             bad[:5], [],
             f"{len(bad)} catalog entr(y/ies) embed the component separator in their own "

@@ -1,4 +1,4 @@
-"""DEV-ONLY: freeze ``dev/feast_name_review.tsv`` into ``dev/feast_name_ground_truth.json``,
+"""DEV-ONLY: freeze ``dev/observance_name_review.tsv`` into ``dev/observance_name_ground_truth.json``,
 the reviewed English name for every feast-name component the engine can serve.
 
 Why a separate file from the TSV. The TSV is a *working* document -- it carries review
@@ -17,7 +17,7 @@ feast, or on one date a year for a movable one. A date-keyed table would need ~9
 (one per served day) nearly all repeating the same handful of distinct strings, and
 -- unlike this file -- would say nothing about *why* a name reads the way it does. The
 engine has no per-date name lookup to begin with; it assembles a day's name from components
-via ``_FEAST_SEP``, so a fix must be expressed at the same granularity to compose correctly
+via ``_OBSERVANCE_SEP``, so a fix must be expressed at the same granularity to compose correctly
 with a day the review process has never seen (2027, or a future re-fetched year).
 
 Each entry:
@@ -36,7 +36,7 @@ Each entry:
                 symmetric: ``source_*`` is what was published, ``approved_*`` is what we
                 serve.
 
-Regenerate after any edit to ``dev/feast_name_review.tsv``:
+Regenerate after any edit to ``dev/observance_name_review.tsv``:
     python dev/build_ground_truth.py
 """
 
@@ -45,8 +45,8 @@ import json
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REVIEW_PATH = os.path.join(HERE, "feast_name_review.tsv")
-OUT_PATH = os.path.join(HERE, "feast_name_ground_truth.json")
+REVIEW_PATH = os.path.join(HERE, "observance_name_review.tsv")
+OUT_PATH = os.path.join(HERE, "observance_name_ground_truth.json")
 
 
 def main():

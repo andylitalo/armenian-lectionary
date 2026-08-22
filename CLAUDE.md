@@ -22,10 +22,10 @@ with no install step.
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/feast_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
-| `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/feast_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
+| `armenian_lectionary/data/feast_names_hy.json` | No longer read at runtime (superseded by `observance_catalog.json`). Kept as the source of the `source_hy` column in `dev/observance_name_review.tsv` and exercised by `tests/test_language.py`'s orthography guards; still rebuilt by `dev/fetch_translations.py`. |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
 | `Dockerfile` / `.dockerignore` | Container image for Cloud Run (`pip install .` + gunicorn on `0.0.0.0:$PORT`). |
 | `dev/` | **Dev-only** tooling (ground-truth fetch, table build, analysis). Not used at runtime; excluded from the image and package. Writes the shipped JSON via the engine's PATH constants. |
@@ -51,11 +51,11 @@ PORT=8090 gunicorn --bind "0.0.0.0:$PORT" --workers 2 --threads 4 --timeout 60 a
 ```bash
 # self-contained, no cache needed:
 python -m unittest tests.test_calendar tests.test_parser tests.test_language \
-                   tests.test_feast_contract
+                   tests.test_observance_contract
 python -m unittest discover -s tests -t .                  # everything
 ```
 The full-dataset regression tests (`test_regression`, `test_full_dataset`,
-`test_table_build`, `test_feast`, `test_feast_name_raw`) need the git-ignored
+`test_table_build`, `test_observance`, `test_observance_name_raw`) need the git-ignored
 `dev/reference_data/` ground-truth cache; they SKIP without it (`@requires_reference_cache`).
 Rebuild the cache with `python dev/bulk_fetch.py` (see README).
 
@@ -65,15 +65,15 @@ others structurally cannot:
 
 | Test | Compares | Needs cache? |
 |------|----------|--------------|
-| `test_feast_name_raw` | the **raw string**, component-wise on ` — `. Contradictions (engine emits a component the source lacks) must be **0**; omissions and exact matches are ratchets, both now at their limits (0 omissions, 9,496/9,496 exact). | yes (2001–2026) |
-| `test_feast_contract` | source-**independent** invariants — no placeholder, no empty name, `hy` differs from `en`, no repeated or runaway component, clean characters. Deliberately asserts **no storage limit**: how to store a name is the consumer's problem. | **no** (2001–2027) |
-| `test_feast` | only the *commemoration component*. Narrowest: it strips the position/eve components from both sides, so >50% of days compare `"" == ""`. | yes (2001–2026) |
+| `test_observance_name_raw` | the **raw string**, component-wise on ` — `. Contradictions (engine emits a component the source lacks) must be **0**; omissions and exact matches are ratchets, both now at their limits (0 omissions, 9,496/9,496 exact). | yes (2001–2026) |
+| `test_observance_contract` | source-**independent** invariants — no placeholder, no empty name, `hy` differs from `en`, no repeated or runaway component, clean characters. Deliberately asserts **no storage limit**: how to store a name is the consumer's problem. | **no** (2001–2027) |
+| `test_observance` | only the *commemoration component*. Narrowest: it strips the position/eve components from both sides, so >50% of days compare `"" == ""`. | yes (2001–2026) |
 | `test_source_text` | the **source's own** text quality, not the engine's fidelity to it — see below. | yes (2001–2026) |
-| `test_feast_name_review` | the engine against **our own** approved names (`dev/feast_name_review.tsv`) — the only one that can fail because a name is *wrong*. | mostly **no** |
+| `test_observance_name_review` | the engine against **our own** approved names (`dev/observance_name_review.tsv`) — the only one that can fail because a name is *wrong*. | mostly **no** |
 
-That last stripping is why `test_feast` alone was not enough — the engine shipped a name
+That last stripping is why `test_observance` alone was not enough — the engine shipped a name
 the source contradicted on 41 days, and six more as bare placeholders, entirely invisible
-to it. `test_feast_contract` needs no ground truth, so it is the only cover for **2027**:
+to it. `test_observance_contract` needs no ground truth, so it is the only cover for **2027**:
 sacredtradition.am publishes nothing for that year, so the cache's 365 days for it are
 empty and no oracle test can assert anything about them.
 
@@ -90,18 +90,18 @@ twice, so it can be caught contradicting itself. That is how the Council of Ephe
 found dated `AD 341` in English and `431` in Armenian, and Pentecost called the
 `Fifteenth day of Eastertide` where the Armenian says fiftieth.
 
-Registered repairs live in the `approved_en` column of `dev/feast_name_review.tsv`, each
+Registered repairs live in the `approved_en` column of `dev/observance_name_review.tsv`, each
 justified by the source contradicting itself rather than by editorial preference (with one
 declared exception — see the doc). `apply_ground_truth` resolves a component by **looking
 it up whole**: `source_en` is a key into that table and a record for the reviewer, never an
 ingredient in the answer, which is always `approved_en` verbatim. When one lands, the
 shipped artifacts must be rebuilt with it — including `saint_schedule.json`, whose feast
 labels are served directly (`dev/refresh_artifact_names.py`). Every correction is written
-up, with its evidence, in [`docs/feast-name-corrections.md`](docs/feast-name-corrections.md).
+up, with its evidence, in [`docs/observance-name-corrections.md`](docs/observance-name-corrections.md).
 
-### Our own ground truth: `dev/feast_name_review.tsv`
+### Our own ground truth: `dev/observance_name_review.tsv`
 
-`dev/reference_data/` is *sacredtradition.am's* ground truth. **`dev/feast_name_review.tsv`
+`dev/reference_data/` is *sacredtradition.am's* ground truth. **`dev/observance_name_review.tsv`
 is ours** — one row per distinct name component with the English a human approved, the
 source's own Armenian beside it, and the questions still open. It is the only name test
 that can fail because a name is *wrong* rather than because it differs from the source.
@@ -126,12 +126,12 @@ The review loop, and why it is safe to hand to a non-programmer:
 2. edit `approved_en` (or `approved_hy`) where the text should read differently, and say
    why in `note`. Leave the `source_*` columns alone — they are the record of what was
    published. `id` (below) is preserved the same way;
-3. `tests/test_feast_name_review.py` now fails, naming the row;
+3. `tests/test_observance_name_review.py` now fails, naming the row;
 4. rebuild (order below), and it passes. The row **is** the registration — there is no
    second place to state a name. `build_ground_truth.py` freezes it and
    `apply_ground_truth` looks it up.
 
-`python dev/feast_name_review.py` refreshes the file and **never discards human edits**;
+`python dev/observance_name_review.py` refreshes the file and **never discards human edits**;
 `--check` reports rows whose approved name the engine does not yet serve. Rows come from
 two places: every distinct component the source published (from the cache, keyed by its raw
 text) and every position/eve label the engine *composes*, which the source may print less
@@ -146,7 +146,7 @@ corrections made 158 of its 429 stored names unreachable, stranding curated icon
 generated contexts behind them with nothing raised; an id that shifted when its text was
 corrected would reproduce that exactly, only harder to notice.
 
-So the id lives in the **`id` column of `dev/feast_name_review.tsv`**, beside the human
+So the id lives in the **`id` column of `dev/observance_name_review.tsv`**, beside the human
 decision about what the observance is called, and the catalog is a straight projection:
 
 ```
@@ -168,7 +168,7 @@ Working rules:
   comma-joined "Fast day, Remembrance of the Ten Virgins", whose halves have their own
   ids), or a minority source spelling nothing reaches. Text the table *stores* keeps its id
   even where a higher-precedence tier shadows it at runtime — the artifacts still resolve.
-  **Say why in `note`**, via `feast_name_review.NO_ID_REASONS` so it survives a rebuild:
+  **Say why in `note`**, via `observance_name_review.NO_ID_REASONS` so it survives a rebuild:
   `test_every_id_less_row_says_why` fails on a bare empty id, because an id missing on
   purpose and an id missing by accident are otherwise indistinguishable, and the accident
   leaves a served observance unaddressable.
@@ -179,11 +179,11 @@ Working rules:
   several onto one line when the taregir leaves few days for them, naming only the first
   "for the sake of brevity" (preface, Sixth, p.556). So a line like `Sts. Vahan of Goghtn,
   Gordius, Polyeuctus and Grigoris` is a **day**. Its `approved_en`/`approved_hy` split it
-  on `_FEAST_SEP`, each canon keeps its own id, and the row itself gets none — the same
+  on `_OBSERVANCE_SEP`, each canon keeps its own id, and the row itself gets none — the same
   shape as the comma-joined `Fast day, Remembrance of the Ten Virgins`. Group or split only
   on First Volume evidence, never on how similar two strings look.
   - A canon the source never publishes alone still needs a row and an id;
-    `feast_name_review.py` emits one (`status = split`) from the halves of a split approved
+    `observance_name_review.py` emits one (`status = split`) from the halves of a split approved
     name, and its Armenian is stated by hand because there is no standalone scrape of it.
   - `dev/observance_ids._PACKED_POOLS` enumerates the two pools **by id**. It is what lets
     the discrepancy reports call a day where the engine serves more canons than the source
@@ -194,18 +194,18 @@ Working rules:
     closing it is a readings-provenance change (docs §7).
 
 Invariants the build enforces, each of which was violable before: ids unique, English
-unique (no two observances under one display string), no component carrying `_FEAST_SEP` in
+unique (no two observances under one display string), no component carrying `_OBSERVANCE_SEP` in
 its own text, every served component covered, nothing shipped silently dropped.
 
 Dev tooling:
 ```bash
 python dev/audit_source_anomalies.py     # errors in the SOURCE's own feast text
-python dev/feast_name_review.py          # refresh dev/feast_name_review.tsv (our own GT)
+python dev/observance_name_review.py          # refresh dev/observance_name_review.tsv (our own GT)
 python dev/refresh_artifact_names.py     # push registered fixes into saint_schedule.json
-python dev/feast_discrepancy_report.py   # engine vs. source, classified (now: 0 findings)
+python dev/observance_discrepancy_report.py   # engine vs. source, classified (now: 0 findings)
 python dev/verify_position_labels.py     # engine._position_label vs. every cached label
 python dev/verify_eve_labels.py          # engine._eve_label vs. every cached eve note
-python dev/feast_audit.py                # residual commemoration mismatches
+python dev/observance_audit.py                # residual commemoration mismatches
 ```
 
 **After any change to `dev/source_corrections`**, rebuild in this order and re-run the
@@ -214,15 +214,15 @@ rebuild leaves days with no Armenian name:
 ```bash
 python dev/fetch_translations.py               # feast/book *_names_hy.json (offline
                                                #   from dev/reference_data_hy/)
-python dev/feast_name_review.py                # refresh the TSV (never discards edits)
-python dev/build_ground_truth.py               # freeze feast_name_review.tsv edits
+python dev/observance_name_review.py                # refresh the TSV (never discards edits)
+python dev/build_ground_truth.py               # freeze observance_name_review.tsv edits
 python dev/build_observance_catalog.py         # observance_catalog.json + observance_readings_index.json
 python dev/build_table.py                      # lectionary_data.json
 python dev/refresh_artifact_names.py --write   # saint_schedule labels
 ```
 The catalog comes **before** the table, not after: `dev/build_table.py` stamps an
 `observance_ids` list onto every entry and fails loudly on a component the catalog does not
-cover. And `feast_name_review.py` comes first, because a correction that introduces new
+cover. And `observance_name_review.py` comes first, because a correction that introduces new
 served text needs a row (and an id) before anything downstream can resolve it.
 `dev/build_second_volume_cycles.py` used to be excluded from that list for not reproducing
 its checked-in artifact; it does now, and `tests/test_second_volume_cycles.py` keeps it that
@@ -255,7 +255,7 @@ and substitutes that id's `hy`, so correcting `approved_hy` and rebuilding is en
 `engine.py` never mentions the Armenian words at all. English used to be the exception:
 `_position_label`/`_eve_label`'s literal template text was *always* what got served, so
 correcting an English position/eve label meant editing the template in `engine.py`, not
-just `dev/feast_name_review.tsv`'s `approved_en`.
+just `dev/observance_name_review.tsv`'s `approved_en`.
 
 `engine._apply_position_label`/`_apply_eve_label` close that gap the same way, for the
 subset of labels it is safe to: those genuinely determined by their offset alone (a
@@ -326,17 +326,17 @@ overlay exists in the first place.
 
 Practically: to rename an English position/eve label already covered by the readings
 index (`illuminator_fast_day_*`, `nisibis_fast_day_*` once PR #28 lands, and similar),
-edit `approved_en` in `dev/feast_name_review.tsv` and rebuild (`build_ground_truth.py`
+edit `approved_en` in `dev/observance_name_review.tsv` and rebuild (`build_ground_truth.py`
 then `build_observance_catalog.py`) — `engine.py` does not change. `dev/
 source_corrections.illuminator_fast_label` calls `engine._position_label` directly rather
 than keeping its own copy of the window and template, for the same duplication reason;
-`dev/feast_names._SEASONS` derives the Illuminator fast's bare name from the live catalog
+`dev/observance_names._SEASONS` derives the Illuminator fast's bare name from the live catalog
 rather than a hardcoded literal, so it does not go stale the day a rename ships.
 
 #### Index coverage
 
 "Index coverage" is a **separate axis from accuracy**, not a measure of it:
-`tests/test_feast_name_raw.py`/`test_feast_name_hy_raw.py` already guarantee served text
+`tests/test_observance_name_raw.py`/`test_observance_name_hy_raw.py` already guarantee served text
 matches sacredtradition.am on every day, covered label or not (0 contradictions, hard
 requirement). Coverage instead measures how many of the position/eve labels the engine
 can currently produce would pick up a *future* TSV rename with no `engine.py` edit.
@@ -368,7 +368,7 @@ A third overlay is not a table problem but a **translation gap**: `engine._FIXED
 adds an observance on a fixed civil date that the source's *English* names on no day at all —
 currently Jan 1's `Blessing of the Pomegranates`. There is no printed English to correct, so
 it cannot go through `apply_ground_truth`; it is declared in the engine, listed in
-`dev/observance_ids._ADDED_OBSERVANCES`, and pinned by `FEAST_ADDITION_DAYS` as an
+`dev/observance_ids._ADDED_OBSERVANCES`, and pinned by `OBSERVANCE_ADDITION_DAYS` as an
 **equality**, because an addition is excluded from the contradiction count by construction
 and nothing else would notice it firing on the wrong days. Each entry carries the **first
 year it applies** (2015 for the Pomegranates, the year the rite was instituted) — the one

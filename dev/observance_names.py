@@ -16,7 +16,7 @@ compare only the **commemoration component** -- the saint/feast identity -- whic
 reproducible. ``commemoration_of`` strips the position/eve/status noise; ``commem_key``
 casefolds it for comparison.
 
-Not shipped (dev tooling); imported by tests/test_feast.py and dev/feast_audit.py.
+Not shipped (dev tooling); imported by tests/test_observance.py and dev/observance_audit.py.
 """
 
 import os
@@ -38,7 +38,7 @@ _ORD_DAY_OF_RE = re.compile(r"^\w+ day of (.+)$")
 
 def _served_season_name(catalog_id, fallback):
     """The bare season/fast name behind a "{ord} day of <name>" catalog id, read from the
-    LIVE catalog rather than hardcoded, so a rename (edit dev/feast_name_review.tsv's
+    LIVE catalog rather than hardcoded, so a rename (edit dev/observance_name_review.tsv's
     approved_en, rebuild) is picked up here automatically instead of drifting from a copy.
     Falls back to ``fallback`` if the catalog or the id is absent (a thin checkout).
     """
@@ -159,7 +159,7 @@ def commemoration_of(feast_str):
     if not feast_str:
         return ""
     # The fetch layer now joins the source's <br>-delimited components with " — " (see
-    # fetch_reference.FEAST_SEP); the engine emits the same. Re-mash to the separatorless
+    # fetch_reference.OBSERVANCE_SEP); the engine emits the same. Re-mash to the separatorless
     # form this extractor's position/eve stripping expects -- and so a legacy mashed string
     # (no separator) canonicalizes identically. The separator carries no commemoration.
     s = feast_str.replace(" — ", "")

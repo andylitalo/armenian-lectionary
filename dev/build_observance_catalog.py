@@ -1,4 +1,4 @@
-"""DEV-ONLY: project dev/feast_name_ground_truth.json into the shipped id -> {en, hy}
+"""DEV-ONLY: project dev/observance_name_ground_truth.json into the shipped id -> {en, hy}
 observance catalog.
 
 "Observance" (not "feast") because the corpus is not all feasts -- fasts ("First day of
@@ -6,7 +6,7 @@ the Fast of the Assumption"), calendar positions ("Fourth Sunday after Nativity"
 notes ("Eve of Great Lent") are named components too.
 
 This is a PROJECTION, not a derivation. Every id is STATED, in the ``id`` column of
-dev/feast_name_review.tsv, next to the human decision about what the observance should be
+dev/observance_name_review.tsv, next to the human decision about what the observance should be
 called::
 
     {row.id: {"en": row.approved_en, "hy": row.approved_hy}}
@@ -57,21 +57,21 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                              # noqa: E402
-    _FEAST_SEP, _compute_lectionary, _eve_label, _observance_id_from_coordinate,
+    _OBSERVANCE_SEP, _compute_lectionary, _eve_label, _observance_id_from_coordinate,
     _observance_id_from_readings, _position_coordinate, _position_label,
     compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
 DEV_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(DEV_DIR)
-GROUND_TRUTH_PATH = os.path.join(DEV_DIR, "feast_name_ground_truth.json")
-REVIEW_PATH = os.path.join(DEV_DIR, "feast_name_review.tsv")
+GROUND_TRUTH_PATH = os.path.join(DEV_DIR, "observance_name_ground_truth.json")
+REVIEW_PATH = os.path.join(DEV_DIR, "observance_name_review.tsv")
 CATALOG_PATH = os.path.join(REPO_ROOT, "armenian_lectionary", "data",
                             "observance_catalog.json")
 READINGS_INDEX_PATH = os.path.join(REPO_ROOT, "armenian_lectionary", "data",
                                    "observance_readings_index.json")
 
-# _FEAST_SEP is the ENGINE's component join, and a catalog entry is ONE component. Any
+# _OBSERVANCE_SEP is the ENGINE's component join, and a catalog entry is ONE component. Any
 # entry whose own text contains it is a category error, and it shows: the source's Armenian
 # for a few days carries a trailing note its English drops ("- Նաւակատիք", the vigil), and
 # the scrape kept that inside the single component it was paired with. The engine then
@@ -139,7 +139,7 @@ def _slug(text, used):
     the whole catalog would renumber every colliding entry the moment a new one sorted
     ahead of it. Stated ids are what make that impossible.
     """
-    s = _STRIP_PREFIX.sub("", text.replace(_FEAST_SEP, " ").lower())
+    s = _STRIP_PREFIX.sub("", text.replace(_OBSERVANCE_SEP, " ").lower())
     base = "_".join(_NON_WORD.sub("_", s).strip("_").split("_")[:4]) or "observance"
     sid, n = base, 2
     while sid in used:
@@ -161,7 +161,7 @@ def served_components(ground_truth):
     source_corrections.illuminator_fast_label), and the COMPONENTS of every approved name.
 
     Components, not whole approved names: a correction may resolve one source string into
-    several observances joined on _FEAST_SEP, because the Tonats'oyts packs several First
+    several observances joined on _OBSERVANCE_SEP, because the Tonats'oyts packs several First
     Volume canons onto one line when the taregir leaves few days for them. Each half is a
     served observance and needs an id, including the halves the source never publishes
     alone -- which is precisely the case that reading only whole approved names misses.
@@ -174,7 +174,7 @@ def served_components(ground_truth):
         d += datetime.timedelta(days=1)
     whole = {row["approved_en"] for row in ground_truth.values() if row.get("approved_en")}
     for approved in whole:
-        parts = [p.strip() for p in approved.split(_FEAST_SEP) if p.strip()]
+        parts = [p.strip() for p in approved.split(_OBSERVANCE_SEP) if p.strip()]
         if len(parts) > 1:
             # Only the halves a split PRODUCED. A whole approved name is already a row, and
             # that row states its id or states why it has none -- sweeping those back in
@@ -320,7 +320,7 @@ def build_catalog(ground_truth):
     One entry per OBSERVANCE, not per display string. A commemoration the source spells
     several ways is one entry per CANON: the Tonats'oyts packs several First Volume canons
     onto one line when the taregir leaves few days for them, and the row approves the
-    _FEAST_SEP-joined split, so each canon resolves to its own id and the join gets none.
+    _OBSERVANCE_SEP-joined split, so each canon resolves to its own id and the join gets none.
     """
     catalog, problems = {}, []
     by_id, by_en = {}, {}
@@ -357,12 +357,12 @@ def build_catalog(ground_truth):
                 f"{sid} and {by_en[en]} share the English {en!r}; one display string "
                 "cannot identify two observances")
             continue
-        if _FEAST_SEP in en:
+        if _OBSERVANCE_SEP in en:
             problems.append(f"{sid}: {en!r} is a whole day, not one component -- an id "
                             "belongs on each half, not on the join")
             continue
         by_id[sid], by_en[en] = source, sid
-        catalog[sid] = {"en": en, "hy": hy.replace(_FEAST_SEP, _INTERNAL_SEP)}
+        catalog[sid] = {"en": en, "hy": hy.replace(_OBSERVANCE_SEP, _INTERNAL_SEP)}
 
     return catalog, problems
 
@@ -386,7 +386,7 @@ def audit(catalog, ground_truth):
         findings.append(
             f"{len(unregistered)} component(s) the engine serves have no id: "
             + ", ".join(repr(t) for t in unregistered[:5])
-            + "\n  Add the row to feast_name_review.tsv (dev/feast_name_review.py) and "
+            + "\n  Add the row to observance_name_review.tsv (dev/observance_name_review.py) and "
               "rerun with --mint.")
 
     if os.path.exists(CATALOG_PATH):

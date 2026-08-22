@@ -59,23 +59,23 @@ BOOK_MAP_PATH = os.path.join(DATA_DIR, "book_names_hy.json")
 URL = ("https://www.sacredtradition.am/Calendar/nter.php"
        "?NM=0&iM=1103&iA=0&iL=0&ymd={ymd}")
 
-# Must match the engine's join convention (armenian_lectionary.engine._FEAST_SEP) and
+# Must match the engine's join convention (armenian_lectionary.engine._OBSERVANCE_SEP) and
 # dev/fetch_reference.py so feast components split/rejoin identically across languages.
-FEAST_SEP = " — "
+OBSERVANCE_SEP = " — "
 
 # A citation is "<book head> <chapter.verse tail>"; the tail is language-independent.
 _REF_RE = re.compile(r"^(.*?)(\d+\.\d.*)$")
 
 
 def _strip(s: str) -> str:
-    """Collapse the source's <br>-delimited components onto FEAST_SEP (mirrors
+    """Collapse the source's <br>-delimited components onto OBSERVANCE_SEP (mirrors
     dev/fetch_reference.py so the Armenian feast splits into the same components)."""
     import html as _html
     s = re.sub(r"\s*<br\s*/?>\s*", "\x00", s)
     s = re.sub(r"<[^>]+>", "", s)
     s = _html.unescape(s)
     parts = [p.strip() for p in s.split("\x00") if p.strip()]
-    return FEAST_SEP.join(parts)
+    return OBSERVANCE_SEP.join(parts)
 
 
 # --------------------------------------------------------------------------- #
@@ -231,11 +231,11 @@ def build(force: bool = False):
             feast_votes[en["feast"]][hy["feast"]] += 1
             # Also vote per component. The engine composes some labels itself
             # (Annunciation collisions, the Genocide-Remembrance note, ...) by joining
-            # FEAST_SEP components, so a per-component map lets those translate even
+            # OBSERVANCE_SEP components, so a per-component map lets those translate even
             # when the exact composite was never scraped as one string. Only pair when
             # both sides split into the same number of components (same structure).
-            en_parts = en["feast"].split(FEAST_SEP)
-            hy_parts = hy["feast"].split(FEAST_SEP)
+            en_parts = en["feast"].split(OBSERVANCE_SEP)
+            hy_parts = hy["feast"].split(OBSERVANCE_SEP)
             if len(en_parts) == len(hy_parts) > 1:
                 for ep, hp in zip(en_parts, hy_parts):
                     feast_votes[ep][hp] += 1

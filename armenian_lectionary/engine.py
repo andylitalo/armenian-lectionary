@@ -32,7 +32,7 @@ DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # Armenian ("hy") name maps, scraped from sacredtradition.am by
 # dev/fetch_translations.py. Each degrades to {} if absent; language="hy" then falls
 # back to the English name. FEAST maps a whole scraped feast string OR a single
-# FEAST_SEP component -> its Armenian form; BOOK maps an English book head -> Armenian.
+# OBSERVANCE_SEP component -> its Armenian form; BOOK maps an English book head -> Armenian.
 # FEAST_NAMES_HY_PATH is no longer consulted at runtime at all: #18 moved feast-name
 # resolution onto the id catalog (see OBSERVANCE_CATALOG_PATH below), so the map it points
 # at is now a dev-time input to dev/build_observance_catalog.py and a shipped data file
@@ -65,7 +65,7 @@ SUPPORTED_LANGUAGES = ("en", "hy")
 # Supported date range. The validated table, the saint schedule and the ground truth all
 # stop here, and outside it the engine has nothing to say: it falls through to internal
 # absence-markers and would serve "(commemoration)" or "Feast (day not yet in validated
-# table)" as if those were names. tests/test_feast_contract.py forbids exactly those strings
+# table)" as if those were names. tests/test_observance_contract.py forbids exactly those strings
 # INSIDE the range, so returning them outside it was the same defect with no test looking.
 #
 # Env-overridable under the names app.py already used, so the range can widen without a code
@@ -1116,7 +1116,7 @@ def _movable_slot_readings(d, tables=None, with_band=True):
     return list(entry["readings"]) if entry is not None else None
 
 
-def _collision_base_feast(d, tables=None):
+def _collision_base_observance(d, tables=None):
     """The NAME of the movable/base commemoration a fixed-date feast co-celebrates on
     ``d``: the pre-Lent cohort martyr keyed to this Easter offset, else the movable
     slot's feast string, else None. The source calendar headlines a fixed/movable
@@ -1134,8 +1134,8 @@ def _collision_base_feast(d, tables=None):
 # label, commemoration, eve/status note). The source delimits them with <br>; the fetch
 # layer (dev/fetch_reference._strip) preserves that boundary as this string, so the shipped
 # table and every served label carry the components already split -- the engine never has
-# to re-derive the boundary. Keep in sync with dev/fetch_reference.FEAST_SEP.
-_FEAST_SEP = " — "
+# to re-derive the boundary. Keep in sync with dev/fetch_reference.OBSERVANCE_SEP.
+_OBSERVANCE_SEP = " — "
 
 
 # --------------------------------------------------------------------------- #
@@ -1147,7 +1147,7 @@ _FEAST_SEP = " — "
 # whose keys are liturgical coordinates shared by many years: doing so asserted the modal
 # year's ordinal for every year and shipped a wrong label on 34 days across 2001-2026
 # (dev/build_table.unanimous_feast now drops those; see
-# dev/feast_discrepancy_report.py). The label is regenerated here instead, per date,
+# dev/observance_discrepancy_report.py). The label is regenerated here instead, per date,
 # where the year is known.
 #
 # Each family's counting rule was derived from the ground-truth cache and verified against
@@ -1174,7 +1174,7 @@ _SUN = (6,)
 _ANY = None          # unbounded end of a family's offset window
 
 # Recognizes a component as a calendar-position label, so a stored one is not duplicated
-# by the regenerated one. Mirrors dev/feast_names.is_position (dev tooling cannot be
+# by the regenerated one. Mirrors dev/observance_names.is_position (dev tooling cannot be
 # imported at runtime); the ordinal words are this module's own _ORDINAL_WORDS.
 _POSITION_COMPONENT_RE = re.compile(
     r"^(?:" + "|".join(_ORDINAL_WORDS) + r")\s+(?:day of|Sunday)\b"
@@ -1297,7 +1297,7 @@ _POSITION_FAMILIES = (
     # is the fast schedule rather than anything about the feast (a feast marker would show
     # on Thu/Sat too -- it is the same feast every year), and the source's own Armenian
     # reads "Պահք". Folded in source_corrections.POSITION_LABEL_FIXES; see
-    # docs/feast-name-corrections.md section 1.
+    # docs/observance-name-corrections.md section 1.
     ("E", (_ANY, _ANY), (0, 1, 2, 4), None, 0, "Fast day", (12, 9)),
     ("E", (_ANY, _ANY), (2, 4), None, 0, "Fast day"),
 )
@@ -1757,11 +1757,11 @@ _PRELENT_COHORT = (
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     # Two First Volume canons (pp.464-465), packed onto one day and joined on _FEAST_SEP
+     # Two First Volume canons (pp.464-465), packed onto one day and joined on _OBSERVANCE_SEP
      # so each resolves to its own observance id. The Second Volume prints "the Atomian
      # Generals, and Bishop Mark, Pion, and the others"; its preface (Sixth) says to
      # celebrate the companions the First Volume sets down.
-     "Sts. Atom and his soldiers" + _FEAST_SEP
+     "Sts. Atom and his soldiers" + _OBSERVANCE_SEP
      + "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, "
        "and Martyrs Abdelmseh, Ormistan and Sayen",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
@@ -1810,11 +1810,11 @@ def _prelent_cohort_layout(year):
             d = d2
         if d in layout:
             # Two canons land on one day. The source prints both -- "Saint Sargis ... and
-            # Saints Atom and his soldiers" -- so serve both, joined on _FEAST_SEP so each
+            # Saints Atom and his soldiers" -- so serve both, joined on _OBSERVANCE_SEP so each
             # resolves to its own observance id. The senior keeps the day's id and its
             # readings; only the name grows, so a merge cannot move a reading.
             senior_id, senior_label, senior_reads = layout[d]
-            layout[d] = (senior_id, senior_label + _FEAST_SEP + label, senior_reads)
+            layout[d] = (senior_id, senior_label + _OBSERVANCE_SEP + label, senior_reads)
             continue
         layout[d] = (sid, label, reads)                 # senior is placed first
     return layout
@@ -2123,8 +2123,8 @@ def _resolve_generated_text(default_text, readings, kind, coordinate=None):
 # set, because one observance is one CANON: where the source prints a longer or shorter
 # companion list for the same liturgical day, that is the Tonats'oyts packing several First
 # Volume canons onto one line, not one observance under two names. The packed line is a
-# _FEAST_SEP join whose components each resolve here on their own
-# (docs/feast-name-corrections.md section 7).
+# _OBSERVANCE_SEP join whose components each resolve here on their own
+# (docs/observance-name-corrections.md section 7).
 def _observance_indexes(catalog):
     """``(text -> that spelling's {en, hy}, text -> the observance's id)``."""
     names = {entry["en"]: entry for entry in catalog.values()}
@@ -2229,7 +2229,7 @@ def _build_readings_refs(readings_list: list) -> list:
 
 
 def _resolve_observance_names(label: str, language: str) -> str:
-    """Return ``label`` (a possibly FEAST_SEP-composite observance name) resolved to
+    """Return ``label`` (a possibly OBSERVANCE_SEP-composite observance name) resolved to
     ``language`` via the id-based observance catalog: each component's already-served
     English text is mapped to its stable id, then to that id's text in ``language``.
 
@@ -2243,10 +2243,10 @@ def _resolve_observance_names(label: str, language: str) -> str:
     if not label:
         return label
     resolved = []
-    for part in label.split(_FEAST_SEP):
+    for part in label.split(_OBSERVANCE_SEP):
         entry = _observance_names().get(part)
         resolved.append(entry.get(language, part) if entry else part)
-    return _FEAST_SEP.join(resolved)
+    return _OBSERVANCE_SEP.join(resolved)
 
 
 def _localize(result: dict, language: str) -> dict:
@@ -2293,13 +2293,13 @@ _GENOCIDE_REMEMBRANCE = "Remembrance of the Armenian Genocide (1915)"
 def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
     """Return ``label`` with the Genocide Remembrance note anchored to April 24.
 
-    The note is a distinct ``_FEAST_SEP``-delimited component; drop it wherever the
+    The note is a distinct ``_OBSERVANCE_SEP``-delimited component; drop it wherever the
     Easter-keyed table baked it (it floats off April 24 in other years) and re-append it
     only on April 24."""
-    parts = [p for p in label.split(_FEAST_SEP) if p != _GENOCIDE_REMEMBRANCE]
+    parts = [p for p in label.split(_OBSERVANCE_SEP) if p != _GENOCIDE_REMEMBRANCE]
     if (d.month, d.day) == (4, 24):
         parts.append(_GENOCIDE_REMEMBRANCE)
-    return _FEAST_SEP.join(parts)
+    return _OBSERVANCE_SEP.join(parts)
 
 
 _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
@@ -2339,19 +2339,19 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     else:
         resolved = _resolve_generated_text(
             position, readings, "position", _position_coordinate(d))
-    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
     if any(_is_position_component(p) for p in parts):
         if resolved != position:                  # a catalogued rename overrides even a
             parts = [resolved if _is_position_component(p) else p for p in parts]
-        return _FEAST_SEP.join(parts) if parts else label
-    return _FEAST_SEP.join([resolved] + parts)
+        return _OBSERVANCE_SEP.join(parts) if parts else label
+    return _OBSERVANCE_SEP.join([resolved] + parts)
 
 
 # Observances fixed to a civil date that the source's ENGLISH never names, though its
 # Armenian does. Unlike a position or eve label these are not computed from the calendar
 # and not abbreviated from a longer printed form -- they are days the source's English
 # simply omits, so they are declared here, one entry per date, and counted by their own
-# ratchet (dev/observance_ids._ADDED_OBSERVANCES, FEAST_ADDITION_DAYS).
+# ratchet (dev/observance_ids._ADDED_OBSERVANCES, OBSERVANCE_ADDITION_DAYS).
 #
 # Each entry carries the first year it applies. That is unusual -- the rest of the engine
 # is a function of the liturgical calendar, not of history -- and it is here because the
@@ -2365,7 +2365,7 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
 # there in Armenian (and nothing in English), but the 1915 Tonatsoyts itself carries no such
 # entry -- grabar-ocr/corpus has no occurrence of Կաղանդ on any of its 189 pages -- so the
 # civil New Year is the scrape's addition, not the book's, and it is not served. See
-# docs/feast-name-corrections.md section 9.
+# docs/observance-name-corrections.md section 9.
 _FIXED_DATE_OBSERVANCES = {
     (1, 1): ("Blessing of the Pomegranates", 2015),
 }
@@ -2395,11 +2395,11 @@ def _apply_fixed_date_label(label: str, d: datetime.date) -> str:
     fixed = fixed_date_label(d)
     if fixed is None:
         return label
-    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
     if fixed in parts:
-        return _FEAST_SEP.join(parts)
+        return _OBSERVANCE_SEP.join(parts)
     head = parts[:1] if parts and _is_position_component(parts[0]) else []
-    return _FEAST_SEP.join(head + [fixed] + parts[len(head):])
+    return _OBSERVANCE_SEP.join(head + [fixed] + parts[len(head):])
 
 
 def _is_position_component(component: str) -> bool:
@@ -2425,12 +2425,12 @@ def _apply_eve_label(label: str, d: datetime.date, readings=None) -> str:
     if eve is None:
         return label
     resolved = _resolve_generated_text(eve, readings, "eve") if readings else eve
-    parts = [p for p in label.split(_FEAST_SEP) if p and p not in _PLACEHOLDER_LABELS]
+    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
     if any(p.startswith("Eve of ") for p in parts):
         if resolved != eve:
             parts = [resolved if p.startswith("Eve of ") else p for p in parts]
-        return _FEAST_SEP.join(parts) if parts else label
-    return _FEAST_SEP.join(parts + [resolved]) if parts else resolved
+        return _OBSERVANCE_SEP.join(parts) if parts else label
+    return _OBSERVANCE_SEP.join(parts + [resolved]) if parts else resolved
 
 
 def compute_armenian_lectionary(target_date: datetime.date,
@@ -2462,7 +2462,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
 
     Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
     the engine has no validated data and would otherwise return an internal absence-marker
-    dressed as a name -- the very strings ``tests/test_feast_contract.py`` forbids inside
+    dressed as a name -- the very strings ``tests/test_observance_contract.py`` forbids inside
     it. :func:`calculate_liturgical_mode` is NOT restricted this way; it is pure arithmetic
     on the paschal cycle and correct for any date.
     """
@@ -2628,17 +2628,17 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
         # it collides with, plus the Annunciation. In Lent/Holy Week the movable day
         # outranks and leads; in Eastertide the Annunciation leads.
         _annun = "Annunciation to the Virgin Mary"
-        _base = _collision_base_feast(target_date) or ""
+        _base = _collision_base_observance(target_date) or ""
         _e_off = (target_date - calculate_gregorian_easter(target_date.year)).days
         if not _base:
             _name = _annun
         elif _e_off >= 1:
             # Eastertide: the Annunciation leads the commemorations, but the calendar
             # day-count stays at the front -- position, then Annunciation, then any saint.
-            _parts = _base.split(_FEAST_SEP)
-            _name = _FEAST_SEP.join([_parts[0], _annun] + _parts[1:])
+            _parts = _base.split(_OBSERVANCE_SEP)
+            _name = _OBSERVANCE_SEP.join([_parts[0], _annun] + _parts[1:])
         else:
-            _name = _base + _FEAST_SEP + _annun   # Lent/Holy Week: the movable day leads
+            _name = _base + _OBSERVANCE_SEP + _annun   # Lent/Holy Week: the movable day leads
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": _name,
@@ -2669,7 +2669,7 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
         # label alone: the source names 2011-02-13 "Fifth Sunday after Nativity — Eve of
         # Fast of Catechumens" and never "Eve of the Presentation of the Lord", so
         # inventing that eve here shipped a name the source contradicts.
-        _name = _collision_base_feast(target_date) or ""
+        _name = _collision_base_observance(target_date) or ""
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": _name,
