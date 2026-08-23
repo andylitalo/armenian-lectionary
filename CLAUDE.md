@@ -217,7 +217,9 @@ neither is wrong alone). `audit_duplicate_commemorations.py` needs no ground tru
 is also what lets it cover **2027**; its ratchet is `tests/test_duplicate_commemorations.py`
 and the by-design recurrences are declared in `observance_ids._RECURRING_OBSERVANCES`. See
 docs §7b. `observance_year_table.py` writes the reviewing artifact that surfaced it —
-a year per page, each day's ids positionally aligned with the words they stand for.
+a year per page, each day's ids positionally aligned with the words they stand for. Its
+output is **not checked in**: 20 duplicates are still open, so a published table would be a
+table to republish. Generate it when they close (docs/README.md).
 
 **After any change to `dev/source_corrections`**, rebuild in this order and re-run the
 suite — the table and the `hy` map are keyed on the corrected English, so a partial
