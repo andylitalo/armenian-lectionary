@@ -206,7 +206,18 @@ python dev/observance_discrepancy_report.py   # engine vs. source, classified (n
 python dev/verify_position_labels.py     # engine._position_label vs. every cached label
 python dev/verify_eve_labels.py          # engine._eve_label vs. every cached eve note
 python dev/observance_audit.py                # residual commemoration mismatches
+python dev/audit_duplicate_commemorations.py  # a canon kept twice in one liturgical year
+python dev/observance_year_table.py 2026 2027 --write   # docs/observance-names-<year>.tsv
 ```
+
+The last two are **cross-day** checks, and that is the point: every other name check above
+compares one day to the source, so a canon the engine keeps twice a year is invisible to
+all of them (the packed day is a declared `EXPANSION`, the canon's own day is exact —
+neither is wrong alone). `audit_duplicate_commemorations.py` needs no ground truth, which
+is also what lets it cover **2027**; its ratchet is `tests/test_duplicate_commemorations.py`
+and the by-design recurrences are declared in `observance_ids._RECURRING_OBSERVANCES`. See
+docs §7b. `observance_year_table.py` writes the reviewing artifact that surfaced it —
+a year per page, each day's ids positionally aligned with the words they stand for.
 
 **After any change to `dev/source_corrections`**, rebuild in this order and re-run the
 suite — the table and the `hy` map are keyed on the corrected English, so a partial

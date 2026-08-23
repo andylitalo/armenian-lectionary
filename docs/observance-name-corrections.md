@@ -728,6 +728,78 @@ Rows whose approved name contains `_OBSERVANCE_SEP` now take `source_hy` from a 
 pair also shares an approved name, but for that one the approved-keyed map is better,
 because it votes across every year rather than the single day the Armenian cache sampled.
 
+### 7b. The other direction — a companion that already had its own day
+
+§7 measures the packing gap in one direction: days where the source names **more** canons
+than the engine serves (5 English, 4 Armenian, counted as `OMISSION`). The opposite
+direction was not counted at all, because `EXPANSION` was written to excuse it.
+
+The preface-Sixth warrant is *"we have placed only the name of the first saints… for the
+sake of brevity"*. It licenses the engine to serve companions the source abbreviated away
+— but only where the taregir left those companions no day of their own. Nothing checked
+that, and the check is not something a per-day comparison can make: on the packed day the
+engine's extra component is a declared `EXPANSION`, and on the companion's own day the
+engine matches the source byte for byte. **Neither day is wrong. The pair is.**
+
+`dev/audit_duplicate_commemorations.py` states the missing invariant — *a canon is kept
+once per liturgical year* — and found **43** violations across 2001–2027.
+
+Being source-independent, it is also the only check that reaches **2027**, whose 365 cached
+days are empty. Five of the 43 were 2027-only.
+
+#### The Mark/Pionius canon — fixed
+
+23 of the 43 were one bug. `engine._PRELENT_COHORT` glued the Mark/Pionius canon to the
+Atomian Generals' label **unconditionally**, on the warrant above. But that canon has a day
+of its own at Easter−55, where the validated table serves it with its own propers — so the
+engine kept it twice a year, seven days apart, in 23 of 27 liturgical years.
+
+The condition turns out to be exact rather than a judgement call. Easter−55 is always the
+same weekday as the Generals' Easter−62, so only a **fixed civil date** can take it, and in
+the supported range that is Feb 13, the embedded eve of the Presentation of the Lord. The
+source packs the two canons onto one line in precisely the two years where that happens:
+
+| Year | Easter−55 | What sacredtradition.am prints |
+|---|---|---|
+| 2012, 2023 | **Feb 13** — the embedded Presentation eve | both canons, on the Generals' day |
+| 2006, 2017 | free (the Generals' own slot is the blocked one) | this canon alone, on its own day |
+| the other 22 | free | the Generals alone at −62, this canon alone at −55 |
+
+`_prelent_cohort_layout` now packs it only when its own day is unavailable. Serving is
+otherwise untouched — the Generals keep the day's id and readings, and only a name is
+dropped, so no reading moves.
+
+| | before | after |
+|---|---:|---:|
+| duplicate commemorations | 43 | **20** |
+| Armenian components exact | 394 | **396** |
+| Armenian `EXPANSION` | 4 | **2** |
+| English contradictions / omissions | 0 / 5 | 0 / 5 |
+
+#### What is left, and why each needs its own evidence
+
+`tests/test_duplicate_commemorations.py` holds the remaining 20 as a ratchet. They are
+three different problems wearing the same symptom, and none is a spelling decision:
+
+- **17 — a packed companion that also holds its own day.** Same shape as Mark/Pionius, but
+  the packing is stored text in `lectionary_data.json` and `saint_schedule.json`, against a
+  liturgical **coordinate** shared by civil years that disagree about whether the packing
+  applies. §7 already names this: *"the engine serves one packing per liturgical
+  coordinate, and which canons the source names varies by year-type."* An artifact edit
+  would therefore be wrong in the years where the packing is right; this needs a per-date
+  overlay, computed from the liturgical year's own laydown, in the same family as
+  `_apply_position_label`. Affects `hermit_sts_tryphon_barsauma` (6),
+  `andrew_the_general_and` (3), `vahan_of_goghtn` (3), `eugenia_the_virgin_her` (2),
+  `gregory_the_theologian` (2), `hermit_st_anton` (1).
+- **2 — `gordius_polyeuctus_and_grigoris`.** Packed onto *both* its occurrences and heading
+  neither, so there is no "own day" to keep. The readings cannot separate them either. The
+  source names it on the Vahan day and not on the Cyricus day, which says which packing to
+  drop, but that is a claim about the table's stored text and wants First Volume backing.
+- **1 — `patriarchs_barlaam_anthimus_and` on 2027-07-31.** Not a packing at all. The
+  `second-volume-cycle` tier lays this canon into the July pool eight weeks from the late-September
+  Thursday it holds in all 26 cached years, and 2027 is the year `_drop_cache_contradicted`
+  has no cache to filter against. A `dev/build_second_volume_cycles.py` question.
+
 ## 8. Accepted differences from the source
 
 Not everything that differs is a defect, and three of these are the source disagreeing with
