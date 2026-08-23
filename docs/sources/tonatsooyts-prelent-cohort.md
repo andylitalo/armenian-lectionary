@@ -27,9 +27,11 @@ sacredtradition.am cache** (the cache remains a test oracle only).
 
 ---
 
-## The five propers (as received, First Vol pp. 464–465)
+## The five propers the engine lays down (First Vol pp. 464–465)
 
-The section lays the cohort on consecutive saint-weekdays after the Barekendan rubric:
+The section lays the cohort on consecutive saint-weekdays after the Barekendan rubric.
+These five are the ones `_PRELENT_COHORT` generates; the section itself carries more, and
+one of them matters to how the cohort behaves — see *A sixth canon* below.
 
 | Day | Feast | Old Testament | Prophet | Apostle | Gospel |
 |---|---|---|---|---|---|
@@ -48,6 +50,49 @@ Grabar for the Monday (Atom) and Tuesday (Sukias) entries, hand-transcribed from
 >
 > **Երեքշաբաթ. սրբոց Սուքիասանց վըկայից։** … Ճաշու Սաղ. ԽԱ. … Առակ. ԻԲ. 1 … վ. 12 …
 > Մարգարէ Եսայ. ԾԶ. 6 … վ. 7 … Առաքեալն Եբր. ԺԱ. 32 … վ. 40 … Աւետարան Ղուկ. ԺԲ. 4 … վ. 8։
+
+### A sixth canon, a week later — Mark / Pionius (p. 465)
+
+The table above stops at the five the **engine** lays down, which made it read as the whole
+of pp. 464–465. It is not. The section continues onto p. 465, and after a Wednesday ferial,
+Thursday (Voskeank), Friday ferial, **Saturday (Isaac Parthev)** and a Sunday, it sets out a
+sixth martyr canon on the **next Monday**:
+
+> **Երկուշաբաթ. սրբոցն՝ Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի
+> սարկաւագացն, եւ վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի։** ահ. եւ Հարց Մարտիրոսաց։
+> Ճաշու Սաղ. Քահանայք քո։ Մարգարէ Զաքար. Ը. 1 … վ. 3 … Առաքեալն Հռոմ. Ը. 28 … վ. 39 …
+> Ալէ. Քահանայք քո։ Աւետարան Յովհ. ԺԵ. 17 … վ. 21։
+
+| Day | Feast | Prophet | Apostle | Gospel |
+|---|---|---|---|---|
+| **Mon⁺⁷** | **Mark** the Bishop, **Pion** the Priest, Cyril & Benjamin the Deacons, and the Martyrs Abdelmseh, Ormizdan & Sayen | Zech 8:1-3 | Rom 8:28-39 | John 15:17-21 |
+
+Two things follow, and the engine depends on both:
+
+1. **It is its own canon, not a companion of the Atomian Generals.** It has its own tone,
+   its own Psalm and Alleluia, and its own complete propers — no Proverbs/Wisdom reading,
+   unlike the five above.
+2. **It sits exactly one week after them.** The Generals are Easter−62 (Monday); this is the
+   Monday after, Easter−55 — which is always a Monday, since the two are seven days apart.
+
+It is **not** in `_PRELENT_COHORT`, and deliberately: the validated table already serves
+Easter−55, with `Zechariah 8.1-3 · Romans 8.28-39 · John 15.17-21` — this page's three
+readings, verse for verse, arrived at independently of it. Adding it to the cohort would
+only move a validated day onto a source-derived tier to restate the same feast.
+
+The one thing the cohort does need from it is the displaced case; see
+[`observance-name-corrections.md` §7b](../observance-name-corrections.md) and
+`engine._MARK_CANON`. The Second Volume packs it back onto the Generals' day in 3 of its 36
+year-type calendars — **Ձ** (p.593), **Ճ** (p.597), **Մ** (p.599) — and in each of those
+Easter−55 is occupied, by the Vardanank Generals, the Ghevondians and the Presentation of
+the Lord respectively. Year-types that name a different companion beside the Generals
+(Theodore, p.573; the Sukiasians, pp.613/615) do not mention this canon at all.
+
+> **Also on p. 465, and also outside the cohort:** the **Vardanank Generals and the 1,036
+> martyrs** (Thursday, Wisd 3:1-8 · Isa 49:8-9 · Heb 12:1-7 · Luke 6:20-26) and the **150
+> Patriarchs of Constantinople** (Saturday). Both are served from the validated table, so
+> the cohort has no reason to lay them; noted here so the section's contents are on record
+> rather than inferred from what the engine happens to generate.
 
 ---
 

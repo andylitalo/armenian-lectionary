@@ -22,6 +22,31 @@ that governs it.
 | [`observance-name-corrections.md`](observance-name-corrections.md) | sacredtradition.am (English vs. its own Armenian) | Every place the engine deliberately departs from the source's feast text, with the evidence for each — plus the questions still open. Companion to [`dev/observance_name_review.tsv`](../dev/observance_name_review.tsv), the approved-name ground truth. |
 | [`sources/second_volume_index.md`](sources/second_volume_index.md) | Տօնացոյց Second Volume, pp. ~555–643 | Per-year-type "Roman cycle" calendars: saint groups (preface §6), the floating-feast list (§7), leap-year rules. Coverage: **42/50** non-validated days (and **22/22** floating saints) are named in the Second Volume. Plus the section→calendar-letter index (`second_volume_index.csv`) and how to verify/label it. |
 
+### Per-year observance tables
+
+[`dev/observance_year_table.py`](../dev/observance_year_table.py) writes
+`docs/observance-names-<year>.tsv`: what every day of a year is called, and by which
+catalog id — the ids of a day in order, positionally aligned with the English and Armenian
+they stand for. It is a reviewing artifact for the id contract, ahead of exposing those ids
+downstream; nothing at runtime reads it.
+
+```bash
+python dev/observance_year_table.py 2026 2027 --write
+```
+
+**No year is checked in yet, deliberately.** Reading the generated 2027 table is what
+surfaced the duplicate-commemoration defect
+([`observance-name-corrections.md` §7b](observance-name-corrections.md)), and 20 of those
+are still open — a table published now would be a table to republish. Generate it when they
+are closed.
+
+> **Reading the id columns.** A numeric suffix is a **collision counter over a truncated
+> slug, not an ordinal**. `third_day_of_the_4` is the *Third* day of the Fast of Nativity;
+> `third_day_of_the_2` is the *Third* day of the Fast of Advent. The four-word stem
+> `third_day_of_the` is shared, and the digit only says which claimant got there first.
+> Ids are frozen and never re-minted (CLAUDE.md, *Observance ids are stated, not derived*),
+> so an unhelpful one stays unhelpful — read the `en` column beside it, never the slug.
+
 > **Citation convention.** Each canon quotes the English (`gemini-flash` translation,
 > `translated.md`) immediately followed by the page-aligned grabar (classical Armenian)
 > from `grabar-ocr/.../merged.md`, so a reviewer can check the translation against the

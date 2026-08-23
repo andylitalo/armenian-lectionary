@@ -170,3 +170,52 @@ def is_declined_en(text):
     """True if the English component is one the engine deliberately does not serve."""
     return text in _DECLINED_FAST_MARKERS_EN
 
+
+# --------------------------------------------------------------------------- #
+# Observances that legitimately recur within one liturgical year
+#
+# The Tonats'oyts lays each saint's canon down ONCE per annual cycle, so an id served on
+# two days of the same liturgical year is a duplicate commemoration -- see
+# dev/audit_duplicate_commemorations.py, which is the check that statement exists to feed.
+# The ids below are the exceptions, and each is an exception for a stated reason rather
+# than because flagging it was inconvenient. Anything not listed here that recurs is a
+# finding.
+#
+# Two shapes. The first five recur BY DESIGN: they are not saint canons at all, but
+# positions and feasts the calendar returns to. The last two are artifacts of where the
+# year is cut -- Heesnak (the Sunday closest to Nov 18) drifts by up to a week, so an
+# observance anchored to a DIFFERENT feast can fall on either side of the boundary and
+# land twice in one window. Both are ~a full year apart (329d and 364d), both are named by
+# the source on both days, and neither is the engine serving anything twice.
+# --------------------------------------------------------------------------- #
+_RECURRING_OBSERVANCES = {
+    "wednesday_fast": "the weekly fast, served on every unclaimed Wednesday (docs 6c)",
+    "friday_fast": "the weekly fast, served on every unclaimed Friday (docs 6c)",
+    "remembrance_of_the_dead":
+        "kept the day after each of the five tabernacle feasts -- Nativity, Easter, "
+        "Transfiguration, Assumption, Exaltation",
+    "feast_of_the_holy":
+        "Feast of the Holy Church, kept on three days of the Exaltation octave",
+    "feast_of_the_holy_2":
+        "Feast of the Holy Cross, kept on three days of the Exaltation octave",
+    "second_sunday_after_pentecost":
+        "the source prints no FIRST Sunday after Pentecost -- Pentecost itself is the "
+        "first -- so Pentecost+7 and Pentecost+14 both carry this ordinal, in the source "
+        "as well as here. Verified on every cached year; see _position_label's docstring "
+        "on the counting rule not being exact on every occurrence",
+    "tenth_sunday_after_the":
+        "boundary artifact: the last Sunday before Advent, counted from the Holy Cross "
+        "(September) while the year is cut at Heesnak (November). When Heesnak falls late "
+        "the pre-Advent Sunday lands inside the previous window too. 364 days apart, and "
+        "the source prints it on both",
+    "abraham_and_khoren_moneyless_2":
+        "boundary artifact, same shape: this canon's slot moved from late December to "
+        "mid-November between two consecutive laydowns, and the Heesnak cut moved later "
+        "still. 329 days apart, and the source prints it on both",
+}
+
+
+def recurs_by_design(sid):
+    """True if ``sid`` may legitimately appear twice in one liturgical year."""
+    return sid in _RECURRING_OBSERVANCES
+
