@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.audit_duplicate_commemorations import findings                # noqa: E402
 from armenian_lectionary.engine import (                               # noqa: E402
-    MAX_YEAR, MIN_YEAR, compute_armenian_lectionary,
+    MAX_YEAR, MIN_YEAR, _canons_with_own_day, compute_armenian_lectionary,
 )
 
 # What survives after the packed-companion repair (docs section 7b). Two groups remain,
@@ -51,9 +51,9 @@ from armenian_lectionary.engine import (                               # noqa: E
 #     packing rule reaches them. A dev/build_second_volume_cycles.py question.
 MAX_DUPLICATE_COMMEMORATIONS = 4
 
-# The post-Theophany pool canons engine._drop_owned_companions un-packs where the taregir
-# gave them a day of their own (docs section 7b). Named individually rather than counted,
-# so a regression says which canon came back.
+# Canons whose double commemoration is closed, by whichever mechanism closed it (docs
+# section 7b). Named individually rather than counted, so a regression says which canon
+# came back.
 REPAIRED_CANONS = (
     "mark_the_bishop_pionius",           # the pre-Lent cohort case, fixed first
     "hermit_sts_tryphon_barsauma",
@@ -104,10 +104,13 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         """2002-01-17: Tryphon holds 2002-08-01, so Anton's day names Anton alone.
 
         This is what sacredtradition.am prints there ("The Hermit Saints Anton") and what
-        Second Volume p.574 does by hand when the year gives Tryphon room.
+        Second Volume p.574 does by hand when the year gives Tryphon room. The day it was
+        given is asserted too: a drop moves a name, it does not lose one.
         """
         self.assertEqual("The Hermit St. Anton",
                          self._day("2002-01-17")["Liturgical Day"])
+        self.assertEqual("The Hermit Sts. Tryphon, Barsauma and Onuphrius",
+                         self._day("2002-08-01")["Liturgical Day"])
 
     def test_dropping_a_middle_companion_keeps_the_rest(self):
         """2016-07-28: Vahan heads 2016-08-01, so it goes and Gordius stays.
@@ -129,20 +132,24 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         self.assertEqual("The Hermit St. Anton",
                          self._day("2027-07-24")["Liturgical Day"])
 
-    def test_the_year_scan_spans_the_supported_range_edges(self):
-        """A January date sits in the PREVIOUS liturgical year, whose window opens in the
-        November before -- one year below MIN_YEAR at the bottom edge.
+    def test_the_year_scan_overshoots_the_supported_range_at_both_ends(self):
+        """The scan window is Heesnak to Heesnak, so it leaves the range at both edges.
 
-        The scan reads that window through ``_compute_lectionary``, which has no range
-        guard on purpose. Clamping it to the supported range instead would make a day's
-        name depend on ``LECTIONARY_MIN_YEAR``, which is env-overridable by design.
+        A January date sits in the PREVIOUS liturgical year, opening in the November
+        below ``MIN_YEAR``; ``MAX_YEAR``'s own window closes in the November above it.
+        The scan reads both through ``_compute_lectionary``, which has no range guard on
+        purpose -- clamping would make a day's name depend on ``LECTIONARY_MIN_YEAR``,
+        which is env-overridable by design. Both windows are asserted on the scan itself;
+        only the bottom one is reachable from a served day (2001-01-22 is packed and sits
+        in liturgical year 2000), because no packed day falls between Heesnak MAX_YEAR and
+        the end of MAX_YEAR -- which is what keeps the unvalidated top overshoot unread.
         """
-        for year in (MIN_YEAR, MAX_YEAR):
-            d = datetime.date(year, 1, 1)
-            while d.year == year:
-                with self.subTest(d):
-                    self.assertTrue(self._day(d.isoformat())["Liturgical Day"].strip())
-                d += datetime.timedelta(days=1)
+        for ly in (MIN_YEAR - 1, MAX_YEAR):
+            with self.subTest(ly):
+                self.assertIsInstance(_canons_with_own_day(ly), frozenset)
+        self.assertEqual(
+            "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
+            self._day("2001-01-22")["Liturgical Day"])
 
     def test_the_day_keeps_the_head_canons_propers(self):
         """A drop takes a name and nothing else: the readings stay the head canon's.

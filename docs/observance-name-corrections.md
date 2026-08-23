@@ -780,10 +780,10 @@ Year-types that name a *different* companion beside the Generals — Theodore (p
 Sukiasians (pp.613, 615) — do not mention this canon at all. So the book packs it exactly
 when its own day is gone, and never otherwise.
 
-The engine's test is narrower than the book's, and provably equivalent in range. Easter−55
-is always the same weekday as Easter−62 — hence always the Monday the First Volume prints —
-so no other cohort member can land on it and only a **fixed civil date** can take it. Over
-2001–2027 that happens twice:
+The engine originally asked a narrower question than the book's, provably equivalent in
+range: Easter−55 is always the same weekday as Easter−62 — hence always the Monday the First
+Volume prints — so no other cohort member can land on it and only a **fixed civil date** can
+take it. Over 2001–2027 that happens twice:
 
 | Year | Easter−55 | What sacredtradition.am prints |
 |---|---|---|
@@ -794,14 +794,15 @@ so no other cohort member can land on it and only a **fixed civil date** can tak
 The website and the book agree. The Feb 14 branch is unexercised in range but is what
 taregir **Մ** describes, so `blocked` covers it too.
 
-`_prelent_cohort_layout` now packs it only when its own day is unavailable. Serving is
-otherwise untouched — the Generals keep the day's id and readings, and only a name is
-dropped, so no reading moves.
+That hand-rolled test has since been retired: the cohort packs the canon onto the Generals
+unconditionally and the general rule below takes it back off, which reproduces the table
+above day for day. Serving is otherwise untouched — the Generals keep the day's id and
+readings, and only a name is dropped, so no reading moves.
 
 | | before | after |
 |---|---:|---:|
 | duplicate commemorations | 43 | **20** |
-| Armenian components exact | 394 | **396** |
+| Armenian days exact | 394 | **396** |
 | Armenian `EXPANSION` | 4 | **2** |
 | English contradictions / omissions | 0 / 5 | 0 / 5 |
 
@@ -823,18 +824,20 @@ Grigoris"*, continuing on p.462 with Eugenia's household, Gregory the Theologian
 Eugenius — ten canons, each with its own tone, psalm and four readings.
 
 **Packing is a property of the year, not of the saints.** First Volume p.526 states the
-mechanism outright: *"if the interval of eating meat is three weeks, these are the feasts
-that are set down up to this point… But if the meat-eating period is four weeks, **add one
-week here**… And in such years, sometimes **the Apostles James and Simon, being separated
-from Thomas, are celebrated on the Saturday of this week.**"* Given an extra week, a glued
-triad **splits**.
+mechanism outright — of the autumn interval, not this one: *"if the interval of eating meat
+is three weeks, these are the feasts that are set down up to this point. And the fourth
+Sunday becomes the Eve of the Fast of the Holy Cross… But if the meat-eating period is four
+weeks, **add one week here**… And in such years, sometimes **the Apostles James and Simon,
+being separated from Thomas, are celebrated on the Saturday of this week.**"* Given an extra
+week, a glued triad **splits**, and the same arithmetic governs every run a movable fast
+closes.
 
 **And the book performs this exact repair by hand.** Second Volume p.574 prints the line
 `Anton, and Tryphon, Barsamas and Onuphrius the hermits` — the very string the engine
 served on all six `hermit_sts_tryphon_barsauma` duplicate days — then notes in the small
 cursive:
 
-> **If the year-letter is ԹԸ in a leap year, on this Saturday do not celebrate Anton,
+> **If the year-letter is [ԹԸ] in a leap year, on this Saturday do not celebrate Anton,
 > because it was celebrated under the first letter Թ after the Theophany**; but on Saturday
 > celebrate Theodosius; on Monday, Kyriakos; on Tuesday, Vahan; and **on Thursday, Tryphon
 > with their companions.**
@@ -842,7 +845,9 @@ cursive:
 Given room, it unpacks onto its own Thursday. It never prints the canon twice.
 
 `engine._drop_owned_companions` is that condition, generalised from the one canon
-`_prelent_cohort_layout` handled by hand. It runs as a per-date overlay in the
+`_prelent_cohort_layout` handled by hand — which no longer needs to: the cohort now packs
+the Mark/Pionius canon unconditionally and this overlay removes it, so one rule serves both
+cases instead of two that could drift. It runs as a per-date overlay in the
 `_apply_position_label` family, because the packing is stored against a liturgical
 **coordinate** that civil years disagree about, so no artifact edit could be right in every
 year sharing the key. `engine._canons_with_own_day(ly)` reads the liturgical year's own
@@ -856,7 +861,7 @@ id and its readings, so nothing but a name moves.
 | duplicate commemorations | 20 | **4** |
 | days whose name changes | — | 16 |
 | days whose readings change | — | **0** |
-| Armenian components exact | 396 | **397** |
+| Armenian days exact | 396 | **397** |
 | Armenian `EXPANSION` | 2 | **1** |
 | English contradictions / omissions | 0 / 5 | 0 / 5 |
 

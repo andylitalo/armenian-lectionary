@@ -74,14 +74,16 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   day of its own in this liturgical year? — against `_canons_with_own_day(ly)`, the year's
   actual laydown. It is a per-date overlay because the packing is stored against a
   liturgical coordinate that civil years disagree about, so no artifact edit is right in
-  every year sharing the key.
+  every year sharing the key. It also subsumes the hand-rolled version of the same test the
+  pre-Lent cohort carried for the Mark/Pionius canon, which is retired here — the cohort
+  packs that canon unconditionally again and the overlay removes it, day for day as before.
 
   **No reading moves.** The head canon keeps the day, its id and its propers; only a name is
   dropped. Fidelity improves in both languages: 12 days go from `EXPANSION` to matching the
   source exactly (2005-07-28 and 2016-07-28 now reproduce its fuller line byte for byte),
-  no day gains an omission or contradiction, and Armenian exact components go 396 → 397 with
-  `EXPANSION` 2 → 1. Duplicate commemorations 20 → 4; the four that remain are two different
-  problems, both written up.
+  no day gains an omission or contradiction, and Armenian days matching exactly go 396 → 397
+  with `EXPANSION` 2 → 1. Duplicate commemorations 20 → 4; the four that remain are two
+  different problems, both written up.
 
 - **The Fast of the Holy Cross of Varag is named, and stops being served as the weekly
   fast** ([docs §6d](docs/observance-name-corrections.md)). The source names this fast on

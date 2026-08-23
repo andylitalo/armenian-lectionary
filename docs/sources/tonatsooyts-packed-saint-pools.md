@@ -1,7 +1,7 @@
 # Packed saint pools — when one printed line carries several canons, and when it must not
 
 > **Source / provenance:** Տօնացոյց (*Tōnatsʿoyts*), **Second Volume preface, Sixth**
-> (p. 556); **First Volume p. 526** (the gap-length rubric); **Second Volume p. 574**
+> (p. 556); **First Volume p. 526** (the gap-length rubric, stated of the autumn interval); **Second Volume p. 574**
 > (a leap-year unpacking note, printed in the small cursive / նօտր գիր); **First Volume
 > pp. 461–462** (the post-Theophany pool itself). Quoted from
 > `grabar-ocr/corpus/book.english.md` and `book.grabar.md`, both page-anchored.
@@ -70,19 +70,27 @@ are celebrated in various and different intervals").
 
 ## Why they run together — First Volume p. 526
 
-Packing is a property of the **year**, never of the saints. The pool has to fit between the
-fixed Theophany octave and the movable Fast of the Catechumens, and that gap changes length
-with the taregir (`book.english.md:2885`):
+Packing is a property of the **year**, never of the saints: a pool has to fit into however
+many saint weekdays a movable fast leaves in front of it, and that count changes with the
+taregir. The book states the mechanism outright — for a **different** interval, the autumn
+one, which is why the quote names the Fast of the Holy Cross and not the Fast of the
+Catechumens (`book.english.md:2885`, immediately before "Fourth Sunday after the Holy
+Mother of God"):
 
 > Understand, O **lover of feasts**, **if the interval of eating meat is three weeks**,
-> these are the feasts that are set down up to this point… But if the meat-eating period is
-> four weeks, **add one week here**, in which the feasts set down below are celebrated, and
-> the fifth Sunday becomes the Eve of the Fast. And in such years, sometimes **the Apostles
-> James and Simon, being separated from Thomas, are celebrated on the Saturday of this
-> week.** The Directory [Tarekirk] shows you all this.
+> these are the feasts that are set down up to this point. And the fourth Sunday becomes
+> the Eve of the Fast of the Holy Cross; at that time, the feasts set down below are
+> celebrated in another place. But if the meat-eating period is four weeks, **add one week
+> here**, in which the feasts set down below are celebrated, and the fifth Sunday becomes
+> the Eve of the Fast. And in such years, sometimes **the Apostles James and Simon, being
+> separated from Thomas, are celebrated on the Saturday of this week.** The Directory
+> [Tarekirk] shows you all this.
 
 The last clause is the rule read backwards, and it is the decisive one: given an extra week,
-a normally-glued triad **splits**. Gluing is what the book does when it runs out of days.
+a normally-glued triad **splits**. Gluing is what the book does when it runs out of days —
+stated here of the Assumption-to-Holy-Cross interval, and the same arithmetic governs the
+Theophany-to-Catechumens run this pool sits in and the post-Vardavar run it overflows into.
+For the pool itself the book does not argue the point; it performs it, on p. 574.
 
 ## The book performing the repair — Second Volume p. 574
 
@@ -90,13 +98,17 @@ This taregir's default line is `Anton, and Tryphon, Barsamas and Onuphrius the h
 the exact string the engine served on all six `hermit_sts_tryphon_barsauma` duplicate days.
 The leap-year note beside it (`book.english.md:5201`, grabar `book.grabar.md:9184`):
 
+(Letters normalized: the English corpus prints the year-letter as `8 [Te / Թ]` and `9 [To /
+Թ]`, OCR of the Armenian — see the caveat below.)
+
 > 25. Saturday. Tone 4 Plagal. Anton, and Tryphon, Barsamas and Onuphrius the hermits.
-> **If the year-letter is ԹԸ in a leap year, on this Saturday do not celebrate Anton,
+> **If the year-letter is [ԹԸ] in a leap year, on this Saturday do not celebrate Anton,
 > because it was celebrated under the first letter Թ after the Theophany**; but on Saturday
 > celebrate Theodosius; on Monday, Kyriakos; on Tuesday, Vahan; and **on Thursday, Tryphon
 > with their companions.** But in ordinary years, as it is set, celebrate in this manner.
 
-> **Երկուշաբաթ… Եթէ նահանջ ամի ԹԸ իցէն տարեգիրն, դու յայս շաբաթի օրս զԱնտոնն մի՛
+> **25. Շբ. ԴՉ.** Անտոնի, — և Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն։ **Եթէ նահանջ
+> ամի [ԹԸ] իցէն տարեգիրն, դու յայս շաբաթի օրս զԱնտոնն մի՛
 > տօնիցէս, զի տօնեցաւ յառաջին գիրն Թ յետ ծննդեանն**. այլ ի շաբաթի օրն զԹէոդոսն.
 > յերկուշաբաթին՝ զԿիրակոսն. յերեքշաբաթին՝ զՎահանն, և ի հինգշաբաթին՝ **զՏրիփոնն տօնեսցէս
 > իւրեանց ընկերօքն**։

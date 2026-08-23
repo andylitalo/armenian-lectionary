@@ -79,8 +79,7 @@ def pool_of_text(text):
     Unknown text is not an error here (the source publishes spellings that reach nothing);
     it simply belongs to no pool.
     """
-    sid = _text_to_id().get(text)
-    return packed_pool(sid) if sid is not None else None
+    return packed_pool(_text_to_id().get(text))
 
 
 # Observances the engine ADDS: served on a fixed civil date that the source's English never

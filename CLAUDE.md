@@ -192,17 +192,14 @@ Working rules:
     kept visible and ratcheted. It lives in the engine because the runtime needs it too:
     see the next bullet.
   - **The preface-Sixth warrant is conditional, and the condition is enforced per date.**
-    The sentence licensing the engine to serve abbreviated-away companions ends "and
-    commemorate their names *by that canon* as they are set down in the First Volume" — and
-    the First Volume sets each canon down once. So a companion is packed only where the
-    taregir left it no day of its own. `engine._drop_owned_companions` asks that, using
-    `engine._canons_with_own_day(ly)` — the liturgical year's own laydown, read off the
-    engine's pre-overlay output, `lru_cache`d per year and consulted only on a day that is
-    actually packed. It is a **per-date overlay**, in the `_apply_position_label` family and
-    for the same reason: the packing is stored against a liturgical coordinate that civil
-    years disagree about, so no artifact edit is right in every year sharing the key. A head
-    canon is never dropped — it owns the day, its id and its readings — so this only ever
-    removes a name. See docs §7b and `dev/audit_duplicate_commemorations.py`.
+    A companion is packed only where the taregir left it no day of its own;
+    `engine._drop_owned_companions` asks that against `engine._canons_with_own_day(ly)`,
+    the liturgical year's own laydown. It is a **per-date overlay**, in the
+    `_apply_position_label` family and for the same reason: the packing is stored against a
+    liturgical coordinate that civil years disagree about. A head canon is never dropped, so
+    this only ever removes a name. Warrant and pages:
+    `docs/sources/tonatsooyts-packed-saint-pools.md`; results and residual: docs §7b and
+    `dev/audit_duplicate_commemorations.py`.
   - The engine serves **one packing per liturgical coordinate**; which canons the source
     names varies by year-type. That is the residual 5 English / 4 Armenian omissions, and
     closing it is a readings-provenance change (docs §7).

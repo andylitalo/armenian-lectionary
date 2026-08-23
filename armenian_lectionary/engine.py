@@ -1137,21 +1137,18 @@ _OBSERVANCE_SEP = " — "
 # Packed pools -- the First Volume canons the Second Volume prints several to a line
 #
 # The Tonats'oyts sets these out as SEPARATE canons, each with its own tone, psalm and
-# propers: the post-Theophany insertions at First Volume pp.460-462 ("Then the feast of
-# Saint Anton... Then... Theodosius and the Children of Ephesus... Then... Cyriacus and
-# Julietta..." -- ten of them, each printed once) and the pre-Lent cohort at pp.464-465.
-#
-# The Second Volume then packs them onto however many days the taregir leaves between the
-# fixed Theophany and the movable Fast of the Catechumens. That gap is a VARIABLE number of
-# saint weekdays -- First Volume p.526 states the mechanism outright ("if the interval of
-# eating meat is three weeks, these are the feasts set down up to this point... but if four
-# weeks, add one week here") -- so packing is a property of the year, never of the saints.
+# propers (First Volume pp.461-462 and pp.464-465). The Second Volume then packs them onto
+# however many saint weekdays the taregir leaves in the runs that carry them -- the January
+# one after the Theophany octave, and the summer one after Vardavar, which draw on each
+# other's overflow. That count varies by year, so packing is a property of the year, never
+# of the saints.
 #
 # Membership is by id and enumerated from the First Volume, never inferred from text.
+# Full source record: docs/sources/tonatsooyts-packed-saint-pools.md.
 # --------------------------------------------------------------------------- #
 
 _PACKED_POOLS = (
-    # First Volume pp.460-462 -- inserted after the Theophany octave.
+    # First Volume pp.461-462 -- inserted after the Theophany octave.
     frozenset({
         "hermit_st_anton", "hermit_sts_tryphon_barsauma", "theodosius_and_the_children",
         "cyricus_and_his_mother", "vahan_of_goghtn", "fathers_sts_athanasius_and",
@@ -1170,13 +1167,16 @@ _PACKED_POOLS = (
 )
 
 
+_POOL_OF_ID = {sid: pool for pool in _PACKED_POOLS for sid in pool}
+
+
 def packed_pool(sid):
-    """The First Volume pool ``sid`` belongs to, or ``None``.
+    """The First Volume pool ``sid`` belongs to, or ``None`` (including for ``None``).
 
     Public because dev/observance_ids resolves the same membership from TEXT for the
     discrepancy reports, and a second copy of the pools would drift from this one.
     """
-    return next((pool for pool in _PACKED_POOLS if sid in pool), None)
+    return _POOL_OF_ID.get(sid)
 
 
 # --------------------------------------------------------------------------- #
@@ -1915,21 +1915,13 @@ _PRELENT_OFFSETS = frozenset(off for _, off, _, _, _ in _PRELENT_COHORT)
 # The other year-types that name a companion beside the Generals name a different one
 # (Theodore p.573, the Sukiasians pp.613/615) and do not mention this canon at all.
 #
-# Here the test is narrower than the book's, and provably equivalent in range: Easter-55 is
-# always the same weekday as Easter-62 (seven days apart, hence always the Monday the First
-# Volume prints), so no other cohort member can land on it and only a fixed civil date can
-# take it. Over 2001-2027 that happens twice, in 2012 and 2023, both on Feb 13 -- and those
-# are exactly the two years sacredtradition.am prints both names on the Generals' day. The
-# Feb 14 branch is unexercised in range but is what taregir Մ describes, so `blocked` covers
-# it too.
-#
-# Packing it unconditionally is what shipped before, and it commemorated the canon twice in
-# 23 of 27 liturgical years -- invisible to the discrepancy reports, which classified the
-# packed day as an EXPANSION (the preface-Sixth warrant) and found the canon's own day
-# exact. That warrant holds only when the taregir left the canon no day of its own, which
-# is now what the code asks. See dev/audit_duplicate_commemorations.py, docs section 7b, and
+# So the cohort packs it onto the Generals unconditionally and _drop_owned_companions takes
+# it back off wherever the year served its own day -- the general form of the same rule, so
+# the cohort does not carry a second copy of the condition. Over 2001-2027 the packing
+# survives in 2012 and 2023, the two years a fixed civil date (Feb 13) takes Easter-55, and
+# those are exactly the two years sacredtradition.am prints both names on the Generals' day.
+# See dev/audit_duplicate_commemorations.py, docs section 7b, and
 # docs/sources/tonatsooyts-prelent-cohort.md.
-_MARK_OFFSET = -55
 _MARK_CANON = ("Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, "
                "and Martyrs Abdelmseh, Ormistan and Sayen")
 
@@ -1944,16 +1936,14 @@ def _prelent_cohort_layout(year):
     win the merge (senior placed first via setdefault); the juniors abstain. The embedded
     Presentation-eve (Feb 13) is left to the embedded composite.
 
-    The Mark/Pionius canon is packed onto the Atomian Generals' day only in the years its
-    own day at ``_MARK_OFFSET`` is unavailable -- see the note there."""
+    The Mark/Pionius canon is packed onto the Atomian Generals' day; where the year gives
+    it its own day, :func:`_drop_owned_companions` takes it back off -- see the note there.
+    """
     e = calculate_gregorian_easter(year)
     blocked = {_john_forerunner_date(year), datetime.date(year, 2, 14)}
-    mark_day = e + datetime.timedelta(days=_MARK_OFFSET)
-    mark_homeless = (mark_day in blocked
-                     or (mark_day.month, mark_day.day) in EMBEDDED_FIXED)
     layout = {}
     for sid, off, may_shift, label, reads in _PRELENT_COHORT:
-        if sid == "atom" and mark_homeless:
+        if sid == "atom":
             label += _OBSERVANCE_SEP + _MARK_CANON
         d = e + datetime.timedelta(days=off)
         if (d.month, d.day) in EMBEDDED_FIXED:
@@ -2329,16 +2319,15 @@ def _observance_names():
         _TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID = _observance_indexes(
             _OBSERVANCE_CATALOG)
         _OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
+        # _canons_with_own_day caches a year's laydown resolved THROUGH this index, so a
+        # swapped catalog must not answer from a scan the previous one produced.
+        _canons_with_own_day.cache_clear()
     return _TEXT_TO_OBSERVANCE_NAMES
 
 
 def _observance_ids():
-    """``{served English component -> its stable id}``, refreshed like its sibling.
-
-    Goes through :func:`_observance_names` rather than reading the global directly so the
-    two indexes can never be rebuilt out of step.
-    """
-    _observance_names()
+    """``{served English component -> its stable id}``, refreshed like its sibling."""
+    _observance_names()                     # rebuilds both indexes, never one of them
     return _TEXT_TO_OBSERVANCE_ID
 
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
@@ -2519,30 +2508,19 @@ _BARE_FAST_MARKERS = ("Fast day", "Feast day")
 # Preface Sixth, the half that was missing: a companion is packed only when the year
 # left it no day of its own.
 #
-# The Second Volume's preface (Sixth, p.556) licenses serving companions its lines
-# abbreviate away -- "we have placed only the name of the first saints in many places for
-# the sake of brevity; nevertheless... you must celebrate, along with the first-named
-# saint, all the other companions following him" -- and the engine honoured that clause
-# alone. The sentence does not end there. It ends "and commemorate their names BY THAT
-# CANON as they are set down in the First Volume", and the First Volume sets each canon
-# down ONCE (pp.460-462: "Then the feast of Saint Anton... Then... Theodosius and the
-# Children of Ephesus...", ten canons, each with its own propers).
-#
-# So the licence covers only what the taregir had no room to lay down separately. Where it
-# gave the companion a day of its own, adding it back to the head canon's day commemorates
-# the same canon twice in one year -- which the book never does.
-#
-# The book performs this very repair by hand. Second Volume p.574 prints the line
-# "Anton, and Tryphon, Barsamas and Onuphrius the hermits", then notes in the small
-# cursive: "If the year-letter is TE in a leap year, on this Saturday do not celebrate
-# Anton, because it was celebrated under the first letter T after the Theophany; but on
-# Saturday celebrate Theodosius; on Monday, Kyriakos; on Tuesday, Vahan; and on Thursday,
-# Tryphon WITH THEIR COMPANIONS." Given room, it unpacks. It never prints twice.
+# The Second Volume's preface (Sixth, p.556) licenses serving the companions its lines
+# abbreviate away, and the engine honoured that clause alone. The sentence ends "and
+# commemorate their names BY THAT CANON as they are set down in the First Volume" -- and
+# the First Volume sets each canon down ONCE. So the licence covers only what the taregir
+# had no room to lay down separately; where it gave the companion a day of its own,
+# packing it commemorates the same canon twice in one year, which the book never does.
+# It performs this very repair by hand at Second Volume p.574.
 #
 # Packing unconditionally is what shipped before, and it kept 16 canon-years twice --
 # invisible to every per-day check, which classified the packed day an EXPANSION (this
 # warrant) and found the companion's own day exact. Neither day was wrong; the pair was.
-# See dev/audit_duplicate_commemorations.py and docs section 7b.
+# Passages, pages and grabar: docs/sources/tonatsooyts-packed-saint-pools.md. Results and
+# the residual: docs section 7b and dev/audit_duplicate_commemorations.py.
 # --------------------------------------------------------------------------- #
 
 
@@ -2559,7 +2537,7 @@ def _pool_components(label):
     for part in label.split(_OBSERVANCE_SEP):
         part = part.strip()
         sid = ids.get(part)
-        if sid is not None and packed_pool(sid) is not None:
+        if packed_pool(sid) is not None:
             out.append((part, sid))
     return out
 
@@ -2584,16 +2562,19 @@ def _canons_with_own_day(ly: int) -> frozenset:
     :func:`_drop_owned_companions`, which consumes it -- and it does not need to, because
     that overlay never drops a head. The head set is the same before and after.
 
-    Scanning a liturgical year costs ~20ms, paid once per year and then cached, and only
-    ever paid on a day that is actually packed -- :func:`_drop_owned_companions` returns
-    before asking otherwise, so an ordinary day never triggers a scan at all.
+    Scanning a liturgical year costs ~20ms, paid once per year and then cached (and
+    invalidated with the observance index, which the scan resolves components through),
+    and only ever paid on a day that is actually packed -- :func:`_drop_owned_companions`
+    returns before asking otherwise, so an ordinary day never triggers a scan at all.
 
-    The window reaches one year below ``MIN_YEAR`` (a January date sits in the previous
-    liturgical year, whose Heesnak is the November before). That is deliberate and safe:
-    ``_compute_lectionary`` carries no range guard -- that lives in the public wrapper --
-    the same way ``_prelent_cohort_layout`` is called for any year. Clamping to the
-    supported range instead would make a day's name depend on ``LECTIONARY_MIN_YEAR``,
-    which is env-overridable.
+    The window overshoots the supported range at both ends -- down to the November before
+    ``MIN_YEAR`` (a January date sits in the previous liturgical year) and, for
+    ``ly = MAX_YEAR``, up to the November after it. Deliberate: ``_compute_lectionary``
+    carries no range guard -- that lives in the public wrapper -- the same way
+    ``_prelent_cohort_layout`` is called for any year, and clamping instead would make a
+    day's name depend on ``LECTIONARY_MIN_YEAR``, which is env-overridable. The top
+    overshoot reads a year the engine does not validate, but no packed day falls between
+    ``HE(MAX_YEAR)`` and the end of ``MAX_YEAR``, so nothing consults it.
     """
     start, end = anchors(ly)["HE"], anchors(ly + 1)["HE"]
     heads = set()
@@ -2610,27 +2591,26 @@ def _drop_owned_companions(label: str, d: datetime.date) -> str:
     """Drop packed companions of ``label`` that hold a day of their own in ``d``'s year.
 
     The head canon is never dropped -- it owns the day, its id, and its readings, so this
-    is a name change and nothing more. A companion is dropped only when it sits in the
-    SAME First Volume pool as the head (preface Sixth speaks of companions within one
-    run) and that year laid it down on a day of its own.
+    is a name change and nothing more, and a dropped companion is still commemorated
+    once: on the day it heads. A companion is dropped only when it sits in the SAME First
+    Volume pool as the head (preface Sixth speaks of companions within one run) and that
+    year laid it down on a day of its own.
     """
     pool = _pool_components(label)
     if len(pool) < 2:
         return label
     head_pool = packed_pool(pool[0][1])
-    owned = None
-    drop = set()
-    for text, sid in pool[1:]:
-        if packed_pool(sid) is not head_pool:
-            continue
-        if owned is None:
-            owned = _canons_with_own_day(_liturgical_year(d))
-        if sid in owned:
-            drop.add(text)
+    companions = [(text, sid) for text, sid in pool[1:]
+                  if packed_pool(sid) is head_pool]
+    if not companions:
+        return label
+    owned = _canons_with_own_day(_liturgical_year(d))
+    drop = {text for text, sid in companions if sid in owned}
     if not drop:
         return label
-    kept = [p for p in label.split(_OBSERVANCE_SEP) if p.strip() not in drop]
-    return _OBSERVANCE_SEP.join(kept) if kept else label
+    # The head is never in ``drop``, so what is kept is never empty.
+    return _OBSERVANCE_SEP.join(
+        p for p in label.split(_OBSERVANCE_SEP) if p.strip() not in drop)
 
 
 def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:

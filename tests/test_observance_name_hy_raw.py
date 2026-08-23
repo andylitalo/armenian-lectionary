@@ -130,15 +130,13 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # orthography reversal). Monotonic UP.
 #
 # Note this counts BYTE equality, so the internal-delimiter days above are excluded from it
-# even though their text is identical. exact + INTERNAL_DELIMITER is the "same words" number
-# and is what moves when a real fix lands: 409 + 6 = 415.
-#
-# The floor keeps a margin of 2 under what a full cache reports (417 now): the days gained
-# since it was set at 407 are reproducible anywhere except one, which came from the cache
-# growing 433 -> 435 days.
+# even though their text is identical: exact + INTERNAL_DELIMITER is the "same words"
+# number, and it is what moves when a real fix lands.
 #
 # Counted as exact + DECLINED, so a declared decision to serve less does not read as a
-# regression -- see test_exact_match_floor. Unchanged by section 6e: 412 + 2 = 394 + 20.
+# regression -- see test_exact_match_floor. The floor keeps a margin of 2 under what a full
+# cache reports (397 + 20 = 417 now): the days gained since it was set at 407 are
+# reproducible anywhere except one, which came from the cache growing 433 -> 435 days.
 HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "415"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
