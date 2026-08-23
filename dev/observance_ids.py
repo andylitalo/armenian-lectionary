@@ -145,5 +145,28 @@ _DECLINED_SOURCE_HY = frozenset({"Կաղանդ. տարեմուտ", "Նռնօրհ
 
 def is_declined_hy(text):
     """True if the Armenian component is one the engine deliberately does not serve."""
-    return text in _DECLINED_SOURCE_HY
+    return text in _DECLINED_SOURCE_HY or text in _DECLINED_FAST_MARKERS_HY
+
+
+# The undifferentiated fast marker, in both languages. Declared here for the same reason as
+# the civil New Year above: the engine omits what the source states, and an omission that is
+# a decision has to be distinguishable from one that is a bug.
+#
+# Unlike that entry this is not a question of what the Tonats'oyts carries -- the source is
+# right that these are fast days. It is a question of what belongs in a NAME. The marker is
+# an attribute of the day, and on every day that has any other name it only restates what
+# the rest already establishes: "Great Thursday" is Holy Week, "Third day of the Fast of
+# Prophet Elijah" is a day of a fast. Nothing is lost by dropping it, because whether a day
+# is a fast is a function of the date and the engine computes the date -- it was never a
+# fact only sacredtradition.am knew. Where the day IS the weekly fast and nothing else, the
+# section 6c split names it specifically instead.
+#
+# 437 days in English, and their Armenian counterparts. See docs section 6e.
+_DECLINED_FAST_MARKERS_EN = frozenset({"Fast day", "Feast day"})
+_DECLINED_FAST_MARKERS_HY = frozenset({"Պահք"})
+
+
+def is_declined_en(text):
+    """True if the English component is one the engine deliberately does not serve."""
+    return text in _DECLINED_FAST_MARKERS_EN
 

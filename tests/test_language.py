@@ -281,12 +281,18 @@ class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
                         f"{day} served {hy!r}")
 
     def test_an_ordinary_fast_day_is_not_captured(self):
-        """A Wednesday well outside the fast keeps the general, unnumbered label."""
+        """A Wednesday well outside the fast gets no ordinal of the Illuminator's.
+
+        It is not the bare marker any more -- section 6c gives it its weekday -- but that
+        is still the *general* label, carrying no day count of a named fast. What this
+        guards is the window, so it asserts the ordinary label rather than merely the
+        absence of the Illuminator's.
+        """
         day = datetime.date(2026, 10, 7)          # ordinary-time Wednesday
-        self.assertTrue(compute_armenian_lectionary(
-            day, language="hy")["Liturgical Day"].startswith("Պահք"))
-        self.assertTrue(compute_armenian_lectionary(
-            day)["Liturgical Day"].startswith("Fast day"))
+        self.assertEqual(compute_armenian_lectionary(
+            day, language="hy")["Liturgical Day"], "Չորեքշաբթիի պահք")
+        self.assertEqual(compute_armenian_lectionary(
+            day)["Liturgical Day"], "Wednesday Fast")
 
     def test_window_is_closed_at_both_ends(self):
         """The eve (Pentecost+21) and the Discovery of the Relics (+27) are not fast days."""
@@ -469,6 +475,156 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
             with self.subTest(word=word):
                 self.assertEqual(
                     ids_for_text(f"{word} day of the Fast of Prophet Elijah"), [slug])
+
+
+class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
+    """The last fast eve whose days the source left unnamed (docs §6d).
+
+    Nine of the ten fast eves in ``engine._EVE_FAMILIES`` are followed by a named day
+    count. The Fast of the Holy Cross of Varag was the tenth: the source names it on its
+    own eve and then heads all five days it opens with a bare "Fast day" / "Պահք".
+
+    Two of those five are a Wednesday and a Friday, so before this family existed they fell
+    through to the weekly split and were served as the ORDINARY weekly fast -- a day of a
+    named fast wearing the name of a different one. That is what the last test here guards,
+    and it is the reason this class is not merely cosmetic.
+    """
+
+    ORDINALS = (("First", "Ա"), ("Second", "Բ"), ("Third", "Գ"),
+                ("Fourth", "Դ"), ("Fifth", "Ե"))
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG:
+            self.skipTest("observance catalog not present")
+
+    def _eve(self, year):
+        """The Sunday at EX+7 -- the eve the fast's five weekdays follow."""
+        return engine._POSITION_ANCHORS["EX"](
+            datetime.date(year, 9, 14)) + datetime.timedelta(days=7)
+
+    def test_five_weekdays_are_named_in_both_languages(self):
+        for year in (2001, 2015, 2026):
+            eve = self._eve(year)
+            for k, (word, letter) in enumerate(self.ORDINALS, start=1):
+                d = eve + datetime.timedelta(days=k)
+                with self.subTest(date=d):
+                    en = compute_armenian_lectionary(d)["Liturgical Day"]
+                    hy = compute_armenian_lectionary(
+                        d, language="hy")["Liturgical Day"]
+                    self.assertTrue(
+                        en.startswith(
+                            f"{word} day of the Fast of the Holy Cross of Varag"),
+                        f"{d} served {en!r}")
+                    self.assertTrue(
+                        hy.startswith(f"{letter} օր Վարագայ Ս. Խաչի պահոց"),
+                        f"{d} served {hy!r}")
+
+    def test_the_eve_still_names_the_fast(self):
+        """The witness the day labels are taken from, asserted so it cannot quietly move."""
+        for year in (2001, 2026):
+            eve = self._eve(year)
+            with self.subTest(date=eve):
+                self.assertEqual(
+                    engine._eve_label(eve), "Eve of Fast of the Holy Cross of Varag")
+
+    def test_its_wednesday_and_friday_are_not_the_weekly_fast(self):
+        """The defect §6d fixed: two days of this fast were served as the weekly one."""
+        for year in (2001, 2015, 2026):
+            eve = self._eve(year)
+            for k in (3, 5):                      # the Wednesday and the Friday
+                d = eve + datetime.timedelta(days=k)
+                with self.subTest(date=d):
+                    self.assertIn(d.weekday(), (2, 4))
+                    served = compute_armenian_lectionary(d)["Liturgical Day"]
+                    for split in ("Wednesday Fast", "Friday Fast"):
+                        self.assertNotIn(split, served, served)
+
+
+class TestWeeklyFastWeekdaySplit(unittest.TestCase):
+    """The ordinary-time Wed/Fri marker says which weekday's fast it is.
+
+    The weakest-evidenced label in the engine, and the only one with no source witness of
+    any kind: the source prints "Fast day"/"Պահք" on both weekdays and never distinguishes
+    them. So what these tests guard is not fidelity to the source -- there is nothing to be
+    faithful to -- but the SCOPE of the departure. The split must claim the weekly fast and
+    nothing else; everywhere the marker means something other than "it is Wednesday" it has
+    to survive untouched. See docs/observance-name-corrections.md section 6c.
+    """
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG:
+            self.skipTest("observance catalog not present")
+
+    def test_ordinary_time_splits_by_weekday_in_both_languages(self):
+        for d, en, hy in ((datetime.date(2026, 10, 7), "Wednesday Fast", "Չորեքշաբթիի պահք"),
+                          (datetime.date(2026, 10, 9), "Friday Fast", "Ուրբաթի պահք")):
+            with self.subTest(date=d):
+                self.assertTrue(
+                    compute_armenian_lectionary(d)["Liturgical Day"].startswith(en))
+                self.assertTrue(compute_armenian_lectionary(
+                    d, language="hy")["Liturgical Day"].startswith(hy))
+
+    def test_holy_week_is_not_called_the_weekly_fast(self):
+        """Great Wednesday and Great Friday are not the weekly fast.
+
+        They are inside Holy Week, which the source marks on every one of its days --
+        Sunday through Saturday, not just Wed/Fri. Calling them the weekly fast would be
+        false, and they would fall through to the split without the explicit entry that
+        heads them off.
+
+        That entry still matches and still emits "Fast day"; the marker is then dropped as
+        a declared decline (docs §6e), so what reaches the reader is the Holy Week name
+        alone. Both halves are asserted -- the day is not the weekly fast, and it carries no
+        marker restating what "Great Wednesday" already says.
+        """
+        for d in (datetime.date(2026, 4, 1), datetime.date(2026, 4, 3)):
+            with self.subTest(date=d):
+                served = compute_armenian_lectionary(d)["Liturgical Day"]
+                self.assertTrue(served.startswith("Great "), served)
+                for absent in ("Wednesday Fast", "Friday Fast", "Fast day"):
+                    self.assertNotIn(absent, served, served)
+
+    def test_a_named_fast_outranks_the_split(self):
+        """A Wed/Fri inside a named fast is a day OF that fast, not a weekly fast day."""
+        for d in (datetime.date(2026, 9, 9),     # Fast of the Holy Cross, a Wednesday
+                  datetime.date(2026, 12, 9)):   # Fast of St. James of Nisibis, a Wednesday
+            with self.subTest(date=d):
+                served = compute_armenian_lectionary(d)["Liturgical Day"]
+                self.assertNotIn("Wednesday Fast", served, served)
+                self.assertIn("day of the Fast of", served)
+
+    def test_the_generative_continua_tier_does_not_suppress_the_split(self):
+        """The one tier that named a calendar-derived component in its own words.
+
+        ``_generative_continua`` returned a frozen "Fast day" for the Fast-of-the-Assumption
+        Wed/Fri tail. The marker satisfies ``_POSITION_COMPONENT_RE``, so it was taken for
+        an already-resolved position and the split never ran -- on 16 summer Wed/Fri days
+        across the supported range. The tier now asks ``_position_label``, so it cannot
+        disagree with the rule that names every other Wed/Fri (``test_coordinate_index``
+        checks that agreement across the whole range).
+        """
+        for d in (datetime.date(2026, 8, 5), datetime.date(2026, 8, 7)):
+            with self.subTest(date=d):
+                served = compute_armenian_lectionary(d)["Liturgical Day"]
+                self.assertNotIn("Fast day", served, served)
+                self.assertTrue(served.startswith(("Wednesday Fast", "Friday Fast")), served)
+
+    def test_a_day_the_split_does_not_claim_keeps_its_own_day_count(self):
+        """The split is scoped to the terminal fallthrough; it never rewrites a day count.
+
+        Aug 19 2026 is a Wednesday inside no named fast, so it IS the weekly fast -- but the
+        source's own "Fourth day of the Assumption" holds the position slot, and that is the
+        component a reader needs. The split must not replace it, and the bare marker beside
+        it is not served (docs §6e), so the day is its day count and nothing else.
+
+        Asserting the day count is present is the point: this is the test that fails if the
+        split ever starts claiming days whose position the source already stated.
+        """
+        served = compute_armenian_lectionary(
+            datetime.date(2026, 8, 19))["Liturgical Day"]
+        self.assertEqual(served, "Fourth day of the Assumption")
+        for absent in ("Wednesday Fast", "Friday Fast", "Fast day"):
+            self.assertNotIn(absent, served, served)
 
 
 class TestGeneratedLabelsResolveThroughTheCatalog(unittest.TestCase):

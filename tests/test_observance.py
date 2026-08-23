@@ -294,18 +294,25 @@ class TestDecemberNinthFastMarker(unittest.TestCase):
     _CONCEPTION = "Feast of the Conception of the Holy Virgin Mary by Anna"
 
     def test_marker_is_fast_on_advent_fast_weekdays(self):
-        """Dec 9 OUTSIDE the Nisibis window: the bare marker, never the "Feast day" typo.
+        """Dec 9 OUTSIDE the Nisibis window: the feast alone, and never the "Feast day" typo.
 
         Mon/Tue/Wed Dec 9ths always fall INSIDE the Fast of St. James the bishop of
         Nisibis (Heesnak+22..+24) across every supported year -- see
         test_marker_is_superseded_inside_the_nisibis_fast below -- so only Friday Dec 9ths
-        (Heesnak+19) remain to exercise the bare marker here.
+        (Heesnak+19) reach the Dec 9 family here.
+
+        That family still exists and still matches: it claims the day so a Wed/Fri Dec 9
+        cannot fall through to the weekly split and be called the ordinary weekly fast. It
+        just emits nothing, because the bare marker is a declared decline (docs section 6e).
+        So what this now asserts is that the day is served as the feast alone -- and, as
+        before, that the source's "Feast day" typo reaches no name in either form.
         """
         for year in (2016, 2022):
             with self.subTest(year=year):
                 label = compute_armenian_lectionary(
                     datetime.date(year, 12, 9))["Liturgical Day"]
-                self.assertEqual(label, f"Fast day — {self._CONCEPTION}")
+                self.assertEqual(label, self._CONCEPTION)
+                self.assertNotIn("Feast day", label)
 
     def test_marker_is_superseded_inside_the_nisibis_fast(self):
         """Dec 9 INSIDE the Nisibis window keeps its place in that fast's day count.

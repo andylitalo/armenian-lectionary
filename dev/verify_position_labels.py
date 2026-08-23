@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all                                       # noqa: E402
 from dev.observance_names import is_position                           # noqa: E402
+from dev.observance_ids import is_declined_en                          # noqa: E402
 from armenian_lectionary.engine import (                               # noqa: E402
     _OBSERVANCE_SEP, _position_label, compute_armenian_lectionary,
 )
@@ -78,11 +79,17 @@ def main():
     # validated table supplies the rest. Anything counted here as "missing" above may
     # still be served, so report the end-to-end number too -- reading the generator's
     # residue as data loss is the obvious misreading of this tool.
-    served_ok = served_lost = 0
+    served_ok = served_lost = served_declined = 0
     for iso in sorted(days):
         feast = (days[iso].get("feast") or "").strip()
         src = source_position(feast) if feast else None
         if not src:
+            continue
+        if is_declined_en(src):
+            # The undifferentiated fast marker, dropped on purpose everywhere the day has
+            # another name (docs section 6e). Counted separately: LOST must stay 0 and
+            # means "a label went missing", which a declared decline is not.
+            served_declined += 1
             continue
         served = compute_armenian_lectionary(
             datetime.date.fromisoformat(iso))["Liturgical Day"]
@@ -99,6 +106,8 @@ def main():
     print()
     print(f"END-TO-END: {served_ok}/{served_ok + served_lost} source position labels reach "
           f"the served name; {served_lost} LOST (must be 0)")
+    print(f"DECLINED:   {served_declined} bare fast markers the engine drops on purpose "
+          f"(docs section 6e)")
 
     if missing:
         print("\nmissing by family:")

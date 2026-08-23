@@ -583,6 +583,14 @@
   "source_hy": "Ե օր Ս. Խաչի պահոց",
   "status": "ok"
  },
+ "Fifth day of the Fast of the Holy Cross of Varag": {
+  "approved_en": "Fifth day of the Fast of the Holy Cross of Varag",
+  "approved_hy": "Ե օր Վարագայ Ս. Խաչի պահոց",
+  "id": "cross_varag_day_5",
+  "note": "day of the Fast of the Holy Cross of Varag. The source names this fast on its OWN eve (\"Eve of Fast of the Holy Cross of Varag\" / \"Բարեկենդան Վարագայ ս. խաչի\") and then heads all five days it opens with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian -- the only fast eve in engine._EVE_FAMILIES whose days the source leaves unnamed. Named to agree with that eve, the same section 6b disambiguation applied to the Nisibis and Prophet Elijah fasts: the wording is the source's own, only carried onto the days the eve announces. approved_hy follows the shape every other fast in the catalog uses, \"{ordinal} օր <fast> պահոց\", over the attested \"Վարագայ Ս. Խաչի\" from the eve and feast rows. Capitalized rather than the lower-case \"ս. խաչի\" those rows print: this is a FAST label, and every other fast in the catalog capitalizes the saint or feast it is named for -- the Exaltation fast is \"Ա օր Ս. Խաչի պահոց\" over the same two words. source_hy still records what the source printed. Registered in source_corrections._NAMED_FAST_WINDOWS / _NAMED_FAST_TEMPLATES_HY. Without it two of the five days are a Wed and a Fri, which fall through to the weekly split and are served as the ORDINARY weekly fast. See docs/observance-name-corrections.md section 6d.",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Fifth day of the Fast of the Transifiguration": {
   "approved_en": "Fifth day of the Fast of the Transfiguration",
   "approved_hy": "Ե օր Վարդավառի պահոց",
@@ -678,6 +686,14 @@
   "note": "",
   "source_hy": "Ա օր Ս. Խաչի պահոց",
   "status": "ok"
+ },
+ "First day of the Fast of the Holy Cross of Varag": {
+  "approved_en": "First day of the Fast of the Holy Cross of Varag",
+  "approved_hy": "Ա օր Վարագայ Ս. Խաչի պահոց",
+  "id": "cross_varag_day_1",
+  "note": "day of the Fast of the Holy Cross of Varag. The source names this fast on its OWN eve (\"Eve of Fast of the Holy Cross of Varag\" / \"Բարեկենդան Վարագայ ս. խաչի\") and then heads all five days it opens with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian -- the only fast eve in engine._EVE_FAMILIES whose days the source leaves unnamed. Named to agree with that eve, the same section 6b disambiguation applied to the Nisibis and Prophet Elijah fasts: the wording is the source's own, only carried onto the days the eve announces. approved_hy follows the shape every other fast in the catalog uses, \"{ordinal} օր <fast> պահոց\", over the attested \"Վարագայ Ս. Խաչի\" from the eve and feast rows. Capitalized rather than the lower-case \"ս. խաչի\" those rows print: this is a FAST label, and every other fast in the catalog capitalizes the saint or feast it is named for -- the Exaltation fast is \"Ա օր Ս. Խաչի պահոց\" over the same two words. source_hy still records what the source printed. Registered in source_corrections._NAMED_FAST_WINDOWS / _NAMED_FAST_TEMPLATES_HY. Without it two of the five days are a Wed and a Fri, which fall through to the weekly split and are served as the ORDINARY weekly fast. See docs/observance-name-corrections.md section 6d.",
+  "source_hy": "",
+  "status": "generated"
  },
  "First day of the Fast of the Transfiguration": {
   "approved_en": "First day of the Fast of the Transfiguration",
@@ -951,6 +967,14 @@
   "source_hy": "Դ օր Ս. Խաչի պահոց",
   "status": "ok"
  },
+ "Fourth day of the Fast of the Holy Cross of Varag": {
+  "approved_en": "Fourth day of the Fast of the Holy Cross of Varag",
+  "approved_hy": "Դ օր Վարագայ Ս. Խաչի պահոց",
+  "id": "cross_varag_day_4",
+  "note": "day of the Fast of the Holy Cross of Varag. The source names this fast on its OWN eve (\"Eve of Fast of the Holy Cross of Varag\" / \"Բարեկենդան Վարագայ ս. խաչի\") and then heads all five days it opens with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian -- the only fast eve in engine._EVE_FAMILIES whose days the source leaves unnamed. Named to agree with that eve, the same section 6b disambiguation applied to the Nisibis and Prophet Elijah fasts: the wording is the source's own, only carried onto the days the eve announces. approved_hy follows the shape every other fast in the catalog uses, \"{ordinal} օր <fast> պահոց\", over the attested \"Վարագայ Ս. Խաչի\" from the eve and feast rows. Capitalized rather than the lower-case \"ս. խաչի\" those rows print: this is a FAST label, and every other fast in the catalog capitalizes the saint or feast it is named for -- the Exaltation fast is \"Ա օր Ս. Խաչի պահոց\" over the same two words. source_hy still records what the source printed. Registered in source_corrections._NAMED_FAST_WINDOWS / _NAMED_FAST_TEMPLATES_HY. Without it two of the five days are a Wed and a Fri, which fall through to the weekly split and are served as the ORDINARY weekly fast. See docs/observance-name-corrections.md section 6d.",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Fourth day of the Fast of the Transfiguration": {
   "approved_en": "Fourth day of the Fast of the Transfiguration",
   "approved_hy": "Դ օր Վարդավառի պահոց",
@@ -958,6 +982,14 @@
   "note": "",
   "source_hy": "Դ օր Վարդավառի պահոց",
   "status": "ok"
+ },
+ "Friday Fast": {
+  "approved_en": "Friday Fast",
+  "approved_hy": "Ուրբաթի պահք",
+  "id": "friday_fast",
+  "note": "the weekly fast, split by weekday. The ONLY label in the engine with no source witness of any kind: the source prints \"Fast day\" on 730 Wednesdays and 725 Fridays and \"Պահք\" on both, and nowhere says which -- no eve names it, and the Armenian is no more specific than the English. So the warrant is the calendar alone (the day IS the weekly Wednesday or Friday fast, established by its date), which makes this the weakest evidence any correction in docs/observance-name-corrections.md rests on; it is declared as such rather than presented as a reading of the source. approved_hy is supplied by the maintainer, there being nothing to scrape. Scoped to the days the engine actually splits -- the bare marker is correct and complete on Holy Week, the Fast of Prophet Elijah and Dec 9, where the weekday is not the reason for the fast. The Assumption octave's 4th/6th day and post-Ascension Eastertide's 46th/48th (108 days) ARE the weekly fast and keep the bare marker only because their position slot is held by the source's own day count in stored table text, which this fold does not reach -- a declared loose end, not a settled exclusion. Registered in source_corrections.weekly_fast_label / weekly_fast_label_hy. See docs/observance-name-corrections.md section 6c.",
+  "source_hy": "",
+  "status": "generated"
  },
  "Great Friday": {
   "approved_en": "Great Friday",
@@ -2351,6 +2383,14 @@
   "source_hy": "Բ օր Ս. Խաչի պահոց",
   "status": "ok"
  },
+ "Second day of the Fast of the Holy Cross of Varag": {
+  "approved_en": "Second day of the Fast of the Holy Cross of Varag",
+  "approved_hy": "Բ օր Վարագայ Ս. Խաչի պահոց",
+  "id": "cross_varag_day_2",
+  "note": "day of the Fast of the Holy Cross of Varag. The source names this fast on its OWN eve (\"Eve of Fast of the Holy Cross of Varag\" / \"Բարեկենդան Վարագայ ս. խաչի\") and then heads all five days it opens with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian -- the only fast eve in engine._EVE_FAMILIES whose days the source leaves unnamed. Named to agree with that eve, the same section 6b disambiguation applied to the Nisibis and Prophet Elijah fasts: the wording is the source's own, only carried onto the days the eve announces. approved_hy follows the shape every other fast in the catalog uses, \"{ordinal} օր <fast> պահոց\", over the attested \"Վարագայ Ս. Խաչի\" from the eve and feast rows. Capitalized rather than the lower-case \"ս. խաչի\" those rows print: this is a FAST label, and every other fast in the catalog capitalizes the saint or feast it is named for -- the Exaltation fast is \"Ա օր Ս. Խաչի պահոց\" over the same two words. source_hy still records what the source printed. Registered in source_corrections._NAMED_FAST_WINDOWS / _NAMED_FAST_TEMPLATES_HY. Without it two of the five days are a Wed and a Fri, which fall through to the weekly split and are served as the ORDINARY weekly fast. See docs/observance-name-corrections.md section 6d.",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Second day of the Fast of the Transfiguration": {
   "approved_en": "Second day of the Fast of the Transfiguration",
   "approved_hy": "Բ օր Վարդավառի պահոց",
@@ -2903,6 +2943,14 @@
   "source_hy": "Գ օր Ս. Խաչի պահոց",
   "status": "ok"
  },
+ "Third day of the Fast of the Holy Cross of Varag": {
+  "approved_en": "Third day of the Fast of the Holy Cross of Varag",
+  "approved_hy": "Գ օր Վարագայ Ս. Խաչի պահոց",
+  "id": "cross_varag_day_3",
+  "note": "day of the Fast of the Holy Cross of Varag. The source names this fast on its OWN eve (\"Eve of Fast of the Holy Cross of Varag\" / \"Բարեկենդան Վարագայ ս. խաչի\") and then heads all five days it opens with a bare \"Fast day\" in English and a bare \"Պահք\" in Armenian -- the only fast eve in engine._EVE_FAMILIES whose days the source leaves unnamed. Named to agree with that eve, the same section 6b disambiguation applied to the Nisibis and Prophet Elijah fasts: the wording is the source's own, only carried onto the days the eve announces. approved_hy follows the shape every other fast in the catalog uses, \"{ordinal} օր <fast> պահոց\", over the attested \"Վարագայ Ս. Խաչի\" from the eve and feast rows. Capitalized rather than the lower-case \"ս. խաչի\" those rows print: this is a FAST label, and every other fast in the catalog capitalizes the saint or feast it is named for -- the Exaltation fast is \"Ա օր Ս. Խաչի պահոց\" over the same two words. source_hy still records what the source printed. Registered in source_corrections._NAMED_FAST_WINDOWS / _NAMED_FAST_TEMPLATES_HY. Without it two of the five days are a Wed and a Fri, which fall through to the weekly split and are served as the ORDINARY weekly fast. See docs/observance-name-corrections.md section 6d.",
+  "source_hy": "",
+  "status": "generated"
+ },
  "Third day of the Fast of the Transfiguration": {
   "approved_en": "Third day of the Fast of the Transfiguration",
   "approved_hy": "Գ օր Վարդավառի պահոց",
@@ -3222,6 +3270,14 @@
   "note": "",
   "source_hy": "ԻԳ օր Մեծի պահոց",
   "status": "ok"
+ },
+ "Wednesday Fast": {
+  "approved_en": "Wednesday Fast",
+  "approved_hy": "Չորեքշաբթիի պահք",
+  "id": "wednesday_fast",
+  "note": "the weekly fast, split by weekday. The ONLY label in the engine with no source witness of any kind: the source prints \"Fast day\" on 730 Wednesdays and 725 Fridays and \"Պահք\" on both, and nowhere says which -- no eve names it, and the Armenian is no more specific than the English. So the warrant is the calendar alone (the day IS the weekly Wednesday or Friday fast, established by its date), which makes this the weakest evidence any correction in docs/observance-name-corrections.md rests on; it is declared as such rather than presented as a reading of the source. approved_hy is supplied by the maintainer, there being nothing to scrape. Scoped to the days the engine actually splits -- the bare marker is correct and complete on Holy Week, the Fast of Prophet Elijah and Dec 9, where the weekday is not the reason for the fast. The Assumption octave's 4th/6th day and post-Ascension Eastertide's 46th/48th (108 days) ARE the weekly fast and keep the bare marker only because their position slot is held by the source's own day count in stored table text, which this fold does not reach -- a declared loose end, not a settled exclusion. Registered in source_corrections.weekly_fast_label / weekly_fast_label_hy. See docs/observance-name-corrections.md section 6c.",
+  "source_hy": "",
+  "status": "generated"
  },
  "Еighth day of Nativity": {
   "approved_en": "Eighth day of Nativity",

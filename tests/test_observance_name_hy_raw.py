@@ -81,12 +81,15 @@ HY_OMISSION_CEILING = int(os.environ.get("HY_OMISSION_CEILING", "4"))
 # Days carrying the right components in a different order. Monotonic DOWN.
 HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
 
-# Days where the source states a component the engine deliberately does not serve. Exactly
-# the two cached Jan 1 days before 2015 on which sacredtradition.am prints "Կաղանդ.
-# տարեմուտ" -- a civil New Year note the 1915 Tonatsoyts does not carry (docs section 9).
+# Days where the source states a component the engine deliberately does not serve. Two
+# families, both declared:
+#   * 2 -- the cached Jan 1 days before 2015 on which sacredtradition.am prints "Կաղանդ.
+#     տարեմուտ", a civil New Year note the 1915 Tonatsoyts does not carry (docs section 9);
+#   * 18 -- the bare "Պահք" marker, dropped on every day that has another name
+#     (docs section 6e).
 # An EQUALITY: a decline is excluded from the omission count by construction, so nothing
 # else would notice it spreading to days it was never meant to cover.
-HY_DECLINED_DAYS = int(os.environ.get("HY_DECLINED_DAYS", "2"))
+HY_DECLINED_DAYS = int(os.environ.get("HY_DECLINED_DAYS", "20"))
 
 # Days where the source names one canon of a packed pool and the engine serves others from
 # the same pool. Correct as served: the Second Volume prints only the first saints "for the
@@ -127,7 +130,10 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # The floor is 413 rather than the 414 a full cache now reports: the days gained since it
 # was set at 407 are reproducible anywhere except one, which came from the cache growing
 # 433 -> 435 days.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "412"))
+#
+# Counted as exact + DECLINED, so a declared decision to serve less does not read as a
+# regression -- see test_exact_match_floor. Unchanged by section 6e: 412 + 2 = 394 + 20.
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "414"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.
@@ -205,10 +211,24 @@ class TestRawArmenianObservanceName(unittest.TestCase):
             "new trailing note onto a name, which is worth a look")
 
     def test_exact_match_floor(self):
-        n = self.data["exact"]
+        """Days reproducing the source's Armenian, counting a declared decline as reproduced.
+
+        A decline is a decision to serve less than the source prints, so it makes a day
+        non-exact by construction -- which would drag this floor down every time one lands
+        and turn a monotonic-up ratchet into a record of how much we have stopped serving.
+        Adding DECLINED back measures what the ratchet was always for: days where the engine
+        reproduces the source **except where we said we would not**.
+
+        This is not a weakening. HY_DECLINED_DAYS pins the decline count as an EQUALITY, so
+        an exact day cannot quietly become a declined one to keep this sum up; the pair is
+        exactly as strong as the bare floor was. Section 6e is the proof: 412 + 2 before,
+        394 + 20 after -- the same 414.
+        """
+        n = self.data["exact"] + self.tally["DECLINED"]
         self.assertGreaterEqual(
             n, HY_EXACT_FLOOR,
-            f"only {n} days match the source's Armenian exactly (floor {HY_EXACT_FLOOR})")
+            f"only {n} days reproduce the source's Armenian (exact {self.data['exact']} + "
+            f"declined {self.tally['DECLINED']}; floor {HY_EXACT_FLOOR})")
 
     def test_oracle_did_not_shrink(self):
         self.assertGreaterEqual(
