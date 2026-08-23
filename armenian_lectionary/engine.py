@@ -1824,13 +1824,10 @@ _PRELENT_COHORT = (
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
-     # Two First Volume canons (pp.464-465), packed onto one day and joined on _OBSERVANCE_SEP
-     # so each resolves to its own observance id. The Second Volume prints "the Atomian
-     # Generals, and Bishop Mark, Pion, and the others"; its preface (Sixth) says to
-     # celebrate the companions the First Volume sets down.
-     "Sts. Atom and his soldiers" + _OBSERVANCE_SEP
-     + "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, "
-       "and Martyrs Abdelmseh, Ormistan and Sayen",
+     # One First Volume canon (pp.464-465). The Mark/Pionius canon that the Second Volume
+     # sometimes prints beside it ("the Atomian Generals, and Bishop Mark, Pion, and the
+     # others") is its own canon with its own day -- see _MARK_CANON below.
+     "Sts. Atom and his soldiers",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,
@@ -1848,6 +1845,29 @@ _PRELENT_COHORT = (
 )
 _PRELENT_OFFSETS = frozenset(off for _, off, _, _, _ in _PRELENT_COHORT)
 
+# The Mark/Pionius canon (First Volume pp.464-465, laid down right after the Atomian
+# Generals) keeps its own day at Easter-62+7, where the validated table serves it with its
+# own propers. It is NOT a cohort member here, because the table already covers it and the
+# cohort outranks the table -- adding it would move 24 days off a validated reading to
+# restate the same feast.
+#
+# What it needs from the cohort is the one case where that day is not available. Easter-55
+# is always the same weekday as Atom's Easter-62 (seven days apart), so the only thing that
+# can take it is a fixed civil date, and in the supported range that is Feb 13, the embedded
+# eve of the Presentation of the Lord. In exactly those years -- 2012 and 2023 -- the Second
+# Volume packs this canon back onto the Atomian Generals' day and sacredtradition.am prints
+# both names there; in the other 24 cached years it prints the Generals alone at -62 and
+# this canon alone at -55.
+#
+# Packing it unconditionally is what shipped before, and it commemorated the canon twice in
+# 23 of 27 liturgical years -- invisible to the discrepancy reports, which classified the
+# packed day as an EXPANSION (the preface-Sixth warrant) and found the canon's own day
+# exact. That warrant holds only when the taregir left the canon no day of its own, which
+# is now what the code asks. See dev/audit_duplicate_commemorations.py and docs section 7b.
+_MARK_OFFSET = -55
+_MARK_CANON = ("Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, "
+               "and Martyrs Abdelmseh, Ormistan and Sayen")
+
 
 @functools.lru_cache(maxsize=None)
 def _prelent_cohort_layout(year):
@@ -1857,11 +1877,19 @@ def _prelent_cohort_layout(year):
     higher feast (the transferred John the Forerunner, or the Feb-14 Presentation) is
     handled per rank: the senior Generals (Sargis/Atom) shift to the next cohort slot and
     win the merge (senior placed first via setdefault); the juniors abstain. The embedded
-    Presentation-eve (Feb 13) is left to the embedded composite."""
+    Presentation-eve (Feb 13) is left to the embedded composite.
+
+    The Mark/Pionius canon is packed onto the Atomian Generals' day only in the years its
+    own day at ``_MARK_OFFSET`` is unavailable -- see the note there."""
     e = calculate_gregorian_easter(year)
     blocked = {_john_forerunner_date(year), datetime.date(year, 2, 14)}
+    mark_day = e + datetime.timedelta(days=_MARK_OFFSET)
+    mark_homeless = (mark_day in blocked
+                     or (mark_day.month, mark_day.day) in EMBEDDED_FIXED)
     layout = {}
     for sid, off, may_shift, label, reads in _PRELENT_COHORT:
+        if sid == "atom" and mark_homeless:
+            label += _OBSERVANCE_SEP + _MARK_CANON
         d = e + datetime.timedelta(days=off)
         if (d.month, d.day) in EMBEDDED_FIXED:
             continue                                    # co-celebrates via embedded composite
