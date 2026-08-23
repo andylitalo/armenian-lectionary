@@ -941,15 +941,53 @@ component the source prints on those days is unchanged).
   loop is `range(2001, 2027)` — has zero cache years to test either entry against. The fix
   is a filter that can also catch a cycle entry contradicting the **table's** own placement
   of the same canon, and it needs an artifact rebuild. A
-  `dev/build_second_volume_cycles.py` question — and one that has to settle first **which
-  canon governs 2027**. Two mappings are in play and they disagree here: the section whose
-  *printed* Easter equals the year's Gregorian Easter (**Է**, p.571, which lays the pool out
-  in July and names Athanasius/Cyril on the 31st), or the year's **true taregir** from the
-  Julian computus (**Ս**, p.619, whose thirty-four-day post-Theophany gap keeps the whole
-  pool in January). `engine._cycle_saint`'s docstring describes the first; every existing
-  `_SOURCE_SUMMER` march uses the second — `03-31`→Ր, `04-05`→Թ, `03-23`→Ո are each the
-  true taregir of their cache years, not the same-Easter section, and each is recorded as
-  reproducing ground truth exactly. 2027 has no ground truth to break the tie.
+  `dev/build_second_volume_cycles.py` question — see 7d for the canon that governs 2027,
+  which has to be settled first and rules out the obvious repair.
+
+#### 7d. Which canon governs a civil year — and why `_cycle_saint`'s docstring is the defect
+
+A first pass at the `03-28` entries above read them against **Է** (p.571), the section whose
+*printed* Easter is March 28, because 2027's **Gregorian** Easter is March 28. That is a
+category error, and it is worth writing down because the engine's own docstring invites it.
+
+**The taregir is a Julian-Easter code** (`corpus/STRUCTURE.md` gotcha #1). Julian and
+Gregorian Easter for the same civil year are generally different dates, so matching the
+letter table with a Gregorian date is matching across two systems on a coincidence of
+spelling. The Տօնացոյց indexes civil years directly, and the transcription of its 532-year
+perpetual table (p.637) is checked in at
+[`sources/great_paschal_cycle_index.csv`](sources/great_paschal_cycle_index.csv):
+
+```
+2027,Ս,Գ
+```
+
+Independently, Gauss's algorithm gives 2027 a **Julian** Easter of April 19, and
+`second_volume_index.csv` row `Ս,04-19,619,4` matches it exactly. `Է,03-28,571,5` does not
+correspond to 2027 at all.
+
+So **2027 is taregir Ս, pp.619–621** — and the same lookup is what the three transcribed
+`_SOURCE_SUMMER` marches already use: `03-31`→**Ր**, `04-05`→**Թ**, `03-23`→**Ո** are each
+`taregir_for(cache_year)` (2024 `ՑՐ`, 2026 `Թ`, 2008 `ՉՈ` — the lower letter of a leap pair),
+not the same-Easter section (which would have been Ժ, Կ, Բ). Each is recorded as reproducing
+ground truth exactly: three for three.
+
+`engine._cycle_saint`'s docstring states the opposite rule — *"matched to the cycle whose
+Julian Easter equals its Gregorian Easter date"* — and **that rationale is the defect**, not
+the rule the marches deviate from.
+
+**Consequence for the `03-28` findings: the obvious repair is wrong and is not being made.**
+Under Ս the post-Theophany gap is thirty-four days (p.619: Theophany Monday Jan 6, *"the
+meat-eating period … is thirty-four days"*), which keeps the **whole** saint pool in
+January — Anthony 19, Theodosius 20, Cyricus + Gordius 22, Athanasius 24, Vahan + Eugenia
+26, Eugenius 27, Adrian 29, Gregory the Theologian 31 — and leaves p.620's summer with no
+floating saints at all. So there is no swap for either July date to make: the readings
+currently served on 2027-07-27 (Theodosius) and 2027-07-31 (Barlaam) stand.
+
+That leaves the Barlaam duplicate open, and correctly re-diagnosed. It is not a bad match on
+one line; the `03-28` cycle is populated from **Է's pages**, which govern a different civil
+year. Re-keying the cycle build from the julian-label span to `taregir_for` is a much larger,
+separately reviewed change, and it needs its own ground-truth verification across all 35
+cycles.
 
   *(This corrects the earlier reading of `hermit_st_anton`, which was counted with the
   packed-companion group. It is not one: the repair above leaves it standing, because there

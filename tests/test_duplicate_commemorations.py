@@ -42,10 +42,12 @@ from armenian_lectionary.engine import (                               # noqa: E
 #     Easter 2027 is the only supported year of its type, so
 #     build_second_volume_cycles._drop_cache_contradicted has no cache year to filter
 #     either entry against. Both duplicate a HEAD canon, not a companion, which is why no
-#     packing rule reaches them. A dev/build_second_volume_cycles.py question, and one
-#     that first has to settle WHICH canon governs 2027 -- the section whose printed
-#     Easter matches its Gregorian one (Է, p.571) or its true taregir (Ս, p.619), which
-#     lay the pool out differently. Every existing _SOURCE_SUMMER march uses the latter.
+#     packing rule reaches them. A dev/build_second_volume_cycles.py question -- and the
+#     obvious repair is ruled out: 2027 is taregir Ս (docs 7d; the p.637 perpetual table
+#     gives "2027,Ս", and Ս's tabulated Julian Easter Apr 19 matches the computus), whose
+#     34-day post-Theophany gap keeps the whole pool in January, so neither July date has
+#     a swap to make. The cycle is populated from Է's pages, which govern a different
+#     civil year; re-keying the build by taregir is its own reviewed change.
 MAX_DUPLICATE_COMMEMORATIONS = 2
 
 # Canons whose double commemoration is closed, by whichever mechanism closed it (docs
