@@ -516,7 +516,7 @@ class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
                             f"{word} day of the Fast of the Holy Cross of Varag"),
                         f"{d} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր Վարագայ ս. խաչի պահոց"),
+                        hy.startswith(f"{letter} օր Վարագայ Ս. Խաչի պահոց"),
                         f"{d} served {hy!r}")
 
     def test_the_eve_still_names_the_fast(self):

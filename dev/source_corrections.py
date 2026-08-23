@@ -284,15 +284,22 @@ def named_fast_label(date_iso):
 #
 # Each template follows the shape every other fast in the catalog already uses,
 # "{ordinal} օր <fast> պահոց", over the fast's own attested Armenian name: "Ս. Յակովբայ"
-# from the Nisibis eve, and "Վարագայ ս. խաչի" from the Varag eve and feast rows
-# ("Բարեկենդան Վարագայ ս. խաչի" / "Տօն Վարագայ ս. խաչի"), kept verbatim -- lower-case
-# "ս. խաչի" included, because that is how the source spells THIS feast and the Armenian is
-# the witness, not something to tidy toward the Exaltation fast's "Ս. Խաչի պահոց".
+# from the Nisibis eve, and "Վարագայ Ս. Խաչի" from the Varag eve and feast rows
+# ("Բարեկենդան Վարագայ ս. խաչի" / "Տօն Վարագայ ս. խաչի").
+#
+# Capitalized "Ս. Խաչի" rather than the lower-case "ս. խաչի" those two rows print. This is a
+# FAST label, not a copy of the feast's name, and every other fast in the catalog capitalizes
+# the saint or feast it is named for -- the Exaltation fast is "Ա օր Ս. Խաչի պահոց" over the
+# same two words, and Nisibis is "Ա օր Ս. Յակովբայ պահոց". Following the eve's casing here
+# would make the Holy Cross the one saint whose name is capitalized in one fast label and not
+# in another, on nothing but which row the string was lifted from. The witness is preserved
+# where witnesses live: source_hy in the review TSV still records what the source printed.
+# "պահոց" stays lower-case, as it is on all nine other fasts.
 _AMBIGUOUS_FAST_LABEL_HY = "Պահք"
 _NAMED_FAST_ORDINALS_HY = ("Ա", "Բ", "Գ", "Դ", "Ե")
 _NAMED_FAST_TEMPLATES_HY = {
     "HE": "{ord} օր Ս. Յակովբայ պահոց",
-    "EX": "{ord} օր Վարագայ ս. խաչի պահոց",
+    "EX": "{ord} օր Վարագայ Ս. Խաչի պահոց",
 }
 
 

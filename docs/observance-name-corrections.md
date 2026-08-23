@@ -439,7 +439,7 @@ display text is not, which is the whole argument for keying on ids.
 | | Source | Served |
 |---|---|---|
 | en | `Fast day` | **`{First…Fifth} day of the Fast of the Holy Cross of Varag`** |
-| hy | `Պահք` | **`{Ա…Ե} օր Վարագայ ս. խաչի պահոց`** |
+| hy | `Պահք` | **`{Ա…Ե} օր Վարագայ Ս. Խաչի պահոց`** |
 
 135 days — five weekdays a year, at `EX+8`…`EX+12`.
 
@@ -465,10 +465,16 @@ Sunday immediately before** (3); and the served wording is that eve's, carried o
 it announces, with the ordinal the other nine fasts already use (4).
 
 The Armenian follows the shape every other fast in the catalog uses — `{ordinal} օր <fast>
-պահոց` — over the attested `Վարագայ ս. խաչի` from the eve (`Բարեկենդան Վարագայ ս. խաչի`) and
-the feast (`Տօն Վարագայ ս. խաչի`). Kept verbatim, lower-case `ս. խաչի` included: that is how
-the source spells *this* feast, and tidying it toward the Exaltation fast's `Ս. Խաչի պահոց`
-would edit the witness.
+պահոց` — over the attested `Վարագայ Ս. Խաչի` from the eve (`Բարեկենդան Վարագայ ս. խաչի`) and
+the feast (`Տօն Վարագայ ս. խաչի`).
+
+Capitalized, where those two rows print lower-case `ս. խաչի`. This is a **fast** label, not a
+copy of the feast's name, and every other fast in the catalog capitalizes the saint or feast
+it is named for — the Exaltation fast is `Ա օր Ս. Խաչի պահոց` over the same two words, and
+Nisibis is `Ա օր Ս. Յակովբայ պահոց`. Following the eve's casing would make the Holy Cross the
+one saint capitalized in one fast label and not in another, on nothing but which row the
+string was lifted from. The witness is preserved where witnesses live: `source_hy` in the
+review TSV still records exactly what the source printed.
 
 **This was also a defect in §6c, not merely a gap.** Two of the five days are a Wednesday and
 a Friday. With no family claiming them they fell through to the weekly split and were served
