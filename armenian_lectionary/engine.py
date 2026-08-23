@@ -829,7 +829,13 @@ def _cycle_saint(d: datetime.date):
     the floating-saint days), this reads the per-year-type calendar directly: the year's
     Gregorian Easter date selects the cycle, and the cycle gives the saint identity for
     d's civil date. Identity -> readings reuses dev/saint_readings.json. Validated
-    against ground truth (dev/second_volume_resolve.py)."""
+    against ground truth (dev/second_volume_resolve.py).
+
+    Deliberately Gregorian, not the year's true (Julian-computed) Taregir letter --
+    dev/paschal_index.taregir_for answers a different question and disagrees with the
+    section actually served in every supported year. See
+    dev/build_second_volume_cycles.py's module docstring for why, and
+    docs/observance-name-corrections.md section 7d for the ground-truth proof."""
     if d.weekday() not in _SAINT_WD or not _CYCLE_SAINTS or not _SAINT_READINGS:
         return None
     e = calculate_gregorian_easter(d.year)

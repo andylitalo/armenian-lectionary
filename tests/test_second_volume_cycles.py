@@ -38,6 +38,56 @@ TRANSLATION = os.path.expanduser(
     "gemini-flash/translated.md")
 
 
+class TestCycleSelectionIsGregorianNotTrueTaregir(unittest.TestCase):
+    """The cycle tier is keyed by this year's REFORMED (Gregorian) Easter, never by the
+    year's true Taregir letter -- see dev/build_second_volume_cycles.py's module
+    docstring and dev/paschal_index.taregir_for's warning. Both answer real questions;
+    they are just DIFFERENT questions, and confusing them once nearly reverted a correct
+    fix (docs/observance-name-corrections.md section 7d). This pins the distinction so it
+    cannot happen silently again. Needs no ground truth or grabar-ocr -- source-
+    independent, so it also covers 2027.
+    """
+
+    def test_true_taregir_and_served_easter_key_disagree_every_year(self):
+        """Checked across the whole supported range: 0/27 years share a letter between
+        dev.paschal_index.taregir_for(y) and ALPHA[k-1] computed from y's REFORMED
+        Easter -- i.e. these are never interchangeable, not merely "usually different".
+        """
+        import datetime
+
+        from dev.paschal_index import ALPHA, taregir_for
+        from armenian_lectionary.engine import (
+            MAX_YEAR, MIN_YEAR, calculate_gregorian_easter,
+        )
+
+        agree = 0
+        for y in range(MIN_YEAR, MAX_YEAR + 1):
+            k = (calculate_gregorian_easter(y) - datetime.date(y, 3, 21)).days
+            if taregir_for(y) == ALPHA[k - 1]:
+                agree += 1
+        self.assertEqual(0, agree)
+
+    def test_2010_is_governed_by_its_reformed_easter_not_its_true_taregir(self):
+        """2010's true Taregir is Ա (Julian Easter Mar 22); what's actually served comes
+        from the section whose OWN printed label is 04-04 -- 2010's REFORMED Easter.
+        Ա's own pages (First Volume p.558) print this canon on July 23/27, dates that
+        never appear in what 2010 serves; the section matched by 04-04 prints January 21
+        and August 2, exactly what 2010 serves, verbatim against sacredtradition.am.
+        """
+        import datetime
+
+        from dev.paschal_index import taregir_for
+        from armenian_lectionary.engine import compute_armenian_lectionary
+
+        self.assertEqual("Ա", taregir_for(2010))
+        self.assertEqual(
+            "Sts. Cyricus and His Mother Julitta",
+            compute_armenian_lectionary(datetime.date(2010, 1, 21))["Liturgical Day"])
+        self.assertEqual(
+            "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
+            compute_armenian_lectionary(datetime.date(2010, 8, 2))["Liturgical Day"])
+
+
 @requires_reference_cache
 class TestSecondVolumeCyclesReproduce(unittest.TestCase):
     def test_build_reproduces_the_committed_artifact(self):
