@@ -754,16 +754,45 @@ Atomian Generals' label **unconditionally**, on the warrant above. But that cano
 of its own at Easter−55, where the validated table serves it with its own propers — so the
 engine kept it twice a year, seven days apart, in 23 of 27 liturgical years.
 
-The condition turns out to be exact rather than a judgement call. Easter−55 is always the
-same weekday as the Generals' Easter−62, so only a **fixed civil date** can take it, and in
-the supported range that is Feb 13, the embedded eve of the Presentation of the Lord. The
-source packs the two canons onto one line in precisely the two years where that happens:
+**The Tōnats'oyts settles it directly**, and not by inference from sacredtradition.am.
+
+*First Volume p.465* sets the canon out in its own right, on its own **Monday**, a full week
+after the Generals' Monday on p.464 (Isaac Parthev's Saturday and a Sunday fall between):
+
+> **Երկուշաբաթ. սրբոցն՝ Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի
+> սարկաւագացն, եւ վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի։** … Մարգարէ Զաքար. Ը. 1 … վ. 3
+> … Առաքեալն Հռոմ. Ը. 28 … վ. 39 … Աւետարան Յովհ. ԺԵ. 17 … վ. 21։
+
+Its own tone, its own Psalm and Alleluia, its own propers. And the validated table serves
+Easter−55 with `Zechariah 8.1-3 · Romans 8.28-39 · John 15.17-21` — those three readings,
+verse for verse, arrived at independently of the book. The day is unmistakably this canon's.
+
+*Second Volume* then attests the packing, in **3 of its 36** year-type calendars — and in
+every one of them Easter−55 is occupied:
+
+| Taregir | Page | Julian Easter | Generals at −62 | Easter−55 is taken by |
+|---|---|---|---|---|
+| **Ձ** | 593 | Apr 7 | Feb 4 | Feb 11 — the Vardanank Generals |
+| **Ճ** | 597 | Apr 9 | Feb 6 | Feb 13 — the Ghevondian priests |
+| **Մ** | 599 | Apr 10 | Feb 7 | Feb 14 — the Presentation of the Lord |
+
+Year-types that name a *different* companion beside the Generals — Theodore (p.573), the
+Sukiasians (pp.613, 615) — do not mention this canon at all. So the book packs it exactly
+when its own day is gone, and never otherwise.
+
+The engine's test is narrower than the book's, and provably equivalent in range. Easter−55
+is always the same weekday as Easter−62 — hence always the Monday the First Volume prints —
+so no other cohort member can land on it and only a **fixed civil date** can take it. Over
+2001–2027 that happens twice:
 
 | Year | Easter−55 | What sacredtradition.am prints |
 |---|---|---|
 | 2012, 2023 | **Feb 13** — the embedded Presentation eve | both canons, on the Generals' day |
 | 2006, 2017 | free (the Generals' own slot is the blocked one) | this canon alone, on its own day |
 | the other 22 | free | the Generals alone at −62, this canon alone at −55 |
+
+The website and the book agree. The Feb 14 branch is unexercised in range but is what
+taregir **Մ** describes, so `blocked` covers it too.
 
 `_prelent_cohort_layout` now packs it only when its own day is unavailable. Serving is
 otherwise untouched — the Generals keep the day's id and readings, and only a name is

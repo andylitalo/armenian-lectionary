@@ -1845,25 +1845,44 @@ _PRELENT_COHORT = (
 )
 _PRELENT_OFFSETS = frozenset(off for _, off, _, _, _ in _PRELENT_COHORT)
 
-# The Mark/Pionius canon (First Volume pp.464-465, laid down right after the Atomian
-# Generals) keeps its own day at Easter-62+7, where the validated table serves it with its
-# own propers. It is NOT a cohort member here, because the table already covers it and the
-# cohort outranks the table -- adding it would move 24 days off a validated reading to
-# restate the same feast.
+# The Mark/Pionius canon has its OWN day, one week after the Atomian Generals'.
 #
-# What it needs from the cohort is the one case where that day is not available. Easter-55
-# is always the same weekday as Atom's Easter-62 (seven days apart), so the only thing that
-# can take it is a fixed civil date, and in the supported range that is Feb 13, the embedded
-# eve of the Presentation of the Lord. In exactly those years -- 2012 and 2023 -- the Second
-# Volume packs this canon back onto the Atomian Generals' day and sacredtradition.am prints
-# both names there; in the other 24 cached years it prints the Generals alone at -62 and
-# this canon alone at -55.
+# First Volume p.465 sets it out as a canon in its own right -- «Երկուշաբաթ. սրբոցն՝
+# Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն, եւ վկայիցն
+# Աբդլմսեհի, Որմզդանայ եւ Սայենի» -- on its own MONDAY, with its own complete propers
+# (Zech 8.1-3, Rom 8.28-39, John 15.17-21), a full week after the Generals' Monday on p.464
+# (Isaac Parthev's Saturday and a Sunday fall between). The validated table serves that day
+# at Easter-55 with those three readings verse for verse.
+#
+# It is deliberately NOT a cohort member here: the table already covers it, and the cohort
+# outranks the table, so adding it would move 24 days off a validated reading to restate the
+# same feast. What it needs from the cohort is only the case where its own day is taken --
+# then the Second Volume packs it back onto the Generals, per its preface (Sixth).
+#
+# The book attests that packing directly, in 3 of the 36 year-type calendars, and in each
+# one Easter-55 is occupied:
+#
+#   taregir Ձ (p.593, Julian Easter Apr 7)  Generals Feb 4   -55 = Feb 11, Vardanank
+#   taregir Ճ (p.597, Julian Easter Apr 9)  Generals Feb 6   -55 = Feb 13, Ghevondians
+#   taregir Մ (p.599, Julian Easter Apr 10) Generals Feb 7   -55 = Feb 14, the Presentation
+#
+# The other year-types that name a companion beside the Generals name a different one
+# (Theodore p.573, the Sukiasians pp.613/615) and do not mention this canon at all.
+#
+# Here the test is narrower than the book's, and provably equivalent in range: Easter-55 is
+# always the same weekday as Easter-62 (seven days apart, hence always the Monday the First
+# Volume prints), so no other cohort member can land on it and only a fixed civil date can
+# take it. Over 2001-2027 that happens twice, in 2012 and 2023, both on Feb 13 -- and those
+# are exactly the two years sacredtradition.am prints both names on the Generals' day. The
+# Feb 14 branch is unexercised in range but is what taregir Մ describes, so `blocked` covers
+# it too.
 #
 # Packing it unconditionally is what shipped before, and it commemorated the canon twice in
 # 23 of 27 liturgical years -- invisible to the discrepancy reports, which classified the
 # packed day as an EXPANSION (the preface-Sixth warrant) and found the canon's own day
 # exact. That warrant holds only when the taregir left the canon no day of its own, which
-# is now what the code asks. See dev/audit_duplicate_commemorations.py and docs section 7b.
+# is now what the code asks. See dev/audit_duplicate_commemorations.py, docs section 7b, and
+# docs/sources/tonatsooyts-prelent-cohort.md.
 _MARK_OFFSET = -55
 _MARK_CANON = ("Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, "
                "and Martyrs Abdelmseh, Ormistan and Sayen")
