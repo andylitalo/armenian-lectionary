@@ -10,7 +10,7 @@ import functools
 import json
 import os
 
-from armenian_lectionary.engine import _OBSERVANCE_SEP
+from armenian_lectionary.engine import _OBSERVANCE_SEP, packed_pool
 
 CATALOG_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -56,41 +56,20 @@ def ids_for_text(text):
 # --------------------------------------------------------------------------- #
 # Packed pools
 #
-# The Tonats'oyts sets these out as SEPARATE canons, each with its own propers: the
-# post-Theophany insertions at First Volume pp.460-462 and the pre-Lent cohort at
-# pp.464-465. The Second Volume then packs them onto however many days the taregir leaves
-# between the fixed Theophany and the movable Fast of the Catechumens, and its preface
-# (Sixth, p.556) says it prints "only the name of the first saints in many places for the
-# sake of brevity", instructing the reader to celebrate the companions from the First
-# Volume anyway.
+# One day's printed line can carry several First Volume canons: the Second Volume packs
+# them onto however many days the taregir leaves, and its preface (Sixth, p.556) says it
+# prints "only the name of the first saints in many places for the sake of brevity",
+# instructing the reader to celebrate the companions from the First Volume anyway.
 #
-# So a day where the source prints one head canon and the engine serves that canon plus the
-# others packed with it is the book's own instruction, not an invention -- but it IS a
-# difference from the printed string, so it is declared here and counted rather than
-# folded silently. The engine serves one packing per liturgical coordinate; which canons
-# the source names varies by year-type, and reconciling that is a readings question.
+# So a day where the source prints one head canon and the engine serves that canon plus
+# the others packed with it is the book's own instruction, not an invention -- but it IS a
+# difference from the printed string, so it is counted here rather than folded silently.
 #
-# Membership is by id and enumerated from the First Volume, never inferred from text.
+# The pools themselves live in engine._PACKED_POOLS, not here: since the runtime enforces
+# the OTHER half of preface Sixth (a companion is packed only where it has no day of its
+# own -- engine._drop_owned_companions), the engine needs the membership too, and one
+# copy is the only way the two cannot disagree.
 # --------------------------------------------------------------------------- #
-
-_PACKED_POOLS = (
-    # First Volume pp.460-462 -- inserted after the Theophany octave.
-    frozenset({
-        "hermit_st_anton", "hermit_sts_tryphon_barsauma", "theodosius_and_the_children",
-        "cyricus_and_his_mother", "vahan_of_goghtn", "fathers_sts_athanasius_and",
-        "gregory_the_theologian", "gordius_polyeuctus_and_grigoris",
-        "eugenia_the_virgin_her", "eugenius_macarius_valerius_candidus",
-        # Andrew's own canon is at p.527, in the Assumption cycle -- but the Second
-        # Volume's preface (Seventh, p.556) names him among the feasts that "frequently
-        # shift and are celebrated in various and different intervals", and the source
-        # does pack him into the January run (2009-01-27). Declared here on that warrant,
-        # not on a First Volume page.
-        "andrew_the_general_and",
-    }),
-    # First Volume pp.464-465 -- the pre-Lent martyr cohort.
-    frozenset({"sargis", "atom", "mark_the_bishop_pionius", "sukias", "voskian",
-               "ghevond"}),
-)
 
 
 def pool_of_text(text):
@@ -101,9 +80,7 @@ def pool_of_text(text):
     it simply belongs to no pool.
     """
     sid = _text_to_id().get(text)
-    if sid is None:
-        return None
-    return next((pool for pool in _PACKED_POOLS if sid in pool), None)
+    return packed_pool(sid) if sid is not None else None
 
 
 # Observances the engine ADDS: served on a fixed civil date that the source's English never

@@ -36,7 +36,7 @@ Findings are classified, strongest first:
     others from the same pool. Not a defect: the Second Volume prints only the first saints
     "for the sake of brevity" and its preface (Sixth) says to celebrate the companions the
     First Volume sets down. Enumerated rather than inferred -- only ids a reviewer placed in
-    ``observance_ids._PACKED_POOLS`` can match this way.
+    ``engine._PACKED_POOLS`` can match this way.
   * ``ORDER`` -- the same components in a different order.
   * ``DOMINANT_FORM`` -- the source spells one name several ways and the engine serves the
     one it uses most often. Not a defect: it is the same policy the English side applies to
@@ -83,10 +83,10 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary.engine import (                                # noqa: E402
-    _OBSERVANCE_SEP, compute_armenian_lectionary,
+    _OBSERVANCE_SEP, compute_armenian_lectionary, packed_pool,
 )
 from dev.build_observance_catalog import CATALOG_PATH, _INTERNAL_SEP   # noqa: E402
-from dev.observance_ids import _PACKED_POOLS, is_declined_hy           # noqa: E402
+from dev.observance_ids import is_declined_hy                          # noqa: E402
 from dev.fetch_translations import to_mashtots_names                    # noqa: E402
 from dev.source_corrections import (                                    # noqa: E402
     ground_truth_hy_fixes, normalize_position_label_hy,
@@ -162,7 +162,7 @@ def _dominant_forms(witnesses):
 def _hy_pool():
     """``{Armenian spelling -> the packed pool its observance belongs to}``.
 
-    The Armenian side of ``observance_ids._PACKED_POOLS``: the First Volume canons the
+    The Armenian side of ``engine._PACKED_POOLS``: the First Volume canons the
     Second Volume packs onto one day, naming only the first for brevity. Only spellings the
     catalog declares, which is what keeps this from being the fuzzy match the module
     otherwise refuses.
@@ -171,7 +171,7 @@ def _hy_pool():
         catalog = json.load(fh)
     pools = {}
     for sid, entry in catalog.items():
-        pool = next((p for p in _PACKED_POOLS if sid in p), None)
+        pool = packed_pool(sid)
         if pool is not None:
             pools[entry["hy"]] = pool
     return pools

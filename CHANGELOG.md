@@ -59,6 +59,30 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   414. `test_no_position_label_is_ever_dropped` still asserts zero and still passes.
 
 ### Fixed
+- **A companion saint is no longer commemorated twice in one year**
+  ([docs §7b](docs/observance-name-corrections.md),
+  [source record](docs/sources/tonatsooyts-packed-saint-pools.md)). The Second Volume packs
+  several First Volume canons onto one line when the taregir leaves the saint pool few days,
+  and its preface (Sixth) tells the reader to celebrate the companions it abbreviated away.
+  The engine did that unconditionally. But the same sentence ends "and commemorate their
+  names *by that canon* as they are set down in the First Volume" — and the First Volume
+  sets each canon down **once**, so the licence covers only what the year had no room to lay
+  down separately. On 16 days across 2001–2027 the engine served a companion that already
+  held a day of its own, naming the same canon twice, seven months apart in some years.
+
+  `engine._drop_owned_companions` now asks the book's own question — does this canon head a
+  day of its own in this liturgical year? — against `_canons_with_own_day(ly)`, the year's
+  actual laydown. It is a per-date overlay because the packing is stored against a
+  liturgical coordinate that civil years disagree about, so no artifact edit is right in
+  every year sharing the key.
+
+  **No reading moves.** The head canon keeps the day, its id and its propers; only a name is
+  dropped. Fidelity improves in both languages: 12 days go from `EXPANSION` to matching the
+  source exactly (2005-07-28 and 2016-07-28 now reproduce its fuller line byte for byte),
+  no day gains an omission or contradiction, and Armenian exact components go 396 → 397 with
+  `EXPANSION` 2 → 1. Duplicate commemorations 20 → 4; the four that remain are two different
+  problems, both written up.
+
 - **The Fast of the Holy Cross of Varag is named, and stops being served as the weekly
   fast** ([docs §6d](docs/observance-name-corrections.md)). The source names this fast on
   its own eve (`Eve of Fast of the Holy Cross of Varag` / `Բարեկենդան Վարագայ ս. խաչի`) and

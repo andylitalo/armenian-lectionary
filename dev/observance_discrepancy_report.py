@@ -90,7 +90,7 @@ def diff_components(src_comps, eng_comps):
 
     The third pass is what keeps a packed day honest. The source may print one head canon
     where the engine serves that canon plus the others packed onto the same day; the
-    Tonats'oyts' own preface says to celebrate them all (see observance_ids._PACKED_POOLS),
+    Tonats'oyts' own preface says to celebrate them all (see engine._PACKED_POOLS),
     so this is not wrong data -- but it is a departure from the printed string, so it is
     counted rather than folded into silence.
     """

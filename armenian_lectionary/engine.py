@@ -1134,6 +1134,52 @@ _OBSERVANCE_SEP = " — "
 
 
 # --------------------------------------------------------------------------- #
+# Packed pools -- the First Volume canons the Second Volume prints several to a line
+#
+# The Tonats'oyts sets these out as SEPARATE canons, each with its own tone, psalm and
+# propers: the post-Theophany insertions at First Volume pp.460-462 ("Then the feast of
+# Saint Anton... Then... Theodosius and the Children of Ephesus... Then... Cyriacus and
+# Julietta..." -- ten of them, each printed once) and the pre-Lent cohort at pp.464-465.
+#
+# The Second Volume then packs them onto however many days the taregir leaves between the
+# fixed Theophany and the movable Fast of the Catechumens. That gap is a VARIABLE number of
+# saint weekdays -- First Volume p.526 states the mechanism outright ("if the interval of
+# eating meat is three weeks, these are the feasts set down up to this point... but if four
+# weeks, add one week here") -- so packing is a property of the year, never of the saints.
+#
+# Membership is by id and enumerated from the First Volume, never inferred from text.
+# --------------------------------------------------------------------------- #
+
+_PACKED_POOLS = (
+    # First Volume pp.460-462 -- inserted after the Theophany octave.
+    frozenset({
+        "hermit_st_anton", "hermit_sts_tryphon_barsauma", "theodosius_and_the_children",
+        "cyricus_and_his_mother", "vahan_of_goghtn", "fathers_sts_athanasius_and",
+        "gregory_the_theologian", "gordius_polyeuctus_and_grigoris",
+        "eugenia_the_virgin_her", "eugenius_macarius_valerius_candidus",
+        # Andrew's own canon is at p.527, in the Assumption cycle -- but the Second
+        # Volume's preface (Seventh, p.556) names him among the feasts that "frequently
+        # shift and are celebrated in various and different intervals", and the source
+        # does pack him into the January run (2009-01-27). Declared here on that warrant,
+        # not on a First Volume page.
+        "andrew_the_general_and",
+    }),
+    # First Volume pp.464-465 -- the pre-Lent martyr cohort.
+    frozenset({"sargis", "atom", "mark_the_bishop_pionius", "sukias", "voskian",
+               "ghevond"}),
+)
+
+
+def packed_pool(sid):
+    """The First Volume pool ``sid`` belongs to, or ``None``.
+
+    Public because dev/observance_ids resolves the same membership from TEXT for the
+    discrepancy reports, and a second copy of the pools would drift from this one.
+    """
+    return next((pool for pool in _PACKED_POOLS if sid in pool), None)
+
+
+# --------------------------------------------------------------------------- #
 # Calendar-POSITION labels
 #
 # The source heads most days with a position label -- "Fourth Sunday after Nativity",
@@ -2285,6 +2331,16 @@ def _observance_names():
         _OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
     return _TEXT_TO_OBSERVANCE_NAMES
 
+
+def _observance_ids():
+    """``{served English component -> its stable id}``, refreshed like its sibling.
+
+    Goes through :func:`_observance_names` rather than reading the global directly so the
+    two indexes can never be rebuilt out of step.
+    """
+    _observance_names()
+    return _TEXT_TO_OBSERVANCE_ID
+
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
 _READING_SPLIT_RE = re.compile(r"^(.*?)(\d+[.:]\d.*)$")
@@ -2459,6 +2515,124 @@ _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 _BARE_FAST_MARKERS = ("Fast day", "Feast day")
 
 
+# --------------------------------------------------------------------------- #
+# Preface Sixth, the half that was missing: a companion is packed only when the year
+# left it no day of its own.
+#
+# The Second Volume's preface (Sixth, p.556) licenses serving companions its lines
+# abbreviate away -- "we have placed only the name of the first saints in many places for
+# the sake of brevity; nevertheless... you must celebrate, along with the first-named
+# saint, all the other companions following him" -- and the engine honoured that clause
+# alone. The sentence does not end there. It ends "and commemorate their names BY THAT
+# CANON as they are set down in the First Volume", and the First Volume sets each canon
+# down ONCE (pp.460-462: "Then the feast of Saint Anton... Then... Theodosius and the
+# Children of Ephesus...", ten canons, each with its own propers).
+#
+# So the licence covers only what the taregir had no room to lay down separately. Where it
+# gave the companion a day of its own, adding it back to the head canon's day commemorates
+# the same canon twice in one year -- which the book never does.
+#
+# The book performs this very repair by hand. Second Volume p.574 prints the line
+# "Anton, and Tryphon, Barsamas and Onuphrius the hermits", then notes in the small
+# cursive: "If the year-letter is TE in a leap year, on this Saturday do not celebrate
+# Anton, because it was celebrated under the first letter T after the Theophany; but on
+# Saturday celebrate Theodosius; on Monday, Kyriakos; on Tuesday, Vahan; and on Thursday,
+# Tryphon WITH THEIR COMPANIONS." Given room, it unpacks. It never prints twice.
+#
+# Packing unconditionally is what shipped before, and it kept 16 canon-years twice --
+# invisible to every per-day check, which classified the packed day an EXPANSION (this
+# warrant) and found the companion's own day exact. Neither day was wrong; the pair was.
+# See dev/audit_duplicate_commemorations.py and docs section 7b.
+# --------------------------------------------------------------------------- #
+
+
+def _pool_components(label):
+    """``[(component, id)]`` for the parts of ``label`` that are packed-pool canons.
+
+    In served order, which is head-first: the source keys a packed day's propers to its
+    head canon and every stored packing is written that way round. A component the
+    catalog does not resolve is simply not a pool member -- unlike dev/observance_ids,
+    which raises, this is the serving path and must never fail on a name.
+    """
+    ids = _observance_ids()
+    out = []
+    for part in label.split(_OBSERVANCE_SEP):
+        part = part.strip()
+        sid = ids.get(part)
+        if sid is not None and packed_pool(sid) is not None:
+            out.append((part, sid))
+    return out
+
+
+def _liturgical_year(d: datetime.date) -> int:
+    """The liturgical year ``d`` falls in: ``y`` such that HE(y) <= d < HE(y+1).
+
+    Heesnak (the Sunday closest to Nov 18) starts the Fast of Advent and so the Armenian
+    church year. The same cut dev/audit_duplicate_commemorations.py measures duplicates by.
+    """
+    return d.year if d >= anchors(d.year)["HE"] else d.year - 1
+
+
+@functools.lru_cache(maxsize=None)
+def _canons_with_own_day(ly: int) -> frozenset:
+    """Packed-pool canons that HEAD a day of their own in liturgical year ``ly``.
+
+    This is the year's actual laydown, read off the engine's own output rather than
+    re-derived: a canon heads a day when it is the first pool component that day carries.
+
+    Reads the PRE-overlay commemoration, so it cannot recurse into
+    :func:`_drop_owned_companions`, which consumes it -- and it does not need to, because
+    that overlay never drops a head. The head set is the same before and after.
+
+    Scanning a liturgical year costs ~20ms, paid once per year and then cached, and only
+    ever paid on a day that is actually packed -- :func:`_drop_owned_companions` returns
+    before asking otherwise, so an ordinary day never triggers a scan at all.
+
+    The window reaches one year below ``MIN_YEAR`` (a January date sits in the previous
+    liturgical year, whose Heesnak is the November before). That is deliberate and safe:
+    ``_compute_lectionary`` carries no range guard -- that lives in the public wrapper --
+    the same way ``_prelent_cohort_layout`` is called for any year. Clamping to the
+    supported range instead would make a day's name depend on ``LECTIONARY_MIN_YEAR``,
+    which is env-overridable.
+    """
+    start, end = anchors(ly)["HE"], anchors(ly + 1)["HE"]
+    heads = set()
+    d = start
+    while d < end:
+        pool = _pool_components(_compute_lectionary(d)["Liturgical Day"])
+        if pool:
+            heads.add(pool[0][1])
+        d += datetime.timedelta(days=1)
+    return frozenset(heads)
+
+
+def _drop_owned_companions(label: str, d: datetime.date) -> str:
+    """Drop packed companions of ``label`` that hold a day of their own in ``d``'s year.
+
+    The head canon is never dropped -- it owns the day, its id, and its readings, so this
+    is a name change and nothing more. A companion is dropped only when it sits in the
+    SAME First Volume pool as the head (preface Sixth speaks of companions within one
+    run) and that year laid it down on a day of its own.
+    """
+    pool = _pool_components(label)
+    if len(pool) < 2:
+        return label
+    head_pool = packed_pool(pool[0][1])
+    owned = None
+    drop = set()
+    for text, sid in pool[1:]:
+        if packed_pool(sid) is not head_pool:
+            continue
+        if owned is None:
+            owned = _canons_with_own_day(_liturgical_year(d))
+        if sid in owned:
+            drop.add(text)
+    if not drop:
+        return label
+    kept = [p for p in label.split(_OBSERVANCE_SEP) if p.strip() not in drop]
+    return _OBSERVANCE_SEP.join(kept) if kept else label
+
+
 def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     """Head ``label`` with ``d``'s regenerated calendar-position label.
 
@@ -2625,6 +2799,11 @@ def compute_armenian_lectionary(target_date: datetime.date,
     (:func:`_apply_position_label`) and the ``Eve of ...`` note at the tail
     (:func:`_apply_eve_label`).
 
+    It also drops a packed companion canon the year gave a day of its own
+    (:func:`_drop_owned_companions`) -- the other direction of the same problem, and for
+    the same reason: which canons a day carries varies by year-type, so a coordinate-keyed
+    table cannot state it and it has to be decided per date.
+
     ``language`` selects the language of the human-readable names: ``"en"`` (default)
     or ``"hy"`` for Classical Armenian. In ``"hy"`` the feast (``Liturgical Day``) and
     the book names in ``Readings``/``ReadingsList`` come from sacredtradition.am
@@ -2661,7 +2840,9 @@ def compute_armenian_lectionary(target_date: datetime.date,
     result["Liturgical Day"] = _apply_eve_label(
         _apply_fixed_date_label(
             _apply_position_label(
-                _anchor_genocide_remembrance(result["Liturgical Day"], target_date),
+                _anchor_genocide_remembrance(
+                    _drop_owned_companions(result["Liturgical Day"], target_date),
+                    target_date),
                 target_date, readings),
             target_date),
         target_date, readings)

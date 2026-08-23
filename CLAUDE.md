@@ -185,10 +185,24 @@ Working rules:
   - A canon the source never publishes alone still needs a row and an id;
     `observance_name_review.py` emits one (`status = split`) from the halves of a split approved
     name, and its Armenian is stated by hand because there is no standalone scrape of it.
-  - `dev/observance_ids._PACKED_POOLS` enumerates the two pools **by id**. It is what lets
-    the discrepancy reports call a day where the engine serves more canons than the source
-    printed an `EXPANSION` rather than a contradiction — the book's own instruction, kept
-    visible and ratcheted.
+  - `engine._PACKED_POOLS` enumerates the two pools **by id** (`engine.packed_pool(sid)`;
+    `dev/observance_ids.pool_of_text` is the text-keyed wrapper the reports use). It is what
+    lets the discrepancy reports call a day where the engine serves more canons than the
+    source printed an `EXPANSION` rather than a contradiction — the book's own instruction,
+    kept visible and ratcheted. It lives in the engine because the runtime needs it too:
+    see the next bullet.
+  - **The preface-Sixth warrant is conditional, and the condition is enforced per date.**
+    The sentence licensing the engine to serve abbreviated-away companions ends "and
+    commemorate their names *by that canon* as they are set down in the First Volume" — and
+    the First Volume sets each canon down once. So a companion is packed only where the
+    taregir left it no day of its own. `engine._drop_owned_companions` asks that, using
+    `engine._canons_with_own_day(ly)` — the liturgical year's own laydown, read off the
+    engine's pre-overlay output, `lru_cache`d per year and consulted only on a day that is
+    actually packed. It is a **per-date overlay**, in the `_apply_position_label` family and
+    for the same reason: the packing is stored against a liturgical coordinate that civil
+    years disagree about, so no artifact edit is right in every year sharing the key. A head
+    canon is never dropped — it owns the day, its id and its readings — so this only ever
+    removes a name. See docs §7b and `dev/audit_duplicate_commemorations.py`.
   - The engine serves **one packing per liturgical coordinate**; which canons the source
     names varies by year-type. That is the residual 5 English / 4 Armenian omissions, and
     closing it is a readings-provenance change (docs §7).
@@ -218,7 +232,7 @@ is also what lets it cover **2027**; its ratchet is `tests/test_duplicate_commem
 and the by-design recurrences are declared in `observance_ids._RECURRING_OBSERVANCES`. See
 docs §7b. `observance_year_table.py` writes the reviewing artifact that surfaced it —
 a year per page, each day's ids positionally aligned with the words they stand for. Its
-output is **not checked in**: 20 duplicates are still open, so a published table would be a
+output is **not checked in**: 4 duplicates are still open, so a published table would be a
 table to republish. Generate it when they close (docs/README.md).
 
 **After any change to `dev/source_corrections`**, rebuild in this order and re-run the
