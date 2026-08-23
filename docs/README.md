@@ -18,6 +18,8 @@ that governs it.
 | [`sources/tonatsooyts-nativity-octave.md`](sources/tonatsooyts-nativity-octave.md) | Տօնացոյց, p. 464 | The Nativity octave (Jan 6→13) and its 1–2-day encroachment on the following fast by Dominical letter — the principle behind the Jan-13 / Eve-of-Fast collision (`PnOct`). |
 | [`sources/tonatsooyts-low-sunday-antasdan.md`](sources/tonatsooyts-low-sunday-antasdan.md) | Տօնացոյց, pp. 487, 462–463 | Low Sunday (Easter+7) and its Antasdan (Blessing of the Fields) four-corners Gospels — source for the validated `E` reading-block. |
 | [`sources/tonatsooyts-eastertide-gospels.md`](sources/tonatsooyts-eastertide-gospels.md) | Տօնացոյց, p. 488 | The Eastertide four-Gospel continua (Luke·John·Matthew·Mark, Easter+8→Pentecost) — confirms the validated `E`/`EB` Eastertide output. |
+| [`sources/tonatsooyts-prelent-cohort.md`](sources/tonatsooyts-prelent-cohort.md) | Տօնացոյց, pp. 464–465 | The pre-Lent martyr cohort (Sargis · Atom · Sukias · Voskian · Ghevond) and its propers, plus the Mark/Pionius canon a week later — source for the `first-volume-cohort` tier and for when that canon is packed onto the Generals' day. |
+| [`sources/tonatsooyts-packed-saint-pools.md`](sources/tonatsooyts-packed-saint-pools.md) | Տօնացոյց, pp. 461–462, 526, 556, 574 | When one printed line carries several canons **and when it must not**: preface Sixth's abbreviation warrant and the clause that conditions it, the variable gap that causes packing (p. 526, stated of the autumn interval), and the book unpacking a pair by hand (p. 574). The rule behind `engine._drop_owned_companions`. |
 | [`sources/great_paschal_cycle_index.md`](sources/great_paschal_cycle_index.md) | Տօնացոյց, p. 637 | The 532-year year-letter table: Taregir decoded as a **Julian** Easter-date code (closed form in `dev/paschal_index.py`, validated 171/171). Why it is not a Gregorian year-key, and how a Julian source transfers to the Gregorian engine via Easter-offset. |
 | [`observance-name-corrections.md`](observance-name-corrections.md) | sacredtradition.am (English vs. its own Armenian) | Every place the engine deliberately departs from the source's feast text, with the evidence for each — plus the questions still open. Companion to [`dev/observance_name_review.tsv`](../dev/observance_name_review.tsv), the approved-name ground truth. |
 | [`sources/second_volume_index.md`](sources/second_volume_index.md) | Տօնացոյց Second Volume, pp. ~555–643 | Per-year-type "Roman cycle" calendars: saint groups (preface §6), the floating-feast list (§7), leap-year rules. Coverage: **42/50** non-validated days (and **22/22** floating saints) are named in the Second Volume. Plus the section→calendar-letter index (`second_volume_index.csv`) and how to verify/label it. |
@@ -36,7 +38,7 @@ python dev/observance_year_table.py 2026 2027 --write
 
 **No year is checked in yet, deliberately.** Reading the generated 2027 table is what
 surfaced the duplicate-commemoration defect
-([`observance-name-corrections.md` §7b](observance-name-corrections.md)), and 20 of those
+([`observance-name-corrections.md` §7b](observance-name-corrections.md)), and 4 of those
 are still open — a table published now would be a table to republish. Generate it when they
 are closed.
 

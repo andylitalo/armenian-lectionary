@@ -80,7 +80,9 @@ Easter−55, with `Zechariah 8.1-3 · Romans 8.28-39 · John 15.17-21` — this 
 readings, verse for verse, arrived at independently of it. Adding it to the cohort would
 only move a validated day onto a source-derived tier to restate the same feast.
 
-The one thing the cohort does need from it is the displaced case; see
+The one thing the cohort does need from it is the displaced case (packed onto the Generals
+unconditionally, and taken back off by `engine._drop_owned_companions` wherever the year
+serves its own day); see
 [`observance-name-corrections.md` §7b](../observance-name-corrections.md) and
 `engine._MARK_CANON`. The Second Volume packs it back onto the Generals' day in 3 of its 36
 year-type calendars — **Ձ** (p.593), **Ճ** (p.597), **Մ** (p.599) — and in each of those

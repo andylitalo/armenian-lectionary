@@ -92,10 +92,16 @@ HY_ORDER_CEILING = int(os.environ.get("HY_ORDER_CEILING", "1"))
 HY_DECLINED_DAYS = int(os.environ.get("HY_DECLINED_DAYS", "20"))
 
 # Days where the source names one canon of a packed pool and the engine serves others from
-# the same pool. Correct as served: the Second Volume prints only the first saints "for the
-# sake of brevity" and its preface (Sixth) says to celebrate the companions the First Volume
-# sets down. Monotonic DOWN anyway: a rise means a new packing nobody has looked at.
-HY_EXPANSION_CEILING = int(os.environ.get("HY_EXPANSION_CEILING", "4"))
+# the same pool. Correct as served -- but only conditionally, which is why this keeps
+# falling: the Second Volume prints only the first saints "for the sake of brevity" and its
+# preface (Sixth) says to celebrate the companions the First Volume sets down, AND to
+# commemorate them by that canon, which the First Volume sets down once. So the warrant
+# holds only where the taregir left the companion no day of its own.
+#
+# 4 -> 2 when the Mark/Pionius canon stopped being packed unconditionally (docs 7b), and
+# 2 -> 1 when engine._drop_owned_companions generalized that condition to the whole
+# post-Theophany pool. Monotonic DOWN: a rise means a new packing nobody has looked at.
+HY_EXPANSION_CEILING = int(os.environ.get("HY_EXPANSION_CEILING", "1"))
 
 # Days where the source spells a name several ways and we serve its dominant form. Correct,
 # but monotonic DOWN anyway: a rise means a new unreviewed spelling appeared in the source.
@@ -124,16 +130,14 @@ HY_INTERNAL_DELIMITER_CEILING = int(
 # orthography reversal). Monotonic UP.
 #
 # Note this counts BYTE equality, so the internal-delimiter days above are excluded from it
-# even though their text is identical. exact + INTERNAL_DELIMITER is the "same words" number
-# and is what moves when a real fix lands: 409 + 6 = 415.
-#
-# The floor is 413 rather than the 414 a full cache now reports: the days gained since it
-# was set at 407 are reproducible anywhere except one, which came from the cache growing
-# 433 -> 435 days.
+# even though their text is identical: exact + INTERNAL_DELIMITER is the "same words"
+# number, and it is what moves when a real fix lands.
 #
 # Counted as exact + DECLINED, so a declared decision to serve less does not read as a
-# regression -- see test_exact_match_floor. Unchanged by section 6e: 412 + 2 = 394 + 20.
-HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "414"))
+# regression -- see test_exact_match_floor. The floor keeps a margin of 2 under what a full
+# cache reports (397 + 20 = 417 now): the days gained since it was set at 407 are
+# reproducible anywhere except one, which came from the cache growing 433 -> 435 days.
+HY_EXACT_FLOOR = int(os.environ.get("HY_EXACT_FLOOR", "415"))
 
 # Days with a source Armenian name to compare against. Guards against a shrinking cache
 # silently weakening every assertion above.

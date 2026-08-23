@@ -16,7 +16,7 @@ That framing is also what lets this cover **2027**, the one year in range with n
 truth: the invariant is a statement about the engine's own output across a year, so it
 needs no oracle. Both 2027-only findings were invisible to every other check.
 
-The liturgical year runs Heesnak to Heesnak (``engine.anchors(y)["HE"]``, the Sunday
+The liturgical year runs Heesnak to Heesnak (``engine._liturgical_year``, cut at the Sunday
 closest to Nov 18 -- the start of the Fast of Advent, and so of the Armenian church year).
 That cut drifts by up to a week, which can land a September- or December-anchored
 observance in one window twice; the two ids where that happens are declared in
@@ -42,16 +42,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.observance_ids import ids_for_text, recurs_by_design                # noqa: E402
 from armenian_lectionary.engine import (                                     # noqa: E402
-    MAX_YEAR, MIN_YEAR, anchors, compute_armenian_lectionary,
+    MAX_YEAR, MIN_YEAR, _liturgical_year, compute_armenian_lectionary,
 )
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_DIR = os.path.join(REPO_ROOT, "dev", "reference_data")
-
-
-def liturgical_year(d, heesnak):
-    """The liturgical year ``d`` falls in: ``y`` such that HE(y) <= d < HE(y+1)."""
-    return d.year if d >= heesnak[d.year] else d.year - 1
 
 
 def source_feast(d):
@@ -81,14 +76,13 @@ def occurrences():
 
 def findings():
     """Every ``(liturgical_year, id, [dates])`` where one canon is kept more than once."""
-    heesnak = {y: anchors(y)["HE"] for y in range(MIN_YEAR - 1, MAX_YEAR + 2)}
     found = []
     for sid, dates in sorted(occurrences().items()):
         if recurs_by_design(sid):
             continue
         per_year = collections.defaultdict(list)
         for d in dates:
-            per_year[liturgical_year(d, heesnak)].append(d)
+            per_year[_liturgical_year(d)].append(d)
         for ly, days in sorted(per_year.items()):
             if len(days) > 1:
                 found.append((ly, sid, days))
