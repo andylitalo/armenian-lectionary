@@ -873,20 +873,65 @@ the source's own fuller line, which the extra Vahan had been overshooting.
 
 #### What is left, and why each needs its own evidence
 
-`tests/test_duplicate_commemorations.py` holds the remaining 4 as a ratchet. They are two
-different problems, and neither is a spelling decision:
+`tests/test_duplicate_commemorations.py` holds the remaining 2 as a ratchet.
 
-- **2 — `gordius_polyeuctus_and_grigoris`.** Packed onto *both* its occurrences and heading
-  neither, so there is no "own day" to keep and the readings cannot separate them. The
-  Second Volume does speak to it — but per year-type, and in both directions. p.558 prints
-  Cyricus alone on the Thursday and *"Monday. Of Vahan of Golthen, and Gordius"*; p.593 the
-  same (*"2. Monday. Vahan of Goghtn, Gordius, Polyeuctus, and Grigoris"*); while p.574 and
-  p.582 print *"Kyriakos and his mother Julitta, and Gordius, Polyeuctus, and Grigoris"* and
-  give Vahan a separate day beside Eugenia. Which head absorbs this canon is therefore
-  **stated data, not a derivable rule**: it wants a per-coordinate override with its page
-  cited, which is a different kind of change from an algorithmic overlay. Worth noting that
-  the repair above already reproduces the p.574/p.582 layout exactly on 2005-07-28,
-  2008-07-24 and 2016-07-28 — the shape is right; only these two liturgical years disagree.
+#### 7c. Gordius — the packing a year-type has to state
+
+The canon `gordius_polyeuctus_and_grigoris` never **heads** a day. It is packed onto both
+of its occurrences, so there is no "own day" for `_drop_owned_companions` to detect, and
+because a packed day's propers are the head canon's, the readings cannot separate them
+either.
+
+The Second Volume does speak to it — but per year-type, and **in both directions**:
+
+| Direction | Attested at |
+|---|---|
+| Gordius with **Vahan**; Cyricus alone | **p.558** (Ա) · **p.587** (Ծ) |
+| Gordius with **Cyricus**; Vahan a separate day beside Eugenia | **p.574** (Ը) · **p.582** (Լ) · **p.592** (Ձ) · **p.597** (Ճ) |
+
+(An earlier draft of this section cited p.593 for the Vahan direction. p.593 carries none of
+these names; the Ձ section's line is on **p.592**, and it reads *"21. Monday. Cyriacus and
+Julietta, and of Gordius, Polyeuctus, and Gregory"* — the **Cyricus** direction.)
+
+So which head absorbs this canon is **stated data, not a derivable rule**. The repair above
+already reproduces the Cyricus-direction layout exactly on 2005-07-28, 2008-07-24 and
+2016-07-28 — the shape was right; only two liturgical years disagreed.
+
+**Those two are LY2009 and LY2020**, and both have Gregorian Easter **April 4** — the only
+two in range. Ծ is the section whose printed Easter is April 4 (`04-04, p.586, cycle 5`), so
+its civil dates carry the same weekday grid, and it states the layout outright:
+
+> p.586, **January**: `21. Եշ. Կիրակոսի եւ Յուղիտայի։` — *"21. Thursday. Of Cyriacus and
+> Julitta."* — no Gordius. The January run is cut at *"24. Sunday … Barekendan of the
+> Catechumens"* after four canons.
+>
+> p.587, **August** (after July 11 Vardavar says to "come here and celebrate the feasts
+> written below, **which are after the Octave of the Theophany**"):
+> `2. Բշ. ԱԶ. Վահանայ Գողթնացւոյն,- Գորդիոսի, Պողիքտոսի և Գրիգորիսի։` — *"2. Monday. Vahan
+> of Goghtn, Gordius, Polyeuctus, and Grigoris."*
+
+sacredtradition.am prints exactly that on all four days, weekday for weekday.
+
+An artifact edit cannot express it. January is table key `PnSaintMD cyricus_and_his:01-21`,
+shared by **seven** civil years — 2003/2014/2019/2020/2025 print Cyricus **+** Gordius, only
+2010/2021 print Cyricus alone — so `modal_feast` is right for five of the seven. August is
+`TrSaintMD cyricus_and_his:08-02`, reached by **exactly** 2010 and 2021, unanimous with
+Gordius.
+
+So it is stated, in `engine._PACKING_OVERRIDES`, keyed by `(Gregorian Easter, head canon
+id)` and applied by `_drop_owned_companions`. Keying on the **head** is what lets the
+packing be withdrawn from Cyricus without disturbing the same canon under Vahan on the very
+same year's August day.
+
+**Nothing else moved.** Over all 9,861 supported days the change rewrites exactly two
+strings, 2010-01-21 and 2021-01-21; `Source` stays `validated-table` on both, and **not one
+reading changes anywhere in the range** — as with every member of this overlay family, a
+name is dropped and nothing else. The English and Armenian discrepancy tallies are
+byte-identical before and after (the reports count distinct name components, and the
+component the source prints on those days is unchanged).
+
+#### What is left
+
 - **2 — the `03-28` cycle contradicting the table.** `hermit_st_anton` on 2027-07-24 (the
   validated table holds that canon on 07-26) and `patriarchs_barlaam_anthimus_and` on
   2027-07-31 (the table holds it on a late-September Thursday, in all 26 cached years).
@@ -896,7 +941,15 @@ different problems, and neither is a spelling decision:
   loop is `range(2001, 2027)` — has zero cache years to test either entry against. The fix
   is a filter that can also catch a cycle entry contradicting the **table's** own placement
   of the same canon, and it needs an artifact rebuild. A
-  `dev/build_second_volume_cycles.py` question.
+  `dev/build_second_volume_cycles.py` question — and one that has to settle first **which
+  canon governs 2027**. Two mappings are in play and they disagree here: the section whose
+  *printed* Easter equals the year's Gregorian Easter (**Է**, p.571, which lays the pool out
+  in July and names Athanasius/Cyril on the 31st), or the year's **true taregir** from the
+  Julian computus (**Ս**, p.619, whose thirty-four-day post-Theophany gap keeps the whole
+  pool in January). `engine._cycle_saint`'s docstring describes the first; every existing
+  `_SOURCE_SUMMER` march uses the second — `03-31`→Ր, `04-05`→Թ, `03-23`→Ո are each the
+  true taregir of their cache years, not the same-Easter section, and each is recorded as
+  reproducing ground truth exactly. 2027 has no ground truth to break the tie.
 
   *(This corrects the earlier reading of `hermit_st_anton`, which was counted with the
   packed-companion group. It is not one: the repair above leaves it standing, because there

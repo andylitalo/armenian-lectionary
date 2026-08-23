@@ -1170,6 +1170,39 @@ _PACKED_POOLS = (
 _POOL_OF_ID = {sid: pool for pool in _PACKED_POOLS for sid in pool}
 
 
+# --------------------------------------------------------------------------- #
+# Packings a year-type states for itself
+#
+# preface Sixth licenses serving the companions a line abbreviates away, and
+# _drop_owned_companions withdraws that licence where the year gave a companion its own
+# day. Neither reaches a canon that never HEADS a day: it has no "own day" to detect, and
+# no readings of its own to tell its occurrences apart.
+#
+# gordius_polyeuctus_and_grigoris is the one such canon, and the book packs it in BOTH
+# directions depending on the year-type -- with Vahan on p.558 (taregir Ա) and p.587
+# (Ծ), with Cyricus on pp.574 (Ը), 582 (Լ), 592 (Ձ) and 597 (Ճ). So which head absorbs it
+# is stated data, not a rule, and it is stated here rather than derived.
+#
+# Ծ is the section whose printed Easter is April 4, so its civil dates carry the same
+# weekday grid as a Gregorian April-4 year -- 2010 and 2021, the only two in range:
+#
+#   p.586, January:  "21. Thursday. Of Cyriacus and Julitta."          <- no Gordius
+#   p.587, August:   "2. Monday. Vahan of Goghtn, Gordius, Polyeuctus, and Grigoris."
+#
+# sacredtradition.am prints exactly that on all four days. The January run is cut at
+# "24. Sunday ... Barekendan of the Catechumens" after four canons, and p.587 resumes the
+# rest after Vardavar -- "celebrate the feasts written below, which are after the Octave
+# of the Theophany" -- which is where this canon goes in those years.
+#
+# Keyed by Gregorian Easter (the year-type) and the HEAD canon's id, so it withdraws a
+# packing from one head without touching the same canon under another. See docs 7b.
+# --------------------------------------------------------------------------- #
+
+_PACKING_OVERRIDES = {
+    ("04-04", "cyricus_and_his_mother"): frozenset({"gordius_polyeuctus_and_grigoris"}),
+}
+
+
 def packed_pool(sid):
     """The First Volume pool ``sid`` belongs to, or ``None`` (including for ``None``).
 
@@ -2595,17 +2628,24 @@ def _drop_owned_companions(label: str, d: datetime.date) -> str:
     once: on the day it heads. A companion is dropped only when it sits in the SAME First
     Volume pool as the head (preface Sixth speaks of companions within one run) and that
     year laid it down on a day of its own.
+
+    A companion the year-type states outright is dropped too (:data:`_PACKING_OVERRIDES`),
+    for the canon that never heads a day and so has no own-day to detect.
     """
     pool = _pool_components(label)
     if len(pool) < 2:
         return label
     head_pool = packed_pool(pool[0][1])
+    easter = calculate_gregorian_easter(d.year)
+    stated = _PACKING_OVERRIDES.get(
+        (f"{easter.month:02d}-{easter.day:02d}", pool[0][1]), frozenset())
     companions = [(text, sid) for text, sid in pool[1:]
-                  if packed_pool(sid) is head_pool]
+                  if sid in stated or packed_pool(sid) is head_pool]
     if not companions:
         return label
-    owned = _canons_with_own_day(_liturgical_year(d))
-    drop = {text for text, sid in companions if sid in owned}
+    owned = (_canons_with_own_day(_liturgical_year(d))
+             if any(sid not in stated for _, sid in companions) else frozenset())
+    drop = {text for text, sid in companions if sid in stated or sid in owned}
     if not drop:
         return label
     # The head is never in ``drop``, so what is kept is never empty.
