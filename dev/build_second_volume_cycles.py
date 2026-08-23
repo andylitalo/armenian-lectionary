@@ -240,10 +240,29 @@ _SUMMER_CHVO = [
     (3, "eugenia_the_virgin"), (5, "gregory_of_theologian"), (0, "eugenios_makarios_valerian"),
     (1, "andrew_the_general"), (3, "adrian_and_his"), (5, "200_fathers_of"),
 ]
+#   03-28  <- taregir Է (Julian Easter 03-28; NO cache year -- 2027 is the only supported
+#            year of this type, which is why _drop_cache_contradicted cannot validate it).
+#            p.571 (human) lays the run out day by day, opening at the generic start_off
+#            (Vardavar + 20, unlike the Ր/Թ/ՉՈ marches' start_off=5): 24 Sat Anton, 26 Mon
+#            Theodosius, 27 Tue Cyricus+Julitta, 29 Thu Vahan+Gordius+Polyeuctus+Gregory,
+#            31 Sat Athanasius+Cyril+Gregory the Theologian, Aug 2 Mon Eugenia, 3 Tue
+#            Tryphon, 5 Thu Eugenios/Makarios. Peter/Blaise/Absalom are already served in
+#            January on this page (Jan 16) and so do not repeat here, unlike the generic
+#            _SUMMER_SEQUENCE's Peter-first Saturday. Reproduces all eight p.571 dates
+#            exactly (see dev/audit_duplicate_commemorations.py and docs section 7d);
+#            NOT ground-truth-verified, since 2027 has no cache -- see
+#            _report_table_contradicted for the check this branch cannot get from the
+#            drop-guard.
+_SUMMER_E = [
+    (5, "hermit_saints_anton"), (0, "theodosius_and_the"), (1, "cyricus_and_his"),
+    (3, "vahan_of_goghtn"), (5, "fathers_saints_athanasius"), (0, "eugenia_the_virgin"),
+    (1, "hermits_saints_triphon"), (3, "eugenios_makarios_valerian"),
+]
 _SOURCE_SUMMER = {
     "03-31": (_SUMMER_R, 5),
     "04-05": (_SUMMER_T, 5),
     "03-23": (_SUMMER_CHVO, 5),
+    "03-28": (_SUMMER_E, 19),
 }
 
 

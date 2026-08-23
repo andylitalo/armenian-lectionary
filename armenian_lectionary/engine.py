@@ -1200,6 +1200,15 @@ _POOL_OF_ID = {sid: pool for pool in _PACKED_POOLS for sid in pool}
 
 _PACKING_OVERRIDES = {
     ("04-04", "cyricus_and_his_mother"): frozenset({"gordius_polyeuctus_and_grigoris"}),
+    # Ē (p.571): "27. Tuesday. Cyriacus and Julitta." -- no Gordius -- and separately
+    # "29. Thursday. Vahan of Goghtn, and Gordius, Polyeuctus, and Gregory." The stored
+    # cyricus_and_his_mother label (built modally across coordinates) packs Gordius with
+    # Cyricus by default; this year-type's own page says it belongs with Vahan instead.
+    # Vahan's own stored label has no way to gain Gordius without a schema change to the
+    # second-volume-cycle tier (one id per date; docs 7), so withdrawing it here leaves an
+    # omission of the same documented, already-accepted shape as 2008-07-28 (docs 7) --
+    # not a wrong attribution, which is what shipped before this override.
+    ("03-28", "cyricus_and_his_mother"): frozenset({"gordius_polyeuctus_and_grigoris"}),
 }
 
 

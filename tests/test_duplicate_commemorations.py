@@ -33,22 +33,18 @@ from armenian_lectionary.engine import (                               # noqa: E
     MAX_YEAR, MIN_YEAR, _canons_with_own_day, compute_armenian_lectionary,
 )
 
-# What survives after the packed-companion repair and the stated year-type override
-# (docs section 7b). One group remains:
+# What survives after the packed-companion repair, the stated year-type override, and
+# transcribing taregir Ē's own summer march (docs section 7d). One entry remains, left
+# for its own PR:
 #
-#   * 2 -- the "03-28" second-volume cycle placing a canon the validated table places
-#     elsewhere: hermit_st_anton on 2027-07-24 (table has it 07-26) and
-#     patriarchs_barlaam_anthimus_and on 2027-07-31 (table has it in late September).
-#     Easter 2027 is the only supported year of its type, so
-#     build_second_volume_cycles._drop_cache_contradicted has no cache year to filter
-#     either entry against. Both duplicate a HEAD canon, not a companion, which is why no
-#     packing rule reaches them. A dev/build_second_volume_cycles.py question -- and the
-#     obvious repair is ruled out: 2027 is taregir Ս (docs 7d; the p.637 perpetual table
-#     gives "2027,Ս", and Ս's tabulated Julian Easter Apr 19 matches the computus), whose
-#     34-day post-Theophany gap keeps the whole pool in January, so neither July date has
-#     a swap to make. The cycle is populated from Է's pages, which govern a different
-#     civil year; re-keying the build by taregir is its own reviewed change.
-MAX_DUPLICATE_COMMEMORATIONS = 2
+#   * 1 -- hermit_st_anton: the second-volume-cycle tier serves Anton on 2027-07-24 (p.571:
+#     "24. Saturday. Anthony the Hermit."), and the validated table separately serves Anton
+#     on 2027-07-26 -- which p.571 gives to Theodosius instead ("26. Monday. King
+#     Theodosius, and the Children of Ephesus."). The cycle is right and the table is two
+#     days late; dropping the cycle entry would serve Athanasius/Cyril there instead (the
+#     book's OWN July 31 saint), which is worse. This is a build_table.py / TrSaintB
+#     coordinate question, not a second-volume-cycle one.
+MAX_DUPLICATE_COMMEMORATIONS = 1
 
 # Canons whose double commemoration is closed, by whichever mechanism closed it (docs
 # section 7b). Named individually rather than counted, so a regression says which canon
@@ -166,6 +162,24 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         for iso in ("2005-07-28", "2008-07-24", "2016-07-28"):
             with self.subTest(iso):
                 self.assertIn("Gordius", self._day(iso)["Liturgical Day"])
+
+    def test_taregir_e_march_matches_p571(self):
+        """2027 (Gregorian Easter 03-28) is taregir Ē -- source-independent, so 2027 is
+        covered even with no ground truth. p.571 lays out the whole July/August pool;
+        this pins the two the matcher previously got wrong.
+
+        27 was a second Theodosius (the matcher's plural/spelling bugs); the transcribed
+        march now serves what p.571 actually prints: Cyricus alone (the stated override
+        withdraws Gordius, which the page attaches to Vahan on the 29th instead -- see
+        engine._PACKING_OVERRIDES). 31 was the September Barlaam canon, 54 days early;
+        the march now serves Athanasius/Cyril, and Gregory the Theologian.
+        """
+        self.assertEqual("Sts. Cyricus and His Mother Julitta",
+                         self._day("2027-07-27")["Liturgical Day"])
+        self.assertEqual(
+            "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the "
+            "Theologian",
+            self._day("2027-07-31")["Liturgical Day"])
 
     def test_the_year_scan_overshoots_the_supported_range_at_both_ends(self):
         """The scan window is Heesnak to Heesnak, so it leaves the range at both edges.
