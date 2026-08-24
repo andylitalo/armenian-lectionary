@@ -444,6 +444,57 @@ def _hinge_anchors(year: int) -> dict:
     }
 
 
+# --------------------------------------------------------------------------- #
+# Table-collision guard for a year-type absent from ground truth
+#
+# _zone_saint_replay's generic mining lays a saint identity onto a free slot by
+# STRUCTURAL POSITION within an _easter_band() -- it has no notion of which Second-Volume
+# year-type (taregir) it is actually replaying, only of the length class of that year's
+# post-Nativity window (_easter_band, banded on _pn_len). Two DIFFERENT year-types can
+# share a band while their OWN canons lay a different saint into the same structural slot:
+# 2005/2016 (Gregorian Easter 03-27) and 2027 (03-28) share _easter_band() == 0, and the
+# mining -- built and validated only against 2005/2016's true march -- places
+# "cyricus_and_his" at the slot right after the Athanasius pin Saturday for BOTH
+# year-types. That is correct for 2005/2016 (ground truth: Mon 07-25 = Anthony; the
+# VALIDATED table entry TrSaintB["0:cyricus_and_his"] really does hold Anton's readings).
+# It is wrong for 2027: p.571 (dev/build_second_volume_cycles.py's _SUMMER_E; docs section
+# 7e) gives that Monday (07-26) to Theodosius, and puts Anton on the PRECEDING Saturday
+# (07-24) instead -- a slot the mining separately (and harmlessly) mislabels
+# "fathers_saints_athanasius".
+#
+# 2027 is the only supported year of Easter "03-28" (build_table.py's cache loop is
+# range(2001, 2027), so it never observes this Easter date), so nothing in the strict
+# cross-year build can see or drop the resulting alias.
+#
+# The fix is scoped to the ONE (Easter-md, civil-date) pair this produces a real collision
+# on -- not a wholesale replay of _SUMMER_E onto every 2027 summer slot, which would reopen
+# the same class of bug one day later: 07-27 (Tuesday) is UNASSIGNED by the generic mining
+# today (so it already falls through harmlessly to the correct second-volume-cycle tier),
+# but _SUMMER_E's own 07-27 identity is ALSO "cyricus_and_his" -- replaying it there would
+# collide with the very same table entry this override exists to avoid. See docs section
+# 7e for the full account and the verification that this changes exactly one date's output
+# over 2001-2027.
+# --------------------------------------------------------------------------- #
+
+_TR_SAINT_ID_OVERRIDES = {
+    # p.571: "26. Monday. King Theodosius, and the Children of Ephesus." -- not
+    # the mined "cyricus_and_his" (docs section 7e).
+    ("03-28", "07-26"): "theodosius_and_the",
+}
+
+
+def _tr_saint_identity(d: datetime.date):
+    """The TrSaint* identity for a summer saint-weekday: _TR_SAINT_ID_OVERRIDES if this
+    (Easter-md, civil-date) pair is a known table-collision (see above), else the generic
+    mined replay."""
+    e = calculate_gregorian_easter(d.year)
+    key = (f"{e.month:02d}-{e.day:02d}", f"{d.month:02d}-{d.day:02d}")
+    override = _TR_SAINT_ID_OVERRIDES.get(key)
+    if override is not None:
+        return override
+    return _zone_saint_replay("Tr", d.year).get(d)
+
+
 def _summer_slot(d, tr, fast_mon, eve, out):
     """Grid coordinates for a Transfiguration->Assumption day (tr < d <= eve).
 
@@ -468,7 +519,7 @@ def _summer_slot(d, tr, fast_mon, eve, out):
         out["TrFer"] = str(fer)
         return
     # saint weekday: senior-saint identity (most specific) + forward/backward grid.
-    sid = _zone_saint_replay("Tr", d.year).get(d)
+    sid = _tr_saint_identity(d)
     if sid:
         out["TrSaintMD"] = f"{sid}:{d.month:02d}-{d.day:02d}"  # identity x civil date
         out["TrSaintB"] = f"{_easter_band(d.year)}:{sid}"   # Easter-banded variant

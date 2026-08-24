@@ -33,18 +33,11 @@ from armenian_lectionary.engine import (                               # noqa: E
     MAX_YEAR, MIN_YEAR, _canons_with_own_day, compute_armenian_lectionary,
 )
 
-# What survives after the packed-companion repair, the stated year-type override, and
-# transcribing taregir Ē's own summer march (docs section 7d). One entry remains, left
-# for its own PR:
-#
-#   * 1 -- hermit_st_anton: the second-volume-cycle tier serves Anton on 2027-07-24 (p.571:
-#     "24. Saturday. Anthony the Hermit."), and the validated table separately serves Anton
-#     on 2027-07-26 -- which p.571 gives to Theodosius instead ("26. Monday. King
-#     Theodosius, and the Children of Ephesus."). The cycle is right and the table is two
-#     days late; dropping the cycle entry would serve Athanasius/Cyril there instead (the
-#     book's OWN July 31 saint), which is worse. This is a build_table.py / TrSaintB
-#     coordinate question, not a second-volume-cycle one.
-MAX_DUPLICATE_COMMEMORATIONS = 1
+# What survives after the packed-companion repair, the stated year-type override,
+# transcribing taregir Ē's own summer march (docs section 7d), and the TrSaintB
+# table-collision override (docs section 7e, engine._TR_SAINT_ID_OVERRIDES) that closed
+# the last survivor: none.
+MAX_DUPLICATE_COMMEMORATIONS = 0
 
 # Canons whose double commemoration is closed, by whichever mechanism closed it (docs
 # section 7b). Named individually rather than counted, so a regression says which canon
@@ -57,6 +50,7 @@ REPAIRED_CANONS = (
     "vahan_of_goghtn",
     "eugenia_the_virgin_her",
     "gregory_the_theologian",
+    "hermit_st_anton",                   # closed by the TrSaintB override (docs 7e)
 )
 
 
@@ -119,11 +113,13 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
             self._day("2016-07-28")["Liturgical Day"])
 
     def test_the_head_canon_is_never_dropped(self):
-        """2027-07-24: Anton heads this day AND holds 2027-07-26, and still stays.
+        """2027-07-24: Anton heads this day and stays, unaffected by the TrSaintB
+        override that fixes 07-26 (docs section 7e; the override touches only that one
+        civil date, not 07-24's).
 
-        A head owns its day, its id and its readings. That this day duplicates Anton is a
-        second-volume-cycle laydown question (see MAX_DUPLICATE_COMMEMORATIONS), and
-        letting a packing rule "fix" it by dropping the head would leave the day nameless.
+        A head owns its day, its id and its readings, so letting a packing rule "fix" a
+        collision by dropping the head would leave the day nameless -- not the mechanism
+        used here regardless.
         """
         self.assertEqual("The Hermit St. Anton",
                          self._day("2027-07-24")["Liturgical Day"])
@@ -180,6 +176,19 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
             "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the "
             "Theologian",
             self._day("2027-07-31")["Liturgical Day"])
+
+    def test_the_table_collision_is_closed(self):
+        """2027-07-26: the table's own TrSaintB["0:cyricus_and_his"] entry (real, built
+        from 2005/2016 ground truth) no longer aliases onto Ē's Monday.
+
+        p.571 gives it to Theodosius, and engine._TR_SAINT_ID_OVERRIDES (docs section 7e)
+        withdraws the mined "cyricus_and_his" identity for this one (Easter, civil-date)
+        pair, so the second-volume-cycle tier -- not the table -- serves it.
+        """
+        served = self._day("2027-07-26")
+        self.assertEqual("Sts. Theodosius and the Children of Ephesus",
+                         served["Liturgical Day"])
+        self.assertEqual("second-volume-cycle", served["Source"])
 
     def test_the_year_scan_overshoots_the_supported_range_at_both_ends(self):
         """The scan window is Heesnak to Heesnak, so it leaves the range at both edges.

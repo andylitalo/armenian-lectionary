@@ -930,18 +930,25 @@ name is dropped and nothing else. The English and Armenian discrepancy tallies a
 byte-identical before and after (the reports count distinct name components, and the
 component the source prints on those days is unchanged).
 
-#### What is left
+#### The `03-28` cycle's two conflicts with the table — both closed
 
-- **2 — the `03-28` cycle contradicting the table.** `hermit_st_anton` on 2027-07-24 (the
-  validated table holds that canon on 07-26) and `patriarchs_barlaam_anthimus_and` on
-  2027-07-31 (the table holds it on a late-September Thursday, in all 26 cached years).
-  Neither is a packing: in both, the duplicated component is the **head** of its line, which
-  is why no packing rule reaches them. Easter 2027 falls on `03-28`, the only supported year
-  of that type, so `build_second_volume_cycles._drop_cache_contradicted` — whose validation
-  loop is `range(2001, 2027)` — has zero cache years to test either entry against. The fix
-  is a filter that can also catch a cycle entry contradicting the **table's** own placement
-  of the same canon, and it needs an artifact rebuild — see 7d for the canon that governs
-  2027 and the transcription that fixes 07-27/07-31 below.
+Two duplicates were left standing here, both from the `03-28` cycle (2027, the only
+supported year of that type — `build_second_volume_cycles._drop_cache_contradicted`, whose
+validation loop is `range(2001, 2027)`, has zero cache years to test either entry against).
+Neither is a packing: in both, the duplicated component is the **head** of its line, which
+is why no packing rule reaches them.
+
+`patriarchs_barlaam_anthimus_and` on 2027-07-31 (the table holds it on a late-September
+Thursday, in all 26 cached years) closed with the rest of the `03-28` cycle's own matcher
+defects — see 7d's transcription of the canon that governs 2027, which fixes 07-27 and
+07-31 together.
+
+`hermit_st_anton` (the second-volume-cycle tier serves it on 2027-07-24; the **validated
+table** separately served it on 07-26) needed a second, separate fix: unlike 07-27/07-31,
+the table's 07-26 entry was not a matcher defect in the cycle build — it is a real,
+cross-year-validated table entry, built from genuine 2005/2016 ground truth, that happens
+to alias onto 2027's own Monday. Closing it meant a table-collision override, not another
+cycle-transcription fix. See 7e.
 
 #### 7d. Which canon governs a civil year — `taregir_for` answers a different question
 
@@ -993,7 +1000,75 @@ table placement contradicts elsewhere, without deleting data it cannot verify.
 
   *(This corrects the earlier reading of `hermit_st_anton`, which was counted with the
   packed-companion group. It is not one: the repair above leaves it standing, because there
-  is no companion on that day to drop.)*
+  is no companion on that day to drop — it needed a different fix, at the table rather than
+  the cycle. See 7e.)*
+
+#### 7e. The table's own `cyricus_and_his` slot aliases onto Է's Monday
+
+7d fixed the **second-volume-cycle** tier's own two mismatches against p.571 (07-27,
+07-31). One duplicate still stood after that fix: `hermit_st_anton`, served on both
+2027-07-24 (cycle tier, correct) and 2027-07-26 (validated table, wrong) —
+`tests/test_duplicate_commemorations.py`'s `MAX_DUPLICATE_COMMEMORATIONS = 1`.
+
+This one is not a cycle-tier defect. `_lookup` (the **validated-table** tier) runs before
+`_cycle_saint`, and it is the table — not the cycle — that ships Anton twice.
+
+**Why the table is not simply wrong.** `TrSaintB["0:cyricus_and_his"]` maps to Anton's
+readings, and that entry is real: it comes from `engine._zone_saint_replay`, the frozen,
+mined saint order (never readings, `dev/saint_schedule.json`) replayed onto 2005's and
+2016's own free summer weekdays (both Gregorian Easter `03-27`, `_easter_band() == 0`) and
+validated against their ground truth by the strict cross-year build. Both years genuinely
+commemorate Anton on the Monday the mining calls `cyricus_and_his`
+(`reports/lectionary_disagreements.md`'s RESOLUTION note for that slot: "Mon 07-25
+Anthony", both years). The table entry is correct for that year-type.
+
+**Why 2027 collides with it anyway.** `_easter_band()` bands years by the length of the
+winter post-Nativity window, with no notion of which Second-Volume canon a year actually
+serves. 2027 (Easter `03-28`) happens to fall in the same band (0) as 2005/2016 (Easter
+`03-27`), so `coords_for` computes the same `TrSaintB` coordinate (`"0:cyricus_and_his"`)
+for 2027-07-26 as for 2005/2016's real Anton Monday — even though 2027 is governed by an
+entirely different canon (Է, p.571; see 7d), whose own Monday saint is Theodosius, not
+Anton:
+
+> p.571: "24. Saturday. **Anthony the Hermit.** · 26. Monday. **King Theodosius, and the
+> Children of Ephesus.**"
+
+`build_second_volume_cycles._drop_cache_contradicted` — the only filter that could catch
+this — validates each cycle entry against the cached years of its own Easter date
+(`range(2001, 2027)`); 2027 (`03-28`) has none, so it cannot see the contradiction. The
+`03-28` cycle correctly serves Anton on 07-24 regardless — the table simply wins first, at
+07-26, before the cycle tier is ever consulted for that day.
+
+**The fix.** `engine._TR_SAINT_ID_OVERRIDES` is a narrow, cited override — keyed by
+`(Gregorian Easter md, civil MM-DD)`, in the same idiom as `_PACKING_OVERRIDES` (docs
+7b) — consulted by a new `_tr_saint_identity` helper that `_summer_slot` now calls in
+place of `_zone_saint_replay("Tr", d.year).get(d)`. Its one entry says that for Easter
+`03-28`, civil date `07-26` is `theodosius_and_the`, not the mined `cyricus_and_his`.
+`coords_for` then computes `TrSaintB = "0:theodosius_and_the"` for 2027-07-26 — a
+coordinate no table entry has ever populated, since 2027 never enters
+`dev/build_table.py`'s cache-year loop (`range(2001, 2027)`) — so `_lookup` finds nothing
+and the day falls through to the already-correct second-volume-cycle tier, which serves
+Theodosius.
+
+**Why the override is one line, not a full replay of `_SUMMER_E`.** Overriding every 2027
+summer slot with the Է march's own identities would reopen the same class of collision one
+day later: 07-27 (Tuesday) is unassigned by the generic mining today, so it already falls
+through to the cycle tier harmlessly — but `_SUMMER_E`'s own 07-27 identity is also
+`cyricus_and_his`, and assigning it there would recompute `TrSaintB = "0:cyricus_and_his"`
+and collide with the very same table entry, serving Anton a third time. The override is
+therefore scoped to the exact slot that collides, not to the whole year-type's march;
+extending it to a future cache-less year-type should repeat this same audit — check each
+candidate override against the shipped table for a new alias before adding it — rather
+than reintroducing a general replay.
+
+**Nothing else moved.** `_TR_SAINT_ID_OVERRIDES` fires only when a date's Gregorian Easter
+is `03-28`, which no cached year (2001–2026) has, so `dev/build_table.py`'s build is
+untouched and `lectionary_data.json` needed no rebuild. Comparing every one of
+`compute_armenian_lectionary`'s 9,861 supported days (2001-01-01..2027-12-31) before and
+after the change, exactly one changes: 2027-07-26, from "The Hermit St. Anton"
+(`validated-table`) to "Sts. Theodosius and the Children of Ephesus"
+(`second-volume-cycle`). `dev/audit_duplicate_commemorations.py` goes from 1 finding to 0,
+and `MAX_DUPLICATE_COMMEMORATIONS` drops to 0 with it.
 
 ## 8. Accepted differences from the source
 
