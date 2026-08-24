@@ -930,7 +930,7 @@ name is dropped and nothing else. The English and Armenian discrepancy tallies a
 byte-identical before and after (the reports count distinct name components, and the
 component the source prints on those days is unchanged).
 
-#### What is left, and what closed it
+#### The `03-28` cycle's two conflicts with the table — both closed
 
 Two duplicates were left standing here, both from the `03-28` cycle (2027, the only
 supported year of that type — `build_second_volume_cycles._drop_cache_contradicted`, whose
@@ -1003,7 +1003,7 @@ table placement contradicts elsewhere, without deleting data it cannot verify.
   is no companion on that day to drop — it needed a different fix, at the table rather than
   the cycle. See 7e.)*
 
-#### 7e. The table's own `cyricus_and_his` slot aliases onto Ē's Monday
+#### 7e. The table's own `cyricus_and_his` slot aliases onto Է's Monday
 
 7d fixed the **second-volume-cycle** tier's own two mismatches against p.571 (07-27,
 07-31). One duplicate still stood after that fix: `hermit_st_anton`, served on both
@@ -1027,7 +1027,7 @@ winter post-Nativity window, with no notion of which Second-Volume canon a year 
 serves. 2027 (Easter `03-28`) happens to fall in the same band (0) as 2005/2016 (Easter
 `03-27`), so `coords_for` computes the same `TrSaintB` coordinate (`"0:cyricus_and_his"`)
 for 2027-07-26 as for 2005/2016's real Anton Monday — even though 2027 is governed by an
-entirely different canon (Ē, p.571; see 7d), whose own Monday saint is Theodosius, not
+entirely different canon (Է, p.571; see 7d), whose own Monday saint is Theodosius, not
 Anton:
 
 > p.571: "24. Saturday. **Anthony the Hermit.** · 26. Monday. **King Theodosius, and the
@@ -1051,7 +1051,7 @@ and the day falls through to the already-correct second-volume-cycle tier, which
 Theodosius.
 
 **Why the override is one line, not a full replay of `_SUMMER_E`.** Overriding every 2027
-summer slot with the Ē march's own identities would reopen the same class of collision one
+summer slot with the Է march's own identities would reopen the same class of collision one
 day later: 07-27 (Tuesday) is unassigned by the generic mining today, so it already falls
 through to the cycle tier harmlessly — but `_SUMMER_E`'s own 07-27 identity is also
 `cyricus_and_his`, and assigning it there would recompute `TrSaintB = "0:cyricus_and_his"`
