@@ -873,20 +873,65 @@ the source's own fuller line, which the extra Vahan had been overshooting.
 
 #### What is left, and why each needs its own evidence
 
-`tests/test_duplicate_commemorations.py` holds the remaining 4 as a ratchet. They are two
-different problems, and neither is a spelling decision:
+`tests/test_duplicate_commemorations.py` holds the remaining 2 as a ratchet.
 
-- **2 — `gordius_polyeuctus_and_grigoris`.** Packed onto *both* its occurrences and heading
-  neither, so there is no "own day" to keep and the readings cannot separate them. The
-  Second Volume does speak to it — but per year-type, and in both directions. p.558 prints
-  Cyricus alone on the Thursday and *"Monday. Of Vahan of Golthen, and Gordius"*; p.593 the
-  same (*"2. Monday. Vahan of Goghtn, Gordius, Polyeuctus, and Grigoris"*); while p.574 and
-  p.582 print *"Kyriakos and his mother Julitta, and Gordius, Polyeuctus, and Grigoris"* and
-  give Vahan a separate day beside Eugenia. Which head absorbs this canon is therefore
-  **stated data, not a derivable rule**: it wants a per-coordinate override with its page
-  cited, which is a different kind of change from an algorithmic overlay. Worth noting that
-  the repair above already reproduces the p.574/p.582 layout exactly on 2005-07-28,
-  2008-07-24 and 2016-07-28 — the shape is right; only these two liturgical years disagree.
+#### 7c. Gordius — the packing a year-type has to state
+
+The canon `gordius_polyeuctus_and_grigoris` never **heads** a day. It is packed onto both
+of its occurrences, so there is no "own day" for `_drop_owned_companions` to detect, and
+because a packed day's propers are the head canon's, the readings cannot separate them
+either.
+
+The Second Volume does speak to it — but per year-type, and **in both directions**:
+
+| Direction | Attested at |
+|---|---|
+| Gordius with **Vahan**; Cyricus alone | **p.558** (Ա) · **p.587** (Ծ) |
+| Gordius with **Cyricus**; Vahan a separate day beside Eugenia | **p.574** (Ը) · **p.582** (Լ) · **p.592** (Ձ) · **p.597** (Ճ) |
+
+(An earlier draft of this section cited p.593 for the Vahan direction. p.593 carries none of
+these names; the Ձ section's line is on **p.592**, and it reads *"21. Monday. Cyriacus and
+Julietta, and of Gordius, Polyeuctus, and Gregory"* — the **Cyricus** direction.)
+
+So which head absorbs this canon is **stated data, not a derivable rule**. The repair above
+already reproduces the Cyricus-direction layout exactly on 2005-07-28, 2008-07-24 and
+2016-07-28 — the shape was right; only two liturgical years disagreed.
+
+**Those two are LY2009 and LY2020**, and both have Gregorian Easter **April 4** — the only
+two in range. Ծ is the section whose printed Easter is April 4 (`04-04, p.586, cycle 5`), so
+its civil dates carry the same weekday grid, and it states the layout outright:
+
+> p.586, **January**: `21. Եշ. Կիրակոսի եւ Յուղիտայի։` — *"21. Thursday. Of Cyriacus and
+> Julitta."* — no Gordius. The January run is cut at *"24. Sunday … Barekendan of the
+> Catechumens"* after four canons.
+>
+> p.587, **August** (after July 11 Vardavar says to "come here and celebrate the feasts
+> written below, **which are after the Octave of the Theophany**"):
+> `2. Բշ. ԱԶ. Վահանայ Գողթնացւոյն,- Գորդիոսի, Պողիքտոսի և Գրիգորիսի։` — *"2. Monday. Vahan
+> of Goghtn, Gordius, Polyeuctus, and Grigoris."*
+
+sacredtradition.am prints exactly that on all four days, weekday for weekday.
+
+An artifact edit cannot express it. January is table key `PnSaintMD cyricus_and_his:01-21`,
+shared by **seven** civil years — 2003/2014/2019/2020/2025 print Cyricus **+** Gordius, only
+2010/2021 print Cyricus alone — so `modal_feast` is right for five of the seven. August is
+`TrSaintMD cyricus_and_his:08-02`, reached by **exactly** 2010 and 2021, unanimous with
+Gordius.
+
+So it is stated, in `engine._PACKING_OVERRIDES`, keyed by `(Gregorian Easter, head canon
+id)` and applied by `_drop_owned_companions`. Keying on the **head** is what lets the
+packing be withdrawn from Cyricus without disturbing the same canon under Vahan on the very
+same year's August day.
+
+**Nothing else moved.** Over all 9,861 supported days the change rewrites exactly two
+strings, 2010-01-21 and 2021-01-21; `Source` stays `validated-table` on both, and **not one
+reading changes anywhere in the range** — as with every member of this overlay family, a
+name is dropped and nothing else. The English and Armenian discrepancy tallies are
+byte-identical before and after (the reports count distinct name components, and the
+component the source prints on those days is unchanged).
+
+#### What is left
+
 - **2 — the `03-28` cycle contradicting the table.** `hermit_st_anton` on 2027-07-24 (the
   validated table holds that canon on 07-26) and `patriarchs_barlaam_anthimus_and` on
   2027-07-31 (the table holds it on a late-September Thursday, in all 26 cached years).
@@ -895,8 +940,56 @@ different problems, and neither is a spelling decision:
   of that type, so `build_second_volume_cycles._drop_cache_contradicted` — whose validation
   loop is `range(2001, 2027)` — has zero cache years to test either entry against. The fix
   is a filter that can also catch a cycle entry contradicting the **table's** own placement
-  of the same canon, and it needs an artifact rebuild. A
-  `dev/build_second_volume_cycles.py` question.
+  of the same canon, and it needs an artifact rebuild — see 7d for the canon that governs
+  2027 and the transcription that fixes 07-27/07-31 below.
+
+#### 7d. Which canon governs a civil year — `taregir_for` answers a different question
+
+The taregir is a Julian-Easter code (`corpus/STRUCTURE.md` gotcha #1;
+`dev/paschal_index.py`'s docstring states outright that "the Taregir is NOT a usable
+Gregorian year-key"). It is real, correctly computed data about the *old* Julian
+ecclesiastical calendar — 2027 genuinely is taregir **Ս** by the perpetual table
+(`sources/great_paschal_cycle_index.csv`: `2027,Ս,Գ`) — but it is not what determines
+which Second Volume section a modern, reformed-calendar civil year actually serves.
+
+**The engine's own working design says otherwise, and the evidence proves it out.** Every
+`_SOURCE_SUMMER` entry is keyed by `calculate_gregorian_easter(year)` — the served, reformed
+Gregorian Easter — not by the true taregir of its cache years, and the two disagree:
+2010's true taregir is **Ա**, yet the canon the engine (and sacredtradition.am) actually
+serve that year is **Ծ**'s (matched because `calculate_gregorian_easter(2010) = "04-04"`,
+Ծ's own printed Easter). The proof is direct: Ա's own pages (557–559) print this canon on
+**July 23** (Cyricus alone) and **July 27** (Vahan + Gordius) — dates that never appear in
+the served calendar at all. Ծ's pages (586–587) print **January 21** and **August 2** —
+exactly what 2010 and 2021 serve, verbatim (§7c above). This is why matching by served
+Easter, not by true taregir, is correct: the book's printed calendar-label ("this section's
+Easter is such-and-such month-day") is being read as a movable-propers offset key, generic
+across calendar systems, not as a claim about which specific Julian civil year wrote it.
+
+**So 2027, whose served Easter is `03-28`, is governed by Է (p.571)** — the section the
+`03-28` cycle already draws from — not Ս. p.571 lays the July/August pool out day by day:
+
+> 24. Saturday. **Anthony the Hermit.** · 26. Monday. **King Theodosius, and the Children of
+> Ephesus.** · 27. Tuesday. **Cyriacus and Julitta.** · 29. Thursday. **Vahan of Goghtn, and
+> Gordius, Polyeuctus, and Gregory.** · 31. Saturday. **The Patriarchs Athanasius and Cyril,
+> and Gregory the Theologian.** · [Aug] 2. Monday. **Eugenia the Virgin and her father.** ·
+> 3. Tuesday. **Tryphon, Barsamas, and Onuphrius the Hermits.** · 5. Thursday. **Eugenius,
+> Macarius, etc.**
+
+The shipped `03-28` cycle disagrees on two of those eight days — `07-27` (ships a second
+`theodosius_and_the` instead of Cyricus) and `07-31` (ships `fast_daysaint_patriarchs`, a
+**September** canon, own key `ExSaintMD fast_daysaint_patriarchs:09-23`, 3 cached years,
+unanimous, landed 54 days early — this is the duplicate). Both are matcher defects in the
+parsed-text path (`_GENERIC` holds the singular `patriarch` but not the plural, so
+"Patriarchs …" wins on a token that should have been filtered; the identity normalizes
+`cyricus_and_his` to `ciricus` while the translation spells *Cyriacus* → `ciriacus`, and no
+alias bridges them) — not something to fix by tuning the tokenizer, which would touch
+matching across all 35 cycles and 189 pages to repair one section. Transcribed instead, the
+same way as the three other long/compressed year-types: `_SOURCE_SUMMER["03-28"]` is now the
+Է march above, reproducing all eight dates exactly (verified against `_summer_entries`
+directly, and against the rebuilt artifact). `_drop_cache_contradicted` cannot validate it —
+2027 is the only supported year of this type and has no cache — so a new, cache-independent
+check (`_report_table_contradicted`) reports rather than drops any cycle entry a validated
+table placement contradicts elsewhere, without deleting data it cannot verify.
 
   *(This corrects the earlier reading of `hermit_st_anton`, which was counted with the
   packed-companion group. It is not one: the repair above leaves it standing, because there

@@ -19,6 +19,41 @@ Cycles for a year-type that never occurs in MIN_YEAR..MAX_YEAR (e.g. Julian East
 have no cached year to validate against, so their entries stay best-effort -- and unserved,
 which is why they can move without changing a single day.
 
+Why the key is matched against GREGORIAN Easter, despite being named "julian"
+-------------------------------------------------------------------------------
+Each Second Volume section's own Taregir letter is just an alphabetic encoding of "how
+many days after March 21 does Easter fall" (dev/paschal_index.py: position k, Ա=1..Փ=35,
+k <-> Mar21+k). The perpetual table (p.637) computes k from the OLD, pre-1923 JULIAN
+computus -- but the engine serves the REFORMED church's GREGORIAN-computed Easter
+(engine.calculate_gregorian_easter, "Armenian since 1923"), and sacredtradition.am does
+too. A civil year's TRUE Taregir (dev.paschal_index.taregir_for, i.e. which letter the OLD
+perpetual table would assign it) is therefore NOT the section this build should draw
+from -- checked across the whole supported range, it differs from the section actually
+served in EVERY one of MIN_YEAR..MAX_YEAR (0/27 agree).
+
+The section that DOES govern a civil year is the one whose OWN PRINTED Easter label (the
+CSV's ``easter_md_julian``, "days after March 21" read as a bare MM-DD string) equals
+THIS YEAR'S REFORMED Easter, same string. That is exactly what happens by construction:
+``spans``/``out`` key by the CSV's own label, and ``_cycle_saint`` looks up
+``f"{L.calculate_gregorian_easter(d.year):%m-%d}"`` -- Gregorian, not Julian -- against
+it. Nothing here computes ``taregir_for``; it would give the wrong section.
+
+Proof, not assumption: taregir Ա's own pages (557-559) print this canon's Cyricus/Vahan
+canon on July 23/27 -- dates that never appear in what 2010 actually serves. Taregir Ծ's
+pages (586-587), matched because ``calculate_gregorian_easter(2010) == "04-04"`` == Ծ's
+own label, print January 21 and August 2 -- exactly what 2010 serves, byte for byte
+against sacredtradition.am. 2010's TRUE Taregir is Ա, not Ծ; it is simply not the
+question this build needs answered. See docs/observance-name-corrections.md section 7d.
+
+One further wrinkle, for a year-type whose OWN page doesn't print enough of the canonical
+saint sequence to fill a long/compressed gap (Ր, Թ, ՉՈ; see ``_SOURCE_SUMMER`` below): the
+canonical ORDER is transcribed from whichever page prints it most fully and REPLAYED as a
+weekday march anchored on the SERVED year's own Vardavar (Gregorian Easter+98), rather
+than reused verbatim from that page's own dates. This is the same underlying rule as
+above, not a different one -- only the anchor (always this year's reformed Easter) and
+the cutoff (this year's own gap length) determine what serves; which page a saint's name
+happens to be transcribed FROM is incidental.
+
 Run: armenian_lectionary/venv/bin/python dev/build_second_volume_cycles.py
 """
 import calendar
@@ -240,10 +275,29 @@ _SUMMER_CHVO = [
     (3, "eugenia_the_virgin"), (5, "gregory_of_theologian"), (0, "eugenios_makarios_valerian"),
     (1, "andrew_the_general"), (3, "adrian_and_his"), (5, "200_fathers_of"),
 ]
+#   03-28  <- taregir Է (Julian Easter 03-28; NO cache year -- 2027 is the only supported
+#            year of this type, which is why _drop_cache_contradicted cannot validate it).
+#            p.571 (human) lays the run out day by day, opening at the generic start_off
+#            (Vardavar + 20, unlike the Ր/Թ/ՉՈ marches' start_off=5): 24 Sat Anton, 26 Mon
+#            Theodosius, 27 Tue Cyricus+Julitta, 29 Thu Vahan+Gordius+Polyeuctus+Gregory,
+#            31 Sat Athanasius+Cyril+Gregory the Theologian, Aug 2 Mon Eugenia, 3 Tue
+#            Tryphon, 5 Thu Eugenios/Makarios. Peter/Blaise/Absalom are already served in
+#            January on this page (Jan 16) and so do not repeat here, unlike the generic
+#            _SUMMER_SEQUENCE's Peter-first Saturday. Reproduces all eight p.571 dates
+#            exactly (see dev/audit_duplicate_commemorations.py and docs section 7d);
+#            NOT ground-truth-verified, since 2027 has no cache -- see
+#            _report_table_contradicted for the check this branch cannot get from the
+#            drop-guard.
+_SUMMER_E = [
+    (5, "hermit_saints_anton"), (0, "theodosius_and_the"), (1, "cyricus_and_his"),
+    (3, "vahan_of_goghtn"), (5, "fathers_saints_athanasius"), (0, "eugenia_the_virgin"),
+    (1, "hermits_saints_triphon"), (3, "eugenios_makarios_valerian"),
+]
 _SOURCE_SUMMER = {
     "03-31": (_SUMMER_R, 5),
     "04-05": (_SUMMER_T, 5),
     "03-23": (_SUMMER_CHVO, 5),
+    "03-28": (_SUMMER_E, 19),
 }
 
 

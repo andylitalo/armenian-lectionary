@@ -33,29 +33,25 @@ from armenian_lectionary.engine import (                               # noqa: E
     MAX_YEAR, MIN_YEAR, _canons_with_own_day, compute_armenian_lectionary,
 )
 
-# What survives after the packed-companion repair (docs section 7b). Two groups remain,
-# each needing evidence this ratchet is not the place to settle:
+# What survives after the packed-companion repair, the stated year-type override, and
+# transcribing taregir Ē's own summer march (docs section 7d). One entry remains, left
+# for its own PR:
 #
-#   * 2 -- gordius_polyeuctus_and_grigoris, packed onto BOTH its occurrences and heading
-#     neither, so there is no "own day" to keep and no readings signature to tell them
-#     apart. The Second Volume does speak to it, but per year-type and in both directions
-#     (p.558 prints Cyricus alone and "Monday. Of Vahan of Golthen, and Gordius"; p.574
-#     and p.582 print Gordius WITH Cyricus and give Vahan a day beside Eugenia), so which
-#     head absorbs this canon is stated data, not a derivable rule;
-#   * 2 -- the "03-28" second-volume cycle placing a canon the validated table places
-#     elsewhere: hermit_st_anton on 2027-07-24 (table has it 07-26) and
-#     patriarchs_barlaam_anthimus_and on 2027-07-31 (table has it in late September).
-#     Easter 2027 is the only supported year of its type, so
-#     build_second_volume_cycles._drop_cache_contradicted has no cache year to filter
-#     either entry against. Both duplicate a HEAD canon, not a companion, which is why no
-#     packing rule reaches them. A dev/build_second_volume_cycles.py question.
-MAX_DUPLICATE_COMMEMORATIONS = 4
+#   * 1 -- hermit_st_anton: the second-volume-cycle tier serves Anton on 2027-07-24 (p.571:
+#     "24. Saturday. Anthony the Hermit."), and the validated table separately serves Anton
+#     on 2027-07-26 -- which p.571 gives to Theodosius instead ("26. Monday. King
+#     Theodosius, and the Children of Ephesus."). The cycle is right and the table is two
+#     days late; dropping the cycle entry would serve Athanasius/Cyril there instead (the
+#     book's OWN July 31 saint), which is worse. This is a build_table.py / TrSaintB
+#     coordinate question, not a second-volume-cycle one.
+MAX_DUPLICATE_COMMEMORATIONS = 1
 
 # Canons whose double commemoration is closed, by whichever mechanism closed it (docs
 # section 7b). Named individually rather than counted, so a regression says which canon
 # came back.
 REPAIRED_CANONS = (
     "mark_the_bishop_pionius",           # the pre-Lent cohort case, fixed first
+    "gordius_polyeuctus_and_grigoris",   # by stated override, not by own-day detection
     "hermit_sts_tryphon_barsauma",
     "andrew_the_general_and",
     "vahan_of_goghtn",
@@ -131,6 +127,59 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         """
         self.assertEqual("The Hermit St. Anton",
                          self._day("2027-07-24")["Liturgical Day"])
+
+    def test_the_stated_override_withdraws_a_packing(self):
+        """2010/2021: Ծ (pp.586-587) keeps Cyricus alone in January.
+
+        The canon never heads a day, so no own-day rule reaches it; the year-type states
+        the packing and engine._PACKING_OVERRIDES restates it. sacredtradition.am prints
+        exactly this on both days.
+        """
+        for iso in ("2010-01-21", "2021-01-21"):
+            with self.subTest(iso):
+                self.assertEqual("Sts. Cyricus and His Mother Julitta",
+                                 self._day(iso)["Liturgical Day"])
+
+    def test_the_override_does_not_reach_the_other_head(self):
+        """The same canon stays packed on the Vahan day, which is where Ծ puts it.
+
+        p.587: "2. Monday. Vahan of Goghtn, Gordius, Polyeuctus, and Grigoris." The
+        override is keyed by HEAD canon, so withdrawing a packing from Cyricus cannot
+        disturb Vahan's.
+        """
+        for iso in ("2010-08-02", "2021-08-02"):
+            with self.subTest(iso):
+                self.assertEqual(
+                    "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
+                    self._day(iso)["Liturgical Day"])
+
+    def test_the_override_does_not_reach_other_year_types(self):
+        """Year-types that pack Gordius with Cyricus keep it (pp.574/582/592/597).
+
+        These read correctly before the override; pinned so a year-type key that was too
+        loose fails here rather than passing silently.
+        """
+        for iso in ("2005-07-28", "2008-07-24", "2016-07-28"):
+            with self.subTest(iso):
+                self.assertIn("Gordius", self._day(iso)["Liturgical Day"])
+
+    def test_taregir_e_march_matches_p571(self):
+        """2027 (Gregorian Easter 03-28) is taregir Ē -- source-independent, so 2027 is
+        covered even with no ground truth. p.571 lays out the whole July/August pool;
+        this pins the two the matcher previously got wrong.
+
+        27 was a second Theodosius (the matcher's plural/spelling bugs); the transcribed
+        march now serves what p.571 actually prints: Cyricus alone (the stated override
+        withdraws Gordius, which the page attaches to Vahan on the 29th instead -- see
+        engine._PACKING_OVERRIDES). 31 was the September Barlaam canon, 54 days early;
+        the march now serves Athanasius/Cyril, and Gregory the Theologian.
+        """
+        self.assertEqual("Sts. Cyricus and His Mother Julitta",
+                         self._day("2027-07-27")["Liturgical Day"])
+        self.assertEqual(
+            "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the "
+            "Theologian",
+            self._day("2027-07-31")["Liturgical Day"])
 
     def test_the_year_scan_overshoots_the_supported_range_at_both_ends(self):
         """The scan window is Heesnak to Heesnak, so it leaves the range at both edges.

@@ -71,7 +71,18 @@ def julian_easter_gregorian(year: int) -> datetime.date:
 
 def taregir_for(year: int) -> str:
     """The Easter-date Taregir letter for `year` (the second letter in leap years),
-    computed from the Julian Easter date — a closed form for the whole table."""
+    computed from the Julian Easter date — a closed form for the whole table.
+
+    Do NOT use this to pick which Second Volume SECTION a civil year serves for the
+    dev/build_second_volume_cycles.py floating-saint schedule -- that answers a different
+    question and gives a different letter in EVERY supported year (0/27 agree, checked).
+    `taregir_for` reports what the OLD Julian perpetual table (p.637) would have called
+    `year`; the engine serves the REFORMED Gregorian Easter instead (Armenian since 1923,
+    see engine.calculate_gregorian_easter), so the section to use is the one whose OWN
+    printed Easter label -- itself just an alphabetic encoding of "days after March 21"
+    (see ALPHA above) -- matches `year`'s REFORMED Easter, not its Julian one. That is what
+    build_second_volume_cycles.py's Easter-md string keys already do; see its module
+    docstring."""
     k = (julian_easter(year) - datetime.date(year, 3, 21)).days
     return ALPHA[k - 1]
 
