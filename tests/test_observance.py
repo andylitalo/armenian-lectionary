@@ -267,7 +267,7 @@ class TestObservanceSpelling(unittest.TestCase):
             datetime.date(2026, 6, 6): "St. Gregory the Illuminator's coming out of Pit",
             datetime.date(2026, 7, 10): "Fifth day of the Fast of the Transfiguration",
             datetime.date(2026, 8, 6):
-                "Sts. Adrian and his wife Natalia, and Theodore Stratelates "
+                "Sts. Adrian and His Wife Natalia, and Theodore Stratelates "
                 "and Eleutherius the Martyrs",
         }
         for d, expected in cases.items():

@@ -444,13 +444,13 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
                     hy = compute_armenian_lectionary(
                         day, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(f"{word} day of the Fast of Prophet Elijah"),
+                        en.startswith(f"{word} day of the Fast of the Prophet Elijah"),
                         f"{day} served {en!r}")
                     self.assertTrue(hy.startswith(f"{letter} օր Եղիական պահոց"),
                                     f"{day} served {hy!r}")
 
     def test_the_day_count_matches_the_eve_that_names_the_fast(self):
-        for lang, fast in (("en", "Fast of Prophet Elijah"), ("hy", "Եղիական պահոց")):
+        for lang, fast in (("en", "Fast of the Prophet Elijah"), ("hy", "Եղիական պահոց")):
             with self.subTest(lang=lang):
                 pentecost = self._pentecost(2026)
                 eve = compute_armenian_lectionary(
@@ -474,7 +474,7 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
                            ("Seventh", "seventh_day_of_pentecost")):
             with self.subTest(word=word):
                 self.assertEqual(
-                    ids_for_text(f"{word} day of the Fast of Prophet Elijah"), [slug])
+                    ids_for_text(f"{word} day of the Fast of the Prophet Elijah"), [slug])
 
 
 class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
@@ -525,7 +525,7 @@ class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
             eve = self._eve(year)
             with self.subTest(date=eve):
                 self.assertEqual(
-                    engine._eve_label(eve), "Eve of Fast of the Holy Cross of Varag")
+                    engine._eve_label(eve), "Eve of the Fast of the Holy Cross of Varag")
 
     def test_its_wednesday_and_friday_are_not_the_weekly_fast(self):
         """The defect §6d fixed: two days of this fast were served as the weekly one."""

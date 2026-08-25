@@ -164,6 +164,9 @@ CLEARED_PAIRS = {
 CLEARED_TOKENS = {
     ("Armenia", "Armenian"),      # the country and the adjective
     ("MOTHER", "other"),          # a shouted feast title against an ordinary word
+    ("MOTHER", "Other"),          # same, now that title-casing capitalizes "other"
+    ("Mother", "Other"),          # "Holy Mother of God" mid-title vs. an ordinary word
+                                  # title-cased the same way
     ("Simeon", "Simon"),          # Simon the Apostle; Simeon the Stylite, and the
                                   # Simeon called the Relative of Christ -- three people
     ("Theodore", "Theodoret"),    # Theodore the Tyron / Stratelates; Theodoret the

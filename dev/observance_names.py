@@ -126,7 +126,7 @@ def _strip_leading_position(s):
 
 _IS_POSITION = re.compile(
     rf"^(?:{ORD})\s+(?:day of|Sunday(?:\s+(?:after|of))?)\b"
-    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$")
+    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$", re.IGNORECASE)
 
 
 def is_position(component):
