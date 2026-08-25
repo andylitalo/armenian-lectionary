@@ -482,6 +482,36 @@ _TR_SAINT_ID_OVERRIDES = {
     ("03-28", "07-26"): "theodosius_and_the",
 }
 
+# --------------------------------------------------------------------------- #
+# Second-volume-cycle companion append -- a narrow fix for the one-id-per-date
+# limit of second_volume_cycles.json (docs section 7c: "Vahan's own stored
+# label has no way to gain Gordius without a schema change to the
+# second-volume-cycle tier"). Rather than widen that schema for every march,
+# this appends a companion's catalog text to the cycle tier's served label for
+# the single, cited (Easter-md, civil-date) pair the source packs onto one
+# line -- same idiom as _TR_SAINT_ID_OVERRIDES above. The companion never
+# heads a day (packed_pool / _PACKED_POOLS), so its readings are never its
+# own: the day's readings stay the head canon's, unchanged, exactly as every
+# other packed day already works (docs section 7, "What the readings evidence
+# settled").
+# --------------------------------------------------------------------------- #
+
+_TR_SAINT_COMPANION_OVERRIDES = {
+    # p.571: "29. Thursday. Vahan of Goghtn, and Gordius, Polyeuctus, and
+    # Gregory." -- the second-volume-cycle tier serves only the head
+    # (vahan_of_goghtn) today; gordius_polyeuctus_and_grigoris is served on no
+    # other day of 2027 (verified: 0 hits across the whole supported year).
+    ("03-28", "07-29"): ["gordius_polyeuctus_and_grigoris"],
+}
+
+
+def _tr_saint_companions(d: datetime.date):
+    """Companion catalog ids to append to this date's second-volume-cycle label,
+    per _TR_SAINT_COMPANION_OVERRIDES, or an empty list."""
+    e = calculate_gregorian_easter(d.year)
+    key = (f"{e.month:02d}-{e.day:02d}", f"{d.month:02d}-{d.day:02d}")
+    return _TR_SAINT_COMPANION_OVERRIDES.get(key, [])
+
 
 def _tr_saint_identity(d: datetime.date):
     """The TrSaint* identity for a summer saint-weekday: _TR_SAINT_ID_OVERRIDES if this
@@ -3011,6 +3041,12 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     cy = _cycle_saint(target_date)
     if cy is not None:
         zone, sid, label, refs = cy
+        companions = _tr_saint_companions(target_date)
+        if companions and label:
+            companion_text = [_OBSERVANCE_CATALOG.get(csid, {}).get("en")
+                               for csid in companions]
+            if all(companion_text):
+                label = _OBSERVANCE_SEP.join([label] + companion_text)
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": label or "(commemoration)",

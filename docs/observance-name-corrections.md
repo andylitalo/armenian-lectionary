@@ -1070,6 +1070,31 @@ after the change, exactly one changes: 2027-07-26, from "The Hermit St. Anton"
 (`second-volume-cycle`). `dev/audit_duplicate_commemorations.py` goes from 1 finding to 0,
 and `MAX_DUPLICATE_COMMEMORATIONS` drops to 0 with it.
 
+#### 7f. Closing the companion gap 7c left open — 2027-07-29
+
+7c left one packing unresolved: p.571's "29. Thursday. Vahan of Goghtn, and Gordius,
+Polyeuctus, and Gregory" (§7d's transcription) served only the head, `vahan_of_goghtn`,
+because the second-volume-cycle tier's own data (`second_volume_cycles.json`) stores one
+`(zone, saint_id)` per date — no field for a companion, unlike the validated-table tier,
+which stores a packed day as the whole joined string and can *drop* a companion
+(`_drop_owned_companions`, `_PACKING_OVERRIDES`) but has nothing to *add* to a
+single-canon cycle-tier label.
+
+Rather than widen that schema for every march (the fix §7c scoped "for a later one"),
+`engine._TR_SAINT_COMPANION_OVERRIDES` appends the companion's existing catalog text
+(`gordius_polyeuctus_and_grigoris` — already minted, both `en`/`hy`, from the January
+packing) at the one cited `(Easter-md, civil-date)` pair this applies to, in the same
+narrow-override idiom as `_TR_SAINT_ID_OVERRIDES` (7e). Readings are untouched — they stay
+Vahan's, exactly as every other packed day's readings stay the head's (see "What the
+readings evidence settled" above).
+
+**Nothing else moved.** Comparing every one of `compute_armenian_lectionary`'s 9,861
+supported days (2001–2027) before and after, exactly one changes: 2027-07-29, from
+`"St. Vahan of Goghtn"` to `"St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and
+Grigoris"`. Gordius/Polyeuctus/Grigoris are served on no other day of 2027. Pinned by
+`tests/test_duplicate_commemorations.py::TestUnpackingMatchesTheSource::
+test_the_companion_pack_is_closed`.
+
 ## 8. Accepted differences from the source
 
 Not everything that differs is a defect, and three of these are the source disagreeing with

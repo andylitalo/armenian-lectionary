@@ -190,6 +190,25 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
                          served["Liturgical Day"])
         self.assertEqual("second-volume-cycle", served["Source"])
 
+    def test_the_companion_pack_is_closed(self):
+        """2027-07-29: p.571 packs Gordius/Polyeuctus/Grigoris onto Vahan's day
+        ("29. Thursday. Vahan of Goghtn, and Gordius, Polyeuctus, and Gregory."), but the
+        second-volume-cycle tier's own schema (one saint id per date) has no way to say so
+        -- unlike the validated-table tier's packing, which stores the whole line as text.
+        engine._TR_SAINT_COMPANION_OVERRIDES appends the companion's catalog text without
+        touching readings, which stay Vahan's (docs section 7, "the day's readings are the
+        head canon's"). Gordius/Polyeuctus/Grigoris are served on no other day of 2027.
+        """
+        served = self._day("2027-07-29")
+        self.assertEqual(
+            "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
+            served["Liturgical Day"])
+        self.assertEqual(
+            ["Proverbs 7.1-7", "Ezekiel 12.17-19",
+             "St. Paul's Epistle to the Romans 8.12-27", "Luke 9.23-27"],
+            served["ReadingsList"])
+        self.assertEqual("second-volume-cycle", served["Source"])
+
     def test_the_year_scan_overshoots_the_supported_range_at_both_ends(self):
         """The scan window is Heesnak to Heesnak, so it leaves the range at both edges.
 
@@ -222,8 +241,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         vahan = ["Proverbs 7.1-7", "Ezekiel 12.17-19",
                  "St. Paul's Epistle to the Romans 8.12-27", "Luke 9.23-27"]
         for iso, name, propers in (("2002-01-17", "The Hermit St. Anton", anton),
-                                   ("2008-07-28", "St. Vahan of Goghtn", vahan),
-                                   ("2027-07-29", "St. Vahan of Goghtn", vahan)):
+                                   ("2008-07-28", "St. Vahan of Goghtn", vahan)):
             with self.subTest(iso):
                 served = self._day(iso)
                 self.assertEqual(name, served["Liturgical Day"])
