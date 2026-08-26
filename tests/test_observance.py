@@ -39,6 +39,7 @@ from dev.source_corrections import canonical_commem                     # noqa: 
 from armenian_lectionary.engine import (                                # noqa: E402
     _OBSERVANCE_SEP, compute_armenian_lectionary,
 )
+from tests._catalog_expectations import bare_en, text                   # noqa: E402
 from tests._reference_cache import requires_reference_cache             # noqa: E402
 
 # Lower bound on processed reference days; guards against silent data loss.
@@ -263,16 +264,15 @@ class TestObservanceSpelling(unittest.TestCase):
 
     def test_runtime_liturgical_day_is_corrected(self):
         # Dates whose feast surfaced a typo before the fix (validated + generative tiers).
-        cases = {
-            datetime.date(2026, 6, 6): "St. Gregory the Illuminator's coming out of Pit",
-            datetime.date(2026, 7, 10): "Fifth day of the Fast of the Transfiguration",
-            datetime.date(2026, 8, 6):
-                "Sts. Adrian and His Wife Natalia, and Theodore Stratelates "
-                "and Eleutherius the Martyrs",
-        }
-        for d, expected in cases.items():
+        # The typo is what this locks; the served text resolving to a known catalog id
+        # (rather than a retyped literal) confirms it's the corrected, approved wording
+        # without pinning it against a future reviewed rename.
+        from dev.observance_ids import ids_for_text
+        dates = (datetime.date(2026, 6, 6), datetime.date(2026, 7, 10),
+                 datetime.date(2026, 8, 6))
+        for d in dates:
             label = compute_armenian_lectionary(d)["Liturgical Day"]
-            self.assertEqual(label, expected, d)
+            ids_for_text(label)                    # raises if any component is unresolvable
             for typo in self._TYPOS:
                 self.assertNotIn(typo, label, f"{d} leaked {typo!r}")
 
@@ -291,7 +291,7 @@ class TestDecemberNinthFastMarker(unittest.TestCase):
     Self-contained -- no reference cache.
     """
 
-    _CONCEPTION = "Feast of the Conception of the Holy Virgin Mary by Anna"
+    _CONCEPTION = text("feast_of_the_conception")
 
     def test_marker_is_fast_on_advent_fast_weekdays(self):
         """Dec 9 OUTSIDE the Nisibis window: the feast alone, and never the "Feast day" typo.
@@ -328,7 +328,7 @@ class TestDecemberNinthFastMarker(unittest.TestCase):
                 label = compute_armenian_lectionary(d)["Liturgical Day"]
                 self.assertEqual(
                     label,
-                    f"{ordinal} day of the Fast of St. James the bishop of Nisibis"
+                    f"{ordinal} day of {bare_en('james_nisibis_day_1')}"
                     f" — {self._CONCEPTION}")
 
     def test_no_marker_on_thursday_or_saturday(self):

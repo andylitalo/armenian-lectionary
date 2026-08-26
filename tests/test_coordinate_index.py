@@ -57,23 +57,59 @@ class TestTheTableAndTheRuleAgree(unittest.TestCase):
 
     A coordinate hit means "the rule fired here", and the rename it carries then overrides
     whatever the table stored for that day. That is only safe while the table and the rule
-    say the same thing, which they do on every day in range that has both -- 6,312 position
-    components and 335 eve components, zero disagreements.
+    agree about WHICH OBSERVANCE a coordinate names, which they do on every day in range
+    that has both -- 6,312 position components and 335 eve components, zero disagreements.
 
-    This is the check that would notice a table rebuild parting them. It is deliberately
-    NOT a check against sacredtradition.am: the verifiers do that, and they can only do it
-    for years the reference cache covers. This one needs nothing but the shipped package,
-    which is what lets it keep running after the cache stops.
+    Compared by id, not by text: the table's stored text is looked up in the CURRENT
+    catalog to get its id, and the rule's coordinate is looked up in the readings/coordinate
+    index to get its id, using the exact same accessors the request-time override uses
+    (``engine._OBSERVANCE_CATALOG``, ``engine._OBSERVANCE_ID_BY_READINGS``,
+    ``engine._observance_id_from_coordinate``). A renamed label's text changes; its id
+    never does (ids are stated, not derived -- CLAUDE.md), so a TSV-only rename of a
+    covered label no longer fails this test. A genuine ``_POSITION_FAMILIES``/
+    ``_EVE_FAMILIES`` defect (wrong anchor, wrong offset/window) still fails it: that
+    changes the COORDINATE the rule computes for the date, which changes which id it
+    resolves to, independent of any display text. For the 8 families with no readings or
+    coordinate route ("Fast day", the six "Nth Sunday after Nativity", "Second Sunday
+    after Pentecost") there is no id to compare, so this falls back to the old text
+    comparison for them -- unchanged.
+
+    One thing this no longer catches: a hand-typo directly in a covered family's literal
+    template that leaves the anchor/offset arithmetic (and so the coordinate) untouched.
+    That is an acceptable, deliberate narrowing, not a hole: for a covered label the
+    literal's exact wording is already unreachable by any real request --
+    ``_resolve_generated_text`` resolves through the readings hash first, which is
+    independent of the literal's text -- so such a typo was never visible to a caller in
+    the first place. It stays covered by ``dev/verify_position_labels.py``/
+    ``verify_eve_labels.py`` (rule vs. source, cache-gated) and
+    ``tests/test_observance_name_review.py`` (served vs. approved).
+
+    This is deliberately NOT a check against sacredtradition.am: the verifiers do that, and
+    they can only do it for years the reference cache covers. This one needs nothing but
+    the shipped package, which is what lets it keep running after the cache stops.
     """
 
     def test_no_stored_component_disagrees_with_the_rule(self):
+        ids = {entry["en"]: sid for sid, entry in engine._OBSERVANCE_CATALOG.items()}
+        index = engine._OBSERVANCE_ID_BY_READINGS
         checked = {"position": 0, "eve": 0}
         disagreements = []
-        for d, _base, kind, label, _coordinate, stored in _labelled_days():
+        for d, _base, kind, label, coordinate, stored in _labelled_days():
             if stored is None:
                 continue
             checked[kind] += 1
-            if stored != label:
+            stored_id = ids.get(stored)
+            coord_id = (index.get(engine._observance_id_from_coordinate(*coordinate, kind=kind))
+                        if coordinate else None)
+            if stored_id is not None and coord_id is not None:
+                if stored_id != coord_id:
+                    disagreements.append(
+                        f"{d} {kind}: table {stored!r} (id {stored_id}) names a different "
+                        f"observance than the rule's coordinate (id {coord_id}, currently "
+                        f"{engine._OBSERVANCE_CATALOG[coord_id]['en']!r})")
+            elif stored != label:
+                # No id route on one or both sides (an uncovered family, or the catalog is
+                # absent/thin) -- fall back to the old text comparison, unchanged.
                 disagreements.append(f"{d} {kind}: table {stored!r} != rule {label!r}")
         self.assertEqual(
             disagreements, [],

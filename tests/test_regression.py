@@ -14,7 +14,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
 from dev.source_corrections import apply_book_name_fixes, apply_cohort_corrections  # noqa: E402
+from armenian_lectionary import engine  # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
+from tests._catalog_expectations import text  # noqa: E402
 from tests._reference_cache import requires_reference_cache  # noqa: E402
 
 # The structurally-validated tiers: a mismatch here breaks the strict-shipping
@@ -79,8 +81,7 @@ class TestCocelebrationResolvers(unittest.TestCase):
         res = compute_armenian_lectionary(datetime.date(2002, 2, 13))
         self.assertEqual(res["Source"], "validated-table")
         self.assertTrue(res["ReadingsList"])
-        self.assertEqual(res["Season"],
-                         "Eve of the Presentation of the Lord")
+        self.assertEqual(res["Season"], engine._KS_SEASON["PrLE"])
 
     def test_presentation_theotokos_nov21_validated(self):
         # A non-collision Presentation-of-the-Theotokos (Nov 21) co-celebration:
@@ -510,7 +511,7 @@ class TestPreLentCohort(unittest.TestCase):
         # Sargis onto Atom's Monday (Jan 21); the senior general wins the merge.
         res = compute_armenian_lectionary(datetime.date(2008, 1, 21))
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn("Sarkis", res["Liturgical Day"])
+        self.assertIn(text("sargis"), res["Liturgical Day"])
         self.assertEqual(res["ReadingsList"], list(_ref_readings(2008, 1, 21)))
 
     def test_2022_presentation_collision_atom_wins(self):
@@ -518,7 +519,7 @@ class TestPreLentCohort(unittest.TestCase):
         # Sukias's Tuesday (Feb 15) and wins the merge.
         res = compute_armenian_lectionary(datetime.date(2022, 2, 15))
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn("Atom", res["Liturgical Day"])
+        self.assertIn(text("atom"), res["Liturgical Day"])
 
     def test_source_verse_ranges_served(self):
         # The engine serves the SOURCE ranges, not the cache's (Atom Wisdom 6.12-21 /
@@ -533,7 +534,7 @@ class TestPreLentCohort(unittest.TestCase):
         # shipped from the fixed offset regardless of any cache.
         res = compute_armenian_lectionary(datetime.date(2027, 1, 23))  # Sargis 2027 (E-64)
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn("Sarkis", res["Liturgical Day"])
+        self.assertIn(text("sargis"), res["Liturgical Day"])
 
 
 if __name__ == "__main__":

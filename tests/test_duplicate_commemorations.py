@@ -30,8 +30,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.audit_duplicate_commemorations import findings                # noqa: E402
 from armenian_lectionary.engine import (                               # noqa: E402
-    MAX_YEAR, MIN_YEAR, _canons_with_own_day, compute_armenian_lectionary,
+    MAX_YEAR, MIN_YEAR, _OBSERVANCE_SEP, _canons_with_own_day, compute_armenian_lectionary,
 )
+from tests._catalog_expectations import text                           # noqa: E402
 
 # What survives after the packed-companion repair, the stated year-type override,
 # transcribing taregir Ē's own summer march (docs section 7d), and the TrSaintB
@@ -97,9 +98,9 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         Second Volume p.574 does by hand when the year gives Tryphon room. The day it was
         given is asserted too: a drop moves a name, it does not lose one.
         """
-        self.assertEqual("The Hermit St. Anton",
+        self.assertEqual(text("hermit_st_anton"),
                          self._day("2002-01-17")["Liturgical Day"])
-        self.assertEqual("The Hermit Sts. Tryphon, Barsauma and Onuphrius",
+        self.assertEqual(text("hermit_sts_tryphon_barsauma"),
                          self._day("2002-08-01")["Liturgical Day"])
 
     def test_dropping_a_middle_companion_keeps_the_rest(self):
@@ -109,7 +110,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         repair closes a duplicate and an EXPANSION at once.
         """
         self.assertEqual(
-            "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
+            text("cyricus_and_his_mother") + _OBSERVANCE_SEP + text("gordius_polyeuctus_and_grigoris"),
             self._day("2016-07-28")["Liturgical Day"])
 
     def test_the_head_canon_is_never_dropped(self):
@@ -121,7 +122,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         collision by dropping the head would leave the day nameless -- not the mechanism
         used here regardless.
         """
-        self.assertEqual("The Hermit St. Anton",
+        self.assertEqual(text("hermit_st_anton"),
                          self._day("2027-07-24")["Liturgical Day"])
 
     def test_the_stated_override_withdraws_a_packing(self):
@@ -133,7 +134,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         """
         for iso in ("2010-01-21", "2021-01-21"):
             with self.subTest(iso):
-                self.assertEqual("Sts. Cyricus and His Mother Julitta",
+                self.assertEqual(text("cyricus_and_his_mother"),
                                  self._day(iso)["Liturgical Day"])
 
     def test_the_override_does_not_reach_the_other_head(self):
@@ -146,7 +147,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         for iso in ("2010-08-02", "2021-08-02"):
             with self.subTest(iso):
                 self.assertEqual(
-                    "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
+                    text("vahan_of_goghtn") + _OBSERVANCE_SEP + text("gordius_polyeuctus_and_grigoris"),
                     self._day(iso)["Liturgical Day"])
 
     def test_the_override_does_not_reach_other_year_types(self):
@@ -170,11 +171,10 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         engine._PACKING_OVERRIDES). 31 was the September Barlaam canon, 54 days early;
         the march now serves Athanasius/Cyril, and Gregory the Theologian.
         """
-        self.assertEqual("Sts. Cyricus and His Mother Julitta",
+        self.assertEqual(text("cyricus_and_his_mother"),
                          self._day("2027-07-27")["Liturgical Day"])
         self.assertEqual(
-            "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the "
-            "Theologian",
+            text("fathers_sts_athanasius_and") + _OBSERVANCE_SEP + text("gregory_the_theologian"),
             self._day("2027-07-31")["Liturgical Day"])
 
     def test_the_table_collision_is_closed(self):
@@ -186,7 +186,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         pair, so the second-volume-cycle tier -- not the table -- serves it.
         """
         served = self._day("2027-07-26")
-        self.assertEqual("Sts. Theodosius and the Children of Ephesus",
+        self.assertEqual(text("theodosius_and_the_children"),
                          served["Liturgical Day"])
         self.assertEqual("second-volume-cycle", served["Source"])
 
@@ -201,7 +201,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         """
         served = self._day("2027-07-29")
         self.assertEqual(
-            "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
+            text("vahan_of_goghtn") + _OBSERVANCE_SEP + text("gordius_polyeuctus_and_grigoris"),
             served["Liturgical Day"])
         self.assertEqual(
             ["Proverbs 7.1-7", "Ezekiel 12.17-19",
@@ -225,7 +225,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
             with self.subTest(ly):
                 self.assertIsInstance(_canons_with_own_day(ly), frozenset)
         self.assertEqual(
-            "Sts. Cyricus and His Mother Julitta — Sts. Gordius, Polyeuctus and Grigoris",
+            text("cyricus_and_his_mother") + _OBSERVANCE_SEP + text("gordius_polyeuctus_and_grigoris"),
             self._day("2001-01-22")["Liturgical Day"])
 
     def test_the_day_keeps_the_head_canons_propers(self):
@@ -240,8 +240,8 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
                  "St. Paul's Epistle to the Hebrews 11.32-40", "Matthew 10.37-42"]
         vahan = ["Proverbs 7.1-7", "Ezekiel 12.17-19",
                  "St. Paul's Epistle to the Romans 8.12-27", "Luke 9.23-27"]
-        for iso, name, propers in (("2002-01-17", "The Hermit St. Anton", anton),
-                                   ("2008-07-28", "St. Vahan of Goghtn", vahan)):
+        for iso, name, propers in (("2002-01-17", text("hermit_st_anton"), anton),
+                                   ("2008-07-28", text("vahan_of_goghtn"), vahan)):
             with self.subTest(iso):
                 served = self._day(iso)
                 self.assertEqual(name, served["Liturgical Day"])

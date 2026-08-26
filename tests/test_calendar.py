@@ -8,6 +8,7 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import armenian_lectionary.engine as L  # noqa: E402
+from tests._catalog_expectations import bare_en  # noqa: E402
 
 
 class TestEaster(unittest.TestCase):
@@ -93,7 +94,7 @@ class TestFastOfCatechumensAliturgical(unittest.TestCase):
             self.assertEqual(r["Source"], "validated-table", day)
             self.assertEqual(r["Confidence"], "validated", day)
             self.assertIn("aliturgical", r["Note"], day)
-            self.assertIn("Fast of the Catechumens", r["Liturgical Day"], day)
+            self.assertIn(bare_en("catechumens_fast_day_1"), r["Liturgical Day"], day)
 
 
 class TestSummerSundayContinua(unittest.TestCase):
