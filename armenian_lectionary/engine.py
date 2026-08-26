@@ -1205,9 +1205,9 @@ def _collision_base_observance(d, tables=None):
     collision day by this movable day (adding the fixed feast alongside), so the engine
     names it the same way instead of by the fixed feast alone."""
     e_off = (d - calculate_gregorian_easter(d.year)).days
-    for _sid, off, _may_shift, label, _reads in _PRELENT_COHORT:
+    for sid, off, _may_shift, label, _reads in _PRELENT_COHORT:
         if off == e_off:
-            return label
+            return _catalog_text(sid, label)
     entry = _movable_slot_entry(d, tables)
     return entry["feast"] if entry is not None else None
 
@@ -1873,13 +1873,13 @@ def _first_volume_continua(d):
 # strict table has no entry. Single-sample -> source-derived best-guess, byte-matching GT.
 # Keyed by Easter offset -> (liturgical-day label, First-Volume movable readings, verbatim).
 _FV_SUMMER_CONTINUA = {
-    119: ("Fourth Sunday of Transfiguration",
+    119: ("fourth_sunday_after_transfiguration", "Fourth Sunday of Transfiguration",
           ["Luke 4.14-30", "Isaiah 54.1-13",
            "St. Paul's First Epistle to Timothy 1.1-11", "John 2.1-11"]),
-    126: ("Fifth Sunday of Transfiguration",
+    126: ("fifth_sunday_after_transfiguration", "Fifth Sunday of Transfiguration",
           ["Isaiah 58.13-59.7",
            "St. Paul's First Epistle to Timothy 4.12-5.10", "John 3.13-21"]),
-    133: ("Sixth Sunday of Transfiguration",
+    133: ("sixth_sunday_after_transfiguration", "Sixth Sunday of Transfiguration",
           ["Isaiah 62.1-11",
            "St. Paul's Second Epistle to Timothy 2.15-19", "John 6.39-47"]),
 }
@@ -1890,7 +1890,10 @@ def _first_volume_summer_continua(d):
     leaves single-sample (only the earliest-Easter years reach these positions as a blank).
     Keyed by Easter offset. Returns (label, refs) or None. Best-guess, never validated."""
     entry = _FV_SUMMER_CONTINUA.get((d - calculate_gregorian_easter(d.year)).days)
-    return (entry[0], list(entry[1])) if entry else None
+    if entry is None:
+        return None
+    sid, name, refs = entry
+    return (_catalog_text(sid, name), list(refs))
 
 
 def _fast_of_catechumens_eve(year: int) -> datetime.date:
@@ -2074,8 +2077,9 @@ def _prelent_cohort_layout(year):
     blocked = {_john_forerunner_date(year), datetime.date(year, 2, 14)}
     layout = {}
     for sid, off, may_shift, label, reads in _PRELENT_COHORT:
+        label = _catalog_text(sid, label)
         if sid == "atom":
-            label += _OBSERVANCE_SEP + _MARK_CANON
+            label += _OBSERVANCE_SEP + _catalog_text("mark_the_bishop_pionius", _MARK_CANON)
         d = e + datetime.timedelta(days=off)
         if (d.month, d.day) in EMBEDDED_FIXED:
             continue                                    # co-celebrates via embedded composite
@@ -2340,6 +2344,16 @@ _BOOK_NAMES_HY = _load_json_map(BOOK_NAMES_HY_PATH)
 _OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
 
 _OBSERVANCE_ID_BY_READINGS = _load_json_map(OBSERVANCE_READINGS_INDEX_PATH)
+
+
+def _catalog_text(sid, default, lang="en"):
+    """The catalog's current text for ``sid``, or ``default`` if the catalog (or this id)
+    is absent -- the same degrade-to-literal convention every other data file already
+    uses. Lets a hand-written literal stay a correct fallback for a thin install while a
+    full checkout always serves the live, renamed text: a TSV rename of one of these
+    literal-served observances (the pre-Lent cohort, a fixed civil date, an extreme-early-
+    Easter composite) reaches this call with no engine.py edit."""
+    return _OBSERVANCE_CATALOG.get(sid, {}).get(lang, default)
 
 
 def _observance_id_from_readings(readings, kind):
@@ -2834,7 +2848,7 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
 # civil New Year is the scrape's addition, not the book's, and it is not served. See
 # docs/observance-name-corrections.md section 9.
 _FIXED_DATE_OBSERVANCES = {
-    (1, 1): ("Blessing of the Pomegranates", 2015),
+    (1, 1): ("blessing_of_the_pomegranates", "Blessing of the Pomegranates", 2015),
 }
 
 
@@ -2848,8 +2862,8 @@ def fixed_date_label(d: datetime.date):
     entry = _FIXED_DATE_OBSERVANCES.get((d.month, d.day))
     if entry is None:
         return None
-    name, first_year = entry
-    return name if d.year >= first_year else None
+    sid, name, first_year = entry
+    return _catalog_text(sid, name) if d.year >= first_year else None
 
 
 def _apply_fixed_date_label(label: str, d: datetime.date) -> str:
@@ -3238,7 +3252,9 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     if jf is not None:
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Feast of the Birth of St. John the Forerunner (Baptist)",
+            "Liturgical Day": _catalog_text(
+                "feast_of_the_birth_of_st_john_the_forerunner",
+                "Feast of the Birth of St. John the Forerunner (Baptist)"),
             "Season": "Nativity Octave",
             "Readings": _group_readings(jf),
             "ReadingsList": jf,
@@ -3256,7 +3272,8 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     if no is not None:
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Feast of the Naming of Our Lord Jesus Christ",
+            "Liturgical Day": _catalog_text(
+                "feast_of_naming_of", "Feast of the Naming of Our Lord Jesus Christ"),
             "Season": "Nativity Octave",
             "Readings": _group_readings(no),
             "ReadingsList": no,

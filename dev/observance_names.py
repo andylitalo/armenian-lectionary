@@ -69,17 +69,45 @@ _ANCHORS = sorted([
     "Nativity", "Transfiguration", "Assumption", "Eastertide", "Exaltation", "Holy",
 ], key=len, reverse=True)
 
-# Trailing status notes ("Eve of the Fast of ...", "Eve of the Resurrection ...").
+def _served_eve_name(catalog_id, fallback):
+    """The eve's own text, read from the LIVE catalog rather than hardcoded -- every
+    fast-eve id below is a 1:1 row in dev/observance_name_review.tsv, so this closes the
+    same drift _served_season_name closes for _SEASONS. Falls back to ``fallback`` if the
+    catalog or the id is absent (a thin checkout)."""
+    entry = engine._OBSERVANCE_CATALOG.get(catalog_id)
+    return entry["en"] if entry else fallback
+
+
+# Trailing status notes ("Eve of the Fast of ...", "Eve of the Resurrection ..."). This
+# strips BOTH the raw source string (source_en -- immutable, never renamed) and whatever
+# the engine currently serves (approved_en -- read live), so each fast eve needs both: the
+# literal is the source's own unchanging text, and _served_eve_name reads the reviewed
+# rename live so a future one reaches here with no edit. Where the two already agree
+# (nothing has been renamed for that eve yet) the live call is a same-text no-op today.
 _EVES = sorted([
-    "Eve of Fast of Prophet Elijah", "Eve of Fast of Saint Gregory the Illuminator",
-    "Eve of Fast of Saint James the bishop of Nisibis",
+    "Eve of Fast of Prophet Elijah", _served_eve_name(
+        "eve_of_fast_of_prophet_elijah", "Eve of Fast of Prophet Elijah"),
+    "Eve of Fast of Saint Gregory the Illuminator", _served_eve_name(
+        "eve_of_fast_of_illuminator", "Eve of Fast of Saint Gregory the Illuminator"),
+    "Eve of Fast of Saint James the bishop of Nisibis", _served_eve_name(
+        "eve_of_fast_of_nisibis", "Eve of Fast of Saint James the bishop of Nisibis"),
     "Eve of the Nativity and Theophany of our Lord Jesus Christ",
-    "Eve of Fast of Assumption of the Holy Mother of God",
-    "Eve of Fast of Transfiguration", "Eve of Fast of Exaltation of Holy Cross",
-    "Eve of Fast of Nativity", "Eve of Fast of Catechumens",
-    "Eve of Fast of the Holy Cross of Varag",
+    "Eve of Fast of Assumption of the Holy Mother of God", _served_eve_name(
+        "eve_of_fast_of_assumption", "Eve of Fast of Assumption of the Holy Mother of God"),
+    "Eve of Fast of Transfiguration", _served_eve_name(
+        "eve_of_fast_of_transfiguration", "Eve of Fast of Transfiguration"),
+    "Eve of Fast of Exaltation of Holy Cross", _served_eve_name(
+        "eve_of_fast_of_exaltation", "Eve of Fast of Exaltation of Holy Cross"),
+    "Eve of Fast of Nativity", _served_eve_name(
+        "eve_of_fast_of_nativity", "Eve of Fast of Nativity"),
+    "Eve of Fast of Catechumens", _served_eve_name(
+        "eve_of_fast_of_catechumens", "Eve of Fast of Catechumens"),
+    "Eve of Fast of the Holy Cross of Varag", _served_eve_name(
+        "eve_of_fast_of_holy_cross_of_varag", "Eve of Fast of the Holy Cross of Varag"),
     "Eve of the Resurrection of our Lord Jesus Christ", "Eve of Great Lent",
-    "Eve of the Fast of Advent", "Eve of Fast of Advent",
+    "Eve of the Fast of Advent", "Eve of Fast of Advent",   # the source's own two
+                                                             # spellings; both ids were
+                                                             # merged into eve_of_fast_of_advent
     # Vigil designations (temporal markers, not a commemoration): the eve of the
     # Presentation is a co-celebrated reading block, so the day is headlined by its own
     # commemoration, not "Eve of the Presentation".

@@ -27,7 +27,7 @@ import functools
 import json
 import os
 
-from armenian_lectionary.engine import _OBSERVANCE_SEP
+from armenian_lectionary.engine import _OBSERVANCE_SEP, _catalog_text
 
 # cache reading string -> source (Tōnats'oyts First Vol p.464-465) reading string.
 # Applied ONLY on first-volume-cohort days (scoped by the shipping tier, not by text).
@@ -98,39 +98,44 @@ def apply_reading_order(date_iso, readings):
 # companion list.
 # --------------------------------------------------------------------------- #
 
-# Ordered (first match wins). Each entry: (predicate on the commemoration) -> canonical.
+# Ordered (first match wins). Each entry: (catalog id, fallback canonical, predicate on the
+# commemoration). The canonical string is resolved live from the catalog by id in
+# ``canonical_commem`` -- the fallback here is only the thin-install/no-catalog default, so
+# a reviewed rename of the id's approved_en (dev/observance_name_review.tsv) reaches this
+# fold with no edit here. The predicates -- which raw source spellings collapse to one
+# saint -- are hand judgment calls and stay literal.
 _FEAST_CANON_RULES = (
-    ("Sts. Cyricus and His Mother Julitta",
+    ("cyricus_and_his_mother", "Sts. Cyricus and His Mother Julitta",
      lambda c: c.startswith(("Saints Cyricus and His Mother Julitta",
                               "Sts. Cyricus and His Mother Julitta"))),
-    ("Holy Fathers Sts. Athanasius and Cyril of Alexandria",
+    ("fathers_sts_athanasius_and", "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
      lambda c: c.startswith(("Holy Fathers Saints Athanasius and Cyril of Alexandria",
                               "Holy Fathers Sts. Athanasius and Cyril of Alexandria"))),
-    ("St. Vahan of Goghtn",
+    ("vahan_of_goghtn", "St. Vahan of Goghtn",
      lambda c: "Vahan of Goghtn" in c),
-    ("The Hermit Saints Anton",
+    ("hermit_st_anton", "The Hermit St. Anton",
      lambda c: "Anton" in c and "Hermit" in c),
-    ("Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
+    ("eugenius_macarius_valerius_candidus", "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
      lambda c: c.startswith(("Saints Eugenios", "Saints Eugenius",
                               "Sts. Eugenios", "Sts. Eugenius"))),
-    ("St. Sarkis the Warrior and His Son Mardiros and His Fourteen Soldiers",
+    ("sargis", "St. Sarkis the Warrior and His Son Mardiros and His Fourteen Soldiers",
      lambda c: c.startswith(("Saint Sargis the Warrior", "St. Sargis the Warrior",
                               "St. Sarkis the Warrior"))),
-    ("Sts. Atom and His Soldiers",
+    ("atom", "Sts. Atom and His Soldiers",
      lambda c: c.startswith(("Saints Atom and his soldiers", "Sts. Atom and his soldiers",
                               "Sts. Atom and His Soldiers"))),
-    ("PRESENTATION OF OUR LORD TO THE TEMPLE",
+    ("presentation_of_our_lord", "PRESENTATION OF OUR LORD TO THE TEMPLE",
      lambda c: "PRESENTATION OF OUR LORD TO THE TEMPLE" in c),
     # The Theotokos' Presentation (Nov 21) is typed with the first word shouted in 19 of
     # the 26 cached years and in plain title case in the other 7 -- the source disagreeing
     # with itself, with no rule to reproduce. The engine serves the title-case form (the
     # one the hy name map is keyed on); folding on case makes the two score as the same
     # commemoration, which they are.
-    ("Presentation of the Holy Mother of God to the Temple",
+    ("presentation_of_the_holy", "Presentation of the Holy Mother of God to the Temple",
      lambda c: c.lower().startswith("presentation of the holy mother of god to the temple")),
     # St. Theodore the Recruit: the scrape says "the General", the Tonats'oyts table
     # "the Tyron" (Greek Tiron/Recruit) -- the same soldier-martyr.
-    ("Saint Theodore the General",
+    ("theodore_the_tyron", "St. Theodore the Tyron",
      lambda c: "Theodore the Tyron" in c or "Theodore the General" in c),
 )
 
@@ -284,25 +289,38 @@ def named_fast_label(date_iso):
 # be expressed as a text->text map in ``ground_truth_hy_fixes``: one source string resolves
 # to five different components depending on the date.
 #
-# Each template follows the shape every other fast in the catalog already uses,
-# "{ordinal} օր <fast> պահոց", over the fast's own attested Armenian name: "Ս. Յակովբայ"
-# from the Nisibis eve, and "Վարագայ Ս. Խաչի" from the Varag eve and feast rows
-# ("Բարեկենդան Վարագայ ս. խաչի" / "Տօն Վարագայ ս. խաչի").
+# Each label follows the shape every other fast in the catalog already uses,
+# "{ordinal} օր <fast> պահոց", over the fast's own attested Armenian name -- read live from
+# the corresponding eve row's approved_hy (dev/observance_name_review.tsv), so a reviewed
+# rename of the eve (e.g. adding "Մծբնայ հայրապետին" to the Nisibis eve) reaches these day
+# labels with no edit here. The fallback strings below are the current catalog values,
+# kept only for a thin install with no catalog.
 #
-# Capitalized "Ս. Խաչի" rather than the lower-case "ս. խաչի" those two rows print. This is a
-# FAST label, not a copy of the feast's name, and every other fast in the catalog capitalizes
-# the saint or feast it is named for -- the Exaltation fast is "Ա օր Ս. Խաչի պահոց" over the
-# same two words, and Nisibis is "Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց". Following the eve's casing here
-# would make the Holy Cross the one saint whose name is capitalized in one fast label and not
-# in another, on nothing but which row the string was lifted from. The witness is preserved
-# where witnesses live: source_hy in the review TSV still records what the source printed.
-# "պահոց" stays lower-case, as it is on all nine other fasts.
+# Capitalized "Ս. Խաչի" rather than the lower-case "ս. խաչի" the Varag eve/feast rows print.
+# This is a FAST label, not a copy of the feast's name, and every other fast in the catalog
+# capitalizes the saint or feast it is named for -- the Exaltation fast is "Ա օր Ս. Խաչի
+# պահոց" over the same two words. Following the eve's casing here would make the Holy Cross
+# the one saint whose name is capitalized in one fast label and not in another, on nothing
+# but which row the string was lifted from. The witness is preserved where witnesses live:
+# source_hy in the review TSV still records what the source printed. "պահոց" stays
+# lower-case, as it is on all nine other fasts.
 _AMBIGUOUS_FAST_LABEL_HY = "Պահք"
 _NAMED_FAST_ORDINALS_HY = ("Ա", "Բ", "Գ", "Դ", "Ե")
-_NAMED_FAST_TEMPLATES_HY = {
-    "HE": "{ord} օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
-    "EX": "{ord} օր Վարագայ Ս. Խաչի պահոց",
+_NAMED_FAST_EVE_IDS_HY = {"HE": "eve_of_fast_of_nisibis", "EX": "eve_of_fast_of_holy_cross_of_varag"}
+_NAMED_FAST_EVE_HY_FALLBACK = {
+    "HE": "Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
+    "EX": "Բարեկենդան Վարագայ ս. խաչի",
 }
+_EVE_HY_PREFIX = "Բարեկենդան "
+_FAST_HY_SUFFIX = " պահոց"
+
+
+def _bare_fast_name_hy(eve_hy):
+    """Strip the eve's "Բարեկենդան " prefix and, where present, its trailing " պահոց" --
+    what's left is the fast's own bare name, e.g. "Ս. Յակովբայ Մծբնայ հայրապետին" or
+    "Վարագայ ս. խաչի" (the Varag eve never carries a trailing "պահոց" at all)."""
+    s = eve_hy[len(_EVE_HY_PREFIX):] if eve_hy.startswith(_EVE_HY_PREFIX) else eve_hy
+    return s[:-len(_FAST_HY_SUFFIX)] if s.endswith(_FAST_HY_SUFFIX) else s
 
 
 def named_fast_label_hy(date_iso):
@@ -312,11 +330,15 @@ def named_fast_label_hy(date_iso):
     from armenian_lectionary.engine import _POSITION_ANCHORS
 
     d = datetime.date.fromisoformat(date_iso)
-    for akey, template in _NAMED_FAST_TEMPLATES_HY.items():
+    for akey, sid in _NAMED_FAST_EVE_IDS_HY.items():
         lo, hi = _NAMED_FAST_WINDOWS[akey]
         offset = (d - _POSITION_ANCHORS[akey](d)).days
         if lo <= offset <= hi:
-            return template.format(ord=_NAMED_FAST_ORDINALS_HY[offset - lo])
+            eve_hy = _catalog_text(sid, _NAMED_FAST_EVE_HY_FALLBACK[akey], lang="hy")
+            bare = _bare_fast_name_hy(eve_hy)
+            if akey == "EX":
+                bare = bare.replace("ս. խաչի", "Ս. Խաչի")   # see capitalization note above
+            return f"{_NAMED_FAST_ORDINALS_HY[offset - lo]} օր {bare} պահոց"
     return None
 
 
@@ -608,7 +630,7 @@ def canonical_commem(commem):
     contradiction."""
     commem = normalize_confusables(apply_ground_truth(commem))
     commem = commem.replace("Fiest of", "Feast of")     # sacredtradition.am typo
-    for canonical, pred in _FEAST_CANON_RULES:
+    for sid, fallback, pred in _FEAST_CANON_RULES:
         if pred(commem):
-            return canonical
+            return _catalog_text(sid, fallback)
     return commem

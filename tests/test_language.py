@@ -14,6 +14,7 @@ from armenian_lectionary import compute_armenian_lectionary  # noqa: E402
 from armenian_lectionary import engine  # noqa: E402
 from dev import source_corrections  # noqa: E402
 from dev.fetch_translations import OBSERVANCE_MAP_PATH  # noqa: E402
+from tests._catalog_expectations import bare_en, bare_hy, text  # noqa: E402
 
 
 def _observance_names_hy():
@@ -273,11 +274,10 @@ class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
                     hy = compute_armenian_lectionary(
                         day, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(
-                            f"{word} day of the Fast of St. Gregory the Illuminator"),
+                        en.startswith(f"{word} day of {bare_en('illuminator_fast_day_1')}"),
                         f"{day} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր Լուսաւորչի պահոց"),
+                        hy.startswith(f"{letter} օր {bare_hy('illuminator_fast_day_1')}"),
                         f"{day} served {hy!r}")
 
     def test_an_ordinary_fast_day_is_not_captured(self):
@@ -290,9 +290,9 @@ class TestIlluminatorFastIsNamedInBothLanguages(unittest.TestCase):
         """
         day = datetime.date(2026, 10, 7)          # ordinary-time Wednesday
         self.assertEqual(compute_armenian_lectionary(
-            day, language="hy")["Liturgical Day"], "Չորեքշաբթիի պահք")
+            day, language="hy")["Liturgical Day"], text("wednesday_fast", "hy"))
         self.assertEqual(compute_armenian_lectionary(
-            day)["Liturgical Day"], "Wednesday Fast")
+            day)["Liturgical Day"], text("wednesday_fast"))
 
     def test_window_is_closed_at_both_ends(self):
         """The eve (Pentecost+21) and the Discovery of the Relics (+27) are not fast days."""
@@ -358,11 +358,10 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
                     hy = compute_armenian_lectionary(
                         day, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(
-                            f"{word} day of the Fast of St. James the bishop of Nisibis"),
+                        en.startswith(f"{word} day of {bare_en('james_nisibis_day_1')}"),
                         f"{day} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց"),
+                        hy.startswith(f"{letter} օր {bare_hy('james_nisibis_day_1')}"),
                         f"{day} served {hy!r}")
 
     def test_the_day_count_matches_the_eve_that_names_the_fast(self):
@@ -375,8 +374,8 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
         """
         heesnak = self._heesnak(2026)
         eve = heesnak + datetime.timedelta(days=21)
-        for lang, fast in (("en", "Fast of St. James the bishop of Nisibis"),
-                           ("hy", "Ս. Յակովբայ Մծբնայ հայրապետին պահոց")):
+        for lang, fast in (("en", bare_en("james_nisibis_day_1")),
+                           ("hy", bare_hy("james_nisibis_day_1"))):
             with self.subTest(lang=lang):
                 eve_label = compute_armenian_lectionary(
                     eve, language=lang)["Liturgical Day"]
@@ -407,7 +406,7 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
             with self.subTest(year=year):
                 served = compute_armenian_lectionary(
                     datetime.date(year, 12, 9), language="hy")["Liturgical Day"]
-                self.assertIn("օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց", served)
+                self.assertIn(f"օր {bare_hy('james_nisibis_day_1')}", served)
 
 
 class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
@@ -444,13 +443,15 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
                     hy = compute_armenian_lectionary(
                         day, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(f"{word} day of the Fast of the Prophet Elijah"),
+                        en.startswith(f"{word} day of {bare_en('second_day_of_pentecost')}"),
                         f"{day} served {en!r}")
-                    self.assertTrue(hy.startswith(f"{letter} օր Եղիական պահոց"),
-                                    f"{day} served {hy!r}")
+                    self.assertTrue(
+                        hy.startswith(f"{letter} օր {bare_hy('second_day_of_pentecost')}"),
+                        f"{day} served {hy!r}")
 
     def test_the_day_count_matches_the_eve_that_names_the_fast(self):
-        for lang, fast in (("en", "Fast of the Prophet Elijah"), ("hy", "Եղիական պահոց")):
+        for lang, fast in (("en", bare_en("second_day_of_pentecost")),
+                            ("hy", bare_hy("second_day_of_pentecost"))):
             with self.subTest(lang=lang):
                 pentecost = self._pentecost(2026)
                 eve = compute_armenian_lectionary(
@@ -474,7 +475,7 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
                            ("Seventh", "seventh_day_of_pentecost")):
             with self.subTest(word=word):
                 self.assertEqual(
-                    ids_for_text(f"{word} day of the Fast of the Prophet Elijah"), [slug])
+                    ids_for_text(f"{word} day of {bare_en('second_day_of_pentecost')}"), [slug])
 
 
 class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
@@ -512,20 +513,27 @@ class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
                     hy = compute_armenian_lectionary(
                         d, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(
-                            f"{word} day of the Fast of the Holy Cross of Varag"),
+                        en.startswith(f"{word} day of {bare_en('cross_varag_day_1')}"),
                         f"{d} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր Վարագայ Ս. Խաչի պահոց"),
+                        hy.startswith(f"{letter} օր {bare_hy('cross_varag_day_1')}"),
                         f"{d} served {hy!r}")
 
     def test_the_eve_still_names_the_fast(self):
-        """The witness the day labels are taken from, asserted so it cannot quietly move."""
+        """The witness the day labels are taken from, asserted so it cannot quietly move.
+
+        Calls ``engine._eve_label`` directly -- the raw, pre-catalog-override literal --
+        so this checks a substring rather than exact equality: once
+        tests/test_coordinate_index.py compares by id (not text), this literal's exact
+        wording is no longer required to track a rename (it is never actually reachable by
+        a real request for a covered family; see that file's docstring). What still
+        matters, and what this still catches, is that the raw template names *some* Varag
+        fast eve at all.
+        """
         for year in (2001, 2026):
             eve = self._eve(year)
             with self.subTest(date=eve):
-                self.assertEqual(
-                    engine._eve_label(eve), "Eve of the Fast of the Holy Cross of Varag")
+                self.assertIn(text("eve_of_fast_of_holy_cross_of_varag"), engine._eve_label(eve))
 
     def test_its_wednesday_and_friday_are_not_the_weekly_fast(self):
         """The defect §6d fixed: two days of this fast were served as the weekly one."""
@@ -556,8 +564,10 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
             self.skipTest("observance catalog not present")
 
     def test_ordinary_time_splits_by_weekday_in_both_languages(self):
-        for d, en, hy in ((datetime.date(2026, 10, 7), "Wednesday Fast", "Չորեքշաբթիի պահք"),
-                          (datetime.date(2026, 10, 9), "Friday Fast", "Ուրբաթի պահք")):
+        for d, en, hy in ((datetime.date(2026, 10, 7),
+                           text("wednesday_fast"), text("wednesday_fast", "hy")),
+                          (datetime.date(2026, 10, 9),
+                           text("friday_fast"), text("friday_fast", "hy"))):
             with self.subTest(date=d):
                 self.assertTrue(
                     compute_armenian_lectionary(d)["Liturgical Day"].startswith(en))
@@ -581,7 +591,7 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
             with self.subTest(date=d):
                 served = compute_armenian_lectionary(d)["Liturgical Day"]
                 self.assertTrue(served.startswith("Great "), served)
-                for absent in ("Wednesday Fast", "Friday Fast", "Fast day"):
+                for absent in (text("wednesday_fast"), text("friday_fast"), "Fast day"):
                     self.assertNotIn(absent, served, served)
 
     def test_a_named_fast_outranks_the_split(self):
@@ -590,7 +600,7 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
                   datetime.date(2026, 12, 9)):   # Fast of St. James of Nisibis, a Wednesday
             with self.subTest(date=d):
                 served = compute_armenian_lectionary(d)["Liturgical Day"]
-                self.assertNotIn("Wednesday Fast", served, served)
+                self.assertNotIn(text("wednesday_fast"), served, served)
                 self.assertIn("day of the Fast of", served)
 
     def test_the_generative_continua_tier_does_not_suppress_the_split(self):
@@ -607,7 +617,8 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
             with self.subTest(date=d):
                 served = compute_armenian_lectionary(d)["Liturgical Day"]
                 self.assertNotIn("Fast day", served, served)
-                self.assertTrue(served.startswith(("Wednesday Fast", "Friday Fast")), served)
+                self.assertTrue(
+                    served.startswith((text("wednesday_fast"), text("friday_fast"))), served)
 
     def test_a_day_the_split_does_not_claim_keeps_its_own_day_count(self):
         """The split is scoped to the terminal fallthrough; it never rewrites a day count.
@@ -622,8 +633,8 @@ class TestWeeklyFastWeekdaySplit(unittest.TestCase):
         """
         served = compute_armenian_lectionary(
             datetime.date(2026, 8, 19))["Liturgical Day"]
-        self.assertEqual(served, "Fourth day of the Assumption")
-        for absent in ("Wednesday Fast", "Friday Fast", "Fast day"):
+        self.assertEqual(served, text("fourth_day_of_assumption"))
+        for absent in (text("wednesday_fast"), text("friday_fast"), "Fast day"):
             self.assertNotIn(absent, served, served)
 
 

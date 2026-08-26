@@ -77,14 +77,15 @@ class TestCycleSelectionIsGregorianNotTrueTaregir(unittest.TestCase):
         import datetime
 
         from dev.paschal_index import taregir_for
-        from armenian_lectionary.engine import compute_armenian_lectionary
+        from armenian_lectionary.engine import _OBSERVANCE_SEP, compute_armenian_lectionary
+        from tests._catalog_expectations import text
 
         self.assertEqual("Ա", taregir_for(2010))
         self.assertEqual(
-            "Sts. Cyricus and His Mother Julitta",
+            text("cyricus_and_his_mother"),
             compute_armenian_lectionary(datetime.date(2010, 1, 21))["Liturgical Day"])
         self.assertEqual(
-            "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris",
+            text("vahan_of_goghtn") + _OBSERVANCE_SEP + text("gordius_polyeuctus_and_grigoris"),
             compute_armenian_lectionary(datetime.date(2010, 8, 2))["Liturgical Day"])
 
 
