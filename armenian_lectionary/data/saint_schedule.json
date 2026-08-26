@@ -34,29 +34,29 @@
    "head_tail_split": 9
   },
   "aliases": {
-   "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "eugenia_the_virgin",
+   "St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "eugenia_the_virgin",
    "St. Sahak I the Parthian, Patriarch of Armenia": "sahak_i_the",
-   "Sts. Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina": "cyprian_the_bishop",
+   "Sts. Cyprian the Bishop, the Forty-Five Martyrs and the Virgins Justina, Euphemia and Christina": "cyprian_the_bishop",
    "Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs": "athenogenes_the_bishop",
-   "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": "forefathers_adam_abel",
+   "Holy Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and Other Holy Patriarchs": "forefathers_adam_abel",
    "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin": "thaddeus_apostle_of",
    "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian": "fathers_saints_athanasius",
-   "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
+   "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
    "St. Vahan of Goghtn": "vahan_of_goghtn",
-   "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila — Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "eugenios_makarios_valerian",
+   "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila — Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs": "eugenios_makarios_valerian",
    "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermits_saints_anton",
    "Sts. Theodosius and the Children of Ephesus": "theodosius_and_the",
    "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
-   "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
-   "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
-   "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape": "sophia_and_her",
+   "Holy Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
+   "Holy Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
+   "Sts. Sophia and Her Three Daughters Pistis, Elpis, and Agape": "sophia_and_her",
    "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel": "gregory_the_illuminator",
    "Sts. Peter the Patriarch, Blaise the Bishop and Absalom the Deacon": "peter_the_patriarch",
    "St. Gregory the Theologian": "gregory_of_theologian",
    "The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermits_saints_triphon",
-   "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
-   "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
-   "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)": "150_fathers_participating"
+   "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
+   "Commemoration of the 150 Fathers of the Holy Council of Constantinople (AD 381)": "150_fathers_participating"
   },
   "sequence": [
    {
@@ -117,7 +117,7 @@
    },
    {
     "id": "150_fathers_participating",
-    "label": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
+    "label": "Commemoration of the 150 Fathers of the Holy Council of Constantinople (AD 381)",
     "order": 4,
     "support_years": 2,
     "anchor": "skip",
@@ -127,7 +127,7 @@
    },
    {
     "id": "vahan_of_goghtn",
-    "label": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "label": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "order": 5,
     "support_years": 15,
     "anchor": "head",
@@ -148,7 +148,7 @@
    },
    {
     "id": "eugenios_makarios_valerian",
-    "label": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila — Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "label": "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila — Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs",
     "order": 6,
     "support_years": 15,
     "anchor": "head",
@@ -159,7 +159,7 @@
    },
    {
     "id": "eugenia_the_virgin",
-    "label": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "label": "St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "order": 6,
     "support_years": 1,
     "anchor": "skip",
@@ -181,7 +181,7 @@
    },
    {
     "id": "andrew_the_general",
-    "label": "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "label": "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs",
     "order": 7,
     "support_years": 5,
     "anchor": "skip",
@@ -191,7 +191,7 @@
    },
    {
     "id": "adrian_and_his",
-    "label": "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
+    "label": "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
     "order": 8,
     "support_years": 6,
     "anchor": "skip",
@@ -211,7 +211,7 @@
    },
    {
     "id": "cyprian_the_bishop",
-    "label": "Sts. Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
+    "label": "Sts. Cyprian the Bishop, the Forty-Five Martyrs and the Virgins Justina, Euphemia and Christina",
     "order": 8,
     "support_years": 1,
     "anchor": "skip",
@@ -231,7 +231,7 @@
    },
    {
     "id": "maccabees_eleazar_the",
-    "label": "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
+    "label": "Holy Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
     "order": 10,
     "support_years": 9,
     "anchor": "tail",
@@ -242,7 +242,7 @@
    },
    {
     "id": "forefathers_adam_abel",
-    "label": "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
+    "label": "Holy Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and Other Holy Patriarchs",
     "order": 10,
     "support_years": 1,
     "anchor": "skip",
@@ -252,7 +252,7 @@
    },
    {
     "id": "twelve_prophets_hosea",
-    "label": "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
+    "label": "Holy Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
     "order": 11,
     "support_years": 9,
     "anchor": "tail",
@@ -270,12 +270,12 @@
     "date_lo": "02-03",
     "date_hi": "02-09",
     "observance_ids": [
-     "gregory_the_illuminator_s_2"
+     "gregory_the_illuminator_sons_and_grandsons"
     ]
    },
    {
     "id": "sophia_and_her",
-    "label": "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
+    "label": "Sts. Sophia and Her Three Daughters Pistis, Elpis, and Agape",
     "order": 12,
     "support_years": 9,
     "anchor": "tail",
@@ -335,11 +335,11 @@
    "The Hermit St. Anton — The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermit_saints_anton",
    "Sts. Theodosius and the Children of Ephesus": "theodosius_and_the",
    "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel": "gregory_the_illuminator",
-   "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
-   "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
-   "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape": "sophia_and_her",
+   "Holy Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons": "maccabees_eleazar_the",
+   "Holy Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi": "twelve_prophets_hosea",
+   "Sts. Sophia and Her Three Daughters Pistis, Elpis, and Agape": "sophia_and_her",
    "Sts. Cyricus and His Mother Julitta — St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris": "cyricus_and_his",
-   "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
+   "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "vahan_of_goghtn",
    "St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris": "vahan_of_goghtn",
    "The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermits_saints_triphon",
    "St. Gregory the Theologian": "gregory_of_theologian",
@@ -348,15 +348,15 @@
    "Third day of Transfiguration": "third_day_of",
    "St. Isaiah the Prophet": "isaiah_the_prophet",
    "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin": "thaddeus_apostle_of",
-   "Sts. Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina": "cyprian_the_bishop",
+   "Sts. Cyprian the Bishop, the Forty-Five Martyrs and the Virgins Justina, Euphemia and Christina": "cyprian_the_bishop",
    "Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs": "athenogenes_the_bishop",
-   "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs": "forefathers_adam_abel",
-   "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 431)": "200_fathers_of",
+   "Holy Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and Other Holy Patriarchs": "forefathers_adam_abel",
+   "Commemoration of the 200 Fathers of the Holy Council of Ephesus (AD 431)": "200_fathers_of",
    "Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian": "fathers_saints_athanasius",
-   "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "eugenia_the_virgin",
-   "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs — Sts. Eugenius, Macarius, Valerius, Candidus and Aquila": "eugenia_the_virgin",
-   "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
-   "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his"
+   "St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs": "eugenia_the_virgin",
+   "St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs — Sts. Eugenius, Macarius, Valerius, Candidus and Aquila": "eugenia_the_virgin",
+   "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his"
   },
   "sequence": [
    {
@@ -404,7 +404,7 @@
    },
    {
     "id": "cyprian_the_bishop",
-    "label": "Sts. Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
+    "label": "Sts. Cyprian the Bishop, the Forty-Five Martyrs and the Virgins Justina, Euphemia and Christina",
     "order": 4,
     "support_years": 25,
     "anchor": "head",
@@ -424,7 +424,7 @@
    },
    {
     "id": "forefathers_adam_abel",
-    "label": "Sts. Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
+    "label": "Holy Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and Other Holy Patriarchs",
     "order": 6,
     "support_years": 25,
     "anchor": "head",
@@ -441,12 +441,12 @@
     "date_lo": "07-12",
     "date_hi": "08-01",
     "observance_ids": [
-     "gregory_the_illuminator_s_2"
+     "gregory_the_illuminator_sons_and_grandsons"
     ]
    },
    {
     "id": "maccabees_eleazar_the",
-    "label": "Sts. Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
+    "label": "Holy Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
     "order": 8,
     "support_years": 17,
     "anchor": "head",
@@ -456,7 +456,7 @@
    },
    {
     "id": "twelve_prophets_hosea",
-    "label": "Sts. Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
+    "label": "Holy Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
     "order": 9,
     "support_years": 17,
     "anchor": "head",
@@ -466,7 +466,7 @@
    },
    {
     "id": "sophia_and_her",
-    "label": "Sts. Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
+    "label": "Sts. Sophia and Her Three Daughters Pistis, Elpis, and Agape",
     "order": 10,
     "support_years": 17,
     "anchor": "head",
@@ -476,7 +476,7 @@
    },
    {
     "id": "200_fathers_of",
-    "label": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 431)",
+    "label": "Commemoration of the 200 Fathers of the Holy Council of Ephesus (AD 431)",
     "order": 11,
     "support_years": 26,
     "anchor": "pin:Sat",
@@ -534,7 +534,7 @@
    },
    {
     "id": "vahan_of_goghtn",
-    "label": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "label": "St. Vahan of Goghtn — St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "order": 13,
     "support_years": 9,
     "anchor": "skip",
@@ -545,7 +545,7 @@
    },
    {
     "id": "eugenia_the_virgin",
-    "label": "St. Eugenia the Virgin, Her Father Philip and her mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
+    "label": "St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs",
     "order": 13,
     "support_years": 5,
     "anchor": "skip",
@@ -597,7 +597,7 @@
    },
    {
     "id": "andrew_the_general",
-    "label": "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "label": "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs",
     "order": 17,
     "support_years": 6,
     "anchor": "tail",
@@ -608,7 +608,7 @@
    },
    {
     "id": "adrian_and_his",
-    "label": "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
+    "label": "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
     "order": 18,
     "support_years": 6,
     "anchor": "tail",
@@ -654,15 +654,15 @@
    "head_tail_split": 13
   },
   "aliases": {
-   "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
-   "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
+   "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
    "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": "abraham_and_khoren",
    "Second day of the Assumption — Remembrance of the Dead": "second_day_of",
    "Fifth day of the Assumption": "second_day_of",
    "Third day of the Assumption": "third_day_of",
    "Ninth day of Assumption": "third_day_of",
    "Seventh day of the Assumption": "seventh_day_of",
-   "Sts. Joachim and Anna, parents of the Holy Mother of God, and of Myrophores": "joachim_and_anna",
+   "Sts. Joachim and Anna, Parents of the Holy Mother of God, and the Oil-Bearing Women": "joachim_and_anna",
    "St. Jeremiah the Prophet": "jeremiah_the_prophet",
    "Holy Apostles Thomas, James and Simon": "apostles_thomas_james",
    "Holy Apostle Thomas": "apostles_thomas_james",
@@ -670,7 +670,7 @@
    "Sts. Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus": "stephen_of_oulnia",
    "Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist": "prophets_ezekiel_ezra",
    "Sts. John the Forerunner (Baptist) and Job the Righteous": "john_the_forerunner",
-   "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)": "318_fathers_of"
+   "Commemoration of the 318 Fathers of the Holy Council of Nicea (AD 325)": "318_fathers_of"
   },
   "sequence": [
    {
@@ -680,7 +680,7 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "second_day_of_the",
+     "second_day_of_assumption",
      "remembrance_of_the_dead"
     ]
    },
@@ -693,7 +693,7 @@
     "date_lo": "08-18",
     "date_hi": "08-24",
     "observance_ids": [
-     "seventh_day_of_the"
+     "seventh_day_of_assumption"
     ]
    },
    {
@@ -703,12 +703,12 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "third_day_of_the"
+     "third_day_of_assumption"
     ]
    },
    {
     "id": "joachim_and_anna",
-    "label": "Sts. Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
+    "label": "Sts. Joachim and Anna, Parents of the Holy Mother of God, and the Oil-Bearing Women",
     "order": 5,
     "support_years": 26,
     "anchor": "head",
@@ -765,12 +765,12 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "john_the_forerunner_baptist_2"
+     "john_the_forerunner_baptist_and_job_the_righteous"
     ]
    },
    {
     "id": "318_fathers_of",
-    "label": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
+    "label": "Commemoration of the 318 Fathers of the Holy Council of Nicea (AD 325)",
     "order": 11,
     "support_years": 26,
     "anchor": "pin:Sat",
@@ -782,7 +782,7 @@
    },
    {
     "id": "andrew_the_general",
-    "label": "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "label": "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs",
     "order": 12,
     "support_years": 7,
     "anchor": "head",
@@ -792,7 +792,7 @@
    },
    {
     "id": "adrian_and_his",
-    "label": "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
+    "label": "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
     "order": 13,
     "support_years": 7,
     "anchor": "tail",
@@ -809,7 +809,7 @@
     "anchor": "tail",
     "weekday": "Thu",
     "observance_ids": [
-     "abraham_and_khoren_moneyless_2"
+     "abraham_and_khoren_moneyless_and_theodoron"
     ]
    }
   ]
@@ -849,9 +849,9 @@
    "head_tail_split": 37
   },
   "aliases": {
-   "Sts. Severianus of Sebastia and Babylas and his 84 Disciples": "severianus_of_sebastia",
-   "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
-   "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
+   "Sts. Severianus of Sebastia and Babylas and His 84 Disciples": "severianus_of_sebastia",
+   "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs": "andrew_the_general",
+   "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs": "adrian_and_his",
    "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": "abraham_and_khoren",
    "Feast of the Holy Cross — Remembrance of the Dead": "feast_of_the",
    "Feast of the Holy Church": "feast_of_the_2",
@@ -861,31 +861,31 @@
    "Fast day — Sts. Patriarchs Barlaam, Anthimus and Irenaeus": "fast_daysaint_patriarchs",
    "Sts. George the Warrior, Adauctus and Romanus the Melodist": "george_the_warrior",
    "Sts. David of Dvin and the Martyrs Eulampius and Eulampia": "david_of_dvin",
-   "Sts. Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine": "eustachius_his_wife",
-   "The Saintly Princes Sahak and Hamazasp": "saintly_princes_sahak",
+   "Sts. Eustachius, His Wife Theopista and Their Two Sons, and the Holy Virgins Hermione and Catherine": "eustachius_his_wife",
+   "The Holy Princes Sahak and Hamazasp": "saintly_princes_sahak",
    "Seventy Two Holy Disciples of Christ": "seventy_two_holy",
-   "Sts. Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles": "phocas_the_patriarch",
+   "Sts. Phocas the Patriarch and Irenaeus of Lyons, Follower of the Apostles": "phocas_the_patriarch",
    "Sts. Virgins Thecla, Barbara and Pelagia": "virgins_thecla_barbara",
    "Sts. Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin": "pantaleimon_the_physician",
    "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful": "translators_mesrop_yeghishe",
-   "Discovery of Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits": "discovery_of_relics",
+   "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits": "discovery_of_relics",
    "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus": "apostles_ananias_matthias",
    "Sts. Dionysius the Areopagite and the Apostles Timothy and Titus": "dionysius_the_areopagite",
    "Holy Evangelists Matthew, Mark, Luke and John": "evangelists_matthew_mark",
-   "Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary": "longinus_the_centurion",
-   "Sts. Theodoret the Priest of Antioch, Zenon the soldier, Macarius, Eudoxius and Romulus": "theodoret_the_priest",
-   "Sts. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina": "st_aret_and",
+   "Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and His Sisters Martha and Mary": "longinus_the_centurion",
+   "Sts. Theodoret the Priest of Antioch, Zenon the Soldier, Macarius, Eudoxius and Romulus": "theodoret_the_priest",
+   "Sts. Aret and His Companions, the Martyrs Artemius and Christopher and the Women Callinice and Aquilina": "st_aret_and",
    "The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria": "twelve_holy_doctors",
-   "Sts. Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her": "anastasius_the_priest",
-   "Sts. Hipparchus and his Companions Who were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and his 84 Disciples": "hipparchus_and_his",
-   "St. Hipparchus and his companions who were martyred in Samosata": "hipparchus_and_his",
+   "Sts. Anastasius the Priest, Varus the Soldier, Theodota and Her Sons, and Those Who Were Martyred with Her": "anastasius_the_priest",
+   "Sts. Hipparchus and His Companions Who Were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and His 84 Disciples": "hipparchus_and_his",
+   "St. Hipparchus and His Companions Who Were Martyred in Samosata": "hipparchus_and_his",
    "St. John Chrysostom": "john_chrysostom",
-   "Feast of All Sts., the old and the new, the known and the unknown": "feast_of_all",
-   "Sts. Stephen, Bishop of Rome and the priests, deacons and many faithful": "stephen_bishop_of",
+   "Feast of All Saints, the Old and the New, the Known and the Unknown": "feast_of_all",
+   "St. Stephen Bishop of Rome and the Holy Priests, Deacons and Many Faithful": "stephen_bishop_of",
    "Sts. Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr": "akepsimas_the_bishop",
    "Sts. Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs": "metrophanes_alexander_and",
-   "Holy Archangels Gabriel and Michael and all the heavenly Angels": "archangels_gabriel_and",
-   "Sts. Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon": "meletius_bishop_of",
+   "Holy Archangels Gabriel and Michael and All the Heavenly Angels": "archangels_gabriel_and",
+   "Sts. Meletius Bishop of Antioch, Menas of Egypt, and the Other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon": "meletius_bishop_of",
    "Sts. Demetrios the Martyr and Basil the Priest": "demetrios_the_martyr",
    "Sts. Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier": "gurias_samonas_and",
    "The Holy Apostles Andrew and Philip": "apostles_andrew_and"
@@ -898,7 +898,7 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "feast_of_the_holy_2",
+     "feast_of_the_holy_cross",
      "remembrance_of_the_dead"
     ]
    },
@@ -931,7 +931,7 @@
     "date_lo": "09-17",
     "date_hi": "09-23",
     "observance_ids": [
-     "feast_of_the_holy_2"
+     "feast_of_the_holy_cross"
     ]
    },
    {
@@ -991,7 +991,7 @@
    },
    {
     "id": "eustachius_his_wife",
-    "label": "Sts. Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
+    "label": "Sts. Eustachius, His Wife Theopista and Their Two Sons, and the Holy Virgins Hermione and Catherine",
     "order": 9,
     "support_years": 26,
     "anchor": "head",
@@ -1001,7 +1001,7 @@
    },
    {
     "id": "saintly_princes_sahak",
-    "label": "The Saintly Princes Sahak and Hamazasp",
+    "label": "The Holy Princes Sahak and Hamazasp",
     "order": 10,
     "support_years": 26,
     "anchor": "head",
@@ -1023,7 +1023,7 @@
    },
    {
     "id": "phocas_the_patriarch",
-    "label": "Sts. Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
+    "label": "Sts. Phocas the Patriarch and Irenaeus of Lyons, Follower of the Apostles",
     "order": 12,
     "support_years": 26,
     "anchor": "head",
@@ -1065,7 +1065,7 @@
    },
    {
     "id": "discovery_of_relics",
-    "label": "Discovery of Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "label": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
     "order": 16,
     "support_years": 26,
     "anchor": "head",
@@ -1107,7 +1107,7 @@
    },
    {
     "id": "longinus_the_centurion",
-    "label": "Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
+    "label": "Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and His Sisters Martha and Mary",
     "order": 20,
     "support_years": 26,
     "anchor": "head",
@@ -1117,7 +1117,7 @@
    },
    {
     "id": "theodoret_the_priest",
-    "label": "Sts. Theodoret the Priest of Antioch, Zenon the soldier, Macarius, Eudoxius and Romulus",
+    "label": "Sts. Theodoret the Priest of Antioch, Zenon the Soldier, Macarius, Eudoxius and Romulus",
     "order": 21,
     "support_years": 26,
     "anchor": "head",
@@ -1127,7 +1127,7 @@
    },
    {
     "id": "st_aret_and",
-    "label": "Sts. Aret and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
+    "label": "Sts. Aret and His Companions, the Martyrs Artemius and Christopher and the Women Callinice and Aquilina",
     "order": 22,
     "support_years": 26,
     "anchor": "head",
@@ -1149,7 +1149,7 @@
    },
    {
     "id": "anastasius_the_priest",
-    "label": "Sts. Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
+    "label": "Sts. Anastasius the Priest, Varus the Soldier, Theodota and Her Sons, and Those Who Were Martyred with Her",
     "order": 24,
     "support_years": 26,
     "anchor": "head",
@@ -1159,12 +1159,12 @@
    },
    {
     "id": "hipparchus_and_his",
-    "label": "Sts. Hipparchus and his Companions Who were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
+    "label": "Sts. Hipparchus and His Companions Who Were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and His 84 Disciples",
     "order": 25,
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "hipparchus_and_his_companions_2"
+     "hipparchus_and_companions_with_severianus_and_babylas"
     ]
    },
    {
@@ -1179,7 +1179,7 @@
    },
    {
     "id": "severianus_of_sebastia",
-    "label": "Sts. Severianus of Sebastia and Babylas and his 84 Disciples",
+    "label": "Sts. Severianus of Sebastia and Babylas and His 84 Disciples",
     "order": 26,
     "support_years": 7,
     "anchor": "head",
@@ -1189,7 +1189,7 @@
    },
    {
     "id": "feast_of_all",
-    "label": "Feast of All Sts., the old and the new, the known and the unknown",
+    "label": "Feast of All Saints, the Old and the New, the Known and the Unknown",
     "order": 27,
     "support_years": 26,
     "anchor": "pin:Sat",
@@ -1201,7 +1201,7 @@
    },
    {
     "id": "stephen_bishop_of",
-    "label": "Sts. Stephen, Bishop of Rome and the priests, deacons and many faithful",
+    "label": "St. Stephen Bishop of Rome and the Holy Priests, Deacons and Many Faithful",
     "order": 28,
     "support_years": 26,
     "anchor": "head",
@@ -1231,7 +1231,7 @@
    },
    {
     "id": "archangels_gabriel_and",
-    "label": "Holy Archangels Gabriel and Michael and all the heavenly Angels",
+    "label": "Holy Archangels Gabriel and Michael and All the Heavenly Angels",
     "order": 31,
     "support_years": 26,
     "anchor": "pin:Sat",
@@ -1243,7 +1243,7 @@
    },
    {
     "id": "meletius_bishop_of",
-    "label": "Sts. Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
+    "label": "Sts. Meletius Bishop of Antioch, Menas of Egypt, and the Other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
     "order": 32,
     "support_years": 26,
     "anchor": "head",
@@ -1285,7 +1285,7 @@
    },
    {
     "id": "andrew_the_general",
-    "label": "Sts. Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+    "label": "Sts. Andrew the General and His Army, and Callinicus and Diomedes the Martyrs",
     "order": 36,
     "support_years": 7,
     "anchor": "head",
@@ -1295,7 +1295,7 @@
    },
    {
     "id": "adrian_and_his",
-    "label": "Sts. Adrian and his wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
+    "label": "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
     "order": 37,
     "support_years": 7,
     "anchor": "skip",
@@ -1310,7 +1310,7 @@
     "support_years": 7,
     "anchor": "skip",
     "observance_ids": [
-     "abraham_and_khoren_moneyless_2"
+     "abraham_and_khoren_moneyless_and_theodoron"
     ]
    }
   ]

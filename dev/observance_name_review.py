@@ -188,11 +188,6 @@ OPEN_QUESTIONS = {
         "'Eugene/Candidus/Valerian/Aquila of Trebizond' is a group of FOUR -- no Macarius "
         "at all. Armenian tradition may add a fifth companion, or this may be an "
         "inherited error further upstream. Worth a closer look.",
-    "Eve of Fast of Advent":
-        "do not fold to 'Eve of the Fast of Advent' -- this is the engine's deliberate "
-        "dual-form reproduction (engine._advent_eve_label): the source writes it two ways "
-        "depending on whether Heesnak falls 9 or 10 weeks after Exaltation, and both are "
-        "correct as published.",
     "Second Sunday of Great Lent, Sunday of the Expulsion":
         "the served form (period, not comma) is a hardcoded template in "
         "engine._POSITION_FAMILIES, already a deliberate fix. A different 'approved_en' here "

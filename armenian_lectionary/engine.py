@@ -482,6 +482,36 @@ _TR_SAINT_ID_OVERRIDES = {
     ("03-28", "07-26"): "theodosius_and_the",
 }
 
+# --------------------------------------------------------------------------- #
+# Second-volume-cycle companion append -- a narrow fix for the one-id-per-date
+# limit of second_volume_cycles.json (docs section 7c: "Vahan's own stored
+# label has no way to gain Gordius without a schema change to the
+# second-volume-cycle tier"). Rather than widen that schema for every march,
+# this appends a companion's catalog text to the cycle tier's served label for
+# the single, cited (Easter-md, civil-date) pair the source packs onto one
+# line -- same idiom as _TR_SAINT_ID_OVERRIDES above. The companion never
+# heads a day (packed_pool / _PACKED_POOLS), so its readings are never its
+# own: the day's readings stay the head canon's, unchanged, exactly as every
+# other packed day already works (docs section 7, "What the readings evidence
+# settled").
+# --------------------------------------------------------------------------- #
+
+_TR_SAINT_COMPANION_OVERRIDES = {
+    # p.571: "29. Thursday. Vahan of Goghtn, and Gordius, Polyeuctus, and
+    # Gregory." -- the second-volume-cycle tier serves only the head
+    # (vahan_of_goghtn) today; gordius_polyeuctus_and_grigoris is served on no
+    # other day of 2027 (verified: 0 hits across the whole supported year).
+    ("03-28", "07-29"): ["gordius_polyeuctus_and_grigoris"],
+}
+
+
+def _tr_saint_companions(d: datetime.date):
+    """Companion catalog ids to append to this date's second-volume-cycle label,
+    per _TR_SAINT_COMPANION_OVERRIDES, or an empty list."""
+    e = calculate_gregorian_easter(d.year)
+    key = (f"{e.month:02d}-{e.day:02d}", f"{d.month:02d}-{d.day:02d}")
+    return _TR_SAINT_COMPANION_OVERRIDES.get(key, [])
+
 
 def _tr_saint_identity(d: datetime.date):
     """The TrSaint* identity for a summer saint-weekday: _TR_SAINT_ID_OVERRIDES if this
@@ -1318,7 +1348,7 @@ _ANY = None          # unbounded end of a family's offset window
 # imported at runtime); the ordinal words are this module's own _ORDINAL_WORDS.
 _POSITION_COMPONENT_RE = re.compile(
     r"^(?:" + "|".join(_ORDINAL_WORDS) + r")\s+(?:day of|Sunday)\b"
-    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$")
+    r"|^(?:Fast|Feast) day$|^(?:Wednesday|Friday) Fast$", re.IGNORECASE)
 
 
 def _theophany_closing(d: datetime.date) -> datetime.date:
@@ -1367,21 +1397,22 @@ _POSITION_ANCHORS = {
 # Sunday in September is "after the Holy Cross", not still "after Transfiguration".
 _POSITION_FAMILIES = (
     # -- Great Lent: the named Sundays outrank the plain day count --------------
-    ("E", (-42, -42), _SUN, "sundays", 2, "{ord} Sunday of Great Lent. Sunday of the Expulsion"),
-    ("E", (-35, -35), _SUN, "sundays", 3, "{ord} Sunday of Great Lent. Sunday of the Prodigal Son"),
-    ("E", (-28, -28), _SUN, "sundays", 4, "{ord} Sunday of Great Lent. Sunday of the Steward"),
-    ("E", (-25, -25), (2,), "days", 49, "{ord} day of Great Lent. Median day of Lent"),
-    ("E", (-21, -21), _SUN, "sundays", 5, "{ord} Sunday of Great Lent. Sunday of the Judge"),
+    ("E", (-42, -42), _SUN, "sundays", 2, "{ord} Sunday of Great Lent: Sunday of the Expulsion"),
+    ("E", (-35, -35), _SUN, "sundays", 3, "{ord} Sunday of Great Lent: Sunday of the Prodigal Son"),
+    ("E", (-28, -28), _SUN, "sundays", 4, "{ord} Sunday of Great Lent: Sunday of the Steward"),
+    ("E", (-25, -25), (2,), "days", 49, "{ord} day of Great Lent (Median day)"),
+    ("E", (-21, -21), _SUN, "sundays", 5, "{ord} Sunday of Great Lent: Sunday of the Judge"),
     ("E", (-14, -14), _SUN, "sundays", 6, "{ord} Sunday of Great Lent. Sunday of the Advent"),
     ("E", (-48, -8), None, "days", 49, "{ord} day of Great Lent"),
     ("E", (-69, -65), _MON_TO_FRI, "days", 70, "{ord} day of the Fast of the Catechumens"),
     # -- Easter and Eastertide -------------------------------------------------
     ("E", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of Easter"),
-    ("E", (14, 14), _SUN, "sundays", 1, "{ord} Sunday. Sunday of the World temple (Green Sunday)"),
-    ("E", (21, 21), _SUN, "sundays", 1, "{ord} Sunday (Red Sunday)"),
+    ("E", (14, 14), _SUN, "sundays", 1,
+     "{ord} Sunday of Eastertide: Sunday of the World Church (Green Sunday)"),
+    ("E", (21, 21), _SUN, "sundays", 1, "{ord} Sunday of Eastertide (Red Sunday)"),
     ("E", (28, 28), _SUN, "sundays", 1, "{ord} Sunday"),
     ("E", (35, 35), _SUN, "sundays", 1, "{ord} Sunday of Eastertide"),
-    ("E", (42, 42), _SUN, "sundays", 1, "{ord} Sunday of Eastertide. Second Palm Sunday"),
+    ("E", (42, 42), _SUN, "sundays", 1, "{ord} Sunday of Eastertide (Second Palm Sunday)"),
     ("E", (8, 48), _MON_TO_SAT, "days", 1, "{ord} day of Eastertide"),
     # The six weekdays after Pentecost are the Fast of Prophet Elijah, closing on the
     # Remembrance of Prophet Elijah the following Sunday. The source counts them "Nth day
@@ -1390,7 +1421,7 @@ _POSITION_FAMILIES = (
     # _EVE_FAMILIES below). Renamed to agree with that eve, same ordinal; the catalog ids
     # are unchanged, since this is the same observance under a more specific name. See
     # docs/observance-name-corrections.md section 6b.
-    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Fast of Prophet Elijah"),
+    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Fast of the Prophet Elijah"),
     # -- Winter first: the Nativity arc outranks the autumn anchors it overlaps.
     # Jan 6-13 is the Nativity octave, not the tail of Advent; and once Heesnak has
     # passed, a Sunday is "of Advent", not still "after the Holy Cross".
@@ -1417,23 +1448,23 @@ _POSITION_FAMILIES = (
     # fast -- a day of a named fast, labelled as the thing it is not.
     ("EX", (8, 12), _MON_TO_FRI, "days", -7,
      "{ord} day of the Fast of the Holy Cross of Varag"),
-    ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday after the Holy Cross"),
+    ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday of the Holy Cross"),
     ("AS", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of Assumption"),
     ("AS", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Assumption"),
     ("AS", (8, 8), (0,), "days", 1, "{ord} day of Assumption"),
-    # The source keeps the article on the 1st and 4th Sundays after the Assumption and
+    # The source keeps the article on the 1st and 4th Sundays of the Assumption and
     # drops it on the 2nd and 3rd. Inconsistent, but deterministic in the offset, so both
     # forms are reproduced exactly rather than normalized to one.
-    ("AS", (7, 7), _SUN, "sundays", 1, "{ord} Sunday after the Assumption"),
-    ("AS", (14, 21), _SUN, "sundays", 1, "{ord} Sunday after Assumption"),
-    ("AS", (28, 28), _SUN, "sundays", 1, "{ord} Sunday after the Assumption"),
+    ("AS", (7, 7), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
+    ("AS", (14, 21), _SUN, "sundays", 1, "{ord} Sunday of Assumption"),
+    ("AS", (28, 28), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
     ("TR", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Transfiguration"),
     ("TR", (1, 2), (0, 1), "days", 1, "{ord} day of Transfiguration"),
-    ("TR", (7, 42), _SUN, "sundays", 1, "{ord} Sunday after Transfiguration"),
-    # The source has no "First Sunday after Pentecost": the Sunday right after Pentecost
+    ("TR", (7, 42), _SUN, "sundays", 1, "{ord} Sunday of Transfiguration"),
+    # The source has no "First Sunday of Pentecost": the Sunday right after Pentecost
     # is already the "Second", so the count floors at 2.
-    ("PE", (7, 7), _SUN, "sundays", 1, "{ord} Sunday after Pentecost"),
-    ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday after Pentecost"),
+    ("PE", (7, 7), _SUN, "sundays", 1, "{ord} Sunday of Pentecost"),
+    ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday of Pentecost"),
     # The Fast of St. Gregory the Illuminator, opening the day after its Sunday eve
     # (Pentecost+21) and closing before the Discovery of the Relics on the Saturday. The
     # source prints only "Fast day" here in English while naming the ordinal in Armenian;
@@ -1586,35 +1617,36 @@ def _position_coordinate(d: datetime.date):
 # (anchor key, day offset from the anchor, label). Every family is an exact offset -- no
 # counting, no ordinals -- and each fires once a year.
 _EVE_FAMILIES = (
-    ("E",  -70, "Eve of Fast of Catechumens"),
+    ("E",  -70, "Eve of the Fast of the Catechumens"),
     ("E",  -49, "Eve of Great Lent"),
-    ("E",   -1, "Eve of the Resurrection of our Lord Jesus Christ"),
-    ("PE",   0, "Eve of Fast of Prophet Elijah"),
-    ("PE",  21, "Eve of Fast of St. Gregory the Illuminator"),
-    ("TR",  -7, "Eve of Fast of Transfiguration"),
-    ("AS",  -7, "Eve of Fast of Assumption of the Holy Mother of God"),
-    ("EX",  -7, "Eve of Fast of Exaltation of Holy Cross"),
-    ("EX",   7, "Eve of Fast of the Holy Cross of Varag"),
-    ("HE",  21, "Eve of Fast of St. James the bishop of Nisibis"),
+    ("E",   -1, "Eve of the Resurrection of Our Lord Jesus Christ"),
+    ("PE",   0, "Eve of the Fast of the Prophet Elijah"),
+    ("PE",  21, "Eve of the Fast of St. Gregory the Illuminator"),
+    ("TR",  -7, "Eve of the Fast of Transfiguration"),
+    ("AS",  -7, "Eve of the Fast of the Assumption of the Holy Mother of God"),
+    ("EX",  -7, "Eve of the Fast of the Exaltation of the Holy Cross"),
+    ("EX",   7, "Eve of the Fast of the Holy Cross of Varag"),
+    ("HE",  21, "Eve of the Fast of St. James the bishop of Nisibis"),
 )
 
 # The two solar eves, by civil date.
 _EVE_CIVIL = {
-    (12, 29): "Eve of Fast of Nativity",
-    (1, 5): "Eve of the Nativity and Theophany of our Lord Jesus Christ",
+    (12, 29): "Eve of the Fast of Nativity",
+    (1, 5): "Eve of the Nativity and Theophany of Our Lord Jesus Christ",
 }
 
 
 def _advent_eve_label(heesnak: datetime.date) -> str:
     """The Advent eve is Heesnak itself (the fast opens the next morning).
 
-    The source writes it two ways and the choice is not free: it keeps the article in the
-    19 years Heesnak falls 9 weeks after Exaltation and drops it in the 7 where it falls
-    10. An inconsistency, like the Sundays after (the) Assumption, but deterministic in
-    the offset -- so reproduce both forms exactly rather than normalize to one.
+    The source writes it two ways -- keeping the article in the 19 years Heesnak falls 9
+    weeks after Exaltation and dropping it in the 7 where it falls 10 -- an inconsistency,
+    like the Sundays of (the) Assumption, but deterministic in the offset. Normalized to
+    one approved spelling (dev/observance_name_review.tsv id ``eve_of_fast_of_advent``)
+    rather than reproduced both ways; ``heesnak`` is kept as a parameter for the call
+    shape even though the label itself no longer depends on it.
     """
-    weeks = (heesnak - sunday_closest_to(heesnak.year, 9, 14)).days
-    return "Eve of the Fast of Advent" if weeks == 63 else "Eve of Fast of Advent"
+    return "Eve of the Fast of Advent"
 
 
 def _eve_label_and_coordinate(d: datetime.date):
@@ -1841,13 +1873,13 @@ def _first_volume_continua(d):
 # strict table has no entry. Single-sample -> source-derived best-guess, byte-matching GT.
 # Keyed by Easter offset -> (liturgical-day label, First-Volume movable readings, verbatim).
 _FV_SUMMER_CONTINUA = {
-    119: ("Fourth Sunday after Transfiguration",
+    119: ("Fourth Sunday of Transfiguration",
           ["Luke 4.14-30", "Isaiah 54.1-13",
            "St. Paul's First Epistle to Timothy 1.1-11", "John 2.1-11"]),
-    126: ("Fifth Sunday after Transfiguration",
+    126: ("Fifth Sunday of Transfiguration",
           ["Isaiah 58.13-59.7",
            "St. Paul's First Epistle to Timothy 4.12-5.10", "John 3.13-21"]),
-    133: ("Sixth Sunday after Transfiguration",
+    133: ("Sixth Sunday of Transfiguration",
           ["Isaiah 62.1-11",
            "St. Paul's Second Epistle to Timothy 2.15-19", "John 6.39-47"]),
 }
@@ -1965,22 +1997,22 @@ def _nativity_octave_composite(d, tables=None):
 _PRELENT_COHORT = (
     # (id, easter_offset, may_shift, label, source readings)
     ("sargis", -64, True,
-     "St. Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
+     "St. Sarkis the Warrior and His Son Mardiros and His Fourteen Soldiers",
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
     ("atom", -62, True,
      # One First Volume canon (pp.464-465). The Mark/Pionius canon that the Second Volume
      # sometimes prints beside it ("the Atomian Generals, and Bishop Mark, Pion, and the
      # others") is its own canon with its own day -- see _MARK_CANON below.
-     "Sts. Atom and his soldiers",
+     "Sts. Atom and His Soldiers",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
     ("sukias", -61, False,
-     "Sts. Sukiasians the Martyrs",
+     "Holy Sukiasian Martyrs",
      ["Proverbs 22.1-12", "Isaiah 56.6-7",
       "St. Paul's Epistle to the Hebrews 11.32-40", "Luke 12.4-8"]),
     ("voskian", -59, False,
-     "Sts. Voskians the Priests",
+     "Holy Voskian Priests",
      ["Proverbs 24.1-12", "Jeremiah 30.18-22",
       "St. Paul's Second Epistle to Timothy 3.10-12", "Matthew 5.1-12"]),
     ("ghevond", -54, False,
@@ -3011,6 +3043,12 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     cy = _cycle_saint(target_date)
     if cy is not None:
         zone, sid, label, refs = cy
+        companions = _tr_saint_companions(target_date)
+        if companions and label:
+            companion_text = [_OBSERVANCE_CATALOG.get(csid, {}).get("en")
+                               for csid in companions]
+            if all(companion_text):
+                label = _OBSERVANCE_SEP.join([label] + companion_text)
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": label or "(commemoration)",
@@ -3218,7 +3256,7 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
     if no is not None:
         return {
             "Date": target_date.isoformat(),
-            "Liturgical Day": "Feast of Naming of Our Lord Jesus Christ",
+            "Liturgical Day": "Feast of the Naming of Our Lord Jesus Christ",
             "Season": "Nativity Octave",
             "Readings": _group_readings(no),
             "ReadingsList": no,

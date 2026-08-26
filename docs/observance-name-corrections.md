@@ -281,7 +281,7 @@ had no per-day name in **either** language:
 
 | | Days | Source, English | Source, Armenian | Served |
 |---|---|---|---|---|
-| **Fast of St. James the bishop of Nisibis** | Heesnak+22…+26 | `Fast day` | `Պահք` | `Nth day of the Fast of St. James the bishop of Nisibis` / `Ն օր Ս. Յակովբայ պահոց` |
+| **Fast of St. James the bishop of Nisibis** | Heesnak+22…+26 | `Fast day` | `Պահք` | `Nth day of the Fast of St. James the bishop of Nisibis` / `Ն օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց` |
 | **Fast of Prophet Elijah** | Pentecost+1…+6 | `Nth day of Pentecost` | `Ն օր Հոգեգալստեան` | `Nth day of the Fast of Prophet Elijah` / `Ն օր Եղիական պահոց` |
 
 Both meet the four conditions, and both are named by **the source's own eve**, which is
@@ -299,7 +299,7 @@ exactly as its English does.
 text.** Neither name is invented; each is lifted verbatim from the eve the source itself
 prints on the Sunday before:
 
-- `Eve of Fast of St. James the bishop of Nisibis` / `Բարեկենդան Ս. Յակովբայ պահոց`
+- `Eve of Fast of St. James the bishop of Nisibis` / `Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց`
 - `Eve of Fast of Prophet Elijah` / `Բարեկենդան Եղիական պահոց`
 
 The windows are fixed independently by the cache on every year in range. Both fasts have
@@ -471,7 +471,7 @@ the feast (`Տօն Վարագայ ս. խաչի`).
 Capitalized, where those two rows print lower-case `ս. խաչի`. This is a **fast** label, not a
 copy of the feast's name, and every other fast in the catalog capitalizes the saint or feast
 it is named for — the Exaltation fast is `Ա օր Ս. Խաչի պահոց` over the same two words, and
-Nisibis is `Ա օր Ս. Յակովբայ պահոց`. Following the eve's casing would make the Holy Cross the
+Nisibis is `Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց`. Following the eve's casing would make the Holy Cross the
 one saint capitalized in one fast label and not in another, on nothing but which row the
 string was lifted from. The witness is preserved where witnesses live: `source_hy` in the
 review TSV still records exactly what the source printed.
@@ -1070,6 +1070,31 @@ after the change, exactly one changes: 2027-07-26, from "The Hermit St. Anton"
 (`second-volume-cycle`). `dev/audit_duplicate_commemorations.py` goes from 1 finding to 0,
 and `MAX_DUPLICATE_COMMEMORATIONS` drops to 0 with it.
 
+#### 7f. Closing the companion gap 7c left open — 2027-07-29
+
+7c left one packing unresolved: p.571's "29. Thursday. Vahan of Goghtn, and Gordius,
+Polyeuctus, and Gregory" (§7d's transcription) served only the head, `vahan_of_goghtn`,
+because the second-volume-cycle tier's own data (`second_volume_cycles.json`) stores one
+`(zone, saint_id)` per date — no field for a companion, unlike the validated-table tier,
+which stores a packed day as the whole joined string and can *drop* a companion
+(`_drop_owned_companions`, `_PACKING_OVERRIDES`) but has nothing to *add* to a
+single-canon cycle-tier label.
+
+Rather than widen that schema for every march (the fix §7c scoped "for a later one"),
+`engine._TR_SAINT_COMPANION_OVERRIDES` appends the companion's existing catalog text
+(`gordius_polyeuctus_and_grigoris` — already minted, both `en`/`hy`, from the January
+packing) at the one cited `(Easter-md, civil-date)` pair this applies to, in the same
+narrow-override idiom as `_TR_SAINT_ID_OVERRIDES` (7e). Readings are untouched — they stay
+Vahan's, exactly as every other packed day's readings stay the head's (see "What the
+readings evidence settled" above).
+
+**Nothing else moved.** Comparing every one of `compute_armenian_lectionary`'s 9,861
+supported days (2001–2027) before and after, exactly one changes: 2027-07-29, from
+`"St. Vahan of Goghtn"` to `"St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and
+Grigoris"`. Gordius/Polyeuctus/Grigoris are served on no other day of 2027. Pinned by
+`tests/test_duplicate_commemorations.py::TestUnpackingMatchesTheSource::
+test_the_companion_pack_is_closed`.
+
 ## 8. Accepted differences from the source
 
 Not everything that differs is a defect, and three of these are the source disagreeing with
@@ -1104,7 +1129,7 @@ year* — and its English prints nothing. Three cached Armenian days attest it (
 
 So the day reached English callers as a bare position label, and the pairing in
 `dev/fetch_translations.py` — which matches whole strings when the component counts differ —
-folded the Armenian into the position label's own entry: `third_day_of_the_4` shipped
+folded the Armenian into the position label's own entry: `nativity_fast_day_3` shipped
 `Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ`. A civil-date observance hidden inside a
 calendar-position label, in one language only.
 
@@ -1169,7 +1194,7 @@ say what the served name asserts beyond what the source's text does.
 
 ### What it fixed on the Armenian side
 
-`third_day_of_the_4` gives up the glued note and is just `Գ օր Ս. Ծննդեան պահոց`. Because
+`nativity_fast_day_3` gives up the glued note and is just `Գ օր Ս. Ծննդեան պահոց`. Because
 the new row carries `source_hy = Կաղանդ. տարեմուտ` and `approved_hy = Նռնօրհնէք`,
 `ground_truth_hy_fixes` folds the source spelling, which is what will keep Jan 1 exact from
 2015 once the Armenian cache samples one of those years. `INTERNAL_DELIMITER` 7 → 5.
