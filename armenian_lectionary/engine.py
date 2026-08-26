@@ -486,17 +486,10 @@ _TR_SAINT_ID_OVERRIDES = {
 }
 
 # --------------------------------------------------------------------------- #
-# Second-volume-cycle companion append -- a narrow fix for the one-id-per-date
-# limit of second_volume_cycles.json (docs section 7c: "Vahan's own stored
-# label has no way to gain Gordius without a schema change to the
-# second-volume-cycle tier"). Rather than widen that schema for every march,
-# this appends a companion's catalog text to the cycle tier's served label for
-# the single, cited (Easter-md, civil-date) pair the source packs onto one
-# line -- same idiom as _TR_SAINT_ID_OVERRIDES above. The companion never
-# heads a day (packed_pool / _PACKED_POOLS), so its readings are never its
-# own: the day's readings stay the head canon's, unchanged, exactly as every
-# other packed day already works (docs section 7, "What the readings evidence
-# settled").
+# Companion catalog ids to append to the second-volume-cycle tier's served label,
+# by (Easter-md, civil-date). The companion never heads a day (packed_pool /
+# _PACKED_POOLS), so its readings are never its own: the day's readings stay the
+# head canon's, unchanged.
 # --------------------------------------------------------------------------- #
 
 _TR_SAINT_COMPANION_OVERRIDES = {
@@ -1645,12 +1638,8 @@ _EVE_CIVIL = {
 def _advent_eve_label(heesnak: datetime.date) -> str:
     """The Advent eve is Heesnak itself (the fast opens the next morning).
 
-    The source writes it two ways -- keeping the article in the 19 years Heesnak falls 9
-    weeks after Exaltation and dropping it in the 7 where it falls 10 -- an inconsistency,
-    like the Sundays of (the) Assumption, but deterministic in the offset. Normalized to
-    one approved spelling (dev/observance_name_review.tsv id ``eve_of_fast_of_advent``)
-    rather than reproduced both ways; ``heesnak`` is kept as a parameter for the call
-    shape even though the label itself no longer depends on it.
+    ``heesnak`` is kept as a parameter for the call shape even though the label itself
+    does not depend on it.
     """
     return "Eve of the Fast of Advent"
 
@@ -1665,10 +1654,8 @@ def _eve_label_and_coordinate(d: datetime.date):
 
     The two solar eves have no movable anchor and use ``("civil", month * 100 + day)``,
     a namespace the anchor keys cannot collide with. The Advent eve is not in
-    ``_EVE_FAMILIES`` -- it is Heesnak itself, and :func:`_advent_eve_label` picks between
-    two wordings by how far Heesnak falls after Exaltation -- so its coordinate is that
-    same distance (``("EX", 63)`` or ``("EX", 70)``), which is exactly what separates the
-    two wordings.
+    ``_EVE_FAMILIES`` -- it is Heesnak itself, so its coordinate is its distance from
+    Exaltation (``("EX", 63)`` or ``("EX", 70)``).
     """
     if (d.month, d.day) in _EVE_CIVIL:
         return _EVE_CIVIL[(d.month, d.day)], ("civil", d.month * 100 + d.day)
@@ -2362,9 +2349,8 @@ def _catalog_text(sid, default, lang="en"):
     literal-served observances (the pre-Lent cohort, a fixed civil date, an extreme-early-
     Easter composite) reaches this call with no engine.py edit.
 
-    Kept as a module function over :meth:`ObservanceCatalog.text_of` because it reads the
-    CURRENT catalog: eight call sites want whatever ``_OBSERVANCE_CATALOG`` is bound to
-    now, not whatever it was bound to when they were defined."""
+    A module function rather than a direct :meth:`ObservanceCatalog.text_of` call: every
+    caller wants whatever ``_OBSERVANCE_CATALOG`` is currently bound to."""
     return _OBSERVANCE_CATALOG.text_of(sid, default, lang)
 
 
@@ -2437,27 +2423,6 @@ def _resolve_generated_text(default_text, readings, kind, coordinate=None):
             _observance_id_from_coordinate(*coordinate, kind=kind))
     return _OBSERVANCE_CATALOG.get(sid, {}).get("en", default_text) if sid else default_text
 
-
-# Reverse lookup: a served English component -> its stable id. Built once at import time.
-#
-# One entry per component, because the catalog holds no two observances under the same
-# English text -- an invariant dev/build_observance_catalog.py enforces and
-# tests/test_language.py pins. It has not always held: the source heads the five weekdays
-# of the Fast of St. Gregory the Illuminator with their ordinal in Armenian but printed a
-# bare "Fast day" in English, one string standing for six observances, and the id had to be
-# recovered from the DATE. That is registered as a repair now
-# (source_corrections.named_fast_label), which is what lets this be a plain dict.
-# Display text -> its own {en, hy}, and display text -> the OBSERVANCE it names. One key
-# set, because one observance is one CANON: where the source prints a longer or shorter
-# companion list for the same liturgical day, that is the Tonats'oyts packing several First
-# Volume canons onto one line, not one observance under two names. The packed line is a
-# _OBSERVANCE_SEP join whose components each resolve here on their own
-# (docs/observance-name-corrections.md section 7).
-#
-# The reverse indexes this comment used to introduce live in ObservanceCatalog now, built
-# in its constructor from the entries it holds. There is no separate index to keep in step
-# with the catalog, so the identity-check-and-rebuild accessors that used to stand here --
-# and their coupling into _canons_with_own_day's cache -- are gone rather than relocated.
 
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
@@ -2635,8 +2600,7 @@ _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 _BARE_FAST_MARKERS = ("Fast day", "Feast day")
 
 # What the position overlay drops before it places anything: the placeholders (not
-# observances) and the bare markers (attributes wearing a name's clothes). Hoisted
-# because it is a fact about that overlay, not something to rebuild per request.
+# observances) and the bare markers (attributes wearing a name's clothes).
 _POSITION_OVERLAY_DROPS = frozenset(_PLACEHOLDER_LABELS) | frozenset(_BARE_FAST_MARKERS)
 
 
@@ -2703,8 +2667,7 @@ def _canons_with_own_day(ly: int) -> frozenset:
     The cache lives on the CATALOG (``ObservanceCatalog.own_day_cache``), not on this
     function, because the scan resolves components through it: a different catalog must
     not answer from a scan the previous one produced. Holding it there makes that true by
-    construction -- swapping the catalog swaps the cache with it -- where an ``lru_cache``
-    here needed a ``cache_clear()`` wired into the index accessor to notice.
+    construction -- swapping the catalog swaps the cache with it.
 
     The window overshoots the supported range at both ends -- down to the November before
     ``MIN_YEAR`` (a January date sits in the previous liturgical year) and, for
@@ -2883,8 +2846,7 @@ def _is_eve_component(component: str) -> bool:
 
     The sibling of :func:`_is_position_component`. Both are here so that "which component
     is this one" is asked in one place per kind: ``ObservanceName`` deliberately holds no
-    opinion about what the engine's components mean, and a bare ``startswith`` repeated at
-    each site is how the position overlay's own predicate came to be spelled two ways.
+    opinion about what the engine's components mean.
     """
     return component.startswith("Eve of ")
 
