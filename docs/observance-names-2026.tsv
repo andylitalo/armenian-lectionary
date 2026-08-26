@@ -1,7 +1,7 @@
 date	weekday	season	source	observances	observance_ids	en	hy
-2026-01-01	Thu	Advent (Heesnak)	validated-table	2	third_day_of_the_4 — blessing_of_the_pomegranates	Third day of the Fast of Nativity — Blessing of the Pomegranates	Գ օր Ս. Ծննդեան պահոց — Նռնօրհնէք
-2026-01-02	Fri	Advent (Heesnak)	validated-table	1	fourth_day_of_the_4	Fourth day of the Fast of Nativity	Դ օր Ս. Ծննդեան պահոց
-2026-01-03	Sat	Advent (Heesnak)	validated-table	2	fifth_day_of_the_4 — basil_the_great_and	Fifth day of the Fast of Nativity — Sts. Basil the Great and His Brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian	Ե օր Ս. Ծննդեան պահոց — Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ
+2026-01-01	Thu	Advent (Heesnak)	validated-table	2	nativity_fast_day_3 — blessing_of_the_pomegranates	Third day of the Fast of Nativity — Blessing of the Pomegranates	Գ օր Ս. Ծննդեան պահոց — Նռնօրհնէք
+2026-01-02	Fri	Advent (Heesnak)	validated-table	1	nativity_fast_day_4	Fourth day of the Fast of Nativity	Դ օր Ս. Ծննդեան պահոց
+2026-01-03	Sat	Advent (Heesnak)	validated-table	2	nativity_fast_day_5 — basil_the_great_and	Fifth day of the Fast of Nativity — Sts. Basil the Great and His Brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian	Ե օր Ս. Ծննդեան պահոց — Սրբոցն Բարսղի հայրապետին եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին եւ աբբայ Եփրեմի Խուրին Ասորւոյ
 2026-01-04	Sun	Advent (Heesnak)	validated-table	1	seventh_sunday_of_advent	Seventh Sunday of Advent	Է կիւրակէ Յիսնակի
 2026-01-05	Mon	Immovable Feast	validated-table	1	eve_of_the_nativity	Eve of the Nativity and Theophany of Our Lord Jesus Christ	Ճրագալոյց Ս. Ծննդեան եւ Աստուածայայտնութեան Տեառն մերոյ Յիսուսի Քրիստոսի; Նաւակատիք
 2026-01-06	Tue	Immovable Feast	validated-table	1	nativity_and_theophany_of	NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST	ՏՕՆ ԾՆՆԴԵԱՆ ԵՒ ԱՍՏՈՒԱԾԱՅԱՅՏՆՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ
@@ -13,7 +13,7 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-01-12	Mon	Immovable Feast	validated-table	1	seventh_day_of_nativity	Seventh day of Nativity	Է օր Ս. Ծննդեան
 2026-01-13	Tue	Feast of the Naming of the Lord	validated-table	2	eighth_day_of_nativity — feast_of_naming_of	Eighth day of Nativity — Feast of the Naming of Our Lord Jesus Christ	Ը օր Ս. Ծննդեան — Տօն Անուանակոչութեան Տեառն մերոյ Յիսուսի Քրիստոսի
 2026-01-14	Wed	Season after Nativity	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
-2026-01-15	Thu	Season after Nativity	validated-table	1	feast_of_the_birth_2	Feast of the Birth of St. John the Forerunner (Baptist)	Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին
+2026-01-15	Thu	Season after Nativity	validated-table	1	feast_of_the_birth_of_st_john_the_forerunner	Feast of the Birth of St. John the Forerunner (Baptist)	Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին
 2026-01-16	Fri	Season after Nativity	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-01-17	Sat	Season after Nativity	validated-table	1	peter_the_patriarch_blaise	Sts. Peter the Patriarch, Blaise the Bishop and Absalom the Deacon	Սրբոցն Պետրոսի հայրապետին, Վլասայ եպիսկոպոսին եւ Աբիսողոմայ սարկաւագին
 2026-01-18	Sun	Season after Nativity	validated-table	1	first_sunday_after_nativity	First Sunday after Nativity	Ա կիւրակէ զկնի Ս. Ծննդեան
@@ -24,11 +24,11 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-01-23	Fri	Pre-Lent	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-01-24	Sat	Season after Nativity	validated-table	1	commemoration_of_150_fathers	Commemoration of the 150 Fathers of the Holy Council of Constantinople (AD 381)	Կոստանդնուպոլսոյ ս. ժողովոյն հարիւր յիսուն հայրապետացն (381 թ.)
 2026-01-25	Sun	Pre-Lent	validated-table	2	second_sunday_after_nativity — eve_of_fast_of_catechumens	Second Sunday after Nativity — Eve of the Fast of the Catechumens	Բ կիւրակէ զկնի Ս. Ծննդեան — Բարեկենդան Առաջաւորաց պահոց
-2026-01-26	Mon	Pre-Lent	validated-table	1	first_day_of_the_4	First day of the Fast of the Catechumens	Ա օր Առաջաւորաց պահոց
-2026-01-27	Tue	Pre-Lent	validated-table	1	second_day_of_the_5	Second day of the Fast of the Catechumens	Բ օր Առաջաւորաց պահոց
-2026-01-28	Wed	Pre-Lent	validated-table	1	third_day_of_the_5	Third day of the Fast of the Catechumens	Գ օր Առաջաւորաց պահոց
-2026-01-29	Thu	Pre-Lent	validated-table	1	fourth_day_of_the_5	Fourth day of the Fast of the Catechumens	Դ օր Առաջաւորաց պահոց
-2026-01-30	Fri	Pre-Lent	validated-table	2	fifth_day_of_the_5 — remembrance_of_the_prophet	Fifth day of the Fast of the Catechumens — Remembrance of the Prophet Jonah	Ե օր Առաջաւորաց պահոց — Յիշատակ Յովնանու մարգարէին
+2026-01-26	Mon	Pre-Lent	validated-table	1	catechumens_fast_day_1	First day of the Fast of the Catechumens	Ա օր Առաջաւորաց պահոց
+2026-01-27	Tue	Pre-Lent	validated-table	1	catechumens_fast_day_2	Second day of the Fast of the Catechumens	Բ օր Առաջաւորաց պահոց
+2026-01-28	Wed	Pre-Lent	validated-table	1	catechumens_fast_day_3	Third day of the Fast of the Catechumens	Գ օր Առաջաւորաց պահոց
+2026-01-29	Thu	Pre-Lent	validated-table	1	catechumens_fast_day_4	Fourth day of the Fast of the Catechumens	Դ օր Առաջաւորաց պահոց
+2026-01-30	Fri	Pre-Lent	validated-table	2	catechumens_fast_day_5 — remembrance_of_the_prophet	Fifth day of the Fast of the Catechumens — Remembrance of the Prophet Jonah	Ե օր Առաջաւորաց պահոց — Յիշատակ Յովնանու մարգարէին
 2026-01-31	Sat	Pre-Lent	first-volume-cohort	1	sargis	St. Sarkis the Warrior and His Son Mardiros and His Fourteen Soldiers	Սրբոցն Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն
 2026-02-01	Sun	Pre-Lenten Fast	validated-table	1	third_sunday_after_nativity	Third Sunday after Nativity	Գ կիւրակէ զկնի Ս. Ծննդեան
 2026-02-02	Mon	Pre-Lent	first-volume-cohort	1	atom	Sts. Atom and His Soldiers	Սրբոց Ատովմեանց զօրավարացն
@@ -45,47 +45,47 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-02-13	Fri	Eve of the Presentation of the Lord	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-02-14	Sat	Immovable Feast	validated-table	1	presentation_of_our_lord	PRESENTATION OF OUR LORD TO THE TEMPLE	ՏԵԱՌՆԸՆԴԱՌԱՋ (տօն քառասնօրեայ գալստեանն Քրիստոսի ի Տաճարն)
 2026-02-15	Sun	Great Lent	validated-table	1	eve_of_great_lent	Eve of Great Lent	Բուն բարեկենդան
-2026-02-16	Mon	Great Lent	validated-table	1	first_day_of_great	First day of Great Lent	Ա օր Մեծի պահոց
-2026-02-17	Tue	Great Lent	validated-table	1	second_day_of_great	Second day of Great Lent	Բ օր Մեծի պահոց
-2026-02-18	Wed	Great Lent	validated-table	1	third_day_of_great	Third day of Great Lent	Գ օր Մեծի պահոց
-2026-02-19	Thu	Great Lent	validated-table	1	fourth_day_of_great	Fourth day of Great Lent	Դ օր Մեծի պահոց
-2026-02-20	Fri	Great Lent	validated-table	1	fifth_day_of_great	Fifth day of Great Lent	Ե օր Մեծի պահոց
-2026-02-21	Sat	Great Lent	validated-table	2	sixth_day_of_great — theodore_the_tyron	Sixth day of Great Lent — St. Theodore the Tyron	Զ օր Մեծի պահոց — Սրբոյն Թէոդորոսի զօրավարին
-2026-02-22	Sun	Great Lent	validated-table	1	second_sunday_of_great	Second Sunday of Great Lent: Sunday of the Expulsion	Բ կիւրակէ Մեծի պահոց (Արտաքսման)
-2026-02-23	Mon	Great Lent	validated-table	1	eighth_day_of_great	Eighth day of Great Lent	Ը օր Մեծի պահոց
-2026-02-24	Tue	Great Lent	validated-table	1	ninth_day_of_great	Ninth day of Great Lent	Թ օր Մեծի պահոց
-2026-02-25	Wed	Great Lent	validated-table	1	tenth_day_of_great	Tenth day of Great Lent	Ժ օր Մեծի պահոց
-2026-02-26	Thu	Great Lent	validated-table	1	eleventh_day_of_great	Eleventh day of Great Lent	ԺԱ օր Մեծի պահոց
-2026-02-27	Fri	Great Lent	validated-table	1	twelfth_day_of_great	Twelfth day of Great Lent	ԺԲ օր Մեծի պահոց
-2026-02-28	Sat	Great Lent	validated-table	2	thirteenth_day_of_great — cyril_of_jerusalem_cyril	Thirteenth day of Great Lent — Sts. Cyril of Jerusalem, Cyril the Bishop and Anna	ԺԳ օր Մեծի պահոց — Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի
-2026-03-01	Sun	Great Lent	validated-table	1	third_sunday_of_great	Third Sunday of Great Lent: Sunday of the Prodigal Son	Գ կիւրակէ Մեծի պահոց (Անառակին)
-2026-03-02	Mon	Great Lent	validated-table	1	fifteenth_day_of_great	Fifteenth day of Great Lent	ԺԵ օր Մեծի պահոց
-2026-03-03	Tue	Great Lent	validated-table	1	sixteenth_day_of_great	Sixteenth day of Great Lent	ԺԶ օր Մեծի պահոց
-2026-03-04	Wed	Great Lent	validated-table	1	seventeenth_day_of_great	Seventeenth day of Great Lent	ԺԷ օր Մեծի պահոց
-2026-03-05	Thu	Great Lent	validated-table	1	eighteenth_day_of_great	Eighteenth day of Great Lent	ԺԸ օր Մեծի պահոց
-2026-03-06	Fri	Great Lent	validated-table	1	nineteenth_day_of_great	Nineteenth day of Great Lent	ԺԹ օր Մեծի պահոց
-2026-03-07	Sat	Great Lent	validated-table	2	twentieth_day_of_great — john_the_patriarch_of	Twentieth day of Great Lent — Sts. John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev	Ի օր Մեծի պահոց — Սրբոցն Յովհաննու Երուսաղեմայ հայրապետին եւ հայրապետին մերոյ Յովհաննու Օձնեցւոյն եւ վարդապետացն մերոց Յովհաննու Որոտնեցւոյն եւ Գրիգորի Տաթեւացւոյն
-2026-03-08	Sun	Great Lent	validated-table	1	fourth_sunday_of_great	Fourth Sunday of Great Lent: Sunday of the Steward	Դ կիւրակէ Մեծի պահոց (Տնտեսին)
+2026-02-16	Mon	Great Lent	validated-table	1	first_day_of_great_lent	First day of Great Lent	Ա օր Մեծի պահոց
+2026-02-17	Tue	Great Lent	validated-table	1	second_day_of_great_lent	Second day of Great Lent	Բ օր Մեծի պահոց
+2026-02-18	Wed	Great Lent	validated-table	1	third_day_of_great_lent	Third day of Great Lent	Գ օր Մեծի պահոց
+2026-02-19	Thu	Great Lent	validated-table	1	fourth_day_of_great_lent	Fourth day of Great Lent	Դ օր Մեծի պահոց
+2026-02-20	Fri	Great Lent	validated-table	1	fifth_day_of_great_lent	Fifth day of Great Lent	Ե օր Մեծի պահոց
+2026-02-21	Sat	Great Lent	validated-table	2	sixth_day_of_great_lent — theodore_the_tyron	Sixth day of Great Lent — St. Theodore the Tyron	Զ օր Մեծի պահոց — Սրբոյն Թէոդորոսի զօրավարին
+2026-02-22	Sun	Great Lent	validated-table	1	second_sunday_of_great_lent	Second Sunday of Great Lent: Sunday of the Expulsion	Բ կիւրակէ Մեծի պահոց (Արտաքսման)
+2026-02-23	Mon	Great Lent	validated-table	1	eighth_day_of_great_lent	Eighth day of Great Lent	Ը օր Մեծի պահոց
+2026-02-24	Tue	Great Lent	validated-table	1	ninth_day_of_great_lent	Ninth day of Great Lent	Թ օր Մեծի պահոց
+2026-02-25	Wed	Great Lent	validated-table	1	tenth_day_of_great_lent	Tenth day of Great Lent	Ժ օր Մեծի պահոց
+2026-02-26	Thu	Great Lent	validated-table	1	eleventh_day_of_great_lent	Eleventh day of Great Lent	ԺԱ օր Մեծի պահոց
+2026-02-27	Fri	Great Lent	validated-table	1	twelfth_day_of_great_lent	Twelfth day of Great Lent	ԺԲ օր Մեծի պահոց
+2026-02-28	Sat	Great Lent	validated-table	2	thirteenth_day_of_great_lent — cyril_of_jerusalem_cyril	Thirteenth day of Great Lent — Sts. Cyril of Jerusalem, Cyril the Bishop and Anna	ԺԳ օր Մեծի պահոց — Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի
+2026-03-01	Sun	Great Lent	validated-table	1	third_sunday_of_great_lent	Third Sunday of Great Lent: Sunday of the Prodigal Son	Գ կիւրակէ Մեծի պահոց (Անառակին)
+2026-03-02	Mon	Great Lent	validated-table	1	fifteenth_day_of_great_lent	Fifteenth day of Great Lent	ԺԵ օր Մեծի պահոց
+2026-03-03	Tue	Great Lent	validated-table	1	sixteenth_day_of_great_lent	Sixteenth day of Great Lent	ԺԶ օր Մեծի պահոց
+2026-03-04	Wed	Great Lent	validated-table	1	seventeenth_day_of_great_lent	Seventeenth day of Great Lent	ԺԷ օր Մեծի պահոց
+2026-03-05	Thu	Great Lent	validated-table	1	eighteenth_day_of_great_lent	Eighteenth day of Great Lent	ԺԸ օր Մեծի պահոց
+2026-03-06	Fri	Great Lent	validated-table	1	nineteenth_day_of_great_lent	Nineteenth day of Great Lent	ԺԹ օր Մեծի պահոց
+2026-03-07	Sat	Great Lent	validated-table	2	twentieth_day_of_great_lent — john_the_patriarch_of	Twentieth day of Great Lent — Sts. John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev	Ի օր Մեծի պահոց — Սրբոցն Յովհաննու Երուսաղեմայ հայրապետին եւ հայրապետին մերոյ Յովհաննու Օձնեցւոյն եւ վարդապետացն մերոց Յովհաննու Որոտնեցւոյն եւ Գրիգորի Տաթեւացւոյն
+2026-03-08	Sun	Great Lent	validated-table	1	fourth_sunday_of_great_lent	Fourth Sunday of Great Lent: Sunday of the Steward	Դ կիւրակէ Մեծի պահոց (Տնտեսին)
 2026-03-09	Mon	Great Lent	validated-table	1	twenty_second_day_of	Twenty Second day of Great Lent	ԻԲ օր Մեծի պահոց
-2026-03-10	Tue	Great Lent	validated-table	1	twenty_third_day_of_2	Twenty Third day of Great Lent	ԻԳ օր Մեծի պահոց
-2026-03-11	Wed	Great Lent	validated-table	1	twenty_fourth_day_of_2	Twenty Fourth day of Great Lent (Median day)	ԻԴ օր Մեծի պահոց: Միջինք
-2026-03-12	Thu	Great Lent	validated-table	1	twenty_fifth_day_of_2	Twenty Fifth day of Great Lent	ԻԵ օր Մեծի պահոց
-2026-03-13	Fri	Great Lent	validated-table	1	twenty_sixth_day_of_2	Twenty Sixth day of Great Lent	ԻԶ օր Մեծի պահոց
-2026-03-14	Sat	Great Lent	validated-table	2	twenty_seventh_day_of_2 — forty_martyrs_of_sebastia	Twenty Seventh day of Great Lent — Holy Forty Martyrs of Sebastia	ԻԷ օր Մեծի պահոց — Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան
-2026-03-15	Sun	Great Lent	validated-table	1	fifth_sunday_of_great	Fifth Sunday of Great Lent: Sunday of the Judge	Ե կիւրակէ Մեծի պահոց (Դատաւորին)
+2026-03-10	Tue	Great Lent	validated-table	1	twenty_third_day_of_great_lent	Twenty Third day of Great Lent	ԻԳ օր Մեծի պահոց
+2026-03-11	Wed	Great Lent	validated-table	1	twenty_fourth_day_of_great_lent	Twenty Fourth day of Great Lent (Median day)	ԻԴ օր Մեծի պահոց: Միջինք
+2026-03-12	Thu	Great Lent	validated-table	1	twenty_fifth_day_of_great_lent	Twenty Fifth day of Great Lent	ԻԵ օր Մեծի պահոց
+2026-03-13	Fri	Great Lent	validated-table	1	twenty_sixth_day_of_great_lent	Twenty Sixth day of Great Lent	ԻԶ օր Մեծի պահոց
+2026-03-14	Sat	Great Lent	validated-table	2	twenty_seventh_day_of_great_lent — forty_martyrs_of_sebastia	Twenty Seventh day of Great Lent — Holy Forty Martyrs of Sebastia	ԻԷ օր Մեծի պահոց — Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան
+2026-03-15	Sun	Great Lent	validated-table	1	fifth_sunday_of_great_lent	Fifth Sunday of Great Lent: Sunday of the Judge	Ե կիւրակէ Մեծի պահոց (Դատաւորին)
 2026-03-16	Mon	Great Lent	validated-table	1	twenty_ninth_day_of	Twenty Ninth day of Great Lent	ԻԹ օր Մեծի պահոց
-2026-03-17	Tue	Great Lent	validated-table	1	thirtieth_day_of_great	Thirtieth day of Great Lent	Լ օր Մեծի պահոց
-2026-03-18	Wed	Great Lent	validated-table	1	thirty_first_day_of_2	Thirty First day of Great Lent	ԼԱ օր Մեծի պահոց
-2026-03-19	Thu	Great Lent	validated-table	1	thirty_second_day_of_2	Thirty Second day of Great Lent	ԼԲ օր Մեծի պահոց
-2026-03-20	Fri	Great Lent	validated-table	1	thirty_third_day_of_2	Thirty Third day of Great Lent	ԼԳ օր Մեծի պահոց
-2026-03-21	Sat	Great Lent	validated-table	2	thirty_fourth_day_of_2 — gregory_the_illuminator_s	Thirty Fourth day of Great Lent — St. Gregory the Illuminator's Descent into the Pit	ԼԴ օր Մեծի պահոց — Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն
-2026-03-22	Sun	Great Lent	validated-table	1	sixth_sunday_of_great	Sixth Sunday of Great Lent. Sunday of the Advent	Զ կիւրակէ Մեծի պահոց (Գալստեան)
+2026-03-17	Tue	Great Lent	validated-table	1	thirtieth_day_of_great_lent	Thirtieth day of Great Lent	Լ օր Մեծի պահոց
+2026-03-18	Wed	Great Lent	validated-table	1	thirty_first_day_of_great_lent	Thirty First day of Great Lent	ԼԱ օր Մեծի պահոց
+2026-03-19	Thu	Great Lent	validated-table	1	thirty_second_day_of_great_lent	Thirty Second day of Great Lent	ԼԲ օր Մեծի պահոց
+2026-03-20	Fri	Great Lent	validated-table	1	thirty_third_day_of_great_lent	Thirty Third day of Great Lent	ԼԳ օր Մեծի պահոց
+2026-03-21	Sat	Great Lent	validated-table	2	thirty_fourth_day_of_great_lent — gregory_the_illuminator_s	Thirty Fourth day of Great Lent — St. Gregory the Illuminator's Descent into the Pit	ԼԴ օր Մեծի պահոց — Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն
+2026-03-22	Sun	Great Lent	validated-table	1	sixth_sunday_of_great_lent	Sixth Sunday of Great Lent. Sunday of the Advent	Զ կիւրակէ Մեծի պահոց (Գալստեան)
 2026-03-23	Mon	Great Lent	validated-table	1	thirty_sixth_day_of	Thirty Sixth day of Great Lent	ԼԶ օր Մեծի պահոց
-2026-03-24	Tue	Great Lent	validated-table	1	thirty_seventh_day_of_2	Thirty Seventh day of Great Lent	ԼԷ օր Մեծի պահոց
-2026-03-25	Wed	Great Lent	validated-table	1	thirty_eighth_day_of_2	Thirty Eighth day of Great Lent	ԼԸ օր Մեծի պահոց
-2026-03-26	Thu	Great Lent	validated-table	1	thirty_ninth_day_of_2	Thirty Ninth day of Great Lent	ԼԹ օր Մեծի պահոց
-2026-03-27	Fri	Great Lent	validated-table	1	fortieth_day_of_great	Fortieth day of Great Lent	Խ օր Մեծի պահոց
-2026-03-28	Sat	Great Lent	validated-table	2	forty_first_day_of_2 — remembrance_of_the_raising	Forty First day of Great Lent — Remembrance of the Raising of Lazarus	ԽԱ օր Մեծի պահոց — Յիշատակ յարութեան Ղազարու
+2026-03-24	Tue	Great Lent	validated-table	1	thirty_seventh_day_of_great_lent	Thirty Seventh day of Great Lent	ԼԷ օր Մեծի պահոց
+2026-03-25	Wed	Great Lent	validated-table	1	thirty_eighth_day_of_great_lent	Thirty Eighth day of Great Lent	ԼԸ օր Մեծի պահոց
+2026-03-26	Thu	Great Lent	validated-table	1	thirty_ninth_day_of_great_lent	Thirty Ninth day of Great Lent	ԼԹ օր Մեծի պահոց
+2026-03-27	Fri	Great Lent	validated-table	1	fortieth_day_of_great_lent	Fortieth day of Great Lent	Խ օր Մեծի պահոց
+2026-03-28	Sat	Great Lent	validated-table	2	forty_first_day_of_great_lent — remembrance_of_the_raising	Forty First day of Great Lent — Remembrance of the Raising of Lazarus	ԽԱ օր Մեծի պահոց — Յիշատակ յարութեան Ղազարու
 2026-03-29	Sun	Holy Week	validated-table	1	palm_sunday	Palm Sunday	ԾԱՂԿԱԶԱՐԴ
 2026-03-30	Mon	Holy Week	validated-table	1	great_monday	Great Monday	Աւագ երկուշաբթի
 2026-03-31	Tue	Holy Week	validated-table	2	great_tuesday — remembrance_of_the_ten	Great Tuesday — Remembrance of the Ten Virgins	Աւագ երեքշաբթի — Յիշատակ տասն կուսանացն
@@ -155,7 +155,7 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-06-03	Wed	After Pentecost	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-06-04	Thu	After Pentecost	validated-table	1	john_the_forerunner_baptist	Sts. John the Forerunner (Baptist) and Bishop Atanagine	Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին
 2026-06-05	Fri	After Pentecost	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
-2026-06-06	Sat	After Pentecost	validated-table	1	gregory_the_illuminator_s_3	St. Gregory the Illuminator's coming out of Pit	Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն
+2026-06-06	Sat	After Pentecost	validated-table	1	gregory_the_illuminator_coming_out_of_pit	St. Gregory the Illuminator's coming out of Pit	Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն
 2026-06-07	Sun	After Pentecost	validated-table	2	second_sunday_after_pentecost — feast_of_holy_etchmiadzin	Second Sunday of Pentecost — Feast of Holy Etchmiadzin	Բ կիւրակէ զկնի Հոգեգալստեան — Տօն Կաթուղիկէ Սուրբ Էջմիածնի
 2026-06-08	Mon	After Pentecost	validated-table	1	children_of_bethlehem_sts	The Children of Bethlehem and Sts. Acacius the Martyr, Mocius the Priest and Codratus the Soldier	Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին
 2026-06-09	Tue	After Pentecost	validated-table	1	virgins_nune_and_mane	Sts. Virgins Nune and Mane	Սրբոց կուսանացն Նունեայ եւ Մանեայ
@@ -185,11 +185,11 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-07-03	Fri	After Pentecost	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-07-04	Sat	After Pentecost	validated-table	1	twelve_holy_apostles_of	Twelve Holy Apostles of Christ and St. Paul, the Thirteenth Apostle	Սրբոց երկոտասան առաքելոցն Քրիստոսի եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն
 2026-07-05	Sun	After Pentecost	validated-table	2	sixth_sunday_after_pentecost — eve_of_fast_of_transfiguration	Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration	Զ կիւրակէ զկնի Հոգեգալստեան — Բարեկենդան Վարդավառի պահոց
-2026-07-06	Mon	After Pentecost	validated-table	1	first_day_of_the_6	First day of the Fast of the Transfiguration	Ա օր Վարդավառի պահոց
-2026-07-07	Tue	After Pentecost	validated-table	1	second_day_of_the_7	Second day of the Fast of the Transfiguration	Բ օր Վարդավառի պահոց
-2026-07-08	Wed	After Pentecost	validated-table	1	third_day_of_the_7	Third day of the Fast of the Transfiguration	Գ օր Վարդավառի պահոց
-2026-07-09	Thu	After Pentecost	validated-table	1	fourth_day_of_the_7	Fourth day of the Fast of the Transfiguration	Դ օր Վարդավառի պահոց
-2026-07-10	Fri	After Pentecost	validated-table	1	fifth_day_of_the_7	Fifth day of the Fast of the Transfiguration	Ե օր Վարդավառի պահոց
+2026-07-06	Mon	After Pentecost	validated-table	1	transfiguration_fast_day_1	First day of the Fast of the Transfiguration	Ա օր Վարդավառի պահոց
+2026-07-07	Tue	After Pentecost	validated-table	1	transfiguration_fast_day_2	Second day of the Fast of the Transfiguration	Բ օր Վարդավառի պահոց
+2026-07-08	Wed	After Pentecost	validated-table	1	transfiguration_fast_day_3	Third day of the Fast of the Transfiguration	Գ օր Վարդավառի պահոց
+2026-07-09	Thu	After Pentecost	validated-table	1	transfiguration_fast_day_4	Fourth day of the Fast of the Transfiguration	Դ օր Վարդավառի պահոց
+2026-07-10	Fri	After Pentecost	validated-table	1	transfiguration_fast_day_5	Fifth day of the Fast of the Transfiguration	Ե օր Վարդավառի պահոց
 2026-07-11	Sat	After Pentecost	validated-table	1	remembrance_of_the_old	Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church	Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ; Նաւակատիք
 2026-07-12	Sun	After Transfiguration	validated-table	1	transfiguration_of_our_lord	TRANSFIGURATION OF OUR LORD (Vartavar)	ՊԱՅԾԱՌԱԿԵՐՊՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Վարդավառ)
 2026-07-13	Mon	After Transfiguration	validated-table	2	second_day_of_transfiguration — remembrance_of_the_dead	Second day of Transfiguration — Remembrance of the Dead	Բ օր Վարդավառի — Յիշատակ մեռելոց
@@ -204,7 +204,7 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-07-22	Wed	After Transfiguration	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-07-23	Thu	After Transfiguration	validated-table	1	forefathers_adam_abel_seth	Holy Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and Other Holy Patriarchs	Սրբոց նախահարցն Ադամայ, Աբելի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակովբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուելի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գեդէոնի եւ այլոց սրբոց նախահարցն
 2026-07-24	Fri	After Transfiguration	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
-2026-07-25	Sat	After Transfiguration	validated-table	1	gregory_the_illuminator_s_2	St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel	Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի
+2026-07-25	Sat	After Transfiguration	validated-table	1	gregory_the_illuminator_sons_and_grandsons	St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel	Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի
 2026-07-26	Sun	After Transfiguration	validated-table	1	third_sunday_after_transfiguration	Third Sunday of Transfiguration	Գ կիւրակէ զկնի Վարդավառի
 2026-07-27	Mon	After Transfiguration	validated-table	1	maccabees_eleazar_the_priest	Holy Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons	Սրբոց Մակաբայեցւոցն` Եղիազարու քահանային եւ Շամունեայ եւ եօթն որդւոց նորին
 2026-07-28	Tue	After Transfiguration	validated-table	1	twelve_prophets_hosea_amos	Holy Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi	Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ
@@ -220,109 +220,109 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-08-07	Fri	Fast of the Assumption	generative-continua	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-08-08	Sat	After Transfiguration	validated-table	1	commemoration_of_200_fathers	Commemoration of the 200 Fathers of the Holy Council of Ephesus (AD 431)	Եփեսոսի ս. ժողովոյն երկու հարիւր հայրապետացն (431 թ.)
 2026-08-09	Sun	Eve of the Fast of the Assumption	validated-table	2	fifth_sunday_after_transfiguration — eve_of_fast_of_assumption	Fifth Sunday of Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God	Ե կիւրակէ զկնի Վարդավառի — Բարեկենդան Սուրբ Աստուածածնի պահոց
-2026-08-10	Mon	Assumption Cycle	validated-table	1	first_day_of_the_2	First day of the Fast of Assumption	Ա օր Աստուածածնի պահոց
-2026-08-11	Tue	Assumption Cycle	validated-table	1	second_day_of_the_3	Second day of the Fast of Assumption	Բ օր Աստուածածնի պահոց
-2026-08-12	Wed	Assumption Cycle	validated-table	1	third_day_of_the_3	Third day of the Fast of Assumption	Գ օր Աստուածածնի պահոց
-2026-08-13	Thu	Assumption Cycle	validated-table	1	fourth_day_of_the_3	Fourth day of the Fast of Assumption	Դ օր Աստուածածնի պահոց
-2026-08-14	Fri	Assumption Cycle	validated-table	1	fifth_day_of_the_3	Fifth day of the Fast of Assumption	Ե օր Աստուածածնի պահոց
+2026-08-10	Mon	Assumption Cycle	validated-table	1	assumption_fast_day_1	First day of the Fast of Assumption	Ա օր Աստուածածնի պահոց
+2026-08-11	Tue	Assumption Cycle	validated-table	1	assumption_fast_day_2	Second day of the Fast of Assumption	Բ օր Աստուածածնի պահոց
+2026-08-12	Wed	Assumption Cycle	validated-table	1	assumption_fast_day_3	Third day of the Fast of Assumption	Գ օր Աստուածածնի պահոց
+2026-08-13	Thu	Assumption Cycle	validated-table	1	assumption_fast_day_4	Fourth day of the Fast of Assumption	Դ օր Աստուածածնի պահոց
+2026-08-14	Fri	Assumption Cycle	validated-table	1	assumption_fast_day_5	Fifth day of the Fast of Assumption	Ե օր Աստուածածնի պահոց
 2026-08-15	Sat	Assumption Cycle	validated-table	1	feast_of_dedication_of	Feast of the Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator	Տօն Շողակաթի Սուրբ Էջմիածնի ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին; Նաւակատիք
 2026-08-16	Sun	Assumption Cycle	validated-table	1	assumption_of_the_holy	ASSUMPTION OF THE HOLY MOTHER OF GOD	ՎԵՐԱՓՈԽՈՒՄՆ Ս. ԱՍՏՈՒԱԾԱԾՆԻ
-2026-08-17	Mon	After the Assumption	validated-table	2	second_day_of_the — remembrance_of_the_dead	Second day of the Assumption — Remembrance of the Dead	Բ օր Վերափոխման — Յիշատակ մեռելոց
-2026-08-18	Tue	After the Assumption	validated-table	1	third_day_of_the	Third day of the Assumption	Գ օր Վերափոխման
-2026-08-19	Wed	After the Assumption	validated-table	1	fourth_day_of_the	Fourth day of the Assumption	Դ օր Վերափոխման
-2026-08-20	Thu	After the Assumption	validated-table	1	fifth_day_of_the	Fifth day of the Assumption	Ե օր Վերափոխման
-2026-08-21	Fri	After the Assumption	validated-table	1	sixth_day_of_the	Sixth day of the Assumption	Զ օր Վերափոխման
-2026-08-22	Sat	After the Assumption	validated-table	1	seventh_day_of_the	Seventh day of the Assumption	Է օր Վերափոխման
-2026-08-23	Sun	After the Assumption	validated-table	1	second_sunday_after_the	Second Sunday of the Assumption	Բ կիւրակէ զկնի Վերափոխման
+2026-08-17	Mon	After the Assumption	validated-table	2	second_day_of_assumption — remembrance_of_the_dead	Second day of the Assumption — Remembrance of the Dead	Բ օր Վերափոխման — Յիշատակ մեռելոց
+2026-08-18	Tue	After the Assumption	validated-table	1	third_day_of_assumption	Third day of the Assumption	Գ օր Վերափոխման
+2026-08-19	Wed	After the Assumption	validated-table	1	fourth_day_of_assumption	Fourth day of the Assumption	Դ օր Վերափոխման
+2026-08-20	Thu	After the Assumption	validated-table	1	fifth_day_of_assumption	Fifth day of the Assumption	Ե օր Վերափոխման
+2026-08-21	Fri	After the Assumption	validated-table	1	sixth_day_of_assumption	Sixth day of the Assumption	Զ օր Վերափոխման
+2026-08-22	Sat	After the Assumption	validated-table	1	seventh_day_of_assumption	Seventh day of the Assumption	Է օր Վերափոխման
+2026-08-23	Sun	After the Assumption	validated-table	1	second_sunday_of_the_assumption	Second Sunday of the Assumption	Բ կիւրակէ զկնի Վերափոխման
 2026-08-24	Mon	After the Assumption	validated-table	1	ninth_day_of_assumption	Ninth day of Assumption	Թ օր Վերափոխման
 2026-08-25	Tue	After the Assumption	validated-table	1	joachim_and_anna_parents	Sts. Joachim and Anna, Parents of the Holy Mother of God, and the Oil-Bearing Women	Սրբոցն Յովակիմայ եւ Աննայի` ծնողաց սուրբ Աստուածածնի, եւ կանանցն իւղաբերից
 2026-08-26	Wed	After the Assumption	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-08-27	Thu	After the Assumption	validated-table	1	jeremiah_the_prophet	St. Jeremiah the Prophet	Սրբոյն Երեմիայի մարգարէին
 2026-08-28	Fri	After the Assumption	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-08-29	Sat	After the Assumption	validated-table	1	apostles_thomas_james_and	Holy Apostles Thomas, James and Simon	Սրբոց առաքելոցն Թովմայի, Յակովբայ եւ Շմաւոնի
-2026-08-30	Sun	After the Assumption	validated-table	2	third_sunday_after_assumption — feast_day_of_the	Third Sunday of Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God	Գ կիւրակէ զկնի Վերափոխման — Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի
+2026-08-30	Sun	After the Assumption	validated-table	2	third_sunday_after_assumption — discovery_of_the_belt_of_the_holy_mother_of_god	Third Sunday of Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God	Գ կիւրակէ զկնի Վերափոխման — Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի
 2026-08-31	Mon	After the Assumption	validated-table	1	stephen_of_oulnia_and	Sts. Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus	Սրբոյն Ստեփաննոսի Ուլնեցւոյն եւ սրբոց վկայիցն Գոհարինեայ, Ծամիդեսի, Տուքիկոսի եւ Ռատիկոսի
 2026-09-01	Tue	After the Assumption	validated-table	1	prophets_ezekiel_ezra_and	Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist	Սրբոց մարգարէիցն Եզեկիէլի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի
 2026-09-02	Wed	After the Assumption	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
-2026-09-03	Thu	After the Assumption	validated-table	1	john_the_forerunner_baptist_2	Sts. John the Forerunner (Baptist) and Job the Righteous	Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն
+2026-09-03	Thu	After the Assumption	validated-table	1	john_the_forerunner_baptist_and_job_the_righteous	Sts. John the Forerunner (Baptist) and Job the Righteous	Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն
 2026-09-04	Fri	After the Assumption	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-09-05	Sat	After the Assumption	validated-table	1	commemoration_of_318_fathers	Commemoration of the 318 Fathers of the Holy Council of Nicea (AD 325)	Նիկիոյ սուրբ ժողովոյն երեք հարիւր տասն եւ ութ հայրապետացն (325 թ.)
 2026-09-06	Sun	Eve of the Fast of the Holy Cross	validated-table	2	fourth_sunday_after_assumption — eve_of_fast_of_exaltation	Fourth Sunday of Assumption — Eve of the Fast of the Exaltation of the Holy Cross	Դ կիւրակէ զկնի Վերափոխման — Բարեկենդան Ս. Խաչի պահոց
-2026-09-07	Mon	Exaltation of the Cross Cycle	validated-table	1	first_day_of_the_5	First day of the Fast of the Holy Cross	Ա օր Ս. Խաչի պահոց
-2026-09-08	Tue	Feast	validated-composite	2	second_day_of_the_6 — feast_of_the_birth	Second day of the Fast of the Holy Cross — Feast of the Birth of Holy Virgin Mary from Anna	Բ օր Ս. Խաչի պահոց — Տօն Ծննդեան սրբուհւոյ Կուսին Մարիամու յԱննայէ
-2026-09-09	Wed	Exaltation of the Cross Cycle	validated-table	1	third_day_of_the_6	Third day of the Fast of the Holy Cross	Գ օր Ս. Խաչի պահոց
-2026-09-10	Thu	Exaltation of the Cross Cycle	validated-table	1	fourth_day_of_the_6	Fourth day of the Fast of the Holy Cross	Դ օր Ս. Խաչի պահոց
-2026-09-11	Fri	Exaltation of the Cross Cycle	validated-table	1	fifth_day_of_the_6	Fifth day of the Fast of the Holy Cross	Ե օր Ս. Խաչի պահոց
+2026-09-07	Mon	Exaltation of the Cross Cycle	validated-table	1	holy_cross_fast_day_1	First day of the Fast of the Holy Cross	Ա օր Ս. Խաչի պահոց
+2026-09-08	Tue	Feast	validated-composite	2	holy_cross_fast_day_2 — feast_of_the_birth	Second day of the Fast of the Holy Cross — Feast of the Birth of Holy Virgin Mary from Anna	Բ օր Ս. Խաչի պահոց — Տօն Ծննդեան սրբուհւոյ Կուսին Մարիամու յԱննայէ
+2026-09-09	Wed	Exaltation of the Cross Cycle	validated-table	1	holy_cross_fast_day_3	Third day of the Fast of the Holy Cross	Գ օր Ս. Խաչի պահոց
+2026-09-10	Thu	Exaltation of the Cross Cycle	validated-table	1	holy_cross_fast_day_4	Fourth day of the Fast of the Holy Cross	Դ օր Ս. Խաչի պահոց
+2026-09-11	Fri	Exaltation of the Cross Cycle	validated-table	1	holy_cross_fast_day_5	Fifth day of the Fast of the Holy Cross	Ե օր Ս. Խաչի պահոց
 2026-09-12	Sat	Exaltation of the Cross Cycle	validated-table	1	feast_of_holy_church	Feast of the Holy Church for the Dedication of the Holy Cross	Տօն Սրբոյ Եկեղեցւոյ ի նաւակատիս Սրբոյ Խաչին; Նաւակատիք
 2026-09-13	Sun	Exaltation of the Cross Cycle	validated-table	1	exaltation_of_the_holy	EXALTATION OF THE HOLY CROSS	ԽԱՉՎԵՐԱՑ
-2026-09-14	Mon	After the Exaltation of the Cross	validated-table	2	feast_of_the_holy_2 — remembrance_of_the_dead	Feast of the Holy Cross — Remembrance of the Dead	Տօն է Ս. Խաչի — Յիշատակ մեռելոց
+2026-09-14	Mon	After the Exaltation of the Cross	validated-table	2	feast_of_the_holy_cross — remembrance_of_the_dead	Feast of the Holy Cross — Remembrance of the Dead	Տօն է Ս. Խաչի — Յիշատակ մեռելոց
 2026-09-15	Tue	After the Exaltation of the Cross	validated-table	1	feast_of_the_holy	Feast of the Holy Church	Տօն է Ս. Եկեղեցւոյ
 2026-09-16	Wed	After the Exaltation of the Cross	validated-table	2	wednesday_fast — feast_of_the_holy	Wednesday Fast — Feast of the Holy Church	Չորեքշաբթիի պահք — Տօն է Ս. Եկեղեցւոյ
 2026-09-17	Thu	After the Exaltation of the Cross	validated-table	1	feast_of_the_holy	Feast of the Holy Church	Տօն է Ս. Եկեղեցւոյ
-2026-09-18	Fri	After the Exaltation of the Cross	validated-table	2	friday_fast — feast_of_the_holy_2	Friday Fast — Feast of the Holy Cross	Ուրբաթի պահք — Տօն է Ս. Խաչի
-2026-09-19	Sat	After the Exaltation of the Cross	validated-table	1	feast_of_the_holy_2	Feast of the Holy Cross	Տօն է Ս. Խաչի
-2026-09-20	Sun	After the Exaltation of the Cross	validated-table	2	second_sunday_after_the_2 — eve_of_fast_of_holy_cross_of_varag	Second Sunday of the Holy Cross — Eve of the Fast of the Holy Cross of Varag	Բ կիւրակէ զկնի Ս. Խաչին — Բարեկենդան Վարագայ ս. խաչի
+2026-09-18	Fri	After the Exaltation of the Cross	validated-table	2	friday_fast — feast_of_the_holy_cross	Friday Fast — Feast of the Holy Cross	Ուրբաթի պահք — Տօն է Ս. Խաչի
+2026-09-19	Sat	After the Exaltation of the Cross	validated-table	1	feast_of_the_holy_cross	Feast of the Holy Cross	Տօն է Ս. Խաչի
+2026-09-20	Sun	After the Exaltation of the Cross	validated-table	2	second_sunday_of_the_holy_cross — eve_of_fast_of_holy_cross_of_varag	Second Sunday of the Holy Cross — Eve of the Fast of the Holy Cross of Varag	Բ կիւրակէ զկնի Ս. Խաչին — Բարեկենդան Վարագայ ս. խաչի
 2026-09-21	Mon	After the Exaltation of the Cross	validated-table	2	cross_varag_day_1 — mamas_philomenos_and_simeon	First day of the Fast of the Holy Cross of Varag — Sts. Mamas, Philomenos and Simeon the Stylite	Ա օր Վարագայ Ս. Խաչի պահոց — Սրբոցն Մամասայ, Փիլիկտիմոնի եւ Սիմէոնի Սիւնակեցոյն
 2026-09-22	Tue	After the Exaltation of the Cross	validated-table	2	cross_varag_day_2 — virgins_febronia_mariana_and	Second day of the Fast of the Holy Cross of Varag — Sts. Virgins Febronia, Mariana and Shoushan the Daughter of Great Vardan	Բ օր Վարագայ Ս. Խաչի պահոց — Սրբոց կուսանացն Փեբրոնեայ, Մարիանեայ եւ Շուշանայ` դստերն Մեծին Վարդանայ
 2026-09-23	Wed	After the Exaltation of the Cross	validated-table	1	cross_varag_day_3	Third day of the Fast of the Holy Cross of Varag	Գ օր Վարագայ Ս. Խաչի պահոց
 2026-09-24	Thu	After the Exaltation of the Cross	validated-table	2	cross_varag_day_4 — patriarchs_barlaam_anthimus_and	Fourth day of the Fast of the Holy Cross of Varag — Sts. Patriarchs Barlaam, Anthimus and Irenaeus	Դ օր Վարագայ Ս. Խաչի պահոց — Սրբոց հայրապետացն Բարաղամու, Անթիմոսի եւ Երանոսի
 2026-09-25	Fri	After the Exaltation of the Cross	validated-table	1	cross_varag_day_5	Fifth day of the Fast of the Holy Cross of Varag	Ե օր Վարագայ Ս. Խաչի պահոց
 2026-09-26	Sat	After the Exaltation of the Cross	validated-table	1	george_the_warrior_adauctus	Sts. George the Warrior, Adauctus and Romanus the Melodist	Սրբոցն Գէորգայ քաջամարտիկ զօրավարին, Ադոկտոսի եւ Ռոմանոսի երգեցողին
-2026-09-27	Sun	After the Exaltation of the Cross	validated-table	2	third_sunday_after_the — feast_of_the_holy_3	Third Sunday of the Holy Cross — Feast of the Holy Cross of Varag	Գ կիւրակէ զկնի Ս. Խաչի — Տօն Վարագայ ս. խաչի
+2026-09-27	Sun	After the Exaltation of the Cross	validated-table	2	third_sunday_of_the_holy_cross — feast_of_the_holy_cross_of_varag	Third Sunday of the Holy Cross — Feast of the Holy Cross of Varag	Գ կիւրակէ զկնի Ս. Խաչի — Տօն Վարագայ ս. խաչի
 2026-09-28	Mon	After the Exaltation of the Cross	validated-table	1	david_of_dvin_and	Sts. David of Dvin and the Martyrs Eulampius and Eulampia	Սրբոյն Դաւթի Դւնեցւոյն եւ սրբոց վկայիցն Ղամբէոսի եւ Ղամբէուհւոյն
 2026-09-29	Tue	After the Exaltation of the Cross	validated-table	1	eustachius_his_wife_theopista	Sts. Eustachius, His Wife Theopista and Their Two Sons, and the Holy Virgins Hermione and Catherine	Սրբոցն Եւստաթէոսի եւ կնոջ նորա Թէոփիստեայ եւ երկուց որդւոցն եւ սրբոց կուսանացն Երմոնեայ եւ Նեքտարինեայ
 2026-09-30	Wed	After the Exaltation of the Cross	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-10-01	Thu	After the Exaltation of the Cross	validated-table	1	saintly_princes_sahak_and	The Holy Princes Sahak and Hamazasp	Սրբոց իշխանացն Սահակայ եւ Համազասպայ
 2026-10-02	Fri	After the Exaltation of the Cross	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-10-03	Sat	After the Exaltation of the Cross	validated-table	1	seventy_two_holy_disciples	Seventy Two Holy Disciples of Christ	Սրբոց եօթանասնից եւ երկուց աշակերտացն Քրիստոսի
-2026-10-04	Sun	After the Exaltation of the Cross	validated-table	1	fourth_sunday_after_the	Fourth Sunday of the Holy Cross	Դ կիւրակէ զկնի Ս. Խաչի
+2026-10-04	Sun	After the Exaltation of the Cross	validated-table	1	fourth_sunday_of_the_holy_cross	Fourth Sunday of the Holy Cross	Դ կիւրակէ զկնի Ս. Խաչի
 2026-10-05	Mon	After the Exaltation of the Cross	validated-table	1	phocas_the_patriarch_and	Sts. Phocas the Patriarch and Irenaeus of Lyons, Follower of the Apostles	Սրբոցն Փոկասու հայրապետին եւ Երանոսի հետեւողին առաքելոցն
 2026-10-06	Tue	After the Exaltation of the Cross	validated-table	1	virgins_thecla_barbara_and	Sts. Virgins Thecla, Barbara and Pelagia	Սրբոց կուսանացն Թեկղի, Վառվառեայ եւ Պեղիգեայ
 2026-10-07	Wed	After the Exaltation of the Cross	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-10-08	Thu	After the Exaltation of the Cross	validated-table	1	pantaleimon_the_physician_hermolaus	Sts. Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin	Սրբոցն Պանդալէոնի բժշկին, Երմողեայ քահանային եւ Եւպրակսեայ կուսին
 2026-10-09	Fri	After the Exaltation of the Cross	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-10-10	Sat	After the Exaltation of the Cross	validated-table	1	translators_mesrop_yeghishe_moses	Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful	Սրբոց Թարգմանչաց վարդապետացն մերոց Մեսրովբայ, Եղիշէի, Մովսիսի Քերթողին, Դաւթի Անյաղթ փիլիսոփային, Գրիգորի Նարեկացւոյն եւ Ներսիսի Կլայեցւոյն: Տօն ազգային եւ եկեղեցական` ի յիշատակ գիւտի նշանագրացն հայոց եւ թարգմանութեան Սուրբ Գրոց
-2026-10-11	Sun	After the Exaltation of the Cross	validated-table	1	fifth_sunday_after_the_2	Fifth Sunday of the Holy Cross	Ե կիւրակէ զկնի Ս. Խաչի
+2026-10-11	Sun	After the Exaltation of the Cross	validated-table	1	fifth_sunday_of_the_holy_cross	Fifth Sunday of the Holy Cross	Ե կիւրակէ զկնի Ս. Խաչի
 2026-10-12	Mon	After the Exaltation of the Cross	validated-table	1	discovery_of_relics_of	Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits	Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից կաթողիկոսին եւ սրբոց հարցն Թաթլոյ, Վարոսի, Թումասու, Անտոնի, Կրօնիդեայ եւ եօթն խոտաճարակացն, որք յԻննակնեայ վանսն կատարեցան
 2026-10-13	Tue	After the Exaltation of the Cross	validated-table	1	apostles_ananias_matthias_barnabas	The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus	Սրբոց առաքելոցն Անանիայի, Մատթէի, Բառնաբայ, Փիլիպպոսի, Յովհաննու, Շիղայի եւ Սիւղիանոսի
 2026-10-14	Wed	After the Exaltation of the Cross	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-10-15	Thu	After the Exaltation of the Cross	validated-table	1	dionysius_the_areopagite_and	Sts. Dionysius the Areopagite and the Apostles Timothy and Titus	Սրբոցն Դիոնիսիոսի Արիսպագացւոյն եւ առաքելոցն Տիմոթէոսի եւ Տիտոսի
 2026-10-16	Fri	After the Exaltation of the Cross	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-10-17	Sat	After the Exaltation of the Cross	validated-table	1	evangelists_matthew_mark_luke	Holy Evangelists Matthew, Mark, Luke and John	Սրբոց աւետարանչացն Մատթէոսի, Մարկոսի, Ղուկասու եւ Յովհաննու
-2026-10-18	Sun	After the Exaltation of the Cross	validated-table	1	sixth_sunday_after_the	Sixth Sunday of the Holy Cross	Զ կիւրակէ զկնի Ս. Խաչի
+2026-10-18	Sun	After the Exaltation of the Cross	validated-table	1	sixth_sunday_of_the_holy_cross	Sixth Sunday of the Holy Cross	Զ կիւրակէ զկնի Ս. Խաչի
 2026-10-19	Mon	After the Exaltation of the Cross	validated-table	1	longinus_the_centurion_joseph	Sts. Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and His Sisters Martha and Mary	Սրբոցն Ղունկիանոսի հարիւրապետին, որ հաւատաց ի խաչելութիւնն Քրիստոսի, եւ Յովսեփայ աստուածահօրն, Յովսեփայ Արեմաթացւոյն եւ բարեկամին Քրիստոսի Ղազարու եւ քերցն նորա Մարթայի եւ Մարիամու
 2026-10-20	Tue	After the Exaltation of the Cross	validated-table	1	theodoret_the_priest_of	Sts. Theodoret the Priest of Antioch, Zenon the Soldier, Macarius, Eudoxius and Romulus	Սրբոցն Թէոդիտոնի քահանային, Զենոնի զինաւորին, Մակարայ, Եւդոքսեայ եւ Ռամելայ
 2026-10-21	Wed	After the Exaltation of the Cross	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-10-22	Thu	After the Exaltation of the Cross	validated-table	1	aret_and_his_companions	Sts. Aret and His Companions, the Martyrs Artemius and Christopher and the Women Callinice and Aquilina	Սրբոց Խարիթեանցն եւ սրբոց վկայիցն Արտեմեայ եւ Քրիստափորի եւ երկուց կանանցն Կալինիկեայ եւ Ակիւլինեայ
 2026-10-23	Fri	After the Exaltation of the Cross	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-10-24	Sat	After the Exaltation of the Cross	validated-table	1	twelve_holy_doctors_of	The Twelve Holy Doctors of Church: Hierotheus of Athens, Dionysius the Areopagite, Sylvester of Rome, Athanasius of Alexandria, Cyril of Jerusalem, Ephraim the Syrian, Basil the Great, Gregory of Nyssa, Gregory the Theologian, Epiphanius of Cyprus, John Chrysostom, and Cyril of Alexandria	Սրբոց երկոտասանից վարդապետացն Ռեթէոսի, Դիոնիսիոսի, Սեղբեստրոսի, Աթանասի, Կիւրղի Երուսաղեմացւոյն, Եփրեմի Խուրին Ասորւոյ, Բարսղի Կեսարացւոյն, Գրիգորի Նիւսացւոյն, Գրիգորի Աստուածաբանին, Եպիփանու Կիպրացւոյն, Յովհաննու Ոսկեբերանին եւ Կիւրղի Աղեքսանդրացւոյն
-2026-10-25	Sun	After the Exaltation of the Cross	validated-table	2	seventh_sunday_after_the — discovery_of_the_holy	Seventh Sunday of the Holy Cross — Discovery of the Holy Cross	Է կիւրակէ զկնի Ս. Խաչի — Գիւտ խաչի
+2026-10-25	Sun	After the Exaltation of the Cross	validated-table	2	seventh_sunday_of_the_holy_cross — discovery_of_the_holy	Seventh Sunday of the Holy Cross — Discovery of the Holy Cross	Է կիւրակէ զկնի Ս. Խաչի — Գիւտ խաչի
 2026-10-26	Mon	After the Exaltation of the Cross	validated-table	1	anastasius_the_priest_varus	Sts. Anastasius the Priest, Varus the Soldier, Theodota and Her Sons, and Those Who Were Martyred with Her	Սրբոցն Անաստասայ քահանային, Վարոսի, Թէոդորիտեայ եւ որդւոց նորա եւ որք ընդ նմա կատարեցան
-2026-10-27	Tue	After the Exaltation of the Cross	validated-table	1	hipparchus_and_his_companions_2	Sts. Hipparchus and His Companions Who Were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and His 84 Disciples	Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին
+2026-10-27	Tue	After the Exaltation of the Cross	validated-table	1	hipparchus_and_companions_with_severianus_and_babylas	Sts. Hipparchus and His Companions Who Were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and His 84 Disciples	Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին
 2026-10-28	Wed	After the Exaltation of the Cross	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-10-29	Thu	After the Exaltation of the Cross	validated-table	1	john_chrysostom	St. John Chrysostom	Սրբոյն Յովհաննու Ոսկեբերան հայրապետին
 2026-10-30	Fri	After the Exaltation of the Cross	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-10-31	Sat	After the Exaltation of the Cross	validated-table	1	feast_of_all_sts	Feast of All Saints, the Old and the New, the Known and the Unknown	Տօն ամենայն սրբոց` հնոց եւ նորոց, յայտից եւ անյայտից
-2026-11-01	Sun	After the Exaltation of the Cross	validated-table	1	eighth_sunday_after_the	Eighth Sunday of the Holy Cross	Ը կիւրակէ զկնի Ս. Խաչի
+2026-11-01	Sun	After the Exaltation of the Cross	validated-table	1	eighth_sunday_of_the_holy_cross	Eighth Sunday of the Holy Cross	Ը կիւրակէ զկնի Ս. Խաչի
 2026-11-02	Mon	After the Exaltation of the Cross	validated-table	1	stephen_bishop_of_rome	St. Stephen Bishop of Rome and the Holy Priests, Deacons and Many Faithful	Սրբոցն Ստեփաննոսի Հռովմայ հայրապետին եւ քահանայիցն եւ սարկաւագացն եւ ժողովրդոցն
 2026-11-03	Tue	After the Exaltation of the Cross	validated-table	1	akepsimas_the_bishop_joseph	Sts. Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr	Սրբոցն Ակիփսիմեայ եպիսկոպոսին եւ Յովսեփայ քահանային, Այիթալայ սարկաւագին եւ Պղատոնի վկային
 2026-11-04	Wed	After the Exaltation of the Cross	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-11-05	Thu	After the Exaltation of the Cross	validated-table	1	metrophanes_alexander_and_paul	Sts. Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs	Սրբոց հայրապետացն Մետրոփանոսի, Աղեքսանդրոսի եւ Պօղոսի խոստովանողին եւ սրբոց նօտարացն Մարկիանոսի եւ Մարտիրոնի
 2026-11-06	Fri	After the Exaltation of the Cross	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-11-07	Sat	After the Exaltation of the Cross	validated-table	1	archangels_gabriel_and_michael	Holy Archangels Gabriel and Michael and All the Heavenly Angels	Սրբոց հրեշտակապետացն Գաբրիելի եւ Միքայելի եւ ամենայն երկնային զօրացն
-2026-11-08	Sun	After the Exaltation of the Cross	validated-table	1	ninth_sunday_after_the	Ninth Sunday of the Holy Cross	Թ կիւրակէ զկնի Ս. Խաչի
+2026-11-08	Sun	After the Exaltation of the Cross	validated-table	1	ninth_sunday_of_the_holy_cross	Ninth Sunday of the Holy Cross	Թ կիւրակէ զկնի Ս. Խաչի
 2026-11-09	Mon	After the Exaltation of the Cross	validated-table	1	meletius_bishop_of_antioch	Sts. Meletius Bishop of Antioch, Menas of Egypt, and the Other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon	Սրբոցն Մելիտոսի Անտիոքայ հայրապետին եւ Մինասայ Եգիպտացւոյն եւ միւս Մելիտոսի եպիսկոպոսին, Բուրայ քահանային եւ Շինու սարկաւագին
 2026-11-10	Tue	After the Exaltation of the Cross	validated-table	1	demetrios_the_martyr_and	Sts. Demetrios the Martyr and Basil the Priest	Սրբոցն Դեմետրեայ վկային եւ Բասիլիսկոսի քահանային
 2026-11-11	Wed	After the Exaltation of the Cross	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2026-11-12	Thu	After the Exaltation of the Cross	validated-table	1	gurias_samonas_and_habibus	Sts. Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier	Սրբոցն Գուրիասայ, Սամունասայ, Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին եւ Հիւսիքոսի զինաւորին
 2026-11-13	Fri	After the Exaltation of the Cross	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2026-11-14	Sat	After the Exaltation of the Cross	validated-table	1	apostles_andrew_and_philip	The Holy Apostles Andrew and Philip	Սրբոց առաքելոցն Անդրէի եւ Փիլիպպոսի
-2026-11-15	Sun	Advent (Heesnak)	validated-table	2	tenth_sunday_after_the — eve_of_fast_of_advent	Tenth Sunday of the Holy Cross — Eve of the Fast of Advent	Ժ կիւրակէ զկնի Ս. Խաչի — Բարեկենդան Յիսնակի պահոցն
-2026-11-16	Mon	Fast of Advent	validated-table	1	first_day_of_the	First day of the Fast of Advent	Ա օր Յիսնակի պահոց
-2026-11-17	Tue	Fast of Advent	validated-table	1	second_day_of_the_2	Second day of the Fast of Advent	Բ օր Յիսնակի պահոց
-2026-11-18	Wed	Fast of Advent	validated-table	1	third_day_of_the_2	Third day of the Fast of Advent	Գ օր Յիսնակի պահոց
-2026-11-19	Thu	Fast of Advent	validated-table	1	fourth_day_of_the_2	Fourth day of the Fast of Advent	Դ օր Յիսնակի պահոց
-2026-11-20	Fri	Fast of Advent	validated-table	1	fifth_day_of_the_2	Fifth day of the Fast of Advent	Ե օր Յիսնակի պահոց
+2026-11-15	Sun	Advent (Heesnak)	validated-table	2	tenth_sunday_of_the_holy_cross — eve_of_fast_of_advent	Tenth Sunday of the Holy Cross — Eve of the Fast of Advent	Ժ կիւրակէ զկնի Ս. Խաչի — Բարեկենդան Յիսնակի պահոցն
+2026-11-16	Mon	Fast of Advent	validated-table	1	advent_fast_day_1	First day of the Fast of Advent	Ա օր Յիսնակի պահոց
+2026-11-17	Tue	Fast of Advent	validated-table	1	advent_fast_day_2	Second day of the Fast of Advent	Բ օր Յիսնակի պահոց
+2026-11-18	Wed	Fast of Advent	validated-table	1	advent_fast_day_3	Third day of the Fast of Advent	Գ օր Յիսնակի պահոց
+2026-11-19	Thu	Fast of Advent	validated-table	1	advent_fast_day_4	Fourth day of the Fast of Advent	Դ օր Յիսնակի պահոց
+2026-11-20	Fri	Fast of Advent	validated-table	1	advent_fast_day_5	Fifth day of the Fast of Advent	Ե օր Յիսնակի պահոց
 2026-11-21	Sat	Feast	validated-composite	1	presentation_of_the_holy	Presentation of the Holy Mother of God to the Temple	Ընծայումն Ս. Աստուածածնի երից ամաց ի Տաճարն
 2026-11-22	Sun	Advent (Heesnak)	validated-table	1	first_sunday_of_advent	First Sunday of Advent	Ա կիւրակէ Յիսնակի
 2026-11-23	Mon	Advent (Heesnak)	validated-table	1	virgins_juliana_and_basilla	Sts. Virgins Juliana and Basilla	Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ
@@ -340,7 +340,7 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-12-05	Sat	Advent (Heesnak)	validated-table	1	gregory_and_nicholas_the	Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop	Սրբոցն Նիկողայոսի եւ Գրիգորի սքանչելագործ հայրապետացն եւ միւս Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին
 2026-12-06	Sun	Advent (Heesnak)	validated-table	2	third_sunday_of_advent — eve_of_fast_of_nisibis	Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis	Գ կիւրակէ Յիսնակի — Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց
 2026-12-07	Mon	Advent (Heesnak)	validated-table	2	james_nisibis_day_1 — menas_hermogenes_eugraphus_and	First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis	Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի
-2026-12-08	Tue	Advent (Heesnak)	validated-table	2	james_nisibis_day_2 — cornelius_the_centurion_simeon_2	Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East	Բ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան
+2026-12-08	Tue	Advent (Heesnak)	validated-table	2	james_nisibis_day_2 — cornelius_the_centurion_simeon_no_title	Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East	Բ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան
 2026-12-09	Wed	Feast	validated-composite	2	james_nisibis_day_3 — feast_of_the_conception	Third day of the Fast of St. James the bishop of Nisibis — Feast of the Conception of the Holy Virgin Mary by Anna	Գ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Յղութիւն սրբուհւոյ Աստուածածնի յԱննայ
 2026-12-10	Thu	Advent (Heesnak)	validated-table	2	james_nisibis_day_4 — eustratius_auxentius_eugenius_orestes	Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia	Դ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի
 2026-12-11	Fri	Advent (Heesnak)	validated-table	1	james_nisibis_day_5	Fifth day of the Fast of St. James the bishop of Nisibis	Ե օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց
@@ -362,5 +362,5 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2026-12-27	Sun	Advent (Heesnak)	validated-table	1	sixth_sunday_of_advent	Sixth Sunday of Advent	Զ կիւրակէ Յիսնակի
 2026-12-28	Mon	Advent (Heesnak)	validated-table	1	peter_and_paul_the	Sts. Peter and Paul the Apostles	Սրբոց առաքելոցն Պետրոսի եւ Պօղոսի
 2026-12-29	Tue	Advent (Heesnak)	validated-table	2	james_the_apostle_and — eve_of_fast_of_nativity	Sts. James the Apostle and His Brother John the Evangelist — Eve of the Fast of Nativity	Սրբոց Որդւոցն Որոտման Յակովբայ առաքելոյն եւ Յովհաննու աւետարանչին — Բարեկենդան Սուրբ Ծննդեան պահոց
-2026-12-30	Wed	Advent (Heesnak)	validated-table	1	first_day_of_the_3	First day of the Fast of Nativity	Ա օր Ս. Ծննդեան պահոց
-2026-12-31	Thu	Advent (Heesnak)	validated-table	1	second_day_of_the_4	Second day of the Fast of Nativity	Բ օր Ս. Ծննդեան պահոց
+2026-12-30	Wed	Advent (Heesnak)	validated-table	1	nativity_fast_day_1	First day of the Fast of Nativity	Ա օր Ս. Ծննդեան պահոց
+2026-12-31	Thu	Advent (Heesnak)	validated-table	1	nativity_fast_day_2	Second day of the Fast of Nativity	Բ օր Ս. Ծննդեան պահոց

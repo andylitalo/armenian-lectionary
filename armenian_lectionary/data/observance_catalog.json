@@ -7,13 +7,33 @@
   "en": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian",
   "hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի"
  },
- "abraham_and_khoren_moneyless_2": {
+ "abraham_and_khoren_moneyless_and_theodoron": {
   "en": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային"
  },
  "adrian_and_his_wife": {
   "en": "Sts. Adrian and His Wife Natalia, and Theodore Stratelates and Eleutherius the Martyrs",
   "hy": "Սրբոցն Անդրիանոսի եւ կնոջ նորա Անատոլայ եւ Թէոդորոսի եւ Ելեւթիւրոսի վկայիցն"
+ },
+ "advent_fast_day_1": {
+  "en": "First day of the Fast of Advent",
+  "hy": "Ա օր Յիսնակի պահոց"
+ },
+ "advent_fast_day_2": {
+  "en": "Second day of the Fast of Advent",
+  "hy": "Բ օր Յիսնակի պահոց"
+ },
+ "advent_fast_day_3": {
+  "en": "Third day of the Fast of Advent",
+  "hy": "Գ օր Յիսնակի պահոց"
+ },
+ "advent_fast_day_4": {
+  "en": "Fourth day of the Fast of Advent",
+  "hy": "Դ օր Յիսնակի պահոց"
+ },
+ "advent_fast_day_5": {
+  "en": "Fifth day of the Fast of Advent",
+  "hy": "Ե օր Յիսնակի պահոց"
  },
  "akepsimas_the_bishop_joseph": {
   "en": "Sts. Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
@@ -71,6 +91,26 @@
   "en": "ASCENSION OF OUR LORD JESUS CHRIST",
   "hy": "ՀԱՄԲԱՐՁՈՒՄՆ ՔՐԻՍՏՈՍԻ ԱՍՏՈՒԾՈՅ ՄԵՐՈՅ"
  },
+ "assumption_fast_day_1": {
+  "en": "First day of the Fast of Assumption",
+  "hy": "Ա օր Աստուածածնի պահոց"
+ },
+ "assumption_fast_day_2": {
+  "en": "Second day of the Fast of Assumption",
+  "hy": "Բ օր Աստուածածնի պահոց"
+ },
+ "assumption_fast_day_3": {
+  "en": "Third day of the Fast of Assumption",
+  "hy": "Գ օր Աստուածածնի պահոց"
+ },
+ "assumption_fast_day_4": {
+  "en": "Fourth day of the Fast of Assumption",
+  "hy": "Դ օր Աստուածածնի պահոց"
+ },
+ "assumption_fast_day_5": {
+  "en": "Fifth day of the Fast of Assumption",
+  "hy": "Ե օր Աստուածածնի պահոց"
+ },
  "assumption_of_the_holy": {
   "en": "ASSUMPTION OF THE HOLY MOTHER OF GOD",
   "hy": "ՎԵՐԱՓՈԽՈՒՄՆ Ս. ԱՍՏՈՒԱԾԱԾՆԻ"
@@ -103,6 +143,26 @@
   "en": "Sts. Callistratus and His Companions, and Lukianos the Priest",
   "hy": "Սրբոցն Կալիստրատոսի եւ քառասուն եւ ինն վկայիցն եւ Ղունկիանոսի քահանային"
  },
+ "catechumens_fast_day_1": {
+  "en": "First day of the Fast of the Catechumens",
+  "hy": "Ա օր Առաջաւորաց պահոց"
+ },
+ "catechumens_fast_day_2": {
+  "en": "Second day of the Fast of the Catechumens",
+  "hy": "Բ օր Առաջաւորաց պահոց"
+ },
+ "catechumens_fast_day_3": {
+  "en": "Third day of the Fast of the Catechumens",
+  "hy": "Գ օր Առաջաւորաց պահոց"
+ },
+ "catechumens_fast_day_4": {
+  "en": "Fourth day of the Fast of the Catechumens",
+  "hy": "Դ օր Առաջաւորաց պահոց"
+ },
+ "catechumens_fast_day_5": {
+  "en": "Fifth day of the Fast of the Catechumens",
+  "hy": "Ե օր Առաջաւորաց պահոց"
+ },
  "children_of_bethlehem_sts": {
   "en": "The Children of Bethlehem and Sts. Acacius the Martyr, Mocius the Priest and Codratus the Soldier",
   "hy": "Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին"
@@ -131,7 +191,7 @@
   "en": "Sts. Cornelius the Centurion, Simeon the Relative of Christ, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
   "hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան"
  },
- "cornelius_the_centurion_simeon_2": {
+ "cornelius_the_centurion_simeon_no_title": {
   "en": "Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
   "hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան"
  },
@@ -187,6 +247,10 @@
   "en": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
   "hy": "Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից կաթողիկոսին եւ սրբոց հարցն Թաթլոյ, Վարոսի, Թումասու, Անտոնի, Կրօնիդեայ եւ եօթն խոտաճարակացն, որք յԻննակնեայ վանսն կատարեցան"
  },
+ "discovery_of_the_belt_of_the_holy_mother_of_god": {
+  "en": "Feast day of the Discovery of the Belt of the Holy Mother of God",
+  "hy": "Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի"
+ },
  "discovery_of_the_holy": {
   "en": "Discovery of the Holy Cross",
   "hy": "Գիւտ խաչի"
@@ -195,11 +259,11 @@
   "en": "Eighteenth day of Eastertide",
   "hy": "ԺԸ օր Յինանց"
  },
- "eighteenth_day_of_great": {
+ "eighteenth_day_of_great_lent": {
   "en": "Eighteenth day of Great Lent",
   "hy": "ԺԸ օր Մեծի պահոց"
  },
- "eighth_day_of_great": {
+ "eighth_day_of_great_lent": {
   "en": "Eighth day of Great Lent",
   "hy": "Ը օր Մեծի պահոց"
  },
@@ -207,7 +271,7 @@
   "en": "Eighth day of Nativity",
   "hy": "Ը օր Ս. Ծննդեան"
  },
- "eighth_sunday_after_the": {
+ "eighth_sunday_of_the_holy_cross": {
   "en": "Eighth Sunday of the Holy Cross",
   "hy": "Ը կիւրակէ զկնի Ս. Խաչի"
  },
@@ -215,11 +279,11 @@
   "en": "Eleventh day of Eastertide",
   "hy": "ԺԱ օր Յինանց"
  },
- "eleventh_day_of_great": {
+ "eleventh_day_of_great_lent": {
   "en": "Eleventh day of Great Lent",
   "hy": "ԺԱ օր Մեծի պահոց"
  },
- "eleventh_sunday_after_the": {
+ "eleventh_sunday_of_the_holy_cross": {
   "en": "Eleventh Sunday of the Holy Cross",
   "hy": "ԺԱ կիւրակէ զկնի Ս. Խաչի"
  },
@@ -319,10 +383,6 @@
   "en": "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
   "hy": "Սրբոց հայրապետացն Աթանասի եւ Կիւրղի"
  },
- "feast_day_of_the": {
-  "en": "Feast day of the Discovery of the Belt of the Holy Mother of God",
-  "hy": "Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի"
- },
  "feast_of_all_sts": {
   "en": "Feast of All Saints, the Old and the New, the Known and the Unknown",
   "hy": "Տօն ամենայն սրբոց` հնոց եւ նորոց, յայտից եւ անյայտից"
@@ -351,7 +411,7 @@
   "en": "Feast of the Birth of Holy Virgin Mary from Anna",
   "hy": "Տօն Ծննդեան սրբուհւոյ Կուսին Մարիամու յԱննայէ"
  },
- "feast_of_the_birth_2": {
+ "feast_of_the_birth_of_st_john_the_forerunner": {
   "en": "Feast of the Birth of St. John the Forerunner (Baptist)",
   "hy": "Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին"
  },
@@ -367,15 +427,15 @@
   "en": "Feast of the Holy Church",
   "hy": "Տօն է Ս. Եկեղեցւոյ"
  },
- "feast_of_the_holy_2": {
+ "feast_of_the_holy_cross": {
   "en": "Feast of the Holy Cross",
   "hy": "Տօն է Ս. Խաչի"
  },
- "feast_of_the_holy_3": {
+ "feast_of_the_holy_cross_of_varag": {
   "en": "Feast of the Holy Cross of Varag",
   "hy": "Տօն Վարագայ ս. խաչի"
  },
- "fifteenth_day_of_great": {
+ "fifteenth_day_of_great_lent": {
   "en": "Fifteenth day of Great Lent",
   "hy": "ԺԵ օր Մեծի պահոց"
  },
@@ -383,11 +443,15 @@
   "en": "Fifth day of Advent",
   "hy": "Ե օր Յիսնակի պահոց"
  },
+ "fifth_day_of_assumption": {
+  "en": "Fifth day of the Assumption",
+  "hy": "Ե օր Վերափոխման"
+ },
  "fifth_day_of_easter": {
   "en": "Fifth day of Easter",
   "hy": "Ե օր Զատկի"
  },
- "fifth_day_of_great": {
+ "fifth_day_of_great_lent": {
   "en": "Fifth day of Great Lent",
   "hy": "Ե օր Մեծի պահոց"
  },
@@ -398,34 +462,6 @@
  "fifth_day_of_pentecost": {
   "en": "Fifth day of the Fast of the Prophet Elijah",
   "hy": "Ե օր Եղիական պահոց"
- },
- "fifth_day_of_the": {
-  "en": "Fifth day of the Assumption",
-  "hy": "Ե օր Վերափոխման"
- },
- "fifth_day_of_the_2": {
-  "en": "Fifth day of the Fast of Advent",
-  "hy": "Ե օր Յիսնակի պահոց"
- },
- "fifth_day_of_the_3": {
-  "en": "Fifth day of the Fast of Assumption",
-  "hy": "Ե օր Աստուածածնի պահոց"
- },
- "fifth_day_of_the_4": {
-  "en": "Fifth day of the Fast of Nativity",
-  "hy": "Ե օր Ս. Ծննդեան պահոց"
- },
- "fifth_day_of_the_5": {
-  "en": "Fifth day of the Fast of the Catechumens",
-  "hy": "Ե օր Առաջաւորաց պահոց"
- },
- "fifth_day_of_the_6": {
-  "en": "Fifth day of the Fast of the Holy Cross",
-  "hy": "Ե օր Ս. Խաչի պահոց"
- },
- "fifth_day_of_the_7": {
-  "en": "Fifth day of the Fast of the Transfiguration",
-  "hy": "Ե օր Վարդավառի պահոց"
  },
  "fifth_sunday": {
   "en": "Fifth Sunday",
@@ -439,14 +475,6 @@
   "en": "Fifth Sunday of Pentecost",
   "hy": "Ե կիւրակէ զկնի Հոգեգալստեան"
  },
- "fifth_sunday_after_the": {
-  "en": "Fifth Sunday of the Assumption",
-  "hy": "Ե կիւրակէ զկնի Վերափոխման"
- },
- "fifth_sunday_after_the_2": {
-  "en": "Fifth Sunday of the Holy Cross",
-  "hy": "Ե կիւրակէ զկնի Ս. Խաչի"
- },
  "fifth_sunday_after_transfiguration": {
   "en": "Fifth Sunday of Transfiguration",
   "hy": "Ե կիւրակէ զկնի Վարդավառի"
@@ -455,41 +483,25 @@
   "en": "Fifth Sunday of Advent",
   "hy": "Ե կիւրակէ Յիսնակի"
  },
- "fifth_sunday_of_great": {
+ "fifth_sunday_of_great_lent": {
   "en": "Fifth Sunday of Great Lent: Sunday of the Judge",
   "hy": "Ե կիւրակէ Մեծի պահոց (Դատաւորին)"
+ },
+ "fifth_sunday_of_the_assumption": {
+  "en": "Fifth Sunday of the Assumption",
+  "hy": "Ե կիւրակէ զկնի Վերափոխման"
+ },
+ "fifth_sunday_of_the_holy_cross": {
+  "en": "Fifth Sunday of the Holy Cross",
+  "hy": "Ե կիւրակէ զկնի Ս. Խաչի"
  },
  "first_day_of_advent": {
   "en": "First day of Advent",
   "hy": "Ա օր Յիսնակի պահոց"
  },
- "first_day_of_great": {
+ "first_day_of_great_lent": {
   "en": "First day of Great Lent",
   "hy": "Ա օր Մեծի պահոց"
- },
- "first_day_of_the": {
-  "en": "First day of the Fast of Advent",
-  "hy": "Ա օր Յիսնակի պահոց"
- },
- "first_day_of_the_2": {
-  "en": "First day of the Fast of Assumption",
-  "hy": "Ա օր Աստուածածնի պահոց"
- },
- "first_day_of_the_3": {
-  "en": "First day of the Fast of Nativity",
-  "hy": "Ա օր Ս. Ծննդեան պահոց"
- },
- "first_day_of_the_4": {
-  "en": "First day of the Fast of the Catechumens",
-  "hy": "Ա օր Առաջաւորաց պահոց"
- },
- "first_day_of_the_5": {
-  "en": "First day of the Fast of the Holy Cross",
-  "hy": "Ա օր Ս. Խաչի պահոց"
- },
- "first_day_of_the_6": {
-  "en": "First day of the Fast of the Transfiguration",
-  "hy": "Ա օր Վարդավառի պահոց"
  },
  "first_sunday_after_nativity": {
   "en": "First Sunday after Nativity",
@@ -507,7 +519,7 @@
   "en": "Fortieth day of Eastertide",
   "hy": "Խ օր Յինանց"
  },
- "fortieth_day_of_great": {
+ "fortieth_day_of_great_lent": {
   "en": "Fortieth day of Great Lent",
   "hy": "Խ օր Մեծի պահոց"
  },
@@ -523,7 +535,7 @@
   "en": "Forty First day of Eastertide",
   "hy": "ԽԱ օր Յինանց"
  },
- "forty_first_day_of_2": {
+ "forty_first_day_of_great_lent": {
   "en": "Forty First day of Great Lent",
   "hy": "ԽԱ օր Մեծի պահոց"
  },
@@ -559,11 +571,15 @@
   "en": "Fourth day of Advent",
   "hy": "Դ օր Յիսնակի պահոց"
  },
+ "fourth_day_of_assumption": {
+  "en": "Fourth day of the Assumption",
+  "hy": "Դ օր Վերափոխման"
+ },
  "fourth_day_of_easter": {
   "en": "Fourth day of Easter",
   "hy": "Դ օր Զատկի"
  },
- "fourth_day_of_great": {
+ "fourth_day_of_great_lent": {
   "en": "Fourth day of Great Lent",
   "hy": "Դ օր Մեծի պահոց"
  },
@@ -574,34 +590,6 @@
  "fourth_day_of_pentecost": {
   "en": "Fourth day of the Fast of the Prophet Elijah",
   "hy": "Դ օր Եղիական պահոց"
- },
- "fourth_day_of_the": {
-  "en": "Fourth day of the Assumption",
-  "hy": "Դ օր Վերափոխման"
- },
- "fourth_day_of_the_2": {
-  "en": "Fourth day of the Fast of Advent",
-  "hy": "Դ օր Յիսնակի պահոց"
- },
- "fourth_day_of_the_3": {
-  "en": "Fourth day of the Fast of Assumption",
-  "hy": "Դ օր Աստուածածնի պահոց"
- },
- "fourth_day_of_the_4": {
-  "en": "Fourth day of the Fast of Nativity",
-  "hy": "Դ օր Ս. Ծննդեան պահոց"
- },
- "fourth_day_of_the_5": {
-  "en": "Fourth day of the Fast of the Catechumens",
-  "hy": "Դ օր Առաջաւորաց պահոց"
- },
- "fourth_day_of_the_6": {
-  "en": "Fourth day of the Fast of the Holy Cross",
-  "hy": "Դ օր Ս. Խաչի պահոց"
- },
- "fourth_day_of_the_7": {
-  "en": "Fourth day of the Fast of the Transfiguration",
-  "hy": "Դ օր Վարդավառի պահոց"
  },
  "fourth_sunday_after_assumption": {
   "en": "Fourth Sunday of Assumption",
@@ -615,10 +603,6 @@
   "en": "Fourth Sunday of Pentecost",
   "hy": "Դ կիւրակէ զկնի Հոգեգալստեան"
  },
- "fourth_sunday_after_the": {
-  "en": "Fourth Sunday of the Holy Cross",
-  "hy": "Դ կիւրակէ զկնի Ս. Խաչի"
- },
  "fourth_sunday_after_transfiguration": {
   "en": "Fourth Sunday of Transfiguration",
   "hy": "Դ կիւրակէ զկնի Վարդավառի"
@@ -627,9 +611,13 @@
   "en": "Fourth Sunday of Advent",
   "hy": "Դ կիւրակէ Յիսնակի"
  },
- "fourth_sunday_of_great": {
+ "fourth_sunday_of_great_lent": {
   "en": "Fourth Sunday of Great Lent: Sunday of the Steward",
   "hy": "Դ կիւրակէ Մեծի պահոց (Տնտեսին)"
+ },
+ "fourth_sunday_of_the_holy_cross": {
+  "en": "Fourth Sunday of the Holy Cross",
+  "hy": "Դ կիւրակէ զկնի Ս. Խաչի"
  },
  "fourth_sunday_red_sunday": {
   "en": "Fourth Sunday of Eastertide (Red Sunday)",
@@ -647,7 +635,7 @@
   "en": "Sts. Gennaro the Bishop and Mercurius the Warrior",
   "hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին"
  },
- "gennaro_the_bishop_and_2": {
+ "gennaro_the_bishop_and_mercurius_with_jacoc_and_themistocles": {
   "en": "Sts. Gennaro the Bishop and Mercurius the Warrior, and Sts. Jacoc and Themistocles",
   "hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ"
  },
@@ -691,17 +679,17 @@
   "en": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
   "hy": "Սրբոցն Նիկողայոսի եւ Գրիգորի սքանչելագործ հայրապետացն եւ միւս Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին"
  },
+ "gregory_the_illuminator_coming_out_of_pit": {
+  "en": "St. Gregory the Illuminator's coming out of Pit",
+  "hy": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն"
+ },
  "gregory_the_illuminator_s": {
   "en": "St. Gregory the Illuminator's Descent into the Pit",
   "hy": "Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն"
  },
- "gregory_the_illuminator_s_2": {
+ "gregory_the_illuminator_sons_and_grandsons": {
   "en": "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel",
   "hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի"
- },
- "gregory_the_illuminator_s_3": {
-  "en": "St. Gregory the Illuminator's coming out of Pit",
-  "hy": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն"
  },
  "gregory_the_theologian": {
   "en": "St. Gregory the Theologian",
@@ -723,13 +711,33 @@
   "en": "The Hermit Sts. Tryphon, Barsauma and Onuphrius",
   "hy": "Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն"
  },
+ "hipparchus_and_companions_with_severianus_and_babylas": {
+  "en": "Sts. Hipparchus and His Companions Who Were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and His 84 Disciples",
+  "hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին"
+ },
  "hipparchus_and_his_companions": {
   "en": "St. Hipparchus and His Companions Who Were Martyred in Samosata",
   "hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան"
  },
- "hipparchus_and_his_companions_2": {
-  "en": "Sts. Hipparchus and His Companions Who Were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and His 84 Disciples",
-  "hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին"
+ "holy_cross_fast_day_1": {
+  "en": "First day of the Fast of the Holy Cross",
+  "hy": "Ա օր Ս. Խաչի պահոց"
+ },
+ "holy_cross_fast_day_2": {
+  "en": "Second day of the Fast of the Holy Cross",
+  "hy": "Բ օր Ս. Խաչի պահոց"
+ },
+ "holy_cross_fast_day_3": {
+  "en": "Third day of the Fast of the Holy Cross",
+  "hy": "Գ օր Ս. Խաչի պահոց"
+ },
+ "holy_cross_fast_day_4": {
+  "en": "Fourth day of the Fast of the Holy Cross",
+  "hy": "Դ օր Ս. Խաչի պահոց"
+ },
+ "holy_cross_fast_day_5": {
+  "en": "Fifth day of the Fast of the Holy Cross",
+  "hy": "Ե օր Ս. Խաչի պահոց"
  },
  "hripsime_and_her_companions": {
   "en": "Sts. Hripsime and Her Companions",
@@ -807,7 +815,7 @@
   "en": "Sts. John the Forerunner (Baptist) and Bishop Atanagine",
   "hy": "Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին"
  },
- "john_the_forerunner_baptist_2": {
+ "john_the_forerunner_baptist_and_job_the_righteous": {
   "en": "Sts. John the Forerunner (Baptist) and Job the Righteous",
   "hy": "Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն"
  },
@@ -855,6 +863,30 @@
   "en": "NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST",
   "hy": "ՏՕՆ ԾՆՆԴԵԱՆ ԵՒ ԱՍՏՈՒԱԾԱՅԱՅՏՆՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ"
  },
+ "nativity_fast_day_1": {
+  "en": "First day of the Fast of Nativity",
+  "hy": "Ա օր Ս. Ծննդեան պահոց"
+ },
+ "nativity_fast_day_2": {
+  "en": "Second day of the Fast of Nativity",
+  "hy": "Բ օր Ս. Ծննդեան պահոց"
+ },
+ "nativity_fast_day_3": {
+  "en": "Third day of the Fast of Nativity",
+  "hy": "Գ օր Ս. Ծննդեան պահոց"
+ },
+ "nativity_fast_day_4": {
+  "en": "Fourth day of the Fast of Nativity",
+  "hy": "Դ օր Ս. Ծննդեան պահոց"
+ },
+ "nativity_fast_day_5": {
+  "en": "Fifth day of the Fast of Nativity",
+  "hy": "Ե օր Ս. Ծննդեան պահոց"
+ },
+ "nativity_fast_day_6": {
+  "en": "Sixth day of the Fast of Nativity",
+  "hy": "Զ օր Ս. Ծննդեան պահոց"
+ },
  "nerses_the_great_patriarch": {
   "en": "Sts. Nerses the Great Patriarch and Bishop Khad",
   "hy": "Սրբոյն Ներսիսի Մեծի հայրապետին մերոյ եւ Խադայ եպիսկոպոսին"
@@ -867,7 +899,7 @@
   "en": "Nineteenth day of Eastertide",
   "hy": "ԺԹ օր Յինանց"
  },
- "nineteenth_day_of_great": {
+ "nineteenth_day_of_great_lent": {
   "en": "Nineteenth day of Great Lent",
   "hy": "ԺԹ օր Մեծի պահոց"
  },
@@ -879,11 +911,11 @@
   "en": "Ninth day of Eastertide",
   "hy": "Թ օր Յինանց"
  },
- "ninth_day_of_great": {
+ "ninth_day_of_great_lent": {
   "en": "Ninth day of Great Lent",
   "hy": "Թ օր Մեծի պահոց"
  },
- "ninth_sunday_after_the": {
+ "ninth_sunday_of_the_holy_cross": {
   "en": "Ninth Sunday of the Holy Cross",
   "hy": "Թ կիւրակէ զկնի Ս. Խաչի"
  },
@@ -907,7 +939,7 @@
   "en": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
   "hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին"
  },
- "patriarchs_ignatius_the_bishop_2": {
+ "patriarchs_ignatius_the_bishop_and_companions": {
   "en": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
   "hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ"
  },
@@ -1003,11 +1035,15 @@
   "en": "Second day of Advent",
   "hy": "Բ օր Յիսնակի պահոց"
  },
+ "second_day_of_assumption": {
+  "en": "Second day of the Assumption",
+  "hy": "Բ օր Վերափոխման"
+ },
  "second_day_of_easter": {
   "en": "Second day of Easter",
   "hy": "Բ օր Զատկի"
  },
- "second_day_of_great": {
+ "second_day_of_great_lent": {
   "en": "Second day of Great Lent",
   "hy": "Բ օր Մեծի պահոց"
  },
@@ -1018,34 +1054,6 @@
  "second_day_of_pentecost": {
   "en": "Second day of the Fast of the Prophet Elijah",
   "hy": "Բ օր Եղիական պահոց"
- },
- "second_day_of_the": {
-  "en": "Second day of the Assumption",
-  "hy": "Բ օր Վերափոխման"
- },
- "second_day_of_the_2": {
-  "en": "Second day of the Fast of Advent",
-  "hy": "Բ օր Յիսնակի պահոց"
- },
- "second_day_of_the_3": {
-  "en": "Second day of the Fast of Assumption",
-  "hy": "Բ օր Աստուածածնի պահոց"
- },
- "second_day_of_the_4": {
-  "en": "Second day of the Fast of Nativity",
-  "hy": "Բ օր Ս. Ծննդեան պահոց"
- },
- "second_day_of_the_5": {
-  "en": "Second day of the Fast of the Catechumens",
-  "hy": "Բ օր Առաջաւորաց պահոց"
- },
- "second_day_of_the_6": {
-  "en": "Second day of the Fast of the Holy Cross",
-  "hy": "Բ օր Ս. Խաչի պահոց"
- },
- "second_day_of_the_7": {
-  "en": "Second day of the Fast of the Transfiguration",
-  "hy": "Բ օր Վարդավառի պահոց"
  },
  "second_day_of_transfiguration": {
   "en": "Second day of Transfiguration",
@@ -1059,14 +1067,6 @@
   "en": "Second Sunday of Pentecost",
   "hy": "Բ կիւրակէ զկնի Հոգեգալստեան"
  },
- "second_sunday_after_the": {
-  "en": "Second Sunday of the Assumption",
-  "hy": "Բ կիւրակէ զկնի Վերափոխման"
- },
- "second_sunday_after_the_2": {
-  "en": "Second Sunday of the Holy Cross",
-  "hy": "Բ կիւրակէ զկնի Ս. Խաչին"
- },
  "second_sunday_after_transfiguration": {
   "en": "Second Sunday of Transfiguration",
   "hy": "Բ կիւրակէ զկնի Վարդավառի"
@@ -1075,17 +1075,29 @@
   "en": "Second Sunday of Advent",
   "hy": "Բ կիւրակէ Յիսնակի"
  },
- "second_sunday_of_great": {
+ "second_sunday_of_great_lent": {
   "en": "Second Sunday of Great Lent: Sunday of the Expulsion",
   "hy": "Բ կիւրակէ Մեծի պահոց (Արտաքսման)"
+ },
+ "second_sunday_of_the_assumption": {
+  "en": "Second Sunday of the Assumption",
+  "hy": "Բ կիւրակէ զկնի Վերափոխման"
+ },
+ "second_sunday_of_the_holy_cross": {
+  "en": "Second Sunday of the Holy Cross",
+  "hy": "Բ կիւրակէ զկնի Ս. Խաչին"
  },
  "seventeenth_day_of_eastertide": {
   "en": "Seventeenth day of Eastertide",
   "hy": "ԺԷ օր Յինանց"
  },
- "seventeenth_day_of_great": {
+ "seventeenth_day_of_great_lent": {
   "en": "Seventeenth day of Great Lent",
   "hy": "ԺԷ օր Մեծի պահոց"
+ },
+ "seventh_day_of_assumption": {
+  "en": "Seventh day of the Assumption",
+  "hy": "Է օր Վերափոխման"
  },
  "seventh_day_of_easter": {
   "en": "Seventh day of Easter",
@@ -1099,17 +1111,9 @@
   "en": "Seventh day of the Fast of the Prophet Elijah",
   "hy": "Է օր Եղիական պահոց"
  },
- "seventh_day_of_the": {
-  "en": "Seventh day of the Assumption",
-  "hy": "Է օր Վերափոխման"
- },
  "seventh_sunday_after_nativity": {
   "en": "Seventh Sunday after Nativity",
   "hy": "Է կիւրակէ զկնի Ս. Ծննդեան"
- },
- "seventh_sunday_after_the": {
-  "en": "Seventh Sunday of the Holy Cross",
-  "hy": "Է կիւրակէ զկնի Ս. Խաչի"
  },
  "seventh_sunday_after_transfiguration": {
   "en": "Seventh Sunday of Transfiguration",
@@ -1123,6 +1127,10 @@
   "en": "Seventh Sunday of Eastertide (Second Palm Sunday)",
   "hy": "Է կիւրակէ. Երկրորդ ծաղկազարդ"
  },
+ "seventh_sunday_of_the_holy_cross": {
+  "en": "Seventh Sunday of the Holy Cross",
+  "hy": "Է կիւրակէ զկնի Ս. Խաչի"
+ },
  "seventy_two_holy_disciples": {
   "en": "Seventy Two Holy Disciples of Christ",
   "hy": "Սրբոց եօթանասնից եւ երկուց աշակերտացն Քրիստոսի"
@@ -1135,15 +1143,19 @@
   "en": "Sixteenth day of Eastertide",
   "hy": "ԺԶ օր Յինանց"
  },
- "sixteenth_day_of_great": {
+ "sixteenth_day_of_great_lent": {
   "en": "Sixteenth day of Great Lent",
   "hy": "ԺԶ օր Մեծի պահոց"
+ },
+ "sixth_day_of_assumption": {
+  "en": "Sixth day of the Assumption",
+  "hy": "Զ օր Վերափոխման"
  },
  "sixth_day_of_easter": {
   "en": "Sixth day of Easter",
   "hy": "Զ օր Զատկի"
  },
- "sixth_day_of_great": {
+ "sixth_day_of_great_lent": {
   "en": "Sixth day of Great Lent",
   "hy": "Զ օր Մեծի պահոց"
  },
@@ -1155,14 +1167,6 @@
   "en": "Sixth day of the Fast of the Prophet Elijah",
   "hy": "Զ օր Եղիական պահոց"
  },
- "sixth_day_of_the": {
-  "en": "Sixth day of the Assumption",
-  "hy": "Զ օր Վերափոխման"
- },
- "sixth_day_of_the_2": {
-  "en": "Sixth day of the Fast of Nativity",
-  "hy": "Զ օր Ս. Ծննդեան պահոց"
- },
  "sixth_sunday_after_nativity": {
   "en": "Sixth Sunday after Nativity",
   "hy": "Զ կիւրակէ զկնի Ս. Ծննդեան"
@@ -1170,10 +1174,6 @@
  "sixth_sunday_after_pentecost": {
   "en": "Sixth Sunday of Pentecost",
   "hy": "Զ կիւրակէ զկնի Հոգեգալստեան"
- },
- "sixth_sunday_after_the": {
-  "en": "Sixth Sunday of the Holy Cross",
-  "hy": "Զ կիւրակէ զկնի Ս. Խաչի"
  },
  "sixth_sunday_after_transfiguration": {
   "en": "Sixth Sunday of Transfiguration",
@@ -1187,9 +1187,13 @@
   "en": "Sixth Sunday of Eastertide",
   "hy": "Զ կիւրակէ"
  },
- "sixth_sunday_of_great": {
+ "sixth_sunday_of_great_lent": {
   "en": "Sixth Sunday of Great Lent. Sunday of the Advent",
   "hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)"
+ },
+ "sixth_sunday_of_the_holy_cross": {
+  "en": "Sixth Sunday of the Holy Cross",
+  "hy": "Զ կիւրակէ զկնի Ս. Խաչի"
  },
  "sophia_and_her_three": {
   "en": "Sts. Sophia and Her Three Daughters Pistis, Elpis, and Agape",
@@ -1215,11 +1219,11 @@
   "en": "Tenth day of Eastertide",
   "hy": "Ժ օր Յինանց"
  },
- "tenth_day_of_great": {
+ "tenth_day_of_great_lent": {
   "en": "Tenth day of Great Lent",
   "hy": "Ժ օր Մեծի պահոց"
  },
- "tenth_sunday_after_the": {
+ "tenth_sunday_of_the_holy_cross": {
   "en": "Tenth Sunday of the Holy Cross",
   "hy": "Ժ կիւրակէ զկնի Ս. Խաչի"
  },
@@ -1255,11 +1259,15 @@
   "en": "Third day of Advent",
   "hy": "Գ օր Յիսնակի պահոց"
  },
+ "third_day_of_assumption": {
+  "en": "Third day of the Assumption",
+  "hy": "Գ օր Վերափոխման"
+ },
  "third_day_of_easter": {
   "en": "Third day of Easter",
   "hy": "Գ օր Զատկի"
  },
- "third_day_of_great": {
+ "third_day_of_great_lent": {
   "en": "Third day of Great Lent",
   "hy": "Գ օր Մեծի պահոց"
  },
@@ -1270,34 +1278,6 @@
  "third_day_of_pentecost": {
   "en": "Third day of the Fast of the Prophet Elijah",
   "hy": "Գ օր Եղիական պահոց"
- },
- "third_day_of_the": {
-  "en": "Third day of the Assumption",
-  "hy": "Գ օր Վերափոխման"
- },
- "third_day_of_the_2": {
-  "en": "Third day of the Fast of Advent",
-  "hy": "Գ օր Յիսնակի պահոց"
- },
- "third_day_of_the_3": {
-  "en": "Third day of the Fast of Assumption",
-  "hy": "Գ օր Աստուածածնի պահոց"
- },
- "third_day_of_the_4": {
-  "en": "Third day of the Fast of Nativity",
-  "hy": "Գ օր Ս. Ծննդեան պահոց"
- },
- "third_day_of_the_5": {
-  "en": "Third day of the Fast of the Catechumens",
-  "hy": "Գ օր Առաջաւորաց պահոց"
- },
- "third_day_of_the_6": {
-  "en": "Third day of the Fast of the Holy Cross",
-  "hy": "Գ օր Ս. Խաչի պահոց"
- },
- "third_day_of_the_7": {
-  "en": "Third day of the Fast of the Transfiguration",
-  "hy": "Գ օր Վարդավառի պահոց"
  },
  "third_day_of_transfiguration": {
   "en": "Third day of Transfiguration",
@@ -1315,10 +1295,6 @@
   "en": "Third Sunday of Pentecost",
   "hy": "Գ կիւրակէ զկնի Հոգեգալստեան"
  },
- "third_sunday_after_the": {
-  "en": "Third Sunday of the Holy Cross",
-  "hy": "Գ կիւրակէ զկնի Ս. Խաչի"
- },
  "third_sunday_after_transfiguration": {
   "en": "Third Sunday of Transfiguration",
   "hy": "Գ կիւրակէ զկնի Վարդավառի"
@@ -1327,9 +1303,13 @@
   "en": "Third Sunday of Advent",
   "hy": "Գ կիւրակէ Յիսնակի"
  },
- "third_sunday_of_great": {
+ "third_sunday_of_great_lent": {
   "en": "Third Sunday of Great Lent: Sunday of the Prodigal Son",
   "hy": "Գ կիւրակէ Մեծի պահոց (Անառակին)"
+ },
+ "third_sunday_of_the_holy_cross": {
+  "en": "Third Sunday of the Holy Cross",
+  "hy": "Գ կիւրակէ զկնի Ս. Խաչի"
  },
  "third_sunday_sunday_of": {
   "en": "Third Sunday of Eastertide: Sunday of the World Church (Green Sunday)",
@@ -1339,7 +1319,7 @@
   "en": "Thirteenth day of Eastertide",
   "hy": "ԺԳ օր Յինանց"
  },
- "thirteenth_day_of_great": {
+ "thirteenth_day_of_great_lent": {
   "en": "Thirteenth day of Great Lent",
   "hy": "ԺԳ օր Մեծի պահոց"
  },
@@ -1347,7 +1327,7 @@
   "en": "Thirtieth day of Eastertide",
   "hy": "Լ օր Յինանց"
  },
- "thirtieth_day_of_great": {
+ "thirtieth_day_of_great_lent": {
   "en": "Thirtieth day of Great Lent",
   "hy": "Լ օր Մեծի պահոց"
  },
@@ -1355,7 +1335,7 @@
   "en": "Thirty Eighth day of Eastertide",
   "hy": "ԼԸ օր Յինանց"
  },
- "thirty_eighth_day_of_2": {
+ "thirty_eighth_day_of_great_lent": {
   "en": "Thirty Eighth day of Great Lent",
   "hy": "ԼԸ օր Մեծի պահոց"
  },
@@ -1367,7 +1347,7 @@
   "en": "Thirty First day of Eastertide",
   "hy": "ԼԱ օր Յինանց"
  },
- "thirty_first_day_of_2": {
+ "thirty_first_day_of_great_lent": {
   "en": "Thirty First day of Great Lent",
   "hy": "ԼԱ օր Մեծի պահոց"
  },
@@ -1375,7 +1355,7 @@
   "en": "Thirty Fourth day of Eastertide",
   "hy": "ԼԴ օր Յինանց"
  },
- "thirty_fourth_day_of_2": {
+ "thirty_fourth_day_of_great_lent": {
   "en": "Thirty Fourth day of Great Lent",
   "hy": "ԼԴ օր Մեծի պահոց"
  },
@@ -1383,7 +1363,7 @@
   "en": "Thirty Ninth day of Eastertide",
   "hy": "ԼԹ օր Յինանց"
  },
- "thirty_ninth_day_of_2": {
+ "thirty_ninth_day_of_great_lent": {
   "en": "Thirty Ninth day of Great Lent",
   "hy": "ԼԹ օր Մեծի պահոց"
  },
@@ -1391,7 +1371,7 @@
   "en": "Thirty Second day of Eastertide",
   "hy": "ԼԲ օր Յինանց"
  },
- "thirty_second_day_of_2": {
+ "thirty_second_day_of_great_lent": {
   "en": "Thirty Second day of Great Lent",
   "hy": "ԼԲ օր Մեծի պահոց"
  },
@@ -1399,7 +1379,7 @@
   "en": "Thirty Seventh day of Eastertide",
   "hy": "ԼԷ օր Յինանց"
  },
- "thirty_seventh_day_of_2": {
+ "thirty_seventh_day_of_great_lent": {
   "en": "Thirty Seventh day of Great Lent",
   "hy": "ԼԷ օր Մեծի պահոց"
  },
@@ -1411,13 +1391,33 @@
   "en": "Thirty Third day of Eastertide",
   "hy": "ԼԳ օր Յինանց"
  },
- "thirty_third_day_of_2": {
+ "thirty_third_day_of_great_lent": {
   "en": "Thirty Third day of Great Lent",
   "hy": "ԼԳ օր Մեծի պահոց"
  },
  "tiridates_trdat_the_king": {
   "en": "Sts. Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht",
   "hy": "Սրբոցն Տրդատայ թագաւորին մերոյ եւ Աշխենի տիկնոջն եւ Խոսրովիդխտոյն"
+ },
+ "transfiguration_fast_day_1": {
+  "en": "First day of the Fast of the Transfiguration",
+  "hy": "Ա օր Վարդավառի պահոց"
+ },
+ "transfiguration_fast_day_2": {
+  "en": "Second day of the Fast of the Transfiguration",
+  "hy": "Բ օր Վարդավառի պահոց"
+ },
+ "transfiguration_fast_day_3": {
+  "en": "Third day of the Fast of the Transfiguration",
+  "hy": "Գ օր Վարդավառի պահոց"
+ },
+ "transfiguration_fast_day_4": {
+  "en": "Fourth day of the Fast of the Transfiguration",
+  "hy": "Դ օր Վարդավառի պահոց"
+ },
+ "transfiguration_fast_day_5": {
+  "en": "Fifth day of the Fast of the Transfiguration",
+  "hy": "Ե օր Վարդավառի պահոց"
  },
  "transfiguration_of_our_lord": {
   "en": "TRANSFIGURATION OF OUR LORD (Vartavar)",
@@ -1435,7 +1435,7 @@
   "en": "Twelfth day of Eastertide",
   "hy": "ԺԲ օր Յինանց"
  },
- "twelfth_day_of_great": {
+ "twelfth_day_of_great_lent": {
   "en": "Twelfth day of Great Lent",
   "hy": "ԺԲ օր Մեծի պահոց"
  },
@@ -1455,7 +1455,7 @@
   "en": "Twentieth day of Eastertide",
   "hy": "Ի օր Յինանց"
  },
- "twentieth_day_of_great": {
+ "twentieth_day_of_great_lent": {
   "en": "Twentieth day of Great Lent",
   "hy": "Ի օր Մեծի պահոց"
  },
@@ -1467,7 +1467,7 @@
   "en": "Twenty Fifth day of Eastertide",
   "hy": "ԻԵ օր Յինանց"
  },
- "twenty_fifth_day_of_2": {
+ "twenty_fifth_day_of_great_lent": {
   "en": "Twenty Fifth day of Great Lent",
   "hy": "ԻԵ օր Մեծի պահոց"
  },
@@ -1479,7 +1479,7 @@
   "en": "Twenty Fourth day of Eastertide",
   "hy": "ԻԴ օր Յինանց"
  },
- "twenty_fourth_day_of_2": {
+ "twenty_fourth_day_of_great_lent": {
   "en": "Twenty Fourth day of Great Lent (Median day)",
   "hy": "ԻԴ օր Մեծի պահոց: Միջինք"
  },
@@ -1495,7 +1495,7 @@
   "en": "Twenty Seventh day of Eastertide",
   "hy": "ԻԷ օր Յինանց"
  },
- "twenty_seventh_day_of_2": {
+ "twenty_seventh_day_of_great_lent": {
   "en": "Twenty Seventh day of Great Lent",
   "hy": "ԻԷ օր Մեծի պահոց"
  },
@@ -1503,7 +1503,7 @@
   "en": "Twenty Sixth day of Eastertide",
   "hy": "ԻԶ օր Յինանց"
  },
- "twenty_sixth_day_of_2": {
+ "twenty_sixth_day_of_great_lent": {
   "en": "Twenty Sixth day of Great Lent",
   "hy": "ԻԶ օր Մեծի պահոց"
  },
@@ -1511,7 +1511,7 @@
   "en": "Twenty Third day of Eastertide",
   "hy": "ԻԳ օր Յինանց"
  },
- "twenty_third_day_of_2": {
+ "twenty_third_day_of_great_lent": {
   "en": "Twenty Third day of Great Lent",
   "hy": "ԻԳ օր Մեծի պահոց"
  },
@@ -1535,11 +1535,11 @@
   "en": "Sts. Virgins Juliana and Basilla",
   "hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ"
  },
- "virgins_juliana_and_basilla_2": {
+ "virgins_juliana_and_basilla_with_abraham_and_khoren": {
   "en": "The Holy Virgins Juliana and Basilla, and Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային"
  },
- "virgins_juliana_and_basilla_3": {
+ "virgins_juliana_and_basilla_with_indes_domna_and_clericus": {
   "en": "The Holy Virgins Juliana and Basilla, and Holy Virgins Indes and Domna, and Clericus the Priest Along with the 20,000 Martyrs of Nicomedia",
   "hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց"
  },

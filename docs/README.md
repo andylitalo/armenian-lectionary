@@ -42,12 +42,15 @@ surfaced the duplicate-commemoration defect
 are still open — a table published now would be a table to republish. Generate it when they
 are closed.
 
-> **Reading the id columns.** A numeric suffix is a **collision counter over a truncated
-> slug, not an ordinal**. `third_day_of_the_4` is the *Third* day of the Fast of Nativity;
-> `third_day_of_the_2` is the *Third* day of the Fast of Advent. The four-word stem
-> `third_day_of_the` is shared, and the digit only says which claimant got there first.
-> Ids are frozen and never re-minted (CLAUDE.md, *Observance ids are stated, not derived*),
-> so an unhelpful one stays unhelpful — read the `en` column beside it, never the slug.
+> **Reading the id columns.** A numeric suffix minted by `--mint` is a **collision counter
+> over a truncated slug, not an ordinal**: two different observances whose first four slug
+> words agree (e.g. *Third day of the Fast of Nativity* and *Third day of the Fast of
+> Advent*, both truncating to `third_day_of_the`) get `_2`, `_3`, … appended in the order
+> they were minted, saying only which claimant got there first. The ids that shipped this
+> way (`third_day_of_the_4`, `third_day_of_the_2`, …) have since been hand-renamed to
+> descriptive ones (`nativity_fast_day_3`, `advent_fast_day_3`, …), but a fresh collision
+> mints the same unhelpful way — read the `en` column beside an unfamiliar id, never the
+> slug, and rename it by hand in `dev/observance_name_review.tsv` before it ships further.
 
 > **Citation convention.** Each canon quotes the English (`gemini-flash` translation,
 > `translated.md`) immediately followed by the page-aligned grabar (classical Armenian)

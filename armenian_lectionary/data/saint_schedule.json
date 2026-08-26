@@ -270,7 +270,7 @@
     "date_lo": "02-03",
     "date_hi": "02-09",
     "observance_ids": [
-     "gregory_the_illuminator_s_2"
+     "gregory_the_illuminator_sons_and_grandsons"
     ]
    },
    {
@@ -441,7 +441,7 @@
     "date_lo": "07-12",
     "date_hi": "08-01",
     "observance_ids": [
-     "gregory_the_illuminator_s_2"
+     "gregory_the_illuminator_sons_and_grandsons"
     ]
    },
    {
@@ -680,7 +680,7 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "second_day_of_the",
+     "second_day_of_assumption",
      "remembrance_of_the_dead"
     ]
    },
@@ -693,7 +693,7 @@
     "date_lo": "08-18",
     "date_hi": "08-24",
     "observance_ids": [
-     "seventh_day_of_the"
+     "seventh_day_of_assumption"
     ]
    },
    {
@@ -703,7 +703,7 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "third_day_of_the"
+     "third_day_of_assumption"
     ]
    },
    {
@@ -765,7 +765,7 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "john_the_forerunner_baptist_2"
+     "john_the_forerunner_baptist_and_job_the_righteous"
     ]
    },
    {
@@ -809,7 +809,7 @@
     "anchor": "tail",
     "weekday": "Thu",
     "observance_ids": [
-     "abraham_and_khoren_moneyless_2"
+     "abraham_and_khoren_moneyless_and_theodoron"
     ]
    }
   ]
@@ -898,7 +898,7 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "feast_of_the_holy_2",
+     "feast_of_the_holy_cross",
      "remembrance_of_the_dead"
     ]
    },
@@ -931,7 +931,7 @@
     "date_lo": "09-17",
     "date_hi": "09-23",
     "observance_ids": [
-     "feast_of_the_holy_2"
+     "feast_of_the_holy_cross"
     ]
    },
    {
@@ -1164,7 +1164,7 @@
     "support_years": 26,
     "anchor": "head",
     "observance_ids": [
-     "hipparchus_and_his_companions_2"
+     "hipparchus_and_companions_with_severianus_and_babylas"
     ]
    },
    {
@@ -1310,7 +1310,7 @@
     "support_years": 7,
     "anchor": "skip",
     "observance_ids": [
-     "abraham_and_khoren_moneyless_2"
+     "abraham_and_khoren_moneyless_and_theodoron"
     ]
    }
   ]

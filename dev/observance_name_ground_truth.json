@@ -114,7 +114,7 @@
  "Eighteenth day of Great Lent": {
   "approved_en": "Eighteenth day of Great Lent",
   "approved_hy": "ԺԸ օր Մեծի պահոց",
-  "id": "eighteenth_day_of_great",
+  "id": "eighteenth_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԸ օր Մեծի պահոց",
   "status": "ok"
@@ -122,7 +122,7 @@
  "Eighth Sunday after the Holy Cross": {
   "approved_en": "Eighth Sunday of the Holy Cross",
   "approved_hy": "Ը կիւրակէ զկնի Ս. Խաչի",
-  "id": "eighth_sunday_after_the",
+  "id": "eighth_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ը կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -130,7 +130,7 @@
  "Eighth day of Great Lent": {
   "approved_en": "Eighth day of Great Lent",
   "approved_hy": "Ը օր Մեծի պահոց",
-  "id": "eighth_day_of_great",
+  "id": "eighth_day_of_great_lent",
   "note": "",
   "source_hy": "Ը օր Մեծի պահոց",
   "status": "ok"
@@ -138,7 +138,7 @@
  "Eleventh Sunday after the Holy Cross": {
   "approved_en": "Eleventh Sunday of the Holy Cross",
   "approved_hy": "ԺԱ կիւրակէ զկնի Ս. Խաչի",
-  "id": "eleventh_sunday_after_the",
+  "id": "eleventh_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "ԺԱ կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -154,7 +154,7 @@
  "Eleventh day of Great Lent": {
   "approved_en": "Eleventh day of Great Lent",
   "approved_hy": "ԺԱ օր Մեծի պահոց",
-  "id": "eleventh_day_of_great",
+  "id": "eleventh_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԱ օր Մեծի պահոց",
   "status": "ok"
@@ -298,7 +298,7 @@
  "Feast day of the Discovery of the Belt of the Holy Mother of God": {
   "approved_en": "Feast day of the Discovery of the Belt of the Holy Mother of God",
   "approved_hy": "Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի",
-  "id": "feast_day_of_the",
+  "id": "discovery_of_the_belt_of_the_holy_mother_of_god",
   "note": "",
   "source_hy": "Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի",
   "status": "ok"
@@ -362,7 +362,7 @@
  "Feast of the Birth of St. John the Forerunner (Baptist)": {
   "approved_en": "Feast of the Birth of St. John the Forerunner (Baptist)",
   "approved_hy": "Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին",
-  "id": "feast_of_the_birth_2",
+  "id": "feast_of_the_birth_of_st_john_the_forerunner",
   "note": "",
   "source_hy": "Տօն Ծննդեան սրբոյն Յովհաննու Կարապետին",
   "status": "ok"
@@ -386,7 +386,7 @@
  "Feast of the Holy Cross": {
   "approved_en": "Feast of the Holy Cross",
   "approved_hy": "Տօն է Ս. Խաչի",
-  "id": "feast_of_the_holy_2",
+  "id": "feast_of_the_holy_cross",
   "note": "",
   "source_hy": "Տօն է Ս. Խաչի",
   "status": "ok"
@@ -394,7 +394,7 @@
  "Feast of the Holy Cross of Varag": {
   "approved_en": "Feast of the Holy Cross of Varag",
   "approved_hy": "Տօն Վարագայ ս. խաչի",
-  "id": "feast_of_the_holy_3",
+  "id": "feast_of_the_holy_cross_of_varag",
   "note": "",
   "source_hy": "Տօն Վարագայ ս. խաչի",
   "status": "ok"
@@ -410,7 +410,7 @@
  "Fifteenth day of Great Lent": {
   "approved_en": "Fifteenth day of Great Lent",
   "approved_hy": "ԺԵ օր Մեծի պահոց",
-  "id": "fifteenth_day_of_great",
+  "id": "fifteenth_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԵ օր Մեծի պահոց",
   "status": "ok"
@@ -450,7 +450,7 @@
  "Fifth Sunday after the Assumption": {
   "approved_en": "Fifth Sunday of the Assumption",
   "approved_hy": "Ե կիւրակէ զկնի Վերափոխման",
-  "id": "fifth_sunday_after_the",
+  "id": "fifth_sunday_of_the_assumption",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ե կիւրակէ զկնի Վերափոխման",
   "status": "fixed"
@@ -458,7 +458,7 @@
  "Fifth Sunday after the Holy Cross": {
   "approved_en": "Fifth Sunday of the Holy Cross",
   "approved_hy": "Ե կիւրակէ զկնի Ս. Խաչի",
-  "id": "fifth_sunday_after_the_2",
+  "id": "fifth_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ե կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -474,7 +474,7 @@
  "Fifth Sunday of Great Lent. Sunday of the Judge": {
   "approved_en": "Fifth Sunday of Great Lent: Sunday of the Judge",
   "approved_hy": "Ե կիւրակէ Մեծի պահոց (Դատաւորին)",
-  "id": "fifth_sunday_of_great",
+  "id": "fifth_sunday_of_great_lent",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ե կիւրակէ Քառասնորդական պահոց (Դատաւորին)",
   "status": "fixed"
@@ -498,7 +498,7 @@
  "Fifth day of Great Lent": {
   "approved_en": "Fifth day of Great Lent",
   "approved_hy": "Ե օր Մեծի պահոց",
-  "id": "fifth_day_of_great",
+  "id": "fifth_day_of_great_lent",
   "note": "",
   "source_hy": "Ե օր Մեծի պահոց",
   "status": "ok"
@@ -522,7 +522,7 @@
  "Fifth day of the Assumption": {
   "approved_en": "Fifth day of the Assumption",
   "approved_hy": "Ե օր Վերափոխման",
-  "id": "fifth_day_of_the",
+  "id": "fifth_day_of_assumption",
   "note": "",
   "source_hy": "Ե օր Վերափոխման",
   "status": "ok"
@@ -530,7 +530,7 @@
  "Fifth day of the Fast of Advent": {
   "approved_en": "Fifth day of the Fast of Advent",
   "approved_hy": "Ե օր Յիսնակի պահոց",
-  "id": "fifth_day_of_the_2",
+  "id": "advent_fast_day_5",
   "note": "",
   "source_hy": "Ե օր Յիսնակի պահոց",
   "status": "ok"
@@ -538,7 +538,7 @@
  "Fifth day of the Fast of Assumption": {
   "approved_en": "Fifth day of the Fast of Assumption",
   "approved_hy": "Ե օր Աստուածածնի պահոց",
-  "id": "fifth_day_of_the_3",
+  "id": "assumption_fast_day_5",
   "note": "",
   "source_hy": "Ե օր Աստուածածնի պահոց",
   "status": "ok"
@@ -546,7 +546,7 @@
  "Fifth day of the Fast of Nativity": {
   "approved_en": "Fifth day of the Fast of Nativity",
   "approved_hy": "Ե օր Ս. Ծննդեան պահոց",
-  "id": "fifth_day_of_the_4",
+  "id": "nativity_fast_day_5",
   "note": "",
   "source_hy": "Ե օր Ս. Ծննդեան պահոց",
   "status": "ok"
@@ -570,7 +570,7 @@
  "Fifth day of the Fast of the Catechumens": {
   "approved_en": "Fifth day of the Fast of the Catechumens",
   "approved_hy": "Ե օր Առաջաւորաց պահոց",
-  "id": "fifth_day_of_the_5",
+  "id": "catechumens_fast_day_5",
   "note": "",
   "source_hy": "Ե օր Առաջաւորաց պահոց",
   "status": "ok"
@@ -578,7 +578,7 @@
  "Fifth day of the Fast of the Holy Cross": {
   "approved_en": "Fifth day of the Fast of the Holy Cross",
   "approved_hy": "Ե օր Ս. Խաչի պահոց",
-  "id": "fifth_day_of_the_6",
+  "id": "holy_cross_fast_day_5",
   "note": "",
   "source_hy": "Ե օր Ս. Խաչի պահոց",
   "status": "ok"
@@ -594,7 +594,7 @@
  "Fifth day of the Fast of the Transifiguration": {
   "approved_en": "Fifth day of the Fast of the Transfiguration",
   "approved_hy": "Ե օր Վարդավառի պահոց",
-  "id": "fifth_day_of_the_7",
+  "id": "transfiguration_fast_day_5",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ե օր Վարդավառի պահոց",
   "status": "fixed"
@@ -626,7 +626,7 @@
  "First day of Great Lent": {
   "approved_en": "First day of Great Lent",
   "approved_hy": "Ա օր Մեծի պահոց",
-  "id": "first_day_of_great",
+  "id": "first_day_of_great_lent",
   "note": "",
   "source_hy": "Ա օր Մեծի պահոց",
   "status": "ok"
@@ -634,7 +634,7 @@
  "First day of the Fast of Advent": {
   "approved_en": "First day of the Fast of Advent",
   "approved_hy": "Ա օր Յիսնակի պահոց",
-  "id": "first_day_of_the",
+  "id": "advent_fast_day_1",
   "note": "",
   "source_hy": "Ա օր Յիսնակի պահոց",
   "status": "ok"
@@ -642,7 +642,7 @@
  "First day of the Fast of Assumption": {
   "approved_en": "First day of the Fast of Assumption",
   "approved_hy": "Ա օր Աստուածածնի պահոց",
-  "id": "first_day_of_the_2",
+  "id": "assumption_fast_day_1",
   "note": "",
   "source_hy": "Ա օր Աստուածածնի պահոց",
   "status": "ok"
@@ -650,7 +650,7 @@
  "First day of the Fast of Nativity": {
   "approved_en": "First day of the Fast of Nativity",
   "approved_hy": "Ա օր Ս. Ծննդեան պահոց",
-  "id": "first_day_of_the_3",
+  "id": "nativity_fast_day_1",
   "note": "",
   "source_hy": "Ա օր Ս. Ծննդեան պահոց",
   "status": "ok"
@@ -674,7 +674,7 @@
  "First day of the Fast of the Catechumens": {
   "approved_en": "First day of the Fast of the Catechumens",
   "approved_hy": "Ա օր Առաջաւորաց պահոց",
-  "id": "first_day_of_the_4",
+  "id": "catechumens_fast_day_1",
   "note": "",
   "source_hy": "Ա օր Առաջաւորաց պահոց",
   "status": "ok"
@@ -682,7 +682,7 @@
  "First day of the Fast of the Holy Cross": {
   "approved_en": "First day of the Fast of the Holy Cross",
   "approved_hy": "Ա օր Ս. Խաչի պահոց",
-  "id": "first_day_of_the_5",
+  "id": "holy_cross_fast_day_1",
   "note": "",
   "source_hy": "Ա օր Ս. Խաչի պահոց",
   "status": "ok"
@@ -698,7 +698,7 @@
  "First day of the Fast of the Transfiguration": {
   "approved_en": "First day of the Fast of the Transfiguration",
   "approved_hy": "Ա օր Վարդավառի պահոց",
-  "id": "first_day_of_the_6",
+  "id": "transfiguration_fast_day_1",
   "note": "",
   "source_hy": "Ա օր Վարդավառի պահոց",
   "status": "ok"
@@ -714,7 +714,7 @@
  "Fortieth day of Great Lent": {
   "approved_en": "Fortieth day of Great Lent",
   "approved_hy": "Խ օր Մեծի պահոց",
-  "id": "fortieth_day_of_great",
+  "id": "fortieth_day_of_great_lent",
   "note": "",
   "source_hy": "Խ օր Մեծի պահոց",
   "status": "ok"
@@ -746,7 +746,7 @@
  "Forty First day of Great Lent": {
   "approved_en": "Forty First day of Great Lent",
   "approved_hy": "ԽԱ օր Մեծի պահոց",
-  "id": "forty_first_day_of_2",
+  "id": "forty_first_day_of_great_lent",
   "note": "",
   "source_hy": "ԽԱ օր Մեծի պահոց",
   "status": "ok"
@@ -842,7 +842,7 @@
  "Fourth Sunday after the Holy Cross": {
   "approved_en": "Fourth Sunday of the Holy Cross",
   "approved_hy": "Դ կիւրակէ զկնի Ս. Խաչի",
-  "id": "fourth_sunday_after_the",
+  "id": "fourth_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Դ կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -858,7 +858,7 @@
  "Fourth Sunday of Great Lent. Sunday of the Steward": {
   "approved_en": "Fourth Sunday of Great Lent: Sunday of the Steward",
   "approved_hy": "Դ կիւրակէ Մեծի պահոց (Տնտեսին)",
-  "id": "fourth_sunday_of_great",
+  "id": "fourth_sunday_of_great_lent",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Դ կիւրակէ Քառասնորդական պահոց (Տնտեսին)",
   "status": "fixed"
@@ -882,7 +882,7 @@
  "Fourth day of Great Lent": {
   "approved_en": "Fourth day of Great Lent",
   "approved_hy": "Դ օր Մեծի պահոց",
-  "id": "fourth_day_of_great",
+  "id": "fourth_day_of_great_lent",
   "note": "",
   "source_hy": "Դ օր Մեծի պահոց",
   "status": "ok"
@@ -906,7 +906,7 @@
  "Fourth day of the Assumption": {
   "approved_en": "Fourth day of the Assumption",
   "approved_hy": "Դ օր Վերափոխման",
-  "id": "fourth_day_of_the",
+  "id": "fourth_day_of_assumption",
   "note": "",
   "source_hy": "Դ օր Վերափոխման",
   "status": "ok"
@@ -914,7 +914,7 @@
  "Fourth day of the Fast of Advent": {
   "approved_en": "Fourth day of the Fast of Advent",
   "approved_hy": "Դ օր Յիսնակի պահոց",
-  "id": "fourth_day_of_the_2",
+  "id": "advent_fast_day_4",
   "note": "",
   "source_hy": "Դ օր Յիսնակի պահոց",
   "status": "ok"
@@ -922,7 +922,7 @@
  "Fourth day of the Fast of Assumption": {
   "approved_en": "Fourth day of the Fast of Assumption",
   "approved_hy": "Դ օր Աստուածածնի պահոց",
-  "id": "fourth_day_of_the_3",
+  "id": "assumption_fast_day_4",
   "note": "",
   "source_hy": "Դ օր Աստուածածնի պահոց",
   "status": "ok"
@@ -930,7 +930,7 @@
  "Fourth day of the Fast of Nativity": {
   "approved_en": "Fourth day of the Fast of Nativity",
   "approved_hy": "Դ օր Ս. Ծննդեան պահոց",
-  "id": "fourth_day_of_the_4",
+  "id": "nativity_fast_day_4",
   "note": "",
   "source_hy": "Դ օր Ս. Ծննդեան պահոց",
   "status": "ok"
@@ -954,7 +954,7 @@
  "Fourth day of the Fast of the Catechumens": {
   "approved_en": "Fourth day of the Fast of the Catechumens",
   "approved_hy": "Դ օր Առաջաւորաց պահոց",
-  "id": "fourth_day_of_the_5",
+  "id": "catechumens_fast_day_4",
   "note": "",
   "source_hy": "Դ օր Առաջաւորաց պահոց",
   "status": "ok"
@@ -962,7 +962,7 @@
  "Fourth day of the Fast of the Holy Cross": {
   "approved_en": "Fourth day of the Fast of the Holy Cross",
   "approved_hy": "Դ օր Ս. Խաչի պահոց",
-  "id": "fourth_day_of_the_6",
+  "id": "holy_cross_fast_day_4",
   "note": "",
   "source_hy": "Դ օր Ս. Խաչի պահոց",
   "status": "ok"
@@ -978,7 +978,7 @@
  "Fourth day of the Fast of the Transfiguration": {
   "approved_en": "Fourth day of the Fast of the Transfiguration",
   "approved_hy": "Դ օր Վարդավառի պահոց",
-  "id": "fourth_day_of_the_7",
+  "id": "transfiguration_fast_day_4",
   "note": "",
   "source_hy": "Դ օր Վարդավառի պահոց",
   "status": "ok"
@@ -1146,7 +1146,7 @@
  "Nineteenth day of Great Lent": {
   "approved_en": "Nineteenth day of Great Lent",
   "approved_hy": "ԺԹ օր Մեծի պահոց",
-  "id": "nineteenth_day_of_great",
+  "id": "nineteenth_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԹ օր Մեծի պահոց",
   "status": "ok"
@@ -1154,7 +1154,7 @@
  "Ninth Sunday after the Holy Cross": {
   "approved_en": "Ninth Sunday of the Holy Cross",
   "approved_hy": "Թ կիւրակէ զկնի Ս. Խաչի",
-  "id": "ninth_sunday_after_the",
+  "id": "ninth_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Թ կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -1178,7 +1178,7 @@
  "Ninth day of Great Lent": {
   "approved_en": "Ninth day of Great Lent",
   "approved_hy": "Թ օր Մեծի պահոց",
-  "id": "ninth_day_of_great",
+  "id": "ninth_day_of_great_lent",
   "note": "",
   "source_hy": "Թ օր Մեծի պահոց",
   "status": "ok"
@@ -1187,7 +1187,7 @@
   "approved_en": "Octave of Easter (New Sunday)",
   "approved_hy": "Ը օր Զատկի; Կրկնազատիկ (Նոր կիւրակէ)",
   "id": "octave_of_easter_new",
-  "note": "Two Armenian pieces under one English component. The source itself writes them as separate components on some days (\"Ը օր Զատկի — Կրկնազատիկ\"), so the internal break gets the catalog's declared _INTERNAL_SEP rather than the period the sampled day happened to use — a period is ambiguous with the abbreviation dots elsewhere in these names. Same treatment as third_day_of_the_4.",
+  "note": "Two Armenian pieces under one English component. The source itself writes them as separate components on some days (\"Ը օր Զատկի — Կրկնազատիկ\"), so the internal break gets the catalog's declared _INTERNAL_SEP rather than the period the sampled day happened to use — a period is ambiguous with the abbreviation dots elsewhere in these names. Same treatment as nativity_fast_day_3.",
   "source_hy": "Ը օր Զատկի. Կրկնազատիկ (Նոր կիւրակէ)",
   "status": "ok"
  },
@@ -1338,7 +1338,7 @@
  "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel": {
   "approved_en": "St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel",
   "approved_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
-  "id": "gregory_the_illuminator_s_2",
+  "id": "gregory_the_illuminator_sons_and_grandsons",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it | Wikipedia's own article (St. Vrtanes I) spells these 'Aristaces' and 'Husik', not 'Aristakes'/'Housik' -- but Armenian Church diocese sites are inconsistent between transliteration conventions (cf. Ghevond vs Ghevont). Worth a call: Wikipedia form or church-website form?",
   "source_hy": "Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիելի",
   "status": "review"
@@ -1410,7 +1410,7 @@
  "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides": {
   "approved_en": "Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
   "approved_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
-  "id": "patriarchs_ignatius_the_bishop_2",
+  "id": "patriarchs_ignatius_the_bishop_and_companions",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ",
   "status": "fixed"
@@ -1506,7 +1506,7 @@
  "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": {
   "approved_en": "Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "approved_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
-  "id": "abraham_and_khoren_moneyless_2",
+  "id": "abraham_and_khoren_moneyless_and_theodoron",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
   "status": "fixed"
@@ -1618,7 +1618,7 @@
  "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East": {
   "approved_en": "Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
   "approved_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
-  "id": "cornelius_the_centurion_simeon_2",
+  "id": "cornelius_the_centurion_simeon_no_title",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան",
   "status": "review"
@@ -1786,7 +1786,7 @@
  "Saints Gennaro the Bishop and Mercurius the Warrior, and Saints Saints Jacoc and Themistocles": {
   "approved_en": "Sts. Gennaro the Bishop and Mercurius the Warrior, and Sts. Jacoc and Themistocles",
   "approved_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ",
-  "id": "gennaro_the_bishop_and_2",
+  "id": "gennaro_the_bishop_and_mercurius_with_jacoc_and_themistocles",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Գենարիոսի եպիսկոպոսին եւ Մերկերիոսի զինաւորին եւ սրբոցն Յակովկայ եւ Իրաւափառայ",
   "status": "fixed"
@@ -1842,7 +1842,7 @@
  "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples": {
   "approved_en": "Sts. Hipparchus and His Companions Who Were Martyred in Samosata, and Sts. Severianus of Sebastia and Babylas and His 84 Disciples",
   "approved_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
-  "id": "hipparchus_and_his_companions_2",
+  "id": "hipparchus_and_companions_with_severianus_and_babylas",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց Հիպերիքեանցն, որք ի Սամուսատ կատարեցան, եւ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն եւ ութսուն եւ չորից աշակերտաց նորին",
   "status": "fixed"
@@ -1890,7 +1890,7 @@
  "Saints John the Forerunner (Baptist) and Job the Righteous": {
   "approved_en": "Sts. John the Forerunner (Baptist) and Job the Righteous",
   "approved_hy": "Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն",
-  "id": "john_the_forerunner_baptist_2",
+  "id": "john_the_forerunner_baptist_and_job_the_righteous",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն",
   "status": "fixed"
@@ -2234,7 +2234,7 @@
  "Second Sunday after the Assumption": {
   "approved_en": "Second Sunday of the Assumption",
   "approved_hy": "Բ կիւրակէ զկնի Վերափոխման",
-  "id": "second_sunday_after_the",
+  "id": "second_sunday_of_the_assumption",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բ կիւրակէ զկնի Վերափոխման",
   "status": "fixed"
@@ -2242,7 +2242,7 @@
  "Second Sunday after the Holy Cross": {
   "approved_en": "Second Sunday of the Holy Cross",
   "approved_hy": "Բ կիւրակէ զկնի Ս. Խաչին",
-  "id": "second_sunday_after_the_2",
+  "id": "second_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բ կիւրակէ զկնի Ս. Խաչին",
   "status": "fixed"
@@ -2258,7 +2258,7 @@
  "Second Sunday of Great Lent, Sunday of the Expulsion": {
   "approved_en": "Second Sunday of Great Lent: Sunday of the Expulsion",
   "approved_hy": "Բ կիւրակէ Մեծի պահոց (Արտաքսման)",
-  "id": "second_sunday_of_great",
+  "id": "second_sunday_of_great_lent",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES (period, not colon) -- already a deliberate fix (comma->period, source's own 25 other occurrences use period). A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "source_hy": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
   "status": "review"
@@ -2266,7 +2266,7 @@
  "Second Sunday of Great Lent. Sunday of the Expulsion": {
   "approved_en": "Second Sunday of Great Lent: Sunday of the Expulsion",
   "approved_hy": "Բ կիւրակէ Մեծի պահոց (Արտաքսման)",
-  "id": "second_sunday_of_great",
+  "id": "second_sunday_of_great_lent",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
   "status": "fixed"
@@ -2290,7 +2290,7 @@
  "Second day of Great Lent": {
   "approved_en": "Second day of Great Lent",
   "approved_hy": "Բ օր Մեծի պահոց",
-  "id": "second_day_of_great",
+  "id": "second_day_of_great_lent",
   "note": "",
   "source_hy": "Բ օր Մեծի պահոց",
   "status": "ok"
@@ -2322,7 +2322,7 @@
  "Second day of the Assumption": {
   "approved_en": "Second day of the Assumption",
   "approved_hy": "Բ օր Վերափոխման",
-  "id": "second_day_of_the",
+  "id": "second_day_of_assumption",
   "note": "",
   "source_hy": "Բ օր Վերափոխման",
   "status": "ok"
@@ -2330,7 +2330,7 @@
  "Second day of the Fast of Advent": {
   "approved_en": "Second day of the Fast of Advent",
   "approved_hy": "Բ օր Յիսնակի պահոց",
-  "id": "second_day_of_the_2",
+  "id": "advent_fast_day_2",
   "note": "",
   "source_hy": "Բ օր Յիսնակի պահոց",
   "status": "ok"
@@ -2338,7 +2338,7 @@
  "Second day of the Fast of Assumption": {
   "approved_en": "Second day of the Fast of Assumption",
   "approved_hy": "Բ օր Աստուածածնի պահոց",
-  "id": "second_day_of_the_3",
+  "id": "assumption_fast_day_2",
   "note": "",
   "source_hy": "Բ օր Աստուածածնի պահոց",
   "status": "ok"
@@ -2346,7 +2346,7 @@
  "Second day of the Fast of Nativity": {
   "approved_en": "Second day of the Fast of Nativity",
   "approved_hy": "Բ օր Ս. Ծննդեան պահոց",
-  "id": "second_day_of_the_4",
+  "id": "nativity_fast_day_2",
   "note": "",
   "source_hy": "Բ օր Ս. Ծննդեան պահոց",
   "status": "ok"
@@ -2370,7 +2370,7 @@
  "Second day of the Fast of the Catechumens": {
   "approved_en": "Second day of the Fast of the Catechumens",
   "approved_hy": "Բ օր Առաջաւորաց պահոց",
-  "id": "second_day_of_the_5",
+  "id": "catechumens_fast_day_2",
   "note": "",
   "source_hy": "Բ օր Առաջաւորաց պահոց",
   "status": "ok"
@@ -2378,7 +2378,7 @@
  "Second day of the Fast of the Holy Cross": {
   "approved_en": "Second day of the Fast of the Holy Cross",
   "approved_hy": "Բ օր Ս. Խաչի պահոց",
-  "id": "second_day_of_the_6",
+  "id": "holy_cross_fast_day_2",
   "note": "",
   "source_hy": "Բ օր Ս. Խաչի պահոց",
   "status": "ok"
@@ -2394,7 +2394,7 @@
  "Second day of the Fast of the Transfiguration": {
   "approved_en": "Second day of the Fast of the Transfiguration",
   "approved_hy": "Բ օր Վարդավառի պահոց",
-  "id": "second_day_of_the_7",
+  "id": "transfiguration_fast_day_2",
   "note": "",
   "source_hy": "Բ օր Վարդավառի պահոց",
   "status": "ok"
@@ -2410,7 +2410,7 @@
  "Seventeenth day of Great Lent": {
   "approved_en": "Seventeenth day of Great Lent",
   "approved_hy": "ԺԷ օր Մեծի պահոց",
-  "id": "seventeenth_day_of_great",
+  "id": "seventeenth_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԷ օր Մեծի պահոց",
   "status": "ok"
@@ -2434,7 +2434,7 @@
  "Seventh Sunday after the Holy Cross": {
   "approved_en": "Seventh Sunday of the Holy Cross",
   "approved_hy": "Է կիւրակէ զկնի Ս. Խաչի",
-  "id": "seventh_sunday_after_the",
+  "id": "seventh_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Է կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -2482,7 +2482,7 @@
  "Seventh day of the Assumption": {
   "approved_en": "Seventh day of the Assumption",
   "approved_hy": "Է օր Վերափոխման",
-  "id": "seventh_day_of_the",
+  "id": "seventh_day_of_assumption",
   "note": "",
   "source_hy": "Է օր Վերափոխման",
   "status": "ok"
@@ -2506,7 +2506,7 @@
  "Sixteenth day of Great Lent": {
   "approved_en": "Sixteenth day of Great Lent",
   "approved_hy": "ԺԶ օր Մեծի պահոց",
-  "id": "sixteenth_day_of_great",
+  "id": "sixteenth_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԶ օր Մեծի պահոց",
   "status": "ok"
@@ -2538,7 +2538,7 @@
  "Sixth Sunday after the Holy Cross": {
   "approved_en": "Sixth Sunday of the Holy Cross",
   "approved_hy": "Զ կիւրակէ զկնի Ս. Խաչի",
-  "id": "sixth_sunday_after_the",
+  "id": "sixth_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Զ կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -2562,7 +2562,7 @@
  "Sixth Sunday of Great Lent, Sunday of the Advent": {
   "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
   "approved_hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)",
-  "id": "sixth_sunday_of_great",
+  "id": "sixth_sunday_of_great_lent",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES ('...Sunday of the Advent', period not colon). 'Sunday of the Second Coming' would be a real theological content change to an already-reviewed label, not a mechanical fix -- needs explicit sign-off, not a silent ground-truth edit. A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
   "status": "review"
@@ -2570,7 +2570,7 @@
  "Sixth Sunday of Great Lent. Sunday of the Advent": {
   "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
   "approved_hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)",
-  "id": "sixth_sunday_of_great",
+  "id": "sixth_sunday_of_great_lent",
   "note": "",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
   "status": "ok"
@@ -2586,7 +2586,7 @@
  "Sixth day of Great Lent": {
   "approved_en": "Sixth day of Great Lent",
   "approved_hy": "Զ օր Մեծի պահոց",
-  "id": "sixth_day_of_great",
+  "id": "sixth_day_of_great_lent",
   "note": "",
   "source_hy": "Զ օր Մեծի պահոց",
   "status": "ok"
@@ -2610,7 +2610,7 @@
  "Sixth day of the Assumption": {
   "approved_en": "Sixth day of the Assumption",
   "approved_hy": "Զ օր Վերափոխման",
-  "id": "sixth_day_of_the",
+  "id": "sixth_day_of_assumption",
   "note": "",
   "source_hy": "Զ օր Վերափոխման",
   "status": "ok"
@@ -2618,7 +2618,7 @@
  "Sixth day of the Fast of Nativity": {
   "approved_en": "Sixth day of the Fast of Nativity",
   "approved_hy": "Զ օր Ս. Ծննդեան պահոց",
-  "id": "sixth_day_of_the_2",
+  "id": "nativity_fast_day_6",
   "note": "",
   "source_hy": "Զ օր Ս. Ծննդեան պահոց",
   "status": "ok"
@@ -2626,7 +2626,7 @@
  "Staint Gregory the Illuminator's coming out of Pit": {
   "approved_en": "St. Gregory the Illuminator's coming out of Pit",
   "approved_hy": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն",
-  "id": "gregory_the_illuminator_s_3",
+  "id": "gregory_the_illuminator_coming_out_of_pit",
   "note": "Missing article, and lowercase 'coming' where the companion feast reads 'Commitment to the Pit'. 'Coming out of the Pit'? Left alone as the source's own wording rather than silently rewritten.",
   "source_hy": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն",
   "status": "review"
@@ -2650,7 +2650,7 @@
  "Tenth Sunday after the Holy Cross": {
   "approved_en": "Tenth Sunday of the Holy Cross",
   "approved_hy": "Ժ կիւրակէ զկնի Ս. Խաչի",
-  "id": "tenth_sunday_after_the",
+  "id": "tenth_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ժ կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -2666,7 +2666,7 @@
  "Tenth day of Great Lent": {
   "approved_en": "Tenth day of Great Lent",
   "approved_hy": "Ժ օր Մեծի պահոց",
-  "id": "tenth_day_of_great",
+  "id": "tenth_day_of_great_lent",
   "note": "",
   "source_hy": "Ժ օր Մեծի պահոց",
   "status": "ok"
@@ -2730,7 +2730,7 @@
  "The Holy Virgins Juliana and Basilla, and Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr": {
   "approved_en": "The Holy Virgins Juliana and Basilla, and Sts. Abraham and Khoren, Moneyless Physicians Cosmas and Damian, and Theodoron the Martyr",
   "approved_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
-  "id": "virgins_juliana_and_basilla_2",
+  "id": "virgins_juliana_and_basilla_with_abraham_and_khoren",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, նաեւ սրբոցն Աբրահամու եւ Խորենայ եւ անարծաթ բժշկացն Կոզմայի եւ Դամիանոսի եւ Աստուածատրոյ վկային",
   "status": "fixed"
@@ -2738,7 +2738,7 @@
  "The Holy Virgins Juliana and Basilla, and Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia": {
   "approved_en": "The Holy Virgins Juliana and Basilla, and Holy Virgins Indes and Domna, and Clericus the Priest Along with the 20,000 Martyrs of Nicomedia",
   "approved_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
-  "id": "virgins_juliana_and_basilla_3",
+  "id": "virgins_juliana_and_basilla_with_indes_domna_and_clericus",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Սրբոց կուսանացն Յուլիանեայ եւ Վասիլուհւոյ, Ինդոսի, Դոմնայի եւ Գղերիկոսի քահանային եւ երկուց բիւրոցն, որք այրեցան յեկեղեցին Նիկոմիդացւոց",
   "status": "fixed"
@@ -2794,7 +2794,7 @@
  "Third Sunday after the Holy Cross": {
   "approved_en": "Third Sunday of the Holy Cross",
   "approved_hy": "Գ կիւրակէ զկնի Ս. Խաչի",
-  "id": "third_sunday_after_the",
+  "id": "third_sunday_of_the_holy_cross",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գ կիւրակէ զկնի Ս. Խաչի",
   "status": "fixed"
@@ -2810,7 +2810,7 @@
  "Third Sunday of Great Lent. Sunday of the Prodigal Son": {
   "approved_en": "Third Sunday of Great Lent: Sunday of the Prodigal Son",
   "approved_hy": "Գ կիւրակէ Մեծի պահոց (Անառակին)",
-  "id": "third_sunday_of_great",
+  "id": "third_sunday_of_great_lent",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գ կիւրակէ Քառասնորդական պահոց (Անառակին)",
   "status": "fixed"
@@ -2842,7 +2842,7 @@
  "Third day of Great Lent": {
   "approved_en": "Third day of Great Lent",
   "approved_hy": "Գ օր Մեծի պահոց",
-  "id": "third_day_of_great",
+  "id": "third_day_of_great_lent",
   "note": "",
   "source_hy": "Գ օր Մեծի պահոց",
   "status": "ok"
@@ -2874,7 +2874,7 @@
  "Third day of the Assumption": {
   "approved_en": "Third day of the Assumption",
   "approved_hy": "Գ օր Վերափոխման",
-  "id": "third_day_of_the",
+  "id": "third_day_of_assumption",
   "note": "",
   "source_hy": "Գ օր Վերափոխման",
   "status": "ok"
@@ -2882,7 +2882,7 @@
  "Third day of the Fast of Advent": {
   "approved_en": "Third day of the Fast of Advent",
   "approved_hy": "Գ օր Յիսնակի պահոց",
-  "id": "third_day_of_the_2",
+  "id": "advent_fast_day_3",
   "note": "",
   "source_hy": "Գ օր Յիսնակի պահոց",
   "status": "ok"
@@ -2890,7 +2890,7 @@
  "Third day of the Fast of Assumption": {
   "approved_en": "Third day of the Fast of Assumption",
   "approved_hy": "Գ օր Աստուածածնի պահոց",
-  "id": "third_day_of_the_3",
+  "id": "assumption_fast_day_3",
   "note": "",
   "source_hy": "Գ օր Աստուածածնի պահոց",
   "status": "ok"
@@ -2898,7 +2898,7 @@
  "Third day of the Fast of Nativity": {
   "approved_en": "Third day of the Fast of Nativity",
   "approved_hy": "Գ օր Ս. Ծննդեան պահոց",
-  "id": "third_day_of_the_4",
+  "id": "nativity_fast_day_3",
   "note": "the source's Armenian glues the New Year onto this position label; it is its own observance (blessing_of_the_pomegranates), so the label keeps only the day count. See docs section 9.",
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
   "status": "ok"
@@ -2906,7 +2906,7 @@
  "Third day of the Fast of Nativity.": {
   "approved_en": "Third day of the Fast of Nativity",
   "approved_hy": "Գ օր Ս. Ծննդեան պահոց",
-  "id": "third_day_of_the_4",
+  "id": "nativity_fast_day_3",
   "note": "the source's Armenian glues the New Year onto this position label; it is its own observance (blessing_of_the_pomegranates), so the label keeps only the day count. See docs section 9.",
   "source_hy": "Գ օր Ս. Ծննդեան պահոց — Կաղանդ. տարեմուտ",
   "status": "fixed"
@@ -2930,7 +2930,7 @@
  "Third day of the Fast of the Catechumens": {
   "approved_en": "Third day of the Fast of the Catechumens",
   "approved_hy": "Գ օր Առաջաւորաց պահոց",
-  "id": "third_day_of_the_5",
+  "id": "catechumens_fast_day_3",
   "note": "",
   "source_hy": "Գ օր Առաջաւորաց պահոց",
   "status": "ok"
@@ -2938,7 +2938,7 @@
  "Third day of the Fast of the Holy Cross": {
   "approved_en": "Third day of the Fast of the Holy Cross",
   "approved_hy": "Գ օր Ս. Խաչի պահոց",
-  "id": "third_day_of_the_6",
+  "id": "holy_cross_fast_day_3",
   "note": "",
   "source_hy": "Գ օր Ս. Խաչի պահոց",
   "status": "ok"
@@ -2954,7 +2954,7 @@
  "Third day of the Fast of the Transfiguration": {
   "approved_en": "Third day of the Fast of the Transfiguration",
   "approved_hy": "Գ օր Վարդավառի պահոց",
-  "id": "third_day_of_the_7",
+  "id": "transfiguration_fast_day_3",
   "note": "",
   "source_hy": "Գ օր Վարդավառի պահոց",
   "status": "ok"
@@ -2970,7 +2970,7 @@
  "Thirteenth day of Great Lent": {
   "approved_en": "Thirteenth day of Great Lent",
   "approved_hy": "ԺԳ օր Մեծի պահոց",
-  "id": "thirteenth_day_of_great",
+  "id": "thirteenth_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԳ օր Մեծի պահոց",
   "status": "ok"
@@ -2986,7 +2986,7 @@
  "Thirtieth day of Great Lent": {
   "approved_en": "Thirtieth day of Great Lent",
   "approved_hy": "Լ օր Մեծի պահոց",
-  "id": "thirtieth_day_of_great",
+  "id": "thirtieth_day_of_great_lent",
   "note": "",
   "source_hy": "Լ օր Մեծի պահոց",
   "status": "ok"
@@ -3002,7 +3002,7 @@
  "Thirty Eighth day of Great Lent": {
   "approved_en": "Thirty Eighth day of Great Lent",
   "approved_hy": "ԼԸ օր Մեծի պահոց",
-  "id": "thirty_eighth_day_of_2",
+  "id": "thirty_eighth_day_of_great_lent",
   "note": "",
   "source_hy": "ԼԸ օր Մեծի պահոց",
   "status": "ok"
@@ -3026,7 +3026,7 @@
  "Thirty First day of Great Lent": {
   "approved_en": "Thirty First day of Great Lent",
   "approved_hy": "ԼԱ օր Մեծի պահոց",
-  "id": "thirty_first_day_of_2",
+  "id": "thirty_first_day_of_great_lent",
   "note": "",
   "source_hy": "ԼԱ օր Մեծի պահոց",
   "status": "ok"
@@ -3042,7 +3042,7 @@
  "Thirty Fourth day of Great Lent": {
   "approved_en": "Thirty Fourth day of Great Lent",
   "approved_hy": "ԼԴ օր Մեծի պահոց",
-  "id": "thirty_fourth_day_of_2",
+  "id": "thirty_fourth_day_of_great_lent",
   "note": "",
   "source_hy": "ԼԴ օր Մեծի պահոց",
   "status": "ok"
@@ -3058,7 +3058,7 @@
  "Thirty Ninth day of Great Lent": {
   "approved_en": "Thirty Ninth day of Great Lent",
   "approved_hy": "ԼԹ օր Մեծի պահոց",
-  "id": "thirty_ninth_day_of_2",
+  "id": "thirty_ninth_day_of_great_lent",
   "note": "",
   "source_hy": "ԼԹ օր Մեծի պահոց",
   "status": "ok"
@@ -3074,7 +3074,7 @@
  "Thirty Second day of Great Lent": {
   "approved_en": "Thirty Second day of Great Lent",
   "approved_hy": "ԼԲ օր Մեծի պահոց",
-  "id": "thirty_second_day_of_2",
+  "id": "thirty_second_day_of_great_lent",
   "note": "",
   "source_hy": "ԼԲ օր Մեծի պահոց",
   "status": "ok"
@@ -3090,7 +3090,7 @@
  "Thirty Seventh day of Great Lent": {
   "approved_en": "Thirty Seventh day of Great Lent",
   "approved_hy": "ԼԷ օր Մեծի պահոց",
-  "id": "thirty_seventh_day_of_2",
+  "id": "thirty_seventh_day_of_great_lent",
   "note": "",
   "source_hy": "ԼԷ օր Մեծի պահոց",
   "status": "ok"
@@ -3114,7 +3114,7 @@
  "Thirty Third day of Great Lent": {
   "approved_en": "Thirty Third day of Great Lent",
   "approved_hy": "ԼԳ օր Մեծի պահոց",
-  "id": "thirty_third_day_of_2",
+  "id": "thirty_third_day_of_great_lent",
   "note": "",
   "source_hy": "ԼԳ օր Մեծի պահոց",
   "status": "ok"
@@ -3130,7 +3130,7 @@
  "Twelfth day of Great Lent": {
   "approved_en": "Twelfth day of Great Lent",
   "approved_hy": "ԺԲ օր Մեծի պահոց",
-  "id": "twelfth_day_of_great",
+  "id": "twelfth_day_of_great_lent",
   "note": "",
   "source_hy": "ԺԲ օր Մեծի պահոց",
   "status": "ok"
@@ -3154,7 +3154,7 @@
  "Twentieth day of Great Lent": {
   "approved_en": "Twentieth day of Great Lent",
   "approved_hy": "Ի օր Մեծի պահոց",
-  "id": "twentieth_day_of_great",
+  "id": "twentieth_day_of_great_lent",
   "note": "",
   "source_hy": "Ի օր Մեծի պահոց",
   "status": "ok"
@@ -3178,7 +3178,7 @@
  "Twenty Fifth day of Great Lent": {
   "approved_en": "Twenty Fifth day of Great Lent",
   "approved_hy": "ԻԵ օր Մեծի պահոց",
-  "id": "twenty_fifth_day_of_2",
+  "id": "twenty_fifth_day_of_great_lent",
   "note": "",
   "source_hy": "ԻԵ օր Մեծի պահոց",
   "status": "ok"
@@ -3202,7 +3202,7 @@
  "Twenty Fourth day of Great Lent. Median day of Lent": {
   "approved_en": "Twenty Fourth day of Great Lent (Median day)",
   "approved_hy": "ԻԴ օր Մեծի պահոց: Միջինք",
-  "id": "twenty_fourth_day_of_2",
+  "id": "twenty_fourth_day_of_great_lent",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "ԻԴ օր Մեծի պահոց: Միջինք",
   "status": "fixed"
@@ -3234,7 +3234,7 @@
  "Twenty Seventh day of Great Lent": {
   "approved_en": "Twenty Seventh day of Great Lent",
   "approved_hy": "ԻԷ օր Մեծի պահոց",
-  "id": "twenty_seventh_day_of_2",
+  "id": "twenty_seventh_day_of_great_lent",
   "note": "",
   "source_hy": "ԻԷ օր Մեծի պահոց",
   "status": "ok"
@@ -3250,7 +3250,7 @@
  "Twenty Sixth day of Great Lent": {
   "approved_en": "Twenty Sixth day of Great Lent",
   "approved_hy": "ԻԶ օր Մեծի պահոց",
-  "id": "twenty_sixth_day_of_2",
+  "id": "twenty_sixth_day_of_great_lent",
   "note": "",
   "source_hy": "ԻԶ օր Մեծի պահոց",
   "status": "ok"
@@ -3266,7 +3266,7 @@
  "Twenty Third day of Great Lent": {
   "approved_en": "Twenty Third day of Great Lent",
   "approved_hy": "ԻԳ օր Մեծի պահոց",
-  "id": "twenty_third_day_of_2",
+  "id": "twenty_third_day_of_great_lent",
   "note": "",
   "source_hy": "ԻԳ օր Մեծի պահոց",
   "status": "ok"

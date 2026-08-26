@@ -1129,7 +1129,7 @@ year* — and its English prints nothing. Three cached Armenian days attest it (
 
 So the day reached English callers as a bare position label, and the pairing in
 `dev/fetch_translations.py` — which matches whole strings when the component counts differ —
-folded the Armenian into the position label's own entry: `third_day_of_the_4` shipped
+folded the Armenian into the position label's own entry: `nativity_fast_day_3` shipped
 `Գ օր Ս. Ծննդեան պահոց; Կաղանդ. տարեմուտ`. A civil-date observance hidden inside a
 calendar-position label, in one language only.
 
@@ -1194,7 +1194,7 @@ say what the served name asserts beyond what the source's text does.
 
 ### What it fixed on the Armenian side
 
-`third_day_of_the_4` gives up the glued note and is just `Գ օր Ս. Ծննդեան պահոց`. Because
+`nativity_fast_day_3` gives up the glued note and is just `Գ օր Ս. Ծննդեան պահոց`. Because
 the new row carries `source_hy = Կաղանդ. տարեմուտ` and `approved_hy = Նռնօրհնէք`,
 `ground_truth_hy_fixes` folds the source spelling, which is what will keep Jan 1 exact from
 2015 once the Armenian cache samples one of those years. `INTERNAL_DELIMITER` 7 → 5.
