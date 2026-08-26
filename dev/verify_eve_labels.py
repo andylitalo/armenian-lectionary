@@ -40,7 +40,14 @@ def source_eve(feast_str):
     return None
 
 
-def main():
+def collect():
+    """Walk the whole cache once; return the rule's findings and the end-to-end tally.
+
+    The sibling of ``dev/verify_position_labels.collect``, split out of :func:`main` for
+    the same reason: every number below is an invariant that must read 0, and
+    ``tests/test_label_rules.py`` asserts them by importing this rather than by keeping a
+    second copy of the sweep.
+    """
     days = load_all()
     mismatch, missing, extra = [], [], []
     matched = 0
@@ -74,6 +81,16 @@ def main():
             served_ok += 1
         else:
             served_lost.append((iso, src, served))
+
+    return {"matched": matched, "mismatch": mismatch, "missing": missing, "extra": extra,
+            "served_ok": served_ok, "served_lost": served_lost, "days": len(days)}
+
+
+def main():
+    data = collect()
+    matched, mismatch = data["matched"], data["mismatch"]
+    missing, extra = data["missing"], data["extra"]
+    served_ok, served_lost = data["served_ok"], data["served_lost"]
 
     print(f"matched  {matched}")
     print(f"MISMATCH {len(mismatch)}   (must be 0 -- engine contradicts the source)")

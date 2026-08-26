@@ -15,8 +15,9 @@ are NOT equally strong, and this file is where that asymmetry is kept honest:
   * readings are evidence. They come from the validated table, produced independently of
     the rule that emitted the label.
   * a coordinate is the rule restating itself. It can only ever confirm what it already
-    said, so its backing is rule-level: dev/verify_position_labels.py (6,216 matched, 0
-    MISMATCH, 0 EXTRA) and dev/verify_eve_labels.py (338/338).
+    said, so its backing is rule-level: dev/verify_position_labels.py (6,294 matched, 0
+    MISMATCH, 0 EXTRA) and dev/verify_eve_labels.py (338/338) -- asserted, not merely
+    reported, by tests/test_label_rules.py.
 
 So the coordinate route is allowed to name an observance the readings cannot, but it is
 never allowed to overrule the table about one. Three checks below, one per place that can
@@ -80,8 +81,8 @@ class TestTheTableAndTheRuleAgree(unittest.TestCase):
     literal's exact wording is already unreachable by any real request --
     ``_resolve_generated_text`` resolves through the readings hash first, which is
     independent of the literal's text -- so such a typo was never visible to a caller in
-    the first place. It stays covered by ``dev/verify_position_labels.py``/
-    ``verify_eve_labels.py`` (rule vs. source, cache-gated) and
+    the first place. It stays covered by ``tests/test_label_rules.py`` (rule vs. source,
+    over the two verifiers' own sweeps, cache-gated) and
     ``tests/test_observance_name_review.py`` (served vs. approved).
 
     This is deliberately NOT a check against sacredtradition.am: the verifiers do that, and

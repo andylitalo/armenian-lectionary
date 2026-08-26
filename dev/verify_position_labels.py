@@ -52,7 +52,15 @@ def family_of(label):
     return label
 
 
-def main():
+def collect():
+    """Walk the whole cache once; return the rule's findings and the end-to-end tally.
+
+    Split out of :func:`main` for the reason ``dev/observance_discrepancy_report.collect``
+    was: the numbers this file prints are invariants (MISMATCH, EXTRA and END-TO-END LOST
+    all 0), and an invariant a human reads off stdout is not enforced. They are asserted in
+    ``tests/test_label_rules.py``, which imports this function so the report and the test
+    can never measure different things.
+    """
     days = load_all()
     mismatch, missing, extra = [], [], []
     matched = 0
@@ -79,7 +87,8 @@ def main():
     # validated table supplies the rest. Anything counted here as "missing" above may
     # still be served, so report the end-to-end number too -- reading the generator's
     # residue as data loss is the obvious misreading of this tool.
-    served_ok = served_lost = served_declined = 0
+    served_ok = served_declined = 0
+    served_lost = []
     for iso in sorted(days):
         feast = (days[iso].get("feast") or "").strip()
         src = source_position(feast) if feast else None
@@ -96,7 +105,20 @@ def main():
         if src in [c.strip() for c in served.split(_OBSERVANCE_SEP)]:
             served_ok += 1
         else:
-            served_lost += 1
+            # The lost rows carry the served name too: a LOST count tells you a label went
+            # missing, and the next question is always what the day was called instead.
+            served_lost.append((iso, src, served))
+
+    return {"matched": matched, "mismatch": mismatch, "missing": missing, "extra": extra,
+            "served_ok": served_ok, "served_lost": served_lost,
+            "served_declined": served_declined, "days": len(days)}
+
+
+def main():
+    data = collect()
+    matched, mismatch = data["matched"], data["mismatch"]
+    missing, extra = data["missing"], data["extra"]
+    served_ok, served_lost = data["served_ok"], data["served_lost"]
 
     print(f"matched  {matched}")
     print(f"MISMATCH {len(mismatch)}   (must be 0 -- engine contradicts the source)")
@@ -104,10 +126,10 @@ def main():
     print(f"missing  {len(missing)}   (generator does not produce it; may still be served "
           f"from the table -- see below)")
     print()
-    print(f"END-TO-END: {served_ok}/{served_ok + served_lost} source position labels reach "
-          f"the served name; {served_lost} LOST (must be 0)")
-    print(f"DECLINED:   {served_declined} bare fast markers the engine drops on purpose "
-          f"(docs section 6e)")
+    print(f"END-TO-END: {served_ok}/{served_ok + len(served_lost)} source position labels "
+          f"reach the served name; {len(served_lost)} LOST (must be 0)")
+    print(f"DECLINED:   {data['served_declined']} bare fast markers the engine drops on "
+          f"purpose (docs section 6e)")
 
     if missing:
         print("\nmissing by family:")
@@ -125,8 +147,13 @@ def main():
     if extra:
         for iso, got in (extra if "-v" in sys.argv else extra[:15]):
             print(f"  EXTRA {iso}  eng={got!r}  src=(none)")
+    for row in (served_lost if "-v" in sys.argv else served_lost[:15]):
+        print("  LOST", *row)
 
-    return 1 if (mismatch or extra) else 0
+    # LOST is in the exit status, not only in the report. It is the number this script
+    # calls the one that matters downstream -- a fasting calendar is built from exactly
+    # these components -- and it was the one condition a green exit code did not cover.
+    return 1 if (mismatch or extra or served_lost) else 0
 
 
 if __name__ == "__main__":

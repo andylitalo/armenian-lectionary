@@ -60,7 +60,7 @@ The full-dataset regression tests (`test_regression`, `test_full_dataset`,
 Rebuild the cache with `python dev/bulk_fetch.py` (see README).
 
 The feast/fast NAME (`"Liturgical Day"`) — the value bahk persists into `Feast.name` — is
-locked by **three** tests at different strengths. Keep all three; each covers what the
+locked by **six** tests at different strengths. Keep all six; each covers what the
 others structurally cannot:
 
 | Test | Compares | Needs cache? |
@@ -70,6 +70,7 @@ others structurally cannot:
 | `test_observance` | only the *commemoration component*. Narrowest: it strips the position/eve components from both sides, so >50% of days compare `"" == ""`. | yes (2001–2026) |
 | `test_source_text` | the **source's own** text quality, not the engine's fidelity to it — see below. | yes (2001–2026) |
 | `test_observance_name_review` | the engine against **our own** approved names (`dev/observance_name_review.tsv`) — the only one that can fail because a name is *wrong*. | mostly **no** |
+| `test_label_rules` | the position/eve **rule** against the source, not the served name — `engine._position_label` / `_eve_label` directly. The only one that can see a rule regression the validated table masks. MISMATCH, EXTRA and END-TO-END LOST are hard 0s; it imports `collect()` from the two verifier scripts so report and test cannot drift. | yes (2001–2026) |
 
 That last stripping is why `test_observance` alone was not enough — the engine shipped a name
 the source contradicted on 41 days, and six more as bare placeholders, entirely invisible
@@ -216,6 +217,7 @@ python dev/refresh_artifact_names.py     # push registered fixes into saint_sche
 python dev/observance_discrepancy_report.py   # engine vs. source, classified (now: 0 findings)
 python dev/verify_position_labels.py     # engine._position_label vs. every cached label
 python dev/verify_eve_labels.py          # engine._eve_label vs. every cached eve note
+                                         #   (both ratcheted by tests/test_label_rules.py)
 python dev/observance_audit.py                # residual commemoration mismatches
 python dev/audit_duplicate_commemorations.py  # a canon kept twice in one liturgical year
 python dev/observance_year_table.py 2026 2027 --write   # docs/observance-names-<year>.tsv
@@ -339,9 +341,10 @@ Three more collisions, each real and each handled:
   readings hit is per-occurrence evidence — readings come from the validated table,
   produced independently of the rule that emitted the label. A coordinate hit only
   restates that the rule fired here; its backing is rule-level
-  (`dev/verify_position_labels.py`, 6,216 matched / 0 MISMATCH / 0 EXTRA, and
-  `dev/verify_eve_labels.py`, 338/338). Three things keep the weaker key honest, each
-  covering a moment the others do not:
+  (`dev/verify_position_labels.py`, 6,294 matched / 0 MISMATCH / 0 EXTRA, and
+  `dev/verify_eve_labels.py`, 338/338) — and that backing is **asserted**, by
+  `tests/test_label_rules.py`, rather than read off a script's output. Three things keep
+  the weaker key honest, each covering a moment the others do not:
 
   | Guard | Where | Fires when |
   |---|---|---|
@@ -479,7 +482,10 @@ pinning, `HY_DECLINED_DAYS`. Adding to either set requires a write-up in docs §
 Storing them asserted the modal year's count for every year — the defect that shipped
 41 wrong names. If you add a family to either, run its verifier: MISMATCH and EXTRA must
 stay 0, and so must the END-TO-END LOST count, which is the number that actually matters
-downstream (a fasting calendar is built from exactly these components).
+downstream (a fasting calendar is built from exactly these components). All three are
+asserted by `tests/test_label_rules.py`, so a regression fails the suite rather than
+waiting for someone to read the report — but run the script anyway when you add a family:
+it groups the residue by family, which the test does not.
 
 ## Configuration (env vars)
 
