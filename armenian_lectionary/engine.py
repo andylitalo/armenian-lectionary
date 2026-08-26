@@ -26,6 +26,8 @@ import json
 import os
 import re
 
+from .observance_name import OBSERVANCE_SEP, ObservanceName
+
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                          "data", "lectionary_data.json")
 
@@ -1217,7 +1219,10 @@ def _collision_base_observance(d, tables=None):
 # layer (dev/fetch_reference._strip) preserves that boundary as this string, so the shipped
 # table and every served label carry the components already split -- the engine never has
 # to re-derive the boundary. Keep in sync with dev/fetch_reference.OBSERVANCE_SEP.
-_OBSERVANCE_SEP = " — "
+#
+# Defined by armenian_lectionary.observance_name, which owns the encoding; re-exported
+# under the engine's own name because dev tooling and tests import it from here.
+_OBSERVANCE_SEP = OBSERVANCE_SEP
 
 
 # --------------------------------------------------------------------------- #
@@ -2079,7 +2084,8 @@ def _prelent_cohort_layout(year):
     for sid, off, may_shift, label, reads in _PRELENT_COHORT:
         label = _catalog_text(sid, label)
         if sid == "atom":
-            label += _OBSERVANCE_SEP + _catalog_text("mark_the_bishop_pionius", _MARK_CANON)
+            label = ObservanceName.parse(label).with_tail(
+                _catalog_text("mark_the_bishop_pionius", _MARK_CANON)).render()
         d = e + datetime.timedelta(days=off)
         if (d.month, d.day) in EMBEDDED_FIXED:
             continue                                    # co-celebrates via embedded composite
@@ -2095,11 +2101,12 @@ def _prelent_cohort_layout(year):
             d = d2
         if d in layout:
             # Two canons land on one day. The source prints both -- "Saint Sargis ... and
-            # Saints Atom and his soldiers" -- so serve both, joined on _OBSERVANCE_SEP so each
-            # resolves to its own observance id. The senior keeps the day's id and its
-            # readings; only the name grows, so a merge cannot move a reading.
+            # Saints Atom and his soldiers" -- so serve both as separate components so
+            # each resolves to its own observance id. The senior keeps the day's id and
+            # its readings; only the name grows, so a merge cannot move a reading.
             senior_id, senior_label, senior_reads = layout[d]
-            layout[d] = (senior_id, senior_label + _OBSERVANCE_SEP + label, senior_reads)
+            merged = ObservanceName.parse(senior_label).with_tail(label).render()
+            layout[d] = (senior_id, merged, senior_reads)
             continue
         layout[d] = (sid, label, reads)                 # senior is placed first
     return layout
@@ -2567,11 +2574,13 @@ def _resolve_observance_names(label: str, language: str) -> str:
     """
     if not label:
         return label
-    resolved = []
-    for part in label.split(_OBSERVANCE_SEP):
-        entry = _observance_names().get(part)
-        resolved.append(entry.get(language, part) if entry else part)
-    return _OBSERVANCE_SEP.join(resolved)
+    names = _observance_names()
+
+    def in_language(part):
+        entry = names.get(part)
+        return entry.get(language, part) if entry else part
+
+    return ObservanceName.parse(label).map(in_language).render()
 
 
 def _localize(result: dict, language: str) -> dict:
@@ -2618,13 +2627,13 @@ _GENOCIDE_REMEMBRANCE = "Remembrance of the Armenian Genocide (1915)"
 def _anchor_genocide_remembrance(label: str, d: datetime.date) -> str:
     """Return ``label`` with the Genocide Remembrance note anchored to April 24.
 
-    The note is a distinct ``_OBSERVANCE_SEP``-delimited component; drop it wherever the
-    Easter-keyed table baked it (it floats off April 24 in other years) and re-append it
-    only on April 24."""
-    parts = [p for p in label.split(_OBSERVANCE_SEP) if p != _GENOCIDE_REMEMBRANCE]
+    The note is a distinct component; drop it wherever the Easter-keyed table baked it (it
+    floats off April 24 in other years) and re-append it only on April 24. Placeholders
+    are deliberately NOT dropped here -- this runs before the overlays that consume them."""
+    name = ObservanceName.parse(label).without({_GENOCIDE_REMEMBRANCE})
     if (d.month, d.day) == (4, 24):
-        parts.append(_GENOCIDE_REMEMBRANCE)
-    return _OBSERVANCE_SEP.join(parts)
+        name = name.with_tail(_GENOCIDE_REMEMBRANCE)
+    return name.render()
 
 
 _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
@@ -2647,6 +2656,11 @@ _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 #
 # Declared in dev/source_corrections.DECLINED_SOURCE_EN / _HY; see docs section 6e.
 _BARE_FAST_MARKERS = ("Fast day", "Feast day")
+
+# What the position overlay drops before it places anything: the placeholders (not
+# observances) and the bare markers (attributes wearing a name's clothes). Hoisted
+# because it is a fact about that overlay, not something to rebuild per request.
+_POSITION_OVERLAY_DROPS = frozenset(_PLACEHOLDER_LABELS) | frozenset(_BARE_FAST_MARKERS)
 
 
 # --------------------------------------------------------------------------- #
@@ -2679,8 +2693,7 @@ def _pool_components(label):
     """
     ids = _observance_ids()
     out = []
-    for part in label.split(_OBSERVANCE_SEP):
-        part = part.strip()
+    for part in ObservanceName.parse(label):
         sid = ids.get(part)
         if packed_pool(sid) is not None:
             out.append((part, sid))
@@ -2761,8 +2774,7 @@ def _drop_owned_companions(label: str, d: datetime.date) -> str:
     if not drop:
         return label
     # The head is never in ``drop``, so what is kept is never empty.
-    return _OBSERVANCE_SEP.join(
-        p for p in label.split(_OBSERVANCE_SEP) if p.strip() not in drop)
+    return ObservanceName.parse(label).without(drop).render()
 
 
 def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
@@ -2807,25 +2819,24 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     and a CI sweep, both bounded by ``MIN_YEAR``/``MAX_YEAR``, are not in the path when
     someone widens the range against an already-shipped index. This guard is.
     """
-    parts = [p for p in label.split(_OBSERVANCE_SEP)
-             if p and p not in _PLACEHOLDER_LABELS and p not in _BARE_FAST_MARKERS]
+    name = ObservanceName.parse(label, drop=_POSITION_OVERLAY_DROPS)
     position = _position_label(d)
     if position is None or position in _BARE_FAST_MARKERS:
         # The bare marker is not served, from either source -- see _BARE_FAST_MARKERS.
         # ``or label`` is unreachable in the supported range (no day's name is the marker
         # and nothing else) and exists so this can never return an empty name.
-        return _OBSERVANCE_SEP.join(parts) or label
-    stored = next((p for p in parts if _is_position_component(p)), None)
+        return name.render() or label
+    stored = name.find(_is_position_component)
     if readings is None:
         resolved = position
     else:
         coordinate = _position_coordinate(d) if stored in (None, position) else None
         resolved = _resolve_generated_text(position, readings, "position", coordinate)
-    if any(_is_position_component(p) for p in parts):
+    if stored is not None:
         if resolved != position:                  # a catalogued rename overrides even a
-            parts = [resolved if _is_position_component(p) else p for p in parts]
-        return _OBSERVANCE_SEP.join(parts) if parts else label
-    return _OBSERVANCE_SEP.join([resolved] + parts)
+            name = name.replace(_is_position_component, resolved)
+        return name.render() or label
+    return name.with_head(resolved).render()
 
 
 # Observances fixed to a civil date that the source's ENGLISH never names, though its
@@ -2876,11 +2887,21 @@ def _apply_fixed_date_label(label: str, d: datetime.date) -> str:
     fixed = fixed_date_label(d)
     if fixed is None:
         return label
-    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
-    if fixed in parts:
-        return _OBSERVANCE_SEP.join(parts)
-    head = parts[:1] if parts and _is_position_component(parts[0]) else []
-    return _OBSERVANCE_SEP.join(head + [fixed] + parts[len(head):])
+    name = ObservanceName.parse(label, drop=_PLACEHOLDER_LABELS)
+    if fixed in name.parts:
+        return name.render()
+    return name.insert_after_head(fixed, _is_position_component).render()
+
+
+def _is_eve_component(component: str) -> bool:
+    """True if a stored component is already an ``Eve of ...`` note.
+
+    The sibling of :func:`_is_position_component`. Both are here so that "which component
+    is this one" is asked in one place per kind: ``ObservanceName`` deliberately holds no
+    opinion about what the engine's components mean, and a bare ``startswith`` repeated at
+    each site is how the position overlay's own predicate came to be spelled two ways.
+    """
+    return component.startswith("Eve of ")
 
 
 def _is_position_component(component: str) -> bool:
@@ -2906,18 +2927,18 @@ def _apply_eve_label(label: str, d: datetime.date, readings=None) -> str:
     eve = _eve_label(d)
     if eve is None:
         return label
-    parts = [p for p in label.split(_OBSERVANCE_SEP) if p and p not in _PLACEHOLDER_LABELS]
-    stored = next((p for p in parts if p.startswith("Eve of ")), None)
+    name = ObservanceName.parse(label, drop=_PLACEHOLDER_LABELS)
+    stored = name.find(_is_eve_component)
     if readings:
         coordinate = _eve_coordinate(d) if stored in (None, eve) else None
         resolved = _resolve_generated_text(eve, readings, "eve", coordinate)
     else:
         resolved = eve
-    if any(p.startswith("Eve of ") for p in parts):
+    if stored is not None:
         if resolved != eve:
-            parts = [resolved if p.startswith("Eve of ") else p for p in parts]
-        return _OBSERVANCE_SEP.join(parts) if parts else label
-    return _OBSERVANCE_SEP.join(parts + [resolved]) if parts else resolved
+            name = name.replace(_is_eve_component, resolved)
+        return name.render() or label
+    return name.with_tail(resolved).render()
 
 
 def compute_armenian_lectionary(target_date: datetime.date,
@@ -3062,7 +3083,10 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
             companion_text = [_OBSERVANCE_CATALOG.get(csid, {}).get("en")
                                for csid in companions]
             if all(companion_text):
-                label = _OBSERVANCE_SEP.join([label] + companion_text)
+                name = ObservanceName.parse(label)
+                for text in companion_text:
+                    name = name.with_tail(text)
+                label = name.render()
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": label or "(commemoration)",
@@ -3144,10 +3168,10 @@ def _compute_lectionary(target_date: datetime.date) -> dict:
         elif _e_off >= 1:
             # Eastertide: the Annunciation leads the commemorations, but the calendar
             # day-count stays at the front -- position, then Annunciation, then any saint.
-            _parts = _base.split(_OBSERVANCE_SEP)
-            _name = _OBSERVANCE_SEP.join([_parts[0], _annun] + _parts[1:])
-        else:
-            _name = _base + _OBSERVANCE_SEP + _annun   # Lent/Holy Week: the movable day leads
+            _name = ObservanceName.parse(_base).insert_after_head(
+                _annun, lambda _: True).render()
+        else:                                     # Lent/Holy Week: the movable day leads
+            _name = ObservanceName.parse(_base).with_tail(_annun).render()
         return {
             "Date": target_date.isoformat(),
             "Liturgical Day": _name,

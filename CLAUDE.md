@@ -20,6 +20,7 @@ with no install step.
 | `armenian_lectionary/__init__.py` | Package init: re-exports the public API and `__version__`. |
 | `armenian_lectionary/engine.py` | Offline engine. Public entry: `compute_armenian_lectionary(datetime.date) -> dict`. Internal helpers/constants importable from here. |
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
+| `armenian_lectionary/observance_name.py` | `ObservanceName` — the ordered components of a day's name, and the **only** place the ` — ` component separator is spelled at runtime. Owns the encoding (split/join, drop sets, placement, immutability); holds no domain opinion, so predicates like `engine._is_position_component` are passed in. See "A day's name is a list, not a string" below. |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
 | `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
@@ -261,6 +262,51 @@ entries ground truth contradicts.
 `dev/saint_schedule.py` **is** still excluded, and measurably so: regenerating it changes 155
 days' tier or name and 72 days' readings. That drift predates this work and needs its own
 reviewed change.
+
+### A day's name is a list, not a string
+
+`"Liturgical Day"` is an ordered list of observances — a calendar-position label at the
+head, one or more commemorations, an `Eve of ...` note at the tail — each of which is one
+canon with its own id (see "One observance is one CANON" above). It is *written* as a
+` — `-joined string, and the engine composes it in stages: a tier states the
+commemorations, then the per-date overlays below add what a shared table key cannot hold.
+
+**`armenian_lectionary/observance_name.ObservanceName` owns that encoding.** Every stage
+used to re-derive it — split, drop the placeholders, find the component matching a
+predicate, replace or insert, join, remember a served name is never empty — 21 times in
+`engine.py` alone, with four different ideas of which components to drop and three
+spellings of the empty-name fallback. `engine.py` now has **zero**; the overlays read as
+what they liturgically are:
+
+```python
+ObservanceName.parse(label, drop=_PLACEHOLDER_LABELS).with_tail(eve).render()
+ObservanceName.parse(label).without(drop).render()
+name.insert_after_head(fixed, _is_position_component)
+```
+
+Working rules:
+
+- **Never split or join a name in `engine.py`.** `tests/test_observance_name.py`'s
+  `TestTheEngineDoesNotReDeriveTheEncoding` fails if you do. `_OBSERVANCE_SEP` stays in
+  `engine.py` as a re-export because dev tooling imports it from there.
+- **The module holds no domain opinion.** What counts as a position component, which
+  strings are placeholders, which observance outranks which — all of that stays in
+  `engine.py` and reaches the module as predicates and explicit `drop` sets. That is what
+  keeps it importable without a cycle, and what keeps a new position family a one-file
+  change.
+- **`drop` is stated at every call site**, never defaulted: the sites genuinely disagree
+  (the position overlay drops the bare fast markers too; `_anchor_genocide_remembrance`
+  drops nothing, because it runs *before* the overlays that consume placeholders).
+- **The "a served name is never empty" contract is the caller's.** `render()` returns `""`
+  for an empty name; each site states its own fallback (`or label`). The module will not
+  invent a name.
+- Instances are immutable — every operation returns a new name. The overlays chain, so a
+  mutating operation would corrupt the stage before it.
+
+`dev/` still spells the separator out in 15 files; adopting the module there is a
+follow-up. `dev/fetch_reference.py` and `dev/fetch_translations.py` keep their own copy on
+purpose — they collapse the source's `<br>`-delimited HTML onto it before this package
+sees the text.
 
 Two kinds of name component are **not** stored in the table, because a table key is a
 liturgical coordinate shared by civil years that disagree about them. `build_table.
