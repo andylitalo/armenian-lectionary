@@ -58,11 +58,10 @@ def observance_ids(label):
     Resolved through the same reverse index ``language="hy"`` goes through, from the
     ENGLISH text, so the ids are by construction the ones the Armenian was keyed on.
     """
-    engine._observance_names()          # rebuild the index if the catalog was swapped
-    text_to_id = engine._TEXT_TO_OBSERVANCE_ID
+    catalog = engine._OBSERVANCE_CATALOG
     ids = []
     for part in label.split(_OBSERVANCE_SEP):
-        sid = text_to_id.get(part)
+        sid = catalog.id_of(part)
         if sid is None:
             raise KeyError(f"no catalog id for served component {part!r}")
         ids.append(sid)

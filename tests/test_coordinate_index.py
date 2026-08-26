@@ -34,6 +34,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary import engine                                    # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary        # noqa: E402
+from armenian_lectionary.observance_catalog import ObservanceCatalog  # noqa: E402
 
 
 def _labelled_days():
@@ -91,7 +92,7 @@ class TestTheTableAndTheRuleAgree(unittest.TestCase):
     """
 
     def test_no_stored_component_disagrees_with_the_rule(self):
-        ids = {entry["en"]: sid for sid, entry in engine._OBSERVANCE_CATALOG.items()}
+        catalog = engine._OBSERVANCE_CATALOG
         index = engine._OBSERVANCE_ID_BY_READINGS
         checked = {"position": 0, "eve": 0}
         disagreements = []
@@ -99,7 +100,7 @@ class TestTheTableAndTheRuleAgree(unittest.TestCase):
             if stored is None:
                 continue
             checked[kind] += 1
-            stored_id = ids.get(stored)
+            stored_id = catalog.id_of(stored)
             coord_id = (index.get(engine._observance_id_from_coordinate(*coordinate, kind=kind))
                         if coordinate else None)
             if stored_id is not None and coord_id is not None:
@@ -167,10 +168,10 @@ class TestTheTwoRoutesNeverDisagree(unittest.TestCase):
         its days silently were not.
         """
         covered = set(engine._OBSERVANCE_ID_BY_READINGS.values())
-        ids = {entry["en"]: sid for sid, entry in engine._OBSERVANCE_CATALOG.items()}
+        catalog = engine._OBSERVANCE_CATALOG
         unresolved, total = [], 0
         for d, base, kind, label, coordinate, _stored in _labelled_days():
-            if ids.get(label) not in covered:
+            if catalog.id_of(label) not in covered:
                 continue
             total += 1
             if engine._resolve_generated_text(
@@ -215,8 +216,7 @@ class TestTheCoordinateGuard(unittest.TestCase):
 
     def test_a_rename_reaches_a_coordinate_only_day(self):
         d, label, sid = self._a_coordinate_only_day()
-        engine._OBSERVANCE_CATALOG = {
-            **self._orig, sid: {**self._orig[sid], "en": f"RENAMED {sid}"}}
+        engine._OBSERVANCE_CATALOG = self._orig.replacing(sid, en=f"RENAMED {sid}")
         served = compute_armenian_lectionary(d)["Liturgical Day"]
         self.assertIn(f"RENAMED {sid}", served, f"{d} served {served!r} (was {label!r})")
 
@@ -225,8 +225,7 @@ class TestTheCoordinateGuard(unittest.TestCase):
         the rule would not print. The stored value must survive untouched.
         """
         d, label, sid = self._a_coordinate_only_day()
-        engine._OBSERVANCE_CATALOG = {
-            **self._orig, sid: {**self._orig[sid], "en": f"RENAMED {sid}"}}
+        engine._OBSERVANCE_CATALOG = self._orig.replacing(sid, en=f"RENAMED {sid}")
         readings = engine._compute_lectionary(d)["ReadingsList"]
         disagreeing = "Fortieth day of Great Lent"
         self.assertTrue(engine._is_position_component(disagreeing))

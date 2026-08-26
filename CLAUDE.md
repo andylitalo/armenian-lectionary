@@ -20,6 +20,7 @@ with no install step.
 | `armenian_lectionary/__init__.py` | Package init: re-exports the public API and `__version__`. |
 | `armenian_lectionary/engine.py` | Offline engine. Public entry: `compute_armenian_lectionary(datetime.date) -> dict`. Internal helpers/constants importable from here. |
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
+| `armenian_lectionary/observance_catalog.py` | `ObservanceCatalog` — `id -> {en, hy}` plus the reverse indexes (`id_of`, `names_for`, `text_of`), built in its constructor so they cannot go stale, and `own_day_cache`, the engine's per-liturgical-year own-day scan held per instance. `engine._OBSERVANCE_CATALOG` is one of these. Reads dict-like (`[]`, `.get`, `.items()`, `in`); never written in place. |
 | `armenian_lectionary/observance_name.py` | `ObservanceName` — the ordered components of a day's name, and the **only** place the ` — ` component separator is spelled at runtime. Owns the encoding (split/join, drop sets, placement, immutability); holds no domain opinion, so predicates like `engine._is_position_component` are passed in. See "A day's name is a list, not a string" below. |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
@@ -307,6 +308,31 @@ Working rules:
 follow-up. `dev/fetch_reference.py` and `dev/fetch_translations.py` keep their own copy on
 purpose — they collapse the source's `<br>`-delimited HTML onto it before this package
 sees the text.
+
+### The catalog is held, not swapped underneath
+
+`engine._OBSERVANCE_CATALOG` is an `ObservanceCatalog`, not a dict. The reverse indexes
+(text → id, text → `{en, hy}`) are built in its constructor from the entries it holds, so
+**they cannot disagree with it**. That deletes, rather than relocates, the four globals and
+two accessors that used to keep them in step — `_TEXT_TO_OBSERVANCE_NAMES`,
+`_TEXT_TO_OBSERVANCE_ID`, `_OBSERVANCE_INDEX_FOR`, `_observance_indexes`,
+`_observance_names`, `_observance_ids` — and the identity check they ran on every lookup.
+
+Working rules:
+
+- **Substituting a catalog is constructing one**: `engine._OBSERVANCE_CATALOG =
+  ObservanceCatalog({...})`, or `.replacing(sid, en=...)` for the common case of renaming
+  one observance to see whether it propagates. There is no second thing to patch.
+- **`own_day_cache` lives on the instance.** `_canons_with_own_day` memoizes a liturgical
+  year's laydown *resolved through the catalog*, so a different catalog must not answer
+  from the previous one's scan. It is a plain dict on the catalog rather than an
+  `lru_cache` on the function, which is why nothing has to call `cache_clear()` any more.
+  Pinned by `tests/test_observance_catalog.py`.
+- **Reads are dict-like on purpose** (`catalog[sid]`, `.get`, `.items()`, `in`,
+  truthiness): dev tooling and tests legitimately read entries by id. Writes are not — an
+  instance is built complete or not at all.
+- `_catalog_text(sid, default, lang)` stays a module function over `text_of`, because its
+  eight callers want whatever `_OBSERVANCE_CATALOG` is bound to *now*.
 
 Two kinds of name component are **not** stored in the table, because a table key is a
 liturgical coordinate shared by civil years that disagree about them. `build_table.
