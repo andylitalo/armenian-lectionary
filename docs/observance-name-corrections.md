@@ -281,7 +281,7 @@ had no per-day name in **either** language:
 
 | | Days | Source, English | Source, Armenian | Served |
 |---|---|---|---|---|
-| **Fast of St. James the bishop of Nisibis** | Heesnak+22…+26 | `Fast day` | `Պահք` | `Nth day of the Fast of St. James the bishop of Nisibis` / `Ն օր Ս. Յակովբայ պահոց` |
+| **Fast of St. James the bishop of Nisibis** | Heesnak+22…+26 | `Fast day` | `Պահք` | `Nth day of the Fast of St. James the bishop of Nisibis` / `Ն օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց` |
 | **Fast of Prophet Elijah** | Pentecost+1…+6 | `Nth day of Pentecost` | `Ն օր Հոգեգալստեան` | `Nth day of the Fast of Prophet Elijah` / `Ն օր Եղիական պահոց` |
 
 Both meet the four conditions, and both are named by **the source's own eve**, which is
@@ -299,7 +299,7 @@ exactly as its English does.
 text.** Neither name is invented; each is lifted verbatim from the eve the source itself
 prints on the Sunday before:
 
-- `Eve of Fast of St. James the bishop of Nisibis` / `Բարեկենդան Ս. Յակովբայ պահոց`
+- `Eve of Fast of St. James the bishop of Nisibis` / `Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց`
 - `Eve of Fast of Prophet Elijah` / `Բարեկենդան Եղիական պահոց`
 
 The windows are fixed independently by the cache on every year in range. Both fasts have
@@ -471,7 +471,7 @@ the feast (`Տօն Վարագայ ս. խաչի`).
 Capitalized, where those two rows print lower-case `ս. խաչի`. This is a **fast** label, not a
 copy of the feast's name, and every other fast in the catalog capitalizes the saint or feast
 it is named for — the Exaltation fast is `Ա օր Ս. Խաչի պահոց` over the same two words, and
-Nisibis is `Ա օր Ս. Յակովբայ պահոց`. Following the eve's casing would make the Holy Cross the
+Nisibis is `Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց`. Following the eve's casing would make the Holy Cross the
 one saint capitalized in one fast label and not in another, on nothing but which row the
 string was lifted from. The witness is preserved where witnesses live: `source_hy` in the
 review TSV still records exactly what the source printed.

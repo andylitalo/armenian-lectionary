@@ -217,7 +217,7 @@
  },
  "Eve of Fast of Saint James the bishop of Nisibis": {
   "approved_en": "Eve of the Fast of St. James the bishop of Nisibis",
-  "approved_hy": "Բարեկենդան Ս. Յակովբայ պահոց",
+  "approved_hy": "Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "eve_of_fast_of_nisibis",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բարեկենդան Ս. Յակովբայ պահոց",
@@ -473,7 +473,7 @@
  },
  "Fifth Sunday of Great Lent. Sunday of the Judge": {
   "approved_en": "Fifth Sunday of Great Lent: Sunday of the Judge",
-  "approved_hy": "Ե կիւրակէ Մեծ պահոց (Դատաւորին)",
+  "approved_hy": "Ե կիւրակէ Մեծի պահոց (Դատաւորին)",
   "id": "fifth_sunday_of_great",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Ե կիւրակէ Քառասնորդական պահոց (Դատաւորին)",
@@ -561,7 +561,7 @@
  },
  "Fifth day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Fifth day of the Fast of St. James the bishop of Nisibis",
-  "approved_hy": "Ե օր Ս. Յակովբայ պահոց",
+  "approved_hy": "Ե օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_5",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
@@ -665,7 +665,7 @@
  },
  "First day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "First day of the Fast of St. James the bishop of Nisibis",
-  "approved_hy": "Ա օր Ս. Յակովբայ պահոց",
+  "approved_hy": "Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_1",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
@@ -945,7 +945,7 @@
  },
  "Fourth day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Fourth day of the Fast of St. James the bishop of Nisibis",
-  "approved_hy": "Դ օր Ս. Յակովբայ պահոց",
+  "approved_hy": "Դ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_4",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
@@ -2257,7 +2257,7 @@
  },
  "Second Sunday of Great Lent, Sunday of the Expulsion": {
   "approved_en": "Second Sunday of Great Lent: Sunday of the Expulsion",
-  "approved_hy": "Բ կիւրակէ Մեծ պահոց (Արտաքսման)",
+  "approved_hy": "Բ կիւրակէ Մեծի պահոց (Արտաքսման)",
   "id": "second_sunday_of_great",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES (period, not colon) -- already a deliberate fix (comma->period, source's own 25 other occurrences use period). A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "source_hy": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
@@ -2265,7 +2265,7 @@
  },
  "Second Sunday of Great Lent. Sunday of the Expulsion": {
   "approved_en": "Second Sunday of Great Lent: Sunday of the Expulsion",
-  "approved_hy": "Բ կիւրակէ Մեծ պահոց (Արտաքսման)",
+  "approved_hy": "Բ կիւրակէ Մեծի պահոց (Արտաքսման)",
   "id": "second_sunday_of_great",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
@@ -2361,7 +2361,7 @@
  },
  "Second day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Second day of the Fast of St. James the bishop of Nisibis",
-  "approved_hy": "Բ օր Ս. Յակովբայ պահոց",
+  "approved_hy": "Բ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_2",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",
@@ -2561,7 +2561,7 @@
  },
  "Sixth Sunday of Great Lent, Sunday of the Advent": {
   "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
-  "approved_hy": "Զ կիւրակէ Մեծ պահոց (Գալստեան)",
+  "approved_hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)",
   "id": "sixth_sunday_of_great",
   "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES ('...Sunday of the Advent', period not colon). 'Sunday of the Second Coming' would be a real theological content change to an already-reviewed label, not a mechanical fix -- needs explicit sign-off, not a silent ground-truth edit. A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
@@ -2569,7 +2569,7 @@
  },
  "Sixth Sunday of Great Lent. Sunday of the Advent": {
   "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
-  "approved_hy": "Զ կիւրակէ Մեծ պահոց (Գալստեան)",
+  "approved_hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)",
   "id": "sixth_sunday_of_great",
   "note": "",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
@@ -2809,7 +2809,7 @@
  },
  "Third Sunday of Great Lent. Sunday of the Prodigal Son": {
   "approved_en": "Third Sunday of Great Lent: Sunday of the Prodigal Son",
-  "approved_hy": "Գ կիւրակէ Մեծ պահոց (Անառակին)",
+  "approved_hy": "Գ կիւրակէ Մեծի պահոց (Անառակին)",
   "id": "third_sunday_of_great",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
   "source_hy": "Գ կիւրակէ Քառասնորդական պահոց (Անառակին)",
@@ -2921,7 +2921,7 @@
  },
  "Third day of the Fast of St. James the bishop of Nisibis": {
   "approved_en": "Third day of the Fast of St. James the bishop of Nisibis",
-  "approved_hy": "Գ օր Ս. Յակովբայ պահոց",
+  "approved_hy": "Գ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_3",
   "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
   "source_hy": "Պահք",

@@ -43,14 +43,14 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-02-11	Thu	Great Lent	validated-table	1	fourth_day_of_great	Fourth day of Great Lent	Դ օր Մեծի պահոց
 2027-02-12	Fri	Great Lent	validated-table	1	fifth_day_of_great	Fifth day of Great Lent	Ե օր Մեծի պահոց
 2027-02-13	Sat	Presentation	generative-composite	2	sixth_day_of_great — theodore_the_tyron	Sixth day of Great Lent — St. Theodore the Tyron	Զ օր Մեծի պահոց — Սրբոյն Թէոդորոսի զօրավարին
-2027-02-14	Sun	Immovable Feast	validated-table	2	second_sunday_of_great — presentation_of_our_lord	Second Sunday of Great Lent: Sunday of the Expulsion — PRESENTATION OF OUR LORD TO THE TEMPLE	Բ կիւրակէ Մեծ պահոց (Արտաքսման) — ՏԵԱՌՆԸՆԴԱՌԱՋ (տօն քառասնօրեայ գալստեանն Քրիստոսի ի Տաճարն)
+2027-02-14	Sun	Immovable Feast	validated-table	2	second_sunday_of_great — presentation_of_our_lord	Second Sunday of Great Lent: Sunday of the Expulsion — PRESENTATION OF OUR LORD TO THE TEMPLE	Բ կիւրակէ Մեծի պահոց (Արտաքսման) — ՏԵԱՌՆԸՆԴԱՌԱՋ (տօն քառասնօրեայ գալստեանն Քրիստոսի ի Տաճարն)
 2027-02-15	Mon	Great Lent	validated-table	1	eighth_day_of_great	Eighth day of Great Lent	Ը օր Մեծի պահոց
 2027-02-16	Tue	Great Lent	validated-table	1	ninth_day_of_great	Ninth day of Great Lent	Թ օր Մեծի պահոց
 2027-02-17	Wed	Great Lent	validated-table	1	tenth_day_of_great	Tenth day of Great Lent	Ժ օր Մեծի պահոց
 2027-02-18	Thu	Great Lent	validated-table	1	eleventh_day_of_great	Eleventh day of Great Lent	ԺԱ օր Մեծի պահոց
 2027-02-19	Fri	Great Lent	validated-table	1	twelfth_day_of_great	Twelfth day of Great Lent	ԺԲ օր Մեծի պահոց
 2027-02-20	Sat	Great Lent	validated-table	2	thirteenth_day_of_great — cyril_of_jerusalem_cyril	Thirteenth day of Great Lent — Sts. Cyril of Jerusalem, Cyril the Bishop and Anna	ԺԳ օր Մեծի պահոց — Սրբոցն Կիւրղի Երուսաղեմայ հայրապետին եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի
-2027-02-21	Sun	Great Lent	validated-table	1	third_sunday_of_great	Third Sunday of Great Lent: Sunday of the Prodigal Son	Գ կիւրակէ Մեծ պահոց (Անառակին)
+2027-02-21	Sun	Great Lent	validated-table	1	third_sunday_of_great	Third Sunday of Great Lent: Sunday of the Prodigal Son	Գ կիւրակէ Մեծի պահոց (Անառակին)
 2027-02-22	Mon	Great Lent	validated-table	1	fifteenth_day_of_great	Fifteenth day of Great Lent	ԺԵ օր Մեծի պահոց
 2027-02-23	Tue	Great Lent	validated-table	1	sixteenth_day_of_great	Sixteenth day of Great Lent	ԺԶ օր Մեծի պահոց
 2027-02-24	Wed	Great Lent	validated-table	1	seventeenth_day_of_great	Seventeenth day of Great Lent	ԺԷ օր Մեծի պահոց
@@ -64,14 +64,14 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-03-04	Thu	Great Lent	validated-table	1	twenty_fifth_day_of_2	Twenty Fifth day of Great Lent	ԻԵ օր Մեծի պահոց
 2027-03-05	Fri	Great Lent	validated-table	1	twenty_sixth_day_of_2	Twenty Sixth day of Great Lent	ԻԶ օր Մեծի պահոց
 2027-03-06	Sat	Great Lent	validated-table	2	twenty_seventh_day_of_2 — forty_martyrs_of_sebastia	Twenty Seventh day of Great Lent — Holy Forty Martyrs of Sebastia	ԻԷ օր Մեծի պահոց — Սրբոց մանկանցն քառասնից, որք ի Սեբաստիա կատարեցան
-2027-03-07	Sun	Great Lent	validated-table	1	fifth_sunday_of_great	Fifth Sunday of Great Lent: Sunday of the Judge	Ե կիւրակէ Մեծ պահոց (Դատաւորին)
+2027-03-07	Sun	Great Lent	validated-table	1	fifth_sunday_of_great	Fifth Sunday of Great Lent: Sunday of the Judge	Ե կիւրակէ Մեծի պահոց (Դատաւորին)
 2027-03-08	Mon	Great Lent	validated-table	1	twenty_ninth_day_of	Twenty Ninth day of Great Lent	ԻԹ օր Մեծի պահոց
 2027-03-09	Tue	Great Lent	validated-table	1	thirtieth_day_of_great	Thirtieth day of Great Lent	Լ օր Մեծի պահոց
 2027-03-10	Wed	Great Lent	validated-table	1	thirty_first_day_of_2	Thirty First day of Great Lent	ԼԱ օր Մեծի պահոց
 2027-03-11	Thu	Great Lent	validated-table	1	thirty_second_day_of_2	Thirty Second day of Great Lent	ԼԲ օր Մեծի պահոց
 2027-03-12	Fri	Great Lent	validated-table	1	thirty_third_day_of_2	Thirty Third day of Great Lent	ԼԳ օր Մեծի պահոց
 2027-03-13	Sat	Great Lent	validated-table	2	thirty_fourth_day_of_2 — gregory_the_illuminator_s	Thirty Fourth day of Great Lent — St. Gregory the Illuminator's Descent into the Pit	ԼԴ օր Մեծի պահոց — Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն
-2027-03-14	Sun	Great Lent	validated-table	1	sixth_sunday_of_great	Sixth Sunday of Great Lent. Sunday of the Advent	Զ կիւրակէ Մեծ պահոց (Գալստեան)
+2027-03-14	Sun	Great Lent	validated-table	1	sixth_sunday_of_great	Sixth Sunday of Great Lent. Sunday of the Advent	Զ կիւրակէ Մեծի պահոց (Գալստեան)
 2027-03-15	Mon	Great Lent	validated-table	1	thirty_sixth_day_of	Thirty Sixth day of Great Lent	ԼԶ օր Մեծի պահոց
 2027-03-16	Tue	Great Lent	validated-table	1	thirty_seventh_day_of_2	Thirty Seventh day of Great Lent	ԼԷ օր Մեծի պահոց
 2027-03-17	Wed	Great Lent	validated-table	1	thirty_eighth_day_of_2	Thirty Eighth day of Great Lent	ԼԸ օր Մեծի պահոց
@@ -344,12 +344,12 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-12-09	Thu	Feast	validated-composite	1	feast_of_the_conception	Feast of the Conception of the Holy Virgin Mary by Anna	Յղութիւն սրբուհւոյ Աստուածածնի յԱննայ
 2027-12-10	Fri	Advent (Heesnak)	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-12-11	Sat	Advent (Heesnak)	validated-table	1	nicholas_wonderworker_the_bishop	St. Nicholas the Wonderworker, Bishop of Myra	Սրբոյն Նիկողայոսի Զմիւռնացւոյ սքանչելագործ հայրապետին
-2027-12-12	Sun	Advent (Heesnak)	validated-table	2	third_sunday_of_advent — eve_of_fast_of_nisibis	Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis	Գ կիւրակէ Յիսնակի — Բարեկենդան Ս. Յակովբայ պահոց
-2027-12-13	Mon	Advent (Heesnak)	validated-table	2	james_nisibis_day_1 — menas_hermogenes_eugraphus_and	First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis	Ա օր Ս. Յակովբայ պահոց — Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի
-2027-12-14	Tue	Advent (Heesnak)	validated-table	2	james_nisibis_day_2 — cornelius_the_centurion_simeon_2	Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East	Բ օր Ս. Յակովբայ պահոց — Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան
-2027-12-15	Wed	Advent (Heesnak)	validated-table	1	james_nisibis_day_3	Third day of the Fast of St. James the bishop of Nisibis	Գ օր Ս. Յակովբայ պահոց
-2027-12-16	Thu	Advent (Heesnak)	validated-table	2	james_nisibis_day_4 — eustratius_auxentius_eugenius_orestes	Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia	Դ օր Ս. Յակովբայ պահոց — Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի
-2027-12-17	Fri	Advent (Heesnak)	validated-table	1	james_nisibis_day_5	Fifth day of the Fast of St. James the bishop of Nisibis	Ե օր Ս. Յակովբայ պահոց
+2027-12-12	Sun	Advent (Heesnak)	validated-table	2	third_sunday_of_advent — eve_of_fast_of_nisibis	Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis	Գ կիւրակէ Յիսնակի — Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց
+2027-12-13	Mon	Advent (Heesnak)	validated-table	2	james_nisibis_day_1 — menas_hermogenes_eugraphus_and	First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis	Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Սրբոցն Մինասայ, Երմոգինեայ, Գրափոսի եւ կամաւոր աղքատացն Յովհաննու եւ Ալեքսիանոսի
+2027-12-14	Tue	Advent (Heesnak)	validated-table	2	james_nisibis_day_2 — cornelius_the_centurion_simeon_2	Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East	Բ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Սրբոցն Կուռնելիոսի հարիւրապետին եւ Շմաւոնի` ազգականին Քրիստոսի, որ խաչեցաւ յԵրուսաղէմ, Պօղիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յարեւելս կատարեցան
+2027-12-15	Wed	Advent (Heesnak)	validated-table	1	james_nisibis_day_3	Third day of the Fast of St. James the bishop of Nisibis	Գ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց
+2027-12-16	Thu	Advent (Heesnak)	validated-table	2	james_nisibis_day_4 — eustratius_auxentius_eugenius_orestes	Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia	Դ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց — Սրբոցն Եւստրատիոսի, Օգսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի
+2027-12-17	Fri	Advent (Heesnak)	validated-table	1	james_nisibis_day_5	Fifth day of the Fast of St. James the bishop of Nisibis	Ե օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց
 2027-12-18	Sat	Advent (Heesnak)	validated-table	1	james_of_nisibis_marouke	Sts. James of Nisibis, Marouke the Hermit and Mellitus the Bishop	Սրբոցն Յակովբայ Մծբնայ հայրապետին, Մարուգէի ճգնաւորին եւ Մելիտոսի եպիսկոպոսին
 2027-12-19	Sun	Advent (Heesnak)	validated-table	1	fourth_sunday_of_advent	Fourth Sunday of Advent	Դ կիւրակէ Յիսնակի
 2027-12-20	Mon	Advent (Heesnak)	validated-table	1	patriarchs_ignatius_the_bishop_2	Sts. Patriarchs Ignatius the Bishop of Antioch, Addai the Bishop of Edessa and Maruthas the Bishop of Marv, and Sts. Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides	Սրբոց հայրապետացն Իգնատիոսի, Ադդէի եւ Մարութայի եպիսկոպոսին, նաեւ սրբոցն Թէոպոմպայ եպիսկոպոսին, Թէովնայ վկային եւ չորից զինուորացն Բասոսի, Եւսեբի, Եւտիքի եւ Բասիլիդեայ

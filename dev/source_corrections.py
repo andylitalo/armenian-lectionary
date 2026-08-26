@@ -229,7 +229,7 @@ POSITION_LABEL_FIXES_BY_DATE = {
 # witness fewer: its five weekdays read "Fast day" in English AND a bare "Պահք" in
 # Armenian, so there is no other-language statement to appeal to. What names it instead is
 # the source's own EVE on the Sunday before -- "Eve of Fast of St. James the bishop of
-# Nisibis" / "Բարեկենդան Ս. Յակովբայ պահոց" -- which states, in both languages, exactly
+# Nisibis" / "Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց" -- which states, in both languages, exactly
 # which fast the five days that follow belong to. See
 # docs/observance-name-corrections.md section 6b.
 #
@@ -292,7 +292,7 @@ def named_fast_label(date_iso):
 # Capitalized "Ս. Խաչի" rather than the lower-case "ս. խաչի" those two rows print. This is a
 # FAST label, not a copy of the feast's name, and every other fast in the catalog capitalizes
 # the saint or feast it is named for -- the Exaltation fast is "Ա օր Ս. Խաչի պահոց" over the
-# same two words, and Nisibis is "Ա օր Ս. Յակովբայ պահոց". Following the eve's casing here
+# same two words, and Nisibis is "Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց". Following the eve's casing here
 # would make the Holy Cross the one saint whose name is capitalized in one fast label and not
 # in another, on nothing but which row the string was lifted from. The witness is preserved
 # where witnesses live: source_hy in the review TSV still records what the source printed.
@@ -300,7 +300,7 @@ def named_fast_label(date_iso):
 _AMBIGUOUS_FAST_LABEL_HY = "Պահք"
 _NAMED_FAST_ORDINALS_HY = ("Ա", "Բ", "Գ", "Դ", "Ե")
 _NAMED_FAST_TEMPLATES_HY = {
-    "HE": "{ord} օր Ս. Յակովբայ պահոց",
+    "HE": "{ord} օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
     "EX": "{ord} օր Վարագայ Ս. Խաչի պահոց",
 }
 

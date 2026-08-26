@@ -362,7 +362,7 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
                             f"{word} day of the Fast of St. James the bishop of Nisibis"),
                         f"{day} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր Ս. Յակովբայ պահոց"),
+                        hy.startswith(f"{letter} օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց"),
                         f"{day} served {hy!r}")
 
     def test_the_day_count_matches_the_eve_that_names_the_fast(self):
@@ -376,7 +376,7 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
         heesnak = self._heesnak(2026)
         eve = heesnak + datetime.timedelta(days=21)
         for lang, fast in (("en", "Fast of St. James the bishop of Nisibis"),
-                           ("hy", "Ս. Յակովբայ պահոց")):
+                           ("hy", "Ս. Յակովբայ Մծբնայ հայրապետին պահոց")):
             with self.subTest(lang=lang):
                 eve_label = compute_armenian_lectionary(
                     eve, language=lang)["Liturgical Day"]
@@ -407,7 +407,7 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
             with self.subTest(year=year):
                 served = compute_armenian_lectionary(
                     datetime.date(year, 12, 9), language="hy")["Liturgical Day"]
-                self.assertIn("օր Ս. Յակովբայ պահոց", served)
+                self.assertIn("օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց", served)
 
 
 class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
