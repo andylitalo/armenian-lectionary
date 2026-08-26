@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from armenian_lectionary import compute_armenian_lectionary  # noqa: E402
 from armenian_lectionary import engine  # noqa: E402
+from armenian_lectionary.observance_catalog import ObservanceCatalog  # noqa: E402
 from dev import source_corrections  # noqa: E402
 from dev.fetch_translations import OBSERVANCE_MAP_PATH  # noqa: E402
 from tests._catalog_expectations import bare_en, bare_hy, text  # noqa: E402
@@ -74,14 +75,12 @@ class TestResolveObservanceNames(unittest.TestCase):
     }
 
     def setUp(self):
-        self._orig = (engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID)
-        engine._OBSERVANCE_CATALOG = self.CATALOG
-        engine._TEXT_TO_OBSERVANCE_ID = {
-            v["en"]: sid for sid, v in self.CATALOG.items()}
-        self.addCleanup(self._restore)
-
-    def _restore(self):
-        engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID = self._orig
+        # One assignment, not two: the catalog builds its own reverse index, so a
+        # substituted catalog cannot disagree with the index used to read it -- which a
+        # hand-built pair could, and which is why the engine needed a staleness check.
+        self._orig = engine._OBSERVANCE_CATALOG
+        engine._OBSERVANCE_CATALOG = ObservanceCatalog(self.CATALOG)
+        self.addCleanup(setattr, engine, "_OBSERVANCE_CATALOG", self._orig)
 
     def test_single_component(self):
         self.assertEqual(
@@ -122,14 +121,12 @@ class TestLanguageKwarg(unittest.TestCase):
         # Inject known maps so the test is deterministic regardless of scraped data.
         # "Liturgical Day" resolves via the id-based observance catalog, not
         # _OBSERVANCE_NAMES_HY directly -- see _resolve_observance_names.
-        orig_cat, orig_ids = engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID
+        orig_cat = engine._OBSERVANCE_CATALOG
         orig_b = engine._BOOK_NAMES_HY
-        engine._OBSERVANCE_CATALOG = {
+        engine._OBSERVANCE_CATALOG = ObservanceCatalog({
             "resurrection": {
                 "en": "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)",
-                "hy": "ՅԱՐՈՒԹԻՒՆ"}}
-        engine._TEXT_TO_OBSERVANCE_ID = {
-            "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)": "resurrection"}
+                "hy": "ՅԱՐՈՒԹԻՒՆ"}})
         engine._BOOK_NAMES_HY = {"John": "Ավետարան ըստ Հովհաննեսի",
                                  "Acts of the Apostles": "Գործք առաքելոց",
                                  "Mark": "Ավետարան ըստ Մարկոսի",
@@ -138,7 +135,7 @@ class TestLanguageKwarg(unittest.TestCase):
         try:
             result = compute_armenian_lectionary(self.DATE, language="hy")
         finally:
-            engine._OBSERVANCE_CATALOG, engine._TEXT_TO_OBSERVANCE_ID = orig_cat, orig_ids
+            engine._OBSERVANCE_CATALOG = orig_cat
             engine._BOOK_NAMES_HY = orig_b
 
         self.assertEqual(result["Liturgical Day"], "ՅԱՐՈՒԹԻՒՆ")
@@ -662,22 +659,18 @@ class TestGeneratedLabelsResolveThroughTheCatalog(unittest.TestCase):
         before = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
         self.assertIn("Second day of the Fast of St. Gregory the Illuminator", before)
 
-        engine._OBSERVANCE_CATALOG = {
-            **self._orig_catalog,
-            "illuminator_fast_day_2": {
-                **self._orig_catalog["illuminator_fast_day_2"],
-                "en": "Second day of the Fast of the Renamed Illuminator",
-            },
-        }
+        engine._OBSERVANCE_CATALOG = self._orig_catalog.replacing(
+            "illuminator_fast_day_2",
+            en="Second day of the Fast of the Renamed Illuminator")
         after = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
         self.assertIn("Second day of the Fast of the Renamed Illuminator", after)
         self.assertNotIn("Second day of the Fast of St. Gregory the Illuminator", after)
 
     def test_an_uncatalogued_id_falls_back_to_the_literal_template(self):
         """Removing an id from the catalog degrades to the literal text, not a KeyError."""
-        engine._OBSERVANCE_CATALOG = {
-            sid: v for sid, v in self._orig_catalog.items()
-            if sid != "illuminator_fast_day_2"}
+        engine._OBSERVANCE_CATALOG = ObservanceCatalog(
+            {sid: v for sid, v in self._orig_catalog.items()
+             if sid != "illuminator_fast_day_2"})
         served = compute_armenian_lectionary(self.DAY)["Liturgical Day"]
         self.assertIn("Second day of the Fast of St. Gregory the Illuminator", served)
 
@@ -737,10 +730,8 @@ class TestNisibisAndElijahRenamesResolveThroughTheCatalog(unittest.TestCase):
                 self.assertIn(original_en, before, f"{day} served {before!r}")
 
                 renamed_en = f"RENAMED {sid}"
-                engine._OBSERVANCE_CATALOG = {
-                    **self._orig_catalog,
-                    sid: {**self._orig_catalog[sid], "en": renamed_en},
-                }
+                engine._OBSERVANCE_CATALOG = self._orig_catalog.replacing(
+                    sid, en=renamed_en)
                 after = compute_armenian_lectionary(day)["Liturgical Day"]
                 self.assertIn(renamed_en, after, f"{day} served {after!r}")
                 self.assertNotIn(original_en, after, f"{day} served {after!r}")
@@ -768,10 +759,8 @@ class TestNisibisAndElijahRenamesResolveThroughTheCatalog(unittest.TestCase):
                 self.assertIn(original_hy, before, f"{day} served {before!r}")
 
                 renamed_hy = f"ՎԵՐԱՆՈՒԱՆՈՒԱԾ {sid}"
-                engine._OBSERVANCE_CATALOG = {
-                    **self._orig_catalog,
-                    sid: {**self._orig_catalog[sid], "hy": renamed_hy},
-                }
+                engine._OBSERVANCE_CATALOG = self._orig_catalog.replacing(
+                    sid, hy=renamed_hy)
                 after = compute_armenian_lectionary(day, language="hy")["Liturgical Day"]
                 self.assertIn(renamed_hy, after, f"{day} served {after!r}")
                 self.assertNotIn(original_hy, after, f"{day} served {after!r}")
@@ -853,10 +842,7 @@ class TestEveryReadingsIndexedIdResolvesThroughTheCatalog(unittest.TestCase):
                 failures.append((sid, day, "id not in observance catalog"))
                 continue
             sentinel = f"RENAMED__{sid}"
-            engine._OBSERVANCE_CATALOG = {
-                **self._orig_catalog,
-                sid: {**self._orig_catalog[sid], "en": sentinel},
-            }
+            engine._OBSERVANCE_CATALOG = self._orig_catalog.replacing(sid, en=sentinel)
             with self.subTest(id=sid, date=day):
                 served = compute_armenian_lectionary(day)["Liturgical Day"]
                 if sentinel not in served:

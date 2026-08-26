@@ -185,7 +185,7 @@ class TestObservanceCatalogShape(unittest.TestCase):
         """Reverse text lookup must be deterministic, with no exceptions.
 
         Every id has to be recoverable from its English alone, or the winner in
-        engine._TEXT_TO_OBSERVANCE_ID depends on catalog iteration order. Five ids used to
+        ObservanceCatalog's text index depends on catalog iteration order. Five ids used to
         be exempt: the source printed a bare "Fast day" for each weekday of the Fast of St.
         Gregory the Illuminator while naming the ordinal in Armenian, so they were resolved
         from the date instead. That repair is registered now

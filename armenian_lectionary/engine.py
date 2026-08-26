@@ -26,6 +26,7 @@ import json
 import os
 import re
 
+from .observance_catalog import ObservanceCatalog
 from .observance_name import OBSERVANCE_SEP, ObservanceName
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -2348,7 +2349,7 @@ def _load_json_map(path):
 _BOOK_NAMES_HY = _load_json_map(BOOK_NAMES_HY_PATH)
 
 
-_OBSERVANCE_CATALOG = _load_json_map(OBSERVANCE_CATALOG_PATH)
+_OBSERVANCE_CATALOG = ObservanceCatalog.load(OBSERVANCE_CATALOG_PATH)
 
 _OBSERVANCE_ID_BY_READINGS = _load_json_map(OBSERVANCE_READINGS_INDEX_PATH)
 
@@ -2359,8 +2360,12 @@ def _catalog_text(sid, default, lang="en"):
     uses. Lets a hand-written literal stay a correct fallback for a thin install while a
     full checkout always serves the live, renamed text: a TSV rename of one of these
     literal-served observances (the pre-Lent cohort, a fixed civil date, an extreme-early-
-    Easter composite) reaches this call with no engine.py edit."""
-    return _OBSERVANCE_CATALOG.get(sid, {}).get(lang, default)
+    Easter composite) reaches this call with no engine.py edit.
+
+    Kept as a module function over :meth:`ObservanceCatalog.text_of` because it reads the
+    CURRENT catalog: eight call sites want whatever ``_OBSERVANCE_CATALOG`` is bound to
+    now, not whatever it was bound to when they were defined."""
+    return _OBSERVANCE_CATALOG.text_of(sid, default, lang)
 
 
 def _observance_id_from_readings(readings, kind):
@@ -2448,39 +2453,11 @@ def _resolve_generated_text(default_text, readings, kind, coordinate=None):
 # Volume canons onto one line, not one observance under two names. The packed line is a
 # _OBSERVANCE_SEP join whose components each resolve here on their own
 # (docs/observance-name-corrections.md section 7).
-def _observance_indexes(catalog):
-    """``(text -> that spelling's {en, hy}, text -> the observance's id)``."""
-    names = {entry["en"]: entry for entry in catalog.values()}
-    ids = {entry["en"]: sid for sid, entry in catalog.items()}
-    return names, ids
-
-
-_TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID = _observance_indexes(_OBSERVANCE_CATALOG)
-_OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
-
-
-def _observance_names():
-    """The text index, rebuilt if ``_OBSERVANCE_CATALOG`` has been swapped underneath it.
-
-    Derived state that must not go stale: tests substitute a small catalog to exercise
-    resolution, and an index frozen at import would keep answering from the shipped one.
-    An identity check per call is cheaper than rebuilding, and cannot silently disagree.
-    """
-    global _TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID, _OBSERVANCE_INDEX_FOR
-    if _OBSERVANCE_INDEX_FOR is not _OBSERVANCE_CATALOG:
-        _TEXT_TO_OBSERVANCE_NAMES, _TEXT_TO_OBSERVANCE_ID = _observance_indexes(
-            _OBSERVANCE_CATALOG)
-        _OBSERVANCE_INDEX_FOR = _OBSERVANCE_CATALOG
-        # _canons_with_own_day caches a year's laydown resolved THROUGH this index, so a
-        # swapped catalog must not answer from a scan the previous one produced.
-        _canons_with_own_day.cache_clear()
-    return _TEXT_TO_OBSERVANCE_NAMES
-
-
-def _observance_ids():
-    """``{served English component -> its stable id}``, refreshed like its sibling."""
-    _observance_names()                     # rebuilds both indexes, never one of them
-    return _TEXT_TO_OBSERVANCE_ID
+#
+# The reverse indexes this comment used to introduce live in ObservanceCatalog now, built
+# in its constructor from the entries it holds. There is no separate index to keep in step
+# with the catalog, so the identity-check-and-rebuild accessors that used to stand here --
+# and their coupling into _canons_with_own_day's cache -- are gone rather than relocated.
 
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
@@ -2574,10 +2551,10 @@ def _resolve_observance_names(label: str, language: str) -> str:
     """
     if not label:
         return label
-    names = _observance_names()
+    catalog = _OBSERVANCE_CATALOG
 
     def in_language(part):
-        entry = names.get(part)
+        entry = catalog.names_for(part)
         return entry.get(language, part) if entry else part
 
     return ObservanceName.parse(label).map(in_language).render()
@@ -2691,10 +2668,10 @@ def _pool_components(label):
     catalog does not resolve is simply not a pool member -- unlike dev/observance_ids,
     which raises, this is the serving path and must never fail on a name.
     """
-    ids = _observance_ids()
+    catalog = _OBSERVANCE_CATALOG
     out = []
     for part in ObservanceName.parse(label):
-        sid = ids.get(part)
+        sid = catalog.id_of(part)
         if packed_pool(sid) is not None:
             out.append((part, sid))
     return out
@@ -2709,7 +2686,6 @@ def _liturgical_year(d: datetime.date) -> int:
     return d.year if d >= anchors(d.year)["HE"] else d.year - 1
 
 
-@functools.lru_cache(maxsize=None)
 def _canons_with_own_day(ly: int) -> frozenset:
     """Packed-pool canons that HEAD a day of their own in liturgical year ``ly``.
 
@@ -2720,10 +2696,15 @@ def _canons_with_own_day(ly: int) -> frozenset:
     :func:`_drop_owned_companions`, which consumes it -- and it does not need to, because
     that overlay never drops a head. The head set is the same before and after.
 
-    Scanning a liturgical year costs ~20ms, paid once per year and then cached (and
-    invalidated with the observance index, which the scan resolves components through),
-    and only ever paid on a day that is actually packed -- :func:`_drop_owned_companions`
-    returns before asking otherwise, so an ordinary day never triggers a scan at all.
+    Scanning a liturgical year costs ~20ms, paid once per year and then cached, and only
+    ever paid on a day that is actually packed -- :func:`_drop_owned_companions` returns
+    before asking otherwise, so an ordinary day never triggers a scan at all.
+
+    The cache lives on the CATALOG (``ObservanceCatalog.own_day_cache``), not on this
+    function, because the scan resolves components through it: a different catalog must
+    not answer from a scan the previous one produced. Holding it there makes that true by
+    construction -- swapping the catalog swaps the cache with it -- where an ``lru_cache``
+    here needed a ``cache_clear()`` wired into the index accessor to notice.
 
     The window overshoots the supported range at both ends -- down to the November before
     ``MIN_YEAR`` (a January date sits in the previous liturgical year) and, for
@@ -2734,6 +2715,9 @@ def _canons_with_own_day(ly: int) -> frozenset:
     overshoot reads a year the engine does not validate, but no packed day falls between
     ``HE(MAX_YEAR)`` and the end of ``MAX_YEAR``, so nothing consults it.
     """
+    cache = _OBSERVANCE_CATALOG.own_day_cache
+    if ly in cache:
+        return cache[ly]
     start, end = anchors(ly)["HE"], anchors(ly + 1)["HE"]
     heads = set()
     d = start
@@ -2742,7 +2726,8 @@ def _canons_with_own_day(ly: int) -> frozenset:
         if pool:
             heads.add(pool[0][1])
         d += datetime.timedelta(days=1)
-    return frozenset(heads)
+    cache[ly] = frozenset(heads)
+    return cache[ly]
 
 
 def _drop_owned_companions(label: str, d: datetime.date) -> str:
