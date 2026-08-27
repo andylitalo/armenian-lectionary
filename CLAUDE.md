@@ -116,6 +116,10 @@ The columns are symmetric across the two languages, which is the whole shape of 
 | what sacredtradition.am published, never edited | `source_en` | `source_hy` |
 | what the engine must serve — the decision | `approved_en` | `approved_hy` |
 
+On a **composite** row (a packed day whose approved name splits into several canons) the
+two `approved_*` cells are not a decision but a projection of the halves' rows — see
+`component_ids` under "Observance ids are stated, not derived".
+
 `source_en` is also the stable key everything downstream joins on. `approved_hy` is stated
 on **every** row, not only where it differs from the scrape (394 of 397 are equal), for the
 same reason `approved_en` is: it is a decision about what we serve, not a patch on someone
@@ -167,6 +171,15 @@ Working rules:
 - **A genuinely new observance needs an id**, and `build_observance_catalog.py --mint`
   assigns one, writing it back to the TSV. The build refuses to write until every served
   component has one.
+- **A composite row states its halves in `component_ids`**, and its `approved_en` /
+  `approved_hy` are a **projection** of them — `build_ground_truth._compose` rejoins the
+  halves' current text every rebuild, so the stored text is a record, not a source. Edit
+  the HALF's row to rename a canon; the twelve composites follow on their own. The link is
+  frozen once (by `observance_name_review._component_ids_for`, while the halves still
+  resolve by text) and is immutable thereafter, exactly as `id` is — because text is what a
+  rename moves. Three rows pack the Atomian generals, and while they quoted that canon by
+  text, renaming it left all three quoting the old name and the catalog build refused.
+  Pinned by `tests/test_rename_reaches_the_served_name.py`.
 - **Leave `id` empty** for a row that is not one served observance: a whole day (the
   comma-joined "Fast day, Remembrance of the Ten Virgins", whose halves have their own
   ids), or a minority source spelling nothing reaches. Text the table *stores* keeps its id
@@ -308,6 +321,51 @@ Working rules:
 follow-up. `dev/fetch_reference.py` and `dev/fetch_translations.py` keep their own copy on
 purpose — they collapse the source's `<br>`-delimited HTML onto it before this package
 sees the text.
+
+### A generated label's id is declared, not recovered from its text
+
+`_EVE_FAMILIES` and `_EVE_CIVIL` carry `(anchor, offset, **id**, literal)` — the same shape
+`_FIXED_DATE_OBSERVANCES` has always had. The id is stated beside the rule that fires it,
+not recovered by looking the literal up in the catalog.
+
+Why: an eve is exactly one observance, so it has exactly one id, and the id is the only
+thing about it a rename cannot move. Recovering it from text worked only while the engine's
+literal happened to equal the row's `approved_en`. The Nativity fast's eve shows what
+happens when a correction parts them — `_EVE_CIVIL` reads `"Eve of the Fast of Nativity"`
+against a `source_en` of `"Eve of Fast of Nativity"`, so the row was **pinned**: renaming
+`approved_en` left the literal matching neither column, the build reported a served
+observance as unregistered, and forcing past that served the eve twice, once under each
+name.
+
+Rules:
+
+- **A new eve declares its id** in the family table. `build_observance_catalog` reads it
+  (`engine._eve_observance_id`), so the label stays registered and keeps its readings-index
+  entry through any rename.
+- **A declared id outranks both inferences.** `_resolve_generated_id` takes it before the
+  readings hash and the coordinate: those infer through an index built from display text,
+  and some labels have no entry in it at all. The Advent eve is one — Heesnak itself, whose
+  readings vary and whose coordinate is one of two — so a rename of it used to reach
+  nothing. Pinned by `tests/test_rename_reaches_the_served_name.py`, which sweeps all 13.
+- **The literal stays** as the thin-checkout fallback and as what
+  `dev/verify_eve_labels.py` compares against the source. `_eve_label` still returns it.
+- **A position family declares its ids in `engine._POSITION_IDS`**, not in its tuple: one
+  family renders one observance *per ordinal* ("First day of Great Lent", "Second day of
+  …", each its own catalog row), so the id belongs to the `(template, ordinal)` pair. 203
+  entries over 39 templates. Keyed on the **template**, which belongs to `engine.py` and
+  does not move on a TSV rename — unlike the served text, which is exactly what a rename
+  moves. **Editing a template is a change to which observance the family names, so update
+  this table with it**; `tests/test_rename_reaches_the_served_name.py` fails naming the
+  uncovered label rather than letting the edit silently strand a rename.
+- **The declared id is withheld under the coordinate guard**, like the coordinate itself.
+  The guard is not about how strong the rule's evidence is; it is about the table and the
+  rule naming *different observances* for a day, and there the stored, cross-year-validated
+  value wins whatever the rule knows about itself.
+
+Stored components are located by **id** too (`engine._stored_generated_component`).
+`_is_position_component` / `_is_eve_component` recognise a component by its SHAPE
+("Nth day of …", "Eve of …"), which is exactly what a rename may change; when it did, the
+overlay could not see the stored component and appended the regenerated one beside it.
 
 ### The catalog is held, not swapped underneath
 
@@ -528,10 +586,16 @@ is not true either:
   same reading, nor one ordinal to one coordinate.
 
 These are not rescuable by refining either key: the text is not a stable function of the
-readings *or* of the calendar coordinate, so there is no signal left to hash. Making them
-renameable via the TSV alone would need a literal, hand-maintained `(family, ordinal) ->
-id` table in `engine.py`, decoupled from both — a separate undertaking, and a much smaller
-prize than it was at 44.
+readings *or* of the calendar coordinate, so there is no signal left to hash. **They no
+longer need to be.** `engine._POSITION_IDS` and the eve families' declared ids are exactly
+the hand-maintained table this note used to scope, and a declared id outranks both
+inferences (`_resolve_generated_id`), so every position and eve label is renameable through
+the TSV whether or not the index covers it. Ten position labels — these seven plus the two
+weekly fasts and the bare marker — were never in the index at all and are now reached.
+
+Index coverage still matters for what it measures: the index is per-*occurrence* evidence
+produced independently of the rule, which is why it is consulted first for anything a
+declared id does not name.
 
 A third overlay is not a table problem but a **translation gap**: `engine._FIXED_DATE_OBSERVANCES`
 adds an observance on a fixed civil date that the source's *English* names on no day at all —

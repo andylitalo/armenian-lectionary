@@ -49,19 +49,50 @@ REVIEW_PATH = os.path.join(HERE, "observance_name_review.tsv")
 OUT_PATH = os.path.join(HERE, "observance_name_ground_truth.json")
 
 
+_OBSERVANCE_SEP = " \u2014 "
+
+
+def _compose(row, by_id, lang):
+    """A composite row's ``approved_{lang}``, rebuilt from its halves' current text.
+
+    A composite row's approved name is not an independent decision -- it is the halves'
+    decisions, joined. Storing it as text too made the copy the thing that went stale: the
+    canon's own row could be renamed while three packed-day rows went on quoting the old
+    name, and the build then reported that old name as a served observance with no id.
+
+    ``component_ids`` is the immutable link (see observance_name_review._component_ids_for),
+    so the join is recomputed here every time and the stored text is a record, not a source.
+    A row without one -- every non-composite row, and any composite whose link was never
+    frozen -- keeps its stated text unchanged.
+    """
+    field = f"approved_{lang}"
+    if not row.get("component_ids"):
+        return row[field]
+    halves = []
+    for sid in row["component_ids"].split(_OBSERVANCE_SEP):
+        half = by_id.get(sid.strip())
+        if half is None:
+            raise KeyError(
+                f"row {row['source_en']!r} names component id {sid!r}, which no row states. "
+                "An id must never be retired out from under a composite that references it.")
+        halves.append(half[field])
+    return _OBSERVANCE_SEP.join(halves)
+
+
 def main():
     with open(REVIEW_PATH, encoding="utf-8", newline="") as fh:
         rows = list(csv.DictReader(fh, delimiter="\t"))
 
+    by_id = {r["id"]: r for r in rows if r["id"]}
     ground_truth = {}
     for r in rows:
         ground_truth[r["source_en"]] = {
             "id": r["id"],
-            "approved_en": r["approved_en"],
+            "approved_en": _compose(r, by_id, "en"),
             "status": r["status"],
             "note": r["note"],
             "source_hy": r["source_hy"],
-            "approved_hy": r["approved_hy"],
+            "approved_hy": _compose(r, by_id, "hy"),
         }
 
     with open(OUT_PATH, "w", encoding="utf-8") as fh:

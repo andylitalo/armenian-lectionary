@@ -179,13 +179,31 @@ def validate(days, tables):
     return ok, miss, nodata, total, misses
 
 
-def export_table(tables, stats, path=None):
+def _dates_by_entry(days, tables):
+    """``(keyspace, key) -> one date the entry is served on``.
+
+    An entry's stored feast may carry a calendar-derived component whose text has been
+    renamed since the table was built from the cache; that component resolves by id, and
+    the id route needs a date (``observance_ids.ids_for_text``). The table itself is keyed
+    by liturgical coordinate, so a date is recovered the same way ``validate`` recovers
+    one -- by asking ``_lookup`` which entry each cached day lands in.
+    """
+    out = {}
+    for iso in sorted(days):
+        ks, key, entry = _lookup(datetime.date.fromisoformat(iso), tables)
+        if entry is not None:
+            out.setdefault((ks, key), datetime.date.fromisoformat(iso))
+    return out
+
+
+def export_table(tables, stats, path=None, days=None):
     """Write the validated tables to the runtime's shipped data file
     (armenian_lectionary/data/lectionary_data.json)."""
     if path is None:
         path = DATA_PATH
     # Strip support_years from shipped entries to keep the file lean.
     from dev.observance_ids import ids_for_text
+    dates = _dates_by_entry(days, tables) if days else {}
     slim = {}
     for ks, entries in tables.items():
         slim[ks] = {}
@@ -193,7 +211,7 @@ def export_table(tables, stats, path=None):
             keystr = key if isinstance(key, str) else str(key)
             slim[ks][keystr] = {
                 "feast": v["feast"],
-                "observance_ids": ids_for_text(v["feast"]),
+                "observance_ids": ids_for_text(v["feast"], dates.get((ks, key))),
                 "readings": v["readings"],
             }
     # Gate: no shipped feast label may carry a contaminant (Cyrillic/Greek homoglyph,
@@ -231,7 +249,7 @@ if __name__ == "__main__":
     print(f"  correct:  {ok}  ({ok/total*100:.1f}%)")
     print(f"  wrong:    {miss}")
     print(f"  no-entry: {nodata}")
-    path = export_table(tables, stats)
+    path = export_table(tables, stats, days=days)
     print(f"\nExported validated table -> {path}")
     show = sys.argv[1] if len(sys.argv) > 1 else None
     if show:

@@ -59,7 +59,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from armenian_lectionary.engine import (                              # noqa: E402
     _OBSERVANCE_SEP, _ORDINAL_WORDS, _compute_lectionary, _eve_label,
     _eve_coordinate, _observance_id_from_coordinate, _observance_id_from_readings,
-    _position_coordinate,
+    _position_coordinate, _resolve_generated_id, _eve_observance_id,
     _position_label, compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
@@ -208,6 +208,71 @@ def served_components(ground_truth):
     return texts
 
 
+def generated_label_ids():
+    """``{literal label text -> the observance id it resolves to}``, for every position and
+    eve label the engine composes in range.
+
+    The third route by which a served component is registered, and the only one that
+    survives a rename of a label whose engine literal has drifted from its ``source_en``.
+    The first two match TEXT -- ``approved_en``, then the immutable ``source_en`` -- and a
+    label composed in ``engine.py`` matches whichever of those its literal happens to
+    equal. That is fine until a correction moves the literal (the Nativity fast's eve is
+    ``"Eve of the Fast of Nativity"`` in ``_EVE_CIVIL`` and ``"Eve of Fast of Nativity"``
+    in the source), because the row is then pinned: renaming ``approved_en`` leaves the
+    literal matching neither, and the build reports a served, catalogued observance as
+    unregistered.
+
+    Resolving by id instead asks the question the runtime asks -- readings first, then the
+    calendar coordinate -- and gets an answer that does not move when the text does.
+
+    One ``_compute_lectionary`` per day, not one per label: it is the expensive half, and
+    both kinds need the same day's readings.
+    """
+    out = {}
+    d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
+    while d <= end:
+        labels = (("position", _position_label(d), _position_coordinate(d)),
+                  ("eve", _eve_label(d), _eve_coordinate(d)))
+        if any(label and label not in out for _, label, _ in labels):
+            readings = _compute_lectionary(d).get("ReadingsList", [])
+            for kind, label, coordinate in labels:
+                if label and label not in out:
+                    sid = _resolve_generated_id(readings, kind, coordinate)
+                    if sid:
+                        out[label] = sid
+        d += datetime.timedelta(days=1)
+    return out
+
+
+def registration(ground_truth):
+    """``text -> the id registering it``, or ``None`` -- the one place that question is asked.
+
+    Both callers below (the coverage audit, which refuses to write, and ``--mint``, which
+    hands out new ids) must agree exactly: a text the audit thinks is unregistered and mint
+    thinks is registered blocks the build forever, and the reverse mints a duplicate id for
+    an observance that already has one. They used to spell the predicate out separately.
+    """
+    approved_ids = {row["approved_en"]: row.get("id")
+                    for row in ground_truth.values() if row.get("approved_en")}
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
+    generated_ids = generated_label_ids()
+    known = ({sid for sid in approved_ids.values() if sid}
+             | {sid for sid in ids_by_source.values() if sid})
+
+    def registered(text):
+        # approved_en, then the immutable source_en, then the id the engine's own
+        # resolution route gives this literal -- accepted only if some row states it, so a
+        # stale shipped index cannot register an observance the TSV has dropped.
+        sid = approved_ids.get(text) or ids_by_source.get(text)
+        if sid:
+            return sid
+        sid = generated_ids.get(text)
+        return sid if sid in known else None
+
+    return registered
+
+
 def build_readings_index(ground_truth):
     """readings-hash -> catalog id, for every position/eve label whose readings uniquely
     identify it -- plus coordinate-hash -> catalog id for every label a stable calendar
@@ -278,8 +343,18 @@ def build_readings_index(ground_truth):
     ids_by_source = {source: row.get("id")
                      for source, row in ground_truth.items() if row.get("id")}
 
-    def id_for_literal_text(text):
-        return approved_ids.get(text) or ids_by_source.get(text)
+    # (kind, literal text) -> the id the ENGINE declares for it. An eve declares its own
+    # (engine._EVE_FAMILIES/_EVE_CIVIL carry it), which is the only route that survives a
+    # rename: the two text routes below both compare the literal against a column a rename
+    # is free to move, and when they miss, the label loses its index entry -- so the
+    # runtime stops resolving it and serves the literal beside the renamed stored
+    # component, the same observance twice. Filled in by the per-date sweep, which is
+    # where a date is in hand to ask.
+    declared_ids = {}
+
+    def id_for_literal_text(text, kind=None):
+        return (declared_ids.get((kind, text))
+                or approved_ids.get(text) or ids_by_source.get(text))
 
     # (kind, text) -> {Source tier: [(readings, pre-overlay commemoration), ...]}, so the
     # dominant tier can be picked per label before the stability checks run. See the
@@ -304,7 +379,11 @@ def build_readings_index(ground_truth):
         for kind, label, coordinate in (
                 ("position", _position_label(d), _position_coordinate(d)),
                 ("eve", _eve_label(d), _eve_coordinate(d))):
-            if label and id_for_literal_text(label):
+            if label and kind == "eve":
+                declared = _eve_observance_id(d)
+                if declared:
+                    declared_ids[(kind, label)] = declared
+            if label and id_for_literal_text(label, kind):
                 by_tier = occurrences_by_key.setdefault((kind, label), {})
                 by_tier.setdefault(base["Source"], []).append((readings, commem, d))
                 coordinates_by_key.setdefault((kind, label), set()).add(coordinate)
@@ -348,7 +427,8 @@ def build_readings_index(ground_truth):
             continue                              # aliturgical: the coordinate pass has it
         if len(keys_by_readings[(kind, readings)]) != 1:
             continue                              # those readings also carry another text
-        index[_observance_id_from_readings(list(readings), kind)] = id_for_literal_text(text)
+        index[_observance_id_from_readings(list(readings), kind)] = id_for_literal_text(
+            text, kind)
 
     # Coordinate pass. Every label with one stable coordinate that no other label shares
     # gets an entry, not only the aliturgical ones -- see the docstring.
@@ -362,7 +442,7 @@ def build_readings_index(ground_truth):
             continue                          # another label sits on the same coordinate
         akey, offset = coordinate
         coordinate_ids[_observance_id_from_coordinate(akey, offset, kind)] = (
-            id_for_literal_text(text))
+            id_for_literal_text(text, kind))
 
     _assert_routes_agree(index, coordinate_ids, occurrences_by_key, occurrence_coordinate,
                          id_for_literal_text)
@@ -386,7 +466,7 @@ def _assert_routes_agree(readings_ids, coordinate_ids, occurrences_by_key,
     """
     conflicts = []
     for (kind, text), by_tier in occurrences_by_key.items():
-        expected = id_for_literal_text(text)
+        expected = id_for_literal_text(text, kind)
         for occurrences in by_tier.values():
             for readings, _commem, d in occurrences:
                 coordinate = occurrence_coordinate.get((kind, text, d))
@@ -464,18 +544,10 @@ def build_catalog(ground_truth):
 def audit(catalog, ground_truth):
     """Coverage against what the engine actually serves, and against what has shipped."""
     findings = []
-    approved_ids = {row["approved_en"]: row.get("id")
-                    for row in ground_truth.values() if row.get("approved_en")}
-    # A renamed engine-composed row (approved_en no longer equal to the literal text
-    # engine.py composes) is still registered: source_en is its immutable identity key,
-    # left untouched by a rename, so falling back to it keeps a fresh rename from reading
-    # as "unregistered" before the readings index has had a chance to pick it up.
-    ids_by_source = {source: row.get("id")
-                     for source, row in ground_truth.items() if row.get("id")}
+    registered = registration(ground_truth)
     served = served_components(ground_truth)
 
-    unregistered = sorted(
-        t for t in served if not (approved_ids.get(t) or ids_by_source.get(t)))
+    unregistered = sorted(t for t in served if not registered(t))
     if unregistered:
         findings.append(
             f"{len(unregistered)} component(s) the engine serves have no id: "
@@ -507,15 +579,14 @@ def mint(ground_truth):
     """Assign ids to served components that have none, writing them back to the TSV."""
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
-    # See audit()'s matching comment: a renamed engine-composed row is found by its
-    # immutable source_en, not by approved_en, so a rename is never mistaken for a new,
-    # unminted observance.
-    ids_by_source = {source: row.get("id")
-                     for source, row in ground_truth.items() if row.get("id")}
+    # The SAME predicate audit() refuses on -- see registration(). A renamed
+    # engine-composed label must not be minted a second id here: it already has one, and
+    # audit() can see that it does.
+    registered = registration(ground_truth)
     used = {sid for sid in approved_ids.values() if sid}
     new = {text: _slug(text, used)
            for text in sorted(served_components(ground_truth))
-           if not (approved_ids.get(text) or ids_by_source.get(text))}
+           if not registered(text)}
     if not new:
         return {}
 

@@ -486,10 +486,17 @@ _TR_SAINT_ID_OVERRIDES = {
 }
 
 # --------------------------------------------------------------------------- #
-# Companion catalog ids to append to the second-volume-cycle tier's served label,
-# by (Easter-md, civil-date). The companion never heads a day (packed_pool /
-# _PACKED_POOLS), so its readings are never its own: the day's readings stay the
-# head canon's, unchanged.
+# Second-volume-cycle companion append -- a narrow fix for the one-id-per-date
+# limit of second_volume_cycles.json (docs section 7c: "Vahan's own stored
+# label has no way to gain Gordius without a schema change to the
+# second-volume-cycle tier"). Rather than widen that schema for every march,
+# this appends a companion's catalog text to the cycle tier's served label for
+# the single, cited (Easter-md, civil-date) pair the source packs onto one
+# line -- same idiom as _TR_SAINT_ID_OVERRIDES above. The companion never
+# heads a day (packed_pool / _PACKED_POOLS), so its readings are never its
+# own: the day's readings stay the head canon's, unchanged, exactly as every
+# other packed day already works (docs section 7, "What the readings evidence
+# settled").
 # --------------------------------------------------------------------------- #
 
 _TR_SAINT_COMPANION_OVERRIDES = {
@@ -1373,6 +1380,183 @@ def _count_sundays_after(anchor: datetime.date, d: datetime.date) -> int:
 
 
 # Anchor accessors, by the key used in _POSITION_FAMILIES.
+# ``{position template: {ordinal: observance id}}`` -- the position half of "ids are
+# stated, not derived" (CLAUDE.md).
+#
+# An eve declares its id inside its family tuple, because an eve is one observance. A
+# position family is not: it renders one observance PER ORDINAL ("First day of Great Lent",
+# "Second day of ...", each its own catalog row), so the id belongs to the (family, ordinal)
+# pair and is stated here instead.
+#
+# Keyed on the TEMPLATE rather than on the rendered text. The two pick out the same
+# observance -- template plus ordinal IS the rendered text, and no two observances share an
+# English text (build_observance_catalog enforces it) -- but the template belongs to
+# engine.py and a rename does not move it, while the served text is exactly what a rename
+# moves. That is the whole difference: a served-text key stops matching the moment someone
+# edits dev/observance_name_review.tsv, which is the defect this table exists to close.
+#
+# Three templates are shared by two families each ("{ord} Sunday of the Assumption",
+# "{ord} Sunday of Pentecost", "Fast day"); they render identical text, so they name the
+# same observance and one entry serves both.
+#
+# Editing a template IS a change to which observance the family names, so it must be made
+# here too. tests/test_rename_reaches_the_served_name.py fails, naming the uncovered label,
+# rather than letting a template edit silently strand a rename.
+_POSITION_IDS = {
+    '{ord} Sunday of Great Lent: Sunday of the Expulsion': {2: 'second_sunday_of_great_lent'},
+    '{ord} Sunday of Great Lent: Sunday of the Prodigal Son': {3: 'third_sunday_of_great_lent'},
+    '{ord} Sunday of Great Lent: Sunday of the Steward': {4: 'fourth_sunday_of_great_lent'},
+    '{ord} day of Great Lent (Median day)': {24: 'twenty_fourth_day_of_great_lent'},
+    '{ord} Sunday of Great Lent: Sunday of the Judge': {5: 'fifth_sunday_of_great_lent'},
+    '{ord} Sunday of Great Lent. Sunday of the Advent': {6: 'sixth_sunday_of_great_lent'},
+    '{ord} day of Great Lent': {
+        1: 'first_day_of_great_lent', 2: 'second_day_of_great_lent',
+        3: 'third_day_of_great_lent', 4: 'fourth_day_of_great_lent',
+        5: 'fifth_day_of_great_lent', 6: 'sixth_day_of_great_lent',
+        8: 'eighth_day_of_great_lent', 9: 'ninth_day_of_great_lent',
+        10: 'tenth_day_of_great_lent', 11: 'eleventh_day_of_great_lent',
+        12: 'twelfth_day_of_great_lent', 13: 'thirteenth_day_of_great_lent',
+        15: 'fifteenth_day_of_great_lent', 16: 'sixteenth_day_of_great_lent',
+        17: 'seventeenth_day_of_great_lent', 18: 'eighteenth_day_of_great_lent',
+        19: 'nineteenth_day_of_great_lent', 20: 'twentieth_day_of_great_lent',
+        22: 'twenty_second_day_of', 23: 'twenty_third_day_of_great_lent',
+        25: 'twenty_fifth_day_of_great_lent', 26: 'twenty_sixth_day_of_great_lent',
+        27: 'twenty_seventh_day_of_great_lent', 29: 'twenty_ninth_day_of',
+        30: 'thirtieth_day_of_great_lent', 31: 'thirty_first_day_of_great_lent',
+        32: 'thirty_second_day_of_great_lent', 33: 'thirty_third_day_of_great_lent',
+        34: 'thirty_fourth_day_of_great_lent', 36: 'thirty_sixth_day_of',
+        37: 'thirty_seventh_day_of_great_lent', 38: 'thirty_eighth_day_of_great_lent',
+        39: 'thirty_ninth_day_of_great_lent', 40: 'fortieth_day_of_great_lent',
+        41: 'forty_first_day_of_great_lent',
+    },
+    '{ord} day of the Fast of the Catechumens': {
+        1: 'catechumens_fast_day_1', 2: 'catechumens_fast_day_2', 3: 'catechumens_fast_day_3',
+        4: 'catechumens_fast_day_4', 5: 'catechumens_fast_day_5',
+    },
+    '{ord} day of Easter': {
+        2: 'second_day_of_easter', 3: 'third_day_of_easter', 4: 'fourth_day_of_easter',
+        5: 'fifth_day_of_easter', 6: 'sixth_day_of_easter', 7: 'seventh_day_of_easter',
+    },
+    '{ord} Sunday of Eastertide: Sunday of the World Church (Green Sunday)': {
+        3: 'third_sunday_sunday_of',
+    },
+    '{ord} Sunday of Eastertide (Red Sunday)': {4: 'fourth_sunday_red_sunday'},
+    '{ord} Sunday': {5: 'fifth_sunday'},
+    '{ord} Sunday of Eastertide': {6: 'sixth_sunday_of_eastertide'},
+    '{ord} Sunday of Eastertide (Second Palm Sunday)': {7: 'seventh_sunday_of_eastertide'},
+    '{ord} day of Eastertide': {
+        9: 'ninth_day_of_eastertide', 10: 'tenth_day_of_eastertide',
+        11: 'eleventh_day_of_eastertide', 12: 'twelfth_day_of_eastertide',
+        13: 'thirteenth_day_of_eastertide', 14: 'fourteenth_day_of_eastertide',
+        16: 'sixteenth_day_of_eastertide', 17: 'seventeenth_day_of_eastertide',
+        18: 'eighteenth_day_of_eastertide', 19: 'nineteenth_day_of_eastertide',
+        20: 'twentieth_day_of_eastertide', 21: 'twenty_first_day_of',
+        23: 'twenty_third_day_of', 24: 'twenty_fourth_day_of', 25: 'twenty_fifth_day_of',
+        26: 'twenty_sixth_day_of', 27: 'twenty_seventh_day_of', 28: 'twenty_eighth_day_of',
+        30: 'thirtieth_day_of_eastertide', 31: 'thirty_first_day_of',
+        32: 'thirty_second_day_of', 33: 'thirty_third_day_of', 34: 'thirty_fourth_day_of',
+        35: 'thirty_fifth_day_of', 37: 'thirty_seventh_day_of', 38: 'thirty_eighth_day_of',
+        39: 'thirty_ninth_day_of', 40: 'fortieth_day_of_eastertide', 41: 'forty_first_day_of',
+        42: 'forty_second_day_of', 44: 'forty_fourth_day_of', 45: 'forty_fifth_day_of',
+        46: 'forty_sixth_day_of', 47: 'forty_seventh_day_of', 48: 'forty_eighth_day_of',
+        49: 'forty_ninth_day_of',
+    },
+    '{ord} day of the Fast of the Prophet Elijah': {
+        2: 'second_day_of_pentecost', 3: 'third_day_of_pentecost',
+        4: 'fourth_day_of_pentecost', 5: 'fifth_day_of_pentecost', 6: 'sixth_day_of_pentecost',
+        7: 'seventh_day_of_pentecost',
+    },
+    '{ord} day of the Fast of Nativity': {
+        1: 'nativity_fast_day_1', 2: 'nativity_fast_day_2', 3: 'nativity_fast_day_3',
+        4: 'nativity_fast_day_4', 5: 'nativity_fast_day_5', 6: 'nativity_fast_day_6',
+    },
+    '{ord} day of Nativity': {
+        2: 'second_day_of_nativity', 3: 'third_day_of_nativity', 4: 'fourth_day_of_nativity',
+        5: 'fifth_day_of_nativity', 6: 'sixth_day_of_nativity', 7: 'seventh_day_of_nativity',
+        8: 'eighth_day_of_nativity',
+    },
+    '{ord} Sunday after Nativity': {
+        1: 'first_sunday_after_nativity', 2: 'second_sunday_after_nativity',
+        3: 'third_sunday_after_nativity', 4: 'fourth_sunday_after_nativity',
+        5: 'fifth_sunday_after_nativity', 6: 'sixth_sunday_after_nativity',
+        7: 'seventh_sunday_after_nativity',
+    },
+    '{ord} day of Advent': {
+        1: 'first_day_of_advent', 2: 'second_day_of_advent', 3: 'third_day_of_advent',
+        4: 'fourth_day_of_advent', 5: 'fifth_day_of_advent',
+    },
+    '{ord} day of the Fast of Advent': {
+        1: 'advent_fast_day_1', 2: 'advent_fast_day_2', 3: 'advent_fast_day_3',
+        4: 'advent_fast_day_4', 5: 'advent_fast_day_5',
+    },
+    '{ord} Sunday of Advent': {
+        1: 'first_sunday_of_advent', 2: 'second_sunday_of_advent', 3: 'third_sunday_of_advent',
+        4: 'fourth_sunday_of_advent', 5: 'fifth_sunday_of_advent', 6: 'sixth_sunday_of_advent',
+        7: 'seventh_sunday_of_advent',
+    },
+    '{ord} day of the Fast of the Holy Cross': {
+        1: 'holy_cross_fast_day_1', 2: 'holy_cross_fast_day_2', 3: 'holy_cross_fast_day_3',
+        4: 'holy_cross_fast_day_4', 5: 'holy_cross_fast_day_5',
+    },
+    '{ord} day of the Fast of the Holy Cross of Varag': {
+        1: 'cross_varag_day_1', 2: 'cross_varag_day_2', 3: 'cross_varag_day_3',
+        4: 'cross_varag_day_4', 5: 'cross_varag_day_5',
+    },
+    '{ord} Sunday of the Holy Cross': {
+        2: 'second_sunday_of_the_holy_cross', 3: 'third_sunday_of_the_holy_cross',
+        4: 'fourth_sunday_of_the_holy_cross', 5: 'fifth_sunday_of_the_holy_cross',
+        6: 'sixth_sunday_of_the_holy_cross', 7: 'seventh_sunday_of_the_holy_cross',
+        8: 'eighth_sunday_of_the_holy_cross', 9: 'ninth_sunday_of_the_holy_cross',
+        10: 'tenth_sunday_of_the_holy_cross', 11: 'eleventh_sunday_of_the_holy_cross',
+    },
+    '{ord} day of the Fast of Assumption': {
+        1: 'assumption_fast_day_1', 2: 'assumption_fast_day_2', 3: 'assumption_fast_day_3',
+        4: 'assumption_fast_day_4', 5: 'assumption_fast_day_5',
+    },
+    '{ord} day of the Assumption': {
+        2: 'second_day_of_assumption', 3: 'third_day_of_assumption',
+        4: 'fourth_day_of_assumption', 5: 'fifth_day_of_assumption',
+        6: 'sixth_day_of_assumption', 7: 'seventh_day_of_assumption',
+    },
+    '{ord} day of Assumption': {9: 'ninth_day_of_assumption'},
+    '{ord} Sunday of the Assumption': {
+        2: 'second_sunday_of_the_assumption', 5: 'fifth_sunday_of_the_assumption',
+    },
+    '{ord} Sunday of Assumption': {
+        3: 'third_sunday_after_assumption', 4: 'fourth_sunday_after_assumption',
+    },
+    '{ord} day of the Fast of the Transfiguration': {
+        1: 'transfiguration_fast_day_1', 2: 'transfiguration_fast_day_2',
+        3: 'transfiguration_fast_day_3', 4: 'transfiguration_fast_day_4',
+        5: 'transfiguration_fast_day_5',
+    },
+    '{ord} day of Transfiguration': {
+        2: 'second_day_of_transfiguration', 3: 'third_day_of_transfiguration',
+    },
+    '{ord} Sunday of Transfiguration': {
+        2: 'second_sunday_after_transfiguration', 3: 'third_sunday_after_transfiguration',
+        4: 'fourth_sunday_after_transfiguration', 5: 'fifth_sunday_after_transfiguration',
+        6: 'sixth_sunday_after_transfiguration', 7: 'seventh_sunday_after_transfiguration',
+    },
+    '{ord} Sunday of Pentecost': {
+        2: 'second_sunday_after_pentecost', 3: 'third_sunday_after_pentecost',
+        4: 'fourth_sunday_after_pentecost', 5: 'fifth_sunday_after_pentecost',
+        6: 'sixth_sunday_after_pentecost',
+    },
+    '{ord} day of the Fast of St. Gregory the Illuminator': {
+        1: 'illuminator_fast_day_1', 2: 'illuminator_fast_day_2', 3: 'illuminator_fast_day_3',
+        4: 'illuminator_fast_day_4', 5: 'illuminator_fast_day_5',
+    },
+    '{ord} day of the Fast of St. James the bishop of Nisibis': {
+        1: 'james_nisibis_day_1', 2: 'james_nisibis_day_2', 3: 'james_nisibis_day_3',
+        4: 'james_nisibis_day_4', 5: 'james_nisibis_day_5',
+    },
+    'Fast day': {None: 'fast_day'},
+    'Wednesday Fast': {None: 'wednesday_fast'},
+    'Friday Fast': {None: 'friday_fast'},
+}
+
+
 _POSITION_ANCHORS = {
     "E":   lambda d: calculate_gregorian_easter(d.year),
     "PE":  lambda d: calculate_gregorian_easter(d.year) + datetime.timedelta(days=49),
@@ -1540,18 +1724,22 @@ def _position_anchor_days(year: int) -> set:
     }
 
 
-def _position_label_and_coordinate(d: datetime.date):
-    """``(text, (akey, offset))`` for ``d``'s calendar-position label, or ``(None, None)``
-    where no verified rule applies. Shared by :func:`_position_label` (text only) and
-    :func:`_position_coordinate` (the coordinate only), so the family-matching loop exists
-    in exactly one place.
+def _position_id_label_and_coordinate(d: datetime.date):
+    """``(observance id, text, (akey, offset))`` for ``d``'s calendar-position label, or
+    ``(None, None, None)`` where no verified rule applies. Shared by
+    :func:`_position_label` (text only), :func:`_position_coordinate` (the coordinate) and
+    :func:`_position_observance_id` (the id), so the family-matching loop exists in exactly
+    one place.
+
+    The id comes from :data:`_POSITION_IDS`, keyed on the family's template and the ordinal
+    just computed -- stated data, not a lookup of the text this returns.
 
     ``(akey, offset)`` is the position family's own anchor key and day-offset -- a second,
     calendar-only identity for the SAME observance that ``text`` names, useful when there
     is no readings-based one available (see :func:`_position_coordinate`'s docstring).
     """
     if d in _position_anchor_days(d.year):
-        return None, None
+        return None, None, None
     for family in _POSITION_FAMILIES:
         akey, (lo, hi), weekdays, counter, adjust, template = family[:6]
         civil = family[6] if len(family) > 6 else None    # optional (month, day) guard
@@ -1563,14 +1751,16 @@ def _position_label_and_coordinate(d: datetime.date):
         offset = (d - anchor).days
         if (lo is not None and offset < lo) or (hi is not None and offset > hi):
             continue
+        by_ordinal = _POSITION_IDS.get(template, {})
         if counter is None:                  # fixed label, no ordinal to compute
-            return template, (akey, offset)
+            return by_ordinal.get(None), template, (akey, offset)
         raw = offset if counter == "days" else _count_sundays_after(anchor, d)
         n = raw + adjust
         if not 1 <= n <= len(_ORDINAL_WORDS):
-            return None, None
-        return template.format(ord=_ORDINAL_WORDS[n - 1]), (akey, offset)
-    return None, None
+            return None, None, None
+        return (by_ordinal.get(n), template.format(ord=_ORDINAL_WORDS[n - 1]),
+                (akey, offset))
+    return None, None, None
 
 
 def _position_label(d: datetime.date):
@@ -1587,7 +1777,7 @@ def _position_label(d: datetime.date):
     happens to equal the default", which matters because a stored, validated table entry
     is trusted verbatim in the first case and must not be, in the second.
     """
-    return _position_label_and_coordinate(d)[0]
+    return _position_id_label_and_coordinate(d)[1]
 
 
 def _position_coordinate(d: datetime.date):
@@ -1603,7 +1793,14 @@ def _position_coordinate(d: datetime.date):
     just as stable -- the calendar coordinate a position family fires on never changes,
     only the wording chosen for it might.
     """
-    return _position_label_and_coordinate(d)[1]
+    return _position_id_label_and_coordinate(d)[2]
+
+
+def _position_observance_id(d: datetime.date):
+    """The observance ``d``'s calendar-position label names, or ``None`` -- declared, not
+    recovered. The position twin of :func:`_eve_observance_id`; see :data:`_POSITION_IDS`.
+    """
+    return _position_id_label_and_coordinate(d)[0]
 
 
 # ---------------------------------------------------------------------------
@@ -1615,52 +1812,83 @@ def _position_coordinate(d: datetime.date):
 #
 # (anchor key, day offset from the anchor, label). Every family is an exact offset -- no
 # counting, no ordinals -- and each fires once a year.
+# ``(anchor key, day offset, observance id, literal text)``.
+#
+# The id is declared HERE, beside the rule that fires, rather than recovered by looking the
+# literal up in the catalog. An eve is exactly one observance, so it has exactly one id, and
+# the id is the only thing about it that cannot be renamed -- which makes it the only sound
+# key. Recovering it from the text worked just as long as the literal happened to equal the
+# row's ``approved_en``; the moment a correction moved one of the two (``_EVE_CIVIL``'s
+# Nativity eve reads "Eve of the Fast of Nativity" against a ``source_en`` of "Eve of Fast
+# of Nativity"), the row was pinned -- renaming it left the literal matching neither column,
+# the build reported a served observance as unregistered, and forcing past that served the
+# same eve twice, once under each name. Same shape as _FIXED_DATE_OBSERVANCES, which has
+# declared its id from the start.
+#
+# The literal stays: it is the fallback for a thin checkout, and it is what
+# dev/verify_eve_labels.py compares against the source (the calendar rule's own text, not
+# whatever rename is currently being served).
 _EVE_FAMILIES = (
-    ("E",  -70, "Eve of the Fast of the Catechumens"),
-    ("E",  -49, "Eve of Great Lent"),
-    ("E",   -1, "Eve of the Resurrection of Our Lord Jesus Christ"),
-    ("PE",   0, "Eve of the Fast of the Prophet Elijah"),
-    ("PE",  21, "Eve of the Fast of St. Gregory the Illuminator"),
-    ("TR",  -7, "Eve of the Fast of Transfiguration"),
-    ("AS",  -7, "Eve of the Fast of the Assumption of the Holy Mother of God"),
-    ("EX",  -7, "Eve of the Fast of the Exaltation of the Holy Cross"),
-    ("EX",   7, "Eve of the Fast of the Holy Cross of Varag"),
-    ("HE",  21, "Eve of the Fast of St. James the bishop of Nisibis"),
+    ("E",  -70, "eve_of_fast_of_catechumens", "Eve of the Fast of the Catechumens"),
+    ("E",  -49, "eve_of_great_lent", "Eve of Great Lent"),
+    ("E",   -1, "eve_of_the_resurrection", "Eve of the Resurrection of Our Lord Jesus Christ"),
+    ("PE",   0, "eve_of_fast_of_prophet_elijah", "Eve of the Fast of the Prophet Elijah"),
+    ("PE",  21, "eve_of_fast_of_illuminator", "Eve of the Fast of St. Gregory the Illuminator"),
+    ("TR",  -7, "eve_of_fast_of_transfiguration", "Eve of the Fast of Transfiguration"),
+    ("AS",  -7, "eve_of_fast_of_assumption",
+     "Eve of the Fast of the Assumption of the Holy Mother of God"),
+    ("EX",  -7, "eve_of_fast_of_exaltation",
+     "Eve of the Fast of the Exaltation of the Holy Cross"),
+    ("EX",   7, "eve_of_fast_of_holy_cross_of_varag",
+     "Eve of the Fast of the Holy Cross of Varag"),
+    ("HE",  21, "eve_of_fast_of_nisibis",
+     "Eve of the Fast of St. James the bishop of Nisibis"),
 )
 
 # The two solar eves, by civil date.
 _EVE_CIVIL = {
-    (12, 29): "Eve of the Fast of Nativity",
-    (1, 5): "Eve of the Nativity and Theophany of Our Lord Jesus Christ",
+    (12, 29): ("eve_of_fast_of_nativity", "Eve of the Fast of Nativity"),
+    (1, 5): ("eve_of_the_nativity",
+             "Eve of the Nativity and Theophany of Our Lord Jesus Christ"),
 }
+
+# Heesnak's own eve, which is not in _EVE_FAMILIES (see _advent_eve_label).
+_ADVENT_EVE_ID = "eve_of_fast_of_advent"
 
 
 def _advent_eve_label(heesnak: datetime.date) -> str:
     """The Advent eve is Heesnak itself (the fast opens the next morning).
 
-    ``heesnak`` is kept as a parameter for the call shape even though the label itself
-    does not depend on it.
+    The source writes it two ways -- keeping the article in the 19 years Heesnak falls 9
+    weeks after Exaltation and dropping it in the 7 where it falls 10 -- an inconsistency,
+    like the Sundays of (the) Assumption, but deterministic in the offset. Normalized to
+    one approved spelling (dev/observance_name_review.tsv id ``eve_of_fast_of_advent``)
+    rather than reproduced both ways; ``heesnak`` is kept as a parameter for the call
+    shape even though the label itself no longer depends on it.
     """
     return "Eve of the Fast of Advent"
 
 
-def _eve_label_and_coordinate(d: datetime.date):
-    """``(text, (akey, offset))`` for ``d``'s eve note, or ``(None, None)``.
+def _eve_id_label_and_coordinate(d: datetime.date):
+    """``(observance id, text, (akey, offset))`` for ``d``'s eve note, or ``(None, None, None)``.
 
-    The eve twin of :func:`_position_label_and_coordinate`, and for the same reason: an
+    The eve twin of :func:`_position_id_label_and_coordinate`, and for the same reason: an
     eve is already declared as an exact ``(anchor key, day offset)`` pair, so it carries a
     second, calendar-only identity for free. Shared by :func:`_eve_label` (text only) and
     :func:`_eve_coordinate` (the coordinate only), so the matching loop exists once.
 
     The two solar eves have no movable anchor and use ``("civil", month * 100 + day)``,
     a namespace the anchor keys cannot collide with. The Advent eve is not in
-    ``_EVE_FAMILIES`` -- it is Heesnak itself, so its coordinate is its distance from
-    Exaltation (``("EX", 63)`` or ``("EX", 70)``).
+    ``_EVE_FAMILIES`` -- it is Heesnak itself, and :func:`_advent_eve_label` picks between
+    two wordings by how far Heesnak falls after Exaltation -- so its coordinate is that
+    same distance (``("EX", 63)`` or ``("EX", 70)``), which is exactly what separates the
+    two wordings.
     """
     if (d.month, d.day) in _EVE_CIVIL:
-        return _EVE_CIVIL[(d.month, d.day)], ("civil", d.month * 100 + d.day)
+        sid, label = _EVE_CIVIL[(d.month, d.day)]
+        return sid, label, ("civil", d.month * 100 + d.day)
     if d.weekday() not in (5, 6):   # every remaining eve is a Sunday, bar Holy Saturday
-        return None, None
+        return None, None, None
     for year in (d.year - 1, d.year, d.year + 1):
         easter = calculate_gregorian_easter(year)
         anchor = {
@@ -1671,13 +1899,13 @@ def _eve_label_and_coordinate(d: datetime.date):
             "EX": sunday_closest_to(year, 9, 14),
             "HE": sunday_closest_to(year, 11, 18),
         }
-        for akey, offset, label in _EVE_FAMILIES:
+        for akey, offset, sid, label in _EVE_FAMILIES:
             if d == anchor[akey] + datetime.timedelta(days=offset):
-                return label, (akey, offset)
+                return sid, label, (akey, offset)
         if d == anchor["HE"]:
-            return (_advent_eve_label(anchor["HE"]),
+            return (_ADVENT_EVE_ID, _advent_eve_label(anchor["HE"]),
                     ("EX", (anchor["HE"] - anchor["EX"]).days))
-    return None, None
+    return None, None, None
 
 
 def _eve_label(d: datetime.date):
@@ -1690,7 +1918,7 @@ def _eve_label(d: datetime.date):
     Always the literal, un-overridden text -- see :func:`_position_label`'s docstring for
     why a caller wanting a catalogued rename resolves it separately.
     """
-    return _eve_label_and_coordinate(d)[0]
+    return _eve_id_label_and_coordinate(d)[1]
 
 
 def _eve_coordinate(d: datetime.date):
@@ -1702,7 +1930,18 @@ def _eve_coordinate(d: datetime.date):
     fixed civil date outranks it the day's readings become that feast's -- leaving the eve
     text served but its readings signature unrecognizable.
     """
-    return _eve_label_and_coordinate(d)[1]
+    return _eve_id_label_and_coordinate(d)[2]
+
+
+def _eve_observance_id(d: datetime.date):
+    """The observance ``d``'s eve note names, or ``None`` -- declared, not recovered.
+
+    The eve half of the "ids are stated, not derived" rule (CLAUDE.md). Every other route
+    to this id goes through display text, which a rename is free to change; this one is
+    read straight off ``_EVE_FAMILIES``/``_EVE_CIVIL`` and cannot move. The build asks it,
+    so a renamed eve stays registered and keeps its entry in the readings index.
+    """
+    return _eve_id_label_and_coordinate(d)[0]
 
 
 def _annunciation_composite(d, tables=None):
@@ -2349,8 +2588,9 @@ def _catalog_text(sid, default, lang="en"):
     literal-served observances (the pre-Lent cohort, a fixed civil date, an extreme-early-
     Easter composite) reaches this call with no engine.py edit.
 
-    A module function rather than a direct :meth:`ObservanceCatalog.text_of` call: every
-    caller wants whatever ``_OBSERVANCE_CATALOG`` is currently bound to."""
+    Kept as a module function over :meth:`ObservanceCatalog.text_of` because it reads the
+    CURRENT catalog: eight call sites want whatever ``_OBSERVANCE_CATALOG`` is bound to
+    now, not whatever it was bound to when they were defined."""
     return _OBSERVANCE_CATALOG.text_of(sid, default, lang)
 
 
@@ -2386,7 +2626,7 @@ def _observance_id_from_coordinate(akey, offset, kind):
     return hashlib.sha1(f"coord|{kind}|{akey}|{offset}".encode()).hexdigest()[:12]
 
 
-def _resolve_generated_text(default_text, readings, kind, coordinate=None):
+def _resolve_generated_text(default_text, readings, kind, coordinate=None, declared=None):
     """``default_text`` (a position/eve label's literal template output), or the catalog's
     current text for it if ``readings`` (or, failing that, ``coordinate``) identifies a
     served, catalogued observance.
@@ -2415,14 +2655,74 @@ def _resolve_generated_text(default_text, readings, kind, coordinate=None):
     so the caller applies it under a guard rather than unconditionally; see
     :func:`_apply_position_label`.
     """
+    sid = _resolve_generated_id(readings, kind, coordinate, declared)
+    return _OBSERVANCE_CATALOG.text_of(sid, default_text) if sid else default_text
+
+
+def _resolve_generated_id(readings, kind, coordinate=None, declared=None):
+    """The observance a generated position/eve label names, by readings then coordinate.
+
+    The id half of :func:`_resolve_generated_text`, split out because the BUILD needs it
+    and the text is no use there. A build asking "does this label have a row" by matching
+    its literal template text against the TSV gets the wrong answer the moment the label is
+    renamed -- the literal stops matching any approved name, and the build reports a served
+    observance as unregistered. The id does not move (ids are stated, not derived --
+    CLAUDE.md), so the build asks for that instead. See dev/build_observance_catalog.
+    """
+    # A DECLARED id outranks both inferences. The family table states it (an eve carries
+    # its own -- engine._EVE_FAMILIES/_EVE_CIVIL), where readings and coordinate only ever
+    # infer it, and the index they infer through is itself built from display text. That
+    # matters where neither inference can reach: the Advent eve is Heesnak itself, whose
+    # readings vary and whose coordinate is one of two ((EX, 63) or (EX, 70)), so it has
+    # no index entry at all and a rename of it used to reach nothing.
+    if declared:
+        return declared
     sid = None
     if readings:
         sid = _OBSERVANCE_ID_BY_READINGS.get(_observance_id_from_readings(readings, kind))
     if sid is None and coordinate:
         sid = _OBSERVANCE_ID_BY_READINGS.get(
             _observance_id_from_coordinate(*coordinate, kind=kind))
-    return _OBSERVANCE_CATALOG.get(sid, {}).get("en", default_text) if sid else default_text
+    return sid
 
+
+def generated_observance_id(d: datetime.date, kind: str):
+    """The observance id of ``d``'s generated position or eve label, or ``None``.
+
+    Resolved exactly as the serving path resolves it -- the day's own readings first, its
+    calendar coordinate second -- so a build that asks this question gets the same answer
+    a request would. ``kind`` is "position" or "eve".
+    """
+    if kind == "eve":
+        # Declared, so it survives a rename -- see :func:`_eve_observance_id`. The
+        # readings/coordinate route below cannot: it reads an index that is itself built
+        # from display text, so a rename drops the entry the lookup needs.
+        return _eve_observance_id(d)
+    if kind != "position":
+        raise ValueError(f"kind must be 'position' or 'eve', not {kind!r}")
+    return _position_observance_id(d)
+
+
+# Reverse lookup: a served English component -> its stable id. Built once at import time.
+#
+# One entry per component, because the catalog holds no two observances under the same
+# English text -- an invariant dev/build_observance_catalog.py enforces and
+# tests/test_language.py pins. It has not always held: the source heads the five weekdays
+# of the Fast of St. Gregory the Illuminator with their ordinal in Armenian but printed a
+# bare "Fast day" in English, one string standing for six observances, and the id had to be
+# recovered from the DATE. That is registered as a repair now
+# (source_corrections.named_fast_label), which is what lets this be a plain dict.
+# Display text -> its own {en, hy}, and display text -> the OBSERVANCE it names. One key
+# set, because one observance is one CANON: where the source prints a longer or shorter
+# companion list for the same liturgical day, that is the Tonats'oyts packing several First
+# Volume canons onto one line, not one observance under two names. The packed line is a
+# _OBSERVANCE_SEP join whose components each resolve here on their own
+# (docs/observance-name-corrections.md section 7).
+#
+# The reverse indexes this comment used to introduce live in ObservanceCatalog now, built
+# in its constructor from the entries it holds. There is no separate index to keep in step
+# with the catalog, so the identity-check-and-rebuild accessors that used to stand here --
+# and their coupling into _canons_with_own_day's cache -- are gone rather than relocated.
 
 # Split a reading citation into (book head, "chapter.verse" tail). The tail is
 # language-independent, so translating a reading is just swapping the head.
@@ -2600,7 +2900,8 @@ _PLACEHOLDER_LABELS = ("(commemoration)", "(movable ordinary-time reading)")
 _BARE_FAST_MARKERS = ("Fast day", "Feast day")
 
 # What the position overlay drops before it places anything: the placeholders (not
-# observances) and the bare markers (attributes wearing a name's clothes).
+# observances) and the bare markers (attributes wearing a name's clothes). Hoisted
+# because it is a fact about that overlay, not something to rebuild per request.
 _POSITION_OVERLAY_DROPS = frozenset(_PLACEHOLDER_LABELS) | frozenset(_BARE_FAST_MARKERS)
 
 
@@ -2667,7 +2968,8 @@ def _canons_with_own_day(ly: int) -> frozenset:
     The cache lives on the CATALOG (``ObservanceCatalog.own_day_cache``), not on this
     function, because the scan resolves components through it: a different catalog must
     not answer from a scan the previous one produced. Holding it there makes that true by
-    construction -- swapping the catalog swaps the cache with it.
+    construction -- swapping the catalog swaps the cache with it -- where an ``lru_cache``
+    here needed a ``cache_clear()`` wired into the index accessor to notice.
 
     The window overshoots the supported range at both ends -- down to the November before
     ``MIN_YEAR`` (a January date sits in the previous liturgical year) and, for
@@ -2725,6 +3027,27 @@ def _drop_owned_companions(label: str, d: datetime.date) -> str:
     return ObservanceName.parse(label).without(drop).render()
 
 
+def _stored_generated_component(name, sid, has_shape):
+    """The component of ``name`` that IS the observance ``sid``, else the first whose text
+    has the right shape.
+
+    ``_is_position_component`` and ``_is_eve_component`` recognise a component by its SHAPE
+    ("Nth day of ...", "Eve of ..."), which is exactly what a rename is free to change. When
+    it does, the stored component becomes invisible to the overlay, which then appends the
+    regenerated one beside it and serves the same observance twice under two names. Asking
+    by id first fixes that: the id is what does not move.
+
+    The shape predicate stays as the fallback -- for a day whose readings and coordinate
+    identify nothing (an uncovered family), a thin catalog, or a stored component that has
+    no id at all.
+    """
+    if sid:
+        by_id = name.find(lambda p: _OBSERVANCE_CATALOG.id_of(p) == sid)
+        if by_id is not None:
+            return by_id
+    return name.find(has_shape)
+
+
 def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
     """Head ``label`` with ``d``'s regenerated calendar-position label.
 
@@ -2774,15 +3097,34 @@ def _apply_position_label(label: str, d: datetime.date, readings=None) -> str:
         # ``or label`` is unreachable in the supported range (no day's name is the marker
         # and nothing else) and exists so this can never return an empty name.
         return name.render() or label
-    stored = name.find(_is_position_component)
     if readings is None:
-        resolved = position
+        stored, resolved = name.find(_is_position_component), position
     else:
-        coordinate = _position_coordinate(d) if stored in (None, position) else None
-        resolved = _resolve_generated_text(position, readings, "position", coordinate)
+        coordinate = _position_coordinate(d)
+        declared = _position_observance_id(d)
+        sid = _resolve_generated_id(readings, "position", coordinate, declared)
+        stored = _stored_generated_component(name, sid, _is_position_component)
+        # The coordinate guard, asked by identity rather than by text: a stored component
+        # this rule already names (same id) is a RENAME and agrees, where comparing the two
+        # strings would read it as a disagreement and withhold the coordinate from the very
+        # rename it is carrying. A genuinely different observance still blocks it.
+        agrees = (stored is None or stored == position
+                  or (sid is not None and _OBSERVANCE_CATALOG.id_of(stored) == sid))
+        # The declared id is stated data, not an inference -- but it is withheld under
+        # the same guard, because the guard is not about how strong the rule's evidence
+        # is. It is about the table and the rule naming DIFFERENT observances for the day,
+        # and there the stored, cross-year-validated value wins whatever the rule knows
+        # about itself.
+        resolved = _resolve_generated_text(
+            position, readings, "position", coordinate if agrees else None,
+            declared if agrees else None)
     if stored is not None:
-        if resolved != position:                  # a catalogued rename overrides even a
-            name = name.replace(_is_position_component, resolved)
+        # Only a catalogued RENAME (resolution produced something other than the rule's
+        # own literal) may touch a stored component. Comparing against ``stored`` instead
+        # would let the literal overwrite a stored, validated value that the rule simply
+        # disagrees with -- the case the coordinate guard exists to lose.
+        if resolved != position:
+            name = name.replace(lambda p: p == stored, resolved)
         return name.render() or label
     return name.with_head(resolved).render()
 
@@ -2846,7 +3188,8 @@ def _is_eve_component(component: str) -> bool:
 
     The sibling of :func:`_is_position_component`. Both are here so that "which component
     is this one" is asked in one place per kind: ``ObservanceName`` deliberately holds no
-    opinion about what the engine's components mean.
+    opinion about what the engine's components mean, and a bare ``startswith`` repeated at
+    each site is how the position overlay's own predicate came to be spelled two ways.
     """
     return component.startswith("Eve of ")
 
@@ -2875,15 +3218,21 @@ def _apply_eve_label(label: str, d: datetime.date, readings=None) -> str:
     if eve is None:
         return label
     name = ObservanceName.parse(label, drop=_PLACEHOLDER_LABELS)
-    stored = name.find(_is_eve_component)
     if readings:
-        coordinate = _eve_coordinate(d) if stored in (None, eve) else None
-        resolved = _resolve_generated_text(eve, readings, "eve", coordinate)
+        coordinate = _eve_coordinate(d)
+        declared = _eve_observance_id(d)
+        sid = _resolve_generated_id(readings, "eve", coordinate, declared)
+        stored = _stored_generated_component(name, sid, _is_eve_component)
+        agrees = (stored is None or stored == eve
+                  or (sid is not None and _OBSERVANCE_CATALOG.id_of(stored) == sid))
+        resolved = _resolve_generated_text(
+            eve, readings, "eve", coordinate if agrees else None,
+            declared if agrees else None)   # see _apply_position_label's note
     else:
-        resolved = eve
+        stored, resolved = name.find(_is_eve_component), eve
     if stored is not None:
-        if resolved != eve:
-            name = name.replace(_is_eve_component, resolved)
+        if resolved != eve:                       # see _apply_position_label
+            name = name.replace(lambda p: p == stored, resolved)
         return name.render() or label
     return name.with_tail(resolved).render()
 

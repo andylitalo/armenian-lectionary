@@ -34,8 +34,36 @@ def _text_to_id():
     return {entry["en"]: sid for sid, entry in _catalog().items()}
 
 
-def ids_for_text(text):
+def _generated_id(component, date):
+    """The id of ``component`` if it is the position or eve label the engine composes for
+    ``date``, else ``None``.
+
+    The text is checked against the rule's own output before its id is accepted, so this
+    can only ever identify a component the engine really did generate for this date.
+
+    Why a second route at all: a table entry stores the LITERAL label
+    (``source_corrections.named_fast_label`` asks ``engine._position_label`` for the
+    calendar-rule text on purpose, not for a catalogued rename), while the catalog holds
+    the current ``approved_en``. Those are the same string until someone renames the label,
+    and from then on the stored text resolves to nothing by text -- though the runtime
+    serves it perfectly well, because it resolves by readings/coordinate. This asks the
+    same question the runtime asks.
+    """
+    from armenian_lectionary.engine import (
+        _eve_label, _position_label, generated_observance_id)
+    for kind, label in (("position", _position_label(date)), ("eve", _eve_label(date))):
+        if label == component:
+            return generated_observance_id(date, kind)
+    return None
+
+
+def ids_for_text(text, date=None):
     """Ordered list of observance ids for a (possibly _OBSERVANCE_SEP-joined) served string.
+
+    ``date`` -- any date the text is served on -- lets a generated position/eve component
+    resolve by id when it no longer resolves by text; see :func:`_generated_id`. Without
+    it, text is the only route, which is correct for callers whose text is a stored
+    commemoration rather than a calendar-derived label.
 
     Raises KeyError, naming the missing component, rather than silently dropping it --
     an unresolvable component here means observance_catalog.json has drifted out of date
@@ -45,11 +73,14 @@ def ids_for_text(text):
     by_text = _text_to_id()
     ids = []
     for component in [c.strip() for c in (text or "").split(_OBSERVANCE_SEP) if c.strip()]:
-        if component not in by_text:
+        sid = by_text.get(component)
+        if sid is None and date is not None:
+            sid = _generated_id(component, date)
+        if sid is None:
             raise KeyError(
                 f"no observance_catalog.json entry for component {component!r}; "
                 "rerun dev/build_observance_catalog.py")
-        ids.append(by_text[component])
+        ids.append(sid)
     return ids
 
 
