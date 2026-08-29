@@ -53,7 +53,8 @@ PORT=8090 gunicorn --bind "0.0.0.0:$PORT" --workers 2 --threads 4 --timeout 60 a
 ```bash
 # self-contained, no cache needed:
 python -m unittest tests.test_calendar tests.test_parser tests.test_language \
-                   tests.test_observance_contract tests.test_build_registration
+                   tests.test_observance_contract tests.test_build_registration \
+                   tests.test_tier_ladder
 python -m unittest discover -s tests -t .                  # everything
 ```
 `test_build_registration` is the only test that drives the shipped-artifact **build**
@@ -86,6 +87,52 @@ empty and no oracle test can assert anything about them.
 
 The governing rule for any new difference from the source: it must be either counted by a
 ratchet or registered in `dev/source_corrections`. Nothing passes silently.
+
+### The tier ladder is data, so its order is asserted
+
+`_compute_lectionary` resolves a date by walking `engine._TIERS`, an ordered tuple of
+thirteen `_tier_*` adapters, each returning a `_TierResult` or `None`. Precedence **is**
+that order — it used to be the physical order of thirteen `if`/`return` paragraphs, where
+moving one was a conspicuous edit.
+
+It is now a one-token change that reads like tidying, and nothing in CI was watching.
+Swapping the first two (`_tier_prelent_cohort` above `_tier_validated_table` — the
+precedence that adapter's own comment argues for) changes what **117 days** serve, under a
+different `Source`, and the whole suite stayed green: it is caught by one
+`test_regression` test, and the cache that test needs is git-ignored, so CI skips it.
+`_tier_presentation_eve` above `_tier_first_volume_winter_continua` was a second such gap.
+The tuple also looks more forgiving than it is — 8 of its 12 adjacent swaps change no
+output at all, because those tiers never claim the same date.
+
+`tests/test_tier_ladder.py` states the ladder instead: every adapter is on it **once, in
+definition order** (so the file still reads top-to-bottom as the precedence it
+implements), `_tier_fallback` is last and unconditional, and each of the **21 real
+precedence relations** is pinned to a date where *both* tiers apply. Needs no cache, so it
+runs on every push; it fails on all 12 adjacent swaps and on a dropped, duplicated or
+non-`_TierResult`-returning adapter.
+
+Working rules:
+
+- **Reordering `_TIERS` means moving the adapter's definition too.** That is deliberate
+  friction: it is what makes a precedence change look like one again.
+- **A tier's `Note` lives in a module-level `_NOTE_*` constant**, not inline in the
+  adapter. Twelve of them, hoisted above the ladder so it reads as thirteen short
+  decisions rather than thirteen paragraphs of prose. The text is served verbatim, so
+  reflowing one changes the API response — verify against the reference dump, not by eye.
+- **The ladder ends in a `for`/`else` that raises.** Unreachable while `_tier_fallback` is
+  last and unconditional, and stated so that a bad reorder fails naming the date and the
+  ladder rather than as an `AttributeError` on `None` three lines later.
+- **A new tier needs a pin.** `test_the_pins_cover_every_contended_adjacency` fails if a
+  new adapter makes a fifth adjacency contended and nothing pins it. Find the date by
+  scanning the range for days where more than one tier returns non-`None`.
+- **A pin's `loser` must genuinely apply on that date**, or it asserts coverage rather
+  than precedence; `test_every_pin_actually_contends` enforces it.
+- `_tier_generative_saint` and `_tier_fallback` currently **win on no date** in
+  2001–2027 — the first is fully shadowed by `_tier_validated_table` and
+  `_tier_cycle_saint` (though it applies on 1,904 days), the second because every day in
+  range is claimed earlier. Both are still reachable outside the range, which is
+  env-overridable, so neither is dead code — but do not read a passing suite as evidence
+  that either one's *body* is exercised.
 
 ### The source is not automatically right
 
