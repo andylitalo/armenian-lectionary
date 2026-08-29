@@ -53,9 +53,13 @@ PORT=8090 gunicorn --bind "0.0.0.0:$PORT" --workers 2 --threads 4 --timeout 60 a
 ```bash
 # self-contained, no cache needed:
 python -m unittest tests.test_calendar tests.test_parser tests.test_language \
-                   tests.test_observance_contract
+                   tests.test_observance_contract tests.test_build_registration
 python -m unittest discover -s tests -t .                  # everything
 ```
+`test_build_registration` is the only test that drives the shipped-artifact **build**
+(`dev/build_observance_catalog.py`) rather than the serving path — it rebuilds the catalog and
+the readings index from the tracked ground truth over a simulated TSV rename, so it needs no
+cache. See "The build asks for the declaration" below for what it exists to catch.
 The full-dataset regression tests (`test_regression`, `test_full_dataset`,
 `test_table_build`, `test_observance`, `test_observance_name_raw`) need the git-ignored
 `dev/reference_data/` ground-truth cache; they SKIP without it (`@requires_reference_cache`).
@@ -339,9 +343,10 @@ name.
 
 Rules:
 
-- **A new eve declares its id** in the family table. `build_observance_catalog` reads it
-  (`engine._eve_observance_id`), so the label stays registered and keeps its readings-index
-  entry through any rename.
+- **A new eve declares its id** in the family table, and a new position family in
+  `_POSITION_IDS`. `build_observance_catalog` reads both through one accessor,
+  `engine.generated_observance_id(d, kind)`, so the label stays registered and keeps its
+  readings-index entry through any rename.
 - **A declared id outranks both inferences.** `_resolve_generated_id` takes it before the
   readings hash and the coordinate: those infer through an index built from display text,
   and some labels have no entry in it at all. The Advent eve is one — Heesnak itself, whose
@@ -366,6 +371,30 @@ Stored components are located by **id** too (`engine._stored_generated_component
 `_is_position_component` / `_is_eve_component` recognise a component by its SHAPE
 ("Nth day of …", "Eve of …"), which is exactly what a rename may change; when it did, the
 overlay could not see the stored component and appended the regenerated one beside it.
+
+#### The build asks for the declaration; only the serving path infers
+
+`generated_observance_id(d, kind)` returns the **declared** id and nothing else. That is the
+whole of what the build may use, and the split matters:
+
+| | asks | why |
+|---|---|---|
+| build (`dev/build_observance_catalog.py`) | `generated_observance_id` — declared only | the inferences read `_OBSERVANCE_ID_BY_READINGS`, which **is the previous build's own output**; a build resolving through it derives the new catalog from the old one |
+| serving (`_apply_position_label` / `_apply_eve_label`) | `_resolve_generated_id` — declared → readings → coordinate | there the index is per-occurrence evidence produced independently of the rule, worth having on top of the declaration |
+
+Both `declared_label_ids` (which `registration()` uses) and `build_readings_index`'s
+`declared_ids` ask for both kinds. Asking for eves only is what shipped broken: 52 of the 216
+labels are **pinned** — the engine literal equals neither `approved_en` nor `source_en` — so a
+rename left them with no text route, and a pinned *position* label then silently lost its
+index entry on rebuild while the build still reported success (registration was reading the
+previous index). The next rebuild failed on what that one wrote. Pinned by
+`tests/test_build_registration.py`, which drives the real build over a renamed ground truth —
+`tests/test_rename_reaches_the_served_name.py` substitutes a catalog in-process and re-runs
+the *serving* path, so it structurally cannot see a build defect.
+
+Do **not** route the serving path through `generated_observance_id`: `_apply_position_label`
+withholds `declared` *and* `coordinate` under the coordinate guard, and collapsing the two
+calls would delete that guard.
 
 ### The catalog is held, not swapped underneath
 

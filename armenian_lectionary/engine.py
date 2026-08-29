@@ -2687,16 +2687,28 @@ def _resolve_generated_id(readings, kind, coordinate=None, declared=None):
 
 
 def generated_observance_id(d: datetime.date, kind: str):
-    """The observance id of ``d``'s generated position or eve label, or ``None``.
+    """The DECLARED observance id of ``d``'s generated position or eve label, or ``None``.
+    ``kind`` is "position" or "eve".
 
-    Resolved exactly as the serving path resolves it -- the day's own readings first, its
-    calendar coordinate second -- so a build that asks this question gets the same answer
-    a request would. ``kind`` is "position" or "eve".
+    The one entry point a BUILD asks. Not the serving path's full precedence: that is
+    :func:`_resolve_generated_id` (declared, then a readings hash, then a calendar
+    coordinate), and only its first term is sound at build time.
+
+    Why the build takes the declared term alone. Both inferences read
+    ``_OBSERVANCE_ID_BY_READINGS``, which is *itself an artifact of the previous build* and
+    is keyed, ultimately, off display text. A build that leaned on it would be resolving the
+    new catalog through the old one -- so a rename that dropped a label from the index would
+    quietly drop it again on the next rebuild, each build inheriting the last one's blind
+    spot. The declared id is stated beside the rule that fires (:data:`_POSITION_IDS`,
+    :data:`_EVE_FAMILIES`/:data:`_EVE_CIVIL`) and is the only thing about a label a rename
+    cannot move, so it is what the build must key on. Every generated label in range has
+    one; ``tests/test_build_registration.py`` asserts that, because this function returning
+    ``None`` is what would silently strand a rename.
+
+    The serving path keeps both inferences: there the index is per-occurrence evidence
+    produced independently of the rule, which is worth having on top of the declaration.
     """
     if kind == "eve":
-        # Declared, so it survives a rename -- see :func:`_eve_observance_id`. The
-        # readings/coordinate route below cannot: it reads an index that is itself built
-        # from display text, so a rename drops the entry the lookup needs.
         return _eve_observance_id(d)
     if kind != "position":
         raise ValueError(f"kind must be 'position' or 'eve', not {kind!r}")

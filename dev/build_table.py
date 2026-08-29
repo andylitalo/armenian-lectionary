@@ -196,14 +196,22 @@ def _dates_by_entry(days, tables):
     return out
 
 
-def export_table(tables, stats, path=None, days=None):
-    """Write the validated tables to the runtime's shipped data file
-    (armenian_lectionary/data/lectionary_data.json)."""
-    if path is None:
-        path = DATA_PATH
-    # Strip support_years from shipped entries to keep the file lean.
+def slim_tables(tables, dates=None):
+    """The shipped shape of ``tables``: string keys and ``{feast, observance_ids,
+    readings}`` only, with ``support_years`` stripped to keep the file lean.
+
+    Its own function because tests/test_table_build.py asserts the shipped table is
+    reproducible and so must slim a freshly built table exactly as the export does. It used
+    to keep a copy of this loop, which silently diverged the moment ``dates`` was added
+    here -- the copy went on resolving ids by text alone, which is right until a rename
+    lands and then quietly wrong. One implementation cannot drift from itself.
+
+    ``dates`` maps ``(keyspace, key) -> a date the entry is served on``; see
+    :func:`_dates_by_entry`. Without it a calendar-derived component that has been renamed
+    resolves by text only, which is why the export always passes it.
+    """
     from dev.observance_ids import ids_for_text
-    dates = _dates_by_entry(days, tables) if days else {}
+    dates = dates or {}
     slim = {}
     for ks, entries in tables.items():
         slim[ks] = {}
@@ -214,6 +222,15 @@ def export_table(tables, stats, path=None, days=None):
                 "observance_ids": ids_for_text(v["feast"], dates.get((ks, key))),
                 "readings": v["readings"],
             }
+    return slim
+
+
+def export_table(tables, stats, path=None, days=None):
+    """Write the validated tables to the runtime's shipped data file
+    (armenian_lectionary/data/lectionary_data.json)."""
+    if path is None:
+        path = DATA_PATH
+    slim = slim_tables(tables, _dates_by_entry(days, tables) if days else {})
     # Gate: no shipped feast label may carry a contaminant (Cyrillic/Greek homoglyph,
     # curly quote, ...). Fold known ones upstream (normalize_confusables); anything else
     # fails here so the maintainer decides fold-vs-allow rather than shipping it silently.
