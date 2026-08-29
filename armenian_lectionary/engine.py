@@ -26,6 +26,7 @@ import json
 import os
 import re
 from dataclasses import dataclass
+from typing import Optional
 
 from .observance_catalog import ObservanceCatalog
 from .observance_name import OBSERVANCE_SEP, ObservanceName
@@ -3314,23 +3315,120 @@ def compute_armenian_lectionary(target_date: datetime.date,
 
 
 @dataclass(frozen=True)
-class TierResult:
+class _TierResult:
     """One tier's answer for a date: everything ``_compute_lectionary`` needs to
-    build the result dict, and nothing about how the tier reached it."""
+    build the result dict, and nothing about how the tier reached it.
+
+    Compares by value but is NOT hashable: ``frozen=True`` generates a ``__hash__``
+    over the fields, and ``readings`` is a list, so hashing one raises. Equality is
+    the useful half for a test; nothing needs these in a set or a dict key.
+    """
     label: str
     season: str
-    readings: list
+    readings: list[str]       # English citation strings, as served in ReadingsList
     source: str
-    confidence: str = None
-    note: str = None
+    confidence: Optional[str] = None
+    note: Optional[str] = None
 
 
-# The tier ladder. Each adapter wraps one precedence-tier resolver (unchanged --
-# several are called directly by dev/ tooling and tests, so their own signatures
-# and return shapes stay exactly as they are) and repackages its answer as a
-# TierResult, or returns None if the tier does not apply to this date. TIERS is
-# the ladder itself: precedence is which adapter fires first, stated as an
-# ordered tuple instead of the physical order of a branch chain.
+# --------------------------------------------------------------------------- #
+# The tier ladder
+#
+# Each adapter below wraps one precedence-tier resolver (unchanged -- several are
+# called directly by dev/ tooling and tests, so their own signatures and return
+# shapes stay exactly as they are) and repackages its answer as a _TierResult, or
+# returns None if the tier does not apply to this date. _TIERS is the ladder
+# itself: precedence is which adapter fires first, stated as an ordered tuple
+# instead of the physical order of a branch chain.
+#
+# Reordering _TIERS is a change to what the engine serves. It is asserted, not
+# merely laid out -- see tests/test_tier_ladder.py, which pins every contended
+# pair and requires _TIERS to match the order the adapters are DEFINED in, so a
+# precedence change stays as conspicuous as it was when this was a branch chain.
+#
+# A tier's Note is the prose it hands the consumer to explain the provenance and
+# the confidence of what it served. They are hoisted here so the ladder itself
+# reads as thirteen short decisions rather than thirteen paragraphs of text.
+# --------------------------------------------------------------------------- #
+
+_NOTE_PRELENT_COHORT = (
+    "Readings from the Tōnats'oyts First Volume (pp.464-465); the Second Volume "
+    "names this feast per year-type and defers its readings there. Verse ranges "
+    "follow the source (a few differ from sacredtradition.am by a versification "
+    "convention; see dev/source_corrections.py).")
+
+_NOTE_ALITURGICAL = (
+    "No scripture readings are appointed for this day; it is kept as a penitential "
+    "fast without a Divine Liturgy (an aliturgical day -- the ferial days of the "
+    "Fast of the Catechumens). The empty reading set is intentional and validated "
+    "against the Tōnats'oyts, not missing data.")
+
+_NOTE_CYCLE_SAINT = (
+    "Saint resolved from the Tonatsoyts Second Volume per-year-type calendar "
+    "(matched by this year's Easter date); readings are that saint's proper. "
+    "Source-derived, not cross-year cache-validated.")
+
+_NOTE_GENERATIVE_SAINT = (
+    "Best-guess readings from the canonical saint laydown; not cross-year validated "
+    "(this saint-weekday is under-sampled in the reference data). Filter on "
+    "Source/Confidence if you need only provably-validated readings.")
+
+_NOTE_GENERATIVE_CONTINUA = (
+    "Best-guess readings from the Fast-of-the-Assumption lectio-continua (modal "
+    "reading for this fast-day position); not cross-year validated. Filter on "
+    "Source/Confidence if you need only provably-validated readings.")
+
+_NOTE_ANNUNCIATION = (
+    "Best-guess readings from the Annunciation collision rule (Tonatsooyts "
+    "pp. 486-488): the fixed Annunciation proper combined with the movable "
+    "Lent/Holy-Week/Eastertide day it falls on, ordered by that day's rank. The "
+    "reading order is rubric-deterministic but the day-portion may be liturgically "
+    "reduced, so this is not cross-year validated. Filter on Source/Confidence if "
+    "you need only validated readings.")
+
+_NOTE_PRESENTATION_EVE = (
+    "Best-guess readings for the eve of the Presentation of the Lord (Feb 14): the "
+    "day's own base proper combined with the fixed Presentation-eve block "
+    "(Tonats'oyts First Vol p.462). This year's Easter offset is single-sample, so "
+    "the strict PrLE keyspace could not validate it; the composite errs toward a "
+    "superset and is not cross-year validated. Filter on Source/Confidence if you "
+    "need only validated readings.")
+
+_NOTE_FIRST_VOLUME_WINTER_CONTINUA = (
+    "Source-derived readings from the Tōnats'oyts First-Volume movable ordinary-time "
+    "continua (after-Theophany winter arc, pp.458-460, with the p.460 bridge into the "
+    "after-Vardavar continua pp.517-519). This position is reached only in the "
+    "latest-Easter winters, so it is single-sample in the cache and not cross-year "
+    "validated; the readings are taken from the source directly. Filter on "
+    "Source/Confidence if you need only validated readings.")
+
+_NOTE_FIRST_VOLUME_SUMMER_CONTINUA = (
+    "Source-derived readings from the Tōnats'oyts First-Volume movable ordinary-time "
+    "continua (after-Transfiguration summer arc: the winter 1-2 Timothy + John "
+    "continua bridged forward per the p.460/line-75 rubric, pp.458-460). This position "
+    "is reached only in the earliest-Easter years (e.g. 2008), so it is single-sample "
+    "in the cache and not cross-year validated; the readings are taken from the source "
+    "directly and byte-match the ground truth. Filter on Source/Confidence if you need "
+    "only validated readings.")
+
+_NOTE_JOHN_FORERUNNER = (
+    "Nativity of John the Forerunner (nominal Jan 14) transferred to this "
+    "saint-weekday because the Fast of Catechumens (Easter-70) reaches Jan 14 in this "
+    "extreme-early-Easter year; readings are the cross-year-validated PnJohn proper "
+    "(Tonats'oyts p. 464).")
+
+_NOTE_NATIVITY_OCTAVE = (
+    "Best-guess readings: in this extreme-early-Easter year the eighth-day Nativity "
+    "octave (Jan 13) coincides with the eve of the Fast of Catechumens (Easter-70) and "
+    "both are celebrated with Liturgy (Tonats'oyts p. 464). The octave proper is "
+    "combined with the eve's validated Liturgy; the flat slots carry no Matins/Liturgy "
+    "structure so this errs toward a superset and is not cross-year validated. Filter "
+    "on Source/Confidence if you need only validated readings.")
+
+_NOTE_FALLBACK = (
+    "This day falls in the winter ferial zone whose ordered saint/fast tracks are not "
+    "yet modeled; readings unavailable.")
+
 
 def _tier_prelent_cohort(d):
     # Pre-Lent martyr cohort (Sargis/Atom/Sukias/Voskian/Ghevond): readings taken
@@ -3342,14 +3440,9 @@ def _tier_prelent_cohort(d):
     if pc is None:
         return None
     _sid, label, refs = pc
-    return TierResult(
+    return _TierResult(
         label=label, season="Pre-Lent", readings=refs,
-        source="first-volume-cohort",
-        note=("Readings from the Tōnats'oyts First Volume (pp.464-465); the "
-              "Second Volume names this feast per year-type and defers its "
-              "readings there. Verse ranges follow the source (a few differ from "
-              "sacredtradition.am by a versification convention; see "
-              "dev/source_corrections.py)."))
+        source="first-volume-cohort", note=_NOTE_PRELENT_COHORT)
 
 
 def _tier_validated_table(d):
@@ -3365,15 +3458,10 @@ def _tier_validated_table(d):
         # penitential fast without a Divine Liturgy). The empty reading set is a
         # validated fact, not an unresolved gap, so flag it explicitly: consumers
         # must not read the emptiness as missing/not-yet-modeled data.
-        return TierResult(
+        return _TierResult(
             label=label, season=season, readings=refs, source="validated-table",
-            confidence="validated",
-            note=("No scripture readings are appointed for this day; it is "
-                  "kept as a penitential fast without a Divine Liturgy (an "
-                  "aliturgical day -- the ferial days of the Fast of the "
-                  "Catechumens). The empty reading set is intentional and "
-                  "validated against the Tōnats'oyts, not missing data."))
-    return TierResult(label=label, season=season, readings=refs,
+            confidence="validated", note=_NOTE_ALITURGICAL)
+    return _TierResult(label=label, season=season, readings=refs,
                        source="validated-table")
 
 
@@ -3386,7 +3474,7 @@ def _tier_embedded_composite(d):
     if refs is None:
         return None
     feast = _EMBEDDED_FEAST.get((d.month, d.day), "Feast")
-    return TierResult(label=feast, season="Feast", readings=refs,
+    return _TierResult(label=feast, season="Feast", readings=refs,
                        source="validated-composite")
 
 
@@ -3410,12 +3498,10 @@ def _tier_cycle_saint(d):
             for text in companion_text:
                 name = name.with_tail(text)
             label = name.render()
-    return TierResult(
+    return _TierResult(
         label=label or "(commemoration)", season=season_for(zone + "Saint", sid),
         readings=refs, source="second-volume-cycle", confidence="source-derived",
-        note=("Saint resolved from the Tonatsoyts Second Volume per-year-type "
-              "calendar (matched by this year's Easter date); readings are that "
-              "saint's proper. Source-derived, not cross-year cache-validated."))
+        note=_NOTE_CYCLE_SAINT)
 
 
 def _tier_generative_saint(d):
@@ -3428,13 +3514,10 @@ def _tier_generative_saint(d):
     if gs is None:
         return None
     zone, sid, label, refs = gs
-    return TierResult(
+    return _TierResult(
         label=label or "(commemoration)", season=season_for(zone + "Saint", sid),
         readings=refs, source="generative-saint", confidence="best-guess",
-        note=("Best-guess readings from the canonical saint laydown; not "
-              "cross-year validated (this saint-weekday is under-sampled "
-              "in the reference data). Filter on Source/Confidence if you "
-              "need only provably-validated readings."))
+        note=_NOTE_GENERATIVE_SAINT)
 
 
 def _tier_generative_continua(d):
@@ -3444,7 +3527,7 @@ def _tier_generative_continua(d):
     gc = _generative_continua(d)
     if gc is None:
         return None
-    return TierResult(
+    return _TierResult(
         # The position label, not a frozen "Fast day": this is a calendar-derived
         # component, and a readings tier stating one in its own words is the defect
         # build_table.unanimous_feast exists to prevent -- it just was not reachable
@@ -3456,10 +3539,7 @@ def _tier_generative_continua(d):
         # The fallback keeps the contract that a served name is never empty.
         label=_position_label(d) or "Fast day", season="Fast of the Assumption",
         readings=gc, source="generative-continua", confidence="best-guess",
-        note=("Best-guess readings from the Fast-of-the-Assumption "
-              "lectio-continua (modal reading for this fast-day position); "
-              "not cross-year validated. Filter on Source/Confidence if "
-              "you need only provably-validated readings."))
+        note=_NOTE_GENERATIVE_CONTINUA)
 
 
 def _tier_annunciation(d):
@@ -3486,16 +3566,10 @@ def _tier_annunciation(d):
             _annun, lambda _: True).render()
     else:                                         # Lent/Holy Week: the movable day leads
         _name = ObservanceName.parse(_base).with_tail(_annun).render()
-    return TierResult(
+    return _TierResult(
         label=_name, season="Annunciation", readings=ac,
         source="generative-composite", confidence="best-guess",
-        note=("Best-guess readings from the Annunciation collision rule "
-              "(Tonatsooyts pp. 486-488): the fixed Annunciation proper "
-              "combined with the movable Lent/Holy-Week/Eastertide day it "
-              "falls on, ordered by that day's rank. The reading order is "
-              "rubric-deterministic but the day-portion may be liturgically "
-              "reduced, so this is not cross-year validated. Filter on "
-              "Source/Confidence if you need only validated readings."))
+        note=_NOTE_ANNUNCIATION)
 
 
 def _tier_presentation_eve(d):
@@ -3514,16 +3588,10 @@ def _tier_presentation_eve(d):
     # Fast of Catechumens" and never "Eve of the Presentation of the Lord", so
     # inventing that eve here shipped a name the source contradicts.
     _name = _collision_base_observance(d) or ""
-    return TierResult(
+    return _TierResult(
         label=_name, season="Presentation", readings=pe,
         source="generative-composite", confidence="best-guess",
-        note=("Best-guess readings for the eve of the Presentation of the Lord "
-              "(Feb 14): the day's own base proper combined with the fixed "
-              "Presentation-eve block (Tonats'oyts First Vol p.462). This "
-              "year's Easter offset is single-sample, so the strict PrLE keyspace "
-              "could not validate it; the composite errs toward a superset and is "
-              "not cross-year validated. Filter on Source/Confidence if you need "
-              "only validated readings."))
+        note=_NOTE_PRESENTATION_EVE)
 
 
 def _tier_first_volume_winter_continua(d):
@@ -3534,16 +3602,10 @@ def _tier_first_volume_winter_continua(d):
     fv = _first_volume_continua(d)
     if fv is None:
         return None
-    return TierResult(
+    return _TierResult(
         label="(movable ordinary-time reading)", season="After Theophany",
         readings=fv, source="first-volume-continua", confidence="best-guess",
-        note=("Source-derived readings from the Tōnats'oyts First-Volume movable "
-              "ordinary-time continua (after-Theophany winter arc, pp.458-460, with "
-              "the p.460 bridge into the after-Vardavar continua pp.517-519). This "
-              "position is reached only in the latest-Easter winters, so it is "
-              "single-sample in the cache and not cross-year validated; the readings "
-              "are taken from the source directly. Filter on Source/Confidence if "
-              "you need only validated readings."))
+        note=_NOTE_FIRST_VOLUME_WINTER_CONTINUA)
 
 
 def _tier_first_volume_summer_continua(d):
@@ -3555,17 +3617,10 @@ def _tier_first_volume_summer_continua(d):
     if sv is None:
         return None
     label, refs = sv
-    return TierResult(
+    return _TierResult(
         label=label, season="After Transfiguration", readings=refs,
         source="first-volume-continua", confidence="best-guess",
-        note=("Source-derived readings from the Tōnats'oyts First-Volume movable "
-              "ordinary-time continua (after-Transfiguration summer arc: the winter "
-              "1-2 Timothy + John continua bridged forward per the p.460/line-75 "
-              "rubric, pp.458-460). This position is reached only in the earliest-"
-              "Easter years (e.g. 2008), so it is single-sample in the cache and not "
-              "cross-year validated; the readings are taken from the source directly "
-              "and byte-match the ground truth. Filter on Source/Confidence if you "
-              "need only validated readings."))
+        note=_NOTE_FIRST_VOLUME_SUMMER_CONTINUA)
 
 
 def _tier_john_forerunner(d):
@@ -3576,14 +3631,11 @@ def _tier_john_forerunner(d):
     jf = _john_forerunner_composite(d)
     if jf is None:
         return None
-    return TierResult(
+    return _TierResult(
         label=_catalog_text("feast_of_the_birth_of_st_john_the_forerunner",
-                             "Feast of the Birth of St. John the Forerunner (Baptist)"),
+                            "Feast of the Birth of St. John the Forerunner (Baptist)"),
         season="Nativity Octave", readings=jf, source="validated-composite",
-        note=("Nativity of John the Forerunner (nominal Jan 14) transferred to "
-              "this saint-weekday because the Fast of Catechumens (Easter-70) "
-              "reaches Jan 14 in this extreme-early-Easter year; readings are the "
-              "cross-year-validated PnJohn proper (Tonats'oyts p. 464)."))
+        note=_NOTE_JOHN_FORERUNNER)
 
 
 def _tier_nativity_octave(d):
@@ -3593,24 +3645,17 @@ def _tier_nativity_octave(d):
     no = _nativity_octave_composite(d)
     if no is None:
         return None
-    return TierResult(
+    return _TierResult(
         label=_catalog_text("feast_of_naming_of",
-                             "Feast of the Naming of Our Lord Jesus Christ"),
+                            "Feast of the Naming of Our Lord Jesus Christ"),
         season="Nativity Octave", readings=no, source="generative-composite",
-        confidence="best-guess",
-        note=("Best-guess readings: in this extreme-early-Easter year the eighth-"
-              "day Nativity octave (Jan 13) coincides with the eve of the Fast of "
-              "Catechumens (Easter-70) and both are celebrated with Liturgy "
-              "(Tonats'oyts p. 464). The octave proper is combined with the eve's "
-              "validated Liturgy; the flat slots carry no Matins/Liturgy structure "
-              "so this errs toward a superset and is not cross-year validated. "
-              "Filter on Source/Confidence if you need only validated readings."))
+        confidence="best-guess", note=_NOTE_NATIVITY_OCTAVE)
 
 
 def _tier_fallback(d):
     # Fallback: no validated entry (chiefly the winter hinge). Name the season
     # algorithmically and flag the readings as not-yet-modeled. Unconditional --
-    # never returns None -- so it must stay last in TIERS.
+    # never returns None -- so it must stay last in _TIERS.
     cs = coords_for(d)
     # Pick an in-window keyspace for a season label. Winter grid slots come first
     # (they carry the right Advent / after-Nativity label even when their
@@ -3624,14 +3669,12 @@ def _tier_fallback(d):
         if win is None or win[0] <= cs[kspace] <= win[1]:
             season = season_for(kspace, cs[kspace])
             break
-    return TierResult(
+    return _TierResult(
         label=f"{season} (day not yet in validated table)", season=season,
-        readings=[], source="algorithmic-estimate",
-        note=("This day falls in the winter ferial zone whose ordered "
-              "saint/fast tracks are not yet modeled; readings unavailable."))
+        readings=[], source="algorithmic-estimate", note=_NOTE_FALLBACK)
 
 
-TIERS = (
+_TIERS = (
     _tier_prelent_cohort, _tier_validated_table, _tier_embedded_composite,
     _tier_cycle_saint, _tier_generative_saint, _tier_generative_continua,
     _tier_annunciation, _tier_presentation_eve,
@@ -3642,10 +3685,19 @@ TIERS = (
 
 def _compute_lectionary(target_date: datetime.date) -> dict:
     """Resolve the liturgical day and readings for ``target_date`` (pre-overlay)."""
-    for tier in TIERS:
+    for tier in _TIERS:
         result = tier(target_date)
         if result is not None:
             break
+    else:
+        # Unreachable while _tier_fallback is last and unconditional, which
+        # tests/test_tier_ladder.py asserts. Stated anyway so that reordering the
+        # ladder wrong fails HERE, naming the date and the ladder, rather than as an
+        # AttributeError on None three lines down.
+        last = _TIERS[-1].__name__ if _TIERS else "(the ladder is empty)"
+        raise RuntimeError(
+            f"no tier resolved {target_date.isoformat()}; the last entry in _TIERS "
+            f"must be an unconditional fallback, and is {last}")
     out = {
         "Date": target_date.isoformat(),
         "Liturgical Day": result.label,

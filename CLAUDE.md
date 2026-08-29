@@ -90,8 +90,8 @@ ratchet or registered in `dev/source_corrections`. Nothing passes silently.
 
 ### The tier ladder is data, so its order is asserted
 
-`_compute_lectionary` resolves a date by walking `engine.TIERS`, an ordered tuple of
-thirteen `_tier_*` adapters, each returning a `TierResult` or `None`. Precedence **is**
+`_compute_lectionary` resolves a date by walking `engine._TIERS`, an ordered tuple of
+thirteen `_tier_*` adapters, each returning a `_TierResult` or `None`. Precedence **is**
 that order — it used to be the physical order of thirteen `if`/`return` paragraphs, where
 moving one was a conspicuous edit.
 
@@ -109,12 +109,19 @@ definition order** (so the file still reads top-to-bottom as the precedence it
 implements), `_tier_fallback` is last and unconditional, and each of the **21 real
 precedence relations** is pinned to a date where *both* tiers apply. Needs no cache, so it
 runs on every push; it fails on all 12 adjacent swaps and on a dropped, duplicated or
-non-`TierResult`-returning adapter.
+non-`_TierResult`-returning adapter.
 
 Working rules:
 
-- **Reordering `TIERS` means moving the adapter's definition too.** That is deliberate
+- **Reordering `_TIERS` means moving the adapter's definition too.** That is deliberate
   friction: it is what makes a precedence change look like one again.
+- **A tier's `Note` lives in a module-level `_NOTE_*` constant**, not inline in the
+  adapter. Twelve of them, hoisted above the ladder so it reads as thirteen short
+  decisions rather than thirteen paragraphs of prose. The text is served verbatim, so
+  reflowing one changes the API response — verify against the reference dump, not by eye.
+- **The ladder ends in a `for`/`else` that raises.** Unreachable while `_tier_fallback` is
+  last and unconditional, and stated so that a bad reorder fails naming the date and the
+  ladder rather than as an `AttributeError` on `None` three lines later.
 - **A new tier needs a pin.** `test_the_pins_cover_every_contended_adjacency` fails if a
   new adapter makes a fifth adjacency contended and nothing pins it. Find the date by
   scanning the range for days where more than one tier returns non-`None`.
