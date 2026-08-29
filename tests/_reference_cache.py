@@ -16,6 +16,7 @@ not the full range -- so tests over it cover the distinct NAMES well and per-yea
 behaviour thinly.
 """
 
+import json
 import os
 import unittest
 
@@ -43,3 +44,17 @@ requires_reference_cache_hy = unittest.skipUnless(
     HAS_REFERENCE_CACHE_HY,
     "dev/reference_data_hy/ Armenian ground-truth cache absent; run "
     "`python dev/fetch_translations.py` to enable the Armenian accuracy lock.")
+
+
+def reference_day(iso):
+    """Load and correct one cached reference day by its ISO date string.
+
+    Single reader for every dev/reference_data/ consumer in test_regression.py: opens
+    REF_DIR/{iso}.json and applies the same corrections dev.analyze.load_all applies to
+    the full cache, so a test comparing against this can never drift from what the build
+    itself treats as ground truth.
+    """
+    from dev.source_corrections import apply_source_corrections
+    with open(os.path.join(REF_DIR, f"{iso}.json"), encoding="utf-8") as fh:
+        day = json.load(fh)
+    return apply_source_corrections(day)
