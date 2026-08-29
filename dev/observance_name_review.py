@@ -90,7 +90,7 @@ from armenian_lectionary.engine import (                                # noqa: 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "observance_name_review.tsv")
-FIELDS = ("status", "days", "last", "source_en", "id", "approved_en",
+FIELDS = ("status", "days", "last", "source_en", "id", "component_ids", "approved_en",
           "source_hy", "approved_hy", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
@@ -485,6 +485,11 @@ def build_rows():
     composed_only = generated_only | set(split_only)
 
 
+    # approved_en -> id, over the rows that already exist, for _component_ids_for below.
+    approved_ids = {row["approved_en"]: row["id"]
+                    for row in existing.values()
+                    if row.get("approved_en") and row.get("id")}
+
     for src in sorted(days):
         served = src if src in composed_only else corrected(src)
         prior = existing.get(src)
@@ -526,12 +531,26 @@ def build_rows():
         # source text", so the map keyed on that text is the one that answers it.
         source_hy = raw_hy.get(src) or armenian_for(approved, hy) \
             or COMPOSED_SOURCE_HY.get(src, "")
+        # A composite row's halves, by id. Derived once from the halves' current text and
+        # preserved thereafter, exactly as ``id`` is -- and for the same reason: text is
+        # what a rename moves, so a link recorded as text goes stale the moment the canon
+        # it points at is renamed. Three rows pack the Atomian generals, and renaming that
+        # canon used to leave all three quoting the old name, which the catalog build then
+        # reported as a served observance with no id.
+        #
+        # Derived only while every half still resolves. After a rename one of them will
+        # not, and an empty value there is honest: the link was never frozen and cannot be
+        # recovered from the text any more.
+        component_ids = (prior or {}).get("component_ids") or ""
+        if not component_ids:
+            component_ids = _component_ids_for(approved, approved_ids)
         rows.append({
             "status": status,
             "days": days[src],
             "last": last[src],
             "source_en": src,
             "id": (prior or {}).get("id") or "",
+            "component_ids": component_ids,
             "approved_en": approved,
             "source_hy": source_hy,
             # Defaults to the scrape only on a row that has never carried a decision;
@@ -540,6 +559,20 @@ def build_rows():
             "note": note,
         })
     return rows, drift
+
+
+def _component_ids_for(approved, approved_ids):
+    """``_OBSERVANCE_SEP``-joined ids of ``approved``'s halves, or "" .
+
+    Empty for a single-component name (it has an ``id`` of its own and needs no second
+    link) and empty when any half is unresolvable, which is what keeps this from freezing
+    a guess.
+    """
+    parts = [p.strip() for p in approved.split(_OBSERVANCE_SEP) if p.strip()]
+    if len(parts) < 2:
+        return ""
+    ids = [approved_ids.get(part) for part in parts]
+    return _OBSERVANCE_SEP.join(ids) if all(ids) else ""
 
 
 def write(rows):

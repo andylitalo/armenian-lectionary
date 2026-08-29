@@ -59,7 +59,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from armenian_lectionary.engine import (                              # noqa: E402
     _OBSERVANCE_SEP, _ORDINAL_WORDS, _compute_lectionary, _eve_label,
     _eve_coordinate, _observance_id_from_coordinate, _observance_id_from_readings,
-    _position_coordinate,
+    _position_coordinate, generated_observance_id,
     _position_label, compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, fixed_date_label,
 )
 
@@ -208,6 +208,87 @@ def served_components(ground_truth):
     return texts
 
 
+def declared_label_ids():
+    """``{(kind, literal label text) -> the observance id DECLARED for it}``, for every
+    position and eve label the engine composes in range.
+
+    The third route by which a served component is registered, and the only one that
+    survives a rename of a label whose engine literal has drifted from its ``source_en``.
+    The first two match TEXT -- ``approved_en``, then the immutable ``source_en`` -- and a
+    label composed in ``engine.py`` matches whichever of those its literal happens to
+    equal. That is fine until a correction moves the literal (the Nativity fast's eve is
+    ``"Eve of the Fast of Nativity"`` in ``_EVE_CIVIL`` and ``"Eve of Fast of Nativity"``
+    in the source), because the row is then pinned: renaming ``approved_en`` leaves the
+    literal matching neither, and the build reports a served, catalogued observance as
+    unregistered. 52 of the 216 labels are pinned that way.
+
+    Asks ``engine.generated_observance_id``, which states the id beside the rule that fires
+    it. It does NOT infer through the readings index, as this used to: that index is the
+    previous build's own output, so inferring through it resolved the new catalog against
+    the old one -- a rename that dropped a label from the index dropped it again on every
+    later rebuild, each build inheriting the last one's blind spot. See that function's
+    docstring. Nothing here reads ``_compute_lectionary`` any more either, which is why
+    this no longer needs the readings at all.
+
+    Keyed by ``(kind, text)``, not by text alone: position labels and eve notes are
+    separate namespaces everywhere else in this file (``occurrences_by_key``,
+    ``id_for_literal_text``, both observance hashes), and collapsing them here let one kind
+    silently win a text the other also uses.
+    """
+    out = {}
+    d, end = datetime.date(MIN_YEAR, 1, 1), datetime.date(MAX_YEAR, 12, 31)
+    while d <= end:
+        for kind, label in (("position", _position_label(d)), ("eve", _eve_label(d))):
+            if label and (kind, label) not in out:
+                sid = generated_observance_id(d, kind)
+                if sid:
+                    out[(kind, label)] = sid
+        d += datetime.timedelta(days=1)
+    return out
+
+
+def registration(ground_truth):
+    """``text -> the id registering it``, or ``None`` -- the one place that question is asked.
+
+    Both callers below (the coverage audit, which refuses to write, and ``--mint``, which
+    hands out new ids) must agree exactly: a text the audit thinks is unregistered and mint
+    thinks is registered blocks the build forever, and the reverse mints a duplicate id for
+    an observance that already has one. They used to spell the predicate out separately.
+    """
+    approved_ids = {row["approved_en"]: row.get("id")
+                    for row in ground_truth.values() if row.get("approved_en")}
+    ids_by_source = {source: row.get("id")
+                     for source, row in ground_truth.items() if row.get("id")}
+    known = ({sid for sid in approved_ids.values() if sid}
+             | {sid for sid in ids_by_source.values() if sid})
+
+    # Flattened to text, because a served component arrives here as text alone -- the
+    # caller has a name to register, not a date or a kind. Two kinds naming ONE text with
+    # two different ids would make that flattening a coin toss, so it is refused rather
+    # than resolved: an observance the build cannot name unambiguously must not be
+    # registered by guess.
+    generated_ids = {}
+    for (kind, text), sid in declared_label_ids().items():
+        if generated_ids.setdefault(text, sid) != sid:
+            raise SystemExit(
+                f"the position and eve rules both render {text!r} but declare different "
+                f"observances ({generated_ids[text]} vs {sid}); one of the two declared "
+                "ids is wrong -- the catalog was NOT written")
+
+    def registered(text):
+        # approved_en, then the immutable source_en, then the id the engine DECLARES for
+        # this literal -- accepted only if some row states it, so a declared id whose row
+        # the TSV has dropped refuses the build instead of registering an observance
+        # nothing can reach.
+        sid = approved_ids.get(text) or ids_by_source.get(text)
+        if sid:
+            return sid
+        sid = generated_ids.get(text)
+        return sid if sid in known else None
+
+    return registered
+
+
 def build_readings_index(ground_truth):
     """readings-hash -> catalog id, for every position/eve label whose readings uniquely
     identify it -- plus coordinate-hash -> catalog id for every label a stable calendar
@@ -278,8 +359,27 @@ def build_readings_index(ground_truth):
     ids_by_source = {source: row.get("id")
                      for source, row in ground_truth.items() if row.get("id")}
 
-    def id_for_literal_text(text):
-        return approved_ids.get(text) or ids_by_source.get(text)
+    # (kind, literal text) -> the id the ENGINE declares for it. BOTH kinds declare one --
+    # an eve inside its family tuple, a position family in engine._POSITION_IDS -- and this
+    # is the only route that survives a rename: the two text routes below both compare the
+    # literal against a column a rename is free to move, and when they miss, the label
+    # loses its index entry, so the runtime stops resolving it and serves the literal
+    # beside the renamed stored component -- the same observance twice.
+    #
+    # This was eve-only, and positions paid for it: renaming a pinned position label left
+    # the build SUCCEEDING while silently dropping that label from the rebuilt index (both
+    # its readings and its coordinate entry), because registration() was still finding it
+    # in the previous build's index. The next rebuild, reading the index this one wrote,
+    # then failed outright. Symmetric here, so neither kind can lose its entry that way.
+    #
+    # Deliberately the DECLARED id, not engine._resolve_generated_id's full precedence:
+    # this function BUILDS the readings index, so inferring through the shipped one would
+    # key the new index off the old.
+    declared_ids = {}
+
+    def id_for_literal_text(text, kind=None):
+        return (declared_ids.get((kind, text))
+                or approved_ids.get(text) or ids_by_source.get(text))
 
     # (kind, text) -> {Source tier: [(readings, pre-overlay commemoration), ...]}, so the
     # dominant tier can be picked per label before the stability checks run. See the
@@ -304,7 +404,11 @@ def build_readings_index(ground_truth):
         for kind, label, coordinate in (
                 ("position", _position_label(d), _position_coordinate(d)),
                 ("eve", _eve_label(d), _eve_coordinate(d))):
-            if label and id_for_literal_text(label):
+            if label:
+                declared = generated_observance_id(d, kind)
+                if declared:
+                    declared_ids[(kind, label)] = declared
+            if label and id_for_literal_text(label, kind):
                 by_tier = occurrences_by_key.setdefault((kind, label), {})
                 by_tier.setdefault(base["Source"], []).append((readings, commem, d))
                 coordinates_by_key.setdefault((kind, label), set()).add(coordinate)
@@ -348,7 +452,8 @@ def build_readings_index(ground_truth):
             continue                              # aliturgical: the coordinate pass has it
         if len(keys_by_readings[(kind, readings)]) != 1:
             continue                              # those readings also carry another text
-        index[_observance_id_from_readings(list(readings), kind)] = id_for_literal_text(text)
+        index[_observance_id_from_readings(list(readings), kind)] = id_for_literal_text(
+            text, kind)
 
     # Coordinate pass. Every label with one stable coordinate that no other label shares
     # gets an entry, not only the aliturgical ones -- see the docstring.
@@ -362,7 +467,7 @@ def build_readings_index(ground_truth):
             continue                          # another label sits on the same coordinate
         akey, offset = coordinate
         coordinate_ids[_observance_id_from_coordinate(akey, offset, kind)] = (
-            id_for_literal_text(text))
+            id_for_literal_text(text, kind))
 
     _assert_routes_agree(index, coordinate_ids, occurrences_by_key, occurrence_coordinate,
                          id_for_literal_text)
@@ -372,21 +477,27 @@ def build_readings_index(ground_truth):
 
 def _assert_routes_agree(readings_ids, coordinate_ids, occurrences_by_key,
                          occurrence_coordinate, id_for_literal_text):
-    """Fail the build if the two routes would ever name different observances.
+    """Fail the build if any two routes would name different observances.
 
-    The readings route is evidence and the coordinate route is the labelling rule
-    restated (see ``engine._resolve_generated_text``), so wherever both resolve, they are
-    two independent authorities answering one question and must answer it the same way.
-    They do, on every one of the ~4,300 label-days in range. If a table rebuild ever
-    parts them, that is the signal that one of the two is wrong -- and it has to stop the
-    build, because by the time it reaches a served name there is nothing left to notice
-    it: both routes produce a plausible observance name, and neither is marked.
+    THREE routes answer "which observance is this label", and each is a different kind of
+    authority: ``expected`` is what the label is DECLARED to be (engine._POSITION_IDS, the
+    eve family tuples) or, failing that, what its text says; the readings route is
+    per-occurrence evidence produced independently of the labelling rule; the coordinate
+    route is that rule restated (see ``engine._resolve_generated_text``). Wherever two of
+    them resolve, they are independent authorities answering one question and must answer
+    it the same way. They do, on every one of the ~4,300 label-days in range.
+
+    All three are compared, not just the two inferences. A declaration that contradicts the
+    evidence is exactly the case nothing downstream can catch: the index would be written
+    keyed to one observance while the runtime -- which takes the declared id first -- serves
+    another, and both are plausible names with neither marked. That is worth stopping the
+    build for, so it does.
 
     Bounded by MIN_YEAR/MAX_YEAR, since that is what the sweep above walked.
     """
     conflicts = []
     for (kind, text), by_tier in occurrences_by_key.items():
-        expected = id_for_literal_text(text)
+        expected = id_for_literal_text(text, kind)
         for occurrences in by_tier.values():
             for readings, _commem, d in occurrences:
                 coordinate = occurrence_coordinate.get((kind, text, d))
@@ -401,10 +512,16 @@ def _assert_routes_agree(readings_ids, coordinate_ids, occurrences_by_key,
                     conflicts.append(
                         f"{d} {kind} {text!r}: readings -> {via_readings}, "
                         f"coordinate -> {via_coordinate} (expected {expected})")
+                for route, got in (("readings", via_readings),
+                                   ("coordinate", via_coordinate)):
+                    if expected and got and got != expected:
+                        conflicts.append(
+                            f"{d} {kind} {text!r}: {route} -> {got}, but the label is "
+                            f"registered as {expected}")
     if conflicts:
         raise SystemExit(
-            "readings and coordinate routes disagree on "
-            f"{len(conflicts)} occurrence(s); the index was NOT written:\n  "
+            f"the routes naming an observance disagree on {len(conflicts)} occurrence(s); "
+            "the index was NOT written:\n  "
             + "\n  ".join(conflicts[:20]))
 
 
@@ -464,18 +581,10 @@ def build_catalog(ground_truth):
 def audit(catalog, ground_truth):
     """Coverage against what the engine actually serves, and against what has shipped."""
     findings = []
-    approved_ids = {row["approved_en"]: row.get("id")
-                    for row in ground_truth.values() if row.get("approved_en")}
-    # A renamed engine-composed row (approved_en no longer equal to the literal text
-    # engine.py composes) is still registered: source_en is its immutable identity key,
-    # left untouched by a rename, so falling back to it keeps a fresh rename from reading
-    # as "unregistered" before the readings index has had a chance to pick it up.
-    ids_by_source = {source: row.get("id")
-                     for source, row in ground_truth.items() if row.get("id")}
+    registered = registration(ground_truth)
     served = served_components(ground_truth)
 
-    unregistered = sorted(
-        t for t in served if not (approved_ids.get(t) or ids_by_source.get(t)))
+    unregistered = sorted(t for t in served if not registered(t))
     if unregistered:
         findings.append(
             f"{len(unregistered)} component(s) the engine serves have no id: "
@@ -504,27 +613,60 @@ def audit(catalog, ground_truth):
 
 
 def mint(ground_truth):
-    """Assign ids to served components that have none, writing them back to the TSV."""
+    """Assign ids to served components that have none, writing them back to the TSV.
+
+    Every minted id must land on a row. ``new`` is keyed by the text the ENGINE serves,
+    while a row is found by ``approved_en`` or by the immutable ``source_en``; where a
+    served text matches neither, there is no row to carry the id and minting cannot finish
+    the job. That used to pass silently -- the write-back matched on ``approved_en`` alone,
+    so a served literal that no row spelled that way was reported as minted and written
+    while the file was left untouched, and re-running only repeated the no-op. It raises
+    now: the missing row is the actual next step, and dev/observance_name_review.py is what
+    creates it (CLAUDE.md's rebuild order puts it first for exactly this reason).
+    """
     approved_ids = {row["approved_en"]: row.get("id")
                     for row in ground_truth.values() if row.get("approved_en")}
-    # See audit()'s matching comment: a renamed engine-composed row is found by its
-    # immutable source_en, not by approved_en, so a rename is never mistaken for a new,
-    # unminted observance.
-    ids_by_source = {source: row.get("id")
-                     for source, row in ground_truth.items() if row.get("id")}
-    used = {sid for sid in approved_ids.values() if sid}
+    # The SAME predicate audit() refuses on -- see registration(). A renamed
+    # engine-composed label must not be minted a second id here: it already has one, and
+    # audit() can see that it does.
+    registered = registration(ground_truth)
+    # Every id _slug must not collide with: the ones rows state (under EITHER column -- a
+    # row with no approved_en still owns its id) and the ones that have been retired. A
+    # retired id is the dangerous half: reusing it points a consumer's stored key at a
+    # different observance, and audit() only notices on the NEXT run, once this function
+    # has already written it to the TSV.
+    used = ({sid for sid in approved_ids.values() if sid}
+            | {row["id"] for row in ground_truth.values() if row.get("id")}
+            | set(_RETIRED_IDS))
     new = {text: _slug(text, used)
            for text in sorted(served_components(ground_truth))
-           if not (approved_ids.get(text) or ids_by_source.get(text))}
+           if not registered(text)}
     if not new:
         return {}
 
     with open(REVIEW_PATH, encoding="utf-8", newline="") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
         fields, rows = reader.fieldnames, list(reader)
+    placed = set()
     for row in rows:
-        if not row["id"] and row["approved_en"] in new:
-            row["id"] = new[row["approved_en"]]
+        if row["id"]:
+            continue
+        # approved_en first, then the immutable source_en -- the same two text routes
+        # registration() reads, so mint writes an id exactly where audit() will look for it.
+        text = next((t for t in (row["approved_en"], row["source_en"]) if t in new), None)
+        if text is not None:
+            row["id"] = new[text]
+            placed.add(text)
+
+    homeless = sorted(set(new) - placed)
+    if homeless:
+        raise SystemExit(
+            f"{len(homeless)} served component(s) have no row to carry an id: "
+            + ", ".join(repr(t) for t in homeless[:5])
+            + "\n  Nothing was written. Run dev/observance_name_review.py first -- it adds the "
+              "row (and its approved_en) that this id belongs on, which is why CLAUDE.md's "
+              "rebuild order puts it ahead of this script.")
+
     with open(REVIEW_PATH, "w", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=fields, delimiter="\t",
                            lineterminator="\n", quoting=csv.QUOTE_MINIMAL)
