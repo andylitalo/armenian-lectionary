@@ -5,7 +5,6 @@ emit a WRONG table hit, and coverage may only ratchet upward.
 """
 
 import datetime
-import json
 import os
 import sys
 import unittest
@@ -13,11 +12,11 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dev.analyze import load_all  # noqa: E402
-from dev.source_corrections import apply_book_name_fixes, apply_cohort_corrections  # noqa: E402
+from dev.source_corrections import apply_cohort_corrections  # noqa: E402
 from armenian_lectionary import engine  # noqa: E402
 from armenian_lectionary.engine import compute_armenian_lectionary  # noqa: E402
 from tests._catalog_expectations import text  # noqa: E402
-from tests._reference_cache import requires_reference_cache  # noqa: E402
+from tests._reference_cache import reference_day, requires_reference_cache  # noqa: E402
 
 # The structurally-validated tiers: a mismatch here breaks the strict-shipping
 # 0-wrong contract. The generative/resolved tiers are labeled best-guesses,
@@ -101,16 +100,13 @@ class TestCocelebrationResolvers(unittest.TestCase):
             "St. Paul's Epistle to the Philippians 4.8-23",
             "Luke 11.1-13",
         ]
-        ref_dir = os.path.join(os.path.dirname(__file__), os.pardir,
-                               "dev", "reference_data")
         for year in (2004, 2010, 2021):
             res = compute_armenian_lectionary(datetime.date(year, 11, 21))
             self.assertEqual(res["Source"], "validated-composite",
                              f"{year}-11-21 should ship validated-composite")
             self.assertEqual(res["ReadingsList"][-3:], expected_tail,
                              f"{year}-11-21 tail should be the 11th Sunday readings")
-            with open(os.path.join(ref_dir, f"{year}-11-21.json")) as fh:
-                gt = json.load(fh)["readings"]
+            gt = reference_day(f"{year}-11-21")["readings"]
             self.assertEqual(res["ReadingsList"], gt,
                              f"{year}-11-21 should exact-match ground truth")
 
@@ -131,13 +127,7 @@ class TestPresentationEveComposite(unittest.TestCase):
               "2020-02-13", "2022-02-13")
 
     def _gt(self, iso):
-        # The cache spells the eve block's Malachi reading "Malach" (a source typo the
-        # engine serves canonically as "Malachi"); apply the same book-name fold every
-        # reference_data reader does so the oracle matches the shipped/generative output.
-        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
-                           "reference_data", f"{iso}.json")
-        with open(ref) as fh:
-            return apply_book_name_fixes(json.load(fh)["readings"])
+        return reference_day(iso)["readings"]
 
     def test_exact_matches_ship_best_guess(self):
         for iso in self._EXACT:
@@ -212,10 +202,7 @@ class TestFirstVolumeContinua(unittest.TestCase):
     _DAYS = ("2011-02-04", "2011-02-06", "2011-02-09", "2011-02-11", "2022-02-04")
 
     def _gt(self, iso):
-        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
-                           "reference_data", f"{iso}.json")
-        with open(ref) as fh:
-            return json.load(fh)["readings"]
+        return reference_day(iso)["readings"]
 
     def test_winter_continua_days_exact_and_best_guess(self):
         for iso in self._DAYS:
@@ -240,10 +227,7 @@ class TestLeapSummerParity(unittest.TestCase):
     days best-effort; now each ships exact from the cycle tier."""
 
     def _readings(self, y, m, d):
-        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
-                           "reference_data", f"{y:04d}-{m:02d}-{d:02d}.json")
-        with open(ref) as fh:
-            return json.load(fh)["readings"]
+        return reference_day(f"{y:04d}-{m:02d}-{d:02d}")["readings"]
 
     def test_2005_common_vs_2016_leap_diverge_and_match(self):
         # 2005 (common) and 2016 (leap) share Gregorian Easter 03-27.
@@ -266,10 +250,7 @@ class TestWinterMarch(unittest.TestCase):
     generative laydown mis-placed now ship exact from the cycle tier."""
 
     def _readings(self, y, m, d):
-        ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
-                           "reference_data", f"{y:04d}-{m:02d}-{d:02d}.json")
-        with open(ref) as fh:
-            return json.load(fh)["readings"]
+        return reference_day(f"{y:04d}-{m:02d}-{d:02d}")["readings"]
 
     def test_2011_winter_tail_saints_exact(self):
         # Cyprian / Athenogenes / Forefathers / Thaddeus, previously generative misses.
@@ -282,10 +263,7 @@ class TestWinterMarch(unittest.TestCase):
 
 
 def _ref_readings(y, m, d):
-    ref = os.path.join(os.path.dirname(__file__), os.pardir, "dev",
-                       "reference_data", f"{y:04d}-{m:02d}-{d:02d}.json")
-    with open(ref) as fh:
-        return json.load(fh)["readings"]
+    return reference_day(f"{y:04d}-{m:02d}-{d:02d}")["readings"]
 
 
 @requires_reference_cache
