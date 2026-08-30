@@ -6,6 +6,28 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
 ## [Unreleased]
 
+### Added
+- **`ObservanceIds`: a key that survives a name correction.** Every result now carries
+  `"ObservanceIds"`, the stable catalog id of each `"Liturgical Day"` component, in the
+  same order, independent of `language`. A day is identified by the whole ordered list —
+  some days name two to four observances at once (a calendar position, a commemoration,
+  an eve note) — and no separator is imposed, so a consumer joins them however it likes.
+
+  This is the field the weekly-fast-split entry below already assumes: `Liturgical Day`
+  is corrected data, not a stable interface, and 1.3.0 demonstrated the cost of treating it
+  as one — 158 of 429 of bahk's stored feast names went unreachable when the engine got
+  more right. An id, once published, keeps meaning the same observance forever (see
+  "Observance ids are stated, not derived" in CLAUDE.md); `ObservanceIds` is what makes
+  that guarantee something a consumer can actually key on instead of reimplementing.
+
+  Resolved from the served English label, before `language="hy"` translation, so the ids
+  are independent of `language` by construction. All or nothing: an unresolvable component
+  yields `[]` rather than a list with a hole in it, since a partial list would silently
+  identify a different day than the one served. Additive and non-breaking — no existing
+  field changes. Locked by `tests/test_observance_ids.py`, including a corpus-wide sweep
+  asserting every day 2001–2027 resolves completely and round-trips back to its own name,
+  and an HTTP/JSON boundary test in both languages.
+
 ### Changed (BREAKING — warrants a major bump at release)
 - **The ordinary-time weekly fast says which weekday it is**
   ([docs §6c](docs/observance-name-corrections.md)). `Fast day` / `Պահք` becomes

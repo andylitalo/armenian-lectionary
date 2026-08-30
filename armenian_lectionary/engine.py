@@ -2850,6 +2850,28 @@ def _resolve_observance_names(label: str, language: str) -> str:
     return ObservanceName.parse(label).map(in_language).render()
 
 
+def _observance_ids(label: str) -> list:
+    """The stable catalog id of each component of ``label``, in served order, or ``[]``
+    if any component does not resolve.
+
+    All or nothing: a partial list is not a key. A consumer keying rows on
+    ``ObservanceIds`` needs the whole list to identify a day; a list with a hole in it
+    would silently identify a different one. Operates on ``label`` post-overlay --
+    :func:`_apply_position_label` / :func:`_apply_eve_label` have already decided which
+    text is served (stored value or a catalogued rename), so this asks the catalog
+    nothing about the calendar, only what id that already-resolved text names -- the
+    same reverse lookup :func:`_resolve_observance_names` uses for language.
+    """
+    catalog = _OBSERVANCE_CATALOG
+    ids = []
+    for part in ObservanceName.parse(label):
+        sid = catalog.id_of(part)
+        if not sid:
+            return []
+        ids.append(sid)
+    return ids
+
+
 def _localize(result: dict, language: str) -> dict:
     """Translate the human-readable feast and reading names of ``result`` in place.
 
@@ -3294,6 +3316,12 @@ def compute_armenian_lectionary(target_date: datetime.date,
     ``ReadingsList`` entry. ``book`` is always the canonical English head, independent
     of ``language``.
 
+    ``ObservanceIds`` gives the stable catalog id of each component of ``Liturgical Day``,
+    in the same order, independent of ``language`` -- what a consumer should key rows on
+    instead of the display string (see "Observance ids are stated, not derived" in
+    CLAUDE.md). All or nothing: ``[]`` if any component has no catalog entry, since a
+    partial list would silently identify a different day than the one served.
+
     Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
     the engine has no validated data and would otherwise return an internal absence-marker
     dressed as a name -- the very strings ``tests/test_observance_contract.py`` forbids inside
@@ -3322,6 +3350,10 @@ def compute_armenian_lectionary(target_date: datetime.date,
         target_date, readings)
     result["Mode"] = calculate_liturgical_mode(target_date)
     result["ReadingsRefs"] = _build_readings_refs(result.get("ReadingsList", []))
+    # Resolved from the ENGLISH label, before _localize rewrites it for language="hy" --
+    # the catalog's reverse index is keyed on English, and the ids must not vary by
+    # language (see tests.test_observance_ids.TestObservanceIdsAreLanguageIndependent).
+    result["ObservanceIds"] = _observance_ids(result["Liturgical Day"])
     return _localize(result, language)
 
 
