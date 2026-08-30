@@ -59,6 +59,15 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   414. `test_no_position_label_is_ever_dropped` still asserts zero and still passes.
 
 ### Fixed
+- **`Season` is no longer served over HTTP.** It was never a liturgical fact about the
+  date — it's an internal label for which tier/keyspace resolved the day, set ad hoc per
+  tier with no dedicated test or cross-tier consistency guarantee (e.g. the generative
+  continua tier hardcoded `"Fast of the Assumption"` for its Wed/Fri tail days regardless
+  of whether the date actually fell inside that fast). No consumer was found to depend on
+  it. `app.py`'s `/readings` endpoint now drops the key before returning JSON;
+  `compute_armenian_lectionary()`'s return value is unchanged, so this is not a package
+  (PyPI) breaking change — only the Cloud Run HTTP response shape.
+
 - **A companion saint is no longer commemorated twice in one year**
   ([docs §7b](docs/observance-name-corrections.md),
   [source record](docs/sources/tonatsooyts-packed-saint-pools.md)). The Second Volume packs

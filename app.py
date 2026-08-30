@@ -118,7 +118,13 @@ def readings():
             "supported_languages": list(SUPPORTED_LANGUAGES),
         }), 400
 
-    return jsonify(compute_armenian_lectionary(target_date, language=language))
+    result = compute_armenian_lectionary(target_date, language=language)
+    # Season is an internal tier-provenance label ("which resolution mechanism served
+    # this day"), not a liturgical fact about the date, and it isn't derived consistently
+    # across tiers yet -- so it stays in the package-level dict for internal/dev use but
+    # is not served over HTTP.
+    result.pop("Season", None)
+    return jsonify(result)
 
 
 if __name__ == "__main__":
