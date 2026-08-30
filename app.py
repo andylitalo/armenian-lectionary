@@ -122,7 +122,8 @@ def readings():
     # Season is an internal tier-provenance label ("which resolution mechanism served
     # this day"), not a liturgical fact about the date, and it isn't derived consistently
     # across tiers yet -- so it stays in the package-level dict for internal/dev use but
-    # is not served over HTTP.
+    # is not served over HTTP. A future effort should investigate deriving a genuinely
+    # date-based, tier-independent season before this could be served again.
     result.pop("Season", None)
     return jsonify(result)
 
