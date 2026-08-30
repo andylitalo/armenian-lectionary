@@ -5,6 +5,7 @@ these pass without the scraped *_names_hy.json files present.
 """
 import datetime
 import os
+import re
 import sys
 import unittest
 
@@ -415,13 +416,28 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
     closes the week is the Remembrance of Prophet Elijah, so the fast is named for the
     saint it ends on -- the same shape as the Illuminator and Nisibis fasts.
 
-    Registered on the review rows themselves (``approved_en``/``approved_hy`` on the six
+    Registered on the review rows themselves (``approved_en``/``approved_hy`` on the five
     ``*_of_pentecost`` rows), which is why their ids do NOT move: same observance, more
     specific name.
+
+    The fast is Mon-Fri only: the source marks each of those five days "-- Fast day" in
+    English and carries no such marker on the Saturday that follows ("Seventh day of
+    Pentecost", bare, in every sampled year) -- so Saturday keeps its plain count instead
+    of being renamed into a fast it is not marked as observing. See
+    docs/observance-name-corrections.md section 6b.
     """
 
-    _ORDINALS = (("Second", "Բ"), ("Third", "Գ"), ("Fourth", "Դ"),
-                 ("Fifth", "Ե"), ("Sixth", "Զ"), ("Seventh", "Է"))
+    # Ordinal ids in order, for offsets 1-5 from Pentecost (Mon-Fri).
+    _IDS = ("second_day_of_pentecost", "third_day_of_pentecost", "fourth_day_of_pentecost",
+            "fifth_day_of_pentecost", "sixth_day_of_pentecost")
+
+    # Elijah's shape is "Nth day of Pentecost (Fast of the Prophet Elijah)" -- unlike the
+    # Illuminator/Nisibis/Varag families' plain "Nth day of X", it keeps the source's own
+    # day-of-Pentecost count AND parenthesizes the more specific name (see the class
+    # docstring), so the shared bare_en/bare_hy helpers -- which strip "Nth day of " and
+    # expect the remainder to be a plain trailing "X"/"...պահոց" -- don't fit. Compared
+    # against the catalog's own full text per id instead.
+    _PAREN_RE = re.compile(r"\((.+)\)$")
 
     def setUp(self):
         if not engine._OBSERVANCE_CATALOG:
@@ -433,28 +449,26 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
     def test_each_fast_day_carries_its_ordinal_in_both_languages(self):
         for year in (2001, 2014, 2026):
             pentecost = self._pentecost(year)
-            for offset, (word, letter) in enumerate(self._ORDINALS, start=1):
+            for offset, sid in enumerate(self._IDS, start=1):
                 day = pentecost + datetime.timedelta(days=offset)
                 with self.subTest(year=year, offset=offset):
                     en = compute_armenian_lectionary(day)["Liturgical Day"]
                     hy = compute_armenian_lectionary(
                         day, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(f"{word} day of {bare_en('second_day_of_pentecost')}"),
-                        f"{day} served {en!r}")
+                        en.startswith(text(sid, "en")), f"{day} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր {bare_hy('second_day_of_pentecost')}"),
-                        f"{day} served {hy!r}")
+                        hy.startswith(text(sid, "hy")), f"{day} served {hy!r}")
 
     def test_the_day_count_matches_the_eve_that_names_the_fast(self):
-        for lang, fast in (("en", bare_en("second_day_of_pentecost")),
-                            ("hy", bare_hy("second_day_of_pentecost"))):
+        for lang in ("en", "hy"):
+            fast = self._PAREN_RE.search(text("second_day_of_pentecost", lang)).group(1)
             with self.subTest(lang=lang):
                 pentecost = self._pentecost(2026)
                 eve = compute_armenian_lectionary(
                     pentecost, language=lang)["Liturgical Day"]
                 self.assertIn(fast, eve, f"eve served {eve!r}")
-                for offset in range(1, 7):
+                for offset in range(1, 6):
                     day = pentecost + datetime.timedelta(days=offset)
                     served = compute_armenian_lectionary(
                         day, language=lang)["Liturgical Day"]
@@ -469,7 +483,7 @@ class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
         """
         from dev.observance_ids import ids_for_text
         for word, slug in (("Second", "second_day_of_pentecost"),
-                           ("Seventh", "seventh_day_of_pentecost")):
+                           ("Sixth", "sixth_day_of_pentecost")):
             with self.subTest(word=word):
                 self.assertEqual(
                     ids_for_text(f"{word} day of {bare_en('second_day_of_pentecost')}"), [slug])
@@ -718,7 +732,7 @@ class TestNisibisAndElijahRenamesResolveThroughTheCatalog(unittest.TestCase):
     def _elijah_cases(self):
         pentecost = self._pentecost(2026)
         ids = ("second_day_of_pentecost", "third_day_of_pentecost", "fourth_day_of_pentecost",
-               "fifth_day_of_pentecost", "sixth_day_of_pentecost", "seventh_day_of_pentecost")
+               "fifth_day_of_pentecost", "sixth_day_of_pentecost")
         for n, sid in enumerate(ids, start=1):
             yield sid, pentecost + datetime.timedelta(days=n)
 

@@ -49,6 +49,16 @@ correction uses it (§6). "This reads better" still never qualifies, and neither
 that is merely terse — §6 changes a name that gives the reader no way to tell *which* fast
 begins, on the only day of the year that it does.
 
+### A second, weaker warrant: matching the rest of the corpus
+
+A handful of §5/§10 corrections use a different, still-narrower justification: not the
+source contradicting itself, but the served text contradicting how the *rest of the
+corpus* already spells the identical construction (a fast's own connector, an article on
+a family of Sundays, a saint's title). None of these was found or applied silently — each
+was raised, and the fold applied, on explicit request rather than as a default reading of
+this document's rules. Where no other instance of the construction exists to check
+against, that is stated plainly as a plain editorial choice, not dressed up as evidence.
+
 Detection: [`dev/audit_source_anomalies.py`](../dev/audit_source_anomalies.py) (nine
 detectors) plus a read of all 187 commemoration components by hand — the corpus is small
 enough that exhaustive human review is practical, and two of the corrections below came
@@ -108,6 +118,7 @@ years — only by reading the source against itself.
 | `Saint Patriarchs Barlaam, …` | `Saints Patriarchs …` | `Սրբոց հայրապետացն` — plural. |
 | `Saint Virgins Juliana and Basilla` | `Saints Virgins …` | `Սրբոց կուսանացն` — plural; and the source itself writes `Saints Virgins Nune and Mane` on other days. |
 | `Clement the Bishop Rome` | `Clement the Bishop of Rome` | A dropped preposition. |
+| `… and other Nicholas the Bishop …` | `… and the Other Nicholas …` | `միւս Նիկողայոսի` is "**the** other Nicholas" — the English capitalized `Other` (correctly treating it as part of how this second Nicholas is distinguished from the first) but dropped the article the Armenian states. |
 
 ## 3. Mechanical slips
 
@@ -186,13 +197,50 @@ Until then it is counted as an `OMISSION` by `dev/hy_discrepancy.py` rather than
 Registered separately, in `POSITION_LABEL_FIXES`, because they are calendar labels rather
 than commemorations: a stray trailing period on `the Fast of Nativity.` (4 occurrences, on
 Jan 1, against 25 clean ones), two comma-for-period variants of `Great Lent. Sunday of …`
-(1 occurrence each against 25), and one wrong ordinal word — 2008-04-07 reads `Thirteenth
-day of Eastertide` where the count is 16, pinned by its own neighbours (Apr 5 is
-`Fourteenth`, Apr 8 `Seventeenth`). That last is scoped to its single date, since
-`Thirteenth day of Eastertide` is correct on every other year's Easter+12.
+(1 occurrence each against 25, on the Second and Sixth Sundays), and one wrong ordinal
+word — 2008-04-07 reads `Thirteenth day of Eastertide` where the count is 16, pinned by its
+own neighbours (Apr 5 is `Fourteenth`, Apr 8 `Seventeenth`). That last is scoped to its
+single date, since `Thirteenth day of Eastertide` is correct on every other year's
+Easter+12.
 
 Also folded, for casing: `PRESENTATION of the Holy Mother of God to the Temple`, which the
 source shouts in 19 of 26 years and title-cases in the other 7.
+
+### The Great Lent Sunday family, completed
+
+The comma-for-period fix above resolves the Second and Sixth Sundays' own minority source
+variant, but the connector chosen for the family — a colon before the named-Sunday half
+("`Second Sunday of Great Lent: Sunday of the Expulsion`") — was applied to the Third,
+Fourth and Fifth Sundays too, none of which has a comma/period disagreement of its own: it
+is a family-consistency choice, not a per-Sunday self-contradiction. The Sixth Sunday
+("`… Sunday of the Advent`") was the one left out, because unlike the other five it is a
+hardcoded `engine._POSITION_FAMILIES`/`_POSITION_IDS` template rather than table-stored
+text, so a TSV-only edit could not reach it — unlike the other five, changing it needed an
+`engine.py` edit alongside the review-row edit. Done now, for the same family-consistency
+reason as the other five.
+
+### Fifth Sunday of Eastertide
+
+The source's own text for this Sunday is bare `Fifth Sunday` / `Ե կիւրակէ` — no
+self-contradiction to appeal to, since both languages are equally terse. The correction
+matches it to the rest of its own family instead: the Third, Fourth, Sixth and Seventh
+Sundays of Eastertide are all named `Nth Sunday of Eastertide (…)`, and the Third and
+Fourth already carry this same "add `of Eastertide`" repair. Armenian is given a matching
+qualifier, `Ե կիւրակէ զատկական` (`zatkakan`, "paschal/of Easter") — a new qualifier, not a
+repair to a self-contradiction, since the source's Armenian for this family never states
+one either way.
+
+### The Assumption family's definite article
+
+`the Fast of Assumption`, `Nth day of Assumption` (the ninth/octave day) and the Third and
+Fourth Sundays of Assumption were the family's holdouts against `the`, against `the Fast of
+the Transfiguration`/`the Fast of the Holy Cross` (the sibling fasts), the family's own `Nth
+day of the Assumption` (days 2–7), and the family's own Second and Fifth Sundays (`Nth
+Sunday of the Assumption`). Normalized to the article everywhere in the family — the same
+family-consistency reasoning as the Great Lent Sunday connector above, not a
+self-contradiction in any single row. The engine's own comment on the Sunday split had
+called the source's alternation "inconsistent, but deterministic in the offset" and chosen
+to reproduce it exactly; this corrects that choice.
 
 ### The Fast of St. Gregory the Illuminator counts its days only in Armenian
 
@@ -217,6 +265,36 @@ The Armenian confirms the repair rather than merely permitting it. The old hand-
 block could attest days 1, 2 and 4 directly and constructed 3 and 5 by analogy; once the
 English was specific enough to pair against, the scrape yielded all five, and days 3 and 5
 matched the constructed forms exactly.
+
+### The Fast of the Prophet Elijah is Mon–Fri, not Mon–Sat, and keeps its own count
+
+Unlike the Illuminator and Nisibis fasts, the Prophet Elijah fast's own source text is not
+a generic, undifferentiated `Fast day`: the source counts these days `Nth day of Pentecost`
+/ `Ն օր Հոգեգալստեան` in both languages, a real (if unspecific) count. Two consequences
+follow from that difference:
+
+1. **The rename keeps the count instead of replacing it.** The Illuminator/Nisibis
+   pattern — `Nth day of X` in, `Nth day of the Fast of <saint>` out, discarding the season
+   word entirely — was applied to Elijah too, but discarding `Pentecost` there throws away
+   real information the other two fasts never had to begin with. Elijah's rename now reads
+   `Nth day of Pentecost (Fast of the Prophet Elijah)`, keeping both. (Armenian: `Ն օր
+   Հոգեգալստեան (Եղիական պահոց)`.) The parenthetical, not the `—` component separator, is
+   deliberate: the separator is reserved for joining genuinely distinct top-level
+   observances (each with its own id), and this is one observance under a fuller name, not
+   two.
+2. **The fast is five days, not six.** The source marks each of Mon–Fri `— Fast day` in
+   English; the Saturday that follows carries no such marker, in every sampled year
+   (2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, and 2014/2015/2018/
+   2021–2026 spot-checked) — it is a bare `Seventh day of Pentecost`, with no fast
+   reference in either language. The engine used to rename that Saturday into the fast
+   anyway, on the same `_POSITION_FAMILIES` window as the other five days. Narrowing the
+   window to offsets 1–5 (Mon–Fri) stops that: the Saturday is now served by the validated
+   table alone, exactly as the source states it, and is declared as a decline the position
+   rule does not attempt (`dev.observance_ids._DECLINED_POSITION_LABELS_EN`) rather than
+   left as a silent rule/source mismatch.
+
+The `seventh_day_of_pentecost` id is unaffected — same observance, corrected text, not a
+retirement: the Saturday did not stop being served, it stopped being mis-renamed.
 
 ---
 
@@ -1204,6 +1282,26 @@ there the source glues the New Year onto the **saints** (`Կաղանդ. տարե
 rather than printing it as its own component, and a review row holds one `source_hy`, not
 one per year.
 
+## 10. Corpus-wide consistency folds
+
+None of these is a self-contradiction in the row it lands on — each is the source being
+internally consistent (or too terse to contradict itself) and the correction matching it to
+how the rest of the corpus already spells the same construction. Weaker warrant than
+§§1–4b, on the same terms as §5's colon/article folds above; recorded here because they are
+commemoration components, not position labels.
+
+| Component | Was | Now | Matches |
+|---|---|---|---|
+| `Beheading of St. John the Forerunner (the Baptist)` | `(the Baptist)` | `(Baptist)` | Every other component naming him: `Feast of the Birth of St. John the Forerunner (Baptist)`, `Sts. John the Forerunner (Baptist) and Bishop Atanagine`, `Sts. John the Forerunner (Baptist) and Job the Righteous`. This was the one outlier. |
+| `St. James the bishop of Nisibis` (all six components naming him — the eve and five fast days) | lower-case `bishop` | `Bishop` | Every other `the Bishop of <place>` in the corpus: `Clement the Bishop of Rome`, `Ignatius the Bishop of Antioch`, `Addai the Bishop of Edessa`, `Maruthas the Bishop of Marv`, `Theopemptus the Bishop of Nicomedia`, `Polycarp the Bishop of Smyrna` — all capitalize `Bishop` as part of the title. Armenian unaffected: `հայրապետին` carries no case distinction. |
+| `St. Gregory the Illuminator's Descent into the Pit` | `Descent` capitalized | `descent` | Its companion feast, `St. Gregory the Illuminator's coming out of the Pit` (below) — the pair reads as one two-part story and is now cased the same way throughout. |
+| `Staint Gregory the Illuminator's coming out of Pit` | `Staint` (typo), missing article | `St. Gregory the Illuminator's coming out of the Pit` | Fixes the source's own typo (`Staint` → `St.`, matching the companion feast's own abbreviation) and the missing article the open question below had already flagged; `coming` stays lower-case to match the companion's now-lowercased `descent`. |
+
+The Illuminator's-Pit pair is the one case here where "match the rest of the corpus" isn't
+available — there is no third example to check against — so the casing choice is a plain
+editorial decision between two already-served spellings, made on explicit request rather
+than found by any evidence rule above.
+
 ## Open questions — NOT corrected
 
 These are recorded in `dev/observance_name_review.tsv` with `status = review`. The source stands
@@ -1214,11 +1312,9 @@ as published until someone who reads Armenian decides. Enter the preferred Engli
 |---|---|
 | `Saints Jacoc and Themistocles` | `Jacoc` is not an English name. `Յակովկայ` is the genitive of `Յակովիկ`, a diminutive of Jacob/James — so `Jacob`? Or a closer transliteration, `Jacovk` / `Hakovik`? |
 | `Saint Theodoron the Martyr` | `Աստուածատրոյ` is *Astvatsatur*, "God-given", usually rendered **Theodore**. Is `Theodoron` intended, or a half-declined Greek form? |
-| `Saint Gregory the Illuminator's coming out of Pit` | Missing article, and lowercase `coming` where the companion feast reads `Commitment to the Pit`. `Coming out of the Pit`? |
 | `Saints Aret and His Companions …` | `Aret` renders `Խարիթեանցն`; the saint is usually **Arethas** of Najran in English. |
 | `… and the poor men John and Alexis` | `կամաւոր աղքատացն` is the **voluntary** poor — perhaps `the voluntary poor John and Alexis`. |
 | `The Twelve Holy Doctors of Church: …` | `of Church` wants an article — `of the Church`. Also the longest name served, 289 characters. |
-| `Saints Gregory and Nicholas the Wonderworkers, and other Nicholas …` | `միւս Նիկողայոսի` is "**the** other Nicholas". |
 | `Saint Nicholas Wonderworker the Bishop of Myra` | The other two components naming him say `the Wonderworker`. |
 | `Saints Joachim and Anna, … and of Myrophores` | The Myrophores are the myrrh-bearing women (`կանանցն իւղաբերից`) — `and of the Myrophores`? |
 | `… the Seven Herbivorous Hermits` | Renders `խոտաճարակացն` literally (grass-eating). Usual English: `the Seven Grass-eating Hermits`. |

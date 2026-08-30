@@ -172,10 +172,21 @@ def is_declined_hy(text):
 _DECLINED_FAST_MARKERS_EN = frozenset({"Fast day", "Feast day"})
 _DECLINED_FAST_MARKERS_HY = frozenset({"Պահք"})
 
+# A specific position label the rule does not produce, declared for the same reason as the
+# markers above -- distinct from them because this is not a generic marker restating what
+# another name already establishes; it is the source's OWN plain day count, correctly left
+# unrenamed. "Seventh day of Pentecost" (Pentecost+6, a Saturday) sits one day past the Fast
+# of the Prophet Elijah, which is Mon-Fri only (the source marks each of those five days
+# "Fast day" and carries none on this Saturday, every sampled year) -- so
+# engine._POSITION_FAMILIES' PE-fast family stops at offset 5 and this day is served by the
+# validated table alone, exactly as the source states it. See
+# docs/observance-name-corrections.md section 6b.
+_DECLINED_POSITION_LABELS_EN = frozenset({"Seventh day of Pentecost"})
+
 
 def is_declined_en(text):
     """True if the English component is one the engine deliberately does not serve."""
-    return text in _DECLINED_FAST_MARKERS_EN
+    return text in _DECLINED_FAST_MARKERS_EN or text in _DECLINED_POSITION_LABELS_EN
 
 
 # --------------------------------------------------------------------------- #

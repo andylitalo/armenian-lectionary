@@ -40,12 +40,12 @@
   "status": "fixed"
  },
  "Beheading of St. John the Forerunner (the Baptist)": {
-  "approved_en": "Beheading of St. John the Forerunner (the Baptist)",
+  "approved_en": "Beheading of St. John the Forerunner (Baptist)",
   "approved_hy": "Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի",
   "id": "beheading_of_st_john",
-  "note": "",
+  "note": "normalized to match every other component naming him (\"Feast of the Birth of St. John the Forerunner (Baptist)\" and others) -- this was the one outlier reading \"(the Baptist)\".",
   "source_hy": "Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի",
-  "status": "ok"
+  "status": "fixed"
  },
  "Blessing of the Pomegranates": {
   "approved_en": "Blessing of the Pomegranates",
@@ -216,7 +216,7 @@
   "status": "fixed"
  },
  "Eve of Fast of Saint James the bishop of Nisibis": {
-  "approved_en": "Eve of the Fast of St. James the bishop of Nisibis",
+  "approved_en": "Eve of the Fast of St. James the Bishop of Nisibis",
   "approved_hy": "Բարեկենդան Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "eve_of_fast_of_nisibis",
   "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
@@ -416,12 +416,12 @@
   "status": "ok"
  },
  "Fifth Sunday": {
-  "approved_en": "Fifth Sunday",
-  "approved_hy": "Ե կիւրակէ",
+  "approved_en": "Fifth Sunday of Eastertide",
+  "approved_hy": "Ե կիւրակէ զատկական",
   "id": "fifth_sunday",
-  "note": "",
+  "note": "normalized to match the rest of the family (\"Fourth Sunday of Eastertide (Red Sunday)\", \"Sixth Sunday of Eastertide\", ...), which this was the one member missing -- same repair already applied to the Third and Fourth Sundays. Armenian given the same qualifier for the same reason.",
   "source_hy": "Ե կիւրակէ",
-  "status": "ok"
+  "status": "fixed"
  },
  "Fifth Sunday after Nativity": {
   "approved_en": "Fifth Sunday after Nativity",
@@ -512,10 +512,10 @@
   "status": "ok"
  },
  "Fifth day of Pentecost": {
-  "approved_en": "Fifth day of the Fast of the Prophet Elijah",
-  "approved_hy": "Ե օր Եղիական պահոց",
+  "approved_en": "Fifth day of Pentecost (Fast of the Prophet Elijah)",
+  "approved_hy": "Ե օր Հոգեգալստեան (Եղիական պահոց)",
   "id": "fifth_day_of_pentecost",
-  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these six weekdays belong to; the source's day-count text states neither which fast it is. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
+  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these five weekdays belong to; the source's day-count text states neither which fast it is. Unlike the Illuminator and Nisibis fasts (whose day-by-day source text is a bare, generic \"Fast day\"/\"Պահք\" with nothing to preserve), the Prophet Elijah fast's source states a real count (\"Nth day of Pentecost\" in both languages), so the rename keeps it and parenthesizes the more specific name instead of replacing it. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
   "source_hy": "Ե օր Հոգեգալստեան",
   "status": "fixed"
  },
@@ -536,12 +536,12 @@
   "status": "ok"
  },
  "Fifth day of the Fast of Assumption": {
-  "approved_en": "Fifth day of the Fast of Assumption",
+  "approved_en": "Fifth day of the Fast of the Assumption",
   "approved_hy": "Ե օր Աստուածածնի պահոց",
   "id": "assumption_fast_day_5",
-  "note": "",
+  "note": "normalized to match \"the Fast of the Transfiguration\" / \"the Fast of the Holy Cross\" and the family's own \"Nth day of the Assumption\" -- this was the one Assumption-family form missing the article.",
   "source_hy": "Ե օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "fixed"
  },
  "Fifth day of the Fast of Nativity": {
   "approved_en": "Fifth day of the Fast of Nativity",
@@ -559,12 +559,12 @@
   "source_hy": "Ե օր Լուսաւորչի պահոց",
   "status": "generated"
  },
- "Fifth day of the Fast of St. James the bishop of Nisibis": {
-  "approved_en": "Fifth day of the Fast of St. James the bishop of Nisibis",
+ "Fifth day of the Fast of St. James the Bishop of Nisibis": {
+  "approved_en": "Fifth day of the Fast of St. James the Bishop of Nisibis",
   "approved_hy": "Ե օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_5",
-  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
-  "source_hy": "Պահք",
+  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the Bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
+  "source_hy": "",
   "status": "generated"
  },
  "Fifth day of the Fast of the Catechumens": {
@@ -640,12 +640,12 @@
   "status": "ok"
  },
  "First day of the Fast of Assumption": {
-  "approved_en": "First day of the Fast of Assumption",
+  "approved_en": "First day of the Fast of the Assumption",
   "approved_hy": "Ա օր Աստուածածնի պահոց",
   "id": "assumption_fast_day_1",
-  "note": "",
+  "note": "normalized to match \"the Fast of the Transfiguration\" / \"the Fast of the Holy Cross\" and the family's own \"Nth day of the Assumption\" -- this was the one Assumption-family form missing the article.",
   "source_hy": "Ա օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "fixed"
  },
  "First day of the Fast of Nativity": {
   "approved_en": "First day of the Fast of Nativity",
@@ -663,12 +663,12 @@
   "source_hy": "Ա օր Լուսաւորչի պահոց",
   "status": "generated"
  },
- "First day of the Fast of St. James the bishop of Nisibis": {
-  "approved_en": "First day of the Fast of St. James the bishop of Nisibis",
+ "First day of the Fast of St. James the Bishop of Nisibis": {
+  "approved_en": "First day of the Fast of St. James the Bishop of Nisibis",
   "approved_hy": "Ա օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_1",
-  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
-  "source_hy": "Պահք",
+  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the Bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
+  "source_hy": "",
   "status": "generated"
  },
  "First day of the Fast of the Catechumens": {
@@ -808,10 +808,10 @@
   "status": "fixed"
  },
  "Fourth Sunday after Assumption": {
-  "approved_en": "Fourth Sunday of Assumption",
+  "approved_en": "Fourth Sunday of the Assumption",
   "approved_hy": "Դ կիւրակէ զկնի Վերափոխման",
   "id": "fourth_sunday_after_assumption",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "normalized to match the Second and Fifth Sundays (\"Second Sunday of the Assumption\", \"Fifth Sunday of the Assumption\") -- the source keeps the article on some Sundays of this family and drops it on others; now served consistently with it everywhere.",
   "source_hy": "Դ կիւրակէ զկնի Վերափոխման",
   "status": "fixed"
  },
@@ -896,10 +896,10 @@
   "status": "ok"
  },
  "Fourth day of Pentecost": {
-  "approved_en": "Fourth day of the Fast of the Prophet Elijah",
-  "approved_hy": "Դ օր Եղիական պահոց",
+  "approved_en": "Fourth day of Pentecost (Fast of the Prophet Elijah)",
+  "approved_hy": "Դ օր Հոգեգալստեան (Եղիական պահոց)",
   "id": "fourth_day_of_pentecost",
-  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these six weekdays belong to; the source's day-count text states neither which fast it is. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
+  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these five weekdays belong to; the source's day-count text states neither which fast it is. Unlike the Illuminator and Nisibis fasts (whose day-by-day source text is a bare, generic \"Fast day\"/\"Պահք\" with nothing to preserve), the Prophet Elijah fast's source states a real count (\"Nth day of Pentecost\" in both languages), so the rename keeps it and parenthesizes the more specific name instead of replacing it. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
   "source_hy": "Դ օր Հոգեգալստեան",
   "status": "fixed"
  },
@@ -920,12 +920,12 @@
   "status": "ok"
  },
  "Fourth day of the Fast of Assumption": {
-  "approved_en": "Fourth day of the Fast of Assumption",
+  "approved_en": "Fourth day of the Fast of the Assumption",
   "approved_hy": "Դ օր Աստուածածնի պահոց",
   "id": "assumption_fast_day_4",
-  "note": "",
+  "note": "normalized to match \"the Fast of the Transfiguration\" / \"the Fast of the Holy Cross\" and the family's own \"Nth day of the Assumption\" -- this was the one Assumption-family form missing the article.",
   "source_hy": "Դ օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "fixed"
  },
  "Fourth day of the Fast of Nativity": {
   "approved_en": "Fourth day of the Fast of Nativity",
@@ -943,12 +943,12 @@
   "source_hy": "Դ օր Լուսաւորչի պահոց",
   "status": "generated"
  },
- "Fourth day of the Fast of St. James the bishop of Nisibis": {
-  "approved_en": "Fourth day of the Fast of St. James the bishop of Nisibis",
+ "Fourth day of the Fast of St. James the Bishop of Nisibis": {
+  "approved_en": "Fourth day of the Fast of St. James the Bishop of Nisibis",
   "approved_hy": "Դ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_4",
-  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
-  "source_hy": "Պահք",
+  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the Bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
+  "source_hy": "",
   "status": "generated"
  },
  "Fourth day of the Fast of the Catechumens": {
@@ -1160,12 +1160,12 @@
   "status": "fixed"
  },
  "Ninth day of Assumption": {
-  "approved_en": "Ninth day of Assumption",
+  "approved_en": "Ninth day of the Assumption",
   "approved_hy": "Թ օր Վերափոխման",
   "id": "ninth_day_of_assumption",
-  "note": "",
+  "note": "normalized to match \"Second day of the Assumption\" .. \"Seventh day of the Assumption\" -- this was the one day of the family missing the article.",
   "source_hy": "Թ օր Վերափոխման",
-  "status": "ok"
+  "status": "fixed"
  },
  "Ninth day of Eastertide": {
   "approved_en": "Ninth day of Eastertide",
@@ -1344,10 +1344,10 @@
   "status": "review"
  },
  "Saint Gregory the Illuminator’s Commitment to the Pit": {
-  "approved_en": "St. Gregory the Illuminator's Descent into the Pit",
+  "approved_en": "St. Gregory the Illuminator's descent into the Pit",
   "approved_hy": "Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն",
   "id": "gregory_the_illuminator_s",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it. \"descent\" lowercased to match its companion feast (\"St. Gregory the Illuminator's coming out of the Pit\") -- explicit editorial decision for pair consistency, not a source self-contradiction; see docs/observance-name-corrections.md.",
   "source_hy": "Տօն է սրբոյն Գրիգորի Լուսաւորչին մերոյ եւ յիշատակ սոսկալի չարչարանացն նորա եւ մտանելոյն ի վիրապն",
   "status": "fixed"
  },
@@ -1808,10 +1808,10 @@
   "status": "fixed"
  },
  "Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop": {
-  "approved_en": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
+  "approved_en": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
   "approved_hy": "Սրբոցն Նիկողայոսի եւ Գրիգորի սքանչելագործ հայրապետացն եւ միւս Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
   "id": "gregory_and_nicholas_the",
-  "note": "'and other Nicholas' -- hy 'միւս Նիկողայոսի' is 'the other Nicholas'. Add the article?",
+  "note": "reviewed correction: hy \"միւս Նիկողայոսի\" is \"the other Nicholas\" -- the English capitalized \"Other\" but dropped the article the Armenian states. See docs/observance-name-corrections.md.",
   "source_hy": "Սրբոցն Նիկողայոսի եւ Գրիգորի սքանչելագործ հայրապետացն եւ միւս Նիկողայոսի հայրապետին եւ Միւռոնայ եպիսկոպոսին",
   "status": "review"
  },
@@ -2259,7 +2259,7 @@
   "approved_en": "Second Sunday of Great Lent: Sunday of the Expulsion",
   "approved_hy": "Բ կիւրակէ Մեծի պահոց (Արտաքսման)",
   "id": "second_sunday_of_great_lent",
-  "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES (period, not colon) -- already a deliberate fix (comma->period, source's own 25 other occurrences use period). A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
+  "note": "resolved: this position label was a hardcoded engine._POSITION_FAMILIES template, since colon-normalized (see the sibling row, the registration for the dominant 25-occurrence source text). This row is the minority comma-source variant (1 occurrence, 2016); both now agree on the colon form.",
   "source_hy": "Բ կիւրակէ Քառասնորդական պահոց (Արտաքսման)",
   "status": "review"
  },
@@ -2304,10 +2304,10 @@
   "status": "ok"
  },
  "Second day of Pentecost": {
-  "approved_en": "Second day of the Fast of the Prophet Elijah",
-  "approved_hy": "Բ օր Եղիական պահոց",
+  "approved_en": "Second day of Pentecost (Fast of the Prophet Elijah)",
+  "approved_hy": "Բ օր Հոգեգալստեան (Եղիական պահոց)",
   "id": "second_day_of_pentecost",
-  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these six weekdays belong to; the source's day-count text states neither which fast it is. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
+  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these five weekdays belong to; the source's day-count text states neither which fast it is. Unlike the Illuminator and Nisibis fasts (whose day-by-day source text is a bare, generic \"Fast day\"/\"Պահք\" with nothing to preserve), the Prophet Elijah fast's source states a real count (\"Nth day of Pentecost\" in both languages), so the rename keeps it and parenthesizes the more specific name instead of replacing it. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
   "source_hy": "Բ օր Հոգեգալստեան",
   "status": "fixed"
  },
@@ -2336,12 +2336,12 @@
   "status": "ok"
  },
  "Second day of the Fast of Assumption": {
-  "approved_en": "Second day of the Fast of Assumption",
+  "approved_en": "Second day of the Fast of the Assumption",
   "approved_hy": "Բ օր Աստուածածնի պահոց",
   "id": "assumption_fast_day_2",
-  "note": "",
+  "note": "normalized to match \"the Fast of the Transfiguration\" / \"the Fast of the Holy Cross\" and the family's own \"Nth day of the Assumption\" -- this was the one Assumption-family form missing the article.",
   "source_hy": "Բ օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "fixed"
  },
  "Second day of the Fast of Nativity": {
   "approved_en": "Second day of the Fast of Nativity",
@@ -2359,12 +2359,12 @@
   "source_hy": "Բ օր Լուսաւորչի պահոց",
   "status": "generated"
  },
- "Second day of the Fast of St. James the bishop of Nisibis": {
-  "approved_en": "Second day of the Fast of St. James the bishop of Nisibis",
+ "Second day of the Fast of St. James the Bishop of Nisibis": {
+  "approved_en": "Second day of the Fast of St. James the Bishop of Nisibis",
   "approved_hy": "Բ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_2",
-  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
-  "source_hy": "Պահք",
+  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the Bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
+  "source_hy": "",
   "status": "generated"
  },
  "Second day of the Fast of the Catechumens": {
@@ -2472,12 +2472,12 @@
   "status": "ok"
  },
  "Seventh day of Pentecost": {
-  "approved_en": "Seventh day of the Fast of the Prophet Elijah",
-  "approved_hy": "Է օր Եղիական պահոց",
+  "approved_en": "Seventh day of Pentecost",
+  "approved_hy": "Է օր Հոգեգալստեան",
   "id": "seventh_day_of_pentecost",
-  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these six weekdays belong to; the source's day-count text states neither which fast it is. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
+  "note": "no longer renamed: the Fast of the Prophet Elijah is Mon-Fri only (the source marks each of those five days \"Fast day\" and carries no such marker on this Saturday, in every sampled year). Same observance, same id -- the engine used to mis-rename this day into the fast; now served as the source's own plain count. See docs/observance-name-corrections.md section 6b.",
   "source_hy": "Է օր Հոգեգալստեան",
-  "status": "fixed"
+  "status": "ok"
  },
  "Seventh day of the Assumption": {
   "approved_en": "Seventh day of the Assumption",
@@ -2560,20 +2560,20 @@
   "status": "ok"
  },
  "Sixth Sunday of Great Lent, Sunday of the Advent": {
-  "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
+  "approved_en": "Sixth Sunday of Great Lent: Sunday of the Advent",
   "approved_hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)",
   "id": "sixth_sunday_of_great_lent",
-  "note": "REVERTED: this position label is a hardcoded template in engine._POSITION_FAMILIES ('...Sunday of the Advent', period not colon). 'Sunday of the Second Coming' would be a real theological content change to an already-reviewed label, not a mechanical fix -- needs explicit sign-off, not a silent ground-truth edit. A different 'approved' here has no effect on served output and breaks test_every_served_component_is_approved.",
+  "note": "resolved: this position label was a hardcoded engine._POSITION_FAMILIES template (period, not colon); now edited to match the other five Sundays of Great Lent. This row is the minority comma-source variant (1 occurrence, 2019) -- the registration is the sibling row with the dominant (25-occurrence) source text; both now agree on the colon form.",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
   "status": "review"
  },
  "Sixth Sunday of Great Lent. Sunday of the Advent": {
-  "approved_en": "Sixth Sunday of Great Lent. Sunday of the Advent",
+  "approved_en": "Sixth Sunday of Great Lent: Sunday of the Advent",
   "approved_hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)",
   "id": "sixth_sunday_of_great_lent",
-  "note": "",
+  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it. Matches the other five Sundays of Great Lent (all already colon-separated); required an engine._POSITION_FAMILIES/_POSITION_IDS edit since this label is a hardcoded template, not a plain TSV-only rename.",
   "source_hy": "Զ կիւրակէ Քառասնորդական պահոց (Գալստեան)",
-  "status": "ok"
+  "status": "fixed"
  },
  "Sixth day of Easter": {
   "approved_en": "Sixth day of Easter",
@@ -2600,10 +2600,10 @@
   "status": "ok"
  },
  "Sixth day of Pentecost": {
-  "approved_en": "Sixth day of the Fast of the Prophet Elijah",
-  "approved_hy": "Զ օր Եղիական պահոց",
+  "approved_en": "Sixth day of Pentecost (Fast of the Prophet Elijah)",
+  "approved_hy": "Զ օր Հոգեգալստեան (Եղիական պահոց)",
   "id": "sixth_day_of_pentecost",
-  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these six weekdays belong to; the source's day-count text states neither which fast it is. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
+  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these five weekdays belong to; the source's day-count text states neither which fast it is. Unlike the Illuminator and Nisibis fasts (whose day-by-day source text is a bare, generic \"Fast day\"/\"Պահք\" with nothing to preserve), the Prophet Elijah fast's source states a real count (\"Nth day of Pentecost\" in both languages), so the rename keeps it and parenthesizes the more specific name instead of replacing it. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
   "source_hy": "Զ օր Հոգեգալստեան",
   "status": "fixed"
  },
@@ -2624,10 +2624,10 @@
   "status": "ok"
  },
  "Staint Gregory the Illuminator's coming out of Pit": {
-  "approved_en": "St. Gregory the Illuminator's coming out of Pit",
+  "approved_en": "St. Gregory the Illuminator's coming out of the Pit",
   "approved_hy": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն",
   "id": "gregory_the_illuminator_coming_out_of_pit",
-  "note": "Missing article, and lowercase 'coming' where the companion feast reads 'Commitment to the Pit'. 'Coming out of the Pit'? Left alone as the source's own wording rather than silently rewritten.",
+  "note": "reviewed correction: fixes the source's own typo (\"Staint\" -> \"St.\") and missing article (\"of Pit\" -> \"of the Pit\"); \"coming\" kept lowercase to match its companion feast's now-lowercased \"descent\". See docs/observance-name-corrections.md.",
   "source_hy": "Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն",
   "status": "review"
  },
@@ -2760,10 +2760,10 @@
   "status": "review"
  },
  "Third Sunday after Assumption": {
-  "approved_en": "Third Sunday of Assumption",
+  "approved_en": "Third Sunday of the Assumption",
   "approved_hy": "Գ կիւրակէ զկնի Վերափոխման",
   "id": "third_sunday_after_assumption",
-  "note": "reviewed correction: this row IS the registration -- build_ground_truth.py freezes approved_en and apply_ground_truth serves it",
+  "note": "normalized to match the Second and Fifth Sundays (\"Second Sunday of the Assumption\", \"Fifth Sunday of the Assumption\") -- the source keeps the article on some Sundays of this family and drops it on others; now served consistently with it everywhere.",
   "source_hy": "Գ կիւրակէ զկնի Վերափոխման",
   "status": "fixed"
  },
@@ -2856,10 +2856,10 @@
   "status": "ok"
  },
  "Third day of Pentecost": {
-  "approved_en": "Third day of the Fast of the Prophet Elijah",
-  "approved_hy": "Գ օր Եղիական պահոց",
+  "approved_en": "Third day of Pentecost (Fast of the Prophet Elijah)",
+  "approved_hy": "Գ օր Հոգեգալստեան (Եղիական պահոց)",
   "id": "third_day_of_pentecost",
-  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these six weekdays belong to; the source's day-count text states neither which fast it is. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
+  "note": "registered rename: the source's own eve on Pentecost itself (\"Eve of Fast of Prophet Elijah\" / \"Բարեկենդան Եղիական պահոց\") names the fast these five weekdays belong to; the source's day-count text states neither which fast it is. Unlike the Illuminator and Nisibis fasts (whose day-by-day source text is a bare, generic \"Fast day\"/\"Պահք\" with nothing to preserve), the Prophet Elijah fast's source states a real count (\"Nth day of Pentecost\" in both languages), so the rename keeps it and parenthesizes the more specific name instead of replacing it. See docs/observance-name-corrections.md section 6b. id unchanged -- same observance under a more specific name.",
   "source_hy": "Գ օր Հոգեգալստեան",
   "status": "fixed"
  },
@@ -2888,12 +2888,12 @@
   "status": "ok"
  },
  "Third day of the Fast of Assumption": {
-  "approved_en": "Third day of the Fast of Assumption",
+  "approved_en": "Third day of the Fast of the Assumption",
   "approved_hy": "Գ օր Աստուածածնի պահոց",
   "id": "assumption_fast_day_3",
-  "note": "",
+  "note": "normalized to match \"the Fast of the Transfiguration\" / \"the Fast of the Holy Cross\" and the family's own \"Nth day of the Assumption\" -- this was the one Assumption-family form missing the article.",
   "source_hy": "Գ օր Աստուածածնի պահոց",
-  "status": "ok"
+  "status": "fixed"
  },
  "Third day of the Fast of Nativity": {
   "approved_en": "Third day of the Fast of Nativity",
@@ -2919,12 +2919,12 @@
   "source_hy": "Գ օր Լուսաւորչի պահոց",
   "status": "generated"
  },
- "Third day of the Fast of St. James the bishop of Nisibis": {
-  "approved_en": "Third day of the Fast of St. James the bishop of Nisibis",
+ "Third day of the Fast of St. James the Bishop of Nisibis": {
+  "approved_en": "Third day of the Fast of St. James the Bishop of Nisibis",
   "approved_hy": "Գ օր Ս. Յակովբայ Մծբնայ հայրապետին պահոց",
   "id": "james_nisibis_day_3",
-  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
-  "source_hy": "Պահք",
+  "note": "engine-composed label; the source prints a less specific text here in EITHER language (\"Fast day\" / \"Պահք\") -- named from the source's own eve, \"Eve of Fast of St. James the Bishop of Nisibis\" / \"Բարեկենդան Ս. Յակովբայ պահոց\". See dev/source_corrections.named_fast_label_hy and docs/observance-name-corrections.md section 6b.",
+  "source_hy": "",
   "status": "generated"
  },
  "Third day of the Fast of the Catechumens": {

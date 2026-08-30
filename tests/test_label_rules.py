@@ -51,13 +51,19 @@ from dev.observance_ids import is_declined_en                             # noqa
 from tests._reference_cache import requires_reference_cache               # noqa: E402
 
 # Days where the source printed a position label and the rule printed the same one.
-# Monotonic UP: it may only grow as the cache does. A floor rather than an equality so
-# extending the cache reports its true number instead of failing on arithmetic.
-POSITION_MATCHED_FLOOR = int(os.environ.get("POSITION_MATCHED_FLOOR", "6294"))
+# Monotonic UP as the cache grows. Lowered by 26 (one per supported year, 2001-2026) when
+# the Fast of the Prophet Elijah's position family narrowed from Mon-Sat to Mon-Fri: the
+# rule no longer tries "Seventh day of Pentecost" at all (a declared decline -- see
+# dev.observance_ids._DECLINED_POSITION_LABELS_EN -- rather than a mismatch), so those 26
+# days move out of "matched" instead of staying a silent MISMATCH. A floor rather than an
+# equality so extending the cache reports its true number instead of failing on arithmetic.
+POSITION_MATCHED_FLOOR = int(os.environ.get("POSITION_MATCHED_FLOOR", "6268"))
 
 # Source position labels that reach the SERVED name, from the rule or from the table.
-# Monotonic UP, same reasoning. Excludes the declared declines counted separately.
-POSITION_SERVED_FLOOR = int(os.environ.get("POSITION_SERVED_FLOOR", "6238"))
+# Monotonic UP, same reasoning. Excludes the declared declines counted separately -- which
+# is why the 26 "Seventh day of Pentecost" days move out of this count too, the same
+# reason and the same day POSITION_MATCHED_FLOOR moved for.
+POSITION_SERVED_FLOOR = int(os.environ.get("POSITION_SERVED_FLOOR", "6212"))
 
 # Eve components, matched by the rule and served end-to-end. Both currently 338/338 --
 # every eve family is implemented, so these two numbers are the same one.

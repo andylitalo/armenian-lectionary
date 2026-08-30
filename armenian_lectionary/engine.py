@@ -1410,7 +1410,7 @@ _POSITION_IDS = {
     '{ord} Sunday of Great Lent: Sunday of the Steward': {4: 'fourth_sunday_of_great_lent'},
     '{ord} day of Great Lent (Median day)': {24: 'twenty_fourth_day_of_great_lent'},
     '{ord} Sunday of Great Lent: Sunday of the Judge': {5: 'fifth_sunday_of_great_lent'},
-    '{ord} Sunday of Great Lent. Sunday of the Advent': {6: 'sixth_sunday_of_great_lent'},
+    '{ord} Sunday of Great Lent: Sunday of the Advent': {6: 'sixth_sunday_of_great_lent'},
     '{ord} day of Great Lent': {
         1: 'first_day_of_great_lent', 2: 'second_day_of_great_lent',
         3: 'third_day_of_great_lent', 4: 'fourth_day_of_great_lent',
@@ -1443,8 +1443,7 @@ _POSITION_IDS = {
         3: 'third_sunday_sunday_of',
     },
     '{ord} Sunday of Eastertide (Red Sunday)': {4: 'fourth_sunday_red_sunday'},
-    '{ord} Sunday': {5: 'fifth_sunday'},
-    '{ord} Sunday of Eastertide': {6: 'sixth_sunday_of_eastertide'},
+    '{ord} Sunday of Eastertide': {5: 'fifth_sunday', 6: 'sixth_sunday_of_eastertide'},
     '{ord} Sunday of Eastertide (Second Palm Sunday)': {7: 'seventh_sunday_of_eastertide'},
     '{ord} day of Eastertide': {
         9: 'ninth_day_of_eastertide', 10: 'tenth_day_of_eastertide',
@@ -1463,10 +1462,9 @@ _POSITION_IDS = {
         46: 'forty_sixth_day_of', 47: 'forty_seventh_day_of', 48: 'forty_eighth_day_of',
         49: 'forty_ninth_day_of',
     },
-    '{ord} day of the Fast of the Prophet Elijah': {
+    '{ord} day of Pentecost (Fast of the Prophet Elijah)': {
         2: 'second_day_of_pentecost', 3: 'third_day_of_pentecost',
         4: 'fourth_day_of_pentecost', 5: 'fifth_day_of_pentecost', 6: 'sixth_day_of_pentecost',
-        7: 'seventh_day_of_pentecost',
     },
     '{ord} day of the Fast of Nativity': {
         1: 'nativity_fast_day_1', 2: 'nativity_fast_day_2', 3: 'nativity_fast_day_3',
@@ -1511,7 +1509,7 @@ _POSITION_IDS = {
         8: 'eighth_sunday_of_the_holy_cross', 9: 'ninth_sunday_of_the_holy_cross',
         10: 'tenth_sunday_of_the_holy_cross', 11: 'eleventh_sunday_of_the_holy_cross',
     },
-    '{ord} day of the Fast of Assumption': {
+    '{ord} day of the Fast of the Assumption': {
         1: 'assumption_fast_day_1', 2: 'assumption_fast_day_2', 3: 'assumption_fast_day_3',
         4: 'assumption_fast_day_4', 5: 'assumption_fast_day_5',
     },
@@ -1519,13 +1517,11 @@ _POSITION_IDS = {
         2: 'second_day_of_assumption', 3: 'third_day_of_assumption',
         4: 'fourth_day_of_assumption', 5: 'fifth_day_of_assumption',
         6: 'sixth_day_of_assumption', 7: 'seventh_day_of_assumption',
+        9: 'ninth_day_of_assumption',
     },
-    '{ord} day of Assumption': {9: 'ninth_day_of_assumption'},
     '{ord} Sunday of the Assumption': {
-        2: 'second_sunday_of_the_assumption', 5: 'fifth_sunday_of_the_assumption',
-    },
-    '{ord} Sunday of Assumption': {
-        3: 'third_sunday_after_assumption', 4: 'fourth_sunday_after_assumption',
+        2: 'second_sunday_of_the_assumption', 3: 'third_sunday_after_assumption',
+        4: 'fourth_sunday_after_assumption', 5: 'fifth_sunday_of_the_assumption',
     },
     '{ord} day of the Fast of the Transfiguration': {
         1: 'transfiguration_fast_day_1', 2: 'transfiguration_fast_day_2',
@@ -1549,7 +1545,7 @@ _POSITION_IDS = {
         1: 'illuminator_fast_day_1', 2: 'illuminator_fast_day_2', 3: 'illuminator_fast_day_3',
         4: 'illuminator_fast_day_4', 5: 'illuminator_fast_day_5',
     },
-    '{ord} day of the Fast of St. James the bishop of Nisibis': {
+    '{ord} day of the Fast of St. James the Bishop of Nisibis': {
         1: 'james_nisibis_day_1', 2: 'james_nisibis_day_2', 3: 'james_nisibis_day_3',
         4: 'james_nisibis_day_4', 5: 'james_nisibis_day_5',
     },
@@ -1587,7 +1583,7 @@ _POSITION_FAMILIES = (
     ("E", (-28, -28), _SUN, "sundays", 4, "{ord} Sunday of Great Lent: Sunday of the Steward"),
     ("E", (-25, -25), (2,), "days", 49, "{ord} day of Great Lent (Median day)"),
     ("E", (-21, -21), _SUN, "sundays", 5, "{ord} Sunday of Great Lent: Sunday of the Judge"),
-    ("E", (-14, -14), _SUN, "sundays", 6, "{ord} Sunday of Great Lent. Sunday of the Advent"),
+    ("E", (-14, -14), _SUN, "sundays", 6, "{ord} Sunday of Great Lent: Sunday of the Advent"),
     ("E", (-48, -8), None, "days", 49, "{ord} day of Great Lent"),
     ("E", (-69, -65), _MON_TO_FRI, "days", 70, "{ord} day of the Fast of the Catechumens"),
     # -- Easter and Eastertide -------------------------------------------------
@@ -1595,18 +1591,24 @@ _POSITION_FAMILIES = (
     ("E", (14, 14), _SUN, "sundays", 1,
      "{ord} Sunday of Eastertide: Sunday of the World Church (Green Sunday)"),
     ("E", (21, 21), _SUN, "sundays", 1, "{ord} Sunday of Eastertide (Red Sunday)"),
-    ("E", (28, 28), _SUN, "sundays", 1, "{ord} Sunday"),
+    ("E", (28, 28), _SUN, "sundays", 1, "{ord} Sunday of Eastertide"),
     ("E", (35, 35), _SUN, "sundays", 1, "{ord} Sunday of Eastertide"),
     ("E", (42, 42), _SUN, "sundays", 1, "{ord} Sunday of Eastertide (Second Palm Sunday)"),
     ("E", (8, 48), _MON_TO_SAT, "days", 1, "{ord} day of Eastertide"),
-    # The six weekdays after Pentecost are the Fast of Prophet Elijah, closing on the
-    # Remembrance of Prophet Elijah the following Sunday. The source counts them "Nth day
-    # of Pentecost" -- true, but it does not say which fast the reader is in, while the
-    # source's OWN eve on Pentecost itself does ("Eve of Fast of Prophet Elijah",
-    # _EVE_FAMILIES below). Renamed to agree with that eve, same ordinal; the catalog ids
-    # are unchanged, since this is the same observance under a more specific name. See
+    # The five weekdays after Pentecost are the Fast of Prophet Elijah -- marked "-- Fast
+    # day" on all five in the source, and NOT on the Saturday that follows ("Seventh day of
+    # Pentecost", bare, every sampled year), so the fast is Mon-Fri only. The source counts
+    # the five "Nth day of Pentecost" in both languages -- true, but it does not say which
+    # fast the reader is in, while the source's OWN eve on Pentecost itself does ("Eve of
+    # Fast of Prophet Elijah", _EVE_FAMILIES below). Unlike the Illuminator and Nisibis
+    # fasts (whose own day-by-day text is a bare, generic "Fast day"/"Պահք" with nothing to
+    # preserve), Elijah's source states a real count -- so the rename keeps it rather than
+    # replacing it, parenthesizing the more specific name instead: "Second day of Pentecost
+    # (Fast of the Prophet Elijah)". Same ordinal as before; the catalog ids are unchanged,
+    # since this is the same observance under a more specific name. See
     # docs/observance-name-corrections.md section 6b.
-    ("PE", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Fast of the Prophet Elijah"),
+    ("PE", (1, 5), _MON_TO_FRI, "days", 1,
+     "{ord} day of Pentecost (Fast of the Prophet Elijah)"),
     # -- Winter first: the Nativity arc outranks the autumn anchors it overlaps.
     # Jan 6-13 is the Nativity octave, not the tail of Advent; and once Heesnak has
     # passed, a Sunday is "of Advent", not still "after the Holy Cross".
@@ -1634,14 +1636,14 @@ _POSITION_FAMILIES = (
     ("EX", (8, 12), _MON_TO_FRI, "days", -7,
      "{ord} day of the Fast of the Holy Cross of Varag"),
     ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday of the Holy Cross"),
-    ("AS", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of Assumption"),
+    ("AS", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Assumption"),
     ("AS", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Assumption"),
-    ("AS", (8, 8), (0,), "days", 1, "{ord} day of Assumption"),
-    # The source keeps the article on the 1st and 4th Sundays of the Assumption and
-    # drops it on the 2nd and 3rd. Inconsistent, but deterministic in the offset, so both
-    # forms are reproduced exactly rather than normalized to one.
+    ("AS", (8, 8), (0,), "days", 1, "{ord} day of the Assumption"),
+    # The source keeps the article on the 1st and 4th Sundays of the Assumption and drops
+    # it on the 2nd and 3rd. Normalized to keep it everywhere, for consistency with the
+    # rest of the family (the Fast of the Assumption, Nth day of the Assumption).
     ("AS", (7, 7), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
-    ("AS", (14, 21), _SUN, "sundays", 1, "{ord} Sunday of Assumption"),
+    ("AS", (14, 21), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
     ("AS", (28, 28), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
     ("TR", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Transfiguration"),
     ("TR", (1, 2), (0, 1), "days", 1, "{ord} day of Transfiguration"),
@@ -1668,7 +1670,7 @@ _POSITION_FAMILIES = (
     # fast's ordinal ("First, Second, --, Fourth, Fifth"). See
     # docs/observance-name-corrections.md section 6b.
     ("HE", (22, 26), _MON_TO_FRI, "days", -21,
-     "{ord} day of the Fast of St. James the bishop of Nisibis"),
+     "{ord} day of the Fast of St. James the Bishop of Nisibis"),
     # -- Ordinary-time fast days (terminal fallthrough) -------------------------
     # A Wed/Fri no season above has claimed is simply a fast day. Verified exact on every
     # such day in the ground truth (1553/1553). Counter ``None`` = a fixed label, no ordinal.
@@ -1844,7 +1846,7 @@ _EVE_FAMILIES = (
     ("EX",   7, "eve_of_fast_of_holy_cross_of_varag",
      "Eve of the Fast of the Holy Cross of Varag"),
     ("HE",  21, "eve_of_fast_of_nisibis",
-     "Eve of the Fast of St. James the bishop of Nisibis"),
+     "Eve of the Fast of St. James the Bishop of Nisibis"),
 )
 
 # The two solar eves, by civil date.
