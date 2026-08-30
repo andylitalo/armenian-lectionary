@@ -163,7 +163,6 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
     "Tone": "ԱԿ",
     "Number": 2
   },
-  "Season": "After Pentecost",
   "Readings": {
     "Old Testament": ["Proverbs 31.29-31", "Isaiah 61.10-62.3"],
     "Epistle": ["St. Paul's Epistle to the Romans 15.30-16.2"],

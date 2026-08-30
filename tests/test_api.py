@@ -27,6 +27,15 @@ class TestReadingsAPI(unittest.TestCase):
                 self.assertEqual(mode, expected)
                 self.assertIs(type(mode["Number"]), int)
 
+    def test_season_is_not_served(self):
+        """Season is an internal tier-provenance label, not a liturgical fact, and no
+        consumer relies on it -- it must not leak onto the wire even though the
+        package-level compute_armenian_lectionary() still carries it internally.
+        """
+        response = self.client.get("/readings?date=2026-08-05")
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("Season", response.get_json())
+
     def test_out_of_range_date_is_a_400_not_a_500(self):
         """The endpoint answers the range question itself, before the engine raises.
 
