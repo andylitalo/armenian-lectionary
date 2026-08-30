@@ -127,12 +127,30 @@ Working rules:
   scanning the range for days where more than one tier returns non-`None`.
 - **A pin's `loser` must genuinely apply on that date**, or it asserts coverage rather
   than precedence; `test_every_pin_actually_contends` enforces it.
-- `_tier_generative_saint` and `_tier_fallback` currently **win on no date** in
-  2001–2027 — the first is fully shadowed by `_tier_validated_table` and
-  `_tier_cycle_saint` (though it applies on 1,904 days), the second because every day in
-  range is claimed earlier. Both are still reachable outside the range, which is
-  env-overridable, so neither is dead code — but do not read a passing suite as evidence
-  that either one's *body* is exercised.
+- `_tier_generative_saint` and `_tier_fallback` **win on no date** in 2001–2027 — the
+  first is fully shadowed by `_tier_validated_table` and `_tier_cycle_saint` (though it
+  applies on 1,904 days), the second because every day in range is claimed earlier. Both
+  are reachable outside the range, which is env-overridable, so neither is dead code.
+  `tests/test_shadowed_tiers.py` is what exercises the two bodies: it finds the dates each
+  tier actually wins on out to 2130 and asserts, for every one, that the readings served
+  are attested by the validated table (a twin at the same zone-saint coordinate, or the
+  identity's dominant validated reading set) and that the fallback serves none at all.
+  The **shadowing itself is not pinned** — that is a fact about the current data, and one
+  more validated coordinate would change it; `dev/audit_shadowed_tiers.py` reports it:
+
+  ```bash
+  python dev/audit_shadowed_tiers.py          # applies/wins per tier, and every win day verified
+  python dev/audit_shadowed_tiers.py --list   # plus every shadowed disagreement
+  ```
+- **`_tier_generative_saint` is not leftover scaffolding, despite winning nothing.** Its
+  original job — filling in-range blanks — did go to `_tier_cycle_saint`. What it covers
+  now is the complement of two deliberate conservatism rules: `build_table`'s
+  `_consistent(items, 2)` drops any coordinate seen in only one year, and `_CYCLE_SAINTS`
+  carries only the days each year-type's Second Volume page prints, and the pages
+  truncate. Five days per century fall in both holes; both of their coordinates verify.
+  Its 16%-agreement-with-`_tier_cycle_saint` figure describes the floating-saint days it
+  is never allowed to serve, not the days it does — see
+  [`docs/generative-saint-tier.md`](docs/generative-saint-tier.md).
 
 ### The source is not automatically right
 
