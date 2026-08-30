@@ -141,7 +141,7 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-05-20	Thu	After Pentecost	validated-table	1	fifth_day_of_pentecost	Fifth day of Pentecost (Fast of the Prophet Elijah)	Ե օր Հոգեգալստեան (Եղիական պահոց)
 2027-05-21	Fri	After Pentecost	validated-table	1	sixth_day_of_pentecost	Sixth day of Pentecost (Fast of the Prophet Elijah)	Զ օր Հոգեգալստեան (Եղիական պահոց)
 2027-05-22	Sat	After Pentecost	validated-table	1	seventh_day_of_pentecost	Seventh day of Pentecost	Է օր Հոգեգալստեան
-2027-05-23	Sun	After Pentecost	validated-table	2	second_sunday_after_pentecost — remembrance_of_prophet_elijah	Second Sunday of Pentecost — Remembrance of the Prophet Elijah	Բ կիւրակէ զկնի Հոգեգալստեան — Յիշատակ Եղիայի մարգարէին
+2027-05-23	Sun	After Pentecost	validated-table	2	first_sunday_after_pentecost — remembrance_of_prophet_elijah	First Sunday of Pentecost — Remembrance of the Prophet Elijah	Ա կիւրակէ զկնի Հոգեգալստեան — Յիշատակ Եղիայի մարգարէին
 2027-05-24	Mon	After Pentecost	validated-table	1	hripsime_and_her_companions	Sts. Hripsime and Her Companions	Սրբոց կուսանացն Հռիփսիմեանց
 2027-05-25	Tue	After Pentecost	validated-table	1	gayane_and_her_companions	Sts. Gayane and Her Companions	Սրբոց կուսանացն Գայիանեանց
 2027-05-26	Wed	After Pentecost	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք

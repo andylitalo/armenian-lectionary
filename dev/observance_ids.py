@@ -216,11 +216,6 @@ _RECURRING_OBSERVANCES = {
         "Feast of the Holy Church, kept on three days of the Exaltation octave",
     "feast_of_the_holy_cross":
         "Feast of the Holy Cross, kept on three days of the Exaltation octave",
-    "second_sunday_after_pentecost":
-        "the source prints no FIRST Sunday after Pentecost -- Pentecost itself is the "
-        "first -- so Pentecost+7 and Pentecost+14 both carry this ordinal, in the source "
-        "as well as here. Verified on every cached year; see _position_label's docstring "
-        "on the counting rule not being exact on every occurrence",
     "tenth_sunday_of_the_holy_cross":
         "boundary artifact: the last Sunday before Advent, counted from the Holy Cross "
         "(September) while the year is cut at Heesnak (November). When Heesnak falls late "

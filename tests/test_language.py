@@ -151,19 +151,28 @@ class TestLanguageKwarg(unittest.TestCase):
         # Provenance metadata is not translated.
         self.assertEqual(result["Source"], "validated-table")
 
-    def test_second_sunday_after_pentecost_ordinal(self):
-        """Locks a real fix the observance-catalog resolver surfaced: the OLD whole-
-        string _translate_feast could return "Ա" (First) for "Second Sunday after
-        Pentecost" depending on which composite happened to be scraped whole, even
-        though English never has a "First Sunday after Pentecost" (the count floors at
-        2 -- see engine._POSITION_FAMILIES). The catalog resolves this English text to
-        one canonical, correct "Բ" (Second) everywhere. Self-contained: skips if the
-        shipped catalog is absent."""
+    def test_first_and_second_sunday_after_pentecost_ordinals(self):
+        """Pentecost+7 and Pentecost+14 are DIFFERENT Sundays and now say so.
+
+        The English source's raw text is byte-identical on both ("Second Sunday after
+        Pentecost") -- one string standing for two different weeks -- but its own
+        Armenian numbers them Ա/Բ (First/Second), never repeating a number. This used to
+        be resolved the other way: the observance catalog forced BOTH weeks to the single
+        canonical "Բ" (Second), on the theory that "English never has a First Sunday
+        after Pentecost" was itself authoritative. It is not -- the Armenian is the more
+        specific witness (the section-1 pattern in
+        docs/observance-name-corrections.md) -- so Pentecost+7 now gets its own id,
+        ``first_sunday_after_pentecost``, and its own ordinal in both languages, and the
+        ids no longer collide. Self-contained: skips if the shipped catalog is absent."""
         if not engine._OBSERVANCE_CATALOG:
             self.skipTest("observance catalog not present")
-        result = compute_armenian_lectionary(datetime.date(2001, 6, 17), language="hy")
+        first = compute_armenian_lectionary(datetime.date(2001, 6, 10), language="hy")
         self.assertEqual(
-            result["Liturgical Day"],
+            first["Liturgical Day"],
+            "Ա կիւրակէ զկնի Հոգեգալստեան — Յիշատակ Եղիայի մարգարէին")
+        second = compute_armenian_lectionary(datetime.date(2001, 6, 17), language="hy")
+        self.assertEqual(
+            second["Liturgical Day"],
             "Բ կիւրակէ զկնի Հոգեգալստեան — Տօն Կաթուղիկէ Սուրբ Էջմիածնի")
 
 

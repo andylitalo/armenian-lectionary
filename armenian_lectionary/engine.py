@@ -1537,9 +1537,9 @@ _POSITION_IDS = {
         6: 'sixth_sunday_after_transfiguration', 7: 'seventh_sunday_after_transfiguration',
     },
     '{ord} Sunday of Pentecost': {
-        2: 'second_sunday_after_pentecost', 3: 'third_sunday_after_pentecost',
-        4: 'fourth_sunday_after_pentecost', 5: 'fifth_sunday_after_pentecost',
-        6: 'sixth_sunday_after_pentecost',
+        1: 'first_sunday_after_pentecost', 2: 'second_sunday_after_pentecost',
+        3: 'third_sunday_after_pentecost', 4: 'fourth_sunday_after_pentecost',
+        5: 'fifth_sunday_after_pentecost', 6: 'sixth_sunday_after_pentecost',
     },
     '{ord} day of the Fast of St. Gregory the Illuminator': {
         1: 'illuminator_fast_day_1', 2: 'illuminator_fast_day_2', 3: 'illuminator_fast_day_3',
@@ -1648,9 +1648,15 @@ _POSITION_FAMILIES = (
     ("TR", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Transfiguration"),
     ("TR", (1, 2), (0, 1), "days", 1, "{ord} day of Transfiguration"),
     ("TR", (7, 42), _SUN, "sundays", 1, "{ord} Sunday of Transfiguration"),
-    # The source has no "First Sunday of Pentecost": the Sunday right after Pentecost
-    # is already the "Second", so the count floors at 2.
-    ("PE", (7, 7), _SUN, "sundays", 1, "{ord} Sunday of Pentecost"),
+    # The ENGLISH source has no "First Sunday of Pentecost" -- Pentecost+7 reads "Second
+    # Sunday after Pentecost", identical to Pentecost+14's own text -- but the Armenian
+    # numbers them Ա/Բ/Գ... (First/Second/Third), never repeating a number: the source
+    # states the same fact twice and disagrees with itself, the section-1 pattern applied
+    # to a position label (docs/observance-name-corrections.md). Floors at 1, not 2;
+    # tables 2001-2026 confirm English's own count is Second/Second/Third/Fourth/Fifth/
+    # Sixth for weeks 1-6, i.e. exact once week 1 is corrected to First -- not the
+    # year-to-year drift this family used to be described as having.
+    ("PE", (7, 7), _SUN, "sundays", 0, "{ord} Sunday of Pentecost"),
     ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday of Pentecost"),
     # The Fast of St. Gregory the Illuminator, opening the day after its Sunday eve
     # (Pentecost+21) and closing before the Discovery of the Relics on the Saturday. The
