@@ -63,6 +63,23 @@ class WinDay:
     detail: str
 
 
+@dataclass(frozen=True)
+class _Claim:
+    """What a tier served on a date, before it is classified.
+
+    Gathering these first is what lets ``validated_index`` be built for the handful of
+    coordinates and identities the claims actually ask about, instead of for the whole
+    supported range.
+    """
+    date: datetime.date
+    tier: str
+    keyspace: Optional[str]        # e.g. "TrSaintMD"
+    coordinate: Optional[str]      # e.g. "cyricus_and_his:07-30"
+    identity: Optional[str]        # e.g. "cyricus_and_his"
+    name: str
+    readings: tuple
+
+
 @dataclass
 class Report:
     min_year: int
@@ -103,81 +120,97 @@ def _winner(d):
     raise RuntimeError(f"no tier resolved {d.isoformat()}")   # _tier_fallback prevents this
 
 
-def _saint_coordinate(d):
+def _saint_coordinate(d, cs=None):
     """``d``'s ``*SaintMD`` coordinate as ``(keyspace, value)``, or ``(None, None)``.
 
     Identity x civil date: the finest zone-saint coordinate the engine keys on, and the
     one a cross-year twin must share to be evidence about this DAY rather than this saint.
+    ``cs`` lets a caller that already has ``coords_for(d)`` avoid recomputing it.
     """
-    for keyspace, value in sorted(coords_for(d).items()):
+    for keyspace, value in sorted((cs if cs is not None else coords_for(d)).items()):
         if keyspace.endswith("SaintMD"):
             return keyspace, value
     return None, None
 
 
-def validated_index(min_year, max_year):
-    """What the validated table serves in range, indexed the two ways we verify by.
+def validated_index(min_year, max_year, coordinates, identities):
+    """What the validated table serves in range, for the keys the claims ask about.
 
     ``twins``  ``*SaintMD`` coordinate -> [(date, name, readings)]
     ``attest`` saint identity -> Counter of reading sets
+
+    Restricted to those keys on purpose. ``coords_for`` is ~4x cheaper than a full
+    ``compute_armenian_lectionary``, so filtering on the coordinate first and serving only
+    the candidate days is the difference between a 2.4s pass and a 0.4s one -- and the
+    entries it skips are ones no claim can reach. The cost is worth naming because this
+    runs in CI, where the ground-truth tests that would otherwise notice a served-reading
+    regression are exactly the ones that skip.
     """
     twins = collections.defaultdict(list)
     attest = collections.defaultdict(collections.Counter)
     for d in _days(min_year, max_year):
+        cs = coords_for(d)
+        keyspace, coordinate = _saint_coordinate(d, cs)
+        wanted = {v for k, v in cs.items() if k.endswith("Saint")} & identities
+        if coordinate not in coordinates and not wanted:
+            continue
         served = engine.compute_armenian_lectionary(d)
         if served["Source"] != VALIDATED:
             continue
         readings = tuple(served["ReadingsList"])
-        keyspace, coordinate = _saint_coordinate(d)
-        if coordinate is not None:
+        if coordinate in coordinates:
             twins[coordinate].append((d, served["Liturgical Day"], readings))
-        for key, value in coords_for(d).items():
-            if key.endswith("Saint"):
-                attest[value][readings] += 1
+        for identity in wanted:
+            attest[identity][readings] += 1
     return twins, attest
 
 
-def _verify(d, tier_name, twins, attest, probe_to):
-    """Classify what ``tier_name`` serves on ``d``. Routes are in the module docstring."""
+def _claim(d, tier_name, probe_to):
+    """What ``tier_name`` serves on ``d``, with the two keys its verdict will turn on."""
     keyspace, coordinate = _saint_coordinate(d)
     # The identity comes from the tier, not from coords_for: the tier is what placed the
     # saint, and the zone coordinate can be absent on exactly the days worth checking.
     placed = engine._generative_saint(d)
-    identity = placed[1] if placed else None
     with widened_range(probe_to):
         served = engine.compute_armenian_lectionary(d)
-    name, readings = served["Liturgical Day"], tuple(served["ReadingsList"])
+    return _Claim(d, tier_name, keyspace, coordinate, placed[1] if placed else None,
+                  served["Liturgical Day"], tuple(served["ReadingsList"]))
 
+
+def _classify(claim, twins, attest):
+    """Judge a claim against the validated table. Routes are in the module docstring."""
     def win(verdict, detail):
-        return WinDay(d, tier_name, coordinate, name, readings, verdict, detail)
+        return WinDay(claim.date, claim.tier, claim.coordinate, claim.name,
+                      claim.readings, verdict, detail)
 
-    if not readings:
+    if not claim.readings:
         # _tier_fallback: an explicit "not yet modeled", with no readings to be wrong about.
         return win("no-claim", "serves no readings and says so")
 
-    candidates = twins.get(coordinate, ())
+    candidates = twins.get(claim.coordinate, ())
     for twin_date, twin_name, twin_readings in candidates:
-        if (twin_name, twin_readings) == (name, readings):
+        if (twin_name, twin_readings) == (claim.name, claim.readings):
             return win("twin", f"byte-identical to {twin_date.isoformat()} "
-                               f"({VALIDATED}, same {keyspace})")
+                               f"({VALIDATED}, same {claim.keyspace})")
     if candidates:
         # A coordinate whose twins disagreed with EACH OTHER would already have failed the
         # table's cross-year consistency rule, so reporting the first says all there is.
         twin_date, twin_name, twin_readings = candidates[0]
         return win("unverified",
-                   f"twin {twin_date.isoformat()} at the same {keyspace} serves "
+                   f"twin {twin_date.isoformat()} at the same {claim.keyspace} serves "
                    f"{twin_name!r} / {len(twin_readings)} readings, not this")
 
-    counts = attest.get(identity)
+    counts = attest.get(claim.identity)
     if counts:
         (modal, modal_n), = counts.most_common(1)
-        if modal == readings:
-            return win("attested", f"{identity}'s dominant reading set across "
+        if modal == claim.readings:
+            return win("attested", f"{claim.identity}'s dominant reading set across "
                                    f"{modal_n} {VALIDATED} days in range")
         return win("unverified",
-                   f"{identity} is attested {modal_n}x in range with a different set")
-    return win("unverified", f"no twin at {keyspace or 'any saint coordinate'} and no "
-                             f"validated attestation for {identity!r}")
+                   f"{claim.identity} is attested {modal_n}x in range with a different set")
+    return win("unverified",
+               f"no twin at {claim.keyspace or 'any saint coordinate'} and no validated "
+               f"attestation for {claim.identity!r}")
 
 
 def collect(min_year=MIN_YEAR, max_year=MAX_YEAR, probe_to=PROBE_TO):
@@ -185,13 +218,22 @@ def collect(min_year=MIN_YEAR, max_year=MAX_YEAR, probe_to=PROBE_TO):
     wins = collections.Counter(_winner(d) for d in _days(min_year, max_year))
     wins = {tier.__name__: wins[tier.__name__] for tier in engine._TIERS}
 
-    twins, attest = validated_index(min_year, max_year)
-    win_days = {name: [] for name in wins}
+    claims = []
     for d in _days(max_year + 1, probe_to):
         name = _winner(d)
         if wins[name]:
             continue        # it wins in range too; the rest of the suite reaches it there
-        win_days[name].append(_verify(d, name, twins, attest, probe_to))
+        claims.append(_claim(d, name, probe_to))
+
+    # Gathered before the index is built, so the index covers these keys and nothing else.
+    twins, attest = validated_index(
+        min_year, max_year,
+        {claim.coordinate for claim in claims if claim.coordinate},
+        {claim.identity for claim in claims if claim.identity})
+
+    win_days = {name: [] for name in wins}
+    for claim in claims:
+        win_days[claim.tier].append(_classify(claim, twins, attest))
 
     return Report(min_year, max_year, probe_to, wins, win_days)
 
