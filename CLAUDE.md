@@ -128,29 +128,32 @@ Working rules:
 - **A pin's `loser` must genuinely apply on that date**, or it asserts coverage rather
   than precedence; `test_every_pin_actually_contends` enforces it.
 - `_tier_generative_saint` and `_tier_fallback` **win on no date** in 2001–2027 — the
-  first is fully shadowed by `_tier_validated_table` and `_tier_cycle_saint` (though it
-  applies on 1,904 days), the second because every day in range is claimed earlier. Both
-  are reachable outside the range, which is env-overridable, so neither is dead code.
-  `tests/test_shadowed_tiers.py` is what exercises the two bodies: it finds the dates each
-  tier actually wins on out to 2130 and asserts, for every one, that the readings served
-  are attested by the validated table (a twin at the same zone-saint coordinate, or the
-  identity's dominant validated reading set) and that the fallback serves none at all.
-  The **shadowing itself is not pinned** — that is a fact about the current data, and one
-  more validated coordinate would change it; `dev/audit_shadowed_tiers.py` reports it:
+  first is shadowed by `_tier_validated_table` and `_tier_cycle_saint` (it applies on
+  1,904 days), the second because every day in range is claimed earlier. Neither is dead
+  code: the range is env-overridable and `_compute_lectionary` has no range guard.
+  `tests/test_shadowed_tiers.py` is what exercises the two bodies — it finds the days each
+  wins on past `MAX_YEAR` and asserts that `_tier_generative_saint`'s readings are attested
+  by the validated table (a twin at the same zone-saint coordinate, or the identity's
+  dominant validated reading set) and that `_tier_fallback` serves none at all. The
+  **shadowing itself is not pinned**: it is a fact about the current data, and one more
+  validated coordinate would change it.
+- **`_tier_generative_saint` is not leftover scaffolding, despite winning nothing.** Its
+  original job — filling in-range blanks — went to `_tier_cycle_saint`. What is left is
+  the complement of two deliberate conservatism rules: `build_table`'s
+  `_consistent(items, 2)` drops any coordinate seen in only one year, and `_CYCLE_SAINTS`
+  carries only the days each year-type's Second Volume page prints. Five days per century
+  fall in both holes, on two coordinates, both verified. Its low agreement with
+  `_tier_cycle_saint` measures the floating-saint days it is never allowed to serve, not
+  the days it does.
+- **Before widening `LECTIONARY_MAX_YEAR`, audit the new years:**
 
   ```bash
-  python dev/audit_shadowed_tiers.py          # applies/wins per tier, and every win day verified
-  python dev/audit_shadowed_tiers.py --list   # plus every shadowed disagreement
+  python dev/audit_shadowed_tiers.py --to 2035   # exit 0 iff every win day is attested
   ```
-- **`_tier_generative_saint` is not leftover scaffolding, despite winning nothing.** Its
-  original job — filling in-range blanks — did go to `_tier_cycle_saint`. What it covers
-  now is the complement of two deliberate conservatism rules: `build_table`'s
-  `_consistent(items, 2)` drops any coordinate seen in only one year, and `_CYCLE_SAINTS`
-  carries only the days each year-type's Second Volume page prints, and the pages
-  truncate. Five days per century fall in both holes; both of their coordinates verify.
-  Its 16%-agreement-with-`_tier_cycle_saint` figure describes the floating-saint days it
-  is never allowed to serve, not the days it does — see
-  [`docs/generative-saint-tier.md`](docs/generative-saint-tier.md).
+
+  Not open-ended today: `2152-02-01`, `-02-03` and `-02-12` are genuine unattested win
+  days (the PN zone runs out of saint coordinates and the laydown marches on anyway), so
+  `PROBE_TO` stops before them. Model those before reaching that far.
 
 ### The source is not automatically right
 
