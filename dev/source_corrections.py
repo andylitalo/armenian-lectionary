@@ -249,8 +249,9 @@ POSITION_LABEL_FIXES_BY_DATE = {
 _AMBIGUOUS_FAST_LABEL = "Fast day"
 
 # The ambiguous marker first_sunday_after_pentecost_label resolves, post apply_ground_truth
-# (which has already folded "after Pentecost" to "of Pentecost" by the time this runs).
-_AMBIGUOUS_SECOND_SUNDAY_LABEL = "Second Sunday of Pentecost"
+# (a no-op on this text: the reviewed name agrees with the source, "Second Sunday after
+# Pentecost" both before and after the fold).
+_AMBIGUOUS_SECOND_SUNDAY_LABEL = "Second Sunday after Pentecost"
 
 # anchor -> day-offset window (inclusive) where the source's bare "Fast day" stands for a
 # more specific, named fast. Pentecost+21 / Heesnak+21 is each fast's Sunday eve; Mon-Fri
@@ -295,7 +296,7 @@ def named_fast_label(date_iso):
 # ``POSITION_LABEL_FIXES``'s plain text substitution cannot express "the same source string
 # means something different depending on which week it falls in".
 def first_sunday_after_pentecost_label(date_iso):
-    """"First Sunday of Pentecost" on Pentecost+7 specifically, else ``None``.
+    """"First Sunday after Pentecost" on Pentecost+7 specifically, else ``None``.
 
     Delegates to ``engine._position_label`` for the reason ``named_fast_label`` does: the
     window and template already live in ``engine._POSITION_FAMILIES``.

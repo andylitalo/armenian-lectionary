@@ -30,7 +30,7 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-01-29	Fri	Pre-Lenten Fast	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-01-30	Sat	Pre-Lenten Fast	validated-table	1	sahak_i_the_parthian	St. Sahak I the Parthian, Patriarch of Armenia	Սրբոյն Իսահակայ Պարթեւի հայրապետին մերոյ
 2027-01-31	Sun	Pre-Lenten Fast	validated-table	1	third_sunday_after_nativity	Third Sunday after Nativity	Գ կիւրակէ զկնի Ս. Ծննդեան
-2027-02-01	Mon	Pre-Lenten Fast	validated-table	1	mark_the_bishop_pionius	Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen	Սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի
+2027-02-01	Mon	Pre-Lenten Fast	validated-table	1	mark_the_bishop_pionius	Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen	Սրբոցն Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն եւ սրբոց վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի
 2027-02-02	Tue	Pre-Lent	first-volume-cohort	1	ghevond	Sts. Ghevond the Priest and His Companions	Սրբոց Ղեւոնդեանց քահանայիցն
 2027-02-03	Wed	Pre-Lenten Fast	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-02-04	Thu	Pre-Lenten Fast	validated-table	1	vardan_the_general_and	St. Vartan the General and His Holy Companions - the 1036 Martyrs Who Died in the Great Battle	Սրբոց Վարդանանց զօրավարացն մերոց` հազար երեսուն եւ վեց վկայիցն, որք կատարեցան ի մեծի պատերազմին
@@ -78,7 +78,7 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-03-18	Thu	Great Lent	validated-table	1	thirty_ninth_day_of_great_lent	Thirty Ninth day of Great Lent	ԼԹ օր Մեծի պահոց
 2027-03-19	Fri	Great Lent	validated-table	1	fortieth_day_of_great_lent	Fortieth day of Great Lent	Խ օր Մեծի պահոց
 2027-03-20	Sat	Great Lent	validated-table	2	forty_first_day_of_great_lent — remembrance_of_the_raising	Forty First day of Great Lent — Remembrance of the Raising of Lazarus	ԽԱ օր Մեծի պահոց — Յիշատակ յարութեան Ղազարու
-2027-03-21	Sun	Holy Week	validated-table	1	palm_sunday	Palm Sunday	ԾԱՂԿԱԶԱՐԴ
+2027-03-21	Sun	Holy Week	validated-table	1	palm_sunday	Palm Sunday	Ծաղկազարդ
 2027-03-22	Mon	Holy Week	validated-table	1	great_monday	Great Monday	Աւագ երկուշաբթի
 2027-03-23	Tue	Holy Week	validated-table	2	great_tuesday — remembrance_of_the_ten	Great Tuesday — Remembrance of the Ten Virgins	Աւագ երեքշաբթի — Յիշատակ տասն կուսանացն
 2027-03-24	Wed	Holy Week	validated-table	1	great_wednesday	Great Wednesday	Աւագ չորեքշաբթի
@@ -141,42 +141,42 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-05-20	Thu	After Pentecost	validated-table	1	fifth_day_of_pentecost	Fifth day of Pentecost (Fast of the Prophet Elijah)	Ե օր Հոգեգալստեան (Եղիական պահոց)
 2027-05-21	Fri	After Pentecost	validated-table	1	sixth_day_of_pentecost	Sixth day of Pentecost (Fast of the Prophet Elijah)	Զ օր Հոգեգալստեան (Եղիական պահոց)
 2027-05-22	Sat	After Pentecost	validated-table	1	seventh_day_of_pentecost	Seventh day of Pentecost	Է օր Հոգեգալստեան
-2027-05-23	Sun	After Pentecost	validated-table	2	first_sunday_after_pentecost — remembrance_of_prophet_elijah	First Sunday of Pentecost — Remembrance of the Prophet Elijah	Ա կիւրակէ զկնի Հոգեգալստեան — Յիշատակ Եղիայի մարգարէին
+2027-05-23	Sun	After Pentecost	validated-table	2	first_sunday_after_pentecost — remembrance_of_prophet_elijah	First Sunday after Pentecost — Remembrance of the Prophet Elijah	Ա կիւրակէ զկնի Հոգեգալստեան — Յիշատակ Եղիայի մարգարէին
 2027-05-24	Mon	After Pentecost	validated-table	1	hripsime_and_her_companions	Sts. Hripsime and Her Companions	Սրբոց կուսանացն Հռիփսիմեանց
 2027-05-25	Tue	After Pentecost	validated-table	1	gayane_and_her_companions	Sts. Gayane and Her Companions	Սրբոց կուսանացն Գայիանեանց
 2027-05-26	Wed	After Pentecost	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-05-27	Thu	After Pentecost	validated-table	1	john_the_forerunner_baptist	Sts. John the Forerunner (Baptist) and Bishop Atanagine	Տօն սրբոյն Յովհաննու Կարապետին եւ Աթանագինեայ եպիսկոպոսին
 2027-05-28	Fri	After Pentecost	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-05-29	Sat	After Pentecost	validated-table	1	gregory_the_illuminator_coming_out_of_pit	St. Gregory the Illuminator's coming out of the Pit	Սրբոյն Գրիգորի Լուսաւորչին մերոյ ելն ի վիրապէն
-2027-05-30	Sun	After Pentecost	validated-table	2	second_sunday_after_pentecost — feast_of_holy_etchmiadzin	Second Sunday of Pentecost — Feast of Holy Etchmiadzin	Բ կիւրակէ զկնի Հոգեգալստեան — Տօն Կաթուղիկէ Սուրբ Էջմիածնի
+2027-05-30	Sun	After Pentecost	validated-table	2	second_sunday_after_pentecost — feast_of_holy_etchmiadzin	Second Sunday after Pentecost — Feast of Holy Etchmiadzin	Բ կիւրակէ զկնի Հոգեգալստեան — Տօն Կաթուղիկէ Սուրբ Էջմիածնի
 2027-05-31	Mon	After Pentecost	validated-table	1	children_of_bethlehem_sts	The Children of Bethlehem and Sts. Acacius the Martyr, Mocius the Priest and Codratus the Soldier	Սրբոց մանկանցն Բեթղեհէմի եւ Ակակիոսի վկային, Մովկիմայ քահանային եւ Կոտրատիոսի զինաւորին
 2027-06-01	Tue	After Pentecost	validated-table	1	virgins_nune_and_mane	Sts. Virgins Nune and Mane	Սրբոց կուսանացն Նունեայ եւ Մանեայ
 2027-06-02	Wed	After Pentecost	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-06-03	Thu	After Pentecost	validated-table	1	princes_sahak_and_joseph	Sts. Princes Sahak and Joseph and the Martyrs Sergius and Bacchus	Սրբոց իշխանացն Սահակայ եւ Յովսեփայ եւ սրբոց վկայիցն Սարգսի եւ Բագոսի
 2027-06-04	Fri	After Pentecost	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-06-05	Sat	After Pentecost	validated-table	1	nerses_the_great_patriarch	Sts. Nerses the Great Patriarch and Bishop Khad	Սրբոյն Ներսիսի Մեծի հայրապետին մերոյ եւ Խադայ եպիսկոպոսին
-2027-06-06	Sun	After Pentecost	validated-table	2	third_sunday_after_pentecost — eve_of_fast_of_illuminator	Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator	Գ կիւրակէ զկնի Հոգեգալստեան — Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց
+2027-06-06	Sun	After Pentecost	validated-table	2	third_sunday_after_pentecost — eve_of_fast_of_illuminator	Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator	Գ կիւրակէ զկնի Հոգեգալստեան — Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց
 2027-06-07	Mon	After Pentecost	validated-table	2	illuminator_fast_day_1 — epiphanius_bishop_of_cyprus	First day of the Fast of St. Gregory the Illuminator — Sts. Epiphanius Bishop of Cyprus, Babylas the Patriarch, and His Three Disciples	Ա օր Լուսաւորչի պահոց — Սրբոցն Եպիփանու Կիպրացւոյն, Բաբելայ հայրապետին եւ երից աշակերտաց նորին
 2027-06-08	Tue	After Pentecost	validated-table	2	illuminator_fast_day_2 — constantine_the_emperor_and	Second day of the Fast of St. Gregory the Illuminator — Sts. Constantine the Emperor and His Mother Helen	Բ օր Լուսաւորչի պահոց — Սրբոցն Կոստանդիանոսի թագաւորին եւ մօրն նորա Հեղինեայ
 2027-06-09	Wed	After Pentecost	validated-table	1	illuminator_fast_day_3	Third day of the Fast of St. Gregory the Illuminator	Գ օր Լուսաւորչի պահոց
 2027-06-10	Thu	After Pentecost	validated-table	2	illuminator_fast_day_4 — theodotus_of_galatia_and	Fourth day of the Fast of St. Gregory the Illuminator — Sts. Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra	Դ օր Լուսաւորչի պահոց — Սրբոցն Թէոդիտոնի Գաղատացւոյն եւ Թալիլեայ բժշկին եւ եօթն կուսանացն, որք յԱնկիւրիա կատարեցան
 2027-06-11	Fri	After Pentecost	validated-table	1	illuminator_fast_day_5	Fifth day of the Fast of St. Gregory the Illuminator	Ե օր Լուսաւորչի պահոց
 2027-06-12	Sat	After Pentecost	validated-table	1	feast_of_discovery_of	Feast of the Discovery of St. Gregory's Relics	Գիւտ նշխարաց սրբոյն Գրիգորի Լուսաւորչին մերոյ
-2027-06-13	Sun	After Pentecost	validated-table	1	fourth_sunday_after_pentecost	Fourth Sunday of Pentecost	Դ կիւրակէ զկնի Հոգեգալստեան
+2027-06-13	Sun	After Pentecost	validated-table	1	fourth_sunday_after_pentecost	Fourth Sunday after Pentecost	Դ կիւրակէ զկնի Հոգեգալստեան
 2027-06-14	Mon	After Pentecost	validated-table	1	martyrs_antoninus_theophilus_anicetus	Holy Martyrs Antoninus, Theophilus, Anicetus and Potinus	Սրբոց վկայիցն Անտոնինոսի, Թէոփիլոսի, Անիքտոսի եւ Փոտինոսի
 2027-06-15	Tue	After Pentecost	validated-table	1	prophet_daniel_and_his	Holy Prophet Daniel and His Companions Shadrach, Meshach and Abednego	Սրբոցն Դանիէլի մարգարէին եւ երից մանկանցն Սեդրակայ, Միսաքայ եւ Աբեդնագովի
 2027-06-16	Wed	After Pentecost	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-06-17	Thu	After Pentecost	validated-table	1	translators_sts_sahak_and	Holy Translators Sts. Sahak and Mesrop	Սրբոց թարգմանչացն մերոց Սահակայ եւ Մեսրովբայ
 2027-06-18	Fri	After Pentecost	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-06-19	Sat	After Pentecost	validated-table	1	tiridates_trdat_the_king	Sts. Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht	Սրբոցն Տրդատայ թագաւորին մերոյ եւ Աշխենի տիկնոջն եւ Խոսրովիդխտոյն
-2027-06-20	Sun	After Pentecost	validated-table	2	fifth_sunday_after_pentecost — feast_of_the_discovery	Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box	Ե կիւրակէ զկնի Հոգեգալստեան — Գիւտ տփոյ սրբուհւոյ Աստուածածնի
+2027-06-20	Sun	After Pentecost	validated-table	2	fifth_sunday_after_pentecost — feast_of_the_discovery	Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box	Ե կիւրակէ զկնի Հոգեգալստեան — Գիւտ տփոյ սրբուհւոյ Աստուածածնի
 2027-06-21	Mon	After Pentecost	validated-table	1	callistratus_and_his_companions	Sts. Callistratus and His Companions, and Lukianos the Priest	Սրբոցն Կալիստրատոսի եւ քառասուն եւ ինն վկայիցն եւ Ղունկիանոսի քահանային
 2027-06-22	Tue	After Pentecost	validated-table	1	zechariah_the_prophet	St. Zechariah the Prophet	Սրբոյն Զաքարիայի մարգարէին
 2027-06-23	Wed	After Pentecost	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-06-24	Thu	After Pentecost	validated-table	1	elisha_the_prophet	St. Elisha the Prophet	Սրբոյն Եղիսէի մարգարէին
 2027-06-25	Fri	After Pentecost	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-06-26	Sat	After Pentecost	validated-table	1	twelve_holy_apostles_of	Twelve Holy Apostles of Christ and St. Paul, the Thirteenth Apostle	Սրբոց երկոտասան առաքելոցն Քրիստոսի եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն
-2027-06-27	Sun	After Pentecost	validated-table	2	sixth_sunday_after_pentecost — eve_of_fast_of_transfiguration	Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration	Զ կիւրակէ զկնի Հոգեգալստեան — Բարեկենդան Վարդավառի պահոց
+2027-06-27	Sun	After Pentecost	validated-table	2	sixth_sunday_after_pentecost — eve_of_fast_of_transfiguration	Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration	Զ կիւրակէ զկնի Հոգեգալստեան — Բարեկենդան Վարդավառի պահոց
 2027-06-28	Mon	After Pentecost	validated-table	1	transfiguration_fast_day_1	First day of the Fast of the Transfiguration	Ա օր Վարդավառի պահոց
 2027-06-29	Tue	After Pentecost	validated-table	1	transfiguration_fast_day_2	Second day of the Fast of the Transfiguration	Բ օր Վարդավառի պահոց
 2027-06-30	Wed	After Pentecost	validated-table	1	transfiguration_fast_day_3	Third day of the Fast of the Transfiguration	Գ օր Վարդավառի պահոց
@@ -184,41 +184,41 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-07-02	Fri	After Pentecost	validated-table	1	transfiguration_fast_day_5	Fifth day of the Fast of the Transfiguration	Ե օր Վարդավառի պահոց
 2027-07-03	Sat	After Pentecost	validated-table	1	remembrance_of_the_old	Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church	Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ; Նաւակատիք
 2027-07-04	Sun	After Transfiguration	validated-table	1	transfiguration_of_our_lord	TRANSFIGURATION OF OUR LORD (Vartavar)	ՊԱՅԾԱՌԱԿԵՐՊՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ (Վարդավառ)
-2027-07-05	Mon	After Transfiguration	validated-table	2	second_day_of_transfiguration — remembrance_of_the_dead	Second day of Transfiguration — Remembrance of the Dead	Բ օր Վարդավառի — Յիշատակ մեռելոց
-2027-07-06	Tue	After Transfiguration	validated-table	1	third_day_of_transfiguration	Third day of Transfiguration	Գ օր Վարդավառի
+2027-07-05	Mon	After Transfiguration	validated-table	2	second_day_of_transfiguration — remembrance_of_the_dead	Second day of the Transfiguration — Remembrance of the Dead	Բ օր Վարդավառի — Յիշատակ մեռելոց
+2027-07-06	Tue	After Transfiguration	validated-table	1	third_day_of_transfiguration	Third day of the Transfiguration	Գ օր Վարդավառի
 2027-07-07	Wed	After Transfiguration	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-07-08	Thu	After Transfiguration	validated-table	1	isaiah_the_prophet	St. Isaiah the Prophet	Սրբոյն Եսայեայ մարգարէին
 2027-07-09	Fri	After Transfiguration	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-07-10	Sat	After Transfiguration	validated-table	1	thaddeus_apostle_of_armenia	Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin	Սրբոցն Թադէոսի առաքելոյն մերոյ եւ Սանդխտոյ կուսին
-2027-07-11	Sun	After Transfiguration	validated-table	1	second_sunday_after_transfiguration	Second Sunday of Transfiguration	Բ կիւրակէ զկնի Վարդավառի
+2027-07-11	Sun	After Transfiguration	validated-table	1	second_sunday_of_the_transfiguration	Second Sunday of the Transfiguration	Բ կիւրակէ զկնի Վարդավառի
 2027-07-12	Mon	After Transfiguration	validated-table	1	cyprian_the_bishop_the	Sts. Cyprian the Bishop, the Forty-Five Martyrs and the Virgins Justina, Euphemia and Christina	Սրբոցն Կիպրիանոսի եպիսկոպոսին եւ քառասուն եւ հինգ վկայիցն եւ սրբոց կուսանացն Յուստիանեայ, Եւփիմեայ եւ Քրիստինեայ
 2027-07-13	Tue	After Transfiguration	validated-table	1	athenogenes_the_bishop_and	Sts. Athenogenes the Bishop and the Ten Disciples and Five Martyrs	Սրբոցն Աթանագինեայ եպիսկոպոսին եւ տասն աշակերտացն եւ հինգ վկայիցն
 2027-07-14	Wed	After Transfiguration	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-07-15	Thu	After Transfiguration	validated-table	1	forefathers_adam_abel_seth	Holy Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and Other Holy Patriarchs	Սրբոց նախահարցն Ադամայ, Աբելի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակովբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուելի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գեդէոնի եւ այլոց սրբոց նախահարցն
 2027-07-16	Fri	After Transfiguration	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-07-17	Sat	After Transfiguration	validated-table	1	gregory_the_illuminator_sons_and_grandsons	St. Gregory the Illuminator's Sons and Grandsons: Sts. Aristakes, Vrtanes, Housik, Grigoris and Daniel	Սրբոց որդւոց եւ թոռանց սրբոյն Գրիգորի Լուսաւորչին մերոյ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի
-2027-07-18	Sun	After Transfiguration	validated-table	1	third_sunday_after_transfiguration	Third Sunday of Transfiguration	Գ կիւրակէ զկնի Վարդավառի
+2027-07-18	Sun	After Transfiguration	validated-table	1	third_sunday_of_the_transfiguration	Third Sunday of the Transfiguration	Գ կիւրակէ զկնի Վարդավառի
 2027-07-19	Mon	After Transfiguration	validated-table	1	maccabees_eleazar_the_priest	Holy Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons	Սրբոց Մակաբայեցւոցն` Եղիազարու քահանային եւ Շամունեայ եւ եօթն որդւոց նորին
 2027-07-20	Tue	After Transfiguration	validated-table	1	twelve_prophets_hosea_amos	Holy Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi	Սրբոց երկոտասան մարգարէիցն Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգէայ, Զաքարեայ եւ Մաղաքեայ
 2027-07-21	Wed	After Transfiguration	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-07-22	Thu	After Transfiguration	validated-table	1	sophia_and_her_three	Sts. Sophia and Her Three Daughters Pistis, Elpis, and Agape	Սրբոցն Սոփիայ եւ երից դստերացն Պիստոսի, Էլպիսի եւ Ագապեայ
 2027-07-23	Fri	After Transfiguration	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-07-24	Sat	After Transfiguration	second-volume-cycle	1	hermit_st_anton	The Hermit St. Anton	Սրբոյն Անտոնի ճգնաւորին
-2027-07-25	Sun	After Transfiguration	validated-table	1	fourth_sunday_after_transfiguration	Fourth Sunday of Transfiguration	Դ կիւրակէ զկնի Վարդավառի
+2027-07-25	Sun	After Transfiguration	validated-table	1	fourth_sunday_of_the_transfiguration	Fourth Sunday of the Transfiguration	Դ կիւրակէ զկնի Վարդավառի
 2027-07-26	Mon	After Transfiguration	second-volume-cycle	1	theodosius_and_the_children	Sts. Theodosius and the Children of Ephesus	Սրբոցն Թէոդոսի թագաւորին եւ մանկանցն Եփեսոսի
 2027-07-27	Tue	After Transfiguration	second-volume-cycle	1	cyricus_and_his_mother	Sts. Cyricus and His Mother Julitta	Սրբոցն Կիրակոսի եւ մօրն Յուղիտայի
 2027-07-28	Wed	After Transfiguration	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-07-29	Thu	After Transfiguration	second-volume-cycle	2	vahan_of_goghtn — gordius_polyeuctus_and_grigoris	St. Vahan of Goghtn — Sts. Gordius, Polyeuctus and Grigoris	Սրբոյն Վահանայ Գողթնացւոյն — Սրբոց վկայիցն Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի
 2027-07-30	Fri	After Transfiguration	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-07-31	Sat	After Transfiguration	second-volume-cycle	2	fathers_sts_athanasius_and — gregory_the_theologian	Holy Fathers Sts. Athanasius and Cyril of Alexandria — St. Gregory the Theologian	Սրբոց հայրապետացն Աթանասի եւ Կիւրղի — Սրբոյն Գրիգորի Աստուածաբանին
-2027-08-01	Sun	After Transfiguration	validated-table	1	fifth_sunday_after_transfiguration	Fifth Sunday of Transfiguration	Ե կիւրակէ զկնի Վարդավառի
+2027-08-01	Sun	After Transfiguration	validated-table	1	fifth_sunday_of_the_transfiguration	Fifth Sunday of the Transfiguration	Ե կիւրակէ զկնի Վարդավառի
 2027-08-02	Mon	After Transfiguration	second-volume-cycle	1	eugenia_the_virgin_her	St. Eugenia the Virgin, Her Father Philip and Her Mother Claudia, Her Brothers Sergius and Avitus, and the Two Eunuchs	Սրբոցն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն
 2027-08-03	Tue	After Transfiguration	validated-table	1	hermit_sts_tryphon_barsauma	The Hermit Sts. Tryphon, Barsauma and Onuphrius	Սրբոցն Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն
 2027-08-04	Wed	After Transfiguration	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-08-05	Thu	After Transfiguration	validated-table	1	eugenius_macarius_valerius_candidus	Sts. Eugenius, Macarius, Valerius, Candidus and Aquila	Սրբոց վկայիցն Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ
 2027-08-06	Fri	After Transfiguration	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-08-07	Sat	After Transfiguration	validated-table	1	commemoration_of_200_fathers	Commemoration of the 200 Fathers of the Holy Council of Ephesus (AD 431)	Եփեսոսի ս. ժողովոյն երկու հարիւր հայրապետացն (431 թ.)
-2027-08-08	Sun	Eve of the Fast of the Assumption	validated-table	2	sixth_sunday_after_transfiguration — eve_of_fast_of_assumption	Sixth Sunday of Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God	Զ կիւրակէ զկնի Վարդավառի — Բարեկենդան Սուրբ Աստուածածնի պահոց
+2027-08-08	Sun	Eve of the Fast of the Assumption	validated-table	2	sixth_sunday_of_the_transfiguration — eve_of_fast_of_assumption	Sixth Sunday of the Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God	Զ կիւրակէ զկնի Վարդավառի — Բարեկենդան Սուրբ Աստուածածնի պահոց
 2027-08-09	Mon	Assumption Cycle	validated-table	1	assumption_fast_day_1	First day of the Fast of the Assumption	Ա օր Աստուածածնի պահոց
 2027-08-10	Tue	Assumption Cycle	validated-table	1	assumption_fast_day_2	Second day of the Fast of the Assumption	Բ օր Աստուածածնի պահոց
 2027-08-11	Wed	Assumption Cycle	validated-table	1	assumption_fast_day_3	Third day of the Fast of the Assumption	Գ օր Աստուածածնի պահոց
@@ -239,14 +239,14 @@ date	weekday	season	source	observances	observance_ids	en	hy
 2027-08-26	Thu	After the Assumption	validated-table	1	jeremiah_the_prophet	St. Jeremiah the Prophet	Սրբոյն Երեմիայի մարգարէին
 2027-08-27	Fri	After the Assumption	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-08-28	Sat	After the Assumption	validated-table	1	apostles_thomas_james_and	Holy Apostles Thomas, James and Simon	Սրբոց առաքելոցն Թովմայի, Յակովբայ եւ Շմաւոնի
-2027-08-29	Sun	After the Assumption	validated-table	2	third_sunday_after_assumption — discovery_of_the_belt_of_the_holy_mother_of_god	Third Sunday of the Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God	Գ կիւրակէ զկնի Վերափոխման — Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի
+2027-08-29	Sun	After the Assumption	validated-table	2	third_sunday_of_the_assumption — discovery_of_the_belt_of_the_holy_mother_of_god	Third Sunday of the Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God	Գ կիւրակէ զկնի Վերափոխման — Տօն Գիւտի գօտւոյ սրբուհւոյ Աստուածածնի
 2027-08-30	Mon	After the Assumption	validated-table	1	stephen_of_oulnia_and	Sts. Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus	Սրբոյն Ստեփաննոսի Ուլնեցւոյն եւ սրբոց վկայիցն Գոհարինեայ, Ծամիդեսի, Տուքիկոսի եւ Ռատիկոսի
 2027-08-31	Tue	After the Assumption	validated-table	1	prophets_ezekiel_ezra_and	Holy Prophets Ezekiel, Ezra and Zachariah the Father of John the Baptist	Սրբոց մարգարէիցն Եզեկիէլի, Եզրի եւ Զաքարիայի` հօրն Յովհաննու Մկրտչի
 2027-09-01	Wed	After the Assumption	validated-table	1	wednesday_fast	Wednesday Fast	Չորեքշաբթիի պահք
 2027-09-02	Thu	After the Assumption	validated-table	1	john_the_forerunner_baptist_and_job_the_righteous	Sts. John the Forerunner (Baptist) and Job the Righteous	Սրբոցն Յովհաննու Կարապետին եւ Յոբայ արդարոյն
 2027-09-03	Fri	After the Assumption	validated-table	1	friday_fast	Friday Fast	Ուրբաթի պահք
 2027-09-04	Sat	After the Assumption	validated-table	1	commemoration_of_318_fathers	Commemoration of the 318 Fathers of the Holy Council of Nicea (AD 325)	Նիկիոյ սուրբ ժողովոյն երեք հարիւր տասն եւ ութ հայրապետացն (325 թ.)
-2027-09-05	Sun	Eve of the Fast of the Holy Cross	validated-table	2	fourth_sunday_after_assumption — eve_of_fast_of_exaltation	Fourth Sunday of the Assumption — Eve of the Fast of the Exaltation of the Holy Cross	Դ կիւրակէ զկնի Վերափոխման — Բարեկենդան Ս. Խաչի պահոց
+2027-09-05	Sun	Eve of the Fast of the Holy Cross	validated-table	2	fourth_sunday_of_the_assumption — eve_of_fast_of_exaltation	Fourth Sunday of the Assumption — Eve of the Fast of the Exaltation of the Holy Cross	Դ կիւրակէ զկնի Վերափոխման — Բարեկենդան Ս. Խաչի պահոց
 2027-09-06	Mon	Exaltation of the Cross Cycle	validated-table	1	holy_cross_fast_day_1	First day of the Fast of the Holy Cross	Ա օր Ս. Խաչի պահոց
 2027-09-07	Tue	Exaltation of the Cross Cycle	validated-table	1	holy_cross_fast_day_2	Second day of the Fast of the Holy Cross	Բ օր Ս. Խաչի պահոց
 2027-09-08	Wed	Feast	validated-composite	2	holy_cross_fast_day_3 — feast_of_the_birth	Third day of the Fast of the Holy Cross — Feast of the Birth of Holy Virgin Mary from Anna	Գ օր Ս. Խաչի պահոց — Տօն Ծննդեան սրբուհւոյ Կուսին Մարիամու յԱննայէ

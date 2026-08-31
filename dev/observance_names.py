@@ -50,6 +50,7 @@ def _served_season_name(catalog_id, fallback):
 # Season names following "Nth day of ...". Longest-first so specific ones win.
 _SEASONS = sorted([
     "Great Lent", "Eastertide", "Advent", "Pentecost", "Transfiguration",
+    "the Transfiguration",
     "Assumption", "Nativity", "Easter",
     "the Fast of the Catechumens", "the Fast of Catechumens",
     "the Fast of the Holy Cross", "the Fast of the Transfiguration",
@@ -66,7 +67,8 @@ _ANCHORS = sorted([
     "Holy Cross of Varag", "the Exaltation of the Holy Cross", "the Holy Cross",
     "Holy Cross", "Holy Etchmiadzin", "Holy Nativity", "the Assumption",
     "the Great Barekendan", "Great Barekendan", "Advent", "Pentecost", "Great Lent",
-    "Nativity", "Transfiguration", "Assumption", "Eastertide", "Exaltation", "Holy",
+    "Nativity", "Transfiguration", "the Transfiguration", "Assumption", "Eastertide",
+    "Exaltation", "Holy",
 ], key=len, reverse=True)
 
 def _served_eve_name(catalog_id, fallback):

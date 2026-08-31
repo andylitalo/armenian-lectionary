@@ -9,8 +9,8 @@ renamed observance -- had no coverage at all, and shipped broken.
 
 What broke, and why the serving tests could not see it. A generated label is registered by
 three routes: ``approved_en``, the immutable ``source_en``, and the id the engine declares
-for it. For 52 of the 216 labels the engine's literal equals NEITHER column ("Second Sunday
-of Pentecost" against a source_en of "Second Sunday after Pentecost"), so both text routes
+for it. For 52 of the 216 labels the engine's literal equals NEITHER column ("Eve of the
+Fast of Nativity" against a source_en of "Eve of Fast of Nativity"), so both text routes
 die on a rename and only the declared id is left. The build was not asking for it:
 
   * ``declared_label_ids`` inferred through the previously-SHIPPED readings index instead
@@ -19,9 +19,12 @@ die on a rename and only the declared id is left. The build was not asking for i
 
 Two failures followed, and this file pins one test to each:
 
-  * a label with no index entry ("Second Sunday of Pentecost" is one of eight) had no route
-    left at all -- the build refused, and ``--mint`` then reported ids it had not written,
-    so re-running repeated the no-op forever;
+  * a label with no index entry had no route left at all -- the build refused, and
+    ``--mint`` then reported ids it had not written, so re-running repeated the no-op
+    forever. Index coverage has since grown to cover every pinned label with a unique id
+    (see CLAUDE.md's "Index coverage" note), so ``UNINDEXED`` below no longer names a
+    label the index actually misses -- the fixture only needs to be pinned with a single
+    owning row, which this test does not depend on index coverage to exercise;
   * a label WITH an index entry ("Fifth Sunday of the Holy Cross") looked fine: the build
     succeeded, because registration was reading the previous build's index. But the index
     it wrote had silently dropped that label, so the NEXT rebuild -- reading what this one
@@ -46,9 +49,12 @@ from dev import build_observance_catalog as build                          # noq
 
 # Two labels that exercise the two different failure modes. Both are "pinned": the engine
 # literal differs from every source_en of their id, so a rename of approved_en leaves only
-# the declared route. They differ in whether the readings index covers them, which is
-# exactly what made one fail loudly and the other fail silently.
-UNINDEXED = ("Second Sunday after Pentecost", "Second Sunday of Pentecost")
+# the declared route. UNINDEXED must additionally be the SOLE row carrying its id -- the
+# Advent eve, the one label still actually missing from the readings/coordinate index,
+# fails that: its two raw spellings ("Eve of Fast of Advent" / "Eve of the Fast of Advent")
+# share one id across two rows, so stripping the id from only one leaves it registered via
+# its twin and the test below finds nothing to fail on.
+UNINDEXED = ("Eve of Fast of Nativity", "Eve of the Fast of Nativity")
 INDEXED = ("Fifth Sunday after the Holy Cross", "Fifth Sunday of the Holy Cross")
 
 

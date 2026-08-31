@@ -1215,9 +1215,9 @@
     ]
    },
    "4:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -1524,7 +1524,7 @@
     ]
    },
    "6:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -1881,7 +1881,7 @@
     ]
    },
    "1:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -2126,7 +2126,7 @@
     ]
    },
    "5:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -2170,7 +2170,7 @@
     ]
    },
    "0:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -2499,7 +2499,7 @@
     ]
    },
    "2:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -2669,9 +2669,9 @@
     ]
    },
    "6:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -2752,7 +2752,7 @@
     ]
    },
    "6:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -2884,7 +2884,7 @@
     ]
    },
    "5:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -2948,9 +2948,9 @@
     ]
    },
    "2:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -3261,7 +3261,7 @@
     ]
    },
    "6:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -3494,7 +3494,7 @@
     ]
    },
    "4:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -3603,7 +3603,7 @@
     ]
    },
    "2:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -3630,9 +3630,9 @@
     ]
    },
    "5:112": {
-    "feast": "Third Sunday of Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
+    "feast": "Third Sunday of the Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_transfiguration",
+     "third_sunday_of_the_transfiguration",
      "eve_of_fast_of_assumption"
     ],
     "readings": [
@@ -3828,7 +3828,7 @@
     ]
    },
    "2:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -3882,7 +3882,7 @@
     ]
    },
    "3:56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -4446,7 +4446,7 @@
     ]
    },
    "0:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -4697,7 +4697,7 @@
     ]
    },
    "3:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -4773,7 +4773,7 @@
     ]
    },
    "4:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -4971,7 +4971,7 @@
     ]
    },
    "0:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -4995,7 +4995,7 @@
     ]
    },
    "1:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -5406,7 +5406,7 @@
     ]
    },
    "0:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -5635,7 +5635,7 @@
     ]
    },
    "0:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -5999,7 +5999,7 @@
     ]
    },
    "5:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -6122,9 +6122,9 @@
     ]
    },
    "3:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -6555,9 +6555,9 @@
     ]
    },
    "5:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -6704,7 +6704,7 @@
     ]
    },
    "1:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -6847,7 +6847,7 @@
     ]
    },
    "2:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -7078,7 +7078,7 @@
     ]
    },
    "2:56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -7149,7 +7149,7 @@
     ]
    },
    "0:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -7298,7 +7298,7 @@
     ]
    },
    "3:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -7361,7 +7361,7 @@
     ]
    },
    "6:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -7457,7 +7457,7 @@
     ]
    },
    "1:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -7904,7 +7904,7 @@
     ]
    },
    "4:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -7939,7 +7939,7 @@
     ]
    },
    "4:56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -7980,7 +7980,7 @@
     ]
    },
    "3:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -7992,7 +7992,7 @@
     ]
    },
    "5:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -8264,7 +8264,7 @@
     ]
    },
    "5:56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -8277,7 +8277,7 @@
     ]
    },
    "0:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -8322,9 +8322,9 @@
     ]
    },
    "1:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -8820,7 +8820,7 @@
     ]
    },
    "0:56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -8878,7 +8878,7 @@
     ]
    },
    "3:-62": {
-    "feast": "Sts. Atom and His Soldiers — Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Atom and His Soldiers — Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "atom",
      "mark_the_bishop_pionius"
@@ -9368,7 +9368,7 @@
     ]
    },
    "6:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -9788,9 +9788,9 @@
     ]
    },
    "4:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -9956,7 +9956,7 @@
     ]
    },
    "6:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -10284,7 +10284,7 @@
     ]
    },
    "1:56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -10379,7 +10379,7 @@
     ]
    },
    "5:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -10473,7 +10473,7 @@
     ]
    },
    "6:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -10617,7 +10617,7 @@
     ]
    },
    "3:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -10929,7 +10929,7 @@
     ]
    },
    "3:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -11021,7 +11021,7 @@
     ]
    },
    "2:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -11168,7 +11168,7 @@
     ]
    },
    "3:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -11208,7 +11208,7 @@
     ]
    },
    "4:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -11437,7 +11437,7 @@
     ]
    },
    "1:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -11590,7 +11590,7 @@
     ]
    },
    "1:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -12184,7 +12184,7 @@
     ]
    },
    "6:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -12493,7 +12493,7 @@
     ]
    },
    "3:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -12972,7 +12972,7 @@
     ]
    },
    "6:56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -13037,9 +13037,9 @@
     ]
    },
    "6:112": {
-    "feast": "Third Sunday of Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
+    "feast": "Third Sunday of the Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_transfiguration",
+     "third_sunday_of_the_transfiguration",
      "eve_of_fast_of_assumption"
     ],
     "readings": [
@@ -13094,7 +13094,7 @@
     ]
    },
    "4:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -13161,9 +13161,9 @@
     ]
    },
    "3:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -13283,7 +13283,7 @@
     ]
    },
    "2:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -13444,7 +13444,7 @@
     ]
    },
    "2:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -13596,7 +13596,7 @@
     ]
    },
    "5:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -13690,7 +13690,7 @@
     ]
    },
    "1:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -14087,9 +14087,9 @@
     ]
    },
    "2:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -14159,7 +14159,7 @@
     ]
    },
    "1:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -14246,7 +14246,7 @@
     ]
    },
    "5:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -14395,7 +14395,7 @@
     ]
    },
    "2:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -14861,7 +14861,7 @@
     ]
    },
    "5:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -14935,9 +14935,9 @@
     ]
    },
    "0:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -15437,7 +15437,7 @@
     ]
    },
    "4:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -15949,7 +15949,7 @@
     ]
    },
    "4:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -16633,7 +16633,7 @@
     ]
    },
    "0:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -16861,7 +16861,7 @@
     ]
    },
    "4:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -16981,9 +16981,9 @@
     ]
    },
    "0:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -17126,9 +17126,9 @@
     ]
    },
    "1:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -18014,7 +18014,7 @@
     ]
    },
    "70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -18220,7 +18220,7 @@
     ]
    },
    "63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -18343,7 +18343,7 @@
     ]
    },
    "91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -18355,7 +18355,7 @@
     ]
    },
    "84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -18561,7 +18561,7 @@
     ]
    },
    "99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -18718,7 +18718,7 @@
     ]
    },
    "-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -18895,7 +18895,7 @@
     ]
    },
    "77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -19028,7 +19028,7 @@
     ]
    },
    "56": {
-    "feast": "First Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
      "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
@@ -19209,7 +19209,7 @@
     ]
    },
    "100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -28589,9 +28589,9 @@
   },
   "TrSunL": {
    "21:2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28600,9 +28600,9 @@
     ]
    },
    "35:3": {
-    "feast": "Fourth Sunday of Transfiguration",
+    "feast": "Fourth Sunday of the Transfiguration",
     "observance_ids": [
-     "fourth_sunday_after_transfiguration"
+     "fourth_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 58.13-59.7",
@@ -28611,9 +28611,9 @@
     ]
    },
    "14:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28622,9 +28622,9 @@
     ]
    },
    "28:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28633,9 +28633,9 @@
     ]
    },
    "21:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28644,9 +28644,9 @@
     ]
    },
    "35:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28655,9 +28655,9 @@
     ]
    },
    "28:3": {
-    "feast": "Fourth Sunday of Transfiguration",
+    "feast": "Fourth Sunday of the Transfiguration",
     "observance_ids": [
-     "fourth_sunday_after_transfiguration"
+     "fourth_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 58.13-59.7",
@@ -28666,9 +28666,9 @@
     ]
    },
    "28:2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28677,9 +28677,9 @@
     ]
    },
    "35:4": {
-    "feast": "Fifth Sunday of Transfiguration",
+    "feast": "Fifth Sunday of the Transfiguration",
     "observance_ids": [
-     "fifth_sunday_after_transfiguration"
+     "fifth_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 62.1-11",
@@ -28688,9 +28688,9 @@
     ]
    },
    "35:2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28703,7 +28703,7 @@
    "28:3": {
     "feast": "Fourth Sunday of the Assumption",
     "observance_ids": [
-     "fourth_sunday_after_assumption"
+     "fourth_sunday_of_the_assumption"
     ],
     "readings": [
      "Isaiah 10.12-19",
@@ -28714,7 +28714,7 @@
    "21:2": {
     "feast": "Third Sunday of the Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [
@@ -28753,7 +28753,7 @@
    "28:2": {
     "feast": "Third Sunday of the Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [
@@ -28965,9 +28965,9 @@
   },
   "TrSun": {
    "2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28976,9 +28976,9 @@
     ]
    },
    "1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28991,7 +28991,7 @@
    "3": {
     "feast": "Fourth Sunday of the Assumption",
     "observance_ids": [
-     "fourth_sunday_after_assumption"
+     "fourth_sunday_of_the_assumption"
     ],
     "readings": [
      "Isaiah 10.12-19",
@@ -29002,7 +29002,7 @@
    "2": {
     "feast": "Third Sunday of the Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [
@@ -30394,7 +30394,7 @@
     ]
    },
    "second_day_of:07-13": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30407,7 +30407,7 @@
     ]
    },
    "second_day_of:07-28": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30558,7 +30558,7 @@
     ]
    },
    "third_day_of:07-21": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -30582,7 +30582,7 @@
     ]
    },
    "second_day_of:07-04": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30727,7 +30727,7 @@
     ]
    },
    "third_day_of:07-05": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -30798,7 +30798,7 @@
     ]
    },
    "second_day_of:07-20": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30880,7 +30880,7 @@
     ]
    },
    "third_day_of:07-29": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31056,7 +31056,7 @@
     ]
    },
    "second_day_of:07-16": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31104,7 +31104,7 @@
     ]
    },
    "third_day_of:07-09": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31116,7 +31116,7 @@
     ]
    },
    "second_day_of:07-12": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31228,7 +31228,7 @@
     ]
    },
    "third_day_of:07-14": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31251,7 +31251,7 @@
     ]
    },
    "second_day_of:07-08": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31288,7 +31288,7 @@
     ]
    },
    "third_day_of:07-13": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31346,7 +31346,7 @@
     ]
    },
    "third_day_of:07-17": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31571,7 +31571,7 @@
     ]
    },
    "third_day_of:07-25": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31618,7 +31618,7 @@
     ]
    },
    "second_day_of:07-24": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31737,7 +31737,7 @@
     ]
    },
    "2:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31761,7 +31761,7 @@
     ]
    },
    "6:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31925,7 +31925,7 @@
     ]
    },
    "4:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31960,7 +31960,7 @@
     ]
    },
    "0:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32104,7 +32104,7 @@
     ]
    },
    "0:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32163,7 +32163,7 @@
     ]
    },
    "4:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32257,7 +32257,7 @@
     ]
    },
    "6:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32375,7 +32375,7 @@
     ]
    },
    "3:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32399,7 +32399,7 @@
     ]
    },
    "3:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32459,7 +32459,7 @@
     ]
    },
    "1:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32557,7 +32557,7 @@
     ]
    },
    "2:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32580,7 +32580,7 @@
     ]
    },
    "1:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32593,7 +32593,7 @@
     ]
    },
    "5:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32629,7 +32629,7 @@
     ]
    },
    "5:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32852,7 +32852,7 @@
     ]
    },
    "second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32911,7 +32911,7 @@
     ]
    },
    "third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33041,7 +33041,7 @@
     ]
    },
    "28:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33054,7 +33054,7 @@
     ]
    },
    "14:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33194,7 +33194,7 @@
     ]
    },
    "21:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33206,7 +33206,7 @@
     ]
    },
    "35:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33303,7 +33303,7 @@
     ]
    },
    "35:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33350,7 +33350,7 @@
     ]
    },
    "21:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33422,7 +33422,7 @@
     ]
    },
    "14:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33516,7 +33516,7 @@
     ]
    },
    "28:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33645,7 +33645,7 @@
     ]
    },
    "28:4:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33658,7 +33658,7 @@
     ]
    },
    "14:2:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33798,7 +33798,7 @@
     ]
    },
    "21:2:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33810,7 +33810,7 @@
     ]
    },
    "35:5:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33907,7 +33907,7 @@
     ]
    },
    "35:4:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33954,7 +33954,7 @@
     ]
    },
    "21:3:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -34026,7 +34026,7 @@
     ]
    },
    "14:1:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -34120,7 +34120,7 @@
     ]
    },
    "28:3:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -49288,7 +49288,7 @@
     ]
    },
    "0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -49335,7 +49335,7 @@
     ]
    },
    "0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -50402,7 +50402,7 @@
    "14": {
     "feast": "Third Sunday of the Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [

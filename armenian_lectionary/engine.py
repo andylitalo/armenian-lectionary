@@ -1398,7 +1398,7 @@ def _count_sundays_after(anchor: datetime.date, d: datetime.date) -> int:
 # edits dev/observance_name_review.tsv, which is the defect this table exists to close.
 #
 # Three templates are shared by two families each ("{ord} Sunday of the Assumption",
-# "{ord} Sunday of Pentecost", "Fast day"); they render identical text, so they name the
+# "{ord} Sunday after Pentecost", "Fast day"); they render identical text, so they name the
 # same observance and one entry serves both.
 #
 # Editing a template IS a change to which observance the family names, so it must be made
@@ -1520,23 +1520,23 @@ _POSITION_IDS = {
         9: 'ninth_day_of_assumption',
     },
     '{ord} Sunday of the Assumption': {
-        2: 'second_sunday_of_the_assumption', 3: 'third_sunday_after_assumption',
-        4: 'fourth_sunday_after_assumption', 5: 'fifth_sunday_of_the_assumption',
+        2: 'second_sunday_of_the_assumption', 3: 'third_sunday_of_the_assumption',
+        4: 'fourth_sunday_of_the_assumption', 5: 'fifth_sunday_of_the_assumption',
     },
     '{ord} day of the Fast of the Transfiguration': {
         1: 'transfiguration_fast_day_1', 2: 'transfiguration_fast_day_2',
         3: 'transfiguration_fast_day_3', 4: 'transfiguration_fast_day_4',
         5: 'transfiguration_fast_day_5',
     },
-    '{ord} day of Transfiguration': {
+    '{ord} day of the Transfiguration': {
         2: 'second_day_of_transfiguration', 3: 'third_day_of_transfiguration',
     },
-    '{ord} Sunday of Transfiguration': {
-        2: 'second_sunday_after_transfiguration', 3: 'third_sunday_after_transfiguration',
-        4: 'fourth_sunday_after_transfiguration', 5: 'fifth_sunday_after_transfiguration',
-        6: 'sixth_sunday_after_transfiguration', 7: 'seventh_sunday_after_transfiguration',
+    '{ord} Sunday of the Transfiguration': {
+        2: 'second_sunday_of_the_transfiguration', 3: 'third_sunday_of_the_transfiguration',
+        4: 'fourth_sunday_of_the_transfiguration', 5: 'fifth_sunday_of_the_transfiguration',
+        6: 'sixth_sunday_of_the_transfiguration', 7: 'seventh_sunday_of_the_transfiguration',
     },
-    '{ord} Sunday of Pentecost': {
+    '{ord} Sunday after Pentecost': {
         1: 'first_sunday_after_pentecost', 2: 'second_sunday_after_pentecost',
         3: 'third_sunday_after_pentecost', 4: 'fourth_sunday_after_pentecost',
         5: 'fifth_sunday_after_pentecost', 6: 'sixth_sunday_after_pentecost',
@@ -1646,9 +1646,9 @@ _POSITION_FAMILIES = (
     ("AS", (14, 21), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
     ("AS", (28, 28), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
     ("TR", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Transfiguration"),
-    ("TR", (1, 2), (0, 1), "days", 1, "{ord} day of Transfiguration"),
-    ("TR", (7, 42), _SUN, "sundays", 1, "{ord} Sunday of Transfiguration"),
-    # The ENGLISH source has no "First Sunday of Pentecost" -- Pentecost+7 reads "Second
+    ("TR", (1, 2), (0, 1), "days", 1, "{ord} day of the Transfiguration"),
+    ("TR", (7, 42), _SUN, "sundays", 1, "{ord} Sunday of the Transfiguration"),
+    # The ENGLISH source has no "First Sunday after Pentecost" -- Pentecost+7 reads "Second
     # Sunday after Pentecost", identical to Pentecost+14's own text -- but the Armenian
     # numbers them Ա/Բ/Գ... (First/Second/Third), never repeating a number: the source
     # states the same fact twice and disagrees with itself, the section-1 pattern applied
@@ -1656,8 +1656,8 @@ _POSITION_FAMILIES = (
     # tables 2001-2026 confirm English's own count is Second/Second/Third/Fourth/Fifth/
     # Sixth for weeks 1-6, i.e. exact once week 1 is corrected to First -- not the
     # year-to-year drift this family used to be described as having.
-    ("PE", (7, 7), _SUN, "sundays", 0, "{ord} Sunday of Pentecost"),
-    ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday of Pentecost"),
+    ("PE", (7, 7), _SUN, "sundays", 0, "{ord} Sunday after Pentecost"),
+    ("PE", (14, 42), _SUN, "sundays", 0, "{ord} Sunday after Pentecost"),
     # The Fast of St. Gregory the Illuminator, opening the day after its Sunday eve
     # (Pentecost+21) and closing before the Discovery of the Relics on the Saturday. The
     # source prints only "Fast day" here in English while naming the ordinal in Armenian;
@@ -1844,7 +1844,7 @@ _EVE_FAMILIES = (
     ("E",   -1, "eve_of_the_resurrection", "Eve of the Resurrection of Our Lord Jesus Christ"),
     ("PE",   0, "eve_of_fast_of_prophet_elijah", "Eve of the Fast of the Prophet Elijah"),
     ("PE",  21, "eve_of_fast_of_illuminator", "Eve of the Fast of St. Gregory the Illuminator"),
-    ("TR",  -7, "eve_of_fast_of_transfiguration", "Eve of the Fast of Transfiguration"),
+    ("TR",  -7, "eve_of_fast_of_transfiguration", "Eve of the Fast of the Transfiguration"),
     ("AS",  -7, "eve_of_fast_of_assumption",
      "Eve of the Fast of the Assumption of the Holy Mother of God"),
     ("EX",  -7, "eve_of_fast_of_exaltation",
@@ -2115,13 +2115,13 @@ def _first_volume_continua(d):
 # strict table has no entry. Single-sample -> source-derived best-guess, byte-matching GT.
 # Keyed by Easter offset -> (liturgical-day label, First-Volume movable readings, verbatim).
 _FV_SUMMER_CONTINUA = {
-    119: ("fourth_sunday_after_transfiguration", "Fourth Sunday of Transfiguration",
+    119: ("fourth_sunday_of_the_transfiguration", "Fourth Sunday of the Transfiguration",
           ["Luke 4.14-30", "Isaiah 54.1-13",
            "St. Paul's First Epistle to Timothy 1.1-11", "John 2.1-11"]),
-    126: ("fifth_sunday_after_transfiguration", "Fifth Sunday of Transfiguration",
+    126: ("fifth_sunday_of_the_transfiguration", "Fifth Sunday of the Transfiguration",
           ["Isaiah 58.13-59.7",
            "St. Paul's First Epistle to Timothy 4.12-5.10", "John 3.13-21"]),
-    133: ("sixth_sunday_after_transfiguration", "Sixth Sunday of Transfiguration",
+    133: ("sixth_sunday_of_the_transfiguration", "Sixth Sunday of the Transfiguration",
           ["Isaiah 62.1-11",
            "St. Paul's Second Epistle to Timothy 2.15-19", "John 6.39-47"]),
 }

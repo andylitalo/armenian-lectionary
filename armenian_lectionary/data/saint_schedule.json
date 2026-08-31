@@ -344,8 +344,8 @@
    "The Hermit Sts. Tryphon, Barsauma and Onuphrius": "hermits_saints_triphon",
    "St. Gregory the Theologian": "gregory_of_theologian",
    "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila": "eugenios_makarios_valerian",
-   "Second day of Transfiguration — Remembrance of the Dead": "second_day_of",
-   "Third day of Transfiguration": "third_day_of",
+   "Second day of the Transfiguration — Remembrance of the Dead": "second_day_of",
+   "Third day of the Transfiguration": "third_day_of",
    "St. Isaiah the Prophet": "isaiah_the_prophet",
    "Sts. Thaddeus Apostle of Armenia and Sandoukht the Virgin": "thaddeus_apostle_of",
    "Sts. Cyprian the Bishop, the Forty-Five Martyrs and the Virgins Justina, Euphemia and Christina": "cyprian_the_bishop",
@@ -361,7 +361,7 @@
   "sequence": [
    {
     "id": "second_day_of",
-    "label": "Second day of Transfiguration — Remembrance of the Dead",
+    "label": "Second day of the Transfiguration — Remembrance of the Dead",
     "order": 0,
     "support_years": 26,
     "anchor": "head",
@@ -372,7 +372,7 @@
    },
    {
     "id": "third_day_of",
-    "label": "Third day of Transfiguration",
+    "label": "Third day of the Transfiguration",
     "order": 1,
     "support_years": 26,
     "anchor": "head",
