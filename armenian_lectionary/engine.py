@@ -1509,17 +1509,17 @@ _POSITION_IDS = {
         8: 'eighth_sunday_of_the_holy_cross', 9: 'ninth_sunday_of_the_holy_cross',
         10: 'tenth_sunday_of_the_holy_cross', 11: 'eleventh_sunday_of_the_holy_cross',
     },
-    '{ord} day of the Fast of the Assumption': {
+    '{ord} day of the Fast of the Assumption of the Holy Mother of God': {
         1: 'assumption_fast_day_1', 2: 'assumption_fast_day_2', 3: 'assumption_fast_day_3',
         4: 'assumption_fast_day_4', 5: 'assumption_fast_day_5',
     },
-    '{ord} day of the Assumption': {
+    '{ord} day of the Assumption of the Holy Mother of God': {
         2: 'second_day_of_assumption', 3: 'third_day_of_assumption',
         4: 'fourth_day_of_assumption', 5: 'fifth_day_of_assumption',
         6: 'sixth_day_of_assumption', 7: 'seventh_day_of_assumption',
         9: 'ninth_day_of_assumption',
     },
-    '{ord} Sunday of the Assumption': {
+    '{ord} Sunday of the Assumption of the Holy Mother of God': {
         2: 'second_sunday_of_the_assumption', 3: 'third_sunday_of_the_assumption',
         4: 'fourth_sunday_of_the_assumption', 5: 'fifth_sunday_of_the_assumption',
     },
@@ -1636,15 +1636,18 @@ _POSITION_FAMILIES = (
     ("EX", (8, 12), _MON_TO_FRI, "days", -7,
      "{ord} day of the Fast of the Holy Cross of Varag"),
     ("EX", (7, 70), _SUN, "sundays", 1, "{ord} Sunday of the Holy Cross"),
-    ("AS", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Assumption"),
-    ("AS", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Assumption"),
-    ("AS", (8, 8), (0,), "days", 1, "{ord} day of the Assumption"),
+    ("AS", (-6, -2), _MON_TO_FRI, "days", 7,
+     "{ord} day of the Fast of the Assumption of the Holy Mother of God"),
+    ("AS", (1, 6), _MON_TO_SAT, "days", 1, "{ord} day of the Assumption of the Holy Mother of God"),
+    ("AS", (8, 8), (0,), "days", 1, "{ord} day of the Assumption of the Holy Mother of God"),
     # The source keeps the article on the 1st and 4th Sundays of the Assumption and drops
     # it on the 2nd and 3rd. Normalized to keep it everywhere, for consistency with the
     # rest of the family (the Fast of the Assumption, Nth day of the Assumption).
-    ("AS", (7, 7), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
-    ("AS", (14, 21), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
-    ("AS", (28, 28), _SUN, "sundays", 1, "{ord} Sunday of the Assumption"),
+    ("AS", (7, 7), _SUN, "sundays", 1, "{ord} Sunday of the Assumption of the Holy Mother of God"),
+    ("AS", (14, 21), _SUN, "sundays", 1,
+     "{ord} Sunday of the Assumption of the Holy Mother of God"),
+    ("AS", (28, 28), _SUN, "sundays", 1,
+     "{ord} Sunday of the Assumption of the Holy Mother of God"),
     ("TR", (-6, -2), _MON_TO_FRI, "days", 7, "{ord} day of the Fast of the Transfiguration"),
     ("TR", (1, 2), (0, 1), "days", 1, "{ord} day of the Transfiguration"),
     ("TR", (7, 42), _SUN, "sundays", 1, "{ord} Sunday of the Transfiguration"),

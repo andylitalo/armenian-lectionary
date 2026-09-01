@@ -397,8 +397,8 @@ def named_fast_label_hy(date_iso):
 # --------------------------------------------------------------------------- #
 _WEEKLY_FAST_LABELS = ("Wednesday Fast", "Friday Fast")
 _WEEKLY_FAST_LABELS_HY = {
-    "Wednesday Fast": "Չորեքշաբթիի պահք",
-    "Friday Fast": "Ուրբաթի պահք",
+    "Wednesday Fast": "Պահք Չորեքշաբաթւոյ",
+    "Friday Fast": "Պահք Ուրբաթու",
 }
 
 

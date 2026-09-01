@@ -19,7 +19,7 @@ import re
 from armenian_lectionary import engine
 
 _ORD_EN_RE = re.compile(r"^\w+ day of (.+)$")
-_ORD_HY_RE = re.compile(r"^[Ա-Ֆ]+ օր (.+ պահոց)$")
+_ORD_HY_RE = re.compile(r"^[Ա-Ֆ]+ օր (.+)$")
 
 
 def text(sid, lang="en"):

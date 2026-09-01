@@ -424,6 +424,68 @@ follow from that difference:
 The `seventh_day_of_pentecost` id is unaffected — same observance, corrected text, not a
 retirement: the Saturday did not stop being served, it stopped being mis-renamed.
 
+### The Assumption family states its own name
+
+The Assumption's own feast row has always read `ASSUMPTION OF THE HOLY MOTHER OF GOD` /
+`ՎԵՐԱՓՈԽՈՒՄՆ Ս. ԱՍՏՈՒԱԾԱԾՆԻ` — both halves of the name, in both languages. Its fast and
+octave never did. The fast's five days and eve carried only the `Աստուածածնի` (Mother-of-God)
+half in Armenian and never `Վերափոխման` (Assumption) at all; the octave days and the
+following Sundays had exactly the opposite gap, carrying only `Վերափոխման` and never
+`Աստուածածնի`. English told the same half-story: the fast read `the Fast of the Assumption`,
+the octave and Sundays `the Assumption`, neither ever `of the Holy Mother of God`.
+
+Not a self-contradiction in any one row — each half was terse rather than wrong, the same
+"too terse to contradict itself" shape as the article fixes above. The correction states
+the observance's own full name, `Assumption of the Holy Mother of God` /
+`Աստուածածնի Վերափոխման` (fast: `Սուրբ Աստուածածնի Վերափոխման`, keeping the fast's own
+`Սուրբ`), throughout the family — the fast's five days and eve, the octave days, and the
+following Sundays — matching the main feast row rather than a sibling family, on explicit
+request. `engine.py`'s three `_POSITION_FAMILIES`/rule-tuple English literals for this
+family needed the matching edit, the same shape the Great Lent Sunday connector and the
+Transfiguration article fix above needed for their own hardcoded templates.
+
+### The Transfiguration family's formal name
+
+The main feast row leads with the formal `ՊԱՅԾԱՌԱԿԵՐՊՈՒԹԻՒՆ ՏԵԱՌՆ ՄԵՐՈՅ...` (*Transfiguration
+of Our Lord*) and keeps the colloquial `Վարդավառ` only as a bracketed folk-name,
+`(Վարդավառ)`. Every generated position label for the same feast — the fast's eve and five
+days, the day-of-Transfiguration pair, and the six following Sundays — used the colloquial
+`Վարդավառի` throughout instead, never the formal term the feast names itself with. Armenian
+only; English already read `Transfiguration` everywhere in the family. Folded to
+`Պայծառակերպութեան`, the same case each occurrence already inflected `Վարդավառի` in
+(genitive, whether governed by `պահոց` or by `զկնի`), on explicit request rather than a
+self-contradiction — the source is consistent within itself throughout, just consistently
+informal.
+
+### The Fast of St. Gregory the Illuminator's own name
+
+The fast's eve has always named the saint in full — `Eve of the Fast of St. Gregory the
+Illuminator` / `Բարեկենդան սրբոյն Գրիգորի Լուսաւորչի պահոց` — but its own five days carried
+only the bare `Լուսաւորչի պահոց` ("of the Illuminator's fast") in Armenian, dropping `Սրբոյն
+Գրիգորի` ("of St. Gregory") entirely. English already named the saint in full on every day
+(`Nth day of the Fast of St. Gregory the Illuminator`) via the section-1 English/Armenian
+disagreement fix above; only the Armenian day family still fell short of the fuller
+Armenian the eve had always carried.
+
+Folded to the eve's own fuller name, restated in the `Պահ(ք/ոց) [genitive]` word order
+found elsewhere in the wider Armenian liturgical corpus (e.g. `Պահք Առաքելոց`, "Fast of the
+Apostles") rather than the `[genitive] պահոց` order the eve itself had used — a further,
+explicitly requested word-order choice on top of the naming fix, not attested by any other
+family in this corpus. `Ա–Ե օր Պահոց Սրբոյն Գրիգորի Լուսաւորչին`, the eve reading
+`Բարեկենդան Պահոց Սրբոյն Գրիգորի Լուսաւորչին`. Armenian only.
+
+### The weekly Wed/Fri fast marker's word order
+
+`friday_fast`/`wednesday_fast` (§6c below) already carry this document's weakest warrant:
+the source prints undifferentiated `Պահք` on both weekdays, so `approved_hy` was never a
+reading of the source at all, "supplied by the maintainer, there being nothing to scrape."
+Reordered from `[Weekday-genitive] պահք` (`Ուրբաթի պահք`, `Չորեքշաբթիի պահք`) to `Պահք
+[Weekday-genitive]` (`Պահք Ուրբաթու`, `Պահք Չորեքշաբաթւոյ`, also correcting the elided
+`Չորեքշաբթիի` to the full `Չորեքշաբաթւոյ`), matching the same `Պահ(ք/ոց) [genitive]`
+convention as the Illuminator fast directly above — a plain editorial word-order preference
+on maintainer-supplied text, on explicit request, with no source text of any kind on either
+side of the change to be consistent or inconsistent with.
+
 ---
 
 ## 6. Disambiguation — `Beginning of the Fast` names no fast
@@ -1422,13 +1484,23 @@ commemoration components, not position labels.
 |---|---|---|---|
 | `Beheading of St. John the Forerunner (the Baptist)` | `(the Baptist)` | `(Baptist)` | Every other component naming him: `Feast of the Birth of St. John the Forerunner (Baptist)`, `Sts. John the Forerunner (Baptist) and Bishop Atanagine`, `Sts. John the Forerunner (Baptist) and Job the Righteous`. This was the one outlier. |
 | `St. James the bishop of Nisibis` (all six components naming him — the eve and five fast days) | lower-case `bishop` | `Bishop` | Every other `the Bishop of <place>` in the corpus: `Clement the Bishop of Rome`, `Ignatius the Bishop of Antioch`, `Addai the Bishop of Edessa`, `Maruthas the Bishop of Marv`, `Theopemptus the Bishop of Nicomedia`, `Polycarp the Bishop of Smyrna` — all capitalize `Bishop` as part of the title. Armenian unaffected: `հայրապետին` carries no case distinction. |
-| `St. Gregory the Illuminator's Descent into the Pit` | `Descent` capitalized | `descent` | Its companion feast, `St. Gregory the Illuminator's coming out of the Pit` (below) — the pair reads as one two-part story and is now cased the same way throughout. |
-| `Staint Gregory the Illuminator's coming out of Pit` | `Staint` (typo), missing article | `St. Gregory the Illuminator's coming out of the Pit` | Fixes the source's own typo (`Staint` → `St.`, matching the companion feast's own abbreviation) and the missing article the open question below had already flagged; `coming` stays lower-case to match the companion's now-lowercased `descent`. |
+| `Discovery of the Relics of St. Grigoris the Catholicos of Aghvank...` | ended at `...the Seven Herbivorous Hermits` | `..., who reposed at the Monastery of Innaknia.` | The source's own Armenian, `...որք յԻննակնեայ վանսն կատարեցան`. Not a self-contradiction landing on this row so much as an outright omission of one: the earlier `approved_en` simply stopped translating partway through the sentence, dropping the closing clause entirely rather than rendering it differently. `Herbivorous Hermits` (below) stands; see the closed question below. |
+| `St. Gregory the Illuminator's Descent into the Pit` / `Staint Gregory the Illuminator's coming out of Pit` | `Descent`/`coming` cased to match each other (`descent`/`coming`, both lower) | `Descent`/`Coming` cased to match each other (both capitalized) | Superseded, on later explicit request, the pairing decision directly below — the pair is still cased identically, capitalized rather than lower-cased. `Staint` → `St.` and the missing article on the companion feast (from the open question this closed) stand unaffected. |
+
+Beheading's Armenian, `Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչի`, carried the matching
+outlier one row up: every other component naming this saint uses `Կարապետին`/`Կարապետի`
+("the Forerunner") in Armenian, and this was the one still reading `Մկրտչի` ("the Baptist")
+— the Armenian half of the same normalization the English `(the Baptist)` → `(Baptist)` fix
+above already made, left undone until now. Folded to `Կարապետին`, matching
+`feast_of_the_birth_of_st_john_the_forerunner`, `john_the_forerunner_baptist` and
+`john_the_forerunner_baptist_and_job_the_righteous`.
 
 The Illuminator's-Pit pair is the one case here where "match the rest of the corpus" isn't
 available — there is no third example to check against — so the casing choice is a plain
 editorial decision between two already-served spellings, made on explicit request rather
-than found by any evidence rule above.
+than found by any evidence rule above. That request has since been reversed, on a second
+explicit request (table row above): the pair is capitalized again, still matching each
+other.
 
 ### Palm Sunday's Armenian, `ԾԱՂԿԱԶԱՐԴ` → `Ծաղկազարդ`
 
@@ -1465,10 +1537,14 @@ as published until someone who reads Armenian decides. Enter the preferred Engli
 | `The Twelve Holy Doctors of Church: …` | `of Church` wants an article — `of the Church`. Also the longest name served, 289 characters. |
 | `Saint Nicholas Wonderworker the Bishop of Myra` | The other two components naming him say `the Wonderworker`. |
 | `Saints Joachim and Anna, … and of Myrophores` | The Myrophores are the myrrh-bearing women (`կանանցն իւղաբերից`) — `and of the Myrophores`? |
-| `… the Seven Herbivorous Hermits` | Renders `խոտաճարակացն` literally (grass-eating). Usual English: `the Seven Grass-eating Hermits`. |
 | `Saints martyrs Antoninus, …` / `Saints virgins Indes and Domna, …` | Lowercase where `Saints Virgins` and `Saints Princes` are capitalised elsewhere. |
 | `Saints Vardan the General and His Companions - the 1036 Martyrs …` | A hyphen where the source's component separator is an em-dash; possibly meant as a break. |
 | `Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)` | `Nicea` vs `Nicaea` — confirm the preferred form. |
+
+**`… the Seven Herbivorous Hermits` — closed.** `խոտաճարակացն` renders literally
+(grass-eating) rather than the more usual `Grass-eating Hermits`; decided, on explicit
+request, to keep the literal `Herbivorous`. Independent of that call, this row's
+`approved_en` was also missing the source's entire closing clause — see §10 above.
 
 Two of these are larger than a spelling, and blocked on each other.
 
