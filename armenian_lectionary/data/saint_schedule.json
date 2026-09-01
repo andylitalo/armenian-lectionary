@@ -868,7 +868,7 @@
    "Sts. Virgins Thecla, Barbara and Pelagia": "virgins_thecla_barbara",
    "Sts. Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin": "pantaleimon_the_physician",
    "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful": "translators_mesrop_yeghishe",
-   "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknia.": "discovery_of_relics",
+   "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya": "discovery_of_relics",
    "The Holy Apostles Ananias, Matthias, Barnabas, Philip, John, Silas and Silvanus": "apostles_ananias_matthias",
    "Sts. Dionysius the Areopagite and the Apostles Timothy and Titus": "dionysius_the_areopagite",
    "Holy Evangelists Matthew, Mark, Luke and John": "evangelists_matthew_mark",
@@ -1065,7 +1065,7 @@
    },
    {
     "id": "discovery_of_relics",
-    "label": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknia.",
+    "label": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "order": 16,
     "support_years": 26,
     "anchor": "head",

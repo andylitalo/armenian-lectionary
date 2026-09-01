@@ -118,22 +118,9 @@ def detect_doubled_word(comps):
     return sorted(hits.items())
 
 
-# Components judged fine despite edge punctuation, with the reason.
-CLEARED_EDGE_PUNCTUATION = {
-    # discovery_of_relics_of: the source's own text drops its closing clause ("who
-    # reposed at the Monastery of Innaknia") entirely; the trailing period ends that
-    # restored clause as a complete sentence, not a scrape artifact.
-    "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy "
-    "Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous "
-    "Hermits, who reposed at the Monastery of Innaknia.",
-}
-
-
 def detect_edge_punctuation(comps):
     hits = collections.defaultdict(list)
     for comp, isos in comps.items():
-        if comp in CLEARED_EDGE_PUNCTUATION:
-            continue
         if comp[-1] in ".,;:-" and not comp.endswith(")"):
             hits[f"trailing {comp[-1]!r}: {comp!r}"].extend(isos)
         if comp[0] in ".,;:-":

@@ -80,10 +80,10 @@
   "status": "review"
  },
  "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits": {
-  "approved_en": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknia.",
+  "approved_en": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
   "approved_hy": "Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից կաթողիկոսին եւ սրբոց հարցն Թաթլոյ, Վարոսի, Թումասու, Անտոնի, Կրօնիդեայ եւ եօթն խոտաճարակացն, որք յԻննակնեայ վանսն կատարեցան",
   "id": "discovery_of_relics_of",
-  "note": "resolved: kept \"Herbivorous Hermits\"; added the previously-dropped closing clause \"որք յԻննակնեայ վանսն կատարեցան\" (\"who reposed at the Monastery of Innaknia\") to approved_en, which had omitted it entirely.",
+  "note": "resolved: kept \"Herbivorous Hermits\"; added the previously-dropped closing clause \"որք յԻննակնեայ վանսն կատարեցան\" (\"who reposed at the Monastery of Innaknia\") to approved_en, which had omitted it entirely. | corrected \"Innaknia\" to \"Innaknya\" and dropped the trailing period, per request.",
   "source_hy": "Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից կաթողիկոսին եւ սրբոց հարցն Թաթլոյ, Վարոսի, Թումասու, Անտոնի, Կրօնիդեայ եւ եօթն խոտաճարակացն, որք յԻննակնեայ վանսն կատարեցան",
   "status": "review"
  },
@@ -525,7 +525,7 @@
   "id": "fifth_day_of_assumption",
   "note": "consistency correction: Armenian now states Վերափոխման (Assumption) explicitly, matching the main feast; English states \"of the Holy Mother of God\" throughout the fast, octave, and following Sundays.",
   "source_hy": "Ե օր Վերափոխման",
-  "status": "ok"
+  "status": "fixed"
  },
  "Fifth day of the Fast of Advent": {
   "approved_en": "Fifth day of the Fast of Advent",
@@ -917,7 +917,7 @@
   "id": "fourth_day_of_assumption",
   "note": "consistency correction: Armenian now states Վերափոխման (Assumption) explicitly, matching the main feast; English states \"of the Holy Mother of God\" throughout the fast, octave, and following Sundays.",
   "source_hy": "Դ օր Վերափոխման",
-  "status": "ok"
+  "status": "fixed"
  },
  "Fourth day of the Fast of Advent": {
   "approved_en": "Fourth day of the Fast of Advent",
@@ -2333,7 +2333,7 @@
   "id": "second_day_of_assumption",
   "note": "consistency correction: Armenian now states Վերափոխման (Assumption) explicitly, matching the main feast; English states \"of the Holy Mother of God\" throughout the fast, octave, and following Sundays.",
   "source_hy": "Բ օր Վերափոխման",
-  "status": "ok"
+  "status": "fixed"
  },
  "Second day of the Fast of Advent": {
   "approved_en": "Second day of the Fast of Advent",
@@ -2493,7 +2493,7 @@
   "id": "seventh_day_of_assumption",
   "note": "consistency correction: Armenian now states Վերափոխման (Assumption) explicitly, matching the main feast; English states \"of the Holy Mother of God\" throughout the fast, octave, and following Sundays.",
   "source_hy": "Է օր Վերափոխման",
-  "status": "ok"
+  "status": "fixed"
  },
  "Seventy Two Holy Disciples of Christ": {
   "approved_en": "Seventy Two Holy Disciples of Christ",
@@ -2621,7 +2621,7 @@
   "id": "sixth_day_of_assumption",
   "note": "consistency correction: Armenian now states Վերափոխման (Assumption) explicitly, matching the main feast; English states \"of the Holy Mother of God\" throughout the fast, octave, and following Sundays.",
   "source_hy": "Զ օր Վերափոխման",
-  "status": "ok"
+  "status": "fixed"
  },
  "Sixth day of the Fast of Nativity": {
   "approved_en": "Sixth day of the Fast of Nativity",
@@ -2885,7 +2885,7 @@
   "id": "third_day_of_assumption",
   "note": "consistency correction: Armenian now states Վերափոխման (Assumption) explicitly, matching the main feast; English states \"of the Holy Mother of God\" throughout the fast, octave, and following Sundays.",
   "source_hy": "Գ օր Վերափոխման",
-  "status": "ok"
+  "status": "fixed"
  },
  "Third day of the Fast of Advent": {
   "approved_en": "Third day of the Fast of Advent",
