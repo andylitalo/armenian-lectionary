@@ -324,7 +324,7 @@
     ]
    },
    "04-06:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -511,7 +511,7 @@
     ]
    },
    "04-06:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -682,7 +682,7 @@
     ]
    },
    "1:54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -788,7 +788,7 @@
     ]
    },
    "2:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -815,7 +815,7 @@
     ]
    },
    "1:55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -1215,9 +1215,9 @@
     ]
    },
    "4:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -1524,7 +1524,7 @@
     ]
    },
    "6:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -1576,7 +1576,7 @@
     ]
    },
    "3:51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -1654,7 +1654,7 @@
     ]
    },
    "4:28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy"
@@ -1881,7 +1881,7 @@
     ]
    },
    "1:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -2064,7 +2064,7 @@
     ]
    },
    "0:53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -2126,7 +2126,7 @@
     ]
    },
    "5:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -2151,7 +2151,7 @@
     ]
    },
    "0:28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross — Remembrance of the Armenian Genocide (1915)",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross — Remembrance of the Armenian Genocide (1915)",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy",
@@ -2170,7 +2170,7 @@
     ]
    },
    "0:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -2301,7 +2301,7 @@
     ]
    },
    "6:52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -2499,7 +2499,7 @@
     ]
    },
    "2:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -2669,9 +2669,9 @@
     ]
    },
    "6:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -2752,7 +2752,7 @@
     ]
    },
    "6:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -2884,7 +2884,7 @@
     ]
    },
    "5:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -2932,7 +2932,7 @@
     ]
    },
    "2:51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -2948,9 +2948,9 @@
     ]
    },
    "2:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -2993,7 +2993,7 @@
     ]
    },
    "1:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -3068,7 +3068,7 @@
     ]
    },
    "5:113": {
-    "feast": "First day of the Fast of Assumption",
+    "feast": "First day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_1"
     ],
@@ -3103,7 +3103,7 @@
     ]
    },
    "5:51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -3261,7 +3261,7 @@
     ]
    },
    "6:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -3385,7 +3385,7 @@
     ]
    },
    "5:55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -3494,7 +3494,7 @@
     ]
    },
    "4:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -3603,7 +3603,7 @@
     ]
    },
    "2:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -3630,9 +3630,9 @@
     ]
    },
    "5:112": {
-    "feast": "Third Sunday of Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
+    "feast": "Third Sunday of the Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_transfiguration",
+     "third_sunday_of_the_transfiguration",
      "eve_of_fast_of_assumption"
     ],
     "readings": [
@@ -3693,7 +3693,7 @@
     ]
    },
    "6:54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -3709,7 +3709,7 @@
     ]
    },
    "6:28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy"
@@ -3828,7 +3828,7 @@
     ]
    },
    "2:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -3882,9 +3882,9 @@
     ]
    },
    "3:56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -3963,7 +3963,7 @@
     ]
    },
    "2:55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -3996,7 +3996,7 @@
     ]
    },
    "4:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -4446,7 +4446,7 @@
     ]
    },
    "0:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -4499,7 +4499,7 @@
     ]
    },
    "4:55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -4697,7 +4697,7 @@
     ]
    },
    "3:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -4773,7 +4773,7 @@
     ]
    },
    "4:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -4971,7 +4971,7 @@
     ]
    },
    "0:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -4995,7 +4995,7 @@
     ]
    },
    "1:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -5154,7 +5154,7 @@
     ]
    },
    "6:53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -5296,7 +5296,7 @@
     ]
    },
    "6:50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -5406,7 +5406,7 @@
     ]
    },
    "0:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -5635,7 +5635,7 @@
     ]
    },
    "0:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -5650,7 +5650,7 @@
     ]
    },
    "3:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -5697,7 +5697,7 @@
     ]
    },
    "2:53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -5816,7 +5816,7 @@
     ]
    },
    "0:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -5939,7 +5939,7 @@
     ]
    },
    "5:116": {
-    "feast": "Fourth day of the Fast of Assumption",
+    "feast": "Fourth day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_4"
     ],
@@ -5999,7 +5999,7 @@
     ]
    },
    "5:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -6122,9 +6122,9 @@
     ]
    },
    "3:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -6232,7 +6232,7 @@
     ]
    },
    "5:115": {
-    "feast": "Third day of the Fast of Assumption",
+    "feast": "Third day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_3"
     ],
@@ -6294,7 +6294,7 @@
     ]
    },
    "5:62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -6555,9 +6555,9 @@
     ]
    },
    "5:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -6704,7 +6704,7 @@
     ]
    },
    "1:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -6715,7 +6715,7 @@
     ]
    },
    "1:28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy"
@@ -6744,7 +6744,7 @@
     ]
    },
    "2:52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -6847,7 +6847,7 @@
     ]
    },
    "2:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -6858,7 +6858,7 @@
     ]
    },
    "2:54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -7044,7 +7044,7 @@
     ]
    },
    "0:62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -7078,9 +7078,9 @@
     ]
    },
    "2:56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -7149,7 +7149,7 @@
     ]
    },
    "0:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -7263,7 +7263,7 @@
     ]
    },
    "2:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -7298,7 +7298,7 @@
     ]
    },
    "3:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -7361,7 +7361,7 @@
     ]
    },
    "6:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -7395,7 +7395,7 @@
     ]
    },
    "6:51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -7457,7 +7457,7 @@
     ]
    },
    "1:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -7904,7 +7904,7 @@
     ]
    },
    "4:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -7939,9 +7939,9 @@
     ]
    },
    "4:56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -7952,7 +7952,7 @@
     ]
    },
    "5:52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -7980,7 +7980,7 @@
     ]
    },
    "3:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -7992,7 +7992,7 @@
     ]
    },
    "5:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -8057,7 +8057,7 @@
     ]
    },
    "4:51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -8264,9 +8264,9 @@
     ]
    },
    "5:56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -8277,7 +8277,7 @@
     ]
    },
    "0:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -8322,9 +8322,9 @@
     ]
    },
    "1:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -8535,7 +8535,7 @@
     ]
    },
    "6:116": {
-    "feast": "Fourth day of the Fast of Assumption",
+    "feast": "Fourth day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_4"
     ],
@@ -8571,7 +8571,7 @@
     ]
    },
    "4:50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -8611,7 +8611,7 @@
     ]
    },
    "3:55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -8820,9 +8820,9 @@
     ]
    },
    "0:56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -8878,7 +8878,7 @@
     ]
    },
    "3:-62": {
-    "feast": "Sts. Atom and His Soldiers — Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Atom and His Soldiers — Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "atom",
      "mark_the_bishop_pionius"
@@ -9047,7 +9047,7 @@
     ]
    },
    "2:50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -9135,7 +9135,7 @@
     ]
    },
    "5:114": {
-    "feast": "Second day of the Fast of Assumption",
+    "feast": "Second day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_2"
     ],
@@ -9368,7 +9368,7 @@
     ]
    },
    "6:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -9478,7 +9478,7 @@
     ]
    },
    "0:52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -9770,7 +9770,7 @@
     ]
    },
    "2:28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy"
@@ -9788,9 +9788,9 @@
     ]
    },
    "4:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -9838,7 +9838,7 @@
     ]
    },
    "3:50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -9885,7 +9885,7 @@
     ]
    },
    "3:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -9956,7 +9956,7 @@
     ]
    },
    "6:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -10284,9 +10284,9 @@
     ]
    },
    "1:56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -10335,7 +10335,7 @@
     ]
    },
    "2:62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -10369,7 +10369,7 @@
     ]
    },
    "6:115": {
-    "feast": "Third day of the Fast of Assumption",
+    "feast": "Third day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_3"
     ],
@@ -10379,7 +10379,7 @@
     ]
    },
    "5:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -10473,7 +10473,7 @@
     ]
    },
    "6:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -10617,7 +10617,7 @@
     ]
    },
    "3:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -10735,7 +10735,7 @@
     ]
    },
    "6:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -10929,7 +10929,7 @@
     ]
    },
    "3:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -11021,7 +11021,7 @@
     ]
    },
    "2:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -11055,7 +11055,7 @@
     ]
    },
    "6:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -11168,7 +11168,7 @@
     ]
    },
    "3:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -11208,7 +11208,7 @@
     ]
    },
    "4:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -11335,7 +11335,7 @@
     ]
    },
    "6:55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -11404,7 +11404,7 @@
     ]
    },
    "5:53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -11427,7 +11427,7 @@
     "readings": []
    },
    "6:113": {
-    "feast": "First day of the Fast of Assumption",
+    "feast": "First day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_1"
     ],
@@ -11437,7 +11437,7 @@
     ]
    },
    "1:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -11590,7 +11590,7 @@
     ]
    },
    "1:70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -11602,7 +11602,7 @@
     ]
    },
    "6:62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -11756,7 +11756,7 @@
     ]
    },
    "3:54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -11828,7 +11828,7 @@
     ]
    },
    "3:62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -11881,7 +11881,7 @@
     ]
    },
    "4:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -11989,7 +11989,7 @@
     ]
    },
    "1:52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -12168,7 +12168,7 @@
     ]
    },
    "3:53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -12184,7 +12184,7 @@
     ]
    },
    "6:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -12493,7 +12493,7 @@
     ]
    },
    "3:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -12759,7 +12759,7 @@
     ]
    },
    "5:54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -12806,7 +12806,7 @@
     ]
    },
    "5:50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -12972,9 +12972,9 @@
     ]
    },
    "6:56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -13037,9 +13037,9 @@
     ]
    },
    "6:112": {
-    "feast": "Third Sunday of Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
+    "feast": "Third Sunday of the Transfiguration — Eve of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_transfiguration",
+     "third_sunday_of_the_transfiguration",
      "eve_of_fast_of_assumption"
     ],
     "readings": [
@@ -13073,7 +13073,7 @@
     ]
    },
    "6:114": {
-    "feast": "Second day of the Fast of Assumption",
+    "feast": "Second day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_2"
     ],
@@ -13094,7 +13094,7 @@
     ]
    },
    "4:77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -13105,7 +13105,7 @@
     ]
    },
    "5:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -13161,9 +13161,9 @@
     ]
    },
    "3:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -13283,7 +13283,7 @@
     ]
    },
    "2:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -13444,7 +13444,7 @@
     ]
    },
    "2:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -13596,7 +13596,7 @@
     ]
    },
    "5:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -13690,7 +13690,7 @@
     ]
    },
    "1:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -13929,7 +13929,7 @@
     ]
    },
    "3:52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -14041,7 +14041,7 @@
     ]
    },
    "1:53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -14057,7 +14057,7 @@
     ]
    },
    "1:50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -14087,9 +14087,9 @@
     ]
    },
    "2:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -14159,7 +14159,7 @@
     ]
    },
    "1:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -14246,7 +14246,7 @@
     ]
    },
    "5:100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -14353,7 +14353,7 @@
     ]
    },
    "3:28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy"
@@ -14395,7 +14395,7 @@
     ]
    },
    "2:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -14542,7 +14542,7 @@
     ]
    },
    "5:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -14861,7 +14861,7 @@
     ]
    },
    "5:99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -14935,9 +14935,9 @@
     ]
    },
    "0:105": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -15264,7 +15264,7 @@
     ]
    },
    "4:62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -15323,7 +15323,7 @@
     ]
    },
    "4:54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -15437,7 +15437,7 @@
     ]
    },
    "4:63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -15545,7 +15545,7 @@
     ]
    },
    "0:51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -15839,7 +15839,7 @@
     ]
    },
    "0:55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -15949,7 +15949,7 @@
     ]
    },
    "4:84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -16000,7 +16000,7 @@
     ]
    },
    "4:53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -16177,7 +16177,7 @@
     ]
    },
    "1:51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -16516,7 +16516,7 @@
     ]
    },
    "0:54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -16615,7 +16615,7 @@
     ]
    },
    "5:28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy"
@@ -16633,7 +16633,7 @@
     ]
    },
    "0:91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -16748,7 +16748,7 @@
     ]
    },
    "0:50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -16800,7 +16800,7 @@
     ]
    },
    "4:52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -16861,7 +16861,7 @@
     ]
    },
    "4:-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -16981,9 +16981,9 @@
     ]
    },
    "0:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -17026,7 +17026,7 @@
     ]
    },
    "0:-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -17126,9 +17126,9 @@
     ]
    },
    "1:112": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -17205,7 +17205,7 @@
     ]
    },
    "1:62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -17229,7 +17229,7 @@
     ]
    },
    "1:6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -17259,7 +17259,7 @@
     ]
    },
    "54": {
-    "feast": "Sixth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Sixth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "sixth_day_of_pentecost",
      "fast_day"
@@ -17289,7 +17289,7 @@
     ]
    },
    "53": {
-    "feast": "Fifth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fifth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fifth_day_of_pentecost",
      "fast_day"
@@ -17381,7 +17381,7 @@
     ]
    },
    "6": {
-    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (the Baptist)",
+    "feast": "Seventh day of Easter — Beheading of St. John the Forerunner (Baptist)",
     "observance_ids": [
      "seventh_day_of_easter",
      "beheading_of_st_john"
@@ -17408,7 +17408,7 @@
     ]
    },
    "55": {
-    "feast": "Seventh day of the Fast of the Prophet Elijah",
+    "feast": "Seventh day of Pentecost",
     "observance_ids": [
      "seventh_day_of_pentecost"
     ],
@@ -18014,7 +18014,7 @@
     ]
    },
    "70": {
-    "feast": "Third Sunday of Pentecost — Eve of the Fast of St. Gregory the Illuminator",
+    "feast": "Third Sunday after Pentecost — Eve of the Fast of St. Gregory the Illuminator",
     "observance_ids": [
      "third_sunday_after_pentecost",
      "eve_of_fast_of_illuminator"
@@ -18040,7 +18040,7 @@
     ]
    },
    "51": {
-    "feast": "Third day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Third day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "third_day_of_pentecost",
      "fast_day"
@@ -18070,7 +18070,7 @@
     ]
    },
    "28": {
-    "feast": "Fifth Sunday — Appearance of the Holy Cross",
+    "feast": "Fifth Sunday of Eastertide — Appearance of the Holy Cross",
     "observance_ids": [
      "fifth_sunday",
      "appearance_of_the_holy"
@@ -18220,7 +18220,7 @@
     ]
    },
    "63": {
-    "feast": "Second Sunday of Pentecost — Feast of Holy Etchmiadzin",
+    "feast": "Second Sunday after Pentecost — Feast of Holy Etchmiadzin",
     "observance_ids": [
      "second_sunday_after_pentecost",
      "feast_of_holy_etchmiadzin"
@@ -18343,7 +18343,7 @@
     ]
    },
    "91": {
-    "feast": "Sixth Sunday of Pentecost — Eve of the Fast of Transfiguration",
+    "feast": "Sixth Sunday after Pentecost — Eve of the Fast of the Transfiguration",
     "observance_ids": [
      "sixth_sunday_after_pentecost",
      "eve_of_fast_of_transfiguration"
@@ -18355,7 +18355,7 @@
     ]
    },
    "84": {
-    "feast": "Fifth Sunday of Pentecost — Feast of the Discovery of St. Mary's Box",
+    "feast": "Fifth Sunday after Pentecost — Feast of the Discovery of St. Mary's Box",
     "observance_ids": [
      "fifth_sunday_after_pentecost",
      "feast_of_the_discovery"
@@ -18448,7 +18448,7 @@
     ]
    },
    "52": {
-    "feast": "Fourth day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Fourth day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "fourth_day_of_pentecost",
      "fast_day"
@@ -18561,7 +18561,7 @@
     ]
    },
    "99": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -18718,7 +18718,7 @@
     ]
    },
    "-55": {
-    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+    "feast": "Sts. Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abd al-Masih, Ormistan and Sayen",
     "observance_ids": [
      "mark_the_bishop_pionius"
     ],
@@ -18754,7 +18754,7 @@
     ]
    },
    "-14": {
-    "feast": "Sixth Sunday of Great Lent. Sunday of the Advent",
+    "feast": "Sixth Sunday of Great Lent: Sunday of the Advent",
     "observance_ids": [
      "sixth_sunday_of_great_lent"
     ],
@@ -18895,7 +18895,7 @@
     ]
    },
    "77": {
-    "feast": "Fourth Sunday of Pentecost",
+    "feast": "Fourth Sunday after Pentecost",
     "observance_ids": [
      "fourth_sunday_after_pentecost"
     ],
@@ -19028,9 +19028,9 @@
     ]
    },
    "56": {
-    "feast": "Second Sunday of Pentecost — Remembrance of the Prophet Elijah",
+    "feast": "First Sunday after Pentecost — Remembrance of the Prophet Elijah",
     "observance_ids": [
-     "second_sunday_after_pentecost",
+     "first_sunday_after_pentecost",
      "remembrance_of_prophet_elijah"
     ],
     "readings": [
@@ -19209,7 +19209,7 @@
     ]
    },
    "100": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -19266,7 +19266,7 @@
     ]
    },
    "50": {
-    "feast": "Second day of the Fast of the Prophet Elijah — Fast day",
+    "feast": "Second day of Pentecost (Fast of the Prophet Elijah) — Fast day",
     "observance_ids": [
      "second_day_of_pentecost",
      "fast_day"
@@ -19310,7 +19310,7 @@
     ]
    },
    "62": {
-    "feast": "St. Gregory the Illuminator's coming out of Pit",
+    "feast": "St. Gregory the Illuminator's Coming out of the Pit",
     "observance_ids": [
      "gregory_the_illuminator_coming_out_of_pit"
     ],
@@ -19526,7 +19526,7 @@
     ]
    },
    "51:3": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -19549,7 +19549,7 @@
     ]
    },
    "52:3": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -19616,7 +19616,7 @@
     ]
    },
    "47:3": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -19749,7 +19749,7 @@
     ]
    },
    "48:3": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -19772,7 +19772,7 @@
     ]
    },
    "46:3": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -19938,7 +19938,7 @@
     ]
    },
    "50:3": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -20019,7 +20019,7 @@
     ]
    },
    "3": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -20357,7 +20357,7 @@
     ]
    },
    "46:5": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -20437,7 +20437,7 @@
     ]
    },
    "47:5": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -20467,7 +20467,7 @@
     ]
    },
    "46:6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -20537,7 +20537,7 @@
     ]
    },
    "49:6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -20557,7 +20557,7 @@
     ]
    },
    "50:5": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -20608,7 +20608,7 @@
     ]
    },
    "49:5": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -20618,7 +20618,7 @@
     ]
    },
    "51:6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -20688,7 +20688,7 @@
     ]
    },
    "48:5": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -20718,7 +20718,7 @@
     ]
    },
    "47:6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -20748,7 +20748,7 @@
     ]
    },
    "51:5": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -20768,7 +20768,7 @@
     ]
    },
    "52:6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -20949,7 +20949,7 @@
     ]
    },
    "48:6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -21069,7 +21069,7 @@
     ]
    },
    "50:6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -21149,7 +21149,7 @@
     ]
    },
    "5": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -21179,7 +21179,7 @@
     ]
    },
    "6": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -21752,7 +21752,7 @@
     ]
    },
    "52:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -21775,7 +21775,7 @@
     ]
    },
    "52:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -21810,7 +21810,7 @@
     ]
    },
    "51:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -22039,7 +22039,7 @@
     ]
    },
    "48:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -22052,7 +22052,7 @@
     ]
    },
    "48:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -22185,7 +22185,7 @@
     ]
    },
    "46:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -22385,7 +22385,7 @@
     ]
    },
    "49:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -22501,7 +22501,7 @@
     ]
    },
    "50:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -22602,7 +22602,7 @@
     ]
    },
    "51:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -22625,7 +22625,7 @@
     ]
    },
    "46:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -22663,7 +22663,7 @@
     ]
    },
    "52:2:Sat": {
-    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
+    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
     "observance_ids": [
      "gregory_and_nicholas_the"
     ],
@@ -22699,7 +22699,7 @@
     ]
    },
    "47:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -22844,7 +22844,7 @@
     ]
    },
    "52:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -23006,7 +23006,7 @@
     ]
    },
    "48:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -23186,7 +23186,7 @@
     ]
    },
    "46:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -23233,7 +23233,7 @@
     ]
    },
    "49:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -23246,7 +23246,7 @@
     ]
    },
    "47:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -23292,7 +23292,7 @@
     ]
    },
    "47:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -23330,7 +23330,7 @@
     ]
    },
    "49:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -23355,7 +23355,7 @@
     ]
    },
    "48:0:Sat": {
-    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
+    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
     "observance_ids": [
      "gregory_and_nicholas_the"
     ],
@@ -23571,7 +23571,7 @@
     ]
    },
    "50:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -23729,7 +23729,7 @@
     ]
    },
    "52:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -23752,7 +23752,7 @@
     ]
    },
    "52:4:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -23787,7 +23787,7 @@
     ]
    },
    "51:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -24016,7 +24016,7 @@
     ]
    },
    "48:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -24029,7 +24029,7 @@
     ]
    },
    "48:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -24162,7 +24162,7 @@
     ]
    },
    "46:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -24362,7 +24362,7 @@
     ]
    },
    "49:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -24478,7 +24478,7 @@
     ]
    },
    "50:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -24579,7 +24579,7 @@
     ]
    },
    "51:4:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -24602,7 +24602,7 @@
     ]
    },
    "46:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -24640,7 +24640,7 @@
     ]
    },
    "52:4:Sat": {
-    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
+    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
     "observance_ids": [
      "gregory_and_nicholas_the"
     ],
@@ -24676,7 +24676,7 @@
     ]
    },
    "47:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -24821,7 +24821,7 @@
     ]
    },
    "52:4:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -24983,7 +24983,7 @@
     ]
    },
    "48:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -25163,7 +25163,7 @@
     ]
    },
    "46:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -25210,7 +25210,7 @@
     ]
    },
    "49:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -25223,7 +25223,7 @@
     ]
    },
    "47:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -25269,7 +25269,7 @@
     ]
    },
    "47:3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -25307,7 +25307,7 @@
     ]
    },
    "49:3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -25332,7 +25332,7 @@
     ]
    },
    "48:6:Sat": {
-    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
+    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
     "observance_ids": [
      "gregory_and_nicholas_the"
     ],
@@ -25548,7 +25548,7 @@
     ]
    },
    "50:3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -25695,7 +25695,7 @@
     ]
    },
    "3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -25708,7 +25708,7 @@
     ]
    },
    "3:Tue": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -25769,7 +25769,7 @@
     ]
    },
    "3:Mon": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -25841,7 +25841,7 @@
   },
   "AdvSatB": {
    "3:Thu": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -28589,9 +28589,9 @@
   },
   "TrSunL": {
    "21:2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28600,9 +28600,9 @@
     ]
    },
    "35:3": {
-    "feast": "Fourth Sunday of Transfiguration",
+    "feast": "Fourth Sunday of the Transfiguration",
     "observance_ids": [
-     "fourth_sunday_after_transfiguration"
+     "fourth_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 58.13-59.7",
@@ -28611,9 +28611,9 @@
     ]
    },
    "14:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28622,9 +28622,9 @@
     ]
    },
    "28:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28633,9 +28633,9 @@
     ]
    },
    "21:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28644,9 +28644,9 @@
     ]
    },
    "35:1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28655,9 +28655,9 @@
     ]
    },
    "28:3": {
-    "feast": "Fourth Sunday of Transfiguration",
+    "feast": "Fourth Sunday of the Transfiguration",
     "observance_ids": [
-     "fourth_sunday_after_transfiguration"
+     "fourth_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 58.13-59.7",
@@ -28666,9 +28666,9 @@
     ]
    },
    "28:2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28677,9 +28677,9 @@
     ]
    },
    "35:4": {
-    "feast": "Fifth Sunday of Transfiguration",
+    "feast": "Fifth Sunday of the Transfiguration",
     "observance_ids": [
-     "fifth_sunday_after_transfiguration"
+     "fifth_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 62.1-11",
@@ -28688,9 +28688,9 @@
     ]
    },
    "35:2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28701,9 +28701,9 @@
   },
   "AsSunL": {
    "28:3": {
-    "feast": "Fourth Sunday of Assumption",
+    "feast": "Fourth Sunday of the Assumption of the Holy Mother of God",
     "observance_ids": [
-     "fourth_sunday_after_assumption"
+     "fourth_sunday_of_the_assumption"
     ],
     "readings": [
      "Isaiah 10.12-19",
@@ -28712,9 +28712,9 @@
     ]
    },
    "21:2": {
-    "feast": "Third Sunday of Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
+    "feast": "Third Sunday of the Assumption of the Holy Mother of God — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [
@@ -28725,7 +28725,7 @@
     ]
    },
    "21:1": {
-    "feast": "Second Sunday of the Assumption",
+    "feast": "Second Sunday of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "second_sunday_of_the_assumption"
     ],
@@ -28738,7 +28738,7 @@
     ]
    },
    "28:1": {
-    "feast": "Second Sunday of the Assumption",
+    "feast": "Second Sunday of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "second_sunday_of_the_assumption"
     ],
@@ -28751,9 +28751,9 @@
     ]
    },
    "28:2": {
-    "feast": "Third Sunday of Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
+    "feast": "Third Sunday of the Assumption of the Holy Mother of God — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [
@@ -28965,9 +28965,9 @@
   },
   "TrSun": {
    "2": {
-    "feast": "Third Sunday of Transfiguration",
+    "feast": "Third Sunday of the Transfiguration",
     "observance_ids": [
-     "third_sunday_after_transfiguration"
+     "third_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 5.1-10",
@@ -28976,9 +28976,9 @@
     ]
    },
    "1": {
-    "feast": "Second Sunday of Transfiguration",
+    "feast": "Second Sunday of the Transfiguration",
     "observance_ids": [
-     "second_sunday_after_transfiguration"
+     "second_sunday_of_the_transfiguration"
     ],
     "readings": [
      "Isaiah 3.16-4.1",
@@ -28989,9 +28989,9 @@
   },
   "AsSun": {
    "3": {
-    "feast": "Fourth Sunday of Assumption",
+    "feast": "Fourth Sunday of the Assumption of the Holy Mother of God",
     "observance_ids": [
-     "fourth_sunday_after_assumption"
+     "fourth_sunday_of_the_assumption"
     ],
     "readings": [
      "Isaiah 10.12-19",
@@ -29000,9 +29000,9 @@
     ]
    },
    "2": {
-    "feast": "Third Sunday of Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
+    "feast": "Third Sunday of the Assumption of the Holy Mother of God — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [
@@ -29013,7 +29013,7 @@
     ]
    },
    "1": {
-    "feast": "Second Sunday of the Assumption",
+    "feast": "Second Sunday of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "second_sunday_of_the_assumption"
     ],
@@ -29436,7 +29436,7 @@
     ]
    },
    "21:1": {
-    "feast": "Fourth day of the Assumption — Fast day",
+    "feast": "Fourth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "fourth_day_of_assumption",
      "fast_day"
@@ -29460,7 +29460,7 @@
     ]
    },
    "28:2": {
-    "feast": "Sixth day of the Assumption — Fast day",
+    "feast": "Sixth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "sixth_day_of_assumption",
      "fast_day"
@@ -29474,7 +29474,7 @@
     ]
    },
    "28:1": {
-    "feast": "Fourth day of the Assumption — Fast day",
+    "feast": "Fourth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "fourth_day_of_assumption",
      "fast_day"
@@ -29538,7 +29538,7 @@
     ]
    },
    "21:2": {
-    "feast": "Sixth day of the Assumption — Fast day",
+    "feast": "Sixth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "sixth_day_of_assumption",
      "fast_day"
@@ -30046,7 +30046,7 @@
     ]
    },
    "1": {
-    "feast": "Fourth day of the Assumption — Fast day",
+    "feast": "Fourth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "fourth_day_of_assumption",
      "fast_day"
@@ -30070,7 +30070,7 @@
     ]
    },
    "2": {
-    "feast": "Sixth day of the Assumption — Fast day",
+    "feast": "Sixth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "sixth_day_of_assumption",
      "fast_day"
@@ -30394,7 +30394,7 @@
     ]
    },
    "second_day_of:07-13": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30407,7 +30407,7 @@
     ]
    },
    "second_day_of:07-28": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30558,7 +30558,7 @@
     ]
    },
    "third_day_of:07-21": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -30582,7 +30582,7 @@
     ]
    },
    "second_day_of:07-04": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30727,7 +30727,7 @@
     ]
    },
    "third_day_of:07-05": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -30798,7 +30798,7 @@
     ]
    },
    "second_day_of:07-20": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -30880,7 +30880,7 @@
     ]
    },
    "third_day_of:07-29": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31056,7 +31056,7 @@
     ]
    },
    "second_day_of:07-16": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31104,7 +31104,7 @@
     ]
    },
    "third_day_of:07-09": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31116,7 +31116,7 @@
     ]
    },
    "second_day_of:07-12": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31228,7 +31228,7 @@
     ]
    },
    "third_day_of:07-14": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31251,7 +31251,7 @@
     ]
    },
    "second_day_of:07-08": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31288,7 +31288,7 @@
     ]
    },
    "third_day_of:07-13": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31346,7 +31346,7 @@
     ]
    },
    "third_day_of:07-17": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31571,7 +31571,7 @@
     ]
    },
    "third_day_of:07-25": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31618,7 +31618,7 @@
     ]
    },
    "second_day_of:07-24": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31737,7 +31737,7 @@
     ]
    },
    "2:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31761,7 +31761,7 @@
     ]
    },
    "6:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -31925,7 +31925,7 @@
     ]
    },
    "4:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -31960,7 +31960,7 @@
     ]
    },
    "0:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32104,7 +32104,7 @@
     ]
    },
    "0:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32163,7 +32163,7 @@
     ]
    },
    "4:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32257,7 +32257,7 @@
     ]
    },
    "6:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32375,7 +32375,7 @@
     ]
    },
    "3:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32399,7 +32399,7 @@
     ]
    },
    "3:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32459,7 +32459,7 @@
     ]
    },
    "1:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32557,7 +32557,7 @@
     ]
    },
    "2:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32580,7 +32580,7 @@
     ]
    },
    "1:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32593,7 +32593,7 @@
     ]
    },
    "5:third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -32629,7 +32629,7 @@
     ]
    },
    "5:second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32852,7 +32852,7 @@
     ]
    },
    "second_day_of": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -32911,7 +32911,7 @@
     ]
    },
    "third_day_of": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33041,7 +33041,7 @@
     ]
    },
    "28:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33054,7 +33054,7 @@
     ]
    },
    "14:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33194,7 +33194,7 @@
     ]
    },
    "21:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33206,7 +33206,7 @@
     ]
    },
    "35:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33303,7 +33303,7 @@
     ]
    },
    "35:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33350,7 +33350,7 @@
     ]
    },
    "21:0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33422,7 +33422,7 @@
     ]
    },
    "14:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33516,7 +33516,7 @@
     ]
    },
    "28:0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33645,7 +33645,7 @@
     ]
    },
    "28:4:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33658,7 +33658,7 @@
     ]
    },
    "14:2:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33798,7 +33798,7 @@
     ]
    },
    "21:2:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33810,7 +33810,7 @@
     ]
    },
    "35:5:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -33907,7 +33907,7 @@
     ]
    },
    "35:4:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -33954,7 +33954,7 @@
     ]
    },
    "21:3:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -34026,7 +34026,7 @@
     ]
    },
    "14:1:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -34120,7 +34120,7 @@
     ]
    },
    "28:3:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -34179,7 +34179,7 @@
     ]
    },
    "third_day_of:08-19": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -34205,7 +34205,7 @@
     ]
    },
    "joachim_and_anna:08-21": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -34218,7 +34218,7 @@
     ]
    },
    "jeremiah_the_prophet:08-21": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -34265,7 +34265,7 @@
     ]
    },
    "second_day_of:08-14": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -34279,7 +34279,7 @@
     ]
    },
    "jeremiah_the_prophet:08-24": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -34292,7 +34292,7 @@
     ]
    },
    "second_day_of:08-13": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -34318,7 +34318,7 @@
     ]
    },
    "joachim_and_anna:08-20": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -34331,7 +34331,7 @@
     ]
    },
    "seventh_day_of:08-20": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -34344,7 +34344,7 @@
     ]
    },
    "seventh_day_of:08-23": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -34371,7 +34371,7 @@
     ]
    },
    "jeremiah_the_prophet:08-26": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -34384,7 +34384,7 @@
     ]
    },
    "third_day_of:08-16": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -34409,7 +34409,7 @@
     ]
    },
    "third_day_of:08-18": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -34482,7 +34482,7 @@
     ]
    },
    "joachim_and_anna:08-17": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -34542,7 +34542,7 @@
     ]
    },
    "seventh_day_of:08-22": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -34567,7 +34567,7 @@
     ]
    },
    "seventh_day_of:08-18": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -34580,7 +34580,7 @@
     ]
    },
    "second_day_of:08-18": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -34629,7 +34629,7 @@
     ]
    },
    "third_day_of:08-15": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -34678,7 +34678,7 @@
     ]
    },
    "third_day_of:08-20": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -34691,7 +34691,7 @@
     ]
    },
    "seventh_day_of:08-19": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -34704,7 +34704,7 @@
     ]
    },
    "second_day_of:08-17": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -34743,7 +34743,7 @@
     ]
    },
    "third_day_of:08-14": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -34815,7 +34815,7 @@
     ]
    },
    "jeremiah_the_prophet:08-25": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -34839,7 +34839,7 @@
     ]
    },
    "seventh_day_of:08-21": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -34892,7 +34892,7 @@
     ]
    },
    "third_day_of:08-17": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -34918,7 +34918,7 @@
     ]
    },
    "jeremiah_the_prophet:08-22": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -34931,7 +34931,7 @@
     ]
    },
    "joachim_and_anna:08-19": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -34944,7 +34944,7 @@
     ]
    },
    "jeremiah_the_prophet:08-23": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -34957,7 +34957,7 @@
     ]
    },
    "joachim_and_anna:08-18": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -35055,7 +35055,7 @@
     ]
    },
    "jeremiah_the_prophet:08-20": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -35080,7 +35080,7 @@
     ]
    },
    "second_day_of:08-16": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -35094,7 +35094,7 @@
     ]
    },
    "joachim_and_anna:08-16": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -35107,7 +35107,7 @@
     ]
    },
    "second_day_of:08-15": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -35155,7 +35155,7 @@
     ]
    },
    "joachim_and_anna:08-22": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -35206,7 +35206,7 @@
     ]
    },
    "second_day_of:08-19": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -35220,7 +35220,7 @@
     ]
    },
    "seventh_day_of:08-24": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35257,7 +35257,7 @@
     ]
    },
    "6:third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -35283,7 +35283,7 @@
     ]
    },
    "6:joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -35296,7 +35296,7 @@
     ]
    },
    "3:jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -35343,7 +35343,7 @@
     ]
    },
    "5:second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -35357,7 +35357,7 @@
     ]
    },
    "2:jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -35382,7 +35382,7 @@
     ]
    },
    "2:joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -35395,7 +35395,7 @@
     ]
    },
    "6:seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35422,7 +35422,7 @@
     ]
    },
    "4:jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -35435,7 +35435,7 @@
     ]
    },
    "1:jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -35460,7 +35460,7 @@
     ]
    },
    "4:third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -35519,7 +35519,7 @@
     ]
    },
    "3:joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -35557,7 +35557,7 @@
     ]
    },
    "4:seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35581,7 +35581,7 @@
     ]
    },
    "3:seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35594,7 +35594,7 @@
     ]
    },
    "6:second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -35620,7 +35620,7 @@
     ]
    },
    "0:seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35656,7 +35656,7 @@
     ]
    },
    "5:third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -35705,7 +35705,7 @@
     ]
    },
    "5:seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35718,7 +35718,7 @@
     ]
    },
    "2:second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -35757,7 +35757,7 @@
     ]
    },
    "3:third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -35797,7 +35797,7 @@
     ]
    },
    "1:second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -35823,7 +35823,7 @@
     ]
    },
    "0:third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -35847,7 +35847,7 @@
     ]
    },
    "1:third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -35883,7 +35883,7 @@
     ]
    },
    "6:jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -35935,7 +35935,7 @@
     ]
    },
    "2:seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35948,7 +35948,7 @@
     ]
    },
    "1:seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -35975,7 +35975,7 @@
     ]
    },
    "2:third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -36012,7 +36012,7 @@
     ]
    },
    "5:jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -36025,7 +36025,7 @@
     ]
    },
    "5:joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36038,7 +36038,7 @@
     ]
    },
    "3:second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36075,7 +36075,7 @@
     ]
    },
    "4:joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36136,7 +36136,7 @@
     ]
    },
    "1:joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36161,7 +36161,7 @@
     ]
    },
    "4:second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36175,7 +36175,7 @@
     ]
    },
    "0:second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36212,7 +36212,7 @@
     ]
    },
    "0:joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36237,7 +36237,7 @@
     ]
    },
    "0:jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -36275,7 +36275,7 @@
     ]
    },
    "third_day_of": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -36301,7 +36301,7 @@
     ]
    },
    "joachim_and_anna": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36314,7 +36314,7 @@
     ]
    },
    "jeremiah_the_prophet": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -36350,7 +36350,7 @@
     ]
    },
    "second_day_of": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36376,7 +36376,7 @@
     ]
    },
    "seventh_day_of": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -36425,7 +36425,7 @@
     ]
    },
    "Tue:08-19": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -36451,7 +36451,7 @@
     ]
    },
    "Thu:08-21": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36464,7 +36464,7 @@
     ]
    },
    "Mon:08-21": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -36511,7 +36511,7 @@
     ]
    },
    "Mon:08-14": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36525,7 +36525,7 @@
     ]
    },
    "Mon:08-24": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -36538,7 +36538,7 @@
     ]
    },
    "Mon:08-13": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36564,7 +36564,7 @@
     ]
    },
    "Thu:08-20": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36577,7 +36577,7 @@
     ]
    },
    "Sat:08-20": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -36590,7 +36590,7 @@
     ]
    },
    "Sat:08-23": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -36617,7 +36617,7 @@
     ]
    },
    "Mon:08-26": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -36630,7 +36630,7 @@
     ]
    },
    "Tue:08-16": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -36655,7 +36655,7 @@
     ]
    },
    "Tue:08-18": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -36728,7 +36728,7 @@
     ]
    },
    "Thu:08-17": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -36788,7 +36788,7 @@
     ]
    },
    "Sat:08-22": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -36813,7 +36813,7 @@
     ]
    },
    "Sat:08-18": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -36826,7 +36826,7 @@
     ]
    },
    "Mon:08-18": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36875,7 +36875,7 @@
     ]
    },
    "Tue:08-15": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -36924,7 +36924,7 @@
     ]
    },
    "Tue:08-20": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -36937,7 +36937,7 @@
     ]
    },
    "Sat:08-19": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -36950,7 +36950,7 @@
     ]
    },
    "Mon:08-17": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -36989,7 +36989,7 @@
     ]
    },
    "Tue:08-14": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -37087,7 +37087,7 @@
     ]
    },
    "Mon:08-25": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -37111,7 +37111,7 @@
     ]
    },
    "Sat:08-21": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -37175,7 +37175,7 @@
     ]
    },
    "Tue:08-17": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -37215,7 +37215,7 @@
     ]
    },
    "Mon:08-22": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -37228,7 +37228,7 @@
     ]
    },
    "Thu:08-19": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -37241,7 +37241,7 @@
     ]
    },
    "Mon:08-23": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -37254,7 +37254,7 @@
     ]
    },
    "Thu:08-18": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -37364,7 +37364,7 @@
     ]
    },
    "Mon:08-20": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -37389,7 +37389,7 @@
     ]
    },
    "Mon:08-16": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -37403,7 +37403,7 @@
     ]
    },
    "Thu:08-16": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -37416,7 +37416,7 @@
     ]
    },
    "Mon:08-15": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -37464,7 +37464,7 @@
     ]
    },
    "Thu:08-22": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -37515,7 +37515,7 @@
     ]
    },
    "Mon:08-19": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -37529,7 +37529,7 @@
     ]
    },
    "Sat:08-24": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -37566,7 +37566,7 @@
     ]
    },
    "21:0:Tue": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -37592,7 +37592,7 @@
     ]
    },
    "21:0:Thu": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -37605,7 +37605,7 @@
     ]
    },
    "28:1:Mon": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -37652,7 +37652,7 @@
     ]
    },
    "28:0:Mon": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -37666,7 +37666,7 @@
     ]
    },
    "21:1:Mon": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -37691,7 +37691,7 @@
     ]
    },
    "21:0:Sat": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -37754,7 +37754,7 @@
     ]
    },
    "28:0:Thu": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -37780,7 +37780,7 @@
     ]
    },
    "28:0:Sat": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -37793,7 +37793,7 @@
     ]
    },
    "21:0:Mon": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -37819,7 +37819,7 @@
     ]
    },
    "28:0:Tue": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -37905,7 +37905,7 @@
     ]
    },
    "21:2:Tue": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -37931,7 +37931,7 @@
     ]
    },
    "21:2:Thu": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -37944,7 +37944,7 @@
     ]
    },
    "28:3:Mon": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -37991,7 +37991,7 @@
     ]
    },
    "28:4:Mon": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -38005,7 +38005,7 @@
     ]
    },
    "21:2:Mon": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -38030,7 +38030,7 @@
     ]
    },
    "21:2:Sat": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -38093,7 +38093,7 @@
     ]
    },
    "28:3:Thu": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -38119,7 +38119,7 @@
     ]
    },
    "28:3:Sat": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -38132,7 +38132,7 @@
     ]
    },
    "21:3:Mon": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -38158,7 +38158,7 @@
     ]
    },
    "28:3:Tue": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -38270,7 +38270,7 @@
     ]
    },
    "discovery_of_relics:10-16": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -39119,7 +39119,7 @@
     ]
    },
    "discovery_of_relics:10-10": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -39599,7 +39599,7 @@
     ]
    },
    "discovery_of_relics:10-11": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -39681,7 +39681,7 @@
     ]
    },
    "discovery_of_relics:10-15": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -39864,7 +39864,7 @@
     ]
    },
    "discovery_of_relics:10-12": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -40722,7 +40722,7 @@
     ]
    },
    "discovery_of_relics:10-13": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -41198,7 +41198,7 @@
     ]
    },
    "discovery_of_relics:10-14": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -41296,7 +41296,7 @@
     ]
    },
    "3:discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -41946,7 +41946,7 @@
     ]
    },
    "0:discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -42406,7 +42406,7 @@
     ]
    },
    "2:discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -42607,7 +42607,7 @@
     ]
    },
    "4:discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -42860,7 +42860,7 @@
     ]
    },
    "1:discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -43366,7 +43366,7 @@
     ]
    },
    "6:discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -43560,7 +43560,7 @@
     ]
    },
    "5:discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -44073,7 +44073,7 @@
     ]
    },
    "discovery_of_relics": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -44436,7 +44436,7 @@
     ]
    },
    "Mon:10-16": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -45297,7 +45297,7 @@
     ]
    },
    "Mon:10-10": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -45777,7 +45777,7 @@
     ]
    },
    "Mon:10-11": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -45859,7 +45859,7 @@
     ]
    },
    "Mon:10-15": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -46042,7 +46042,7 @@
     ]
    },
    "Mon:10-12": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -46912,7 +46912,7 @@
     ]
    },
    "Mon:10-13": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -47411,7 +47411,7 @@
     ]
    },
    "Mon:10-14": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -47521,7 +47521,7 @@
     ]
    },
    "62:4:Mon": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -48066,7 +48066,7 @@
     ]
    },
    "69:4:Mon": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -48399,7 +48399,7 @@
     ]
    },
    "62:4:Mon": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -48944,7 +48944,7 @@
     ]
    },
    "69:5:Mon": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -49288,7 +49288,7 @@
     ]
    },
    "0:Mon": {
-    "feast": "Second day of Transfiguration — Remembrance of the Dead",
+    "feast": "Second day of the Transfiguration — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_transfiguration",
      "remembrance_of_the_dead"
@@ -49335,7 +49335,7 @@
     ]
    },
    "0:Tue": {
-    "feast": "Third day of Transfiguration",
+    "feast": "Third day of the Transfiguration",
     "observance_ids": [
      "third_day_of_transfiguration"
     ],
@@ -49372,7 +49372,7 @@
     ]
    },
    "0:Tue": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -49398,7 +49398,7 @@
     ]
    },
    "0:Thu": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -49411,7 +49411,7 @@
     ]
    },
    "1:Mon": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -49447,7 +49447,7 @@
     ]
    },
    "0:Mon": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -49473,7 +49473,7 @@
     ]
    },
    "0:Sat": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -49597,7 +49597,7 @@
     ]
    },
    "4:Mon": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -49996,7 +49996,7 @@
     ]
    },
    "4:Mon": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -50010,7 +50010,7 @@
     ]
    },
    "3:Thu": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -50023,7 +50023,7 @@
     ]
    },
    "3:Sat": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -50036,7 +50036,7 @@
     ]
    },
    "3:Tue": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -50098,7 +50098,7 @@
   },
   "AS": {
    "-6": {
-    "feast": "First day of the Fast of Assumption",
+    "feast": "First day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_1"
     ],
@@ -50108,7 +50108,7 @@
     ]
    },
    "-3": {
-    "feast": "Fourth day of the Fast of Assumption",
+    "feast": "Fourth day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_4"
     ],
@@ -50129,7 +50129,7 @@
     ]
    },
    "-4": {
-    "feast": "Third day of the Fast of Assumption",
+    "feast": "Third day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_3"
     ],
@@ -50139,7 +50139,7 @@
     ]
    },
    "2": {
-    "feast": "Third day of the Assumption",
+    "feast": "Third day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "third_day_of_assumption"
     ],
@@ -50165,7 +50165,7 @@
     ]
    },
    "4": {
-    "feast": "Fifth day of the Assumption",
+    "feast": "Fifth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "fifth_day_of_assumption"
     ],
@@ -50188,7 +50188,7 @@
     ]
    },
    "8": {
-    "feast": "Ninth day of Assumption",
+    "feast": "Ninth day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "ninth_day_of_assumption"
     ],
@@ -50234,7 +50234,7 @@
     ]
    },
    "-2": {
-    "feast": "Fifth day of the Fast of Assumption",
+    "feast": "Fifth day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_5"
     ],
@@ -50244,7 +50244,7 @@
     ]
    },
    "1": {
-    "feast": "Second day of the Assumption — Remembrance of the Dead",
+    "feast": "Second day of the Assumption of the Holy Mother of God — Remembrance of the Dead",
     "observance_ids": [
      "second_day_of_assumption",
      "remembrance_of_the_dead"
@@ -50268,7 +50268,7 @@
     ]
    },
    "3": {
-    "feast": "Fourth day of the Assumption — Fast day",
+    "feast": "Fourth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "fourth_day_of_assumption",
      "fast_day"
@@ -50305,7 +50305,7 @@
     ]
    },
    "6": {
-    "feast": "Seventh day of the Assumption",
+    "feast": "Seventh day of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "seventh_day_of_assumption"
     ],
@@ -50348,7 +50348,7 @@
     ]
    },
    "5": {
-    "feast": "Sixth day of the Assumption — Fast day",
+    "feast": "Sixth day of the Assumption of the Holy Mother of God — Fast day",
     "observance_ids": [
      "sixth_day_of_assumption",
      "fast_day"
@@ -50400,9 +50400,9 @@
     ]
    },
    "14": {
-    "feast": "Third Sunday of Assumption — Feast day of the Discovery of the Belt of the Holy Mother of God",
+    "feast": "Third Sunday of the Assumption of the Holy Mother of God — Feast day of the Discovery of the Belt of the Holy Mother of God",
     "observance_ids": [
-     "third_sunday_after_assumption",
+     "third_sunday_of_the_assumption",
      "discovery_of_the_belt_of_the_holy_mother_of_god"
     ],
     "readings": [
@@ -50413,7 +50413,7 @@
     ]
    },
    "-5": {
-    "feast": "Second day of the Fast of Assumption",
+    "feast": "Second day of the Fast of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "assumption_fast_day_2"
     ],
@@ -50423,7 +50423,7 @@
     ]
    },
    "7": {
-    "feast": "Second Sunday of the Assumption",
+    "feast": "Second Sunday of the Assumption of the Holy Mother of God",
     "observance_ids": [
      "second_sunday_of_the_assumption"
     ],
@@ -50496,7 +50496,7 @@
     ]
    },
    "29": {
-    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+    "feast": "Discovery of the Relics of St. Grigoris the Catholicos of Aghvank, and the Holy Fathers Tatoul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits, who reposed at the Monastery of Innaknya",
     "observance_ids": [
      "discovery_of_relics_of"
     ],
@@ -51261,7 +51261,7 @@
     ]
    },
    "52:25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -51294,7 +51294,7 @@
     ]
    },
    "52:23": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -51349,7 +51349,7 @@
     ]
    },
    "51:25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -51456,7 +51456,7 @@
     ]
    },
    "46:24": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -51478,7 +51478,7 @@
     ]
    },
    "51:21": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -51512,7 +51512,7 @@
     ]
    },
    "52:21": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -51673,7 +51673,7 @@
     ]
    },
    "48:23": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -51736,7 +51736,7 @@
     ]
    },
    "48:22": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -51852,7 +51852,7 @@
     ]
    },
    "47:24": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -51942,7 +51942,7 @@
     ]
    },
    "46:23": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -51977,7 +51977,7 @@
     ]
    },
    "46:26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -52031,7 +52031,7 @@
     ]
    },
    "47:21": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -52190,7 +52190,7 @@
     ]
    },
    "49:26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -52286,7 +52286,7 @@
     ]
    },
    "49:25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -52299,7 +52299,7 @@
     ]
    },
    "50:24": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -52510,7 +52510,7 @@
     ]
    },
    "49:24": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -52520,7 +52520,7 @@
     ]
    },
    "50:23": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -52533,7 +52533,7 @@
     ]
    },
    "51:26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -52724,7 +52724,7 @@
     ]
    },
    "48:24": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -52784,7 +52784,7 @@
     ]
    },
    "51:22": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -52807,7 +52807,7 @@
     ]
    },
    "47:26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -52827,7 +52827,7 @@
     ]
    },
    "46:25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -52877,7 +52877,7 @@
     ]
    },
    "52:20": {
-    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
+    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
     "observance_ids": [
      "gregory_and_nicholas_the"
     ],
@@ -52923,7 +52923,7 @@
     ]
    },
    "47:25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -53024,7 +53024,7 @@
     ]
    },
    "48:21": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -53048,7 +53048,7 @@
     ]
    },
    "51:24": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -53176,7 +53176,7 @@
     ]
    },
    "52:22": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -53231,7 +53231,7 @@
     ]
    },
    "52:26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -53296,7 +53296,7 @@
     ]
    },
    "46:21": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -53421,7 +53421,7 @@
     ]
    },
    "48:25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -53650,7 +53650,7 @@
     ]
    },
    "46:22": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -53759,7 +53759,7 @@
     ]
    },
    "49:23": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -53783,7 +53783,7 @@
     ]
    },
    "47:22": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -53837,7 +53837,7 @@
     ]
    },
    "47:23": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -53875,7 +53875,7 @@
     ]
    },
    "49:22": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -53900,7 +53900,7 @@
     ]
    },
    "48:6": {
-    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and Other Nicholas the Bishop and Myron the Bishop",
+    "feast": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
     "observance_ids": [
      "gregory_and_nicholas_the"
     ],
@@ -53936,7 +53936,7 @@
     ]
    },
    "48:26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -54290,7 +54290,7 @@
     ]
    },
    "50:25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -54337,7 +54337,7 @@
     ]
    },
    "50:21": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -54431,7 +54431,7 @@
     ]
    },
    "50:26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],
@@ -54554,7 +54554,7 @@
     ]
    },
    "25": {
-    "feast": "Fourth day of the Fast of St. James the bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+    "feast": "Fourth day of the Fast of St. James the Bishop of Nisibis — Sts. Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
     "observance_ids": [
      "james_nisibis_day_4",
      "eustratius_auxentius_eugenius_orestes"
@@ -54577,7 +54577,7 @@
     ]
    },
    "23": {
-    "feast": "Second day of the Fast of St. James the bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
+    "feast": "Second day of the Fast of St. James the Bishop of Nisibis — Sts. Cornelius the Centurion, Simeon, Martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs That Perished in the East",
     "observance_ids": [
      "james_nisibis_day_2",
      "cornelius_the_centurion_simeon_no_title"
@@ -54666,7 +54666,7 @@
     ]
    },
    "24": {
-    "feast": "Third day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_3"
     ],
@@ -54676,7 +54676,7 @@
     ]
    },
    "21": {
-    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the bishop of Nisibis",
+    "feast": "Third Sunday of Advent — Eve of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "third_sunday_of_advent",
      "eve_of_fast_of_nisibis"
@@ -54710,7 +54710,7 @@
     ]
    },
    "22": {
-    "feast": "First day of the Fast of St. James the bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
+    "feast": "First day of the Fast of St. James the Bishop of Nisibis — Sts. Menas, Hermogenes, Eugraphus and the Poor Men John and Alexis",
     "observance_ids": [
      "james_nisibis_day_1",
      "menas_hermogenes_eugraphus_and"
@@ -54766,7 +54766,7 @@
     ]
    },
    "26": {
-    "feast": "Fifth day of the Fast of St. James the bishop of Nisibis",
+    "feast": "Fifth day of the Fast of St. James the Bishop of Nisibis",
     "observance_ids": [
      "james_nisibis_day_5"
     ],

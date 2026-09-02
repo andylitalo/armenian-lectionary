@@ -50,13 +50,14 @@ def _served_season_name(catalog_id, fallback):
 # Season names following "Nth day of ...". Longest-first so specific ones win.
 _SEASONS = sorted([
     "Great Lent", "Eastertide", "Advent", "Pentecost", "Transfiguration",
+    "the Transfiguration",
     "Assumption", "Nativity", "Easter",
     "the Fast of the Catechumens", "the Fast of Catechumens",
     "the Fast of the Holy Cross", "the Fast of the Transfiguration",
     "the Fast of the Transifiguration",           # sacredtradition.am spelling variant
-    "the Fast of Assumption", "the Fast of Nativity", "the Fast of Advent",
+    "the Fast of the Assumption", "the Fast of Nativity", "the Fast of Advent",
     _served_season_name("illuminator_fast_day_1", "the Fast of St. Gregory the Illuminator"),
-    _served_season_name("james_nisibis_day_1", "the Fast of St. James the bishop of Nisibis"),
+    _served_season_name("james_nisibis_day_1", "the Fast of St. James the Bishop of Nisibis"),
     _served_season_name("second_day_of_pentecost", "the Fast of Prophet Elijah"),
     "the Assumption",
 ], key=len, reverse=True)
@@ -66,7 +67,8 @@ _ANCHORS = sorted([
     "Holy Cross of Varag", "the Exaltation of the Holy Cross", "the Holy Cross",
     "Holy Cross", "Holy Etchmiadzin", "Holy Nativity", "the Assumption",
     "the Great Barekendan", "Great Barekendan", "Advent", "Pentecost", "Great Lent",
-    "Nativity", "Transfiguration", "Assumption", "Eastertide", "Exaltation", "Holy",
+    "Nativity", "Transfiguration", "the Transfiguration", "Assumption", "Eastertide",
+    "Exaltation", "Holy",
 ], key=len, reverse=True)
 
 def _served_eve_name(catalog_id, fallback):
@@ -89,8 +91,8 @@ _EVES = sorted([
         "eve_of_fast_of_prophet_elijah", "Eve of Fast of Prophet Elijah"),
     "Eve of Fast of Saint Gregory the Illuminator", _served_eve_name(
         "eve_of_fast_of_illuminator", "Eve of Fast of Saint Gregory the Illuminator"),
-    "Eve of Fast of Saint James the bishop of Nisibis", _served_eve_name(
-        "eve_of_fast_of_nisibis", "Eve of Fast of Saint James the bishop of Nisibis"),
+    "Eve of Fast of Saint James the Bishop of Nisibis", _served_eve_name(
+        "eve_of_fast_of_nisibis", "Eve of Fast of Saint James the Bishop of Nisibis"),
     "Eve of the Nativity and Theophany of our Lord Jesus Christ",
     "Eve of Fast of Assumption of the Holy Mother of God", _served_eve_name(
         "eve_of_fast_of_assumption", "Eve of Fast of Assumption of the Holy Mother of God"),

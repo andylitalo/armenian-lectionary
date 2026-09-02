@@ -129,6 +129,26 @@ _RETIRED_IDS = {
     "eugenia_the_virgin_her_2":
         "a packed day; the Eugenia and Eugenius canons each keep an id",
     "atom_and_his_soldiers_2": "a packed day; Atom and the Sukiasians each keep an id",
+    # Renamed pre-release, before any tagged version shipped these ids to PyPI (CLAUDE.md's
+    # own carve-out: "Retiring was only available because the catalog's keys had never been
+    # served as ids at this point"). The Transfiguration/Assumption Sunday families start
+    # counting at "Second" (see docs/observance-name-corrections.md's zkni write-up), so the
+    # served English has always read "... of the Transfiguration"/"... of the Assumption" --
+    # these ids were minted with "after_" before that was noticed, drifting from the text
+    # they name. Renamed to "of_the_..." to match the served text and the sibling Holy Cross
+    # family, which was minted correctly the first time (second_sunday_of_the_holy_cross).
+    "second_sunday_after_transfiguration": "renamed to second_sunday_of_the_transfiguration",
+    "third_sunday_after_transfiguration": "renamed to third_sunday_of_the_transfiguration",
+    "fourth_sunday_after_transfiguration": "renamed to fourth_sunday_of_the_transfiguration",
+    "fifth_sunday_after_transfiguration": "renamed to fifth_sunday_of_the_transfiguration",
+    "sixth_sunday_after_transfiguration": "renamed to sixth_sunday_of_the_transfiguration",
+    "seventh_sunday_after_transfiguration": "renamed to seventh_sunday_of_the_transfiguration",
+    # Assumption's 2nd and 5th Sundays were minted "of_the_assumption" after the article was
+    # normalized; the 3rd and 4th were minted earlier, before that pass, and kept "after_"
+    # even once their own served text became "... of the Assumption" too. Same rename, same
+    # reason as the Transfiguration ids above -- brought in line with their own siblings.
+    "third_sunday_after_assumption": "renamed to third_sunday_of_the_assumption",
+    "fourth_sunday_after_assumption": "renamed to fourth_sunday_of_the_assumption",
 }
 
 

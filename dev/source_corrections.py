@@ -248,12 +248,17 @@ POSITION_LABEL_FIXES_BY_DATE = {
 # --------------------------------------------------------------------------- #
 _AMBIGUOUS_FAST_LABEL = "Fast day"
 
+# The ambiguous marker first_sunday_after_pentecost_label resolves, post apply_ground_truth
+# (a no-op on this text: the reviewed name agrees with the source, "Second Sunday after
+# Pentecost" both before and after the fold).
+_AMBIGUOUS_SECOND_SUNDAY_LABEL = "Second Sunday after Pentecost"
+
 # anchor -> day-offset window (inclusive) where the source's bare "Fast day" stands for a
 # more specific, named fast. Pentecost+21 / Heesnak+21 is each fast's Sunday eve; Mon-Fri
 # follow.
 _NAMED_FAST_WINDOWS = {
     "PE": (22, 26),   # Fast of St. Gregory the Illuminator
-    "HE": (22, 26),   # Fast of St. James the bishop of Nisibis
+    "HE": (22, 26),   # Fast of St. James the Bishop of Nisibis
     "EX": (8, 12),    # Fast of the Holy Cross of Varag
 }
 
@@ -279,6 +284,30 @@ def named_fast_label(date_iso):
         offset = (d - _POSITION_ANCHORS[akey](d)).days
         if lo <= offset <= hi:
             return _position_label(d)
+    return None
+
+
+# The source's own English for Pentecost+7 -- "Second Sunday after Pentecost" -- is
+# byte-identical to Pentecost+14's, one string standing for two different weeks. The
+# Armenian settles it the same way Ephesus/Pentecost's own "Fiftieth day" do (docs section
+# 1): it numbers these Ա/Բ/Գ... (First/Second/Third...), never repeating a number, so the
+# more specific statement -- Pentecost+7 is the FIRST Sunday, not a second "Second" --
+# stands. Scoped to this one offset, the same idiom as ``named_fast_label`` above:
+# ``POSITION_LABEL_FIXES``'s plain text substitution cannot express "the same source string
+# means something different depending on which week it falls in".
+def first_sunday_after_pentecost_label(date_iso):
+    """"First Sunday after Pentecost" on Pentecost+7 specifically, else ``None``.
+
+    Delegates to ``engine._position_label`` for the reason ``named_fast_label`` does: the
+    window and template already live in ``engine._POSITION_FAMILIES``.
+    """
+    if not date_iso:
+        return None
+    from armenian_lectionary.engine import _POSITION_ANCHORS, _position_label
+
+    d = datetime.date.fromisoformat(date_iso)
+    if (d - _POSITION_ANCHORS["PE"](d)).days == 7:
+        return _position_label(d)
     return None
 
 
@@ -368,8 +397,8 @@ def named_fast_label_hy(date_iso):
 # --------------------------------------------------------------------------- #
 _WEEKLY_FAST_LABELS = ("Wednesday Fast", "Friday Fast")
 _WEEKLY_FAST_LABELS_HY = {
-    "Wednesday Fast": "Չորեքշաբթիի պահք",
-    "Friday Fast": "Ուրբաթի պահք",
+    "Wednesday Fast": "Պահք Չորեքշաբաթւոյ",
+    "Friday Fast": "Պահք Ուրբաթու",
 }
 
 
@@ -405,15 +434,50 @@ def normalize_position_label(text, date_iso=""):
         text = text.replace(wrong, right)
     for wrong, right in POSITION_LABEL_FIXES_BY_DATE.get(date_iso, {}).items():
         text = text.replace(wrong, right)
-    specific = named_fast_label(date_iso) or weekly_fast_label(date_iso)
+    specific = (named_fast_label(date_iso) or weekly_fast_label(date_iso)
+                or first_sunday_after_pentecost_label(date_iso))
     if specific:
         # Component-exact, not a substring replace: the bare label is what is ambiguous,
         # and rewriting it inside a longer component would corrupt a name that merely
-        # contains the words.
+        # contains the words. Only one of the two markers is ever actually present in a
+        # given day's text, so checking both is safe.
         text = _OBSERVANCE_SEP.join(
-            specific if part.strip() == _AMBIGUOUS_FAST_LABEL else part
+            specific if part.strip() in (_AMBIGUOUS_FAST_LABEL, _AMBIGUOUS_SECOND_SUNDAY_LABEL)
+            else part
             for part in text.split(_OBSERVANCE_SEP))
     return text
+
+
+_FIRST_SUNDAY_AFTER_PENTECOST_HY_FALLBACK = "Ա կիւրակէ զկնի Հոգեգալստեան"
+
+
+def first_sunday_after_pentecost_label_hy(date_iso):
+    """The Armenian half of :func:`first_sunday_after_pentecost_label`: "Ա կիւրակէ ..."
+    on Pentecost+7 specifically, else ``None``.
+
+    Needed because ``dev/hy_discrepancy.source_feast``'s global ``ground_truth_hy_fixes``
+    fold cannot express "the same raw Armenian text means something different depending on
+    the date" any more than the plain English substitution could (see
+    ``first_sunday_after_pentecost_label``): the ``second_sunday_after_pentecost`` review
+    row is free to record a sampled Pentecost+7 occurrence as ITS ``source_hy`` (the review
+    tool derives that column from whichever cached day it finds first for the shared
+    English text), which would otherwise fold every genuine Pentecost+7 "Ա" occurrence to
+    "Բ" globally, including this one. This override runs after that fold, the same way
+    ``named_fast_label_hy`` overrides ``Պահք``, and restores it on this one offset. The
+    REAL serving path is unaffected either way -- it resolves Armenian by id, not through
+    this dev-only audit fold -- so this exists only to keep
+    ``dev/hy_discrepancy.py``/``tests/test_observance_name_hy_raw.py`` from reporting a
+    stale sampling artifact as a contradiction.
+    """
+    if not date_iso:
+        return None
+    from armenian_lectionary.engine import _POSITION_ANCHORS
+
+    d = datetime.date.fromisoformat(date_iso)
+    if (d - _POSITION_ANCHORS["PE"](d)).days == 7:
+        return _catalog_text("first_sunday_after_pentecost",
+                              _FIRST_SUNDAY_AFTER_PENTECOST_HY_FALLBACK, lang="hy")
+    return None
 
 
 def normalize_position_label_hy(text, date_iso=""):
@@ -423,6 +487,15 @@ def normalize_position_label_hy(text, date_iso=""):
     ambiguous, and rewriting it inside a longer component would corrupt a name that merely
     contains it.
     """
+    first_sunday = first_sunday_after_pentecost_label_hy(date_iso)
+    if first_sunday and text:
+        # Not component-exact like the rest: what needs replacing here is whatever the
+        # global ground_truth_hy_fixes fold turned the raw "Ա..." into (see the function's
+        # docstring) -- a fixed, known string, checked directly rather than matched against
+        # an ambiguous marker shared by other days.
+        text = _OBSERVANCE_SEP.join(
+            first_sunday if part.strip() == "Բ կիւրակէ զկնի Հոգեգալստեան" else part
+            for part in text.split(_OBSERVANCE_SEP))
     specific = named_fast_label_hy(date_iso) or weekly_fast_label_hy(date_iso)
     if not text or not specific:
         return text

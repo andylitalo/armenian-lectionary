@@ -172,10 +172,21 @@ def is_declined_hy(text):
 _DECLINED_FAST_MARKERS_EN = frozenset({"Fast day", "Feast day"})
 _DECLINED_FAST_MARKERS_HY = frozenset({"Պահք"})
 
+# A specific position label the rule does not produce, declared for the same reason as the
+# markers above -- distinct from them because this is not a generic marker restating what
+# another name already establishes; it is the source's OWN plain day count, correctly left
+# unrenamed. "Seventh day of Pentecost" (Pentecost+6, a Saturday) sits one day past the Fast
+# of the Prophet Elijah, which is Mon-Fri only (the source marks each of those five days
+# "Fast day" and carries none on this Saturday, every sampled year) -- so
+# engine._POSITION_FAMILIES' PE-fast family stops at offset 5 and this day is served by the
+# validated table alone, exactly as the source states it. See
+# docs/observance-name-corrections.md section 6b.
+_DECLINED_POSITION_LABELS_EN = frozenset({"Seventh day of Pentecost"})
+
 
 def is_declined_en(text):
     """True if the English component is one the engine deliberately does not serve."""
-    return text in _DECLINED_FAST_MARKERS_EN
+    return text in _DECLINED_FAST_MARKERS_EN or text in _DECLINED_POSITION_LABELS_EN
 
 
 # --------------------------------------------------------------------------- #
@@ -205,11 +216,6 @@ _RECURRING_OBSERVANCES = {
         "Feast of the Holy Church, kept on three days of the Exaltation octave",
     "feast_of_the_holy_cross":
         "Feast of the Holy Cross, kept on three days of the Exaltation octave",
-    "second_sunday_after_pentecost":
-        "the source prints no FIRST Sunday after Pentecost -- Pentecost itself is the "
-        "first -- so Pentecost+7 and Pentecost+14 both carry this ordinal, in the source "
-        "as well as here. Verified on every cached year; see _position_label's docstring "
-        "on the counting rule not being exact on every occurrence",
     "tenth_sunday_of_the_holy_cross":
         "boundary artifact: the last Sunday before Advent, counted from the Holy Cross "
         "(September) while the year is cut at Heesnak (November). When Heesnak falls late "
