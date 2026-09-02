@@ -24,7 +24,7 @@ with no install step.
 | `armenian_lectionary/observance_name.py` | `ObservanceName` — the ordered components of a day's name, and the **only** place the ` — ` component separator is spelled at runtime. Owns the encoding (split/join, drop sets, placement, immutability); holds no domain opinion, so predicates like `engine._is_position_component` are passed in. See "A day's name is a list, not a string" below. |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`). A **projection** of the `id` column of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`) and for the public `"ObservanceIds"` field (`engine._observance_ids`). A **projection** of the `id` column of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -348,6 +348,14 @@ entries ground truth contradicts.
 `dev/saint_schedule.py` **is** still excluded, and measurably so: regenerating it changes 155
 days' tier or name and 72 days' readings. That drift predates this work and needs its own
 reviewed change.
+
+**The id is served, not just internal.** `compute_armenian_lectionary` carries it as
+`"ObservanceIds"` — the stable id of each component of `"Liturgical Day"`, in order,
+independent of `language` — so a consumer can key on it directly instead of reimplementing
+this resolution against the display string (`engine._observance_ids`, a plain reverse
+lookup through `_OBSERVANCE_CATALOG.id_of` over the already-served, post-overlay label; see
+`tests/test_observance_ids.py`). All-or-nothing, like every other id lookup here: `[]` if
+any component has no catalog entry.
 
 ### A day's name is a list, not a string
 

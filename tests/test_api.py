@@ -27,6 +27,23 @@ class TestReadingsAPI(unittest.TestCase):
                 self.assertEqual(mode, expected)
                 self.assertIs(type(mode["Number"]), int)
 
+    def test_observance_ids_survive_json_boundary_and_do_not_vary_by_language(self):
+        expected = [
+            "eleventh_sunday_of_the_holy_cross", "presentation_of_the_holy_mother",
+            "eve_of_fast_of_advent",
+        ]
+        ids_by_language = {}
+        for language in ("en", "hy"):
+            with self.subTest(language=language):
+                response = self.client.get(
+                    "/readings?date=2004-11-21&language=" + language
+                )
+                self.assertEqual(response.status_code, 200)
+                ids = response.get_json()["ObservanceIds"]
+                self.assertEqual(ids, expected)
+                ids_by_language[language] = ids
+        self.assertEqual(ids_by_language["en"], ids_by_language["hy"])
+
     def test_season_is_not_served(self):
         """Season is an internal tier-provenance label, not a liturgical fact, and no
         consumer relies on it -- it must not leak onto the wire even though the

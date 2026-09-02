@@ -158,7 +158,7 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
 ```json
 {
   "Date": "2026-06-01",
-  "Liturgical Day": "Saints Hripsime and her companions",
+  "Liturgical Day": "Sts. Hripsime and Her Companions",
   "Mode": {
     "Tone": "ԱԿ",
     "Number": 2
@@ -177,6 +177,7 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
     {"book": "Isaiah", "start_chapter": 61, "start_verse": 10,
      "end_chapter": 62, "end_verse": 3, "citation": "Isaiah 61.10-62.3"}
   ],
+  "ObservanceIds": ["hripsime_and_her_companions"],
   "Source": "validated-table"
 }
 ```
@@ -188,6 +189,27 @@ sub-reference, so a consumer does not have to parse citation strings like
 independent of `language`. A composite citation — currently only the Daniel/Azariah
 reading, `"Daniel 3.1-23, Azariah. 1-68"` — expands to two dicts sharing that
 `citation` string, the back-pointer to their shared `ReadingsList` entry.
+
+### Stable observance ids
+
+`"Liturgical Day"` is corrected data, not a stable key — a spelling fix or a source
+correction can change the string a given day serves. `"ObservanceIds"` gives the stable
+catalog id of each component of `"Liturgical Day"`, in the same order, independent of
+`language`. It is what a consumer should persist instead of the display string:
+
+```python
+>>> compute_armenian_lectionary(datetime.date(2004, 11, 21))["Liturgical Day"]
+'Eleventh Sunday of the Holy Cross — Presentation of the Holy Mother of God to the Temple — Eve of the Fast of Advent'
+>>> compute_armenian_lectionary(datetime.date(2004, 11, 21))["ObservanceIds"]
+['eleventh_sunday_of_the_holy_cross', 'presentation_of_the_holy_mother', 'eve_of_fast_of_advent']
+```
+
+A day is identified by the whole ordered list, not any single id — some days name two to
+four observances at once (a calendar position, a commemoration, an eve note), and no
+separator is imposed on the list itself. An id, once published, keeps meaning the same
+observance forever; a day whose components cannot all be resolved (a thin install with no
+catalog data, for instance) gets `[]` rather than a list with a hole in it, since a partial
+list would silently identify a different day than the one actually served.
 
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.
@@ -218,6 +240,7 @@ print(reading["Mode"])             # {'Tone': 'ԱՁ', 'Number': 1}
 print(reading["ReadingsList"])     # ['John 20.1-18', 'Acts of the Apostles 1.1-8', ...]
 print(reading["ReadingsRefs"][0])  # {'book': 'John', 'start_chapter': 20, 'start_verse': 1,
                                     #  'end_chapter': 20, 'end_verse': 18, 'citation': 'John 20.1-18'}
+print(reading["ObservanceIds"])    # ['resurrection_of_our_lord'] -- stable across renames
 
 # Armenian names: pass language="hy" (default "en"). ReadingsRefs' "book" stays English.
 hy = armenian_lectionary.compute_armenian_lectionary(datetime.date(2026, 4, 5), language="hy")

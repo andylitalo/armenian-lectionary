@@ -6,6 +6,28 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
 ## [Unreleased]
 
+### Added
+- **`ObservanceIds`: a key that survives a name correction.** Every result now carries
+  `"ObservanceIds"`, the stable catalog id of each `"Liturgical Day"` component, in the
+  same order, independent of `language`. A day is identified by the whole ordered list —
+  some days name two to four observances at once (a calendar position, a commemoration,
+  an eve note) — and no separator is imposed, so a consumer joins them however it likes.
+
+  This is the field the weekly-fast-split entry below already assumes: `Liturgical Day`
+  is corrected data, not a stable interface, and 1.3.0 demonstrated the cost of treating it
+  as one — 158 of 429 of bahk's stored feast names went unreachable when the engine got
+  more right. An id, once published, keeps meaning the same observance forever (see
+  "Observance ids are stated, not derived" in CLAUDE.md); `ObservanceIds` is what makes
+  that guarantee something a consumer can actually key on instead of reimplementing.
+
+  Resolved from the served English label, before `language="hy"` translation, so the ids
+  are independent of `language` by construction. All or nothing: an unresolvable component
+  yields `[]` rather than a list with a hole in it, since a partial list would silently
+  identify a different day than the one served. Additive and non-breaking — no existing
+  field changes. Locked by `tests/test_observance_ids.py`, including a corpus-wide sweep
+  asserting every day 2001–2027 resolves completely and round-trips back to its own name,
+  and an HTTP/JSON boundary test in both languages.
+
 ### Changed (BREAKING — warrants a major bump at release)
 - **The ordinary-time weekly fast says which weekday it is**
   ([docs §6c](docs/observance-name-corrections.md)). `Fast day` / `Պահք` becomes
@@ -117,6 +139,57 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   disagree with the rule *and* suppressed the split on them (the marker matches
   `_POSITION_COMPONENT_RE`, so it was taken for an already-resolved position).
   `tests/test_coordinate_index.py`'s table-vs-rule sweep now covers those days.
+
+- **Pentecost+7 and Pentecost+14 no longer share one id.** Both had been served as `Second
+  Sunday of Pentecost` under a single id — the source's own Armenian numbers these Sundays
+  Ա/Բ/Գ… without ever repeating, confirmed stable across all 26 cached years. Pentecost+7
+  now gets its own id, `first_sunday_after_pentecost`, and renders `First Sunday after
+  Pentecost` / `Ա կիւրակէ...` in both languages; Pentecost+14 keeps
+  `second_sunday_after_pentecost`.
+
+- **The Fast of the Prophet Elijah is Monday–Friday, not Monday–Saturday.** It had been
+  served Mon–Sat, but the source only marks Mon–Fri as the fast and states nothing for the
+  Saturday (`Seventh day of Pentecost`, bare, in every sampled year). Narrowed accordingly
+  and the two affected ratchets adjusted; day labels now keep the source's own `Nth day of
+  Pentecost` count alongside the fast name rather than discarding it (`Second day of
+  Pentecost (Fast of the Prophet Elijah)`).
+
+- **A round of naming/punctuation consistency fixes**
+  ([docs §5, §10](docs/observance-name-corrections.md)): the Sixth Sunday of Great Lent's
+  punctuation before "Sunday of the Advent"; St. John the Forerunner's `(the Baptist)` →
+  `(Baptist)`, matching every other component naming him; the Fifth Sunday of Eastertide's
+  missing "of Eastertide"; the Assumption family's missing "the," now stating its full name
+  ("Assumption of the Holy Mother of God") consistently across the fast, octave, and Sunday
+  forms in both languages; St. James the Bishop of Nisibis's capitalization; the restored
+  article in "and the Other Nicholas"; St. Gregory the Illuminator's two Pit feasts recased
+  consistently; the Transfiguration family's Armenian brought in line with the main feast's
+  own heading; and the Discovery of the Relics of St. Grigoris's dropped closing clause
+  ("who reposed at the Monastery of Innaknya"), previously missing from the English
+  entirely. `docs/observance-names-2026.tsv` / `-2027.tsv` regenerated and verified against
+  every fix.
+
+- **8 observance-catalog ids corrected from `after` to `of`**
+  (`second_sunday_after_transfiguration` … `seventh_sunday_after_transfiguration`,
+  `third_sunday_after_assumption`, `fourth_sunday_after_assumption`) — minted before the
+  Transfiguration/Assumption Sunday families' own served text was confirmed to read `of`,
+  not `after` ([docs §5](docs/observance-name-corrections.md#observance-ids-renamed-pre-release)).
+  Renamed to match their sibling Holy Cross family (`second_sunday_of_the_holy_cross`, …),
+  which was minted correctly the first time.
+
+- **109 more observance-catalog ids renamed for consistency with the text they name** (e.g.
+  `sargis` → `sarkis`, `feast_of_all_sts` → `feast_of_all_saints`; full mapping and
+  rationale for each in `dev/build_observance_catalog.py`'s `_RETIRED_IDS`), and
+  `cornelius_the_centurion_simeon_no_title` merged into `cornelius_the_centurion_simeon`
+  (same observance; the source just omits Simeon's title on one spelling). 97 of the 109
+  were already present in the v1.3.0-shipped catalog — that file ships inside the wheel
+  (`artifacts = ["armenian_lectionary/data/*.json"]` in `pyproject.toml`) but was never
+  part of the documented public interface (absent from `__init__.py`'s `__all__`, the
+  README, and the 1.3.0 changelog), so this is a correction rather than a break of anything
+  ever promised; each old id is recorded in `_RETIRED_IDS` regardless, in case anyone has
+  already read one directly out of the bundled JSON. No reading or display text changed
+  except the Cornelius merge. New `tests/test_retired_ids.py` checks every declared
+  redirect resolves to a live id, never targets itself, and never chains through another
+  retired id instead of landing on the current one.
 
 ## [1.3.0] — 2026-08-12
 
