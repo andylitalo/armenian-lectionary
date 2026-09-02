@@ -6,6 +6,8 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
 ## [Unreleased]
 
+## [2.0.0] — 2026-09-02
+
 ### Added
 - **`ObservanceIds`: a key that survives a name correction.** Every result now carries
   `"ObservanceIds"`, the stable catalog id of each `"Liturgical Day"` component, in the
