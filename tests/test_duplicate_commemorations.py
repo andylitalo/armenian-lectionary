@@ -47,9 +47,9 @@ REPAIRED_CANONS = (
     "mark_the_bishop_pionius",           # the pre-Lent cohort case, fixed first
     "gordius_polyeuctus_and_grigoris",   # by stated override, not by own-day detection
     "hermit_sts_tryphon_barsauma",
-    "andrew_the_general_and",
+    "andrew_the_general_and_martyrs",
     "vahan_of_goghtn",
-    "eugenia_the_virgin_her",
+    "eugenia_the_virgin_and_family",
     "gregory_the_theologian",
     "hermit_st_anton",                   # closed by the TrSaintB override (docs 7e)
 )
@@ -174,7 +174,7 @@ class TestUnpackingMatchesTheSource(unittest.TestCase):
         self.assertEqual(text("cyricus_and_his_mother"),
                          self._day("2027-07-27")["Liturgical Day"])
         self.assertEqual(
-            text("fathers_sts_athanasius_and") + _OBSERVANCE_SEP + text("gregory_the_theologian"),
+            text("fathers_athanasius_and_cyril") + _OBSERVANCE_SEP + text("gregory_the_theologian"),
             self._day("2027-07-31")["Liturgical Day"])
 
     def test_the_table_collision_is_closed(self):

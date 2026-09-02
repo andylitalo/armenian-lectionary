@@ -236,7 +236,7 @@ _RECURRING_OBSERVANCES = {
     "remembrance_of_the_dead":
         "kept the day after each of the five tabernacle feasts -- Nativity, Easter, "
         "Transfiguration, Assumption, Exaltation",
-    "feast_of_the_holy":
+    "feast_of_the_holy_church":
         "Feast of the Holy Church, kept on three days of the Exaltation octave",
     "feast_of_the_holy_cross":
         "Feast of the Holy Cross, kept on three days of the Exaltation octave",

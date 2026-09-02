@@ -291,7 +291,7 @@ class TestDecemberNinthFastMarker(unittest.TestCase):
     Self-contained -- no reference cache.
     """
 
-    _CONCEPTION = text("feast_of_the_conception")
+    _CONCEPTION = text("feast_of_the_conception_of_st_mary")
 
     def test_marker_is_fast_on_advent_fast_weekdays(self):
         """Dec 9 OUTSIDE the Nisibis window: the feast alone, and never the "Feast day" typo.
@@ -328,7 +328,7 @@ class TestDecemberNinthFastMarker(unittest.TestCase):
                 label = compute_armenian_lectionary(d)["Liturgical Day"]
                 self.assertEqual(
                     label,
-                    f"{ordinal} day of {bare_en('james_nisibis_day_1')}"
+                    f"{ordinal} day of {bare_en('james_nisibis_fast_day_1')}"
                     f" — {self._CONCEPTION}")
 
     def test_no_marker_on_thursday_or_saturday(self):

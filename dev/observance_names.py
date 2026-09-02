@@ -68,7 +68,7 @@ _SEASONS = sorted([
     "the Fast of the Transifiguration",           # sacredtradition.am spelling variant
     "the Fast of the Assumption", "the Fast of Nativity", "the Fast of Advent",
     _served_season_name("illuminator_fast_day_1", "the Fast of St. Gregory the Illuminator"),
-    _served_season_name("james_nisibis_day_1", "the Fast of St. James the Bishop of Nisibis"),
+    _served_season_name("james_nisibis_fast_day_1", "the Fast of St. James the Bishop of Nisibis"),
     _served_season_name("second_day_of_pentecost", "the Fast of Prophet Elijah"),
     # The Assumption's own two families each need the LIVE, currently-served form
     # alongside the short bare forms above -- the fast now reads "the Fast of the

@@ -365,10 +365,10 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
                     hy = compute_armenian_lectionary(
                         day, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(f"{word} day of {bare_en('james_nisibis_day_1')}"),
+                        en.startswith(f"{word} day of {bare_en('james_nisibis_fast_day_1')}"),
                         f"{day} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր {bare_hy('james_nisibis_day_1')}"),
+                        hy.startswith(f"{letter} օր {bare_hy('james_nisibis_fast_day_1')}"),
                         f"{day} served {hy!r}")
 
     def test_the_day_count_matches_the_eve_that_names_the_fast(self):
@@ -381,8 +381,8 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
         """
         heesnak = self._heesnak(2026)
         eve = heesnak + datetime.timedelta(days=21)
-        for lang, fast in (("en", bare_en("james_nisibis_day_1")),
-                           ("hy", bare_hy("james_nisibis_day_1"))):
+        for lang, fast in (("en", bare_en("james_nisibis_fast_day_1")),
+                           ("hy", bare_hy("james_nisibis_fast_day_1"))):
             with self.subTest(lang=lang):
                 eve_label = compute_armenian_lectionary(
                     eve, language=lang)["Liturgical Day"]
@@ -413,7 +413,7 @@ class TestNisibisFastIsNamedInBothLanguages(unittest.TestCase):
             with self.subTest(year=year):
                 served = compute_armenian_lectionary(
                     datetime.date(year, 12, 9), language="hy")["Liturgical Day"]
-                self.assertIn(f"օր {bare_hy('james_nisibis_day_1')}", served)
+                self.assertIn(f"օր {bare_hy('james_nisibis_fast_day_1')}", served)
 
 
 class TestProphetElijahFastIsNamedInBothLanguages(unittest.TestCase):
@@ -533,10 +533,10 @@ class TestVaragFastIsNamedInBothLanguages(unittest.TestCase):
                     hy = compute_armenian_lectionary(
                         d, language="hy")["Liturgical Day"]
                     self.assertTrue(
-                        en.startswith(f"{word} day of {bare_en('cross_varag_day_1')}"),
+                        en.startswith(f"{word} day of {bare_en('cross_varag_fast_day_1')}"),
                         f"{d} served {en!r}")
                     self.assertTrue(
-                        hy.startswith(f"{letter} օր {bare_hy('cross_varag_day_1')}"),
+                        hy.startswith(f"{letter} օր {bare_hy('cross_varag_fast_day_1')}"),
                         f"{d} served {hy!r}")
 
     def test_the_eve_still_names_the_fast(self):
@@ -733,8 +733,8 @@ class TestNisibisAndElijahRenamesResolveThroughTheCatalog(unittest.TestCase):
         # (that occurrence isn't index-covered), not a wrong one; picking a clean year keeps
         # this test about the rename mechanism, not about composite-day tier exclusion.
         heesnak = self._heesnak(2017)
-        ids = ("james_nisibis_day_1", "james_nisibis_day_2", "james_nisibis_day_3",
-               "james_nisibis_day_4", "james_nisibis_day_5")
+        ids = ("james_nisibis_fast_day_1", "james_nisibis_fast_day_2", "james_nisibis_fast_day_3",
+               "james_nisibis_fast_day_4", "james_nisibis_fast_day_5")
         for n, sid in enumerate(ids, start=1):
             yield sid, heesnak + datetime.timedelta(days=21 + n)
 
@@ -770,11 +770,11 @@ class TestNisibisAndElijahRenamesResolveThroughTheCatalog(unittest.TestCase):
         entry can supply the served ``hy`` text.
         """
         heesnak = self._heesnak(2017)      # clean year -- see _nisibis_cases
-        nisibis_day = heesnak + datetime.timedelta(days=21 + 2)      # james_nisibis_day_2
+        nisibis_day = heesnak + datetime.timedelta(days=21 + 2)      # james_nisibis_fast_day_2
         pentecost = self._pentecost(2026)
         elijah_day = pentecost + datetime.timedelta(days=1)          # second_day_of_pentecost
 
-        for sid, day in (("james_nisibis_day_2", nisibis_day),
+        for sid, day in (("james_nisibis_fast_day_2", nisibis_day),
                          ("second_day_of_pentecost", elijah_day)):
             with self.subTest(id=sid):
                 original_hy = self._orig_catalog[sid]["hy"]
