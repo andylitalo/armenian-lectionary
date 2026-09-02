@@ -84,6 +84,30 @@ def ids_for_text(text, date=None):
     return ids
 
 
+def text_for_id(sid):
+    """The catalog's current English text for ``sid`` -- the inverse of
+    :func:`ids_for_text`.
+
+    An id never moves (CLAUDE.md: "the id is the only thing about it a rename cannot
+    move"), so once a caller already knows the id, this is the only lookup that stays
+    correct no matter how many times the observance has been renamed since. Matching on
+    stored TEXT instead only ever recognizes the text's own original form -- fine the
+    first time a component is corrected, silently wrong the second time, because the
+    stored text is then neither the source spelling nor necessarily the current one.
+    :func:`dev.refresh_artifact_names.refresh` is the caller this matters for.
+
+    Raises KeyError, naming the id, if it is not (or no longer) in the catalog -- e.g. a
+    retired id nothing migrated off of.
+    """
+    catalog = _catalog()
+    if sid not in catalog:
+        raise KeyError(
+            f"no observance_catalog.json entry for id {sid!r}; "
+            "rerun dev/build_observance_catalog.py, or check "
+            "build_observance_catalog._RETIRED_IDS")
+    return catalog[sid]["en"]
+
+
 # --------------------------------------------------------------------------- #
 # Packed pools
 #
