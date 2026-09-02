@@ -34,6 +34,7 @@ ORD = (r"(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|"
        r"Fortieth|Forty [A-Z][a-z]+|Fiftieth)")
 
 _ORD_DAY_OF_RE = re.compile(r"^\w+ day of (.+)$")
+_ORD_SUNDAY_RE = re.compile(r"^\w+ Sunday (?:after|of) (.+)$")
 
 
 def _served_season_name(catalog_id, fallback):
@@ -44,6 +45,16 @@ def _served_season_name(catalog_id, fallback):
     """
     entry = engine._OBSERVANCE_CATALOG.get(catalog_id)
     m = _ORD_DAY_OF_RE.match(entry["en"]) if entry else None
+    return m.group(1) if m else fallback
+
+
+def _served_anchor_name(catalog_id, fallback):
+    """The bare anchor name behind an "{ord} Sunday after/of <anchor>" catalog id, read
+    from the LIVE catalog -- the ``_ANCHORS`` twin of :func:`_served_season_name`, for the
+    same reason and the same drift. Falls back to ``fallback`` if the catalog or the id is
+    absent (a thin checkout)."""
+    entry = engine._OBSERVANCE_CATALOG.get(catalog_id)
+    m = _ORD_SUNDAY_RE.match(entry["en"]) if entry else None
     return m.group(1) if m else fallback
 
 
@@ -59,6 +70,16 @@ _SEASONS = sorted([
     _served_season_name("illuminator_fast_day_1", "the Fast of St. Gregory the Illuminator"),
     _served_season_name("james_nisibis_day_1", "the Fast of St. James the Bishop of Nisibis"),
     _served_season_name("second_day_of_pentecost", "the Fast of Prophet Elijah"),
+    # The Assumption's own two families each need the LIVE, currently-served form
+    # alongside the short bare forms above -- the fast now reads "the Fast of the
+    # Assumption of the Holy Mother of God", the day-count family "the Assumption of the
+    # Holy Mother of God", neither of which the bare "Assumption"/"the Assumption" alone
+    # is a prefix match for once the season name itself grows past them. Same drift
+    # _served_season_name already closes for Illuminator/Nisibis/Elijah above; the short
+    # forms stay, exactly as EVES keeps both below, since the source's own raw dump may
+    # still be the short form even after the served text is renamed.
+    _served_season_name("assumption_fast_day_1", "the Fast of the Assumption"),
+    _served_season_name("second_day_of_assumption", "the Assumption"),
     "the Assumption",
 ], key=len, reverse=True)
 
@@ -69,6 +90,10 @@ _ANCHORS = sorted([
     "the Great Barekendan", "Great Barekendan", "Advent", "Pentecost", "Great Lent",
     "Nativity", "Transfiguration", "the Transfiguration", "Assumption", "Eastertide",
     "Exaltation", "Holy",
+    # Same reason as _SEASONS just above: the Assumption Sunday family now reads "Nth
+    # Sunday of the Assumption of the Holy Mother of God", past what the bare "the
+    # Assumption" above still matches.
+    _served_anchor_name("second_sunday_of_the_assumption", "the Assumption"),
 ], key=len, reverse=True)
 
 def _served_eve_name(catalog_id, fallback):
