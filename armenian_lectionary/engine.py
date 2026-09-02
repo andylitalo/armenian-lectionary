@@ -1246,18 +1246,18 @@ _PACKED_POOLS = (
     # First Volume pp.461-462 -- inserted after the Theophany octave.
     frozenset({
         "hermit_st_anton", "hermit_sts_tryphon_barsauma", "theodosius_and_the_children",
-        "cyricus_and_his_mother", "vahan_of_goghtn", "fathers_sts_athanasius_and",
+        "cyricus_and_his_mother", "vahan_of_goghtn", "fathers_athanasius_and_cyril",
         "gregory_the_theologian", "gordius_polyeuctus_and_grigoris",
-        "eugenia_the_virgin_her", "eugenius_macarius_valerius_candidus",
+        "eugenia_the_virgin_and_family", "eugenius_macarius_valerius_candidus",
         # Andrew's own canon is at p.527, in the Assumption cycle -- but the Second
         # Volume's preface (Seventh, p.556) names him among the feasts that "frequently
         # shift and are celebrated in various and different intervals", and the source
         # does pack him into the January run (2009-01-27). Declared here on that warrant,
         # not on a First Volume page.
-        "andrew_the_general_and",
+        "andrew_the_general_and_martyrs",
     }),
     # First Volume pp.464-465 -- the pre-Lent martyr cohort.
-    frozenset({"sargis", "atom", "mark_the_bishop_pionius", "sukias", "voskian",
+    frozenset({"sarkis", "atom", "mark_the_bishop_pionius", "sukiasian", "voskian",
                "ghevond"}),
 )
 
@@ -1421,12 +1421,12 @@ _POSITION_IDS = {
         15: 'fifteenth_day_of_great_lent', 16: 'sixteenth_day_of_great_lent',
         17: 'seventeenth_day_of_great_lent', 18: 'eighteenth_day_of_great_lent',
         19: 'nineteenth_day_of_great_lent', 20: 'twentieth_day_of_great_lent',
-        22: 'twenty_second_day_of', 23: 'twenty_third_day_of_great_lent',
+        22: 'twenty_second_day_of_great_lent', 23: 'twenty_third_day_of_great_lent',
         25: 'twenty_fifth_day_of_great_lent', 26: 'twenty_sixth_day_of_great_lent',
-        27: 'twenty_seventh_day_of_great_lent', 29: 'twenty_ninth_day_of',
+        27: 'twenty_seventh_day_of_great_lent', 29: 'twenty_ninth_day_of_great_lent',
         30: 'thirtieth_day_of_great_lent', 31: 'thirty_first_day_of_great_lent',
         32: 'thirty_second_day_of_great_lent', 33: 'thirty_third_day_of_great_lent',
-        34: 'thirty_fourth_day_of_great_lent', 36: 'thirty_sixth_day_of',
+        34: 'thirty_fourth_day_of_great_lent', 36: 'thirty_sixth_day_of_great_lent',
         37: 'thirty_seventh_day_of_great_lent', 38: 'thirty_eighth_day_of_great_lent',
         39: 'thirty_ninth_day_of_great_lent', 40: 'fortieth_day_of_great_lent',
         41: 'forty_first_day_of_great_lent',
@@ -1440,10 +1440,10 @@ _POSITION_IDS = {
         5: 'fifth_day_of_easter', 6: 'sixth_day_of_easter', 7: 'seventh_day_of_easter',
     },
     '{ord} Sunday of Eastertide: Sunday of the World Church (Green Sunday)': {
-        3: 'third_sunday_sunday_of',
+        3: 'third_sunday_of_eastertide',
     },
     '{ord} Sunday of Eastertide (Red Sunday)': {4: 'fourth_sunday_red_sunday'},
-    '{ord} Sunday of Eastertide': {5: 'fifth_sunday', 6: 'sixth_sunday_of_eastertide'},
+    '{ord} Sunday of Eastertide': {5: 'fifth_sunday_of_eastertide', 6: 'sixth_sunday_of_eastertide'},
     '{ord} Sunday of Eastertide (Second Palm Sunday)': {7: 'seventh_sunday_of_eastertide'},
     '{ord} day of Eastertide': {
         9: 'ninth_day_of_eastertide', 10: 'tenth_day_of_eastertide',
@@ -1451,16 +1451,16 @@ _POSITION_IDS = {
         13: 'thirteenth_day_of_eastertide', 14: 'fourteenth_day_of_eastertide',
         16: 'sixteenth_day_of_eastertide', 17: 'seventeenth_day_of_eastertide',
         18: 'eighteenth_day_of_eastertide', 19: 'nineteenth_day_of_eastertide',
-        20: 'twentieth_day_of_eastertide', 21: 'twenty_first_day_of',
-        23: 'twenty_third_day_of', 24: 'twenty_fourth_day_of', 25: 'twenty_fifth_day_of',
-        26: 'twenty_sixth_day_of', 27: 'twenty_seventh_day_of', 28: 'twenty_eighth_day_of',
-        30: 'thirtieth_day_of_eastertide', 31: 'thirty_first_day_of',
-        32: 'thirty_second_day_of', 33: 'thirty_third_day_of', 34: 'thirty_fourth_day_of',
-        35: 'thirty_fifth_day_of', 37: 'thirty_seventh_day_of', 38: 'thirty_eighth_day_of',
-        39: 'thirty_ninth_day_of', 40: 'fortieth_day_of_eastertide', 41: 'forty_first_day_of',
-        42: 'forty_second_day_of', 44: 'forty_fourth_day_of', 45: 'forty_fifth_day_of',
-        46: 'forty_sixth_day_of', 47: 'forty_seventh_day_of', 48: 'forty_eighth_day_of',
-        49: 'forty_ninth_day_of',
+        20: 'twentieth_day_of_eastertide', 21: 'twenty_first_day_of_eastertide',
+        23: 'twenty_third_day_of_eastertide', 24: 'twenty_fourth_day_of_eastertide', 25: 'twenty_fifth_day_of_eastertide',
+        26: 'twenty_sixth_day_of_eastertide', 27: 'twenty_seventh_day_of_eastertide', 28: 'twenty_eighth_day_of_eastertide',
+        30: 'thirtieth_day_of_eastertide', 31: 'thirty_first_day_of_eastertide',
+        32: 'thirty_second_day_of_eastertide', 33: 'thirty_third_day_of_eastertide', 34: 'thirty_fourth_day_of_eastertide',
+        35: 'thirty_fifth_day_of_eastertide', 37: 'thirty_seventh_day_of_eastertide', 38: 'thirty_eighth_day_of_eastertide',
+        39: 'thirty_ninth_day_of_eastertide', 40: 'fortieth_day_of_eastertide', 41: 'forty_first_day_of_eastertide',
+        42: 'forty_second_day_of_eastertide', 44: 'forty_fourth_day_of_eastertide', 45: 'forty_fifth_day_of_eastertide',
+        46: 'forty_sixth_day_of_eastertide', 47: 'forty_seventh_day_of_eastertide', 48: 'forty_eighth_day_of_eastertide',
+        49: 'forty_ninth_day_of_eastertide',
     },
     '{ord} day of Pentecost (Fast of the Prophet Elijah)': {
         2: 'second_day_of_pentecost', 3: 'third_day_of_pentecost',
@@ -1499,8 +1499,8 @@ _POSITION_IDS = {
         4: 'holy_cross_fast_day_4', 5: 'holy_cross_fast_day_5',
     },
     '{ord} day of the Fast of the Holy Cross of Varag': {
-        1: 'cross_varag_day_1', 2: 'cross_varag_day_2', 3: 'cross_varag_day_3',
-        4: 'cross_varag_day_4', 5: 'cross_varag_day_5',
+        1: 'cross_varag_fast_day_1', 2: 'cross_varag_fast_day_2', 3: 'cross_varag_fast_day_3',
+        4: 'cross_varag_fast_day_4', 5: 'cross_varag_fast_day_5',
     },
     '{ord} Sunday of the Holy Cross': {
         2: 'second_sunday_of_the_holy_cross', 3: 'third_sunday_of_the_holy_cross',
@@ -1546,8 +1546,8 @@ _POSITION_IDS = {
         4: 'illuminator_fast_day_4', 5: 'illuminator_fast_day_5',
     },
     '{ord} day of the Fast of St. James the Bishop of Nisibis': {
-        1: 'james_nisibis_day_1', 2: 'james_nisibis_day_2', 3: 'james_nisibis_day_3',
-        4: 'james_nisibis_day_4', 5: 'james_nisibis_day_5',
+        1: 'james_nisibis_fast_day_1', 2: 'james_nisibis_fast_day_2', 3: 'james_nisibis_fast_day_3',
+        4: 'james_nisibis_fast_day_4', 5: 'james_nisibis_fast_day_5',
     },
     'Fast day': {None: 'fast_day'},
     'Wednesday Fast': {None: 'wednesday_fast'},
@@ -2244,7 +2244,7 @@ def _nativity_octave_composite(d, tables=None):
 
 _PRELENT_COHORT = (
     # (id, easter_offset, may_shift, label, source readings)
-    ("sargis", -64, True,
+    ("sarkis", -64, True,
      "St. Sarkis the Warrior and His Son Mardiros and His Fourteen Soldiers",
      ["Proverbs 3.13-17", "Isaiah 41.1-3",
       "St. Paul's Epistle to the Ephesians 6.10-17", "Luke 21.10-19"]),
@@ -2255,7 +2255,7 @@ _PRELENT_COHORT = (
      "Sts. Atom and His Soldiers",
      ["Wisdom 6.12-21", "Isaiah 18.7-19.7",
       "St. Paul's Second Epistle to the Corinthians 4.10-5.5", "John 16.1-5"]),
-    ("sukias", -61, False,
+    ("sukiasian", -61, False,
      "Holy Sukiasian Martyrs",
      ["Proverbs 22.1-12", "Isaiah 56.6-7",
       "St. Paul's Epistle to the Hebrews 11.32-40", "Luke 12.4-8"]),
@@ -3657,7 +3657,7 @@ def _tier_nativity_octave(d):
     if no is None:
         return None
     return _TierResult(
-        label=_catalog_text("feast_of_naming_of",
+        label=_catalog_text("feast_of_naming_of_our_lord",
                             "Feast of the Naming of Our Lord Jesus Christ"),
         season="Nativity Octave", readings=no, source="generative-composite",
         confidence="best-guess", note=_NOTE_NATIVITY_OCTAVE)

@@ -5,7 +5,7 @@ re-running the source-text correction chain on whatever text was currently store
 looking that text up in the catalog to recover its id. That works exactly once: the first
 time a component is corrected, the stored text is still ``source_en`` and the chain finds
 it. The second time the SAME component is corrected -- as happened twice in one session to
-``discovery_of_relics_of`` (missing clause, then a transliteration fix) -- the stored text
+``discovery_of_relics_of_st_grigoris`` (missing clause, then a transliteration fix) -- the stored text
 is the FIRST correction, which is neither ``source_en`` nor the catalog's current text, so
 the chain silently passes it through unchanged and the id lookup then crashes naming text
 the catalog no longer has.
@@ -61,17 +61,17 @@ class TestASecondCorrectionResolvesById(_SyntheticCatalog):
     def test_a_label_one_generation_stale_is_corrected_without_raising(self):
         """The exact failure mode: the stored label is the FIRST correction, the catalog
         has moved on to a second one, and the entry still carries the (unchanged) id."""
-        self._use_catalog({"discovery_of_relics_of": "...who reposed at Innaknya"})
+        self._use_catalog({"discovery_of_relics_of_st_grigoris": "...who reposed at Innaknya"})
         schedule = {"PN": {"sequence": [
             {"id": "discovery_of_relics", "label": "...who reposed at Innaknia.",
-             "observance_ids": ["discovery_of_relics_of"]},
+             "observance_ids": ["discovery_of_relics_of_st_grigoris"]},
         ]}}
 
         changes = refresh_mod.refresh(schedule)
 
         entry = schedule["PN"]["sequence"][0]
         self.assertEqual(entry["label"], "...who reposed at Innaknya")
-        self.assertEqual(entry["observance_ids"], ["discovery_of_relics_of"])
+        self.assertEqual(entry["observance_ids"], ["discovery_of_relics_of_st_grigoris"])
         self.assertIn(("...who reposed at Innaknia.", "...who reposed at Innaknya"), changes)
 
     def test_a_label_already_current_is_left_untouched(self):

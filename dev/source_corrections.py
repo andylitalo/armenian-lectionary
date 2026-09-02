@@ -108,7 +108,7 @@ _FEAST_CANON_RULES = (
     ("cyricus_and_his_mother", "Sts. Cyricus and His Mother Julitta",
      lambda c: c.startswith(("Saints Cyricus and His Mother Julitta",
                               "Sts. Cyricus and His Mother Julitta"))),
-    ("fathers_sts_athanasius_and", "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
+    ("fathers_athanasius_and_cyril", "Holy Fathers Sts. Athanasius and Cyril of Alexandria",
      lambda c: c.startswith(("Holy Fathers Saints Athanasius and Cyril of Alexandria",
                               "Holy Fathers Sts. Athanasius and Cyril of Alexandria"))),
     ("vahan_of_goghtn", "St. Vahan of Goghtn",
@@ -118,7 +118,7 @@ _FEAST_CANON_RULES = (
     ("eugenius_macarius_valerius_candidus", "Sts. Eugenius, Macarius, Valerius, Candidus and Aquila",
      lambda c: c.startswith(("Saints Eugenios", "Saints Eugenius",
                               "Sts. Eugenios", "Sts. Eugenius"))),
-    ("sargis", "St. Sarkis the Warrior and His Son Mardiros and His Fourteen Soldiers",
+    ("sarkis", "St. Sarkis the Warrior and His Son Mardiros and His Fourteen Soldiers",
      lambda c: c.startswith(("Saint Sargis the Warrior", "St. Sargis the Warrior",
                               "St. Sarkis the Warrior"))),
     ("atom", "Sts. Atom and His Soldiers",
@@ -131,7 +131,7 @@ _FEAST_CANON_RULES = (
     # with itself, with no rule to reproduce. The engine serves the title-case form (the
     # one the hy name map is keyed on); folding on case makes the two score as the same
     # commemoration, which they are.
-    ("presentation_of_the_holy", "Presentation of the Holy Mother of God to the Temple",
+    ("presentation_of_the_holy_mother", "Presentation of the Holy Mother of God to the Temple",
      lambda c: c.lower().startswith("presentation of the holy mother of god to the temple")),
     # St. Theodore the Recruit: the scrape says "the General", the Tonats'oyts table
     # "the Tyron" (Greek Tiron/Recruit) -- the same soldier-martyr.

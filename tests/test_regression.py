@@ -489,7 +489,7 @@ class TestPreLentCohort(unittest.TestCase):
         # Sargis onto Atom's Monday (Jan 21); the senior general wins the merge.
         res = compute_armenian_lectionary(datetime.date(2008, 1, 21))
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn(text("sargis"), res["Liturgical Day"])
+        self.assertIn(text("sarkis"), res["Liturgical Day"])
         self.assertEqual(res["ReadingsList"], list(_ref_readings(2008, 1, 21)))
 
     def test_2022_presentation_collision_atom_wins(self):
@@ -512,7 +512,7 @@ class TestPreLentCohort(unittest.TestCase):
         # shipped from the fixed offset regardless of any cache.
         res = compute_armenian_lectionary(datetime.date(2027, 1, 23))  # Sargis 2027 (E-64)
         self.assertEqual(res["Source"], "first-volume-cohort")
-        self.assertIn(text("sargis"), res["Liturgical Day"])
+        self.assertIn(text("sarkis"), res["Liturgical Day"])
 
 
 if __name__ == "__main__":
