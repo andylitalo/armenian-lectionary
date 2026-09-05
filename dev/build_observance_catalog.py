@@ -9,7 +9,10 @@ This is a PROJECTION, not a derivation. Every id is STATED, in the ``id`` column
 dev/observance_name_review.tsv, next to the human decision about what the observance should be
 called::
 
-    {row.id: {"en": row.approved_en, "hy": row.approved_hy}}
+    {row.id: {"en": row.approved_en, "hy": row.approved_hy, "is_fast": row.is_fast == "x"}}
+
+``is_fast`` is a second, independent human decision on the same row -- whether this
+observance is a fast day -- carried straight through rather than derived from the text.
 
 That is the whole build. It matters that ids are stated rather than computed from text:
 an id derived from display text moves when the text is corrected, and a consumer keying
@@ -717,7 +720,10 @@ def build_catalog(ground_truth):
                             "belongs on each half, not on the join")
             continue
         by_id[sid], by_en[en] = source, sid
-        catalog[sid] = {"en": en, "hy": hy.replace(_OBSERVANCE_SEP, _INTERNAL_SEP)}
+        catalog[sid] = {
+            "en": en, "hy": hy.replace(_OBSERVANCE_SEP, _INTERNAL_SEP),
+            "is_fast": row.get("is_fast", "").strip().lower() == "x",
+        }
 
     return catalog, problems
 

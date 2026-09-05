@@ -24,7 +24,7 @@ with no install step.
 | `armenian_lectionary/observance_name.py` | `ObservanceName` — the ordered components of a day's name, and the **only** place the ` — ` component separator is spelled at runtime. Owns the encoding (split/join, drop sets, placement, immutability); holds no domain opinion, so predicates like `engine._is_position_component` are passed in. See "A day's name is a list, not a string" below. |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`) and for the public `"ObservanceIds"` field (`engine._observance_ids`). A **projection** of the `id` column of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy, is_fast}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`), the public `"ObservanceIds"` field (`engine._observance_ids`), and the public `"FastIds"` field (`engine._fast_ids`, via `ObservanceCatalog.fast_ids`). A **projection** of the `id` (and `is_fast`) columns of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" and "Fasts are marked per observance id" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -356,6 +356,41 @@ this resolution against the display string (`engine._observance_ids`, a plain re
 lookup through `_OBSERVANCE_CATALOG.id_of` over the already-served, post-overlay label; see
 `tests/test_observance_ids.py`). All-or-nothing, like every other id lookup here: `[]` if
 any component has no catalog entry.
+
+### Fasts are marked per observance id
+
+`is_fast` is a second, independent human decision on the same row as `id` in
+`dev/observance_name_review.tsv`: `"x"` if the observance is a fast day, blank otherwise.
+It is reviewed and frozen exactly like every other column there — `dev/build_ground_truth.py`
+carries it into `observance_name_ground_truth.json` untouched (no composition: a composite
+row has no `id`, so it has nothing to carry `is_fast` on either), and
+`dev/build_observance_catalog.py` stamps it into `observance_catalog.json` as a boolean
+alongside `en`/`hy`.
+
+`ObservanceCatalog.fast_ids` (`armenian_lectionary/observance_catalog.py`) is the set of
+every id the review marked, built once in `__init__` from the entries the instance was
+constructed with — the same "cannot go stale" pattern as the catalog's two text indexes.
+`engine._fast_ids` filters a day's already-resolved `"ObservanceIds"` through it, and
+`compute_armenian_lectionary` serves the result as `"FastIds"` — the subset of a day's own
+observance ids that are fasts, always a list, `[]` on a day with none. Because it is a
+filter over `ObservanceIds` rather than a second text resolution, it inherits that field's
+all-or-nothing coverage for free: every date `MIN_YEAR`-`MAX_YEAR` fully resolves.
+
+This is deliberately a *human-reviewed, per-id* tag, not a computation from the calendar.
+The engine already has separate, per-*date* fast logic — the weekly Wednesday/Friday split
+and the named-fast-window position labels (`dev/source_corrections._NAMED_FAST_WINDOWS`,
+`engine._BARE_FAST_MARKERS`) — that decides fast-ness from the date directly, with no
+notion of a catalog id. The two are not reconciled here: `FastIds` answers "which of this
+day's *named observances* is a fast", not "is this date a fast day" — a client that wants
+the latter still needs the engine's own calendar logic, not this field. As of this change,
+55 ids are marked: the nine week-long named fasts' per-day ids, the Prophet Elijah fast's
+`Nth day of Pentecost (Fast of the Prophet Elijah)` ids, the weekly split
+(`wednesday_fast`/`friday_fast`), `fast_day`, and `beginning_of_the_fast`. Left for a future
+review pass, deliberately not auto-marked: the ten `eve_of_fast_of_*` ids (a *Barekendan* —
+the feast evening before a fast begins, not itself a fast day), and Great Lent's and Holy
+Week's component ids (Great Lent is literally "the Great Fast", but whether every one of
+its day/Sunday ids — and Palm Sunday itself — should read `is_fast` is a liturgical-practice
+judgment call this change does not make).
 
 ### A day's name is a list, not a string
 

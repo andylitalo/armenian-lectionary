@@ -24,6 +24,9 @@ Each entry:
     id          the observance's frozen catalog id, or "" for a row that is not a single
                 served observance (a whole day, a minority spelling the engine overrides,
                 or the row is a PACKED DAY, whose canons each keep their own id)
+    is_fast     "x" if this observance is a fast day, "" otherwise -- a human decision,
+                carried straight through with no composition (a composite row has no id,
+                so it has nothing to carry this on)
     approved_en the reviewed English text the engine should serve for this component
     status      ok | fixed | review -- review means the note asks an unresolved question;
                 a component may still be served even under review (the source's own text,
@@ -88,6 +91,7 @@ def main():
     for r in rows:
         ground_truth[r["source_en"]] = {
             "id": r["id"],
+            "is_fast": r["is_fast"],
             "approved_en": _compose(r, by_id, "en"),
             "status": r["status"],
             "note": r["note"],

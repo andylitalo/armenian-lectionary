@@ -2872,6 +2872,17 @@ def _observance_ids(label: str) -> list:
     return ids
 
 
+def _fast_ids(observance_ids: list) -> list:
+    """The ids among ``observance_ids`` the human review marked as a fast, in order.
+
+    A filter over ``ObservanceIds``, not a second resolution of ``Liturgical Day`` --
+    the day's ids are already known by the time this runs, and ``ObservanceCatalog.
+    fast_ids`` (built once, at catalog construction) is the membership test.
+    """
+    fast = _OBSERVANCE_CATALOG.fast_ids
+    return [sid for sid in observance_ids if sid in fast]
+
+
 def _localize(result: dict, language: str) -> dict:
     """Translate the human-readable feast and reading names of ``result`` in place.
 
@@ -3322,6 +3333,12 @@ def compute_armenian_lectionary(target_date: datetime.date,
     CLAUDE.md). All or nothing: ``[]`` if any component has no catalog entry, since a
     partial list would silently identify a different day than the one served.
 
+    ``FastIds`` is the subset of ``ObservanceIds`` a human review marked as a fast (see
+    "Fasts are marked per observance id" in CLAUDE.md) -- ``[]`` on a day with no fast
+    component, never omitted. This is a per-*id* human-reviewed tag, distinct from the
+    engine's own per-*date* fast logic (the weekly Wed/Fri split, the named-fast-window
+    position labels); the two are not cross-checked against each other.
+
     Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
     the engine has no validated data and would otherwise return an internal absence-marker
     dressed as a name -- the very strings ``tests/test_observance_contract.py`` forbids inside
@@ -3354,6 +3371,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
     # the catalog's reverse index is keyed on English, and the ids must not vary by
     # language (see tests.test_observance_ids.TestObservanceIdsAreLanguageIndependent).
     result["ObservanceIds"] = _observance_ids(result["Liturgical Day"])
+    result["FastIds"] = _fast_ids(result["ObservanceIds"])
     return _localize(result, language)
 
 

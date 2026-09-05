@@ -16,6 +16,9 @@ Columns:
   days       how many days in 2001-2026 carry this component
   last       latest date carrying it, for looking it up on sacredtradition.am
   source_en  EXACTLY what the source publishes in English, before any correction
+  is_fast    "x" if this observance is a fast day, blank otherwise. A human decision,
+             independent of any name correction -- see engine.py's
+             ``ObservanceCatalog.fast_ids`` and the served ``FastIds`` field.
   approved_en the English the engine must serve. THIS COLUMN IS THE GROUND TRUTH.
   source_hy  the source's own Armenian for the same component, as an independent witness
   approved_hy the Armenian the engine must serve -- the Armenian counterpart of
@@ -58,9 +61,9 @@ change an id that has shipped.
 ``approved_en`` it is carried over, and defaults to ``source_hy`` only on a row that has
 never had one.
 
-Refreshing this file NEVER discards human edits: ``id``, ``approved_en``, ``approved_hy``
-and ``note`` are carried over by ``source_en`` key, and a row whose approved text no longer
-matches what the engine serves is reported rather than overwritten.
+Refreshing this file NEVER discards human edits: ``id``, ``is_fast``, ``approved_en``,
+``approved_hy`` and ``note`` are carried over by ``source_en`` key, and a row whose approved
+text no longer matches what the engine serves is reported rather than overwritten.
 
 Usage:
     python dev/observance_name_review.py             # refresh (preserving edits)
@@ -90,8 +93,8 @@ from armenian_lectionary.engine import (                                # noqa: 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "observance_name_review.tsv")
-FIELDS = ("status", "days", "last", "source_en", "id", "component_ids", "approved_en",
-          "source_hy", "approved_hy", "note")
+FIELDS = ("status", "days", "last", "source_en", "id", "is_fast", "component_ids",
+          "approved_en", "source_hy", "approved_hy", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
 # Each is a name that reads oddly but that nothing available settles: the Armenian is
@@ -550,6 +553,10 @@ def build_rows():
             "last": last[src],
             "source_en": src,
             "id": (prior or {}).get("id") or "",
+            # A human decision, carried over exactly like id/approved_hy: there is no
+            # scrape to refresh it from, so a row that has never been reviewed stays
+            # blank rather than guessing.
+            "is_fast": (prior or {}).get("is_fast") or "",
             "component_ids": component_ids,
             "approved_en": approved,
             "source_hy": source_hy,

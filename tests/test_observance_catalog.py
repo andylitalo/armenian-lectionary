@@ -28,6 +28,10 @@ from armenian_lectionary.observance_catalog import ObservanceCatalog       # noq
 ENTRIES = {
     "nativity_5": {"en": "Fifth day of Nativity", "hy": "Ե օր Ս. Ծննդեան"},
     "vahan": {"en": "St. Vahan of Goghtn", "hy": "Ս. Վահան Գողթնացի"},
+    "nativity_fast_3": {
+        "en": "Third day of the Fast of Nativity", "hy": "Գ օր Ս. Ծննդեան պահոց",
+        "is_fast": True,
+    },
 }
 
 
@@ -69,7 +73,7 @@ class TestTheInterface(unittest.TestCase):
         self.assertEqual(self.catalog["vahan"]["en"], "St. Vahan of Goghtn")
         self.assertEqual(self.catalog.get("absent"), None)
         self.assertEqual(dict(self.catalog.items()), ENTRIES)
-        self.assertEqual(sorted(self.catalog), ["nativity_5", "vahan"])
+        self.assertEqual(sorted(self.catalog), ["nativity_5", "nativity_fast_3", "vahan"])
 
 
 class TestTheIndexesCannotGoStale(unittest.TestCase):
@@ -96,6 +100,36 @@ class TestTheIndexesCannotGoStale(unittest.TestCase):
         """A rename that silently invented an observance would be worse than a failure."""
         with self.assertRaises(KeyError):
             ObservanceCatalog(ENTRIES).replacing("no_such_id", en="X")
+
+
+class TestFastIds(unittest.TestCase):
+    """``fast_ids`` is the same "derived at construction, cannot go stale" pattern as
+    the two text indexes -- see the module docstring."""
+
+    def setUp(self):
+        self.catalog = ObservanceCatalog(ENTRIES)
+
+    def test_fast_ids_holds_only_the_marked_entries(self):
+        self.assertEqual(self.catalog.fast_ids, frozenset({"nativity_fast_3"}))
+
+    def test_an_entry_with_no_is_fast_key_is_not_a_fast(self):
+        """``vahan``/``nativity_5`` carry no ``is_fast`` key at all -- a thin/older
+        catalog entry, not just a false one -- and must not be treated as a fast."""
+        self.assertNotIn("vahan", self.catalog.fast_ids)
+        self.assertNotIn("nativity_5", self.catalog.fast_ids)
+
+    def test_an_empty_catalog_has_no_fast_ids(self):
+        self.assertEqual(ObservanceCatalog().fast_ids, frozenset())
+
+    def test_replacing_preserves_is_fast_by_default(self):
+        renamed = self.catalog.replacing("nativity_fast_3", en="RENAMED")
+        self.assertIn("nativity_fast_3", renamed.fast_ids)
+
+    def test_replacing_can_override_is_fast(self):
+        unmarked = self.catalog.replacing("nativity_fast_3", is_fast=False)
+        self.assertNotIn("nativity_fast_3", unmarked.fast_ids)
+        marked = self.catalog.replacing("vahan", is_fast=True)
+        self.assertIn("vahan", marked.fast_ids)
 
 
 class TestTheOwnDayCacheBelongsToTheCatalog(unittest.TestCase):
