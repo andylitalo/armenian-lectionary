@@ -322,12 +322,12 @@
  "eighteenth_day_of_great_lent": {
   "en": "Eighteenth day of Great Lent",
   "hy": "ԺԸ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "eighth_day_of_great_lent": {
   "en": "Eighth day of Great Lent",
   "hy": "Ը օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "eighth_day_of_nativity": {
   "en": "Eighth day of Nativity",
@@ -347,7 +347,7 @@
  "eleventh_day_of_great_lent": {
   "en": "Eleventh day of Great Lent",
   "hy": "ԺԱ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "eleventh_sunday_of_the_holy_cross": {
   "en": "Eleventh Sunday of the Holy Cross",
@@ -542,12 +542,12 @@
  "fifteenth_day_of_great_lent": {
   "en": "Fifteenth day of Great Lent",
   "hy": "ԺԵ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "fifth_day_of_advent": {
   "en": "Fifth day of Advent",
   "hy": "Ե օր Յիսնակի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "fifth_day_of_assumption": {
   "en": "Fifth day of the Assumption of the Holy Mother of God",
@@ -562,7 +562,7 @@
  "fifth_day_of_great_lent": {
   "en": "Fifth day of Great Lent",
   "hy": "Ե օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "fifth_day_of_nativity": {
   "en": "Fifth day of Nativity",
@@ -597,7 +597,7 @@
  "fifth_sunday_of_great_lent": {
   "en": "Fifth Sunday of Great Lent: Sunday of the Judge",
   "hy": "Ե կիւրակէ Մեծի պահոց (Դատաւորին)",
-  "is_fast": false
+  "is_fast": true
  },
  "fifth_sunday_of_the_assumption": {
   "en": "Fifth Sunday of the Assumption of the Holy Mother of God",
@@ -617,12 +617,12 @@
  "first_day_of_advent": {
   "en": "First day of Advent",
   "hy": "Ա օր Յիսնակի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "first_day_of_great_lent": {
   "en": "First day of Great Lent",
   "hy": "Ա օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "first_sunday_after_nativity": {
   "en": "First Sunday after Nativity",
@@ -652,7 +652,7 @@
  "fortieth_day_of_great_lent": {
   "en": "Fortieth day of Great Lent",
   "hy": "Խ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "forty_eighth_day_of_eastertide": {
   "en": "Forty Eighth day of Eastertide",
@@ -672,7 +672,7 @@
  "forty_first_day_of_great_lent": {
   "en": "Forty First day of Great Lent",
   "hy": "ԽԱ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "forty_fourth_day_of_eastertide": {
   "en": "Forty Fourth day of Eastertide",
@@ -712,7 +712,7 @@
  "fourth_day_of_advent": {
   "en": "Fourth day of Advent",
   "hy": "Դ օր Յիսնակի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "fourth_day_of_assumption": {
   "en": "Fourth day of the Assumption of the Holy Mother of God",
@@ -727,7 +727,7 @@
  "fourth_day_of_great_lent": {
   "en": "Fourth day of Great Lent",
   "hy": "Դ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "fourth_day_of_nativity": {
   "en": "Fourth day of Nativity",
@@ -757,7 +757,7 @@
  "fourth_sunday_of_great_lent": {
   "en": "Fourth Sunday of Great Lent: Sunday of the Steward",
   "hy": "Դ կիւրակէ Մեծի պահոց (Տնտեսին)",
-  "is_fast": false
+  "is_fast": true
  },
  "fourth_sunday_of_the_assumption": {
   "en": "Fourth Sunday of the Assumption of the Holy Mother of God",
@@ -817,32 +817,32 @@
  "great_friday": {
   "en": "Great Friday",
   "hy": "Աւագ ուրբաթ",
-  "is_fast": false
+  "is_fast": true
  },
  "great_monday": {
   "en": "Great Monday",
   "hy": "Աւագ երկուշաբթի",
-  "is_fast": false
+  "is_fast": true
  },
  "great_saturday": {
   "en": "Great Saturday",
   "hy": "Աւագ շաբաթ",
-  "is_fast": false
+  "is_fast": true
  },
  "great_thursday": {
   "en": "Great Thursday",
   "hy": "Աւագ հինգշաբթի",
-  "is_fast": false
+  "is_fast": true
  },
  "great_tuesday": {
   "en": "Great Tuesday",
   "hy": "Աւագ երեքշաբթի",
-  "is_fast": false
+  "is_fast": true
  },
  "great_wednesday": {
   "en": "Great Wednesday",
   "hy": "Աւագ չորեքշաբթի",
-  "is_fast": false
+  "is_fast": true
  },
  "gregory_and_nicholas_wonderworkers": {
   "en": "Sts. Gregory and Nicholas the Wonderworkers, and the Other Nicholas the Bishop and Myron the Bishop",
@@ -1137,7 +1137,7 @@
  "nineteenth_day_of_great_lent": {
   "en": "Nineteenth day of Great Lent",
   "hy": "ԺԹ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "ninth_day_of_assumption": {
   "en": "Ninth day of the Assumption of the Holy Mother of God",
@@ -1152,7 +1152,7 @@
  "ninth_day_of_great_lent": {
   "en": "Ninth day of Great Lent",
   "hy": "Թ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "ninth_sunday_of_the_holy_cross": {
   "en": "Ninth Sunday of the Holy Cross",
@@ -1287,7 +1287,7 @@
  "second_day_of_advent": {
   "en": "Second day of Advent",
   "hy": "Բ օր Յիսնակի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "second_day_of_assumption": {
   "en": "Second day of the Assumption of the Holy Mother of God",
@@ -1302,7 +1302,7 @@
  "second_day_of_great_lent": {
   "en": "Second day of Great Lent",
   "hy": "Բ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "second_day_of_nativity": {
   "en": "Second day of Nativity",
@@ -1337,7 +1337,7 @@
  "second_sunday_of_great_lent": {
   "en": "Second Sunday of Great Lent: Sunday of the Expulsion",
   "hy": "Բ կիւրակէ Մեծի պահոց (Արտաքսման)",
-  "is_fast": false
+  "is_fast": true
  },
  "second_sunday_of_the_assumption": {
   "en": "Second Sunday of the Assumption of the Holy Mother of God",
@@ -1362,7 +1362,7 @@
  "seventeenth_day_of_great_lent": {
   "en": "Seventeenth day of Great Lent",
   "hy": "ԺԷ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "seventh_day_of_assumption": {
   "en": "Seventh day of the Assumption of the Holy Mother of God",
@@ -1427,7 +1427,7 @@
  "sixteenth_day_of_great_lent": {
   "en": "Sixteenth day of Great Lent",
   "hy": "ԺԶ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "sixth_day_of_assumption": {
   "en": "Sixth day of the Assumption of the Holy Mother of God",
@@ -1442,7 +1442,7 @@
  "sixth_day_of_great_lent": {
   "en": "Sixth day of Great Lent",
   "hy": "Զ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "sixth_day_of_nativity": {
   "en": "Sixth day of Nativity",
@@ -1477,7 +1477,7 @@
  "sixth_sunday_of_great_lent": {
   "en": "Sixth Sunday of Great Lent: Sunday of the Advent",
   "hy": "Զ կիւրակէ Մեծի պահոց (Գալստեան)",
-  "is_fast": false
+  "is_fast": true
  },
  "sixth_sunday_of_the_holy_cross": {
   "en": "Sixth Sunday of the Holy Cross",
@@ -1527,7 +1527,7 @@
  "tenth_day_of_great_lent": {
   "en": "Tenth day of Great Lent",
   "hy": "Ժ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "tenth_sunday_of_the_holy_cross": {
   "en": "Tenth Sunday of the Holy Cross",
@@ -1572,7 +1572,7 @@
  "third_day_of_advent": {
   "en": "Third day of Advent",
   "hy": "Գ օր Յիսնակի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "third_day_of_assumption": {
   "en": "Third day of the Assumption of the Holy Mother of God",
@@ -1587,7 +1587,7 @@
  "third_day_of_great_lent": {
   "en": "Third day of Great Lent",
   "hy": "Գ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "third_day_of_nativity": {
   "en": "Third day of Nativity",
@@ -1627,7 +1627,7 @@
  "third_sunday_of_great_lent": {
   "en": "Third Sunday of Great Lent: Sunday of the Prodigal Son",
   "hy": "Գ կիւրակէ Մեծի պահոց (Անառակին)",
-  "is_fast": false
+  "is_fast": true
  },
  "third_sunday_of_the_assumption": {
   "en": "Third Sunday of the Assumption of the Holy Mother of God",
@@ -1652,7 +1652,7 @@
  "thirteenth_day_of_great_lent": {
   "en": "Thirteenth day of Great Lent",
   "hy": "ԺԳ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirtieth_day_of_eastertide": {
   "en": "Thirtieth day of Eastertide",
@@ -1662,7 +1662,7 @@
  "thirtieth_day_of_great_lent": {
   "en": "Thirtieth day of Great Lent",
   "hy": "Լ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_eighth_day_of_eastertide": {
   "en": "Thirty Eighth day of Eastertide",
@@ -1672,7 +1672,7 @@
  "thirty_eighth_day_of_great_lent": {
   "en": "Thirty Eighth day of Great Lent",
   "hy": "ԼԸ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_fifth_day_of_eastertide": {
   "en": "Thirty Fifth day of Eastertide",
@@ -1687,7 +1687,7 @@
  "thirty_first_day_of_great_lent": {
   "en": "Thirty First day of Great Lent",
   "hy": "ԼԱ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_fourth_day_of_eastertide": {
   "en": "Thirty Fourth day of Eastertide",
@@ -1697,7 +1697,7 @@
  "thirty_fourth_day_of_great_lent": {
   "en": "Thirty Fourth day of Great Lent",
   "hy": "ԼԴ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_ninth_day_of_eastertide": {
   "en": "Thirty Ninth day of Eastertide",
@@ -1707,7 +1707,7 @@
  "thirty_ninth_day_of_great_lent": {
   "en": "Thirty Ninth day of Great Lent",
   "hy": "ԼԹ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_second_day_of_eastertide": {
   "en": "Thirty Second day of Eastertide",
@@ -1717,7 +1717,7 @@
  "thirty_second_day_of_great_lent": {
   "en": "Thirty Second day of Great Lent",
   "hy": "ԼԲ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_seventh_day_of_eastertide": {
   "en": "Thirty Seventh day of Eastertide",
@@ -1727,12 +1727,12 @@
  "thirty_seventh_day_of_great_lent": {
   "en": "Thirty Seventh day of Great Lent",
   "hy": "ԼԷ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_sixth_day_of_great_lent": {
   "en": "Thirty Sixth day of Great Lent",
   "hy": "ԼԶ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "thirty_third_day_of_eastertide": {
   "en": "Thirty Third day of Eastertide",
@@ -1742,7 +1742,7 @@
  "thirty_third_day_of_great_lent": {
   "en": "Thirty Third day of Great Lent",
   "hy": "ԼԳ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "tiridates_trdat_the_king": {
   "en": "Sts. Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht",
@@ -1797,7 +1797,7 @@
  "twelfth_day_of_great_lent": {
   "en": "Twelfth day of Great Lent",
   "hy": "ԺԲ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "twelve_apostles_and_paul": {
   "en": "Twelve Holy Apostles of Christ and St. Paul, the Thirteenth Apostle",
@@ -1822,7 +1822,7 @@
  "twentieth_day_of_great_lent": {
   "en": "Twentieth day of Great Lent",
   "hy": "Ի օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "twenty_eighth_day_of_eastertide": {
   "en": "Twenty Eighth day of Eastertide",
@@ -1837,7 +1837,7 @@
  "twenty_fifth_day_of_great_lent": {
   "en": "Twenty Fifth day of Great Lent",
   "hy": "ԻԵ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "twenty_first_day_of_eastertide": {
   "en": "Twenty First day of Eastertide",
@@ -1852,17 +1852,17 @@
  "twenty_fourth_day_of_great_lent": {
   "en": "Twenty Fourth day of Great Lent (Median day)",
   "hy": "ԻԴ օր Մեծի պահոց: Միջինք",
-  "is_fast": false
+  "is_fast": true
  },
  "twenty_ninth_day_of_great_lent": {
   "en": "Twenty Ninth day of Great Lent",
   "hy": "ԻԹ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "twenty_second_day_of_great_lent": {
   "en": "Twenty Second day of Great Lent",
   "hy": "ԻԲ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "twenty_seventh_day_of_eastertide": {
   "en": "Twenty Seventh day of Eastertide",
@@ -1872,7 +1872,7 @@
  "twenty_seventh_day_of_great_lent": {
   "en": "Twenty Seventh day of Great Lent",
   "hy": "ԻԷ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "twenty_sixth_day_of_eastertide": {
   "en": "Twenty Sixth day of Eastertide",
@@ -1882,7 +1882,7 @@
  "twenty_sixth_day_of_great_lent": {
   "en": "Twenty Sixth day of Great Lent",
   "hy": "ԻԶ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "twenty_third_day_of_eastertide": {
   "en": "Twenty Third day of Eastertide",
@@ -1892,7 +1892,7 @@
  "twenty_third_day_of_great_lent": {
   "en": "Twenty Third day of Great Lent",
   "hy": "ԻԳ օր Մեծի պահոց",
-  "is_fast": false
+  "is_fast": true
  },
  "vahan_of_goghtn": {
   "en": "St. Vahan of Goghtn",
