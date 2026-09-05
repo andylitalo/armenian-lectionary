@@ -139,5 +139,25 @@ class TestTheOwnDayCacheBelongsToTheCatalog(unittest.TestCase):
         self.assertEqual(self._orig.own_day_cache, warmed)
 
 
+class TestObservanceById(unittest.TestCase):
+    """``engine.observance_by_id`` -- a flat id -> text lookup, not a date computation."""
+
+    KNOWN_ID = "advent_fast_day_1"
+    KNOWN_EN = "First day of the Fast of Advent"
+    KNOWN_HY = "Ա օր Յիսնակի պահոց"
+
+    def setUp(self):
+        if not engine._OBSERVANCE_CATALOG:
+            self.skipTest("observance catalog not present")
+
+    def test_known_id_returns_current_text(self):
+        self.assertEqual(
+            engine.observance_by_id(self.KNOWN_ID),
+            {"id": self.KNOWN_ID, "en": self.KNOWN_EN, "hy": self.KNOWN_HY})
+
+    def test_unknown_id_returns_none(self):
+        self.assertIsNone(engine.observance_by_id("no_such_id"))
+
+
 if __name__ == "__main__":
     unittest.main()

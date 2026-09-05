@@ -93,6 +93,20 @@ class TestReadingsAPI(unittest.TestCase):
                 self.assertEqual(first["citation"], "John 20.1-18")
                 self.assertIs(type(first["start_chapter"]), int)
 
+    def test_known_observance_id_returns_names(self):
+        response = self.client.get("/observances/advent_fast_day_1")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {
+            "Id": "advent_fast_day_1",
+            "English": "First day of the Fast of Advent",
+            "Armenian": "Ա օր Յիսնակի պահոց",
+        })
+
+    def test_unknown_observance_id_is_a_404(self):
+        response = self.client.get("/observances/not_a_real_id")
+        self.assertEqual(response.status_code, 404)
+        self.assertIn("error", response.get_json())
+
 
 if __name__ == "__main__":
     unittest.main()

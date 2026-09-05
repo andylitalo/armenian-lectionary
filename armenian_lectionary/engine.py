@@ -2607,6 +2607,21 @@ def _catalog_text(sid, default, lang="en"):
     return _OBSERVANCE_CATALOG.text_of(sid, default, lang)
 
 
+def observance_by_id(observance_id: str) -> Optional[dict]:
+    """The catalog's current ``{"id", "en", "hy"}`` for ``observance_id``, or ``None``
+    if the id is unknown (or the catalog is absent -- a thin checkout).
+
+    A flat id -> text lookup, not a date computation: resolves exactly one component
+    id (a canon, a position label, an eve note -- never a composite "Liturgical Day"
+    string; see ``OBSERVANCE_SEP`` in ``observance_name.py``) to whatever text the
+    catalog currently serves for it.
+    """
+    entry = _OBSERVANCE_CATALOG.get(observance_id)
+    if entry is None:
+        return None
+    return {"id": observance_id, "en": entry.get("en"), "hy": entry.get("hy")}
+
+
 def _observance_id_from_readings(readings, kind):
     """A stable key for an offset-determined observance, derived from its own (immutable)
     readings rather than its (renameable) display text -- never needs freezing or

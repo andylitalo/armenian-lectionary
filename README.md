@@ -214,6 +214,28 @@ list would silently identify a different day than the one actually served.
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.
 
+### `GET /observances/<id>`
+
+Look up a single observance's current display name(s) by its stable catalog id (a
+feast, fast, calendar-position label, or eve note — one component, never a whole
+composite `"Liturgical Day"` string). Useful when a consumer already holds an id
+(e.g. from a prior `/readings` response) and wants to re-fetch just that
+component's current text without recomputing a date. Example:
+
+```bash
+curl "https://lectionary.andylitalo.com/observances/advent_fast_day_1"
+```
+
+```json
+{
+  "Id": "advent_fast_day_1",
+  "English": "First day of the Fast of Advent",
+  "Armenian": "Ա օր Յիսնակի պահոց"
+}
+```
+
+An unknown id returns HTTP 404 with `{"error": ...}`.
+
 Requests are rate-limited per client IP (default **60/min, 600/hour**);
 exceeding a limit returns HTTP 429. Limits are configurable via
 `LECTIONARY_RATE_LIMITS`.

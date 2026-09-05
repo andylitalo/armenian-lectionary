@@ -12,7 +12,7 @@ from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 
 from armenian_lectionary import (
-    compute_armenian_lectionary, MAX_YEAR, MIN_YEAR, SUPPORTED_LANGUAGES,
+    compute_armenian_lectionary, observance_by_id, MAX_YEAR, MIN_YEAR, SUPPORTED_LANGUAGES,
 )
 
 # Supported date range. Readings are validated for 2001-2027 so far; the range is
@@ -77,7 +77,9 @@ def index():
             "language": "en (default) or hy for Armenian (optional; alias: lang)",
         },
         "supported_range": {"min_year": MIN_YEAR, "max_year": MAX_YEAR},
-        "example": "/readings?date=2026-04-05&language=hy"
+        "example": "/readings?date=2026-04-05&language=hy",
+        "observances_endpoint": "/observances/<observance_id>",
+        "observances_example": "/observances/advent_fast_day_1",
     })
 
 
@@ -126,6 +128,19 @@ def readings():
     # date-based, tier-independent season before this could be served again.
     result.pop("Season", None)
     return jsonify(result)
+
+
+@app.route("/observances/<observance_id>")
+def observance(observance_id):
+    """Return the current display name(s) for a single observance id."""
+    entry = observance_by_id(observance_id)
+    if entry is None:
+        return jsonify({"error": f"Unknown observance id {observance_id!r}."}), 404
+    return jsonify({
+        "Id": entry["id"],
+        "English": entry["en"],
+        "Armenian": entry["hy"],
+    })
 
 
 if __name__ == "__main__":
