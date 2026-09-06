@@ -980,37 +980,37 @@
  "great_friday": {
   "en": "Great Friday",
   "hy": "Աւագ ուրբաթ",
-  "is_comm": true,
+  "is_comm": false,
   "is_fast": true
  },
  "great_monday": {
   "en": "Great Monday",
   "hy": "Աւագ երկուշաբթի",
-  "is_comm": true,
+  "is_comm": false,
   "is_fast": true
  },
  "great_saturday": {
   "en": "Great Saturday",
   "hy": "Աւագ շաբաթ",
-  "is_comm": true,
+  "is_comm": false,
   "is_fast": true
  },
  "great_thursday": {
   "en": "Great Thursday",
   "hy": "Աւագ հինգշաբթի",
-  "is_comm": true,
+  "is_comm": false,
   "is_fast": true
  },
  "great_tuesday": {
   "en": "Great Tuesday",
   "hy": "Աւագ երեքշաբթի",
-  "is_comm": true,
+  "is_comm": false,
   "is_fast": true
  },
  "great_wednesday": {
   "en": "Great Wednesday",
   "hy": "Աւագ չորեքշաբթի",
-  "is_comm": true,
+  "is_comm": false,
   "is_fast": true
  },
  "gregory_and_nicholas_wonderworkers": {

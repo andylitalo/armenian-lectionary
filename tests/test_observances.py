@@ -9,8 +9,9 @@ Three things these tests exist to hold, in descending order of what a regression
 cost:
 
   * **the attributes are independent.** Neither mark is the other's negation -- both are
-    true on Holy Week, both false on an ordinal-day label -- so neither may ever be
-    computed from the other. One date is pinned per quadrant, plus the set relations.
+    true on a named Lenten Sunday, both false on an ordinal-day label -- so neither may
+    ever be computed from the other. One date is pinned per quadrant, plus the set
+    relations.
   * **the names still join back to ``Liturgical Day``**, in both languages. That is what
     lets a consumer stop splitting the display string.
   * **the ids agree with ``ObservanceIds``** on every date, since that field is now a
@@ -30,7 +31,8 @@ from armenian_lectionary import compute_armenian_lectionary                # noq
 from armenian_lectionary.engine import _OBSERVANCE_SEP                     # noqa: E402
 
 # One date per quadrant of (is_fast x is_comm), which is the whole argument for two marks.
-GREAT_FRIDAY = datetime.date(2026, 4, 3)          # both, on one id
+GREAT_FRIDAY = datetime.date(2026, 4, 3)          # a fast beside a commemoration
+LENTEN_SUNDAY = datetime.date(2026, 3, 1)         # both marks, on one id
 WEEKLY_FAST_DAY = datetime.date(2026, 1, 14)      # "Wednesday Fast" -- fast, not a comm
 PLAIN_POSITION_DAY = datetime.date(2026, 1, 8)    # "Third day of Nativity" -- neither
 # "Fifth Sunday of Eastertide - Appearance of the Holy Cross": a bare position label
@@ -50,6 +52,14 @@ class TestObservanceEntryShape(unittest.TestCase):
             "is_fast": False,
             "is_comm": True,
         })
+
+    def test_the_only_component_may_be_an_eve(self):
+        """Jan 5 serves the eve and nothing else, so leaving eves unmarked would give the
+        Nativity vigil no commemoration at all. The same holds for Poon Barekendan
+        (`eve_of_great_lent`). This is what makes the eve marking more than a preference."""
+        result = compute_armenian_lectionary(EVE_ONLY_DAY)
+        self.assertEqual([o["id"] for o in result["Observances"]], ["eve_of_the_nativity"])
+        self.assertTrue(result["Observances"][0]["is_comm"])
 
     def test_entries_are_in_served_order(self):
         result = compute_armenian_lectionary(POSITION_PLUS_COMMEMORATION)
@@ -110,9 +120,13 @@ class TestAttributesAreIndependent(unittest.TestCase):
         return result["Observances"][0]
 
     def test_an_observance_can_be_both(self):
-        head = compute_armenian_lectionary(GREAT_FRIDAY)["Observances"][0]
-        self.assertEqual((head["id"], head["is_fast"], head["is_comm"]),
-                         ("great_friday", True, True))
+        """"Third Sunday of Great Lent: Sunday of the Prodigal Son" is one component that
+        is at once a day of the Great Fast and the commemoration the Sunday is named for.
+        Holy Week's `great_*` ids are NOT the example: they are fasts only -- see
+        TestHolyWeekIsFastOnly below."""
+        o = self._only(LENTEN_SUNDAY)
+        self.assertEqual((o["id"], o["is_fast"], o["is_comm"]),
+                         ("third_sunday_of_great_lent", True, True))
 
     def test_an_observance_can_be_a_fast_only(self):
         o = self._only(WEEKLY_FAST_DAY)
@@ -136,6 +150,43 @@ class TestAttributesAreIndependent(unittest.TestCase):
             POSITION_PLUS_COMMEMORATION)["Observances"]
         self.assertEqual([(o["is_fast"], o["is_comm"]) for o in observances],
                          [(False, False), (False, True)])
+
+
+class TestHolyWeekIsFastOnly(unittest.TestCase):
+    """`great_monday` .. `great_saturday` are marked `is_fast` and NOT `is_comm`.
+
+    A Holy Week day-name locates the day inside the Great Week; what the day commemorates
+    is stated by its own component beside it, and those are marked. Four of the six carry
+    one -- the Ten Virgins (Tuesday), the Last Supper (Thursday), the Passion (Friday),
+    the Eve of the Resurrection (Saturday).
+
+    Great Monday and Great Wednesday carry none, and that is the deliberate consequence:
+    across 2001-2027 they serve their day-name alone on 27 of 27 and 26 of 27 occurrences
+    (the exception is 2004-04-07, when the Annunciation, a fixed civil date, lands on
+    Great Wednesday). The corpus names no commemoration for them, so the engine states
+    none rather than inventing one -- these two days are 53 of the ratchet above.
+    """
+
+    HOLY_WEEK = ("great_monday", "great_tuesday", "great_wednesday",
+                 "great_thursday", "great_friday", "great_saturday")
+
+    def test_the_day_names_are_fasts_and_not_commemorations(self):
+        catalog = engine._OBSERVANCE_CATALOG
+        for sid in self.HOLY_WEEK:
+            with self.subTest(sid=sid):
+                self.assertIn(sid, catalog.fast_ids)
+                self.assertNotIn(sid, catalog.commemoration_ids)
+
+    def test_great_friday_commemorates_through_its_own_component(self):
+        observances = compute_armenian_lectionary(GREAT_FRIDAY)["Observances"]
+        self.assertEqual([(o["id"], o["is_fast"], o["is_comm"]) for o in observances],
+                         [("great_friday", True, False),
+                          ("passion_crucifixion_burial", False, True)])
+
+    def test_great_monday_deliberately_commemorates_nothing(self):
+        result = compute_armenian_lectionary(datetime.date(2026, 3, 30))
+        self.assertEqual([o["id"] for o in result["Observances"]], ["great_monday"])
+        self.assertEqual([o["id"] for o in result["Observances"] if o["is_comm"]], [])
 
 
 class TestLanguageIndependence(unittest.TestCase):
@@ -163,7 +214,7 @@ class TestObservancesOverTheCorpus(unittest.TestCase):
     # right to show nothing. A ratchet rather than an equality: marking more observances
     # lowers it, and a NEW blank day is a regression. Lower it when you mark one, never
     # raise it.
-    MAX_DAYS_WITH_NO_COMMEMORATION = 5017
+    MAX_DAYS_WITH_NO_COMMEMORATION = 5070
     _DEFAULT_RANGE = (2001, 2027)
 
     @classmethod

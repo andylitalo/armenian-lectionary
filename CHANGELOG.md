@@ -12,7 +12,7 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
   ```python
   >>> compute_armenian_lectionary(datetime.date(2026, 4, 3))["Observances"]
-  [{'id': 'great_friday', 'name': 'Great Friday', 'is_fast': True, 'is_comm': True},
+  [{'id': 'great_friday', 'name': 'Great Friday', 'is_fast': True, 'is_comm': False},
    {'id': 'passion_crucifixion_burial', 'name': 'Remembrance of the Passion, …',
     'is_fast': False, 'is_comm': True}]
   ```
@@ -28,13 +28,13 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
   | | `is_comm` | not `is_comm` |
   |---|---|---|
-  | **`is_fast`** | `great_friday` — 12 ids | `wednesday_fast` — 95 ids |
+  | **`is_fast`** | `third_sunday_of_great_lent` — 6 ids | `wednesday_fast`, `great_friday` — 101 ids |
   | **not `is_fast`** | `appearance_of_the_holy_cross` — 183 ids | `third_day_of_nativity` — 101 ids |
 
   `is_fast` says the observance is a fast; `is_comm` says it commemorates a person or an
   event rather than only locating the day in the calendar. Neither is the other's negation,
-  so neither may be computed from the other. Of the 391 catalogued ids, 107 are fasts, 195
-  are commemorations, 12 are both and 101 are neither. A consumer rendering the day's saints
+  so neither may be computed from the other. Of the 391 catalogued ids, 107 are fasts, 189
+  are commemorations, 6 are both and 101 are neither. A consumer rendering the day's saints
   and feasts filters on `is_comm`; filtering on `not is_fast` would put `Fifth day of
   Eastertide` on the same footing as the Ascension — 101 ids over 2,534 days in range.
 
@@ -56,10 +56,12 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
   Of the 107 fast marks, 55 name the fast in their own text; the other 52 are a reviewer's
   reading of the season (Great Lent's 41 day/Sunday ids, Holy Week's 6, the 5 `Nth day of
-  Advent` labels). Of the 195 commemoration marks, 167 restate the observance's own name;
-  the other 28 are reviewer judgments — the 13 `Eve of …` notes, the 5 named Lenten Sundays,
-  Mijink, Red Sunday, Green Sunday, Second Palm Sunday, and Holy Week's 6. CLAUDE.md, "A
-  day's observances, and the marks on them", records the warrant for each.
+  Advent` labels). Of the 189 commemoration marks, 167 restate the observance's own name;
+  the other 22 are reviewer judgments — the 13 `Eve of …` notes, the 5 named Lenten Sundays,
+  Mijink, Red Sunday, Green Sunday and Second Palm Sunday. Holy Week's `great_*` ids are
+  fasts and NOT commemorations: what those days commemorate is a separate component beside
+  the day-name. CLAUDE.md, "A day's observances, and the marks on them", records the
+  warrant for each.
 
   Three limits worth knowing before you key on it:
 
@@ -68,8 +70,8 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
     day is `[]`, so check the list is non-empty before reading the marks.
   - **Neither mark is a claim about the date.** `is_fast` does not answer "is this date a
     fast day" — the two differ on the 727 days in range naming both a fast and a
-    commemoration — and 5,017 of the 9,861 days carry no `is_comm` component at all, because
-    those days commemorate nobody.
+    commemoration — and 5,070 of the 9,861 days carry no `is_comm` component at all, because
+    those days commemorate nobody (Great Monday and Great Wednesday among them).
   - **`fast_day` is deprecated and never served**, so on Dec 9 in 2005, 2011, 2016 and 2022
     — the four days in range whose position label is the bare marker and nothing more
     specific — no component is marked `is_fast` on a day the engine's own tables call a

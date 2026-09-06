@@ -364,7 +364,7 @@ one dict per component, in served order:
 
 ```python
 >>> compute_armenian_lectionary(datetime.date(2026, 4, 3))["Observances"]
-[{'id': 'great_friday', 'name': 'Great Friday', 'is_fast': True, 'is_comm': True},
+[{'id': 'great_friday', 'name': 'Great Friday', 'is_fast': True, 'is_comm': False},
  {'id': 'passion_crucifixion_burial', 'name': 'Remembrance of the Passion, …',
   'is_fast': False, 'is_comm': True}]
 ```
@@ -395,7 +395,7 @@ Working rules:
   `Is Fast Day`, fast context). The test is whether the fact would change if you deleted
   one of the day's observances.
 - **Never collapse independent marks into one `kind` enum.** `is_fast` and `is_comm`
-  overlap on 12 ids; an enum would re-impose the false exclusivity that made "the
+  overlap on 6 ids; an enum would re-impose the false exclusivity that made "the
   complement of `FastIds`" wrong in the first place.
 - **Always emit every attribute the engine knows, as a real bool.** `_observances` coerces
   with `bool(entry.get(...))` so a thin or older catalog entry serves `False`, not `None` —
@@ -525,10 +525,10 @@ orthogonal, and all four quadrants are populated:
 
 | | `is_comm` | not `is_comm` |
 |---|---|---|
-| **`is_fast`** | `great_friday`, `third_sunday_of_great_lent` (Sunday of the Prodigal Son) — 12 ids | `wednesday_fast`, `nativity_fast_day_1` — 95 ids |
+| **`is_fast`** | `third_sunday_of_great_lent` (Sunday of the Prodigal Son), `twenty_fourth_day_of_great_lent` (Mijink) — 6 ids | `wednesday_fast`, `great_friday`, `nativity_fast_day_1` — 101 ids |
 | **not `is_fast`** | `appearance_of_the_holy_cross`, `eve_of_the_nativity` — 183 ids | `third_day_of_nativity`, `fifth_day_of_eastertide` — 101 ids |
 
-195 ids are marked, 107 are fasts, 12 are both, 101 are neither. So neither set is the
+189 ids are marked, 107 are fasts, 6 are both, 101 are neither. So neither set is the
 other's complement and neither may be computed from the other —
 `tests/test_observances.py` pins one date per quadrant plus the two set relations,
 and `tests/test_observance_catalog.py` pins that `replacing` one flag leaves the other.
@@ -543,7 +543,7 @@ prefix it would key on.
 
 #### What is marked, and on whose authority
 
-195 ids, every one of which is served at least once in range (no `fast_day`-style
+189 ids, every one of which is served at least once in range (no `fast_day`-style
 unreachable mark — `tests/test_observances.py` asserts it, with no exemption list).
 The artifact is the authority — `python3 -c "import json; c =
 json.load(open('armenian_lectionary/data/observance_catalog.json')); print(sorted(k for k, v
@@ -552,14 +552,13 @@ in c.items() if v['is_comm']))"` — and the shape of it is:
 | | n | the mark rests on |
 |---|--:|---|
 | named commemorations — saints, martyrs, translators, councils, dominical and Marian feasts | 167 | **the observance's own name.** It names who or what is kept. |
-| Holy Week (`great_monday` … `great_saturday`) | 6 | same, *and* marked `is_fast` — the overlap quadrant |
 | the 13 `Eve of …` notes | 13 | **a reading of the observance.** A *Barekendan* / vigil is kept in its own right |
 | the 5 named Lenten Sundays (Expulsion, Prodigal Son, Steward, Judge, Advent) | 5 | the label names a commemoration as well as a calendar slot |
 | `twenty_fourth_day_of_great_lent` (Mijink, the Median day) | 1 | same |
 | `third_sunday_of_eastertide` (Green Sunday), `fourth_sunday_red_sunday`, `seventh_sunday_of_eastertide` (Second Palm Sunday) | 3 | same |
 
 The first 167 are mechanical: the observance names a person or an event, and marking it
-restates the name. The other 28 are reviewer judgments, and these are the ones to
+restates the name. The other 22 are reviewer judgments, and these are the ones to
 re-examine if the marking is disputed:
 
 - **All 13 eves are marked, including the ten `eve_of_fast_of_*` Barekendans.** A
@@ -574,26 +573,36 @@ re-examine if the marking is disputed:
   whole component is marked.
 - **`beginning_of_the_fast` is marked `is_fast` and NOT `is_comm`.** It is the Friday after
   Ascension, and what it names is the resumption of the weekly fast — a calendar fact with
-  no person or event in it. The one comm-shaped id deliberately left blank.
+  no person or event in it.
+- **Holy Week's `great_monday` … `great_saturday` are marked `is_fast` and NOT `is_comm`.**
+  A Holy Week day-name locates the day inside the Great Week; what the day commemorates is
+  a separate component beside it, and those already carry the mark — the Ten Virgins
+  (Tuesday), the Last Supper (Thursday), the Passion (Friday), the Eve of the Resurrection
+  (Saturday). **Great Monday and Great Wednesday carry none**, and that is the deliberate
+  consequence: across 2001–2027 they serve their day-name alone on 27 of 27 and 26 of 27
+  occurrences (the exception is 2004-04-07, when the Annunciation, a fixed civil date,
+  lands on Great Wednesday). The corpus names no commemoration for those two days, so the
+  engine states none rather than inventing one; they are 53 of the ratchet below. Pinned by
+  `tests/test_observances.py`'s `TestHolyWeekIsFastOnly`.
 - **The five `Nth day of Pentecost (Fast of the Prophet Elijah)` labels are left blank.**
   The parenthetical names the fast window the day sits in, not something commemorated on
   it; they are marked `is_fast` and nothing else.
 
 Like `is_fast`, the TSV's `note` column carries name corrections rather than these
-decisions, so the warrant for the 28 is recorded here.
+decisions, so the warrant for the 22 is recorded here.
 
 #### What `is_comm` answers, and what it does not
 
 It answers **"does this named observance commemorate something"** — the mark a consumer
 rendering per-observance devotional content filters on. It does not answer "does this date
 have a commemoration to show" any more than `is_fast` answers "is this date a fast":
-**5,017 of the 9,861 days in range have no `is_comm` component at all**, overwhelmingly the
+**5,070 of the 9,861 days in range have no `is_comm` component at all**, overwhelmingly the
 weekly Wed/Fri fast (1,334 days) and the ordinal-day labels inside Nativity, Eastertide and
 the named fasts. Those days genuinely commemorate nobody, and a consumer is right to show
 nothing on them — but it must handle that as a normal case, not an error. Distribution:
-4,555 days carry one commemoration, 284 carry two, 5 carry three.
+4,606 days carry one commemoration, 185 carry two, none carries three.
 
-That 5,017 is ratcheted by `tests/test_observances.py`, not pinned as an equality: marking a
+That 5,070 is ratcheted by `tests/test_observances.py`, not pinned as an equality: marking a
 further observance lowers it, and a *new* blank day means an observance lost its mark. Lower
 the ratchet when you mark one, never raise it.
 

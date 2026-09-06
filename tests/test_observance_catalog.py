@@ -34,9 +34,12 @@ ENTRIES = {
         "is_fast": True,
     },
     # A fast AND a commemoration -- the quadrant that makes the two sets independent
-    # rather than complements. See tests/test_observances.py.
-    "great_friday": {"en": "Great Friday", "hy": "Աւագ ուրբաթ",
-                     "is_fast": True, "is_comm": True},
+    # rather than complements. A named Lenten Sunday, not a Holy Week day: the `great_*`
+    # ids are fasts only, and what those days commemorate is a separate component beside
+    # them. See tests/test_observances.py.
+    "lenten_sunday": {"en": "Third Sunday of Great Lent: Sunday of the Prodigal Son",
+                      "hy": "Գ կիւրակէ Մեծի պահոց. Անառակի կիւրակէ",
+                      "is_fast": True, "is_comm": True},
 }
 
 
@@ -79,7 +82,7 @@ class TestTheInterface(unittest.TestCase):
         self.assertEqual(self.catalog.get("absent"), None)
         self.assertEqual(dict(self.catalog.items()), ENTRIES)
         self.assertEqual(sorted(self.catalog),
-                         ["great_friday", "nativity_5", "nativity_fast_3", "vahan"])
+                         ["lenten_sunday", "nativity_5", "nativity_fast_3", "vahan"])
 
 
 class TestTheIndexesCannotGoStale(unittest.TestCase):
@@ -117,7 +120,7 @@ class TestFastIds(unittest.TestCase):
 
     def test_fast_ids_holds_only_the_marked_entries(self):
         self.assertEqual(self.catalog.fast_ids,
-                         frozenset({"nativity_fast_3", "great_friday"}))
+                         frozenset({"nativity_fast_3", "lenten_sunday"}))
 
     def test_an_entry_with_no_is_fast_key_is_not_a_fast(self):
         """``vahan``/``nativity_5`` carry no ``is_fast`` key at all -- a thin/older
@@ -142,14 +145,14 @@ class TestFastIds(unittest.TestCase):
 class TestCommemorationIds(unittest.TestCase):
     """``commemoration_ids`` is built the same way as ``fast_ids``, and is INDEPENDENT of
     it: neither set is the other's complement, so neither may be derived from the other.
-    ``great_friday`` is in both, ``nativity_5`` in neither."""
+    ``lenten_sunday`` is in both, ``nativity_5`` in neither."""
 
     def setUp(self):
         self.catalog = ObservanceCatalog(ENTRIES)
 
     def test_commemoration_ids_holds_only_the_marked_entries(self):
         self.assertEqual(self.catalog.commemoration_ids,
-                         frozenset({"vahan", "great_friday"}))
+                         frozenset({"vahan", "lenten_sunday"}))
 
     def test_an_entry_with_no_is_comm_key_is_not_a_commemoration(self):
         """A thin or older catalog entry carries no ``is_comm`` key at all, and must not
@@ -162,7 +165,7 @@ class TestCommemorationIds(unittest.TestCase):
 
     def test_the_two_sets_are_independent(self):
         self.assertEqual(self.catalog.fast_ids & self.catalog.commemoration_ids,
-                         frozenset({"great_friday"}))
+                         frozenset({"lenten_sunday"}))
         self.assertNotIn("nativity_5", self.catalog.fast_ids)
         self.assertNotIn("nativity_5", self.catalog.commemoration_ids)
 
@@ -179,9 +182,9 @@ class TestCommemorationIds(unittest.TestCase):
     def test_overriding_one_flag_leaves_the_other(self):
         """``replacing`` merges fields, so unmarking a fast must not unmark the
         commemoration riding on the same entry."""
-        no_fast = self.catalog.replacing("great_friday", is_fast=False)
-        self.assertNotIn("great_friday", no_fast.fast_ids)
-        self.assertIn("great_friday", no_fast.commemoration_ids)
+        no_fast = self.catalog.replacing("lenten_sunday", is_fast=False)
+        self.assertNotIn("lenten_sunday", no_fast.fast_ids)
+        self.assertIn("lenten_sunday", no_fast.commemoration_ids)
 
 
 class TestTheOwnDayCacheBelongsToTheCatalog(unittest.TestCase):

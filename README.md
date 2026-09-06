@@ -245,7 +245,7 @@ negation** — all four combinations occur:
 
 | | `is_comm` | not `is_comm` |
 |---|---|---|
-| **`is_fast`** | `great_friday` — Great Friday | `wednesday_fast` — Wednesday Fast |
+| **`is_fast`** | `third_sunday_of_great_lent` — Sunday of the Prodigal Son | `wednesday_fast`, `great_friday` |
 | **not `is_fast`** | `appearance_of_the_holy_cross` | `third_day_of_nativity` |
 
 So a consumer rendering the day's saints and feasts filters on `is_comm`. Filtering on
@@ -264,9 +264,11 @@ commemorations; the other 101 are bare position labels, carried on 2,534 days.
 Both marks are **per-observance, not per-date**. `is_fast` does not answer "is this date a
 fast day": the two differ on the 727 days in range that name both a fast and a
 commemoration, and deciding the date needs feast/fast precedence rules this engine does not
-implement. Likewise **5,017 of the 9,861 days in range carry no `is_comm` component at
+implement. Likewise **5,070 of the 9,861 days in range carry no `is_comm` component at
 all** — the weekly Wed/Fri fast alone is 1,334 — because those days commemorate nobody, so
-an empty result there is a normal answer, not an error.
+an empty result there is a normal answer, not an error. A Holy Week day-name is a fast and
+not a commemoration for the same reason: what the day commemorates is a separate component
+beside it (`Great Friday — Remembrance of the Passion, …`).
 
 One known gap: the deprecated `fast_day` id is never served, so on Dec 9 in 2005, 2011,
 2016 and 2022 — the four days in range whose position label is the bare fast marker with

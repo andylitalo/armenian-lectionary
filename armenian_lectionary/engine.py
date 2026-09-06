@@ -3371,7 +3371,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
     ``Observances`` is ``Liturgical Day`` as the ordered list it already is internally --
     one dict per component, in served order::
 
-        {"id": "great_friday", "name": "Great Friday", "is_fast": True, "is_comm": True}
+        {"id": "great_friday", "name": "Great Friday", "is_fast": True, "is_comm": False}
 
     ``id`` is the stable catalog key a consumer should persist instead of display text
     (see "Observance ids are stated, not derived" in CLAUDE.md); ``name`` is that
@@ -3385,8 +3385,8 @@ def compute_armenian_lectionary(target_date: datetime.date,
       ``is_comm``  it commemorates a person or an event, rather than only locating the day
                    in the calendar (see "Commemorations are marked per observance id")
 
-    Neither is the other's negation: they are both true on Holy Week's days and both false
-    on an ordinal-day label. Nor are they claims about the DATE -- ``is_fast`` says nothing
+    Neither is the other's negation: they are both true on a named Lenten Sunday and both
+    false on an ordinal-day label. Nor are they claims about the DATE -- ``is_fast`` says nothing
     about whether today is a fast day, which needs the feast/fast precedence rules this
     engine does not implement, and which 727 days in range answer differently from any
     single component. **A new observance attribute is a new key here, never a new field.**

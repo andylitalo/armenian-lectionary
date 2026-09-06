@@ -54,9 +54,9 @@ class ObservanceCatalog:
         # Every id the human review marked as a fast, and every one it marked as a
         # commemoration, built here for the same reason as the two indexes above: derived
         # from the entries this instance was constructed with, so a substituted catalog
-        # cannot answer from a stale set. The two sets are independent and OVERLAP -- Holy
-        # Week's days are both, an ordinal-day label is neither -- so neither is the
-        # other's complement and neither may be computed from the other.
+        # cannot answer from a stale set. The two sets are independent and OVERLAP -- a
+        # named Lenten Sunday is both, an ordinal-day label is neither -- so neither is
+        # the other's complement and neither may be computed from the other.
         self.fast_ids = frozenset(
             sid for sid, entry in self._entries.items() if entry.get("is_fast"))
         self.commemoration_ids = frozenset(
