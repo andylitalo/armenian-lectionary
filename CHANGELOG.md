@@ -6,6 +6,53 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
 ## [Unreleased]
 
+### Added
+- **`FastIds`: which of a day's observances are fasts.** Every result now carries
+  `"FastIds"`, the subset of that day's own `"ObservanceIds"` a human review has marked as
+  a fast, in the same order and independent of `language`. Always present, `[]` on a day
+  with no fast component. Additive and non-breaking — no existing field changes. Flows
+  through `/readings` automatically.
+
+  It answers **"which of this day's named observances are fasts"**, and by complement which
+  are venerable. It does **not** answer "is this date a fast day": those differ whenever a
+  day names more than one observance, which it does on 727 of the 9,861 days in range —
+  `Wednesday Fast — Feast of the Holy Church`, `Sixth day of Great Lent — St. Theodore the
+  Tyron`, `Great Thursday — Remembrance of the Last Supper`, where a fast and a
+  commemoration are both true. So `bool(FastIds)` is not "today is a fast", and `not
+  FastIds` is not "today is venerable":
+
+  ```python
+  fasts     = set(result["FastIds"])
+  venerable = [sid for sid in result["ObservanceIds"] if sid not in fasts]
+  ```
+
+  Deciding whether the *date* is a fast needs the precedence rules for a feast and a fast
+  colliding on one day, which this engine does not implement. Over `MIN_YEAR`–`MAX_YEAR`:
+  3,325 days where every observance is a fast, 727 where some are, 5,809 where none is.
+
+  Like `ObservanceIds`, this is a **stated** human decision, not a computation — a second
+  column (`is_fast`) beside `id` in `dev/observance_name_review.tsv`, projected into
+  `observance_catalog.json` as a boolean and indexed by `ObservanceCatalog.fast_ids` at
+  construction. 107 ids are marked. **55 of them name the fast in their own text** ("First
+  day of the Fast of Nativity"); the other **52 are a reviewer's reading of the season** —
+  Great Lent's 41 day/Sunday ids, Holy Week's 6, and the 5 `Nth day of Advent` position
+  labels, none of which the source marks as a fast in its own English. See "Fasts are
+  marked per observance id" in CLAUDE.md for the warrant on each, and for the two known
+  gaps below.
+
+  Two limits worth knowing before you key on it:
+
+  - **`FastIds` is only meaningful when `ObservanceIds` is non-empty.** It is a filter over
+    that field, which is `[]` when a component fails to resolve — and on a thin checkout
+    (no `observance_catalog.json`) *every* day is `[]`, so the whole of Great Lent reports
+    as having no fast rather than as unresolvable. Check `ObservanceIds` first.
+  - **`fast_day` is deprecated and never served**, so on the four days in range whose
+    position label is the bare marker and nothing more specific — Dec 9 in 2005, 2011, 2016
+    and 2022, each a Friday outside the Nisibis fast window — `FastIds` is `[]` while the
+    engine's own tables call the day a fast. Those four are the only such days in range.
+
+  Locked by `tests/test_fast_ids.py` and `tests/test_observance_catalog.py`.
+
 ## [2.0.0] — 2026-09-02
 
 ### Added

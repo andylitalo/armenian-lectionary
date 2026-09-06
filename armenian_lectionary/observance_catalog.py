@@ -1,12 +1,13 @@
-"""The observance catalog: ``id -> {en, hy}``, and the indexes that read it backwards.
+"""The observance catalog: ``id -> {en, hy, is_fast}``, and the indexes that read it backwards.
 
 An observance's id is what a consumer is meant to store instead of display text, and the
-catalog is where the two meet. Three questions get asked of it at runtime, and each used
-to have its own module-level global in ``engine.py``:
+catalog is where the two meet. Four questions get asked of it at runtime, and the first
+three each used to have their own module-level global in ``engine.py``:
 
     what is this id called?          _OBSERVANCE_CATALOG
     which observance is this text?   _TEXT_TO_OBSERVANCE_ID
     what are this text's names?      _TEXT_TO_OBSERVANCE_NAMES
+    is this id a fast?               (new -- see fast_ids)
 
 The reverse indexes are derived from the forward one, so they can go stale -- and they
 did, structurally: tests substitute a small catalog to exercise resolution, which meant

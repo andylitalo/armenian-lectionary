@@ -77,13 +77,19 @@ class TestFastIdsMatchTheCatalog(unittest.TestCase):
                 with self.subTest(date=r["Date"], sid=sid):
                     self.assertIn(sid, fast_ids)
 
-    # "fast_day" is the bare, generic marker the SOURCE prints ~2,100 times in
-    # 2001-2026 -- but within the supported range `_apply_position_label` always has
-    # a more specific label available for every one of those days (the Wed/Fri split,
-    # or a named fast's own day count), so the literal "Fast day" text it would
-    # otherwise be shadowed by that label and is never actually served. Same shape as
-    # `tests/test_shadowed_tiers.py`'s `_tier_fallback`/`_tier_generative_saint`:
-    # marked, real, and unreachable in range by construction, not a bug.
+    # "fast_day" is the bare, generic marker the SOURCE prints ~2,100 times in 2001-2026.
+    # It is DEPRECATED and never served: it sits in `engine._BARE_FAST_MARKERS` and
+    # `_POSITION_OVERLAY_DROPS`, so `_apply_position_label` returns before it can reach the
+    # name, and it therefore never enters `ObservanceIds` or `FastIds` no matter how the
+    # row is marked.
+    #
+    # On most of those days that is harmless -- a more specific label claims the day (the
+    # Wed/Fri split, or a named fast's own day count) and carries the fast id itself. On
+    # FOUR it is not: Dec 9 in 2005, 2011, 2016 and 2022, each a Friday falling outside the
+    # Nisibis fast window, serve "Feast of the Conception of the Holy Virgin Mary by Anna"
+    # with `FastIds == []` while the engine's own tables call the day a fast. The fix is to
+    # serve `friday_fast` there rather than dropping the marker, retiring `fast_day`
+    # properly; this exemption records the hole until then, so it cannot widen unnoticed.
     _SHADOWED_IN_RANGE = {"fast_day"}
 
     def test_every_other_catalog_fast_id_is_observed_at_least_once(self):
@@ -95,9 +101,10 @@ class TestFastIdsMatchTheCatalog(unittest.TestCase):
                           f"{engine.MAX_YEAR}: {sorted(never_seen)}")
 
     def test_fast_day_itself_is_shadowed_by_a_more_specific_label_in_range(self):
-        """Documents the one exception above: if a future change makes "Fast day"
-        reachable again, this should start failing so the shadowed set gets revisited
-        rather than silently going stale."""
+        """Documents the one exception above. When the Dec-9 hole is closed by serving
+        `friday_fast` there, `fast_day` should be retired outright rather than made
+        reachable -- either way this starts failing, so the exemption gets revisited
+        instead of silently going stale."""
         seen = {sid for r in self.results for sid in r["FastIds"]}
         self.assertNotIn("fast_day", seen)
 

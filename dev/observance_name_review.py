@@ -16,9 +16,11 @@ Columns:
   days       how many days in 2001-2026 carry this component
   last       latest date carrying it, for looking it up on sacredtradition.am
   source_en  EXACTLY what the source publishes in English, before any correction
-  is_fast    "x" if this observance is a fast day, blank otherwise. A human decision,
-             independent of any name correction -- see engine.py's
-             ``ObservanceCatalog.fast_ids`` and the served ``FastIds`` field.
+  is_fast    "x" if this OBSERVANCE is a fast, blank otherwise -- not a claim about the
+             day, which may name a fast and a commemoration at once. A human decision,
+             independent of any name correction; a row with no ``id`` names no observance,
+             so a mark on one is ignored. See ``ObservanceCatalog.fast_ids``, the served
+             ``FastIds`` field, and "Fasts are marked per observance id" in CLAUDE.md.
   approved_en the English the engine must serve. THIS COLUMN IS THE GROUND TRUTH.
   source_hy  the source's own Armenian for the same component, as an independent witness
   approved_hy the Armenian the engine must serve -- the Armenian counterpart of

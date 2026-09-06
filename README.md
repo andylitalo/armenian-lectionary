@@ -178,6 +178,7 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
      "end_chapter": 62, "end_verse": 3, "citation": "Isaiah 61.10-62.3"}
   ],
   "ObservanceIds": ["hripsime_and_her_companions"],
+  "FastIds": [],
   "Source": "validated-table"
 }
 ```
@@ -210,6 +211,51 @@ separator is imposed on the list itself. An id, once published, keeps meaning th
 observance forever; a day whose components cannot all be resolved (a thin install with no
 catalog data, for instance) gets `[]` rather than a list with a hole in it, since a partial
 list would silently identify a different day than the one actually served.
+
+### Which observances are fasts
+
+`"FastIds"` is the subset of that day's `"ObservanceIds"` marked as a fast — same order,
+independent of `language`, always present, `[]` on a day with none:
+
+```python
+>>> compute_armenian_lectionary(datetime.date(2026, 12, 30))["Liturgical Day"]
+'First day of the Fast of Nativity'
+>>> compute_armenian_lectionary(datetime.date(2026, 12, 30))["FastIds"]
+['nativity_fast_day_1']
+```
+
+It answers **which of the day's observances are fasts**, and by complement which are
+venerable. It does *not* answer "is this date a fast day" — those differ on the 727 days in
+range that name both a fast and a commemoration, where each is true of a different component:
+
+```python
+>>> r = compute_armenian_lectionary(datetime.date(2026, 9, 16))
+>>> r["Liturgical Day"]
+'Wednesday Fast — Feast of the Holy Church'
+>>> r["ObservanceIds"]
+['wednesday_fast', 'feast_of_the_holy_church']
+>>> r["FastIds"]
+['wednesday_fast']
+```
+
+So `bool(FastIds)` is not "today is a fast", and `not FastIds` is not "today is venerable".
+To get the venerable observances of a day:
+
+```python
+fasts     = set(result["FastIds"])
+venerable = [sid for sid in result["ObservanceIds"] if sid not in fasts]
+```
+
+Deciding whether the *date* is a fast needs the precedence rules for a feast and a fast
+colliding on one day, which this engine does not implement. Over the supported range: 3,325
+days where every observance is a fast, 727 where some are, 5,809 where none is.
+
+Two limits: `FastIds` is a filter over `ObservanceIds`, so it is only meaningful when that
+field is non-empty (a thin install with no catalog data reports `[]` for both, and every day
+then looks like a non-fast); and the deprecated `fast_day` id is never served, so on Dec 9 in
+2005, 2011, 2016 and 2022 — the four days in range whose position label is the bare fast
+marker with nothing more specific — `FastIds` is `[]` on a day the engine's own tables call a
+fast. See CLAUDE.md, "Fasts are marked per observance id".
 
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.
