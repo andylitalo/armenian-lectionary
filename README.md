@@ -224,9 +224,9 @@ independent of `language`, always present, `[]` on a day with none:
 ['nativity_fast_day_1']
 ```
 
-It answers **which of the day's observances are fasts**, and by complement which are
-venerable. It does *not* answer "is this date a fast day" — those differ on the 727 days in
-range that name both a fast and a commemoration, where each is true of a different component:
+It answers **which of the day's observances are fasts**, and nothing more. It does *not*
+answer "is this date a fast day" — those differ on the 727 days in range that name both a
+fast and a commemoration, where each is true of a different component:
 
 ```python
 >>> r = compute_armenian_lectionary(datetime.date(2026, 9, 16))
@@ -238,13 +238,17 @@ range that name both a fast and a commemoration, where each is true of a differe
 ['wednesday_fast']
 ```
 
-So `bool(FastIds)` is not "today is a fast", and `not FastIds` is not "today is venerable".
-To get the venerable observances of a day:
+So `bool(FastIds)` is not "today is a fast". To get the day's other observances:
 
 ```python
-fasts     = set(result["FastIds"])
-venerable = [sid for sid in result["ObservanceIds"] if sid not in fasts]
+fasts    = set(result["FastIds"])
+not_fast = [sid for sid in result["ObservanceIds"] if sid not in fasts]
 ```
+
+That complement is not only commemorations: `ObservanceIds` carries calendar-position labels
+and eve notes too, and most of those are not fasts either. Of the 390 ids served in range,
+284 are not fasts — 168 commemorations, 103 position labels (`Third day of Nativity`) and 13
+eve notes (`Eve of the Nativity and Theophany of Our Lord Jesus Christ`).
 
 Deciding whether the *date* is a fast needs the precedence rules for a feast and a fast
 colliding on one day, which this engine does not implement. Over the supported range: 3,325

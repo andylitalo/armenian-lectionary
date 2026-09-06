@@ -13,18 +13,22 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   with no fast component. Additive and non-breaking — no existing field changes. Flows
   through `/readings` automatically.
 
-  It answers **"which of this day's named observances are fasts"**, and by complement which
-  are venerable. It does **not** answer "is this date a fast day": those differ whenever a
-  day names more than one observance, which it does on 727 of the 9,861 days in range —
-  `Wednesday Fast — Feast of the Holy Church`, `Sixth day of Great Lent — St. Theodore the
-  Tyron`, `Great Thursday — Remembrance of the Last Supper`, where a fast and a
-  commemoration are both true. So `bool(FastIds)` is not "today is a fast", and `not
-  FastIds` is not "today is venerable":
+  It answers **"which of this day's named observances are fasts"**, and nothing more. It
+  does **not** answer "is this date a fast day": those differ whenever a day names more than
+  one observance, which it does on 727 of the 9,861 days in range — `Wednesday Fast — Feast
+  of the Holy Church`, `Sixth day of Great Lent — St. Theodore the Tyron`, `Great Thursday —
+  Remembrance of the Last Supper`, where a fast and a commemoration are both true. So
+  `bool(FastIds)` is not "today is a fast":
 
   ```python
-  fasts     = set(result["FastIds"])
-  venerable = [sid for sid in result["ObservanceIds"] if sid not in fasts]
+  fasts    = set(result["FastIds"])
+  not_fast = [sid for sid in result["ObservanceIds"] if sid not in fasts]
   ```
+
+  That complement is not only commemorations — `ObservanceIds` carries calendar-position
+  labels and eve notes too, and most of those are not fasts either. Of the 390 ids served in
+  range, 284 are not fasts: 168 commemorations, 103 position labels (`Third day of
+  Nativity`, `First Sunday after Nativity`) and 13 eve notes.
 
   Deciding whether the *date* is a fast needs the precedence rules for a feast and a fast
   colliding on one day, which this engine does not implement. Over `MIN_YEAR`–`MAX_YEAR`:

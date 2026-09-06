@@ -447,18 +447,27 @@ each of the 52 is recorded here rather than beside the row.
 #### What `FastIds` answers, and what it does not
 
 It is a *per-observance* tag, not a per-date one. `FastIds` answers **"which of this day's
-named observances are fasts"** — and, by complement, which are venerable. It does not answer
-"is this date a fast day". Those are different questions whenever a day names more than one
-observance, which it does on 727 of the 9,861 days in range: `Wednesday Fast — Feast of the
-Holy Church`, `Sixth day of Great Lent — St. Theodore the Tyron`, `Great Thursday —
-Remembrance of the Last Supper`. On those days a fast and a commemoration are both true.
+named observances are fasts"**, and nothing more. It does not answer "is this date a fast
+day". Those are different questions whenever a day names more than one observance, which it
+does on 727 of the 9,861 days in range: `Wednesday Fast — Feast of the Holy Church`, `Sixth
+day of Great Lent — St. Theodore the Tyron`, `Great Thursday — Remembrance of the Last
+Supper`. On those days a fast and a commemoration are both true.
 
-So `bool(FastIds)` is not "today is a fast" and `not FastIds` is not "today is venerable":
+So `bool(FastIds)` is not "today is a fast". The complement is the day's other observances:
 
 ```python
-fasts     = set(result["FastIds"])
-venerable = [sid for sid in result["ObservanceIds"] if sid not in fasts]
+fasts    = set(result["FastIds"])
+not_fast = [sid for sid in result["ObservanceIds"] if sid not in fasts]
 ```
+
+**What that complement contains is worth knowing before rendering it.** It is not only
+commemorations — `ObservanceIds` carries calendar-position labels and eve notes too, and most
+of those are not fasts either. Of the 390 ids served in range, 284 are not fasts: 168
+commemorations, 103 position labels (`Third day of Nativity`, `First Sunday after Nativity`)
+and 13 eve notes (`Eve of the Nativity and Theophany of Our Lord Jesus Christ`). 2,669 days
+have at least one non-fast position or eve component. A consumer treating the complement as
+"the day's commemorations" is including those; the engine states only that they are not
+fasts.
 
 Deciding whether the *date* is a fast is a further question — it needs the precedence rules
 for a feast and a fast colliding on one day, which this engine does not implement. Consumers
