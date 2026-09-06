@@ -20,11 +20,11 @@ with no install step.
 | `armenian_lectionary/__init__.py` | Package init: re-exports the public API and `__version__`. |
 | `armenian_lectionary/engine.py` | Offline engine. Public entry: `compute_armenian_lectionary(datetime.date) -> dict`. Internal helpers/constants importable from here. |
 | `armenian_lectionary/cli.py` | `armenian-lectionary` console entry point (`main()`). |
-| `armenian_lectionary/observance_catalog.py` | `ObservanceCatalog` — `id -> {en, hy}` plus the reverse indexes (`id_of`, `names_for`, `text_of`), built in its constructor so they cannot go stale, and `own_day_cache`, the engine's per-liturgical-year own-day scan held per instance. `engine._OBSERVANCE_CATALOG` is one of these. Reads dict-like (`[]`, `.get`, `.items()`, `in`); never written in place. |
+| `armenian_lectionary/observance_catalog.py` | `ObservanceCatalog` — `id -> {en, hy, is_fast}` plus the reverse indexes (`id_of`, `names_for`, `text_of`) and the `fast_ids` set, all built in its constructor so they cannot go stale, and `own_day_cache`, the engine's per-liturgical-year own-day scan held per instance. `engine._OBSERVANCE_CATALOG` is one of these. Reads dict-like (`[]`, `.get`, `.items()`, `in`); never written in place. |
 | `armenian_lectionary/observance_name.py` | `ObservanceName` — the ordered components of a day's name, and the **only** place the ` — ` component separator is spelled at runtime. Owns the encoding (split/join, drop sets, placement, immutability); holds no domain opinion, so predicates like `engine._is_position_component` are passed in. See "A day's name is a list, not a string" below. |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`) and for the public `"ObservanceIds"` field (`engine._observance_ids`). A **projection** of the `id` column of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy, is_fast, is_comm}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`), and the public `"Observances"` field (`engine._observances`) — each entry's `id`, `name` and marks, with `"ObservanceIds"` its id projection. A **projection** of the `id`, `is_fast` and `is_comm` columns of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" and "A day's observances, and the marks on them" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -229,7 +229,7 @@ So the id lives in the **`id` column of `dev/observance_name_review.tsv`**, besi
 decision about what the observance is called, and the catalog is a straight projection:
 
 ```
-{row.id: {"en": row.approved_en, "hy": row.approved_hy}}
+{row.id: {"en": row.approved_en, "hy": row.approved_hy, "is_fast": row.is_fast == "x"}}
 ```
 
 Correcting a name edits `approved_en`; the id stays put because nothing recomputes it. There
@@ -356,6 +356,255 @@ this resolution against the display string (`engine._observance_ids`, a plain re
 lookup through `_OBSERVANCE_CATALOG.id_of` over the already-served, post-overlay label; see
 `tests/test_observance_ids.py`). All-or-nothing, like every other id lookup here: `[]` if
 any component has no catalog entry.
+
+### A day's observances, and the marks on them
+
+`"Observances"` is `"Liturgical Day"` served as the ordered list it already is internally —
+one dict per component, in served order:
+
+```python
+>>> compute_armenian_lectionary(datetime.date(2026, 4, 3))["Observances"]
+[{'id': 'great_friday', 'name': 'Great Friday', 'is_fast': True, 'is_comm': False},
+ {'id': 'passion_crucifixion_burial', 'name': 'Remembrance of the Passion, …',
+  'is_fast': False, 'is_comm': True}]
+```
+
+`engine._observances` builds it, and it is the **one** resolution of a day's name into
+observances: `"ObservanceIds"` is its id projection (`engine._ids_of`), not a second pass,
+so the two cannot disagree. `name` is the served component verbatim, and `_localize`
+rewrites it *by id* through the same catalog entry `_resolve_observance_names` uses for the
+joined string — so `" — ".join(o["name"] for o in Observances)` reproduces
+`"Liturgical Day"` in either language, and no consumer splits the display string.
+
+**Why one array of dicts and not one array per attribute.** The first cut served `FastIds`
+and `CommemorationIds` beside `ObservanceIds`: the same table stored transposed. A consumer
+asking "what is true of *this* observance" had to re-join the arrays by membership, every
+array restated ids already present, and each new attribute cost a new top-level field — a
+schema change, a CHANGELOG entry, a consumer update. Here an attribute is a **key**, so
+adding one changes no field. It also gave `[]` two meanings: `ObservanceIds == []` says
+"this day did not resolve", while `FastIds == []` said "no fast", and on a thin checkout
+(no `observance_catalog.json`, which the loader degrades to an empty catalog by design)
+*every* day is `[]` — so Great Lent reported as having no fast rather than as unresolvable.
+One array has one meaning.
+
+Working rules:
+
+- **A new observance attribute is a new key in the entry, never a new top-level field.**
+  If it answers a question about one canon, it goes here; if it is a fact about the *date*,
+  it belongs in the `Calendar` object of PR #16 instead (weekday, `Is Sunday`,
+  `Is Fast Day`, fast context). The test is whether the fact would change if you deleted
+  one of the day's observances.
+- **Never collapse independent marks into one `kind` enum.** `is_fast` and `is_comm`
+  overlap on 6 ids; an enum would re-impose the false exclusivity that made "the
+  complement of `FastIds`" wrong in the first place.
+- **Always emit every attribute the engine knows, as a real bool.** `_observances` coerces
+  with `bool(entry.get(...))` so a thin or older catalog entry serves `False`, not `None` —
+  the API promises a boolean and the degrade-to-empty convention must not leak a third
+  value. A key *missing* from an entry therefore means an older engine, not a liturgical
+  claim.
+- **Resolution stays all-or-nothing**, as `ObservanceIds` has been since 2.0.0: `[]` if any
+  component has no catalog entry, since a partial list would silently identify a different
+  day. **Check `Observances` is non-empty before reading the attributes.** The intended fix
+  is to stop serving the blank list at all — with the shipped catalog every day in range
+  resolves, so an empty list is a broken install or a broken build, and raising says so
+  where `[]` does not. That changes `ObservanceIds`' published 2.0.0 contract, so it is its
+  own change.
+
+The two marks below are per-*observance* human decisions, each a column in
+`dev/observance_name_review.tsv` beside `id`, reviewed and frozen exactly like every other
+column there: `dev/build_ground_truth.py` carries each into
+`observance_name_ground_truth.json` untouched, `dev/build_observance_catalog.py` stamps
+each into `observance_catalog.json` as a boolean alongside `en`/`hy`, and
+`ObservanceCatalog` indexes each in `__init__` from the entries the instance was
+constructed with — the same "cannot go stale" pattern as its two text indexes. There is no
+composition and no inference: a row with no `id` names no observance, so a mark on one is
+ignored.
+
+### Fasts are marked per observance id
+
+`is_fast` is `"x"` if the observance is a fast, blank otherwise, indexed as
+`ObservanceCatalog.fast_ids`.
+
+#### What is marked, and on whose authority
+
+107 ids. The artifact is the authority — `python3 -c "import json; c =
+json.load(open('armenian_lectionary/data/observance_catalog.json')); print(sorted(k for k, v
+in c.items() if v['is_fast']))"` — but the shape of it, and the warrant, is this:
+
+| | n | the mark rests on |
+|---|--:|---|
+| the nine week-long named fasts, per day (`nativity_fast_day_1` … `transfiguration_fast_day_5`) | 46 | **the observance's own name.** "First day of the Fast of Nativity" says it. |
+| the weekly split (`wednesday_fast`, `friday_fast`) | 2 | same |
+| the Fast of the Prophet Elijah (`second_` … `sixth_day_of_pentecost`) | 5 | same, *after* a registered correction — the source prints a bare "Second day of Pentecost"; `approved_en` adds "(Fast of the Prophet Elijah)" (docs §6b) |
+| `beginning_of_the_fast` | 1 | same — "Beginning of the Weekly Fasts", the 41st day of Eastertide, always a Friday, the day the weekly fasts resume |
+| `fast_day` | 1 | same, but **never served** — see "The `fast_day` hole" below |
+| Great Lent, per day and per Sunday | 41 | **a reading of the season.** Neither the name nor the source carries a fast word. |
+| Holy Week (`great_monday` … `great_saturday`) | 6 | same |
+| the `Nth day of Advent` position labels | 5 | same |
+
+That split is the thing to keep in view, and it is checkable rather than editorial: **55 of
+the 107 ids have the word "Fast" in their own `approved_en`; the other 52 do not.** The
+first 55 are mechanical — the observance names itself a fast, and marking it restates the
+name. The other 52 are the reviewer's inference from the season the observance sits in, and
+the source's own English states no fast marker on any of those days. They are the ones to
+re-examine if the marking is ever disputed:
+
+- **Great Lent's forty-one day ids and five Sunday ids are all marked.** The reading is that
+  the Armenian Lenten fast runs continuously and its Sundays do not interrupt it — they
+  carry their own Lenten propers and names (Expulsion, Prodigal Son, Steward, Judge,
+  Advent) rather than suspending the count. This is a **liturgical-practice judgment**, not
+  a source reading: the Tōnats'oyts prints no fast marker on any day of Great Lent.
+- **Holy Week is marked; Palm Sunday is not.** `great_monday` … `great_saturday` are the
+  Lenten fast's continuation into the Great Week. Palm Sunday is left unmarked as a feast
+  of the Lord.
+- **The `Nth day of Advent` labels are marked, and this is the narrowest call of the
+  three.** They are not the Advent *season*'s day count. In the whole supported range they
+  fire on Nov 21 and nowhere else — four occurrences for `first_day_of_advent`, three for
+  `second_`, four each for `third_`/`fourth_`/`fifth_` — on the years when the Presentation
+  of the Holy Mother of God to the Temple lands inside the Advent fast's first five days
+  and displaces the `Nth day of the Fast of Advent` label the day would otherwise carry.
+  The mark is right for every occurrence in range and is **not** guaranteed outside it: the
+  id says "Advent", not "Fast of Advent", so if `LECTIONARY_MAX_YEAR` moves and one of
+  these ever fires outside an Advent fast window, the mark becomes wrong. Nothing currently
+  fails if that happens.
+- **The ten `eve_of_fast_of_*` ids and `eve_of_great_lent` are deliberately unmarked.** A
+  *Barekendan* is the feast evening before a fast begins, not itself a fast day.
+
+The TSV's `note` column carries name corrections, not fast decisions, so the warrant for
+each of the 52 is recorded here rather than beside the row.
+
+#### What `is_fast` answers, and what it does not
+
+It is a *per-observance* tag, not a per-date one. It answers **"is this named observance a
+fast"**, and nothing more. It does not answer "is this date a fast day". Those are different
+questions whenever a day names more than one observance, which it does on 727 of the 9,861
+days in range: `Wednesday Fast — Feast of the Holy Church`, `Sixth day of Great Lent — St.
+Theodore the Tyron`, `Great Thursday — Remembrance of the Last Supper`. On those days a fast
+and a commemoration are both true, of different components.
+
+So `any(o["is_fast"] for o in Observances)` is not "today is a fast". Deciding whether the
+*date* is a fast needs the precedence rules for a feast and a fast colliding on one day,
+which this engine does not implement — consumers that need it (bahk does) have their own,
+and PR #16's `Calendar` object is where such a date-level fact would belong. Split over the
+supported range: 3,325 days where every observance is a fast, 727 where some are, 5,809
+where none is.
+
+**And `not is_fast` is not "a commemoration"** — that was the design error this field's
+shape now prevents. Of the 390 ids served in range, 284 are not fasts, but only 183 are
+commemorations; the other 101 are bare calendar-position labels (`Third day of Nativity`,
+`Fifth day of Eastertide`), carried on 2,534 days. Read `is_comm`.
+
+#### The `fast_day` hole
+
+`fast_day` is **deprecated and structurally unreachable**. It is in `engine._BARE_FAST_MARKERS`
+and `_POSITION_OVERLAY_DROPS`, so `_apply_position_label` returns before it can reach the
+served name; it never enters `Observances`, so its mark can never reach a caller. Its row is
+marked `is_fast`, and the mark goes nowhere.
+
+That is not cosmetic. On the four days in range where the source's position label is the bare
+marker and nothing more specific claims the day — **Dec 9 in 2005, 2011, 2016 and 2022, each a
+Friday falling outside the Nisibis fast window** — the day serves `Feast of the Conception of
+the Holy Virgin Mary by Anna` with no `is_fast` component, while the engine's own tables call
+it a fast. Those are the only four; a sweep comparing `engine._position_label(d)` against the
+day's marks across `MIN_YEAR`–`MAX_YEAR` finds no others (and finds 154 in the opposite
+direction, where the mark is right and the bare position label alone is not — Holy Week,
+`beginning_of_the_fast`, the Advent labels).
+
+The fix is to serve `friday_fast` on those days rather than dropping the marker, which retires
+`fast_day` properly instead of leaving it marked-but-invisible. Until then
+`tests/test_observances.py` pins the id as never served, so the hole cannot widen unnoticed.
+
+### Commemorations are marked per observance id
+
+`is_comm` is `"x"` if the observance commemorates a person or an event, blank if it only
+locates the day in the calendar, indexed as `ObservanceCatalog.commemoration_ids`.
+Structurally it is `is_fast`'s twin in every respect described above.
+
+**Why it is its own column and not the complement of `is_fast`.** The two questions are
+orthogonal, and all four quadrants are populated:
+
+| | `is_comm` | not `is_comm` |
+|---|---|---|
+| **`is_fast`** | `third_sunday_of_great_lent` (Sunday of the Prodigal Son), `twenty_fourth_day_of_great_lent` (Mijink) — 6 ids | `wednesday_fast`, `great_friday`, `nativity_fast_day_1` — 101 ids |
+| **not `is_fast`** | `appearance_of_the_holy_cross`, `eve_of_the_nativity` — 183 ids | `third_day_of_nativity`, `fifth_day_of_eastertide` — 101 ids |
+
+189 ids are marked, 107 are fasts, 6 are both, 101 are neither. So neither set is the
+other's complement and neither may be computed from the other —
+`tests/test_observances.py` pins one date per quadrant plus the two set relations,
+and `tests/test_observance_catalog.py` pins that `replacing` one flag leaves the other.
+
+Shape cannot be substituted for the mark either, which is the second reason this is stated
+rather than derived. `Sixth Sunday of Great Lent: Sunday of the Advent` and `Sixth day of
+Nativity` are the same shape with opposite answers; so are `Great Friday` (a commemoration
+that is also a fast) and `Beginning of the Weekly Fasts` (neither — it announces that the
+weekly fast resumes). A shape rule also breaks on exactly the edit the id layer exists to
+survive: a rename is free to add or remove the colon, the parenthetical or the `Eve of`
+prefix it would key on.
+
+#### What is marked, and on whose authority
+
+189 ids, every one of which is served at least once in range (no `fast_day`-style
+unreachable mark — `tests/test_observances.py` asserts it, with no exemption list).
+The artifact is the authority — `python3 -c "import json; c =
+json.load(open('armenian_lectionary/data/observance_catalog.json')); print(sorted(k for k, v
+in c.items() if v['is_comm']))"` — and the shape of it is:
+
+| | n | the mark rests on |
+|---|--:|---|
+| named commemorations — saints, martyrs, translators, councils, dominical and Marian feasts | 167 | **the observance's own name.** It names who or what is kept. |
+| the 13 `Eve of …` notes | 13 | **a reading of the observance.** A *Barekendan* / vigil is kept in its own right |
+| the 5 named Lenten Sundays (Expulsion, Prodigal Son, Steward, Judge, Advent) | 5 | the label names a commemoration as well as a calendar slot |
+| `twenty_fourth_day_of_great_lent` (Mijink, the Median day) | 1 | same |
+| `third_sunday_of_eastertide` (Green Sunday), `fourth_sunday_red_sunday`, `seventh_sunday_of_eastertide` (Second Palm Sunday) | 3 | same |
+
+The first 167 are mechanical: the observance names a person or an event, and marking it
+restates the name. The other 22 are reviewer judgments, and these are the ones to
+re-examine if the marking is disputed:
+
+- **All 13 eves are marked, including the ten `eve_of_fast_of_*` Barekendans.** A
+  *Barekendan* is a celebrated day, not merely a boundary. Two of the thirteen make this
+  more than a preference: on **Jan 5** (`eve_of_the_nativity`, Chragaluyts) and on **Poon
+  Barekendan** (`eve_of_great_lent`) the eve is the day's *only* component, so leaving eves
+  unmarked would give the Nativity vigil and the eve of Great Lent no commemoration at all.
+  Pinned by `test_the_only_component_may_be_an_eve`.
+- **Nine position-shaped labels are marked** — the five named Lenten Sundays, Mijink, Red
+  Sunday, Green Sunday and Second Palm Sunday. Each renders one string that is both a
+  calendar slot and a commemoration; the engine has no way to serve half of it, so the
+  whole component is marked.
+- **`beginning_of_the_fast` is marked `is_fast` and NOT `is_comm`.** It is the Friday after
+  Ascension, and what it names is the resumption of the weekly fast — a calendar fact with
+  no person or event in it.
+- **Holy Week's `great_monday` … `great_saturday` are marked `is_fast` and NOT `is_comm`.**
+  A Holy Week day-name locates the day inside the Great Week; what the day commemorates is
+  a separate component beside it, and those already carry the mark — the Ten Virgins
+  (Tuesday), the Last Supper (Thursday), the Passion (Friday), the Eve of the Resurrection
+  (Saturday). **Great Monday and Great Wednesday carry none**, and that is the deliberate
+  consequence: across 2001–2027 they serve their day-name alone on 27 of 27 and 26 of 27
+  occurrences (the exception is 2004-04-07, when the Annunciation, a fixed civil date,
+  lands on Great Wednesday). The corpus names no commemoration for those two days, so the
+  engine states none rather than inventing one; they are 53 of the ratchet below. Pinned by
+  `tests/test_observances.py`'s `TestHolyWeekIsFastOnly`.
+- **The five `Nth day of Pentecost (Fast of the Prophet Elijah)` labels are left blank.**
+  The parenthetical names the fast window the day sits in, not something commemorated on
+  it; they are marked `is_fast` and nothing else.
+
+Like `is_fast`, the TSV's `note` column carries name corrections rather than these
+decisions, so the warrant for the 22 is recorded here.
+
+#### What `is_comm` answers, and what it does not
+
+It answers **"does this named observance commemorate something"** — the mark a consumer
+rendering per-observance devotional content filters on. It does not answer "does this date
+have a commemoration to show" any more than `is_fast` answers "is this date a fast":
+**5,070 of the 9,861 days in range have no `is_comm` component at all**, overwhelmingly the
+weekly Wed/Fri fast (1,334 days) and the ordinal-day labels inside Nativity, Eastertide and
+the named fasts. Those days genuinely commemorate nobody, and a consumer is right to show
+nothing on them — but it must handle that as a normal case, not an error. Distribution:
+4,606 days carry one commemoration, 185 carry two, none carries three.
+
+That 5,070 is ratcheted by `tests/test_observances.py`, not pinned as an equality: marking a
+further observance lowers it, and a *new* blank day means an observance lost its mark. Lower
+the ratchet when you mark one, never raise it.
 
 ### A day's name is a list, not a string
 

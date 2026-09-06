@@ -44,6 +44,36 @@ class TestReadingsAPI(unittest.TestCase):
                 ids_by_language[language] = ids
         self.assertEqual(ids_by_language["en"], ids_by_language["hy"])
 
+    def test_observances_survive_json_boundary_with_only_the_name_localized(self):
+        """The wire is where an attribute could silently become ``null``: the engine
+        coerces to bool precisely so JSON carries `false`, not a missing third value.
+        Also pins that the names still join back to the served day over HTTP, which is
+        what lets a consumer stop splitting `Liturgical Day` on the separator."""
+        by_language = {}
+        for language in ("en", "hy"):
+            with self.subTest(language=language):
+                response = self.client.get(
+                    "/readings?date=2026-04-03&language=" + language
+                )
+                self.assertEqual(response.status_code, 200)
+                payload = response.get_json()
+                observances = payload["Observances"]
+                self.assertEqual([o["id"] for o in observances],
+                                 ["great_friday", "passion_crucifixion_burial"])
+                for o in observances:
+                    self.assertIs(type(o["is_fast"]), bool)
+                    self.assertIs(type(o["is_comm"]), bool)
+                self.assertEqual(
+                    " — ".join(o["name"] for o in observances),
+                    payload["Liturgical Day"])
+                by_language[language] = observances
+
+        self.assertNotEqual([o["name"] for o in by_language["en"]],
+                            [o["name"] for o in by_language["hy"]])
+        for a, b in zip(by_language["en"], by_language["hy"]):
+            self.assertEqual({k: v for k, v in a.items() if k != "name"},
+                             {k: v for k, v in b.items() if k != "name"})
+
     def test_season_is_not_served(self):
         """Season is an internal tier-provenance label, not a liturgical fact, and no
         consumer relies on it -- it must not leak onto the wire even though the

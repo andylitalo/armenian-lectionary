@@ -16,6 +16,16 @@ Columns:
   days       how many days in 2001-2026 carry this component
   last       latest date carrying it, for looking it up on sacredtradition.am
   source_en  EXACTLY what the source publishes in English, before any correction
+  is_fast    "x" if this OBSERVANCE is a fast, blank otherwise -- not a claim about the
+             day, which may name a fast and a commemoration at once. A human decision,
+             independent of any name correction; a row with no ``id`` names no observance,
+             so a mark on one is ignored. See ``ObservanceCatalog.fast_ids``, the served
+             ``FastIds`` field, and "Fasts are marked per observance id" in CLAUDE.md.
+  is_comm    "x" if this OBSERVANCE commemorates a person or an event, blank if it only
+             locates the day in the calendar. INDEPENDENT of ``is_fast`` in both
+             directions: Great Friday is both, "Fifth day of Eastertide" is neither. See
+             ``ObservanceCatalog.commemoration_ids``, the served ``CommemorationIds``
+             field, and "Commemorations are marked per observance id" in CLAUDE.md.
   approved_en the English the engine must serve. THIS COLUMN IS THE GROUND TRUTH.
   source_hy  the source's own Armenian for the same component, as an independent witness
   approved_hy the Armenian the engine must serve -- the Armenian counterpart of
@@ -58,9 +68,10 @@ change an id that has shipped.
 ``approved_en`` it is carried over, and defaults to ``source_hy`` only on a row that has
 never had one.
 
-Refreshing this file NEVER discards human edits: ``id``, ``approved_en``, ``approved_hy``
-and ``note`` are carried over by ``source_en`` key, and a row whose approved text no longer
-matches what the engine serves is reported rather than overwritten.
+Refreshing this file NEVER discards human edits: ``id``, ``is_fast``, ``is_comm``,
+``approved_en``, ``approved_hy`` and ``note`` are carried over by ``source_en`` key, and a
+row whose approved text no longer matches what the engine serves is reported rather than
+overwritten.
 
 Usage:
     python dev/observance_name_review.py             # refresh (preserving edits)
@@ -90,8 +101,8 @@ from armenian_lectionary.engine import (                                # noqa: 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REVIEW_PATH = os.path.join(HERE, "observance_name_review.tsv")
-FIELDS = ("status", "days", "last", "source_en", "id", "component_ids", "approved_en",
-          "source_hy", "approved_hy", "note")
+FIELDS = ("status", "days", "last", "source_en", "id", "is_fast", "is_comm",
+          "component_ids", "approved_en", "source_hy", "approved_hy", "note")
 
 # Open questions -- keyed by the SOURCE spelling, so they survive a correction landing.
 # Each is a name that reads oddly but that nothing available settles: the Armenian is
@@ -550,6 +561,11 @@ def build_rows():
             "last": last[src],
             "source_en": src,
             "id": (prior or {}).get("id") or "",
+            # Human decisions, carried over exactly like id/approved_hy: there is no
+            # scrape to refresh either from, so a row that has never been reviewed stays
+            # blank rather than guessing.
+            "is_fast": (prior or {}).get("is_fast") or "",
+            "is_comm": (prior or {}).get("is_comm") or "",
             "component_ids": component_ids,
             "approved_en": approved,
             "source_hy": source_hy,

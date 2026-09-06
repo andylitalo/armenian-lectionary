@@ -2850,26 +2850,71 @@ def _resolve_observance_names(label: str, language: str) -> str:
     return ObservanceName.parse(label).map(in_language).render()
 
 
-def _observance_ids(label: str) -> list:
-    """The stable catalog id of each component of ``label``, in served order, or ``[]``
-    if any component does not resolve.
+def _observances(label: str) -> list:
+    """Each component of ``label`` as a record of its id, served name and attributes, in
+    served order -- or ``[]`` if any component does not resolve.
 
-    All or nothing: a partial list is not a key. A consumer keying rows on
-    ``ObservanceIds`` needs the whole list to identify a day; a list with a hole in it
-    would silently identify a different one. Operates on ``label`` post-overlay --
-    :func:`_apply_position_label` / :func:`_apply_eve_label` have already decided which
-    text is served (stored value or a catalogued rename), so this asks the catalog
-    nothing about the calendar, only what id that already-resolved text names -- the
-    same reverse lookup :func:`_resolve_observance_names` uses for language.
+    This is the ONE resolution of a day's name into observances; ``ObservanceIds`` is a
+    projection of it (:func:`_ids_of`) rather than a second pass, so the two cannot
+    disagree. The alternative was a parallel array per attribute -- ``FastIds``,
+    ``CommemorationIds``, one more each time -- which is this table stored transposed:
+    every consumer asking "what is true of THIS observance" had to re-join the arrays by
+    membership, and every new attribute was a new top-level field. Here an attribute is a
+    key, and adding one changes no field.
+
+    All or nothing, exactly as ``ObservanceIds`` has been since 2.0.0: a partial list is
+    not a key, and a list with a hole in it would silently identify a different day than
+    the one served. It follows that ``[]`` has ONE meaning -- "this day did not resolve"
+    -- rather than a different one per field; a `[]` that also had to mean "no fast" is
+    what made the two id arrays unreadable on a thin checkout.
+
+    Operates on ``label`` post-overlay -- :func:`_apply_position_label` /
+    :func:`_apply_eve_label` have already decided which text is served (stored value or a
+    catalogued rename), so this asks the catalog nothing about the calendar, only what id
+    that already-resolved text names -- the same reverse lookup
+    :func:`_resolve_observance_names` uses for language. ``name`` is therefore the served
+    component verbatim, and :func:`_localize` rewrites it by id for ``language="hy"``, so
+    joining the names always reproduces ``Liturgical Day`` in either language.
     """
     catalog = _OBSERVANCE_CATALOG
-    ids = []
+    observances = []
     for part in ObservanceName.parse(label):
         sid = catalog.id_of(part)
         if not sid:
             return []
-        ids.append(sid)
-    return ids
+        entry = catalog[sid]
+        observances.append({
+            "id": sid,
+            "name": part,
+            # Stated per id in dev/observance_name_review.tsv and INDEPENDENT of each
+            # other -- an observance may be both (Great Friday) or neither ("Fifth day of
+            # Eastertide"), so neither may ever be computed from the other. Coerced to
+            # bool so a thin/older catalog entry with the key absent serves False rather
+            # than None: the API promises a boolean, and the catalog's degrade-to-empty
+            # convention must not leak a third value into it.
+            "is_fast": bool(entry.get("is_fast")),
+            "is_comm": bool(entry.get("is_comm")),
+        })
+    return observances
+
+
+def _ids_of(observances: list) -> list:
+    """The ``ObservanceIds`` projection of an ``Observances`` list.
+
+    Its own function so that the field and the array it summarizes are derived in one
+    place; nothing computes the ids independently, so there is no moment at which they can
+    disagree with ``Observances`` -- the same reasoning as ``ObservanceCatalog``'s indexes.
+    """
+    return [o["id"] for o in observances]
+
+
+def _observance_ids(label: str) -> list:
+    """``label``'s stable catalog ids -- :func:`_observances` projected by :func:`_ids_of`.
+
+    Kept as its own entry point because ``ObservanceIds`` is a published 2.0.0 field and
+    dev tooling and tests ask for it by name; it states no rule of its own.
+    """
+    return _ids_of(_observances(label))
 
 
 def _localize(result: dict, language: str) -> dict:
@@ -2889,6 +2934,13 @@ def _localize(result: dict, language: str) -> dict:
         return result
     result["Liturgical Day"] = _resolve_observance_names(
         result.get("Liturgical Day", ""), language)
+    # Each observance's own name, resolved by ID through the same catalog entry
+    # _resolve_observance_names just used for the joined string -- so the two cannot part,
+    # and joining these names still reproduces "Liturgical Day". Only ``name`` moves: the
+    # id and the attributes are language-independent by construction.
+    result["Observances"] = [
+        {**o, "name": _catalog_text(o["id"], o["name"], language)}
+        for o in result.get("Observances", ())]
     result["ReadingsList"] = [
         _translate_reading(r, _BOOK_NAMES_HY) for r in result.get("ReadingsList", [])]
     # Translate within the existing groups: the OT/Epistle/Gospel classification was
@@ -3316,11 +3368,36 @@ def compute_armenian_lectionary(target_date: datetime.date,
     ``ReadingsList`` entry. ``book`` is always the canonical English head, independent
     of ``language``.
 
-    ``ObservanceIds`` gives the stable catalog id of each component of ``Liturgical Day``,
-    in the same order, independent of ``language`` -- what a consumer should key rows on
-    instead of the display string (see "Observance ids are stated, not derived" in
-    CLAUDE.md). All or nothing: ``[]`` if any component has no catalog entry, since a
-    partial list would silently identify a different day than the one served.
+    ``Observances`` is ``Liturgical Day`` as the ordered list it already is internally --
+    one dict per component, in served order::
+
+        {"id": "great_friday", "name": "Great Friday", "is_fast": True, "is_comm": False}
+
+    ``id`` is the stable catalog key a consumer should persist instead of display text
+    (see "Observance ids are stated, not derived" in CLAUDE.md); ``name`` is that
+    component's served text, in ``language``, so ``" -- ".join(o["name"] for o in
+    Observances)`` reproduces ``Liturgical Day`` and no consumer has to split the string.
+
+    The attributes are per-*observance* human-reviewed marks, each stated in a column of
+    ``dev/observance_name_review.tsv`` and INDEPENDENT of one another:
+
+      ``is_fast``  the observance is a fast (see "Fasts are marked per observance id")
+      ``is_comm``  it commemorates a person or an event, rather than only locating the day
+                   in the calendar (see "Commemorations are marked per observance id")
+
+    Neither is the other's negation: they are both true on a named Lenten Sunday and both
+    false on an ordinal-day label. Nor are they claims about the DATE -- ``is_fast`` says nothing
+    about whether today is a fast day, which needs the feast/fast precedence rules this
+    engine does not implement, and which 727 days in range answer differently from any
+    single component. **A new observance attribute is a new key here, never a new field.**
+
+    ``ObservanceIds`` is the id projection of ``Observances`` -- the same ids, in the same
+    order, kept as its own field because it is the published 2.0.0 key.
+
+    Both are all or nothing: ``[]`` if any component has no catalog entry, since a partial
+    list would silently identify a different day than the one served. So an empty list
+    means "this day did not resolve" and nothing else -- check it before reading the
+    attributes, as on a thin checkout (no ``observance_catalog.json``) every day is ``[]``.
 
     Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
     the engine has no validated data and would otherwise return an internal absence-marker
@@ -3353,7 +3430,8 @@ def compute_armenian_lectionary(target_date: datetime.date,
     # Resolved from the ENGLISH label, before _localize rewrites it for language="hy" --
     # the catalog's reverse index is keyed on English, and the ids must not vary by
     # language (see tests.test_observance_ids.TestObservanceIdsAreLanguageIndependent).
-    result["ObservanceIds"] = _observance_ids(result["Liturgical Day"])
+    result["Observances"] = _observances(result["Liturgical Day"])
+    result["ObservanceIds"] = _ids_of(result["Observances"])
     return _localize(result, language)
 
 

@@ -1,12 +1,13 @@
-"""The observance catalog: ``id -> {en, hy}``, and the indexes that read it backwards.
+"""The observance catalog: ``id -> {en, hy, is_fast}``, and the indexes that read it backwards.
 
 An observance's id is what a consumer is meant to store instead of display text, and the
-catalog is where the two meet. Three questions get asked of it at runtime, and each used
-to have its own module-level global in ``engine.py``:
+catalog is where the two meet. Four questions get asked of it at runtime, and the first
+three each used to have their own module-level global in ``engine.py``:
 
     what is this id called?          _OBSERVANCE_CATALOG
     which observance is this text?   _TEXT_TO_OBSERVANCE_ID
     what are this text's names?      _TEXT_TO_OBSERVANCE_NAMES
+    is this id a fast?               (new -- see fast_ids)
 
 The reverse indexes are derived from the forward one, so they can go stale -- and they
 did, structurally: tests substitute a small catalog to exercise resolution, which meant
@@ -36,9 +37,10 @@ import json
 
 
 class ObservanceCatalog:
-    """``id -> {"en": ..., "hy": ...}``, with the text indexes built alongside."""
+    """``id -> {"en", "hy", "is_fast", "is_comm"}``, with the indexes built alongside."""
 
-    __slots__ = ("_entries", "_by_text", "_ids_by_text", "own_day_cache")
+    __slots__ = ("_entries", "_by_text", "_ids_by_text", "fast_ids", "commemoration_ids",
+                 "own_day_cache")
 
     def __init__(self, entries=()):
         self._entries = dict(entries)
@@ -49,6 +51,16 @@ class ObservanceCatalog:
         # on their own (docs/observance-name-corrections.md section 7).
         self._by_text = {entry["en"]: entry for entry in self._entries.values()}
         self._ids_by_text = {entry["en"]: sid for sid, entry in self._entries.items()}
+        # Every id the human review marked as a fast, and every one it marked as a
+        # commemoration, built here for the same reason as the two indexes above: derived
+        # from the entries this instance was constructed with, so a substituted catalog
+        # cannot answer from a stale set. The two sets are independent and OVERLAP -- a
+        # named Lenten Sunday is both, an ordinal-day label is neither -- so neither is
+        # the other's complement and neither may be computed from the other.
+        self.fast_ids = frozenset(
+            sid for sid, entry in self._entries.items() if entry.get("is_fast"))
+        self.commemoration_ids = frozenset(
+            sid for sid, entry in self._entries.items() if entry.get("is_comm"))
         # Scratch space for the engine's per-liturgical-year own-day scan. Here rather
         # than on the function so that swapping the catalog swaps the cache with it; see
         # engine._canons_with_own_day.

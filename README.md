@@ -177,6 +177,10 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
     {"book": "Isaiah", "start_chapter": 61, "start_verse": 10,
      "end_chapter": 62, "end_verse": 3, "citation": "Isaiah 61.10-62.3"}
   ],
+  "Observances": [
+    {"id": "hripsime_and_her_companions", "name": "Sts. Hripsime and Her Companions",
+     "is_fast": false, "is_comm": true}
+  ],
   "ObservanceIds": ["hripsime_and_her_companions"],
   "Source": "validated-table"
 }
@@ -190,26 +194,86 @@ independent of `language`. A composite citation — currently only the Daniel/Az
 reading, `"Daniel 3.1-23, Azariah. 1-68"` — expands to two dicts sharing that
 `citation` string, the back-pointer to their shared `ReadingsList` entry.
 
-### Stable observance ids
+### Observances: the day as a list, with its marks
 
 `"Liturgical Day"` is corrected data, not a stable key — a spelling fix or a source
-correction can change the string a given day serves. `"ObservanceIds"` gives the stable
-catalog id of each component of `"Liturgical Day"`, in the same order, independent of
-`language`. It is what a consumer should persist instead of the display string:
+correction can change the string a given day serves. `"Observances"` gives that day as the
+ordered list it already is internally, one entry per component:
 
 ```python
->>> compute_armenian_lectionary(datetime.date(2004, 11, 21))["Liturgical Day"]
+>>> r = compute_armenian_lectionary(datetime.date(2004, 11, 21))
+>>> r["Liturgical Day"]
 'Eleventh Sunday of the Holy Cross — Presentation of the Holy Mother of God to the Temple — Eve of the Fast of Advent'
->>> compute_armenian_lectionary(datetime.date(2004, 11, 21))["ObservanceIds"]
+>>> r["Observances"]
+[{'id': 'eleventh_sunday_of_the_holy_cross', 'name': 'Eleventh Sunday of the Holy Cross',
+  'is_fast': False, 'is_comm': False},
+ {'id': 'presentation_of_the_holy_mother', 'name': 'Presentation of the Holy Mother of God to the Temple',
+  'is_fast': False, 'is_comm': True},
+ {'id': 'eve_of_fast_of_advent', 'name': 'Eve of the Fast of Advent',
+  'is_fast': False, 'is_comm': True}]
+```
+
+- **`id`** is the stable catalog key, independent of `language` — what a consumer should
+  persist instead of the display string. Once published, an id keeps meaning the same
+  observance forever.
+- **`name`** is that component's served text in the requested `language`, so
+  `" — ".join(o["name"] for o in r["Observances"])` reproduces `"Liturgical Day"`. A
+  consumer never has to split the display string.
+- **`is_fast` / `is_comm`** are per-observance marks (below). A future attribute is a new
+  **key** here, not a new top-level field.
+
+`"ObservanceIds"` is the id projection of the same list, kept as its own field:
+
+```python
+>>> r["ObservanceIds"]
 ['eleventh_sunday_of_the_holy_cross', 'presentation_of_the_holy_mother', 'eve_of_fast_of_advent']
 ```
 
 A day is identified by the whole ordered list, not any single id — some days name two to
-four observances at once (a calendar position, a commemoration, an eve note), and no
-separator is imposed on the list itself. An id, once published, keeps meaning the same
-observance forever; a day whose components cannot all be resolved (a thin install with no
+four observances at once (a calendar position, a commemoration, an eve note). Resolution is
+all or nothing: a day whose components cannot all be resolved (a thin install with no
 catalog data, for instance) gets `[]` rather than a list with a hole in it, since a partial
-list would silently identify a different day than the one actually served.
+list would silently identify a different day than the one actually served. **So an empty
+list means "this day did not resolve" and nothing else — check it before reading the
+marks.**
+
+### The two marks, and why they are independent
+
+`is_fast` says the observance is a fast. `is_comm` says it commemorates a person or an
+event, as opposed to only locating the day in the calendar. **Neither is the other's
+negation** — all four combinations occur:
+
+| | `is_comm` | not `is_comm` |
+|---|---|---|
+| **`is_fast`** | `third_sunday_of_great_lent` — Sunday of the Prodigal Son | `wednesday_fast`, `great_friday` |
+| **not `is_fast`** | `appearance_of_the_holy_cross` | `third_day_of_nativity` |
+
+So a consumer rendering the day's saints and feasts filters on `is_comm`. Filtering on
+`not is_fast` instead would put `Fifth day of Eastertide` on the same footing as the
+Ascension — of the 390 ids served in range, 284 are not fasts but only 183 are
+commemorations; the other 101 are bare position labels, carried on 2,534 days.
+
+```python
+>>> r = compute_armenian_lectionary(datetime.date(2026, 5, 3))
+>>> r["Liturgical Day"]
+'Fifth Sunday of Eastertide — Appearance of the Holy Cross'
+>>> [o["name"] for o in r["Observances"] if o["is_comm"]]
+['Appearance of the Holy Cross']
+```
+
+Both marks are **per-observance, not per-date**. `is_fast` does not answer "is this date a
+fast day": the two differ on the 727 days in range that name both a fast and a
+commemoration, and deciding the date needs feast/fast precedence rules this engine does not
+implement. Likewise **5,070 of the 9,861 days in range carry no `is_comm` component at
+all** — the weekly Wed/Fri fast alone is 1,334 — because those days commemorate nobody, so
+an empty result there is a normal answer, not an error. A Holy Week day-name is a fast and
+not a commemoration for the same reason: what the day commemorates is a separate component
+beside it (`Great Friday — Remembrance of the Passion, …`).
+
+One known gap: the deprecated `fast_day` id is never served, so on Dec 9 in 2005, 2011,
+2016 and 2022 — the four days in range whose position label is the bare fast marker with
+nothing more specific — no component is marked `is_fast` on a day the engine's own tables
+call a fast. See CLAUDE.md, "A day's observances, and the marks on them".
 
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.

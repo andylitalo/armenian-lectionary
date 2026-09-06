@@ -9,7 +9,16 @@ This is a PROJECTION, not a derivation. Every id is STATED, in the ``id`` column
 dev/observance_name_review.tsv, next to the human decision about what the observance should be
 called::
 
-    {row.id: {"en": row.approved_en, "hy": row.approved_hy}}
+    {row.id: {"en": row.approved_en, "hy": row.approved_hy,
+              "is_fast": row.is_fast == "x", "is_comm": row.is_comm == "x"}}
+
+``is_fast`` and ``is_comm`` are two further, independent human decisions on the same row --
+whether this observance is a fast day, and whether it commemorates a person or an event
+rather than only locating the day in the calendar -- each carried straight through rather
+than derived from the text. Deriving either from the text is exactly what this build
+refuses to do, and for the same reason it refuses to derive the id: "Sixth Sunday of Great
+Lent: Sunday of the Advent" and "Sixth day of Nativity" have the same shape and opposite
+answers, and a correction to either name must not move either bit.
 
 That is the whole build. It matters that ids are stated rather than computed from text:
 an id derived from display text moves when the text is corrected, and a consumer keying
@@ -717,7 +726,11 @@ def build_catalog(ground_truth):
                             "belongs on each half, not on the join")
             continue
         by_id[sid], by_en[en] = source, sid
-        catalog[sid] = {"en": en, "hy": hy.replace(_OBSERVANCE_SEP, _INTERNAL_SEP)}
+        catalog[sid] = {
+            "en": en, "hy": hy.replace(_OBSERVANCE_SEP, _INTERNAL_SEP),
+            "is_fast": row.get("is_fast", "").strip().lower() == "x",
+            "is_comm": row.get("is_comm", "").strip().lower() == "x",
+        }
 
     return catalog, problems
 
