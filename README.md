@@ -179,6 +179,7 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
   ],
   "ObservanceIds": ["hripsime_and_her_companions"],
   "FastIds": [],
+  "CommemorationIds": ["hripsime_and_her_companions"],
   "Source": "validated-table"
 }
 ```
@@ -245,10 +246,11 @@ fasts    = set(result["FastIds"])
 not_fast = [sid for sid in result["ObservanceIds"] if sid not in fasts]
 ```
 
-That complement is not only commemorations: `ObservanceIds` carries calendar-position labels
-and eve notes too, and most of those are not fasts either. Of the 390 ids served in range,
-284 are not fasts — 168 commemorations, 103 position labels (`Third day of Nativity`) and 13
-eve notes (`Eve of the Nativity and Theophany of Our Lord Jesus Christ`).
+That complement is **not** the day's commemorations, and is rarely what you want:
+`ObservanceIds` carries calendar-position labels too, and most of those are not fasts either.
+Of the 390 ids served in range, 284 are not fasts — but only 183 are commemorations. The
+other 101 are bare position labels (`Third day of Nativity`, `Fifth day of Eastertide`), and
+2,534 days carry at least one. Read `CommemorationIds` instead.
 
 Deciding whether the *date* is a fast needs the precedence rules for a feast and a fast
 colliding on one day, which this engine does not implement. Over the supported range: 3,325
@@ -260,6 +262,40 @@ then looks like a non-fast); and the deprecated `fast_day` id is never served, s
 2005, 2011, 2016 and 2022 — the four days in range whose position label is the bare fast
 marker with nothing more specific — `FastIds` is `[]` on a day the engine's own tables call a
 fast. See CLAUDE.md, "Fasts are marked per observance id".
+
+### Which observances are commemorations
+
+`"CommemorationIds"` is the subset of the day's `"ObservanceIds"` that commemorate a person
+or an event, as opposed to only locating the day in the calendar — same order, independent
+of `language`, always present, `[]` on a day with none:
+
+```python
+>>> r = compute_armenian_lectionary(datetime.date(2026, 5, 3))
+>>> r["Liturgical Day"]
+'Fifth Sunday of Eastertide — Appearance of the Holy Cross'
+>>> r["ObservanceIds"]
+['fifth_sunday_of_eastertide', 'appearance_of_the_holy_cross']
+>>> r["CommemorationIds"]
+['appearance_of_the_holy_cross']
+```
+
+**It is not the complement of `FastIds`.** The two marks are independent, and all four
+combinations occur — an observance may be both, either, or neither:
+
+| | commemoration | not a commemoration |
+|---|---|---|
+| **fast** | `great_friday` — Great Friday | `wednesday_fast` — Wednesday Fast |
+| **not a fast** | `appearance_of_the_holy_cross` | `third_day_of_nativity` |
+
+So a consumer rendering the day's saints and feasts reads this field; `ObservanceIds` minus
+`FastIds` would put `Third day of Nativity` on the same footing as the Ascension.
+
+**5,017 of the 9,861 days in range serve no commemoration** — overwhelmingly the weekly
+Wed/Fri fast and the ordinal-day labels inside Nativity, Eastertide and the named fasts.
+Those days commemorate nobody, so the empty list is a normal answer and not an error;
+4,555 days carry one, 284 carry two, 5 carry three. Like `FastIds`, this is a filter over
+`ObservanceIds` and is only meaningful when that field is non-empty. See CLAUDE.md,
+"Commemorations are marked per observance id", for what is marked and on whose authority.
 
 An unparseable date returns HTTP 400. `GET /` returns usage JSON, and
 `GET /health` returns `{"status": "ok"}` for liveness checks.

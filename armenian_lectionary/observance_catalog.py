@@ -37,9 +37,10 @@ import json
 
 
 class ObservanceCatalog:
-    """``id -> {"en": ..., "hy": ..., "is_fast": ...}``, with the indexes built alongside."""
+    """``id -> {"en", "hy", "is_fast", "is_comm"}``, with the indexes built alongside."""
 
-    __slots__ = ("_entries", "_by_text", "_ids_by_text", "fast_ids", "own_day_cache")
+    __slots__ = ("_entries", "_by_text", "_ids_by_text", "fast_ids", "commemoration_ids",
+                 "own_day_cache")
 
     def __init__(self, entries=()):
         self._entries = dict(entries)
@@ -50,11 +51,16 @@ class ObservanceCatalog:
         # on their own (docs/observance-name-corrections.md section 7).
         self._by_text = {entry["en"]: entry for entry in self._entries.values()}
         self._ids_by_text = {entry["en"]: sid for sid, entry in self._entries.items()}
-        # Every id the human review marked as a fast, built here for the same reason as
-        # the two indexes above: derived from the entries this instance was constructed
-        # with, so a substituted catalog cannot answer from a stale set.
+        # Every id the human review marked as a fast, and every one it marked as a
+        # commemoration, built here for the same reason as the two indexes above: derived
+        # from the entries this instance was constructed with, so a substituted catalog
+        # cannot answer from a stale set. The two sets are independent and OVERLAP -- Holy
+        # Week's days are both, an ordinal-day label is neither -- so neither is the
+        # other's complement and neither may be computed from the other.
         self.fast_ids = frozenset(
             sid for sid, entry in self._entries.items() if entry.get("is_fast"))
+        self.commemoration_ids = frozenset(
+            sid for sid, entry in self._entries.items() if entry.get("is_comm"))
         # Scratch space for the engine's per-liturgical-year own-day scan. Here rather
         # than on the function so that swapping the catalog swaps the cache with it; see
         # engine._canons_with_own_day.

@@ -2883,6 +2883,17 @@ def _fast_ids(observance_ids: list) -> list:
     return [sid for sid in observance_ids if sid in fast]
 
 
+def _commemoration_ids(observance_ids: list) -> list:
+    """The ids among ``observance_ids`` the review marked as commemorations, in order.
+
+    The sibling of :func:`_fast_ids`, and NOT its complement: an observance may be both
+    (Great Friday) or neither ("Fifth day of Eastertide"). Both are filters over the same
+    already-resolved list, so the two answer about the same observances or neither does.
+    """
+    commemorations = _OBSERVANCE_CATALOG.commemoration_ids
+    return [sid for sid in observance_ids if sid in commemorations]
+
+
 def _localize(result: dict, language: str) -> dict:
     """Translate the human-readable feast and reading names of ``result`` in place.
 
@@ -3339,6 +3350,14 @@ def compute_armenian_lectionary(target_date: datetime.date,
     engine's own per-*date* fast logic (the weekly Wed/Fri split, the named-fast-window
     position labels); the two are not cross-checked against each other.
 
+    ``CommemorationIds`` is the subset a human review marked as commemorating a person or
+    an event, as opposed to only locating the day in the calendar (see "Commemorations are
+    marked per observance id" in CLAUDE.md) -- also ``[]`` rather than omitted. It is NOT
+    the complement of ``FastIds``: the two sets overlap on Holy Week and are both empty on
+    an ordinal-day label. A consumer wanting "what does this day commemorate" reads this
+    field; ``ObservanceIds`` minus ``FastIds`` answers a different question and would
+    include every "Fifth day of Eastertide".
+
     Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
     the engine has no validated data and would otherwise return an internal absence-marker
     dressed as a name -- the very strings ``tests/test_observance_contract.py`` forbids inside
@@ -3372,6 +3391,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
     # language (see tests.test_observance_ids.TestObservanceIdsAreLanguageIndependent).
     result["ObservanceIds"] = _observance_ids(result["Liturgical Day"])
     result["FastIds"] = _fast_ids(result["ObservanceIds"])
+    result["CommemorationIds"] = _commemoration_ids(result["ObservanceIds"])
     return _localize(result, language)
 
 

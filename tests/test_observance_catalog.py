@@ -27,11 +27,16 @@ from armenian_lectionary.observance_catalog import ObservanceCatalog       # noq
 
 ENTRIES = {
     "nativity_5": {"en": "Fifth day of Nativity", "hy": "Ե օր Ս. Ծննդեան"},
-    "vahan": {"en": "St. Vahan of Goghtn", "hy": "Ս. Վահան Գողթնացի"},
+    "vahan": {"en": "St. Vahan of Goghtn", "hy": "Ս. Վահան Գողթնացի",
+              "is_comm": True},
     "nativity_fast_3": {
         "en": "Third day of the Fast of Nativity", "hy": "Գ օր Ս. Ծննդեան պահոց",
         "is_fast": True,
     },
+    # A fast AND a commemoration -- the quadrant that makes the two sets independent
+    # rather than complements. See tests/test_commemoration_ids.py.
+    "great_friday": {"en": "Great Friday", "hy": "Աւագ ուրբաթ",
+                     "is_fast": True, "is_comm": True},
 }
 
 
@@ -73,7 +78,8 @@ class TestTheInterface(unittest.TestCase):
         self.assertEqual(self.catalog["vahan"]["en"], "St. Vahan of Goghtn")
         self.assertEqual(self.catalog.get("absent"), None)
         self.assertEqual(dict(self.catalog.items()), ENTRIES)
-        self.assertEqual(sorted(self.catalog), ["nativity_5", "nativity_fast_3", "vahan"])
+        self.assertEqual(sorted(self.catalog),
+                         ["great_friday", "nativity_5", "nativity_fast_3", "vahan"])
 
 
 class TestTheIndexesCannotGoStale(unittest.TestCase):
@@ -110,7 +116,8 @@ class TestFastIds(unittest.TestCase):
         self.catalog = ObservanceCatalog(ENTRIES)
 
     def test_fast_ids_holds_only_the_marked_entries(self):
-        self.assertEqual(self.catalog.fast_ids, frozenset({"nativity_fast_3"}))
+        self.assertEqual(self.catalog.fast_ids,
+                         frozenset({"nativity_fast_3", "great_friday"}))
 
     def test_an_entry_with_no_is_fast_key_is_not_a_fast(self):
         """``vahan``/``nativity_5`` carry no ``is_fast`` key at all -- a thin/older
@@ -130,6 +137,51 @@ class TestFastIds(unittest.TestCase):
         self.assertNotIn("nativity_fast_3", unmarked.fast_ids)
         marked = self.catalog.replacing("vahan", is_fast=True)
         self.assertIn("vahan", marked.fast_ids)
+
+
+class TestCommemorationIds(unittest.TestCase):
+    """``commemoration_ids`` is built the same way as ``fast_ids``, and is INDEPENDENT of
+    it: neither set is the other's complement, so neither may be derived from the other.
+    ``great_friday`` is in both, ``nativity_5`` in neither."""
+
+    def setUp(self):
+        self.catalog = ObservanceCatalog(ENTRIES)
+
+    def test_commemoration_ids_holds_only_the_marked_entries(self):
+        self.assertEqual(self.catalog.commemoration_ids,
+                         frozenset({"vahan", "great_friday"}))
+
+    def test_an_entry_with_no_is_comm_key_is_not_a_commemoration(self):
+        """A thin or older catalog entry carries no ``is_comm`` key at all, and must not
+        be read as a commemoration on the strength of its shape."""
+        self.assertNotIn("nativity_5", self.catalog.commemoration_ids)
+        self.assertNotIn("nativity_fast_3", self.catalog.commemoration_ids)
+
+    def test_an_empty_catalog_has_no_commemoration_ids(self):
+        self.assertEqual(ObservanceCatalog().commemoration_ids, frozenset())
+
+    def test_the_two_sets_are_independent(self):
+        self.assertEqual(self.catalog.fast_ids & self.catalog.commemoration_ids,
+                         frozenset({"great_friday"}))
+        self.assertNotIn("nativity_5", self.catalog.fast_ids)
+        self.assertNotIn("nativity_5", self.catalog.commemoration_ids)
+
+    def test_replacing_preserves_is_comm_by_default(self):
+        renamed = self.catalog.replacing("vahan", en="RENAMED")
+        self.assertIn("vahan", renamed.commemoration_ids)
+
+    def test_replacing_can_override_is_comm(self):
+        unmarked = self.catalog.replacing("vahan", is_comm=False)
+        self.assertNotIn("vahan", unmarked.commemoration_ids)
+        marked = self.catalog.replacing("nativity_5", is_comm=True)
+        self.assertIn("nativity_5", marked.commemoration_ids)
+
+    def test_overriding_one_flag_leaves_the_other(self):
+        """``replacing`` merges fields, so unmarking a fast must not unmark the
+        commemoration riding on the same entry."""
+        no_fast = self.catalog.replacing("great_friday", is_fast=False)
+        self.assertNotIn("great_friday", no_fast.fast_ids)
+        self.assertIn("great_friday", no_fast.commemoration_ids)
 
 
 class TestTheOwnDayCacheBelongsToTheCatalog(unittest.TestCase):

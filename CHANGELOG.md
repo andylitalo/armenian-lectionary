@@ -25,10 +25,11 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   not_fast = [sid for sid in result["ObservanceIds"] if sid not in fasts]
   ```
 
-  That complement is not only commemorations — `ObservanceIds` carries calendar-position
-  labels and eve notes too, and most of those are not fasts either. Of the 390 ids served in
-  range, 284 are not fasts: 168 commemorations, 103 position labels (`Third day of
-  Nativity`, `First Sunday after Nativity`) and 13 eve notes.
+  That complement is not the day's commemorations — `ObservanceIds` carries calendar-position
+  labels too, and most of those are not fasts either. Of the 390 ids served in range, 284 are
+  not fasts, but only 183 are commemorations; the other 101 are bare position labels (`Third
+  day of Nativity`, `First Sunday after Nativity`). Read `CommemorationIds` instead — see the
+  entry below.
 
   Deciding whether the *date* is a fast needs the precedence rules for a feast and a fast
   colliding on one day, which this engine does not implement. Over `MIN_YEAR`–`MAX_YEAR`:
@@ -56,6 +57,50 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
     engine's own tables call the day a fast. Those four are the only such days in range.
 
   Locked by `tests/test_fast_ids.py` and `tests/test_observance_catalog.py`.
+
+- **`CommemorationIds`: which of a day's observances commemorate something.** Every result
+  now also carries `"CommemorationIds"`, the subset of that day's own `"ObservanceIds"` a
+  human review has marked as commemorating a person or an event — as opposed to only
+  locating the day in the calendar. Same order, independent of `language`, always present,
+  `[]` on a day with none. Additive and non-breaking; flows through `/readings`
+  automatically.
+
+  ```python
+  >>> r = compute_armenian_lectionary(datetime.date(2026, 5, 3))
+  >>> r["Liturgical Day"]
+  'Fifth Sunday of Eastertide — Appearance of the Holy Cross'
+  >>> r["ObservanceIds"]
+  ['fifth_sunday_of_eastertide', 'appearance_of_the_holy_cross']
+  >>> r["CommemorationIds"]
+  ['appearance_of_the_holy_cross']
+  ```
+
+  **This is not the complement of `FastIds`, and must not be reimplemented as one.** The two
+  marks are independent and all four combinations occur: `great_friday` is both,
+  `wednesday_fast` is a fast only, `appearance_of_the_holy_cross` is a commemoration only,
+  `third_day_of_nativity` is neither. Of the 391 catalogued ids, 195 are commemorations, 107
+  are fasts, 12 are both and 101 are neither. A consumer rendering the day's saints and
+  feasts from `ObservanceIds` minus `FastIds` puts `Fifth day of Eastertide` on the same
+  footing as the Ascension — 101 ids over 2,534 days in range.
+
+  Like `FastIds`, this is a **stated** human decision, not a computation from the text — a
+  third column (`is_comm`) beside `id` and `is_fast` in `dev/observance_name_review.tsv`,
+  projected into `observance_catalog.json` as a boolean and indexed by
+  `ObservanceCatalog.commemoration_ids` at construction. Shape cannot substitute for it:
+  `Sixth Sunday of Great Lent: Sunday of the Advent` and `Sixth day of Nativity` have the
+  same shape and opposite answers, and a rename is free to move the punctuation a shape rule
+  would key on. 167 of the 195 marks restate the observance's own name; the other 28 are
+  reviewer judgments — the 13 `Eve of …` notes, the 5 named Lenten Sundays, Mijink, Red
+  Sunday, Green Sunday, Second Palm Sunday, and Holy Week's 6 — recorded with their warrant
+  in CLAUDE.md, "Commemorations are marked per observance id".
+
+  **5,017 of the 9,861 days in range serve no commemoration**, overwhelmingly the weekly
+  Wed/Fri fast and the ordinal-day labels inside Nativity, Eastertide and the named fasts.
+  The empty list is a normal answer on those days, not an error: 4,555 days carry one
+  commemoration, 284 carry two, 5 carry three. And as with `FastIds`, this is a filter over
+  `ObservanceIds`, so it is only meaningful when that field is non-empty.
+
+  Locked by `tests/test_commemoration_ids.py` and `tests/test_observance_catalog.py`.
 
 ## [2.0.0] — 2026-09-02
 

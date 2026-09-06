@@ -27,6 +27,10 @@ Each entry:
     is_fast     "x" if this observance is a fast day, "" otherwise -- a human decision,
                 carried straight through with no composition (a composite row has no id,
                 so it has nothing to carry this on)
+    is_comm     "x" if this observance commemorates a person or an event rather than only
+                locating the day in the calendar, "" otherwise -- the same kind of human
+                decision as ``is_fast``, carried through the same way, and independent of
+                it in both directions
     approved_en the reviewed English text the engine should serve for this component
     status      ok | fixed | review -- review means the note asks an unresolved question;
                 a component may still be served even under review (the source's own text,
@@ -92,6 +96,7 @@ def main():
         ground_truth[r["source_en"]] = {
             "id": r["id"],
             "is_fast": r["is_fast"],
+            "is_comm": r["is_comm"],
             "approved_en": _compose(r, by_id, "en"),
             "status": r["status"],
             "note": r["note"],
