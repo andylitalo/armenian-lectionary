@@ -7,100 +7,76 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 ## [Unreleased]
 
 ### Added
-- **`FastIds`: which of a day's observances are fasts.** Every result now carries
-  `"FastIds"`, the subset of that day's own `"ObservanceIds"` a human review has marked as
-  a fast, in the same order and independent of `language`. Always present, `[]` on a day
-  with no fast component. Additive and non-breaking — no existing field changes. Flows
+- **`Observances`: the day as a list, with per-observance marks.** Every result now carries
+  `"Observances"`, one dict per component of `"Liturgical Day"`, in served order:
+
+  ```python
+  >>> compute_armenian_lectionary(datetime.date(2026, 4, 3))["Observances"]
+  [{'id': 'great_friday', 'name': 'Great Friday', 'is_fast': True, 'is_comm': True},
+   {'id': 'passion_crucifixion_burial', 'name': 'Remembrance of the Passion, …',
+    'is_fast': False, 'is_comm': True}]
+  ```
+
+  `id` is the stable catalog key (unchanged from `ObservanceIds`, and independent of
+  `language`); `name` is that component's served text in the requested language, so
+  `" — ".join(o["name"] for o in Observances)` reproduces `"Liturgical Day"` and a consumer
+  never has to split the display string. Additive and non-breaking — `"ObservanceIds"` is
+  retained as the id projection of the same list, and no existing field changes. Flows
   through `/readings` automatically.
 
-  It answers **"which of this day's named observances are fasts"**, and nothing more. It
-  does **not** answer "is this date a fast day": those differ whenever a day names more than
-  one observance, which it does on 727 of the 9,861 days in range — `Wednesday Fast — Feast
-  of the Holy Church`, `Sixth day of Great Lent — St. Theodore the Tyron`, `Great Thursday —
-  Remembrance of the Last Supper`, where a fast and a commemoration are both true. So
-  `bool(FastIds)` is not "today is a fast":
+  **The marks are per-observance, human-reviewed, and independent of one another:**
 
-  ```python
-  fasts    = set(result["FastIds"])
-  not_fast = [sid for sid in result["ObservanceIds"] if sid not in fasts]
-  ```
+  | | `is_comm` | not `is_comm` |
+  |---|---|---|
+  | **`is_fast`** | `great_friday` — 12 ids | `wednesday_fast` — 95 ids |
+  | **not `is_fast`** | `appearance_of_the_holy_cross` — 183 ids | `third_day_of_nativity` — 101 ids |
 
-  That complement is not the day's commemorations — `ObservanceIds` carries calendar-position
-  labels too, and most of those are not fasts either. Of the 390 ids served in range, 284 are
-  not fasts, but only 183 are commemorations; the other 101 are bare position labels (`Third
-  day of Nativity`, `First Sunday after Nativity`). Read `CommemorationIds` instead — see the
-  entry below.
+  `is_fast` says the observance is a fast; `is_comm` says it commemorates a person or an
+  event rather than only locating the day in the calendar. Neither is the other's negation,
+  so neither may be computed from the other. Of the 391 catalogued ids, 107 are fasts, 195
+  are commemorations, 12 are both and 101 are neither. A consumer rendering the day's saints
+  and feasts filters on `is_comm`; filtering on `not is_fast` would put `Fifth day of
+  Eastertide` on the same footing as the Ascension — 101 ids over 2,534 days in range.
 
-  Deciding whether the *date* is a fast needs the precedence rules for a feast and a fast
-  colliding on one day, which this engine does not implement. Over `MIN_YEAR`–`MAX_YEAR`:
-  3,325 days where every observance is a fast, 727 where some are, 5,809 where none is.
+  **A new observance attribute will be a new key in the entry, not a new top-level field.**
+  That is why this is one array of dicts rather than one array of ids per attribute: the
+  latter is the same table stored transposed, so every consumer had to re-join the arrays by
+  membership to ask "what is true of *this* observance", and every attribute cost a schema
+  change. It also gave `[]` two meanings — "this day did not resolve" and "no fast" — which
+  a thin install could not tell apart. Date-level facts (weekday, "is this date a fast day")
+  are deliberately **not** here; they belong to a per-date object, not to an observance.
 
-  Like `ObservanceIds`, this is a **stated** human decision, not a computation — a second
-  column (`is_fast`) beside `id` in `dev/observance_name_review.tsv`, projected into
-  `observance_catalog.json` as a boolean and indexed by `ObservanceCatalog.fast_ids` at
-  construction. 107 ids are marked. **55 of them name the fast in their own text** ("First
-  day of the Fast of Nativity"); the other **52 are a reviewer's reading of the season** —
-  Great Lent's 41 day/Sunday ids, Holy Week's 6, and the 5 `Nth day of Advent` position
-  labels, none of which the source marks as a fast in its own English. See "Fasts are
-  marked per observance id" in CLAUDE.md for the warrant on each, and for the two known
-  gaps below.
+  Like `ObservanceIds`, both marks are **stated** human decisions, not computations from the
+  text — two columns (`is_fast`, `is_comm`) beside `id` in
+  `dev/observance_name_review.tsv`, projected into `observance_catalog.json` as booleans and
+  indexed by `ObservanceCatalog.fast_ids` / `.commemoration_ids` at construction. Shape
+  cannot substitute: `Sixth Sunday of Great Lent: Sunday of the Advent` and `Sixth day of
+  Nativity` have the same shape and opposite answers, and a rename is free to move the
+  punctuation a shape rule would key on.
 
-  Two limits worth knowing before you key on it:
+  Of the 107 fast marks, 55 name the fast in their own text; the other 52 are a reviewer's
+  reading of the season (Great Lent's 41 day/Sunday ids, Holy Week's 6, the 5 `Nth day of
+  Advent` labels). Of the 195 commemoration marks, 167 restate the observance's own name;
+  the other 28 are reviewer judgments — the 13 `Eve of …` notes, the 5 named Lenten Sundays,
+  Mijink, Red Sunday, Green Sunday, Second Palm Sunday, and Holy Week's 6. CLAUDE.md, "A
+  day's observances, and the marks on them", records the warrant for each.
 
-  - **`FastIds` is only meaningful when `ObservanceIds` is non-empty.** It is a filter over
-    that field, which is `[]` when a component fails to resolve — and on a thin checkout
-    (no `observance_catalog.json`) *every* day is `[]`, so the whole of Great Lent reports
-    as having no fast rather than as unresolvable. Check `ObservanceIds` first.
-  - **`fast_day` is deprecated and never served**, so on the four days in range whose
-    position label is the bare marker and nothing more specific — Dec 9 in 2005, 2011, 2016
-    and 2022, each a Friday outside the Nisibis fast window — `FastIds` is `[]` while the
-    engine's own tables call the day a fast. Those four are the only such days in range.
+  Three limits worth knowing before you key on it:
 
-  Locked by `tests/test_fast_ids.py` and `tests/test_observance_catalog.py`.
+  - **Resolution is all or nothing**, as `ObservanceIds` has been since 2.0.0: `[]` if any
+    component has no catalog entry. On a thin install (no `observance_catalog.json`) *every*
+    day is `[]`, so check the list is non-empty before reading the marks.
+  - **Neither mark is a claim about the date.** `is_fast` does not answer "is this date a
+    fast day" — the two differ on the 727 days in range naming both a fast and a
+    commemoration — and 5,017 of the 9,861 days carry no `is_comm` component at all, because
+    those days commemorate nobody.
+  - **`fast_day` is deprecated and never served**, so on Dec 9 in 2005, 2011, 2016 and 2022
+    — the four days in range whose position label is the bare marker and nothing more
+    specific — no component is marked `is_fast` on a day the engine's own tables call a
+    fast. Those four are the only such days in range.
 
-- **`CommemorationIds`: which of a day's observances commemorate something.** Every result
-  now also carries `"CommemorationIds"`, the subset of that day's own `"ObservanceIds"` a
-  human review has marked as commemorating a person or an event — as opposed to only
-  locating the day in the calendar. Same order, independent of `language`, always present,
-  `[]` on a day with none. Additive and non-breaking; flows through `/readings`
-  automatically.
-
-  ```python
-  >>> r = compute_armenian_lectionary(datetime.date(2026, 5, 3))
-  >>> r["Liturgical Day"]
-  'Fifth Sunday of Eastertide — Appearance of the Holy Cross'
-  >>> r["ObservanceIds"]
-  ['fifth_sunday_of_eastertide', 'appearance_of_the_holy_cross']
-  >>> r["CommemorationIds"]
-  ['appearance_of_the_holy_cross']
-  ```
-
-  **This is not the complement of `FastIds`, and must not be reimplemented as one.** The two
-  marks are independent and all four combinations occur: `great_friday` is both,
-  `wednesday_fast` is a fast only, `appearance_of_the_holy_cross` is a commemoration only,
-  `third_day_of_nativity` is neither. Of the 391 catalogued ids, 195 are commemorations, 107
-  are fasts, 12 are both and 101 are neither. A consumer rendering the day's saints and
-  feasts from `ObservanceIds` minus `FastIds` puts `Fifth day of Eastertide` on the same
-  footing as the Ascension — 101 ids over 2,534 days in range.
-
-  Like `FastIds`, this is a **stated** human decision, not a computation from the text — a
-  third column (`is_comm`) beside `id` and `is_fast` in `dev/observance_name_review.tsv`,
-  projected into `observance_catalog.json` as a boolean and indexed by
-  `ObservanceCatalog.commemoration_ids` at construction. Shape cannot substitute for it:
-  `Sixth Sunday of Great Lent: Sunday of the Advent` and `Sixth day of Nativity` have the
-  same shape and opposite answers, and a rename is free to move the punctuation a shape rule
-  would key on. 167 of the 195 marks restate the observance's own name; the other 28 are
-  reviewer judgments — the 13 `Eve of …` notes, the 5 named Lenten Sundays, Mijink, Red
-  Sunday, Green Sunday, Second Palm Sunday, and Holy Week's 6 — recorded with their warrant
-  in CLAUDE.md, "Commemorations are marked per observance id".
-
-  **5,017 of the 9,861 days in range serve no commemoration**, overwhelmingly the weekly
-  Wed/Fri fast and the ordinal-day labels inside Nativity, Eastertide and the named fasts.
-  The empty list is a normal answer on those days, not an error: 4,555 days carry one
-  commemoration, 284 carry two, 5 carry three. And as with `FastIds`, this is a filter over
-  `ObservanceIds`, so it is only meaningful when that field is non-empty.
-
-  Locked by `tests/test_commemoration_ids.py` and `tests/test_observance_catalog.py`.
+  Locked by `tests/test_observances.py`, `tests/test_observance_catalog.py` and
+  `tests/test_api.py`.
 
 ## [2.0.0] — 2026-09-02
 

@@ -34,7 +34,7 @@ ENTRIES = {
         "is_fast": True,
     },
     # A fast AND a commemoration -- the quadrant that makes the two sets independent
-    # rather than complements. See tests/test_commemoration_ids.py.
+    # rather than complements. See tests/test_observances.py.
     "great_friday": {"en": "Great Friday", "hy": "Աւագ ուրբաթ",
                      "is_fast": True, "is_comm": True},
 }

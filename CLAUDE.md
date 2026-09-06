@@ -24,7 +24,7 @@ with no install step.
 | `armenian_lectionary/observance_name.py` | `ObservanceName` — the ordered components of a day's name, and the **only** place the ` — ` component separator is spelled at runtime. Owns the encoding (split/join, drop sets, placement, immutability); holds no domain opinion, so predicates like `engine._is_position_component` are passed in. See "A day's name is a list, not a string" below. |
 | `armenian_lectionary/data/lectionary_data.json` | Embedded, cross-year-validated readings table (shipped; loaded once at import). |
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
-| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy, is_fast, is_comm}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`), the public `"ObservanceIds"` field (`engine._observance_ids`), the public `"FastIds"` field (`engine._fast_ids`, via `ObservanceCatalog.fast_ids`), and the public `"CommemorationIds"` field (`engine._commemoration_ids`, via `ObservanceCatalog.commemoration_ids`). A **projection** of the `id`, `is_fast` and `is_comm` columns of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived", "Fasts are marked per observance id" and "Commemorations are marked per observance id" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
+| `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy, is_fast, is_comm}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`), and the public `"Observances"` field (`engine._observances`) — each entry's `id`, `name` and marks, with `"ObservanceIds"` its id projection. A **projection** of the `id`, `is_fast` and `is_comm` columns of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" and "A day's observances, and the marks on them" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
@@ -357,44 +357,73 @@ lookup through `_OBSERVANCE_CATALOG.id_of` over the already-served, post-overlay
 `tests/test_observance_ids.py`). All-or-nothing, like every other id lookup here: `[]` if
 any component has no catalog entry.
 
-### Fasts are marked per observance id
+### A day's observances, and the marks on them
 
-`is_fast` is a second, independent human decision on the same row as `id` in
-`dev/observance_name_review.tsv`: `"x"` if the observance is a fast, blank otherwise.
-It is reviewed and frozen exactly like every other column there — `dev/build_ground_truth.py`
-carries it into `observance_name_ground_truth.json` untouched, and
-`dev/build_observance_catalog.py` stamps it into `observance_catalog.json` as a boolean
-alongside `en`/`hy`. There is no composition and no inference: `is_fast` is an attribute of
-an **observance**, so a row with no `id` names no observance and a mark on one is ignored,
-the same way every other per-observance attribute on such a row is.
-
-`ObservanceCatalog.fast_ids` (`armenian_lectionary/observance_catalog.py`) is the set of
-every id the review marked, built once in `__init__` from the entries the instance was
-constructed with — the same "cannot go stale" pattern as the catalog's two text indexes.
-`engine._fast_ids` filters a day's already-resolved `"ObservanceIds"` through it, and
-`compute_armenian_lectionary` serves the result as `"FastIds"` — the subset of a day's own
-observance ids that are fasts, always a list, `[]` on a day with none. Because it is a
-filter over `ObservanceIds` rather than a second text resolution, it inherits that field's
-all-or-nothing coverage for free: every date `MIN_YEAR`-`MAX_YEAR` fully resolves.
-
-That inheritance has one sharp edge. `ObservanceIds` is `[]` when a component fails to
-resolve, and on a thin checkout — `observance_catalog.json` absent, which the loader degrades
-to an empty catalog by design — *every* day resolves to `[]`. For `ObservanceIds` an empty
-list reads as "I could not identify this day". For `FastIds` it is indistinguishable from
-"this day has no fast", so a thin checkout silently reports Great Lent as venerable:
+`"Observances"` is `"Liturgical Day"` served as the ordered list it already is internally —
+one dict per component, in served order:
 
 ```python
->>> engine._OBSERVANCE_CATALOG = ObservanceCatalog()      # thin checkout
->>> compute_armenian_lectionary(datetime.date(2026, 3, 10))
-{'Liturgical Day': 'Twenty Third day of Great Lent', 'ObservanceIds': [], 'FastIds': [], ...}
+>>> compute_armenian_lectionary(datetime.date(2026, 4, 3))["Observances"]
+[{'id': 'great_friday', 'name': 'Great Friday', 'is_fast': True, 'is_comm': True},
+ {'id': 'passion_crucifixion_burial', 'name': 'Remembrance of the Passion, …',
+  'is_fast': False, 'is_comm': True}]
 ```
 
-**Until that is closed, `FastIds` is only meaningful when `ObservanceIds` is non-empty**, and
-a consumer must check the latter first. The intended fix is to stop serving the blank list at
-all: with the shipped catalog every day in range resolves completely, so a day with no
-observance id is a broken install or a broken build, and raising says so where `[]` does not.
-That is a change to `ObservanceIds`' published contract ("all or nothing: `[]` if any
-component has no catalog entry", 2.0.0), so it is its own change, not a rider on this one.
+`engine._observances` builds it, and it is the **one** resolution of a day's name into
+observances: `"ObservanceIds"` is its id projection (`engine._ids_of`), not a second pass,
+so the two cannot disagree. `name` is the served component verbatim, and `_localize`
+rewrites it *by id* through the same catalog entry `_resolve_observance_names` uses for the
+joined string — so `" — ".join(o["name"] for o in Observances)` reproduces
+`"Liturgical Day"` in either language, and no consumer splits the display string.
+
+**Why one array of dicts and not one array per attribute.** The first cut served `FastIds`
+and `CommemorationIds` beside `ObservanceIds`: the same table stored transposed. A consumer
+asking "what is true of *this* observance" had to re-join the arrays by membership, every
+array restated ids already present, and each new attribute cost a new top-level field — a
+schema change, a CHANGELOG entry, a consumer update. Here an attribute is a **key**, so
+adding one changes no field. It also gave `[]` two meanings: `ObservanceIds == []` says
+"this day did not resolve", while `FastIds == []` said "no fast", and on a thin checkout
+(no `observance_catalog.json`, which the loader degrades to an empty catalog by design)
+*every* day is `[]` — so Great Lent reported as having no fast rather than as unresolvable.
+One array has one meaning.
+
+Working rules:
+
+- **A new observance attribute is a new key in the entry, never a new top-level field.**
+  If it answers a question about one canon, it goes here; if it is a fact about the *date*,
+  it belongs in the `Calendar` object of PR #16 instead (weekday, `Is Sunday`,
+  `Is Fast Day`, fast context). The test is whether the fact would change if you deleted
+  one of the day's observances.
+- **Never collapse independent marks into one `kind` enum.** `is_fast` and `is_comm`
+  overlap on 12 ids; an enum would re-impose the false exclusivity that made "the
+  complement of `FastIds`" wrong in the first place.
+- **Always emit every attribute the engine knows, as a real bool.** `_observances` coerces
+  with `bool(entry.get(...))` so a thin or older catalog entry serves `False`, not `None` —
+  the API promises a boolean and the degrade-to-empty convention must not leak a third
+  value. A key *missing* from an entry therefore means an older engine, not a liturgical
+  claim.
+- **Resolution stays all-or-nothing**, as `ObservanceIds` has been since 2.0.0: `[]` if any
+  component has no catalog entry, since a partial list would silently identify a different
+  day. **Check `Observances` is non-empty before reading the attributes.** The intended fix
+  is to stop serving the blank list at all — with the shipped catalog every day in range
+  resolves, so an empty list is a broken install or a broken build, and raising says so
+  where `[]` does not. That changes `ObservanceIds`' published 2.0.0 contract, so it is its
+  own change.
+
+The two marks below are per-*observance* human decisions, each a column in
+`dev/observance_name_review.tsv` beside `id`, reviewed and frozen exactly like every other
+column there: `dev/build_ground_truth.py` carries each into
+`observance_name_ground_truth.json` untouched, `dev/build_observance_catalog.py` stamps
+each into `observance_catalog.json` as a boolean alongside `en`/`hy`, and
+`ObservanceCatalog` indexes each in `__init__` from the entries the instance was
+constructed with — the same "cannot go stale" pattern as its two text indexes. There is no
+composition and no inference: a row with no `id` names no observance, so a mark on one is
+ignored.
+
+### Fasts are marked per observance id
+
+`is_fast` is `"x"` if the observance is a fast, blank otherwise, indexed as
+`ObservanceCatalog.fast_ids`.
 
 #### What is marked, and on whose authority
 
@@ -444,71 +473,54 @@ re-examine if the marking is ever disputed:
 The TSV's `note` column carries name corrections, not fast decisions, so the warrant for
 each of the 52 is recorded here rather than beside the row.
 
-#### What `FastIds` answers, and what it does not
+#### What `is_fast` answers, and what it does not
 
-It is a *per-observance* tag, not a per-date one. `FastIds` answers **"which of this day's
-named observances are fasts"**, and nothing more. It does not answer "is this date a fast
-day". Those are different questions whenever a day names more than one observance, which it
-does on 727 of the 9,861 days in range: `Wednesday Fast — Feast of the Holy Church`, `Sixth
-day of Great Lent — St. Theodore the Tyron`, `Great Thursday — Remembrance of the Last
-Supper`. On those days a fast and a commemoration are both true.
+It is a *per-observance* tag, not a per-date one. It answers **"is this named observance a
+fast"**, and nothing more. It does not answer "is this date a fast day". Those are different
+questions whenever a day names more than one observance, which it does on 727 of the 9,861
+days in range: `Wednesday Fast — Feast of the Holy Church`, `Sixth day of Great Lent — St.
+Theodore the Tyron`, `Great Thursday — Remembrance of the Last Supper`. On those days a fast
+and a commemoration are both true, of different components.
 
-So `bool(FastIds)` is not "today is a fast". The complement is the day's other observances:
+So `any(o["is_fast"] for o in Observances)` is not "today is a fast". Deciding whether the
+*date* is a fast needs the precedence rules for a feast and a fast colliding on one day,
+which this engine does not implement — consumers that need it (bahk does) have their own,
+and PR #16's `Calendar` object is where such a date-level fact would belong. Split over the
+supported range: 3,325 days where every observance is a fast, 727 where some are, 5,809
+where none is.
 
-```python
-fasts    = set(result["FastIds"])
-not_fast = [sid for sid in result["ObservanceIds"] if sid not in fasts]
-```
-
-**What that complement contains is worth knowing before rendering it, and it is almost
-certainly not what you want.** It is not only commemorations — `ObservanceIds` carries
-calendar-position labels and eve notes too, and most of those are not fasts either. Of the
-390 ids served in range, 284 are not fasts — but only 183 of those are commemorations. The
-other 101 are bare calendar-position labels (`Third day of Nativity`, `First Sunday after
-Nativity`, `Fifth day of Eastertide`), and 2,534 days carry at least one. A consumer
-treating the complement as "the day's commemorations" is rendering every one of them; the
-engine states only that they are not fasts.
-
-**A consumer that wants the day's commemorations reads `CommemorationIds`**, the next
-section — a separate human-reviewed mark, not this complement.
-
-Deciding whether the *date* is a fast is a further question — it needs the precedence rules
-for a feast and a fast colliding on one day, which this engine does not implement. Consumers
-that need it (bahk does) have their own. Split over the supported range: 3,325 days where
-every observance is a fast, 727 where some are, 5,809 where none is.
+**And `not is_fast` is not "a commemoration"** — that was the design error this field's
+shape now prevents. Of the 390 ids served in range, 284 are not fasts, but only 183 are
+commemorations; the other 101 are bare calendar-position labels (`Third day of Nativity`,
+`Fifth day of Eastertide`), carried on 2,534 days. Read `is_comm`.
 
 #### The `fast_day` hole
 
 `fast_day` is **deprecated and structurally unreachable**. It is in `engine._BARE_FAST_MARKERS`
 and `_POSITION_OVERLAY_DROPS`, so `_apply_position_label` returns before it can reach the
-served name; it never enters `ObservanceIds`, so it can never enter `FastIds`. Its row is
+served name; it never enters `Observances`, so its mark can never reach a caller. Its row is
 marked `is_fast`, and the mark goes nowhere.
 
 That is not cosmetic. On the four days in range where the source's position label is the bare
 marker and nothing more specific claims the day — **Dec 9 in 2005, 2011, 2016 and 2022, each a
 Friday falling outside the Nisibis fast window** — the day serves `Feast of the Conception of
-the Holy Virgin Mary by Anna` with `FastIds == []`, while the engine's own tables call it a
-fast. Those are the only four; a sweep comparing `engine._position_label(d)` against `FastIds`
-across `MIN_YEAR`–`MAX_YEAR` finds no others (and finds 154 in the opposite direction, where
-`FastIds` is right and the bare position label alone is not — Holy Week, `beginning_of_the_fast`,
-the Advent labels).
+the Holy Virgin Mary by Anna` with no `is_fast` component, while the engine's own tables call
+it a fast. Those are the only four; a sweep comparing `engine._position_label(d)` against the
+day's marks across `MIN_YEAR`–`MAX_YEAR` finds no others (and finds 154 in the opposite
+direction, where the mark is right and the bare position label alone is not — Holy Week,
+`beginning_of_the_fast`, the Advent labels).
 
 The fix is to serve `friday_fast` on those days rather than dropping the marker, which retires
 `fast_day` properly instead of leaving it marked-but-invisible. Until then
-`tests/test_fast_ids.py` pins the id as never served, so the hole cannot widen unnoticed.
+`tests/test_observances.py` pins the id as never served, so the hole cannot widen unnoticed.
 
 ### Commemorations are marked per observance id
 
-`is_comm` is a **third** independent human decision on the same TSV row: `"x"` if the
-observance commemorates a person or an event, blank if it only locates the day in the
-calendar. Everything structural about it is `is_fast`'s twin — carried untouched through
-`build_ground_truth.py`, stamped as a boolean by `build_observance_catalog.py`, indexed as
-`ObservanceCatalog.commemoration_ids` in `__init__`, filtered out of the day's already-resolved
-`ObservanceIds` by `engine._commemoration_ids`, served as `"CommemorationIds"`. Ignored on a
-row with no `id`, for the same reason. The thin-checkout caveat above applies unchanged:
-`CommemorationIds` is only meaningful when `ObservanceIds` is non-empty.
+`is_comm` is `"x"` if the observance commemorates a person or an event, blank if it only
+locates the day in the calendar, indexed as `ObservanceCatalog.commemoration_ids`.
+Structurally it is `is_fast`'s twin in every respect described above.
 
-**Why it is a third column and not the complement of the second.** The two questions are
+**Why it is its own column and not the complement of `is_fast`.** The two questions are
 orthogonal, and all four quadrants are populated:
 
 | | `is_comm` | not `is_comm` |
@@ -518,7 +530,7 @@ orthogonal, and all four quadrants are populated:
 
 195 ids are marked, 107 are fasts, 12 are both, 101 are neither. So neither set is the
 other's complement and neither may be computed from the other —
-`tests/test_commemoration_ids.py` pins one date per quadrant plus the two set relations,
+`tests/test_observances.py` pins one date per quadrant plus the two set relations,
 and `tests/test_observance_catalog.py` pins that `replacing` one flag leaves the other.
 
 Shape cannot be substituted for the mark either, which is the second reason this is stated
@@ -532,7 +544,7 @@ prefix it would key on.
 #### What is marked, and on whose authority
 
 195 ids, every one of which is served at least once in range (no `fast_day`-style
-unreachable mark — `tests/test_commemoration_ids.py` asserts it, with no exemption list).
+unreachable mark — `tests/test_observances.py` asserts it, with no exemption list).
 The artifact is the authority — `python3 -c "import json; c =
 json.load(open('armenian_lectionary/data/observance_catalog.json')); print(sorted(k for k, v
 in c.items() if v['is_comm']))"` — and the shape of it is:
@@ -570,20 +582,20 @@ re-examine if the marking is disputed:
 Like `is_fast`, the TSV's `note` column carries name corrections rather than these
 decisions, so the warrant for the 28 is recorded here.
 
-#### What `CommemorationIds` answers, and what it does not
+#### What `is_comm` answers, and what it does not
 
-It answers **"which of this day's named observances commemorate something"** — the field a
-consumer rendering per-observance devotional content wants. It does not answer "does this
-date have a commemoration to show" any more than `FastIds` answers "is this date a fast":
-**5,017 of the 9,861 days in range serve none**, overwhelmingly the weekly Wed/Fri fast
-(1,334 days) and the ordinal-day labels inside Nativity, Eastertide and the named fasts.
-Those days genuinely commemorate nobody, and a consumer is right to show nothing on them —
-but it must handle the empty list as a normal case, not an error. Distribution: 4,555 days
-carry one commemoration, 284 carry two, 5 carry three.
+It answers **"does this named observance commemorate something"** — the mark a consumer
+rendering per-observance devotional content filters on. It does not answer "does this date
+have a commemoration to show" any more than `is_fast` answers "is this date a fast":
+**5,017 of the 9,861 days in range have no `is_comm` component at all**, overwhelmingly the
+weekly Wed/Fri fast (1,334 days) and the ordinal-day labels inside Nativity, Eastertide and
+the named fasts. Those days genuinely commemorate nobody, and a consumer is right to show
+nothing on them — but it must handle that as a normal case, not an error. Distribution:
+4,555 days carry one commemoration, 284 carry two, 5 carry three.
 
-That 5,017 is ratcheted by `tests/test_commemoration_ids.py`, not pinned as an equality:
-marking a further observance lowers it, and a *new* blank day means an observance lost its
-mark. Lower the ratchet when you mark one, never raise it.
+That 5,017 is ratcheted by `tests/test_observances.py`, not pinned as an equality: marking a
+further observance lowers it, and a *new* blank day means an observance lost its mark. Lower
+the ratchet when you mark one, never raise it.
 
 ### A day's name is a list, not a string
 
