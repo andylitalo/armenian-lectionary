@@ -6,6 +6,8 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
 ## [Unreleased]
 
+## [2.1.0] — 2026-09-05
+
 ### Added
 - **`Observances`: the day as a list, with per-observance marks.** Every result now carries
   `"Observances"`, one dict per component of `"Liturgical Day"`, in served order:
