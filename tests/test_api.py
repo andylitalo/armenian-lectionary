@@ -44,6 +44,48 @@ class TestReadingsAPI(unittest.TestCase):
                 ids_by_language[language] = ids
         self.assertEqual(ids_by_language["en"], ids_by_language["hy"])
 
+    def test_versification_alignment_survives_json_boundary_and_stays_english(self):
+        """The disclaimer and the corrected span have to reach a client, or the whole pass
+        is invisible. 2001-02-01 serves ``Hosea 14.6-7`` -- the reading that was silently
+        fetching KJV 14:6-7 instead of 14:5-6."""
+        by_language = {}
+        for language in ("en", "hy"):
+            with self.subTest(language=language):
+                response = self.client.get(
+                    "/readings?date=2001-02-01&language=" + language
+                )
+                self.assertEqual(response.status_code, 200)
+                payload = response.get_json()
+                notice = payload["VersificationNotice"]
+                self.assertEqual(notice["target"], "kjv")
+                self.assertEqual(notice["policy"], "endpoint-shift-only")
+                self.assertEqual(notice["counts"], {"realigned": 1, "misaligned": 0})
+                self.assertIn("unflagged, not verified", notice["detail"])
+                flagged = [r for r in payload["ReadingsRefs"] if "alignment" in r]
+                self.assertEqual([r["alignment"]["id"] for r in flagged],
+                                 ["HOS-14-6-7-endshift"])
+                ref = flagged[0]
+                # The original span is served untouched; the correction rides alongside.
+                self.assertEqual((ref["start_verse"], ref["end_verse"]), (6, 7))
+                self.assertEqual(ref["alignment"]["mapped"],
+                                 {"start_chapter": 14, "start_verse": 5,
+                                  "end_chapter": 14, "end_verse": 6})
+                self.assertIs(ref["alignment"]["confirmed"], True)
+                by_language[language] = (notice, payload["ReadingsRefs"])
+        # Alignment is an engine annotation, not scraped text: identical in both languages.
+        self.assertEqual(by_language["en"], by_language["hy"])
+
+    def test_unflagged_reading_carries_no_alignment_key_over_the_wire(self):
+        """Absence is the encoding of "no known issue" -- JSON must not turn it into a
+        ``null`` the client has to special-case."""
+        response = self.client.get("/readings?date=2026-06-01")
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        for ref in payload["ReadingsRefs"]:
+            self.assertNotIn("alignment", ref)
+        self.assertEqual(payload["VersificationNotice"]["counts"],
+                         {"realigned": 0, "misaligned": 0})
+
     def test_observances_survive_json_boundary_with_only_the_name_localized(self):
         """The wire is where an attribute could silently become ``null``: the engine
         coerces to bool precisely so JSON carries `false`, not a missing third value.

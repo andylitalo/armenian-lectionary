@@ -6,6 +6,59 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
 ## [Unreleased]
 
+### Added
+- **`VersificationNotice` and `ReadingsRefs[].alignment`: the first pass at verse
+  alignment.** The citations this engine serves are in the versification of the printed
+  Տօնացոյց (Grabar). A consumer fetching English text addresses it by KJV verse numbers, and
+  **the two do not always agree** — silently, with no error and no symptom. `Hosea 14.6-7` is
+  the case that motivated this: the Grabar chapter runs one verse ahead of KJV throughout, so
+  the range is really KJV 14:5-6, and a consumer has been fetching the wrong two verses.
+
+  Every result now carries `"VersificationNotice"`, and a reading whose span is a known
+  divergence carries an `"alignment"` block:
+
+  ```python
+  >>> [r for r in compute_armenian_lectionary(d)["ReadingsRefs"] if "alignment" in r]
+  [{'book': 'Hosea', 'start_chapter': 14, 'start_verse': 9,
+    'end_chapter': 14, 'end_verse': 10, 'citation': 'Hosea 14.9-10',
+    'alignment': {'status': 'realigned', 'id': 'HOS-14-9-10-endshift',
+                  'kind': 'endpoint-shift', 'target': 'kjv',
+                  'mapped': {'start_chapter': 14, 'start_verse': 8,
+                             'end_chapter': 14, 'end_verse': 9},
+                  'note': 'Grabar Hosea 14 runs one verse ahead of KJV throughout …',
+                  'confirmed': True}}]
+  ```
+
+  **Eight divergences ship, from `armenian_lectionary/data/verse_alignment.json`.** Three are
+  `"realigned"` — the whole range maps onto a contiguous, in-order KJV span, given as
+  `mapped`: both Hosea 14 readings (shift −1) and `Joel 3.9-22` → `3:9-21` (identity start, a
+  mid-chapter merge, end one ahead). Five are `"misaligned"` and served unchanged: Greek
+  Esther (`Esther 10.4-9`, which KJV carries as the standalone book `ESG`), the Romans
+  doxology (`Romans 13.11-14.26`, where Grabar 14:24-26 = KJV 16:25-27), Grabar Romans
+  16:24-27's reordered closing verses, `Song of Solomon 6.9-8.13`, and the Prayer of Azariah
+  (67 Armenian verses against KJV's 68).
+
+  **The original `start_*`/`end_*` are never rewritten.** A corrected span is offered
+  alongside and the consumer chooses. `alignment` and `VersificationNotice` stay English under
+  `language="hy"`, like every other provenance field; the notice's `counts` describe that
+  day's readings.
+
+  Additive and non-breaking. A ref with no known divergence gains **no key at all** —
+  absence is how "no known issue" is encoded — so the other ~1,118 readings are byte-identical
+  to 2.1.0, locked by `tests/test_verse_alignment.py` over the full 2001-2027 range. Flows
+  through `/readings` automatically.
+
+  **An absent `alignment` key means a reading is _unflagged_, not _verified_.** Detection is
+  best-effort and not exhaustive, and the notice says so in as many words. `Hosea 14.6-7`
+  overshoots nothing and trips no automated signal while being wrong, so no automated pass
+  over the corpus can certify what it did not flag. Records were confirmed by reading the
+  Armenian against the English text; `Song of Solomon 6.9-8.13` carries `"confirmed": false`
+  because it was only machine-flagged.
+
+  Deliberately **not** in this pass: a versification mapping table, verse-level correction,
+  splitting a reading into segments, fixing the five misaligned records, and any `hy`-target
+  alignment — the Armenian corpus is keyed to Grabar numbering and needs re-keying first.
+
 ## [2.1.0] — 2026-09-05
 
 ### Added

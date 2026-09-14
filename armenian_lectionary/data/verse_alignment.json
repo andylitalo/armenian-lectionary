@@ -1,0 +1,94 @@
+{
+  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: only whole-range endpoint shifts are corrected; every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
+  "_keying": "Each record is keyed on the tuple (book, start_chapter, start_verse, end_chapter, end_verse) exactly as it appears in ReadingsRefs -- never on the citation string, which a composite citation shares across two refs of which only one is flagged.",
+  "_evidence": "Every record was confirmed by reading the Armenian text against the English text on the cited arak29.org page, NOT by trusting that page's KJV annotations: an unannotated row is not proof of identity (Hosea 14 is annotation-free and shifted by one). See docs/ in the working notes for the full provenance discussion.",
+  "target": "kjv",
+  "records": [
+    {
+      "id": "HOS-14-6-7-endshift",
+      "book": "Hosea",
+      "start_chapter": 14, "start_verse": 6, "end_chapter": 14, "end_verse": 7,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": { "start_chapter": 14, "start_verse": 5,
+                  "end_chapter": 14, "end_verse": 6 },
+      "note": "Grabar Hosea 14 runs one verse ahead of KJV throughout (Grabar 14:1 = KJV 13:16).",
+      "evidence": "arak29.org tHos_14 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "HOS-14-9-10-endshift",
+      "book": "Hosea",
+      "start_chapter": 14, "start_verse": 9, "end_chapter": 14, "end_verse": 10,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": { "start_chapter": 14, "start_verse": 8,
+                  "end_chapter": 14, "end_verse": 9 },
+      "note": "Grabar Hosea 14 runs one verse ahead of KJV throughout (Grabar 14:1 = KJV 13:16). KJV Hosea 14 ends at v9, so the original range overshoots the chapter.",
+      "evidence": "arak29.org tHos_14 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "JOL-3-9-22-endshift",
+      "book": "Joel",
+      "start_chapter": 3, "start_verse": 9, "end_chapter": 3, "end_verse": 22,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": { "start_chapter": 3, "start_verse": 9,
+                  "end_chapter": 3, "end_verse": 21 },
+      "note": "Grabar Joel 3 begins at identity (Grabar 3:1 = KJV 3:1) and ends one ahead (Grabar 3:22 = KJV 3:21); a verse merge between v12 and v18 absorbs the difference mid-chapter. Only the end shifts, and the content stays contiguous and in order. Joel 3.1-8, the companion reading, is true identity and carries no record.",
+      "evidence": "arak29.org tJoel_3 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "EST-10-4-9-relocation",
+      "book": "Esther",
+      "start_chapter": 10, "start_verse": 4, "end_chapter": 10, "end_verse": 9,
+      "status": "misaligned",
+      "kind": "relocation",
+      "note": "The Greek additions to Esther. KJV/KJVAIC carries them as the standalone book ESG, not as Esther 10; KJV Esther 10 has only 3 verses, so this range has no counterpart at these addresses.",
+      "evidence": "arak29.org tEsther_10 and the deuterocanonical Esther pages (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "ROM-13-11-14-26-relocation",
+      "book": "St. Paul's Epistle to the Romans",
+      "start_chapter": 13, "start_verse": 11, "end_chapter": 14, "end_verse": 26,
+      "status": "misaligned",
+      "kind": "relocation",
+      "note": "The doxology sits at Grabar Romans 14:24-26 but at KJV 16:25-27; KJV Romans 14 ends at v23. The reading's content is therefore not contiguous in KJV and no endpoint shift can express it.",
+      "evidence": "arak29.org tRom_13, tRom_14, tRom_16 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "ROM-16-17-27-reordering",
+      "book": "St. Paul's Epistle to the Romans",
+      "start_chapter": 16, "start_verse": 17, "end_chapter": 16, "end_verse": 27,
+      "status": "misaligned",
+      "kind": "reordering",
+      "note": "Grabar Romans 16:24-27 corresponds to KJV 16:25, 26, 27, 24 -- the grace benediction comes last in Armenian. The span covers the same verses but not in the same order.",
+      "evidence": "arak29.org tRom_16 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "SNG-6-9-8-13-reordering",
+      "book": "Song of Solomon",
+      "start_chapter": 6, "start_verse": 9, "end_chapter": 8, "end_verse": 13,
+      "status": "misaligned",
+      "kind": "reordering",
+      "note": "Flagged by automated comparison of the Armenian and English columns; the divergence has NOT been independently confirmed by reading the text, so neither its extent nor its kind is settled. Served unchanged.",
+      "evidence": "arak29.org tSong_6, tSong_7, tSong_8 (Classical Armenian Bible, 1895 Constantinople) -- automated flag only, not content-verified",
+      "confirmed": false
+    },
+    {
+      "id": "AZA-1-1-68-composite",
+      "book": "Azariah",
+      "start_chapter": 1, "start_verse": 1, "end_chapter": 1, "end_verse": 68,
+      "status": "misaligned",
+      "kind": "composite",
+      "note": "The Armenian embeds the Prayer of Azariah in Daniel 3:24-90 (67 verses) against KJV's 68 (USFM S3Y): KJV 34, 45 and 46 have no Armenian counterpart, KJV 66 is split across three Armenian verses, and one pair is reordered. Half of the composite citation \"Daniel 3.1-23, Azariah. 1-68\"; the Daniel half is identity and carries no record.",
+      "evidence": "arak29.org tDan_3 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    }
+  ]
+}

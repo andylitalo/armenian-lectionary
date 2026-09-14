@@ -182,6 +182,13 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
      "is_fast": false, "is_comm": true}
   ],
   "ObservanceIds": ["hripsime_and_her_companions"],
+  "VersificationNotice": {
+    "source": "grabar-tonatsoyts",
+    "target": "kjv",
+    "policy": "endpoint-shift-only",
+    "detail": "Armenian (Grabar) and English (KJV/NKJV) versification do not always align. …",
+    "counts": {"realigned": 0, "misaligned": 0}
+  },
   "Source": "validated-table"
 }
 ```
@@ -193,6 +200,54 @@ sub-reference, so a consumer does not have to parse citation strings like
 independent of `language`. A composite citation — currently only the Daniel/Azariah
 reading, `"Daniel 3.1-23, Azariah. 1-68"` — expands to two dicts sharing that
 `citation` string, the back-pointer to their shared `ReadingsList` entry.
+
+### Versification: the citations are Grabar, and alignment is best-effort
+
+The citations this engine serves are in the versification of the printed Տօնացոյց
+(Tōnats'oyts), a Classical Armenian (Grabar) tradition. If you fetch the *text* against
+English verse addresses (KJV, which is also what NKJV is addressed by), the two numbering
+systems **do not always agree**, and a mismatch is silent — the wrong verses come back with
+no error.
+
+Every result therefore carries `"VersificationNotice"`, and a reading whose span is a known
+divergence carries an `"alignment"` block inside its `ReadingsRefs` entry:
+
+```json
+{"book": "Hosea", "start_chapter": 14, "start_verse": 9,
+ "end_chapter": 14, "end_verse": 10, "citation": "Hosea 14.9-10",
+ "alignment": {
+   "status": "realigned", "id": "HOS-14-9-10-endshift",
+   "kind": "endpoint-shift", "target": "kjv",
+   "mapped": {"start_chapter": 14, "start_verse": 8,
+              "end_chapter": 14, "end_verse": 9},
+   "note": "Grabar Hosea 14 runs one verse ahead of KJV throughout (Grabar 14:1 = KJV 13:16). …",
+   "confirmed": true}}
+```
+
+- `status` is `"realigned"` — the whole range maps onto a contiguous, in-order span in the
+  target, given as `mapped` — or `"misaligned"`, a divergence this pass does **not** correct
+  (a relocation to another chapter, a reordering, a composite book). `mapped` is present
+  only on a realigned record.
+- **The original `start_*`/`end_*` are never rewritten.** The corrected span is offered
+  alongside; the consumer decides which to retrieve against.
+- `confirmed` is `false` where the divergence was flagged by automated comparison but not
+  read against the text.
+- `alignment` and `VersificationNotice` stay English under `language="hy"`, like every other
+  provenance field.
+- `counts` on the notice describes **that day's** readings.
+
+**What this covers, honestly.** Eight divergences are known; three are corrected (both Hosea
+14 readings and `Joel 3.9-22`, each an endpoint shift) and five are flagged and served
+unchanged. The remaining ~1,118 readings are untouched.
+
+> **An absent `alignment` key means a reading is _unflagged_, not _verified_.** Detection is
+> best-effort and not exhaustive. `Hosea 14.6-7` is the proof: it sits well inside its KJV
+> chapter, overshoots nothing, and trips no automated check, yet it fetches the wrong two
+> verses. Nothing here certifies the rest of the corpus.
+
+Out of scope for this pass, deliberately: a full versification mapping table, verse-level
+correction, splitting a reading into segments, and any `hy`-target alignment (the Armenian
+corpus is keyed to Grabar numbering already).
 
 ### Observances: the day as a list, with its marks
 
