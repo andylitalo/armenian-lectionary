@@ -1085,8 +1085,20 @@ Three rules govern `armenian_lectionary/data/verse_alignment.json`:
 A record is added by **reading the Armenian text against the English text**, not by trusting
 an automated label. arak29.org's explicit `KJV [ref]` annotations are a reliable *positive*
 signal of divergence; their absence proves nothing — Hosea 14, Romans 16 and Mark 9 all show
-unannotated rows whose columns are offset. A record that was only machine-flagged ships with
-`"confirmed": false` (`Song of Solomon 6.9-8.13` is the one such record today).
+unannotated rows whose columns are offset. Nothing ships on a machine flag alone: `Song of
+Solomon 6.9-8.13` went out in the first cut as an unconfirmed "reordering" and turned out,
+on reading, to be an ordinary endpoint shift.
+
+4. **Check both Armenian witnesses; where they disagree, Nor Ejmiatsin wins.** The Grabar 1895
+   Constantinople edition (arak29) and Nor Ejmiatsin 1994 (bahk's local `hub/data/bible_hy`
+   corpus) do not always agree, and NE is the better witness for what a Տօնացոյց citation
+   means. `Luke 8.22-56`, `Luke 8.49-56` and `Mark 4.35-41` look shifted in 1895 and are plain
+   identity in NE — correcting them from 1895 alone would have sent consumers to the wrong
+   verses. Equal verse-counts are **not** agreement either: NE and 1895 both give Mark 9 the
+   same 49 labels with the same two gaps, yet NE 9:49 = KJV 9:50 where 1895 9:49 = KJV 9:47.
+
+Readings a sweep raised and reading cleared are pinned in `tests/test_verse_alignment.py`'s
+`CLEARED` set, so the next sweep cannot silently re-add them.
 
 Scope is deliberately narrow: only a whole-range endpoint shift is corrected, and only where
 the content stays contiguous and in order in the target (an internal merge or split is fine —

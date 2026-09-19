@@ -35,6 +35,19 @@ REALIGNED = {
     ("Hosea", 14, 6, 14, 7): ("HOS-14-6-7-endshift", (14, 5, 14, 6)),
     ("Hosea", 14, 9, 14, 10): ("HOS-14-9-10-endshift", (14, 8, 14, 9)),
     ("Joel", 3, 9, 3, 22): ("JOL-3-9-22-endshift", (3, 9, 3, 21)),
+    ("Song of Solomon", 6, 9, 8, 13): ("SNG-6-9-8-13-endshift", (6, 10, 8, 13)),
+    ("Acts of the Apostles", 28, 17, 28, 31): ("ACT-28-17-31-endshift", (28, 17, 28, 30)),
+    ("Job", 38, 2, 40, 5): ("JOB-38-2-40-5-endshift", (38, 2, 40, 10)),
+    ("John", 6, 39, 6, 71): ("JHN-6-39-71-endshift", (6, 39, 6, 70)),
+    ("John", 6, 48, 6, 54): ("JHN-6-48-54-endshift", (6, 48, 6, 53)),
+    ("John", 6, 64, 6, 71): ("JHN-6-64-71-endshift", (6, 63, 6, 70)),
+    ("Judith", 15, 7, 16, 3): ("JDT-15-7-16-3-endshift", (15, 6, 16, 3)),
+    ("Luke", 4, 31, 4, 41): ("LUK-4-31-41-endshift", (4, 31, 4, 40)),
+    ("Luke", 4, 42, 5, 11): ("LUK-4-42-5-11-endshift", (4, 41, 5, 11)),
+    ("St. Paul's Epistle to the Philippians", 4, 8, 4, 23):
+        ("PHP-4-8-23-endshift", (4, 8, 4, 22)),
+    ("Song of Solomon", 1, 2, 2, 3): ("SNG-1-2-2-3-endshift", (1, 3, 2, 3)),
+    ("Song of Solomon", 2, 8, 6, 12): ("SNG-2-8-6-12-endshift", (2, 8, 6, 13)),
 }
 
 MISALIGNED = {
@@ -43,8 +56,29 @@ MISALIGNED = {
         ("ROM-13-11-14-26-relocation", "relocation"),
     ("St. Paul's Epistle to the Romans", 16, 17, 16, 27):
         ("ROM-16-17-27-reordering", "reordering"),
-    ("Song of Solomon", 6, 9, 8, 13): ("SNG-6-9-8-13-reordering", "reordering"),
     ("Azariah", 1, 1, 1, 68): ("AZA-1-1-68-composite", "composite"),
+}
+
+# Readings a detector flagged that reading the text cleared. Pinned so a future sweep cannot
+# silently re-add them: each is identity at BOTH endpoints, and a record would send a
+# consumer to the wrong verses.
+CLEARED = {
+    # An internal merge or split absorbed by the span crossing a chapter boundary.
+    ("Baruch", 3, 31, 4, 4),
+    ("Jonah", 1, 1, 4, 11),
+    ("John", 7, 37, 8, 11),
+    ("Wisdom", 2, 23, 3, 8),
+    # Divergent in the Grabar 1895 edition, plain identity in Nor Ejmiatsin -- NE is the
+    # better witness for what a Tonats'oyts citation means, so these carry no record.
+    ("Luke", 8, 22, 8, 56),
+    ("Luke", 8, 49, 8, 56),
+    ("Mark", 4, 35, 4, 41),
+    # The citation's endpoint exists in KJV but in neither Armenian witness: the citation
+    # scheme is already KJV-valid here, so English retrieval needs no correction.
+    ("Mark", 9, 30, 9, 50),
+    ("Mark", 9, 38, 9, 50),
+    ("St. Paul's First Epistle to the Thessalonians", 4, 13, 4, 18),
+    ("St. Paul's Second Epistle to the Thessalonians", 2, 1, 2, 17),
 }
 
 ALL_FLAGGED = set(REALIGNED) | set(MISALIGNED)
@@ -55,13 +89,13 @@ class TestAlignmentDataFile(unittest.TestCase):
 
     def test_counts(self):
         records = engine._VERSE_ALIGNMENT["records"]
-        self.assertEqual(len(records), 8)
+        self.assertEqual(len(records), 19)
         by_status = {}
         for r in records:
             by_status.setdefault(r["status"], []).append(r)
         self.assertEqual(sorted(by_status), ["misaligned", "realigned"])
-        self.assertEqual(len(by_status["realigned"]), 3)
-        self.assertEqual(len(by_status["misaligned"]), 5)
+        self.assertEqual(len(by_status["realigned"]), 15)
+        self.assertEqual(len(by_status["misaligned"]), 4)
 
     def test_status_vocabulary_excludes_aligned(self):
         """``"aligned"`` is never a stored status -- it is the absence of a record."""
@@ -82,12 +116,12 @@ class TestAlignmentDataFile(unittest.TestCase):
             self.assertTrue(r["evidence"].strip(), r["id"])
             self.assertIsInstance(r["confirmed"], bool)
 
-    def test_song_of_solomon_is_not_claimed_as_confirmed(self):
-        """Record 7 was flagged by automated comparison and never read against the text.
-        Claiming otherwise is the exact mistake the evidence rules exist to prevent."""
-        record = next(r for r in engine._VERSE_ALIGNMENT["records"]
-                      if r["book"] == "Song of Solomon")
-        self.assertFalse(record["confirmed"])
+    def test_every_record_is_confirmed_against_the_text(self):
+        """Nothing ships on an automated flag alone. `Song of Solomon 6.9-8.13` went out in
+        the first cut as an unconfirmed "reordering"; reading both Armenian witnesses showed
+        an ordinary endpoint shift, which is now what it carries."""
+        for r in engine._VERSE_ALIGNMENT["records"]:
+            self.assertTrue(r["confirmed"], r["id"])
 
     def test_index_is_keyed_on_the_span_tuple(self):
         self.assertEqual(set(engine._ALIGNMENT_BY_SPAN), ALL_FLAGGED)
@@ -103,6 +137,13 @@ class TestMappedSpansExistInKjv(unittest.TestCase):
     KJV_CHAPTER_VERSES = {
         "Hosea": {14: 9},
         "Joel": {3: 21},
+        "Acts of the Apostles": {28: 31},
+        "Job": {38: 41, 40: 24},
+        "John": {6: 71},
+        "Judith": {15: 13, 16: 25},
+        "Luke": {4: 44, 5: 39},
+        "St. Paul's Epistle to the Philippians": {4: 23},
+        "Song of Solomon": {1: 17, 2: 17, 6: 13, 8: 14},
     }
 
     def test_mapped_spans_fit_their_chapter(self):
@@ -138,6 +179,7 @@ class TestAlignmentBlockShape(unittest.TestCase):
              "end_chapter": ec, "end_verse": ev})]
 
     def test_realigned_blocks(self):
+        self.assertEqual(len(REALIGNED), 15)
         for key, (rid, mapped) in REALIGNED.items():
             block = self._block(key)
             self.assertEqual(block["status"], "realigned", rid)
@@ -215,6 +257,35 @@ class TestAlignmentOnServedRefs(unittest.TestCase):
         self.assertEqual(
             engine._build_readings_refs(["Hosea 14.9-10"])[0]
             ["alignment"]["mapped"]["start_verse"], 8)
+
+
+class TestClearedReadingsStayUnflagged(unittest.TestCase):
+    """Readings a detector raised that reading the text cleared.
+
+    Each is identity at both endpoints, so a record would actively send a consumer to the
+    wrong verses. They are pinned because they are exactly what a future automated sweep
+    would re-raise: a chapter whose verse-counts disagree, an address missing from one
+    witness, an explicit annotation that turns out to sit inside the span without moving
+    its ends.
+    """
+
+    def test_cleared_refs_carry_no_record(self):
+        for span in CLEARED:
+            self.assertNotIn(span, engine._ALIGNMENT_BY_SPAN,
+                             f"{span} was cleared by reading the text; it must not be flagged")
+
+    def test_cleared_refs_serve_without_an_alignment_key(self):
+        for book, sc, sv, ec, ev in CLEARED:
+            ref = {"book": book, "start_chapter": sc, "start_verse": sv,
+                   "end_chapter": ec, "end_verse": ev}
+            self.assertIsNone(engine._ALIGNMENT_BY_SPAN.get(engine._span_key(ref)))
+
+    def test_nor_ejmiatsin_cleared_readings_are_named(self):
+        """Luke 8 and Mark 4 look shifted in the Grabar 1895 edition and are identity in Nor
+        Ejmiatsin. The data file has to say so, or the next sweep re-adds them from 1895."""
+        ev = engine._VERSE_ALIGNMENT["_evidence"]
+        for name in ("Luke 8.22-56", "Luke 8.49-56", "Mark 4.35-41"):
+            self.assertIn(name, ev)
 
 
 class TestThinCheckoutDegradesToNothingFlagged(unittest.TestCase):

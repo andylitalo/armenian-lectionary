@@ -230,20 +230,29 @@ divergence carries an `"alignment"` block inside its `ReadingsRefs` entry:
   only on a realigned record.
 - **The original `start_*`/`end_*` are never rewritten.** The corrected span is offered
   alongside; the consumer decides which to retrieve against.
-- `confirmed` is `false` where the divergence was flagged by automated comparison but not
-  read against the text.
 - `alignment` and `VersificationNotice` stay English under `language="hy"`, like every other
   provenance field.
 - `counts` on the notice describes **that day's** readings.
 
-**What this covers, honestly.** Eight divergences are known; three are corrected (both Hosea
-14 readings and `Joel 3.9-22`, each an endpoint shift) and five are flagged and served
-unchanged. The remaining ~1,118 readings are untouched.
+**What this covers, honestly.** A sweep of all 1,126 distinct served sub-references against
+KJV chapter lengths, two Armenian witnesses' chapter inventories, and arak29's explicit KJV
+annotations raised **113 candidates**. The **23** carrying a hard signal were each resolved by
+reading the text; **15 are corrected** and 4 are flagged and served unchanged. The remaining
+**~84 differ only in chapter verse-count and are unresolved** — they need scholarly review
+this pass defers.
+
+**Two Armenian witnesses, because they disagree.** Every record was checked against both the
+Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and
+Nor Ejmiatsin 1994. Where they part, NE is the better witness for what a Տօնացոյց citation
+means: `Luke 8.22-56`, `Luke 8.49-56` and `Mark 4.35-41` look shifted in the 1895 edition and
+are plain identity in NE, so they carry **no** record — a correction there would have sent
+consumers to the wrong verses.
 
 > **An absent `alignment` key means a reading is _unflagged_, not _verified_.** Detection is
 > best-effort and not exhaustive. `Hosea 14.6-7` is the proof: it sits well inside its KJV
 > chapter, overshoots nothing, and trips no automated check, yet it fetches the wrong two
-> verses. Nothing here certifies the rest of the corpus.
+> verses. Counting verses cannot see a reordering, and it cannot see a merge and a split that
+> offset each other. Nothing here certifies the rest of the corpus.
 
 Out of scope for this pass, deliberately: a full versification mapping table, verse-level
 correction, splitting a reading into segments, and any `hy`-target alignment (the Armenian

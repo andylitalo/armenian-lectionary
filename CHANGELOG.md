@@ -29,14 +29,40 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
                   'confirmed': True}}]
   ```
 
-  **Eight divergences ship, from `armenian_lectionary/data/verse_alignment.json`.** Three are
-  `"realigned"` — the whole range maps onto a contiguous, in-order KJV span, given as
-  `mapped`: both Hosea 14 readings (shift −1) and `Joel 3.9-22` → `3:9-21` (identity start, a
-  mid-chapter merge, end one ahead). Five are `"misaligned"` and served unchanged: Greek
-  Esther (`Esther 10.4-9`, which KJV carries as the standalone book `ESG`), the Romans
-  doxology (`Romans 13.11-14.26`, where Grabar 14:24-26 = KJV 16:25-27), Grabar Romans
-  16:24-27's reordered closing verses, `Song of Solomon 6.9-8.13`, and the Prayer of Azariah
-  (67 Armenian verses against KJV's 68).
+  **Nineteen divergences ship**, from `armenian_lectionary/data/verse_alignment.json`.
+  **Fifteen are `"realigned"`** — the whole range maps onto a contiguous, in-order KJV span,
+  given as `mapped`. Among them:
+
+  | citation | served as | actually |
+  |---|---|---|
+  | `Job 38.2-40.5` | KJV 38:2-40:5 | **38:2-40:10** — five verses were being dropped |
+  | `John 6.64-71` | KJV 6:64-71 | **6:63-70** — every verse off by one |
+  | `Luke 4.42-5.11` | KJV 4:42-5:11 | **4:41**-5:11 |
+  | `Song of Solomon 2.8-6.12` | KJV 2:8-6:12 | **2:8-6:13** |
+  | `Acts 28.17-31` | KJV 28:17-31 | **28:17-30** |
+
+  plus both Hosea 14 readings, `Joel 3.9-22`, `John 6.39-71`, `John 6.48-54`,
+  `Judith 15.7-16.3`, `Luke 4.31-41`, `Philippians 4.8-23`, `Song of Solomon 1.2-2.3` and
+  `Song of Solomon 6.9-8.13`. **Four are `"misaligned"`** and served unchanged: Greek Esther
+  (`Esther 10.4-9`, which KJV carries as the standalone book `ESG`), the Romans doxology
+  (`Romans 13.11-14.26`, where Grabar 14:24-26 = KJV 16:25-27), Grabar Romans 16:24-27's
+  reordered closing verses, and the Prayer of Azariah (67 Armenian verses against KJV's 68).
+
+  **How the set was arrived at, and what it does not cover.** A sweep of all 1,126 distinct
+  served sub-references against KJV chapter lengths, two Armenian witnesses' chapter
+  inventories, and arak29's explicit KJV annotations raised **113 candidates**. The **23**
+  carrying a hard signal were each resolved by reading the text. The remaining **~84 differ
+  only in chapter verse-count and are unresolved** — documented, not fixed.
+
+  **Two Armenian witnesses were compared for every record**, because they disagree: the
+  Grabar 1895 Constantinople edition and Nor Ejmiatsin 1994. Where they part, NE is the
+  better witness for what a Տօնացոյց citation means. `Luke 8.22-56`, `Luke 8.49-56` and
+  `Mark 4.35-41` look shifted in 1895 and are plain identity in NE, so they carry **no**
+  record — correcting them would have sent consumers to the wrong verses. `Mark 9.30-50`,
+  `Mark 9.38-50`, `1 Thess 4.13-18` and `2 Thess 2.1-17` cite an endpoint that exists in KJV
+  but in neither Armenian witness; the citation is already KJV-valid, so English retrieval
+  needs no correction. All are pinned as cleared so a future sweep cannot silently re-add
+  them.
 
   **The original `start_*`/`end_*` are never rewritten.** A corrected span is offered
   alongside and the consumer chooses. `alignment` and `VersificationNotice` stay English under
@@ -44,20 +70,20 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   day's readings.
 
   Additive and non-breaking. A ref with no known divergence gains **no key at all** —
-  absence is how "no known issue" is encoded — so the other ~1,118 readings are byte-identical
+  absence is how "no known issue" is encoded — so the other 1,107 readings are byte-identical
   to 2.1.0, locked by `tests/test_verse_alignment.py` over the full 2001-2027 range. Flows
   through `/readings` automatically.
 
   **An absent `alignment` key means a reading is _unflagged_, not _verified_.** Detection is
   best-effort and not exhaustive, and the notice says so in as many words. `Hosea 14.6-7`
-  overshoots nothing and trips no automated signal while being wrong, so no automated pass
-  over the corpus can certify what it did not flag. Records were confirmed by reading the
-  Armenian against the English text; `Song of Solomon 6.9-8.13` carries `"confirmed": false`
-  because it was only machine-flagged.
+  overshoots nothing and trips no automated signal while being wrong; counting verses cannot
+  see a reordering, nor a merge and a split that offset each other. Every record here was
+  confirmed by reading the Armenian against the English.
 
   Deliberately **not** in this pass: a versification mapping table, verse-level correction,
-  splitting a reading into segments, fixing the five misaligned records, and any `hy`-target
-  alignment — the Armenian corpus is keyed to Grabar numbering and needs re-keying first.
+  splitting a reading into segments, resolving the ~84 count-only candidates, fixing the four
+  misaligned records, and any `hy`-target alignment — the Armenian corpus is keyed to Grabar
+  numbering and needs re-keying first.
 
 ## [2.1.0] — 2026-09-05
 
