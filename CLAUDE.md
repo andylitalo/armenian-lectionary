@@ -1100,6 +1100,15 @@ on reading, to be an ordinary endpoint shift.
 Readings a sweep raised and reading cleared are pinned in `tests/test_verse_alignment.py`'s
 `CLEARED` set, so the next sweep cannot silently re-add them.
 
+**How the record set was derived.** arak29's English column is KJV text chopped at the
+*Armenian* verse divisions, so concatenating a chapter's cells reproduces the KJV chapter and
+the only open question is where KJV's own verse boundaries fall inside it. Aligning that
+stream against a real KJV **by text** answers it without consulting a single annotation —
+which is why it is immune to the failure that makes annotations untrustworthy. That method
+put 1,051 of 1,126 sub-references on positively verified identity. It is not omniscient: a
+pure reordering leaves both the verse counts and the word order intact and is invisible to it,
+so the honest claim remains *unflagged*, never *verified*.
+
 Scope is deliberately narrow: only a whole-range endpoint shift is corrected, and only where
 the content stays contiguous and in order in the target (an internal merge or split is fine —
 `Joel 3.9-22` has one). Relocations, reordering, omissions and composite books are flagged

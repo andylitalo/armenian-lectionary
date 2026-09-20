@@ -234,25 +234,30 @@ divergence carries an `"alignment"` block inside its `ReadingsRefs` entry:
   provenance field.
 - `counts` on the notice describes **that day's** readings.
 
-**What this covers, honestly.** A sweep of all 1,126 distinct served sub-references against
-KJV chapter lengths, two Armenian witnesses' chapter inventories, and arak29's explicit KJV
-annotations raised **113 candidates**. The **23** carrying a hard signal were each resolved by
-reading the text; **15 are corrected** and 4 are flagged and served unchanged. The remaining
-**~84 differ only in chapter verse-count and are unresolved** — they need scholarly review
-this pass defers.
+**What this covers, and how it was arrived at.** All **1,126** distinct served
+sub-references were swept. For the 58 books with a public-domain KJV, arak29's English column
+— which *is* KJV text, chopped at the **Armenian** verse divisions — was aligned to real KJV
+verse boundaries **by text**, so each mapping is derived rather than inferred from annotations.
+That puts **1,051 sub-references on positively verified identity**, not merely "unflagged".
+Every non-identity result was then cross-checked against Nor Ejmiatsin verse by verse, and the
+deuterocanonical books (no machine-readable KJV) were resolved by reading both witnesses.
+**37 records ship: 33 corrected, 4 flagged and served unchanged.**
 
 **Two Armenian witnesses, because they disagree.** Every record was checked against both the
 Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and
 Nor Ejmiatsin 1994. Where they part, NE is the better witness for what a Տօնացոյց citation
-means: `Luke 8.22-56`, `Luke 8.49-56` and `Mark 4.35-41` look shifted in the 1895 edition and
+means. `Luke 8.22-56`, `Luke 8.49-56` and `Mark 4.35-41` look shifted in the 1895 edition and
 are plain identity in NE, so they carry **no** record — a correction there would have sent
-consumers to the wrong verses.
+consumers to the wrong verses. **Equal verse-counts are not agreement:** NE and 1895 both give
+Mark 9 the same 49 labels with the same two gaps, yet NE 9:49 = KJV 9:50 where 1895 9:49 =
+KJV 9:47; and on `Acts 14.18-27` the 1895 edition omits KJV 14:19 outright, so the two
+witnesses disagree about where that reading starts. That record follows NE and says so.
 
-> **An absent `alignment` key means a reading is _unflagged_, not _verified_.** Detection is
-> best-effort and not exhaustive. `Hosea 14.6-7` is the proof: it sits well inside its KJV
-> chapter, overshoots nothing, and trips no automated check, yet it fetches the wrong two
-> verses. Counting verses cannot see a reordering, and it cannot see a merge and a split that
-> offset each other. Nothing here certifies the rest of the corpus.
+> **An absent `alignment` key means a reading is _unflagged_, not _verified_.** The sweep
+> resolved every candidate it raised, but it cannot see a divergence that leaves verse counts
+> equal *and* leaves the English column's word order intact — a pure reordering is invisible to
+> it. `Hosea 14.6-7` is the reminder of why that matters: it sits well inside its KJV chapter,
+> overshoots nothing, and trips no annotation, yet it fetches the wrong two verses.
 
 Out of scope for this pass, deliberately: a full versification mapping table, verse-level
 correction, splitting a reading into segments, and any `hy`-target alignment (the Armenian

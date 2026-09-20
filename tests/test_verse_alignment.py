@@ -48,6 +48,25 @@ REALIGNED = {
         ("PHP-4-8-23-endshift", (4, 8, 4, 22)),
     ("Song of Solomon", 1, 2, 2, 3): ("SNG-1-2-2-3-endshift", (1, 3, 2, 3)),
     ("Song of Solomon", 2, 8, 6, 12): ("SNG-2-8-6-12-endshift", (2, 8, 6, 13)),
+    ("Acts of the Apostles", 14, 18, 14, 27): ("ACT-14-18-27-endshift", (14, 19, 14, 28)),
+    ("Genesis", 49, 32, 50, 13): ("GEN-49-32-50-13-endshift", (49, 33, 50, 13)),
+    ("Matthew", 17, 14, 17, 21): ("MAT-17-14-21-endshift", (17, 14, 17, 22)),
+    ("Matthew", 17, 21, 18, 4): ("MAT-17-21-18-4-endshift", (17, 22, 18, 4)),
+    ("Matthew", 17, 22, 18, 9): ("MAT-17-22-18-9-endshift", (17, 23, 18, 9)),
+    ("Song of Solomon", 1, 2, 1, 11): ("SNG-1-2-11-endshift", (1, 3, 1, 12)),
+    ("Song of Solomon", 6, 3, 6, 8): ("SNG-6-3-8-endshift", (6, 4, 6, 9)),
+    ("Song of Solomon", 6, 9, 6, 11): ("SNG-6-9-11-endshift", (6, 10, 6, 12)),
+    ("St. Paul's Second Epistle to the Corinthians", 13, 5, 13, 13):
+        ("2CO-13-5-13-endshift", (13, 5, 13, 14)),
+    ("Wisdom", 5, 15, 5, 17): ("WIS-5-15-17-endshift", (5, 14, 5, 16)),
+    ("Wisdom", 5, 15, 5, 22): ("WIS-5-15-22-endshift", (5, 14, 5, 21)),
+    ("Wisdom", 5, 16, 5, 23): ("WIS-5-16-23-endshift", (5, 15, 5, 22)),
+    ("Wisdom", 6, 1, 6, 9): ("WIS-6-1-9-endshift", (6, 1, 6, 8)),
+    ("Wisdom", 6, 10, 6, 16): ("WIS-6-10-16-endshift", (6, 9, 6, 15)),
+    ("Wisdom", 6, 11, 6, 20): ("WIS-6-11-20-endshift", (6, 10, 6, 19)),
+    ("Wisdom", 6, 11, 6, 21): ("WIS-6-11-21-endshift", (6, 10, 6, 20)),
+    ("Wisdom", 6, 12, 6, 21): ("WIS-6-12-21-endshift", (6, 11, 6, 20)),
+    ("Wisdom", 6, 21, 6, 24): ("WIS-6-21-24-endshift", (6, 20, 6, 22)),
 }
 
 MISALIGNED = {
@@ -79,6 +98,16 @@ CLEARED = {
     ("Mark", 9, 38, 9, 50),
     ("St. Paul's First Epistle to the Thessalonians", 4, 13, 4, 18),
     ("St. Paul's Second Epistle to the Thessalonians", 2, 1, 2, 17),
+    # Raised only because the text-aligner could not place an endpoint: an arak29 typo
+    # ("of he LORD'S"), an appended epistle subscription, or empty source cells. Verse
+    # counts agree across all three witnesses and the neighbouring verses are identity.
+    ("Lamentations", 3, 22, 3, 56),
+    ("Proverbs", 24, 1, 24, 12),
+    ("St. Paul's Epistle to the Hebrews", 13, 18, 13, 25),
+    ("St. Paul's First Epistle to the Corinthians", 16, 12, 16, 24),
+    # Identity confirmed against the KJV text of Wisdom 5; its neighbours in the same
+    # chapter do shift, which is exactly why it had to be checked rather than assumed.
+    ("Wisdom", 5, 1, 5, 8),
 }
 
 ALL_FLAGGED = set(REALIGNED) | set(MISALIGNED)
@@ -89,12 +118,12 @@ class TestAlignmentDataFile(unittest.TestCase):
 
     def test_counts(self):
         records = engine._VERSE_ALIGNMENT["records"]
-        self.assertEqual(len(records), 19)
+        self.assertEqual(len(records), 37)
         by_status = {}
         for r in records:
             by_status.setdefault(r["status"], []).append(r)
         self.assertEqual(sorted(by_status), ["misaligned", "realigned"])
-        self.assertEqual(len(by_status["realigned"]), 15)
+        self.assertEqual(len(by_status["realigned"]), 33)
         self.assertEqual(len(by_status["misaligned"]), 4)
 
     def test_status_vocabulary_excludes_aligned(self):
@@ -144,6 +173,11 @@ class TestMappedSpansExistInKjv(unittest.TestCase):
         "Luke": {4: 44, 5: 39},
         "St. Paul's Epistle to the Philippians": {4: 23},
         "Song of Solomon": {1: 17, 2: 17, 6: 13, 8: 14},
+        "Acts of the Apostles": {14: 28, 28: 31},
+        "Genesis": {49: 33, 50: 26},
+        "Matthew": {17: 27, 18: 35},
+        "St. Paul's Second Epistle to the Corinthians": {13: 14},
+        "Wisdom": {5: 23, 6: 25},
     }
 
     def test_mapped_spans_fit_their_chapter(self):
@@ -179,7 +213,7 @@ class TestAlignmentBlockShape(unittest.TestCase):
              "end_chapter": ec, "end_verse": ev})]
 
     def test_realigned_blocks(self):
-        self.assertEqual(len(REALIGNED), 15)
+        self.assertEqual(len(REALIGNED), 33)
         for key, (rid, mapped) in REALIGNED.items():
             block = self._block(key)
             self.assertEqual(block["status"], "realigned", rid)
@@ -257,6 +291,47 @@ class TestAlignmentOnServedRefs(unittest.TestCase):
         self.assertEqual(
             engine._build_readings_refs(["Hosea 14.9-10"])[0]
             ["alignment"]["mapped"]["start_verse"], 8)
+
+
+class TestWitnessDisagreementIsResolvedTowardNorEjmiatsin(unittest.TestCase):
+    """`Acts 14.18-27` is the one record where the two Armenian witnesses give different
+    answers, so it is the one place a reader has to know which was followed.
+
+    Nor Ejmiatsin runs one ahead of KJV through the chapter, putting the reading at KJV
+    14:19-28. The Grabar 1895 edition omits KJV 14:19 (the stoning of Paul) outright and so
+    reaches the same end verse from KJV 14:18. NE is followed, and the record says so --
+    both witnesses hold 27 verses here, so nothing about the counts reveals the split.
+    """
+
+    RECORD = ("Acts of the Apostles", 14, 18, 14, 27)
+
+    def test_follows_nor_ejmiatsin(self):
+        block = engine._ALIGNMENT_BY_SPAN[engine._span_key(
+            {"book": self.RECORD[0], "start_chapter": 14, "start_verse": 18,
+             "end_chapter": 14, "end_verse": 27})]
+        self.assertEqual(block["mapped"], {"start_chapter": 14, "start_verse": 19,
+                                           "end_chapter": 14, "end_verse": 28})
+
+    def test_the_disagreement_is_disclosed_not_buried(self):
+        record = next(r for r in engine._VERSE_ALIGNMENT["records"]
+                      if r["id"] == "ACT-14-18-27-endshift")
+        self.assertIn("DISAGREE", record["note"] + record["evidence"])
+        self.assertIn("14:18", record["note"])     # names the answer NOT taken
+
+
+class TestSurveyProvenanceIsStated(unittest.TestCase):
+    """The data file has to carry how its record set was arrived at, and what it still
+    cannot see -- otherwise the next reader has no way to judge the absence of a record."""
+
+    def test_survey_describes_method_and_limits(self):
+        survey = engine._VERSE_ALIGNMENT["_survey"]
+        self.assertIn("1,126", survey)
+        self.assertIn("unflagged, not verified", survey)
+
+    def test_evidence_names_both_witnesses(self):
+        ev = engine._VERSE_ALIGNMENT["_evidence"]
+        self.assertIn("Nor Ejmiatsin", ev)
+        self.assertIn("1895", ev)
 
 
 class TestClearedReadingsStayUnflagged(unittest.TestCase):
