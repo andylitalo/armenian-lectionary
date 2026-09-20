@@ -1,0 +1,688 @@
+{
+  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: only whole-range endpoint shifts are corrected; every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
+  "_keying": "Each record is keyed on the tuple (book, start_chapter, start_verse, end_chapter, end_verse) exactly as it appears in ReadingsRefs -- never on the citation string, which a composite citation shares across two refs of which only one is flagged.",
+  "_evidence": "Every record was confirmed by reading the Armenian text against the English text, NOT by trusting an automated label: an unannotated arak29 row is not proof of identity (Hosea 14 is annotation-free and shifted by one). Two Armenian witnesses were compared for every record -- the Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and Nor Ejmiatsin 1994 -- because they do not always agree, and where they disagree NE is the better witness for what a Tonats'oyts citation means. Luke 8.22-56, Luke 8.49-56 and Mark 4.35-41 look divergent in the 1895 edition and are plain identity in NE; they carry no record for that reason.",
+  "target": "kjv",
+  "records": [
+    {
+      "id": "HOS-14-6-7-endshift",
+      "book": "Hosea",
+      "start_chapter": 14,
+      "start_verse": 6,
+      "end_chapter": 14,
+      "end_verse": 7,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 14,
+        "start_verse": 5,
+        "end_chapter": 14,
+        "end_verse": 6
+      },
+      "note": "Grabar Hosea 14 runs one verse ahead of KJV throughout (Grabar 14:1 = KJV 13:16).",
+      "evidence": "arak29.org tHos_14 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "HOS-14-9-10-endshift",
+      "book": "Hosea",
+      "start_chapter": 14,
+      "start_verse": 9,
+      "end_chapter": 14,
+      "end_verse": 10,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 14,
+        "start_verse": 8,
+        "end_chapter": 14,
+        "end_verse": 9
+      },
+      "note": "Grabar Hosea 14 runs one verse ahead of KJV throughout (Grabar 14:1 = KJV 13:16). KJV Hosea 14 ends at v9, so the original range overshoots the chapter.",
+      "evidence": "arak29.org tHos_14 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "JOL-3-9-22-endshift",
+      "book": "Joel",
+      "start_chapter": 3,
+      "start_verse": 9,
+      "end_chapter": 3,
+      "end_verse": 22,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 3,
+        "start_verse": 9,
+        "end_chapter": 3,
+        "end_verse": 21
+      },
+      "note": "Grabar Joel 3 begins at identity (Grabar 3:1 = KJV 3:1) and ends one ahead (Grabar 3:22 = KJV 3:21); a verse merge between v12 and v18 absorbs the difference mid-chapter. Only the end shifts, and the content stays contiguous and in order. Joel 3.1-8, the companion reading, is true identity and carries no record.",
+      "evidence": "arak29.org tJoel_3 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "EST-10-4-9-relocation",
+      "book": "Esther",
+      "start_chapter": 10,
+      "start_verse": 4,
+      "end_chapter": 10,
+      "end_verse": 9,
+      "status": "misaligned",
+      "kind": "relocation",
+      "note": "The Greek additions to Esther. KJV/KJVAIC carries them as the standalone book ESG, not as Esther 10; KJV Esther 10 has only 3 verses, so this range has no counterpart at these addresses.",
+      "evidence": "arak29.org tEsther_10 and the deuterocanonical Esther pages (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "ROM-13-11-14-26-relocation",
+      "book": "St. Paul's Epistle to the Romans",
+      "start_chapter": 13,
+      "start_verse": 11,
+      "end_chapter": 14,
+      "end_verse": 26,
+      "status": "misaligned",
+      "kind": "relocation",
+      "note": "The doxology sits at Grabar Romans 14:24-26 but at KJV 16:25-27; KJV Romans 14 ends at v23. The reading's content is therefore not contiguous in KJV and no endpoint shift can express it.",
+      "evidence": "arak29.org tRom_13, tRom_14, tRom_16 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "ROM-16-17-27-reordering",
+      "book": "St. Paul's Epistle to the Romans",
+      "start_chapter": 16,
+      "start_verse": 17,
+      "end_chapter": 16,
+      "end_verse": 27,
+      "status": "misaligned",
+      "kind": "reordering",
+      "note": "Grabar Romans 16:24-27 corresponds to KJV 16:25, 26, 27, 24 -- the grace benediction comes last in Armenian. The span covers the same verses but not in the same order.",
+      "evidence": "arak29.org tRom_16 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "SNG-6-9-8-13-endshift",
+      "book": "Song of Solomon",
+      "start_chapter": 6,
+      "start_verse": 9,
+      "end_chapter": 8,
+      "end_verse": 13,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "note": "KJV Song 6:1 is carried as Armenian 5:17, so Armenian chapter 6 runs one ahead of KJV; the offset resolves at the chapter-6/7 break and chapters 7-8 are identity. Shipped in the first cut as an unconfirmed 'reordering' on an automated flag; reading both Armenian witnesses against the English shows an ordinary endpoint shift, contiguous and in order.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true,
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 10,
+        "end_chapter": 8,
+        "end_verse": 13
+      }
+    },
+    {
+      "id": "AZA-1-1-68-composite",
+      "book": "Azariah",
+      "start_chapter": 1,
+      "start_verse": 1,
+      "end_chapter": 1,
+      "end_verse": 68,
+      "status": "misaligned",
+      "kind": "composite",
+      "note": "The Armenian embeds the Prayer of Azariah in Daniel 3:24-90 (67 verses) against KJV's 68 (USFM S3Y): KJV 34, 45 and 46 have no Armenian counterpart, KJV 66 is split across three Armenian verses, and one pair is reordered. Half of the composite citation \"Daniel 3.1-23, Azariah. 1-68\"; the Daniel half is identity and carries no record.",
+      "evidence": "arak29.org tDan_3 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "confirmed": true
+    },
+    {
+      "id": "ACT-28-17-31-endshift",
+      "book": "Acts of the Apostles",
+      "start_chapter": 28,
+      "start_verse": 17,
+      "end_chapter": 28,
+      "end_verse": 31,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 28,
+        "start_verse": 17,
+        "end_chapter": 28,
+        "end_verse": 30
+      },
+      "note": "KJV Acts 28:30 is split across Grabar/NE 28:30-31, so the chapter runs one ahead from there; 28:17 is identity. The cited range ends inside KJV 28:30.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "JOB-38-2-40-5-endshift",
+      "book": "Job",
+      "start_chapter": 38,
+      "start_verse": 2,
+      "end_chapter": 40,
+      "end_verse": 5,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 38,
+        "start_verse": 2,
+        "end_chapter": 40,
+        "end_verse": 10
+      },
+      "note": "The Armenian carries KJV Job 40:1-5 at the end of its chapter 39, so Armenian 40:1 = KJV 40:6 and the whole span runs five verses ahead at the end. Serving the citation as written truncates the reading by five verses (KJV 40:6-10 are part of it).",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "JHN-6-39-71-endshift",
+      "book": "John",
+      "start_chapter": 6,
+      "start_verse": 39,
+      "end_chapter": 6,
+      "end_verse": 71,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 39,
+        "end_chapter": 6,
+        "end_verse": 70
+      },
+      "note": "KJV John 6:51 is split across Armenian 6:51-52, so the chapter runs one ahead from there; 6:39 is identity.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "JHN-6-48-54-endshift",
+      "book": "John",
+      "start_chapter": 6,
+      "start_verse": 48,
+      "end_chapter": 6,
+      "end_verse": 54,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 48,
+        "end_chapter": 6,
+        "end_verse": 53
+      },
+      "note": "KJV John 6:51 is split across Armenian 6:51-52; 6:48 is identity and only the end shifts.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "JHN-6-64-71-endshift",
+      "book": "John",
+      "start_chapter": 6,
+      "start_verse": 64,
+      "end_chapter": 6,
+      "end_verse": 71,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 63,
+        "end_chapter": 6,
+        "end_verse": 70
+      },
+      "note": "Wholly past the split at KJV 6:51, so BOTH endpoints run one ahead: every verse of this reading is currently retrieved one verse late.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "JDT-15-7-16-3-endshift",
+      "book": "Judith",
+      "start_chapter": 15,
+      "start_verse": 7,
+      "end_chapter": 16,
+      "end_verse": 3,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 15,
+        "start_verse": 6,
+        "end_chapter": 16,
+        "end_verse": 3
+      },
+      "note": "Armenian Judith 15 runs one ahead of KJV from 15:5 (KJV 15:4), resolving at the chapter break; KJV 16:3 is split across Armenian 16:3-4, so the mapped end verse is reached only in part.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "LUK-4-31-41-endshift",
+      "book": "Luke",
+      "start_chapter": 4,
+      "start_verse": 31,
+      "end_chapter": 4,
+      "end_verse": 41,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 4,
+        "start_verse": 31,
+        "end_chapter": 4,
+        "end_verse": 40
+      },
+      "note": "KJV Luke 4:38 is split across Armenian 4:38-39, so the chapter runs one ahead from there; 4:31 is identity.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "LUK-4-42-5-11-endshift",
+      "book": "Luke",
+      "start_chapter": 4,
+      "start_verse": 42,
+      "end_chapter": 5,
+      "end_verse": 11,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 4,
+        "start_verse": 41,
+        "end_chapter": 5,
+        "end_verse": 11
+      },
+      "note": "Wholly past the split at KJV 4:38, so the start runs one ahead; the offset resolves at the chapter break and the chapter-5 end is identity.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "PHP-4-8-23-endshift",
+      "book": "St. Paul's Epistle to the Philippians",
+      "start_chapter": 4,
+      "start_verse": 8,
+      "end_chapter": 4,
+      "end_verse": 23,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 4,
+        "start_verse": 8,
+        "end_chapter": 4,
+        "end_verse": 22
+      },
+      "note": "KJV Philippians 4:21 is split across Armenian 4:21-22, so the chapter runs one ahead from there; 4:8 is identity. The reading stops before the grace benediction (KJV 4:23), which serving the citation as written wrongly includes.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "SNG-1-2-2-3-endshift",
+      "book": "Song of Solomon",
+      "start_chapter": 1,
+      "start_verse": 2,
+      "end_chapter": 2,
+      "end_verse": 3,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 1,
+        "start_verse": 3,
+        "end_chapter": 2,
+        "end_verse": 3
+      },
+      "note": "Neither Armenian witness carries the KJV title verse (Song 1:1), so their chapter 1 runs one ahead of KJV throughout; the offset resolves at the chapter break and the chapter-2 end is identity.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "SNG-2-8-6-12-endshift",
+      "book": "Song of Solomon",
+      "start_chapter": 2,
+      "start_verse": 8,
+      "end_chapter": 6,
+      "end_verse": 12,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 2,
+        "start_verse": 8,
+        "end_chapter": 6,
+        "end_verse": 13
+      },
+      "note": "2:8 is identity; KJV Song 6:1 is carried as Armenian 5:17, so chapter 6 runs one ahead and the cited end reaches KJV 6:13.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "ACT-14-18-27-endshift",
+      "book": "Acts of the Apostles",
+      "start_chapter": 14,
+      "start_verse": 18,
+      "end_chapter": 14,
+      "end_verse": 27,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 14,
+        "start_verse": 19,
+        "end_chapter": 14,
+        "end_verse": 28
+      },
+      "note": "Nor Ejmiatsin runs one ahead of KJV from 14:15 (KJV 14:16) to the end of the chapter, so this whole reading is off by one. THE TWO ARMENIAN WITNESSES DISAGREE HERE: the Grabar 1895 edition omits KJV 14:19 (the stoning of Paul) outright and so reaches the same end verse by a different route, which would put the start at KJV 14:18. NE is followed, as the witness that tracks the Tonats'oyts.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified; the witnesses DISAGREE on this reading's start (NE 14:19, 1895 14:18) and NE is followed",
+      "confirmed": true
+    },
+    {
+      "id": "GEN-49-32-50-13-endshift",
+      "book": "Genesis",
+      "start_chapter": 49,
+      "start_verse": 32,
+      "end_chapter": 50,
+      "end_verse": 13,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 49,
+        "start_verse": 33,
+        "end_chapter": 50,
+        "end_verse": 13
+      },
+      "note": "KJV Genesis 49:32 (the purchase of the field) has no separate Armenian verse, so Armenian 49:32 is KJV 49:33; the offset resolves at the chapter break and the chapter-50 end is identity.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "MAT-17-14-21-endshift",
+      "book": "Matthew",
+      "start_chapter": 17,
+      "start_verse": 14,
+      "end_chapter": 17,
+      "end_verse": 21,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 17,
+        "start_verse": 14,
+        "end_chapter": 17,
+        "end_verse": 22
+      },
+      "note": "Neither Armenian witness carries KJV Matthew 17:21 ('Howbeit this kind goeth not out but by prayer and fasting'), so the chapter runs one ahead from there; 17:14 is identity. The mapped span therefore includes one KJV verse the Armenian does not have.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "MAT-17-21-18-4-endshift",
+      "book": "Matthew",
+      "start_chapter": 17,
+      "start_verse": 21,
+      "end_chapter": 18,
+      "end_verse": 4,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 17,
+        "start_verse": 22,
+        "end_chapter": 18,
+        "end_verse": 4
+      },
+      "note": "Wholly past the gap at KJV 17:21, so the start runs one ahead; the offset resolves at the chapter break and the chapter-18 end is identity.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "MAT-17-22-18-9-endshift",
+      "book": "Matthew",
+      "start_chapter": 17,
+      "start_verse": 22,
+      "end_chapter": 18,
+      "end_verse": 9,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 17,
+        "start_verse": 23,
+        "end_chapter": 18,
+        "end_verse": 9
+      },
+      "note": "Wholly past the gap at KJV 17:21, so the start runs one ahead; the offset resolves at the chapter break and the chapter-18 end is identity.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "SNG-1-2-11-endshift",
+      "book": "Song of Solomon",
+      "start_chapter": 1,
+      "start_verse": 2,
+      "end_chapter": 1,
+      "end_verse": 11,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 1,
+        "start_verse": 3,
+        "end_chapter": 1,
+        "end_verse": 12
+      },
+      "note": "Neither Armenian witness carries the KJV title verse (Song 1:1), so their chapter 1 runs one ahead of KJV throughout.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "SNG-6-3-8-endshift",
+      "book": "Song of Solomon",
+      "start_chapter": 6,
+      "start_verse": 3,
+      "end_chapter": 6,
+      "end_verse": 8,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 4,
+        "end_chapter": 6,
+        "end_verse": 9
+      },
+      "note": "KJV Song 6:1 is carried as Armenian 5:17, so Armenian chapter 6 runs one ahead of KJV.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "SNG-6-9-11-endshift",
+      "book": "Song of Solomon",
+      "start_chapter": 6,
+      "start_verse": 9,
+      "end_chapter": 6,
+      "end_verse": 11,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 10,
+        "end_chapter": 6,
+        "end_verse": 12
+      },
+      "note": "KJV Song 6:1 is carried as Armenian 5:17, so Armenian chapter 6 runs one ahead of KJV.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "2CO-13-5-13-endshift",
+      "book": "St. Paul's Second Epistle to the Corinthians",
+      "start_chapter": 13,
+      "start_verse": 5,
+      "end_chapter": 13,
+      "end_verse": 13,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 13,
+        "start_verse": 5,
+        "end_chapter": 13,
+        "end_verse": 14
+      },
+      "note": "KJV 2 Corinthians 13:12 is split across Armenian 13:12-13, so the chapter runs one ahead at the end; 13:5 is identity. Serving the citation as written stops before the trinitarian benediction (KJV 13:14), which is the reading's last verse.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-5-15-17-endshift",
+      "book": "Wisdom",
+      "start_chapter": 5,
+      "start_verse": 15,
+      "end_chapter": 5,
+      "end_verse": 17,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 5,
+        "start_verse": 14,
+        "end_chapter": 5,
+        "end_verse": 16
+      },
+      "note": "KJV Wisdom 5:13 is split across Armenian 5:13-14, so the chapter runs one ahead from 5:15 on.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-5-15-22-endshift",
+      "book": "Wisdom",
+      "start_chapter": 5,
+      "start_verse": 15,
+      "end_chapter": 5,
+      "end_verse": 22,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 5,
+        "start_verse": 14,
+        "end_chapter": 5,
+        "end_verse": 21
+      },
+      "note": "KJV Wisdom 5:13 is split across Armenian 5:13-14, so the chapter runs one ahead from 5:15 on.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-5-16-23-endshift",
+      "book": "Wisdom",
+      "start_chapter": 5,
+      "start_verse": 16,
+      "end_chapter": 5,
+      "end_verse": 23,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 5,
+        "start_verse": 15,
+        "end_chapter": 5,
+        "end_verse": 22
+      },
+      "note": "KJV Wisdom 5:13 is split across Armenian 5:13-14, so the chapter runs one ahead from 5:15 on.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-6-1-9-endshift",
+      "book": "Wisdom",
+      "start_chapter": 6,
+      "start_verse": 1,
+      "end_chapter": 6,
+      "end_verse": 9,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 1,
+        "end_chapter": 6,
+        "end_verse": 8
+      },
+      "note": "KJV Wisdom 6:1 is split across Armenian 6:1-2, so the chapter runs one ahead from 6:2 on; the cited start is identity and only the end moves.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-6-10-16-endshift",
+      "book": "Wisdom",
+      "start_chapter": 6,
+      "start_verse": 10,
+      "end_chapter": 6,
+      "end_verse": 16,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 9,
+        "end_chapter": 6,
+        "end_verse": 15
+      },
+      "note": "Wholly past the split at KJV Wisdom 6:1, so the whole span runs one ahead.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-6-11-20-endshift",
+      "book": "Wisdom",
+      "start_chapter": 6,
+      "start_verse": 11,
+      "end_chapter": 6,
+      "end_verse": 20,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 10,
+        "end_chapter": 6,
+        "end_verse": 19
+      },
+      "note": "Wholly past the split at KJV Wisdom 6:1, so the whole span runs one ahead.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-6-11-21-endshift",
+      "book": "Wisdom",
+      "start_chapter": 6,
+      "start_verse": 11,
+      "end_chapter": 6,
+      "end_verse": 21,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 10,
+        "end_chapter": 6,
+        "end_verse": 20
+      },
+      "note": "Wholly past the split at KJV Wisdom 6:1, so the whole span runs one ahead.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-6-12-21-endshift",
+      "book": "Wisdom",
+      "start_chapter": 6,
+      "start_verse": 12,
+      "end_chapter": 6,
+      "end_verse": 21,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 11,
+        "end_chapter": 6,
+        "end_verse": 20
+      },
+      "note": "Wholly past the split at KJV Wisdom 6:1, so the whole span runs one ahead.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    },
+    {
+      "id": "WIS-6-21-24-endshift",
+      "book": "Wisdom",
+      "start_chapter": 6,
+      "start_verse": 21,
+      "end_chapter": 6,
+      "end_verse": 24,
+      "status": "realigned",
+      "kind": "endpoint-shift",
+      "mapped": {
+        "start_chapter": 6,
+        "start_verse": 20,
+        "end_chapter": 6,
+        "end_verse": 22
+      },
+      "note": "Wholly past the split at KJV Wisdom 6:1; the end shifts by two because KJV Wisdom 6:22 is itself split across Armenian 6:23-24, so the cited end reaches only KJV 6:22.",
+      "evidence": "arak29.org (Grabar 1895 Constantinople) and Nor Ejmiatsin 1994 -- content-verified, both witnesses agree",
+      "confirmed": true
+    }
+  ],
+  "_survey": "A sweep of all 1,126 distinct served sub-references. For the 58 books with a public-domain KJV text, arak29's English column (which IS KJV text, chopped at the ARMENIAN verse divisions) was aligned to real KJV verse boundaries BY TEXT, so the mapping is derived rather than inferred from annotations -- immune to the failure that makes an unannotated row worthless as evidence of identity. 1,051 sub-references are positively verified identity that way. Every non-identity result was then cross-checked against Nor Ejmiatsin verse by verse. The deuterocanonical books, which have no machine-readable KJV, were resolved by reading both witnesses against the KJV text of the relevant chapters. Remaining unresolved: none of the candidates this sweep raised, but detection still cannot see a divergence that leaves verse counts equal AND leaves the English column's word order intact. A reading with no record here is unflagged, not verified."
+}

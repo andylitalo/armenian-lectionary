@@ -60,6 +60,15 @@ OBSERVANCE_CATALOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)
 OBSERVANCE_READINGS_INDEX_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "data", "observance_readings_index.json")
 
+# Hand-verified divergences between the Grabar citation numbering the engine emits and the
+# versification a consumer retrieves text in (currently KJV verse addresses, which is what
+# English text is fetched against). Keyed on a ReadingsRefs span tuple; see
+# _ALIGNMENT_BY_SPAN. Degrades to {} if absent, matching every other optional data file
+# here -- then no ref carries an "alignment" key and every reading is served exactly as
+# 2.1.0 served it.
+VERSE_ALIGNMENT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "data", "verse_alignment.json")
+
 SUPPORTED_LANGUAGES = ("en", "hy")
 
 # Supported date range. The validated table, the saint schedule and the ground truth all
@@ -2593,6 +2602,93 @@ _OBSERVANCE_CATALOG = ObservanceCatalog.load(OBSERVANCE_CATALOG_PATH)
 _OBSERVANCE_ID_BY_READINGS = _load_json_map(OBSERVANCE_READINGS_INDEX_PATH)
 
 
+# --------------------------------------------------------------------------- #
+# Versification alignment
+# --------------------------------------------------------------------------- #
+
+# The span fields a record is keyed on, in tuple order. Named once so the key built from a
+# record and the key built from a ref cannot drift apart.
+_SPAN_FIELDS = ("start_chapter", "start_verse", "end_chapter", "end_verse")
+
+_VERSE_ALIGNMENT = _load_json_map(VERSE_ALIGNMENT_PATH)
+
+
+def _span_key(span: dict) -> tuple:
+    """The (book, start_chapter, start_verse, end_chapter, end_verse) identity of ``span``.
+
+    Takes a ReadingsRefs ref or an alignment record indifferently -- both spell the span
+    the same way, which is what lets one function key both sides of the lookup.
+
+    Deliberately NOT the citation string: the sole composite citation in the corpus,
+    "Daniel 3.1-23, Azariah. 1-68", is shared by two refs of which only the Azariah half
+    diverges, so a citation key would flag a reading that is identity.
+    """
+    return (span["book"],) + tuple(span[f] for f in _SPAN_FIELDS)
+
+
+def _build_alignment_index(data: dict) -> dict:
+    """span key -> the ``alignment`` block to attach to a matching ref.
+
+    Built once at import from ``verse_alignment.json``. The block is assembled here rather
+    than per-request so the served shape is fixed at load: ``target`` is lifted from the
+    file (one target per file today, and a record that outlived it would be a data error
+    worth catching at build time), and ``mapped`` is carried through only for a realigned
+    record -- a ``mapped`` span on a misaligned one would claim a correction this pass
+    explicitly does not make.
+    """
+    index = {}
+    target = data.get("target")
+    for record in data.get("records", ()):
+        block = {
+            "status": record["status"],
+            "id": record["id"],
+            "kind": record["kind"],
+            "target": target,
+        }
+        if record["status"] == "realigned":
+            block["mapped"] = {f: record["mapped"][f] for f in _SPAN_FIELDS}
+        block["note"] = record["note"]
+        block["confirmed"] = record["confirmed"]
+        index[_span_key(record)] = block
+    return index
+
+
+_ALIGNMENT_BY_SPAN = _build_alignment_index(_VERSE_ALIGNMENT)
+
+# Served verbatim on every result. The closing sentence of ``detail`` is load-bearing and
+# must not be softened: "Hosea 14.6-7" sits inside its chapter, overshoots nothing and
+# trips no automated signal, yet fetches the wrong two verses. Absence of a flag is
+# therefore evidence of nothing. We can call the other readings unflagged; we cannot call
+# them verified.
+_VERSIFICATION_NOTICE = {
+    "source": "grabar-tonatsoyts",
+    "target": _VERSE_ALIGNMENT.get("target", "kjv"),
+    "policy": "endpoint-shift-only",
+    "detail": (
+        "Armenian (Grabar) and English (KJV/NKJV) versification do not always align. "
+        "Only unambiguous whole-range endpoint shifts are corrected; other divergences "
+        "-- relocations, reordering, internal omissions -- are flagged via "
+        "ReadingsRefs[].alignment and served in the source's own numbering. Detection is "
+        "best-effort and not exhaustive: a reading without an alignment key is unflagged, "
+        "not verified."
+    ),
+}
+
+
+def _versification_notice(refs: list) -> dict:
+    """The day's copy of :data:`_VERSIFICATION_NOTICE`, with ``counts`` over ``refs``.
+
+    ``counts`` describes THIS day's readings, so a client can render the disclaimer with
+    the day's own numbers instead of the corpus's.
+    """
+    counts = {"realigned": 0, "misaligned": 0}
+    for ref in refs:
+        alignment = ref.get("alignment")
+        if alignment:
+            counts[alignment["status"]] += 1
+    return {**_VERSIFICATION_NOTICE, "counts": counts}
+
+
 def _catalog_text(sid, default, lang="en"):
     """The catalog's current text for ``sid``, or ``default`` if the catalog (or this id)
     is absent -- the same degrade-to-literal convention every other data file already
@@ -2820,10 +2916,26 @@ def _parse_citation_ref(citation: str) -> list:
 
 def _build_readings_refs(readings_list: list) -> list:
     """Flat-map :func:`_parse_citation_ref` over ``readings_list`` (English citation
-    strings from ``ReadingsList``); ``[]`` in, ``[]`` out."""
+    strings from ``ReadingsList``); ``[]`` in, ``[]`` out.
+
+    Each ref is then looked up in :data:`_ALIGNMENT_BY_SPAN` by its span key. A hit gains
+    an ``alignment`` block; a miss gains NOTHING -- an absent key means "no known issue",
+    which is what keeps the ~1,118 unflagged refs byte-identical to what 2.1.0 served. The
+    original ``start_*``/``end_*`` are never rewritten even for a realigned record: the
+    corrected span is offered alongside as ``alignment.mapped`` and the consumer chooses.
+    """
     refs = []
     for citation in readings_list:
         refs.extend(_parse_citation_ref(citation))
+    for ref in refs:
+        alignment = _ALIGNMENT_BY_SPAN.get(_span_key(ref))
+        if alignment is not None:
+            # Copied, not aliased: the index is import-scoped and every result would
+            # otherwise share one mutable block, so a caller editing a day's alignment
+            # would edit every other day's too.
+            ref["alignment"] = dict(alignment)
+            if "mapped" in alignment:
+                ref["alignment"]["mapped"] = dict(alignment["mapped"])
     return refs
 
 
@@ -2926,8 +3038,11 @@ def _localize(result: dict, language: str) -> dict:
     annotations, not source data, and have no scraped Armenian form. ``ReadingsRefs``
     is structured, language-independent data -- its ``book`` stays the canonical
     English head regardless of ``language``; only the human-readable strings carry a
-    translation. The result always carries a ``Language`` key naming the language its
-    names are in.
+    translation. Its ``alignment`` block and the top-level ``VersificationNotice`` are
+    engine annotations of the same kind as ``Source``/``Note`` -- they describe a
+    divergence between two numbering systems, not scraped source text -- so they too stay
+    English under ``language="hy"``. The result always carries a ``Language`` key naming
+    the language its names are in.
     """
     result["Language"] = language
     if language == "en":
@@ -3399,6 +3514,15 @@ def compute_armenian_lectionary(target_date: datetime.date,
     means "this day did not resolve" and nothing else -- check it before reading the
     attributes, as on a thin checkout (no ``observance_catalog.json``) every day is ``[]``.
 
+    ``VersificationNotice`` states, on every result, that the citations are in the source's
+    own (Grabar) numbering and that alignment to the retrieval target is best-effort and
+    incomplete; its ``counts`` are over THIS day's readings. A ``ReadingsRefs`` entry whose
+    span is a known divergence carries an ``alignment`` block naming the ``status``
+    (``"realigned"`` or ``"misaligned"``), the ``kind``, and -- for a realigned one only --
+    a ``mapped`` span in the target's numbering. The original span is never rewritten; the
+    consumer decides which to retrieve against. **An absent ``alignment`` key means the
+    reading is unflagged, not that it was verified** -- see :data:`_VERSIFICATION_NOTICE`.
+
     Raises ``ValueError`` for a date outside ``MIN_YEAR``-``MAX_YEAR``. Outside that window
     the engine has no validated data and would otherwise return an internal absence-marker
     dressed as a name -- the very strings ``tests/test_observance_contract.py`` forbids inside
@@ -3427,6 +3551,7 @@ def compute_armenian_lectionary(target_date: datetime.date,
         target_date, readings)
     result["Mode"] = calculate_liturgical_mode(target_date)
     result["ReadingsRefs"] = _build_readings_refs(result.get("ReadingsList", []))
+    result["VersificationNotice"] = _versification_notice(result["ReadingsRefs"])
     # Resolved from the ENGLISH label, before _localize rewrites it for language="hy" --
     # the catalog's reverse index is keyed on English, and the ids must not vary by
     # language (see tests.test_observance_ids.TestObservanceIdsAreLanguageIndependent).

@@ -182,6 +182,13 @@ curl "https://lectionary.andylitalo.com/readings?date=2026-06-01"
      "is_fast": false, "is_comm": true}
   ],
   "ObservanceIds": ["hripsime_and_her_companions"],
+  "VersificationNotice": {
+    "source": "grabar-tonatsoyts",
+    "target": "kjv",
+    "policy": "endpoint-shift-only",
+    "detail": "Armenian (Grabar) and English (KJV/NKJV) versification do not always align. …",
+    "counts": {"realigned": 0, "misaligned": 0}
+  },
   "Source": "validated-table"
 }
 ```
@@ -193,6 +200,68 @@ sub-reference, so a consumer does not have to parse citation strings like
 independent of `language`. A composite citation — currently only the Daniel/Azariah
 reading, `"Daniel 3.1-23, Azariah. 1-68"` — expands to two dicts sharing that
 `citation` string, the back-pointer to their shared `ReadingsList` entry.
+
+### Versification: the citations are Grabar, and alignment is best-effort
+
+The citations this engine serves are in the versification of the printed Տօնացոյց
+(Tōnats'oyts), a Classical Armenian (Grabar) tradition. If you fetch the *text* against
+English verse addresses (KJV, which is also what NKJV is addressed by), the two numbering
+systems **do not always agree**, and a mismatch is silent — the wrong verses come back with
+no error.
+
+Every result therefore carries `"VersificationNotice"`, and a reading whose span is a known
+divergence carries an `"alignment"` block inside its `ReadingsRefs` entry:
+
+```json
+{"book": "Hosea", "start_chapter": 14, "start_verse": 9,
+ "end_chapter": 14, "end_verse": 10, "citation": "Hosea 14.9-10",
+ "alignment": {
+   "status": "realigned", "id": "HOS-14-9-10-endshift",
+   "kind": "endpoint-shift", "target": "kjv",
+   "mapped": {"start_chapter": 14, "start_verse": 8,
+              "end_chapter": 14, "end_verse": 9},
+   "note": "Grabar Hosea 14 runs one verse ahead of KJV throughout (Grabar 14:1 = KJV 13:16). …",
+   "confirmed": true}}
+```
+
+- `status` is `"realigned"` — the whole range maps onto a contiguous, in-order span in the
+  target, given as `mapped` — or `"misaligned"`, a divergence this pass does **not** correct
+  (a relocation to another chapter, a reordering, a composite book). `mapped` is present
+  only on a realigned record.
+- **The original `start_*`/`end_*` are never rewritten.** The corrected span is offered
+  alongside; the consumer decides which to retrieve against.
+- `alignment` and `VersificationNotice` stay English under `language="hy"`, like every other
+  provenance field.
+- `counts` on the notice describes **that day's** readings.
+
+**What this covers, and how it was arrived at.** All **1,126** distinct served
+sub-references were swept. For the 58 books with a public-domain KJV, arak29's English column
+— which *is* KJV text, chopped at the **Armenian** verse divisions — was aligned to real KJV
+verse boundaries **by text**, so each mapping is derived rather than inferred from annotations.
+That puts **1,051 sub-references on positively verified identity**, not merely "unflagged".
+Every non-identity result was then cross-checked against Nor Ejmiatsin verse by verse, and the
+deuterocanonical books (no machine-readable KJV) were resolved by reading both witnesses.
+**37 records ship: 33 corrected, 4 flagged and served unchanged.**
+
+**Two Armenian witnesses, because they disagree.** Every record was checked against both the
+Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and
+Nor Ejmiatsin 1994. Where they part, NE is the better witness for what a Տօնացոյց citation
+means. `Luke 8.22-56`, `Luke 8.49-56` and `Mark 4.35-41` look shifted in the 1895 edition and
+are plain identity in NE, so they carry **no** record — a correction there would have sent
+consumers to the wrong verses. **Equal verse-counts are not agreement:** NE and 1895 both give
+Mark 9 the same 49 labels with the same two gaps, yet NE 9:49 = KJV 9:50 where 1895 9:49 =
+KJV 9:47; and on `Acts 14.18-27` the 1895 edition omits KJV 14:19 outright, so the two
+witnesses disagree about where that reading starts. That record follows NE and says so.
+
+> **An absent `alignment` key means a reading is _unflagged_, not _verified_.** The sweep
+> resolved every candidate it raised, but it cannot see a divergence that leaves verse counts
+> equal *and* leaves the English column's word order intact — a pure reordering is invisible to
+> it. `Hosea 14.6-7` is the reminder of why that matters: it sits well inside its KJV chapter,
+> overshoots nothing, and trips no annotation, yet it fetches the wrong two verses.
+
+Out of scope for this pass, deliberately: a full versification mapping table, verse-level
+correction, splitting a reading into segments, and any `hy`-target alignment (the Armenian
+corpus is keyed to Grabar numbering already).
 
 ### Observances: the day as a list, with its marks
 

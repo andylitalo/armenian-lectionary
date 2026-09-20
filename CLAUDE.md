@@ -26,6 +26,7 @@ with no install step.
 | `armenian_lectionary/data/{second_volume_cycles,saint_readings,saint_schedule,continua_sequence}.json` | Shipped source-derived saint & continua data feeding the `second-volume-cycle` and `generative-continua` tiers (Tōnats'oyts Second Volume laydown + Fast-of-Assumption continua). Loaded at import; each degrades to `{}` if absent. |
 | `armenian_lectionary/data/observance_catalog.json` | Shipped `id -> {en, hy, is_fast, is_comm}` catalog for every liturgical-observance display-text component (commemoration/position/eve). The runtime resolution point for `language="hy"` feast/fast text (`engine._resolve_observance_names`), and the public `"Observances"` field (`engine._observances`) — each entry's `id`, `name` and marks, with `"ObservanceIds"` its id projection. A **projection** of the `id`, `is_fast` and `is_comm` columns of `dev/observance_name_review.tsv` — see "Observance ids are stated, not derived" and "A day's observances, and the marks on them" below. Loaded at import; degrades to `{}` if absent (→ English fallback). |
 | `armenian_lectionary/data/observance_readings_index.json` | Shipped `readings-hash -> id` index, for the subset of the catalog whose observance is fully determined by its offset from a movable anchor (a dedicated fast weekday, an eve — never a day sharing its table key with a rotating saint). Lets English position/eve text resolve through the catalog too, the same way Armenian already does — see "A rename is a TSV edit, not an `engine.py` edit" below. Built by `dev/build_observance_catalog.py`; loaded at import, degrades to `{}` if absent (→ literal template text). |
+| `armenian_lectionary/data/verse_alignment.json` | Shipped, **hand-verified** table of known divergences between the Grabar citation numbering the engine emits and the KJV verse addresses a consumer retrieves English text against. Keyed on a `ReadingsRefs` span tuple (never on the citation string — the one composite citation spans two refs, of which only one diverges); feeds `ReadingsRefs[].alignment` and the top-level `"VersificationNotice"`. Loaded at import, degrades to `{}` if absent (→ nothing flagged). See "Alignment is flagged, never silently applied" below. |
 | `armenian_lectionary/data/book_names_hy.json` | Shipped English→Armenian map for Bible book heads, for `language="hy"` readings. Scraped once from sacredtradition.am by `dev/fetch_translations.py`; loaded at import, degrades to `{}` if absent (→ English fallback). |
 | `app.py` | Flask web app: `/readings`, `/health`, `/` doc. Imports the package. Range guard + rate limiting live here. |
 | `Dockerfile` / `.dockerignore` | Container image for Cloud Run (`pip install .` + gunicorn on `0.0.0.0:$PORT`). |
@@ -1057,3 +1058,59 @@ project.
 - `app.json.ensure_ascii = False` keeps Armenian script native in responses; preserve it.
 - Engine changes must keep the test suite's **0-wrong** contract (validated tiers never
   return a wrong reading); see `tests/test_full_dataset.py`.
+
+## Alignment is flagged, never silently applied
+
+The citations the engine serves are in the versification of the printed Տօնացոյց (Grabar).
+A consumer fetching English text addresses it by KJV verse numbers, and the two numbering
+systems do not always agree. `Hosea 14.6-7` is the case to remember: the Grabar chapter runs
+one verse ahead of KJV throughout, so the range is really KJV 14:5-6 — and it fetched the
+wrong two verses for years with no error, no overshoot, and no symptom.
+
+Three rules govern `armenian_lectionary/data/verse_alignment.json`:
+
+1. **The served span is never rewritten.** A `"realigned"` record carries its corrected span
+   as `alignment.mapped`, *alongside* the original `start_*`/`end_*`. The engine states what
+   the source says and what the target calls it; the consumer decides which to retrieve
+   against. Rewriting in place would make the engine's own output disagree with the printed
+   Tōnats'oyts it exists to encode.
+2. **`"aligned"` is not a status.** No-known-issue is encoded as the *absence* of the
+   `alignment` key — which is also what keeps the ~1,118 untouched refs byte-identical
+   release to release. An empty or null block would be a different, weaker contract.
+3. **Absence is not verification, and the notice must keep saying so.** `Hosea 14.6-7`
+   overshoots nothing and trips no automated check, so no machine pass over the corpus can
+   certify what it did not flag. The last sentence of `VersificationNotice.detail`
+   ("...unflagged, not verified") is load-bearing and pinned by a test; do not soften it.
+
+A record is added by **reading the Armenian text against the English text**, not by trusting
+an automated label. arak29.org's explicit `KJV [ref]` annotations are a reliable *positive*
+signal of divergence; their absence proves nothing — Hosea 14, Romans 16 and Mark 9 all show
+unannotated rows whose columns are offset. Nothing ships on a machine flag alone: `Song of
+Solomon 6.9-8.13` went out in the first cut as an unconfirmed "reordering" and turned out,
+on reading, to be an ordinary endpoint shift.
+
+4. **Check both Armenian witnesses; where they disagree, Nor Ejmiatsin wins.** The Grabar 1895
+   Constantinople edition (arak29) and Nor Ejmiatsin 1994 (bahk's local `hub/data/bible_hy`
+   corpus) do not always agree, and NE is the better witness for what a Տօնացոյց citation
+   means. `Luke 8.22-56`, `Luke 8.49-56` and `Mark 4.35-41` look shifted in 1895 and are plain
+   identity in NE — correcting them from 1895 alone would have sent consumers to the wrong
+   verses. Equal verse-counts are **not** agreement either: NE and 1895 both give Mark 9 the
+   same 49 labels with the same two gaps, yet NE 9:49 = KJV 9:50 where 1895 9:49 = KJV 9:47.
+
+Readings a sweep raised and reading cleared are pinned in `tests/test_verse_alignment.py`'s
+`CLEARED` set, so the next sweep cannot silently re-add them.
+
+**How the record set was derived.** arak29's English column is KJV text chopped at the
+*Armenian* verse divisions, so concatenating a chapter's cells reproduces the KJV chapter and
+the only open question is where KJV's own verse boundaries fall inside it. Aligning that
+stream against a real KJV **by text** answers it without consulting a single annotation —
+which is why it is immune to the failure that makes annotations untrustworthy. That method
+put 1,051 of 1,126 sub-references on positively verified identity. It is not omniscient: a
+pure reordering leaves both the verse counts and the word order intact and is invisible to it,
+so the honest claim remains *unflagged*, never *verified*.
+
+Scope is deliberately narrow: only a whole-range endpoint shift is corrected, and only where
+the content stays contiguous and in order in the target (an internal merge or split is fine —
+`Joel 3.9-22` has one). Relocations, reordering, omissions and composite books are flagged
+and served unchanged. There are no `hy`-target records: the Armenian corpus downstream is
+keyed to Grabar numbering already, and re-keying it is separate work.
