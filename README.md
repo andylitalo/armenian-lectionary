@@ -250,8 +250,8 @@ deuterocanonical books (no machine-readable KJV) were resolved by reading both w
 
 **Two Armenian witnesses, because they disagree.** Every record was checked against both the
 Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and
-Nor Ejmiatsin 1994 — except `Esther 10.4-9`, since arak29 carries no Esther 10; that record
-rests on NE and the Տօնացոյց's own incipit and explicit. Where they part, NE is the better witness for what a Տօնացոյց citation
+Nor Ejmiatsin 1994. arak29 carries no Esther 10, so for `Esther 10.4-9` the Grabar text is
+shavigh.am's instead. Where they part, NE is the better witness for what a Տօնացոյց citation
 means. `Luke 8.22-56`, `Luke 8.49-56` and `Mark 4.35-41` look shifted in the 1895 edition and
 are plain identity in NE, so they carry **no** record — a correction there would have sent
 consumers to the wrong verses. **Equal verse-counts are not agreement:** NE and 1895 both give
