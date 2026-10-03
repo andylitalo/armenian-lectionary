@@ -1,7 +1,7 @@
 {
-  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: only whole-range endpoint shifts are corrected; every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
+  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: a reading is corrected only when its whole range maps onto one contiguous, in-order target span -- an endpoint shift, or a relocation the target files under another book (mapped.book_usfm, a USFM code, present only then); every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
   "_keying": "Each record is keyed on the tuple (book, start_chapter, start_verse, end_chapter, end_verse) exactly as it appears in ReadingsRefs -- never on the citation string, which a composite citation shares across two refs of which only one is flagged.",
-  "_evidence": "Every record was confirmed by reading the Armenian text against the English text, NOT by trusting an automated label: an unannotated arak29 row is not proof of identity (Hosea 14 is annotation-free and shifted by one). Two Armenian witnesses were compared for every record -- the Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and Nor Ejmiatsin 1994 -- because they do not always agree, and where they disagree NE is the better witness for what a Tonats'oyts citation means. Luke 8.22-56, Luke 8.49-56 and Mark 4.35-41 look divergent in the 1895 edition and are plain identity in NE; they carry no record for that reason.",
+  "_evidence": "Every record was confirmed by reading the Armenian text against the English text, NOT by trusting an automated label: an unannotated arak29 row is not proof of identity (Hosea 14 is annotation-free and shifted by one). Two Armenian witnesses were compared for every record but one -- the Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and Nor Ejmiatsin 1994 -- because they do not always agree (the exception is Esther 10.4-9: arak29 carries no Esther 10, so that record rests on NE and the Tonats'oyts' own incipit and explicit), and where they disagree NE is the better witness for what a Tonats'oyts citation means. Luke 8.22-56, Luke 8.49-56 and Mark 4.35-41 look divergent in the 1895 edition and are plain identity in NE; they carry no record for that reason.",
   "target": "kjv",
   "records": [
     {
@@ -68,10 +68,17 @@
       "start_verse": 4,
       "end_chapter": 10,
       "end_verse": 9,
-      "status": "misaligned",
+      "status": "realigned",
       "kind": "relocation",
-      "note": "The Greek additions to Esther. KJV/KJVAIC carries them as the standalone book ESG, not as Esther 10; KJV Esther 10 has only 3 verses, so this range has no counterpart at these addresses.",
-      "evidence": "arak29.org tEsther_10 and the deuterocanonical Esther pages (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "mapped": {
+        "book_usfm": "ESG",
+        "start_chapter": 10,
+        "start_verse": 4,
+        "end_chapter": 10,
+        "end_verse": 9
+      },
+      "note": "The Greek additions to Esther (Addition F, Mordecai's dream interpreted). The Tonats'oyts cites them inline as Esther 10; KJV files them under the standalone book ESG, and KJV Esther 10 has only 3 verses. Chapter and verse are unchanged in the Copenhagen Alliance eng numbering (ESG 10:4-13 = Addition F), which Catena's Greek Esther also uses. Edition caveat: KJVAIC on API.Bible renumbers ESG as chapters 1-7, so this range is KJVAIC ESG 1:4-9 there -- that offset is per-edition and left to the consumer.",
+      "evidence": "Tonats'oyts p.525 incipit 'Եւ ասէ մուրթքէ' / explicit 'չարեացն մերոց' (= ESG 10:4 'Then Mordecai said' / 10:9 'delivered us from all those evils'); Nor Ejmiatsin Esther 10:4-9 read against KJVAIC ESG 1:4-9 (API.Bible) and RSV Greek Esther 10:4-9 (catenabible.com) -- content-verified, both endpoints identity. arak29.org carries no Esther 10, so the Grabar 1895 witness is unavailable for this range.",
       "confirmed": true
     },
     {

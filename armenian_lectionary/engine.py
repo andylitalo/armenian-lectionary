@@ -2635,6 +2635,13 @@ def _build_alignment_index(data: dict) -> dict:
     worth catching at build time), and ``mapped`` is carried through only for a realigned
     record -- a ``mapped`` span on a misaligned one would claim a correction this pass
     explicitly does not make.
+
+    ``mapped.book_usfm`` is present only when the target files the range under a different
+    book than the source cites -- today only Greek Esther, which the Tonats'oyts cites inline
+    as ``Esther 10.4-9`` and KJV carries as ``ESG``. It is a USFM code, not an English head,
+    because the target book has no name in this engine's vocabulary and the target's own
+    addresses are code-keyed. Same-book records carry no ``book_usfm``, so their blocks are
+    unchanged by its existence.
     """
     index = {}
     target = data.get("target")
@@ -2646,7 +2653,10 @@ def _build_alignment_index(data: dict) -> dict:
             "target": target,
         }
         if record["status"] == "realigned":
-            block["mapped"] = {f: record["mapped"][f] for f in _SPAN_FIELDS}
+            mapped = record["mapped"]
+            block["mapped"] = {f: mapped[f] for f in _SPAN_FIELDS}
+            if "book_usfm" in mapped:
+                block["mapped"] = {"book_usfm": mapped["book_usfm"], **block["mapped"]}
         block["note"] = record["note"]
         block["confirmed"] = record["confirmed"]
         index[_span_key(record)] = block
@@ -2663,11 +2673,13 @@ _ALIGNMENT_BY_SPAN = _build_alignment_index(_VERSE_ALIGNMENT)
 _VERSIFICATION_NOTICE = {
     "source": "grabar-tonatsoyts",
     "target": _VERSE_ALIGNMENT.get("target", "kjv"),
-    "policy": "endpoint-shift-only",
+    "policy": "contiguous-span-only",
     "detail": (
         "Armenian (Grabar) and English (KJV/NKJV) versification do not always align. "
-        "Only unambiguous whole-range endpoint shifts are corrected; other divergences "
-        "-- relocations, reordering, internal omissions -- are flagged via "
+        "Only readings whose whole range maps onto one contiguous, in-order target span "
+        "are corrected -- an endpoint shift, or a range the target files under another "
+        "book; other divergences -- a range split across chapters, reordering, internal "
+        "omissions -- are flagged via "
         "ReadingsRefs[].alignment and served in the source's own numbering. Detection is "
         "best-effort and not exhaustive: a reading without an alignment key is unflagged, "
         "not verified."
@@ -3519,7 +3531,8 @@ def compute_armenian_lectionary(target_date: datetime.date,
     incomplete; its ``counts`` are over THIS day's readings. A ``ReadingsRefs`` entry whose
     span is a known divergence carries an ``alignment`` block naming the ``status``
     (``"realigned"`` or ``"misaligned"``), the ``kind``, and -- for a realigned one only --
-    a ``mapped`` span in the target's numbering. The original span is never rewritten; the
+    a ``mapped`` span in the target's numbering (with ``book_usfm`` when the target files
+    it under another book). The original span is never rewritten; the
     consumer decides which to retrieve against. **An absent ``alignment`` key means the
     reading is unflagged, not that it was verified** -- see :data:`_VERSIFICATION_NOTICE`.
 

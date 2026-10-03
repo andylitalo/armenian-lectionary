@@ -69,8 +69,15 @@ REALIGNED = {
     ("Wisdom", 6, 21, 6, 24): ("WIS-6-21-24-endshift", (6, 20, 6, 22)),
 }
 
+# Realigned onto a different book: the target files the range under another book code, so
+# ``mapped`` carries ``book_usfm``. Chapter and verse are Copenhagen ``eng`` numbering --
+# KJVAIC on API.Bible renumbers ESG 1-7 (this range is its ESG 1:4-9), an offset left to
+# the consumer.
+RELOCATED = {
+    ("Esther", 10, 4, 10, 9): ("EST-10-4-9-relocation", "ESG", (10, 4, 10, 9)),
+}
+
 MISALIGNED = {
-    ("Esther", 10, 4, 10, 9): ("EST-10-4-9-relocation", "relocation"),
     ("St. Paul's Epistle to the Romans", 13, 11, 14, 26):
         ("ROM-13-11-14-26-relocation", "relocation"),
     ("St. Paul's Epistle to the Romans", 16, 17, 16, 27):
@@ -110,7 +117,7 @@ CLEARED = {
     ("Wisdom", 5, 1, 5, 8),
 }
 
-ALL_FLAGGED = set(REALIGNED) | set(MISALIGNED)
+ALL_FLAGGED = set(REALIGNED) | set(RELOCATED) | set(MISALIGNED)
 
 
 class TestAlignmentDataFile(unittest.TestCase):
@@ -123,8 +130,8 @@ class TestAlignmentDataFile(unittest.TestCase):
         for r in records:
             by_status.setdefault(r["status"], []).append(r)
         self.assertEqual(sorted(by_status), ["misaligned", "realigned"])
-        self.assertEqual(len(by_status["realigned"]), 33)
-        self.assertEqual(len(by_status["misaligned"]), 4)
+        self.assertEqual(len(by_status["realigned"]), 34)
+        self.assertEqual(len(by_status["misaligned"]), 3)
 
     def test_status_vocabulary_excludes_aligned(self):
         """``"aligned"`` is never a stored status -- it is the absence of a record."""
@@ -178,14 +185,16 @@ class TestMappedSpansExistInKjv(unittest.TestCase):
         "Matthew": {17: 27, 18: 35},
         "St. Paul's Second Epistle to the Corinthians": {13: 14},
         "Wisdom": {5: 23, 6: 25},
+        # Keyed by USFM code: a relocated record's target book has no English head here.
+        "ESG": {10: 13},
     }
 
     def test_mapped_spans_fit_their_chapter(self):
         for record in engine._VERSE_ALIGNMENT["records"]:
             if record["status"] != "realigned":
                 continue
-            lengths = self.KJV_CHAPTER_VERSES[record["book"]]
             m = record["mapped"]
+            lengths = self.KJV_CHAPTER_VERSES[m.get("book_usfm", record["book"])]
             for ch, vs in ((m["start_chapter"], m["start_verse"]),
                            (m["end_chapter"], m["end_verse"])):
                 self.assertLessEqual(vs, lengths[ch],
@@ -224,6 +233,25 @@ class TestAlignmentBlockShape(unittest.TestCase):
                 (block["mapped"]["start_chapter"], block["mapped"]["start_verse"],
                  block["mapped"]["end_chapter"], block["mapped"]["end_verse"]),
                 mapped, rid)
+
+    def test_relocated_blocks_name_the_target_book(self):
+        for key, (rid, usfm, mapped) in RELOCATED.items():
+            block = self._block(key)
+            self.assertEqual(block["status"], "realigned", rid)
+            self.assertEqual(block["id"], rid)
+            self.assertEqual(block["kind"], "relocation", rid)
+            self.assertEqual(block["target"], "kjv", rid)
+            self.assertEqual(block["mapped"]["book_usfm"], usfm, rid)
+            self.assertEqual(
+                (block["mapped"]["start_chapter"], block["mapped"]["start_verse"],
+                 block["mapped"]["end_chapter"], block["mapped"]["end_verse"]),
+                mapped, rid)
+
+    def test_same_book_blocks_carry_no_book_usfm(self):
+        """``book_usfm`` is the signal that the book changed, so it must be absent whenever
+        it did not -- which also keeps every endpoint-shift block's shape unchanged."""
+        for key in REALIGNED:
+            self.assertNotIn("book_usfm", self._block(key)["mapped"], key)
 
     def test_misaligned_blocks_carry_no_mapped_span(self):
         for key, (rid, kind) in MISALIGNED.items():
@@ -274,6 +302,14 @@ class TestAlignmentOnServedRefs(unittest.TestCase):
         self.assertEqual([r["book"] for r in refs], ["Daniel", "Azariah"])
         self.assertNotIn("alignment", refs[0])
         self.assertEqual(refs[1]["alignment"]["id"], "AZA-1-1-68-composite")
+
+    def test_greek_esther_maps_to_esg(self):
+        ref = engine._build_readings_refs(["Esther 10.4-9"])[0]
+        self.assertEqual((ref["book"], ref["start_chapter"], ref["start_verse"],
+                          ref["end_chapter"], ref["end_verse"]), ("Esther", 10, 4, 10, 9))
+        self.assertEqual(ref["alignment"]["mapped"],
+                         {"book_usfm": "ESG", "start_chapter": 10, "start_verse": 4,
+                          "end_chapter": 10, "end_verse": 9})
 
     def test_joel_3_1_8_is_identity_and_unflagged(self):
         """Checked and found to be true identity. Its neighbour Joel 3.9-22 is not."""
@@ -389,7 +425,7 @@ class TestVersificationNotice(unittest.TestCase):
         notice = compute_armenian_lectionary(self.DATE)["VersificationNotice"]
         self.assertEqual(notice["source"], "grabar-tonatsoyts")
         self.assertEqual(notice["target"], "kjv")
-        self.assertEqual(notice["policy"], "endpoint-shift-only")
+        self.assertEqual(notice["policy"], "contiguous-span-only")
 
     def test_detail_keeps_the_not_exhaustive_sentence(self):
         """Load-bearing and not to be softened: Hosea 14.6-7 is silently wrong while
@@ -400,9 +436,10 @@ class TestVersificationNotice(unittest.TestCase):
 
     def test_counts_describe_this_day(self):
         refs = engine._build_readings_refs(
-            ["Hosea 14.9-10", "Joel 3.9-22", "Esther 10.4-9", "John 3.16"])
+            ["Hosea 14.9-10", "Joel 3.9-22", "Esther 10.4-9",
+             "St. Paul's Epistle to the Romans 13.11-14.26", "John 3.16"])
         self.assertEqual(engine._versification_notice(refs)["counts"],
-                         {"realigned": 2, "misaligned": 1})
+                         {"realigned": 3, "misaligned": 1})
 
     def test_counts_are_zero_when_nothing_is_flagged(self):
         self.assertEqual(

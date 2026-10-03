@@ -30,7 +30,7 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   ```
 
   **Thirty-seven divergences ship**, from `armenian_lectionary/data/verse_alignment.json`.
-  **Thirty-three are `"realigned"`** — the whole range maps onto a contiguous, in-order KJV
+  **Thirty-four are `"realigned"`** — the whole range maps onto a contiguous, in-order KJV
   span, given as `mapped`. Among them:
 
   | citation | served as | actually |
@@ -45,10 +45,12 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
 
   plus both Hosea 14 readings, `Joel 3.9-22`, three more John 6 readings, `Judith 15.7-16.3`,
   two Luke 4 readings, `Philippians 4.8-23`, `Acts 14.18-27`, two more Matthew 17 readings,
-  five Song of Solomon readings and eight more Wisdom readings. **Four are `"misaligned"`** and
-  served unchanged: Greek Esther (`Esther 10.4-9`, which KJV carries as the standalone book
-  `ESG`), the Romans doxology (`Romans 13.11-14.26`, where Grabar 14:24-26 = KJV 16:25-27),
-  Grabar Romans 16:24-27's reordered closing verses, and the Prayer of Azariah (67 Armenian
+  five Song of Solomon readings and eight more Wisdom readings — and Greek Esther:
+  `Esther 10.4-9` is KJV `ESG` 10:4-9, the one record whose `mapped` names another book
+  (`mapped.book_usfm`, a USFM code, present only when the book changes; Copenhagen `eng`
+  numbering, so KJVAIC's renumbered `ESG 1:4-9` is the consumer's offset to apply).
+  **Three are `"misaligned"`** and served unchanged: the Romans doxology (`Romans 13.11-14.26`,
+  where Grabar 14:24-26 = KJV 16:25-27), Grabar Romans 16:24-27's reordered closing verses, and the Prayer of Azariah (67 Armenian
   verses against KJV's 68).
 
   **How the set was derived.** All 1,126 distinct served sub-references were swept. For the 58

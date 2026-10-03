@@ -58,7 +58,7 @@ class TestReadingsAPI(unittest.TestCase):
                 payload = response.get_json()
                 notice = payload["VersificationNotice"]
                 self.assertEqual(notice["target"], "kjv")
-                self.assertEqual(notice["policy"], "endpoint-shift-only")
+                self.assertEqual(notice["policy"], "contiguous-span-only")
                 self.assertEqual(notice["counts"], {"realigned": 1, "misaligned": 0})
                 self.assertIn("unflagged, not verified", notice["detail"])
                 flagged = [r for r in payload["ReadingsRefs"] if "alignment" in r]
