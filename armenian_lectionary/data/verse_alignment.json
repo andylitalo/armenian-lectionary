@@ -1,5 +1,5 @@
 {
-  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: a reading is corrected only when its whole range maps onto one contiguous, in-order target span -- an endpoint shift, or a relocation the target files under another book (mapped.book_usfm, a USFM code, present only then); every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
+  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: a reading is corrected only when its whole range maps onto one contiguous, in-order target span -- an endpoint shift, or a relocation the target files under another book (mapped.book_usfm, a USFM code, present only then); a record may instead map only the contiguous part of a range whose remainder lives elsewhere, and then its note begins PARTIAL and names the verses mapped omits; every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
   "_keying": "Each record is keyed on the tuple (book, start_chapter, start_verse, end_chapter, end_verse) exactly as it appears in ReadingsRefs -- never on the citation string, which a composite citation shares across two refs of which only one is flagged.",
   "_evidence": "Every record was confirmed by reading the Armenian text against the English text, NOT by trusting an automated label: an unannotated arak29 row is not proof of identity (Hosea 14 is annotation-free and shifted by one). Two Armenian witnesses were compared for every record -- the Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and Nor Ejmiatsin 1994 -- because they do not always agree (for Esther 10.4-9, which arak29 does not carry, the Grabar witness is shavigh.am's Grabar text instead), and where they disagree NE is the better witness for what a Tonats'oyts citation means. Luke 8.22-56, Luke 8.49-56 and Mark 4.35-41 look divergent in the 1895 edition and are plain identity in NE; they carry no record for that reason.",
   "target": "kjv",
@@ -88,10 +88,16 @@
       "start_verse": 11,
       "end_chapter": 14,
       "end_verse": 26,
-      "status": "misaligned",
+      "status": "realigned",
       "kind": "relocation",
-      "note": "The doxology sits at Grabar Romans 14:24-26 but at KJV 16:25-27; KJV Romans 14 ends at v23. The reading's content is therefore not contiguous in KJV and no endpoint shift can express it.",
-      "evidence": "arak29.org tRom_13, tRom_14, tRom_16 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "mapped": {
+        "start_chapter": 13,
+        "start_verse": 11,
+        "end_chapter": 14,
+        "end_verse": 23
+      },
+      "note": "PARTIAL: mapped covers only 13:11-14:23 and OMITS the reading's last three verses. Grabar Romans 14:24-26 is the doxology (the Byzantine placement after 14:23), which KJV/NKJV carry at 16:25-27; KJV Romans 14 ends at v23. The full reading in KJV/NKJV numbering is 13:11-14:23 + 16:25-27 -- not one contiguous span, so mapped serves the contiguous part and the doxology at NKJV 16:25-27 is missing from it. A non-contiguous mapping is deferred to a later pass.",
+      "evidence": "Nor Ejmiatsin Romans 14:24-26 (3 verses) = KJV 16:25-27 verse for verse, and NE repeats the doxology at 16:24-26; arak29.org tRom_13, tRom_14, tRom_16 (Classical Armenian Bible, 1895 Constantinople) carry the same doxology at 14:24-25, merged into two verses -- content-verified",
       "confirmed": true
     },
     {

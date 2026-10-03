@@ -225,14 +225,20 @@ divergence carries an `"alignment"` block inside its `ReadingsRefs` entry:
 ```
 
 - `status` is `"realigned"` — the whole range maps onto a contiguous, in-order span in the
-  target, given as `mapped` — or `"misaligned"`, a divergence this pass does **not** correct
-  (a range split across chapters, a reordering, a composite book). `mapped` is present
+  target, given as `mapped` (or, for a partial mapping, its contiguous part — see below) —
+  or `"misaligned"`, a divergence this pass does **not** correct (a reordering, a composite
+  book). `mapped` is present
   only on a realigned record.
 - `mapped.book_usfm` appears only when the target files the range under a different book.
   Today that is Greek Esther: `Esther 10.4-9` is KJV `ESG` 10:4-9 in the Copenhagen
   Alliance `eng` numbering. Some editions renumber ESG — KJVAIC on API.Bible numbers it
   1-7, so the same verses are `ESG 1:4-9` there — and that per-edition offset is left to
   the consumer.
+- A **partial** mapping maps only the contiguous part of a range whose remainder lives
+  elsewhere in the target; its `note` begins `PARTIAL` and names what `mapped` omits. Today
+  that is only `Romans 13.11-14.26`: Grabar 14:24-26 is the doxology, KJV/NKJV 16:25-27, so
+  `mapped` is 13:11-14:23 and **the doxology is missing**. Non-contiguous mappings are
+  deferred to a later pass.
 - **The original `start_*`/`end_*` are never rewritten.** The corrected span is offered
   alongside; the consumer decides which to retrieve against.
 - `alignment` and `VersificationNotice` stay English under `language="hy"`, like every other
@@ -246,7 +252,7 @@ verse boundaries **by text**, so each mapping is derived rather than inferred fr
 That puts **1,051 sub-references on positively verified identity**, not merely "unflagged".
 Every non-identity result was then cross-checked against Nor Ejmiatsin verse by verse, and the
 deuterocanonical books (no machine-readable KJV) were resolved by reading both witnesses.
-**37 records ship: 34 corrected, 3 flagged and served unchanged.**
+**37 records ship: 35 corrected, 2 flagged and served unchanged.**
 
 **Two Armenian witnesses, because they disagree.** Every record was checked against both the
 Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and

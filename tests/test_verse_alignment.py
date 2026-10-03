@@ -77,9 +77,15 @@ RELOCATED = {
     ("Esther", 10, 4, 10, 9): ("EST-10-4-9-relocation", "ESG", (10, 4, 10, 9)),
 }
 
-MISALIGNED = {
+# Realigned onto only the contiguous part of the range: the rest lives elsewhere in the
+# target, so ``mapped`` omits it and the note -- which must begin PARTIAL -- names what is
+# missing. Grabar Romans 14:24-26 is the doxology, KJV/NKJV 16:25-27.
+PARTIAL = {
     ("St. Paul's Epistle to the Romans", 13, 11, 14, 26):
-        ("ROM-13-11-14-26-relocation", "relocation"),
+        ("ROM-13-11-14-26-relocation", (13, 11, 14, 23), "16:25-27"),
+}
+
+MISALIGNED = {
     ("St. Paul's Epistle to the Romans", 16, 17, 16, 27):
         ("ROM-16-17-27-reordering", "reordering"),
     ("Azariah", 1, 1, 1, 68): ("AZA-1-1-68-composite", "composite"),
@@ -117,7 +123,7 @@ CLEARED = {
     ("Wisdom", 5, 1, 5, 8),
 }
 
-ALL_FLAGGED = set(REALIGNED) | set(RELOCATED) | set(MISALIGNED)
+ALL_FLAGGED = set(REALIGNED) | set(RELOCATED) | set(PARTIAL) | set(MISALIGNED)
 
 
 class TestAlignmentDataFile(unittest.TestCase):
@@ -130,8 +136,8 @@ class TestAlignmentDataFile(unittest.TestCase):
         for r in records:
             by_status.setdefault(r["status"], []).append(r)
         self.assertEqual(sorted(by_status), ["misaligned", "realigned"])
-        self.assertEqual(len(by_status["realigned"]), 34)
-        self.assertEqual(len(by_status["misaligned"]), 3)
+        self.assertEqual(len(by_status["realigned"]), 35)
+        self.assertEqual(len(by_status["misaligned"]), 2)
 
     def test_status_vocabulary_excludes_aligned(self):
         """``"aligned"`` is never a stored status -- it is the absence of a record."""
@@ -185,6 +191,7 @@ class TestMappedSpansExistInKjv(unittest.TestCase):
         "Matthew": {17: 27, 18: 35},
         "St. Paul's Second Epistle to the Corinthians": {13: 14},
         "Wisdom": {5: 23, 6: 25},
+        "St. Paul's Epistle to the Romans": {13: 14, 14: 23},
         # Keyed by USFM code: a relocated record's target book has no English head here.
         "ESG": {10: 13},
     }
@@ -246,6 +253,25 @@ class TestAlignmentBlockShape(unittest.TestCase):
                 (block["mapped"]["start_chapter"], block["mapped"]["start_verse"],
                  block["mapped"]["end_chapter"], block["mapped"]["end_verse"]),
                 mapped, rid)
+
+    def test_partial_blocks_name_what_they_omit(self):
+        """A partial mapping silently drops verses unless its note says so, up front."""
+        for key, (rid, mapped, omitted) in PARTIAL.items():
+            block = self._block(key)
+            self.assertEqual(block["status"], "realigned", rid)
+            self.assertEqual(block["id"], rid)
+            self.assertNotIn("book_usfm", block["mapped"], rid)
+            self.assertEqual(
+                (block["mapped"]["start_chapter"], block["mapped"]["start_verse"],
+                 block["mapped"]["end_chapter"], block["mapped"]["end_verse"]),
+                mapped, rid)
+            self.assertTrue(block["note"].startswith("PARTIAL"), rid)
+            self.assertIn(omitted, block["note"], rid)
+
+    def test_only_partial_records_say_partial(self):
+        for r in engine._VERSE_ALIGNMENT["records"]:
+            key = engine._span_key(r)
+            self.assertEqual(r["note"].startswith("PARTIAL"), key in PARTIAL, r["id"])
 
     def test_same_book_blocks_carry_no_book_usfm(self):
         """``book_usfm`` is the signal that the book changed, so it must be absent whenever
@@ -439,7 +465,7 @@ class TestVersificationNotice(unittest.TestCase):
             ["Hosea 14.9-10", "Joel 3.9-22", "Esther 10.4-9",
              "St. Paul's Epistle to the Romans 13.11-14.26", "John 3.16"])
         self.assertEqual(engine._versification_notice(refs)["counts"],
-                         {"realigned": 3, "misaligned": 1})
+                         {"realigned": 4, "misaligned": 0})
 
     def test_counts_are_zero_when_nothing_is_flagged(self):
         self.assertEqual(
