@@ -1,5 +1,5 @@
 {
-  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: a reading is corrected only when its whole range maps onto one contiguous, in-order target span -- an endpoint shift, or a relocation the target files under another book (mapped.book_usfm, a USFM code, present only then); a record may instead map only the contiguous part of a range whose remainder lives elsewhere, and then its note begins PARTIAL and names the verses mapped omits; every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
+  "_description": "Known divergences between the Tonats'oyts (Grabar) citation numbering the engine emits and the target versification used to retrieve text. First pass: a reading is corrected only when its whole range maps onto one contiguous, in-order target span -- an endpoint shift, or a relocation the target files under another book (mapped.book_usfm, a USFM code, present only then); a record may instead map only the contiguous part of a range whose remainder lives elsewhere, and then its note begins PARTIAL and names the verses mapped omits; or, where no span matches verse for verse but one contains the whole reading, map that span as a best approximation, and then its note begins APPROXIMATE and says how the target text differs; every other divergence is flagged and served unchanged. Detection is best-effort and NOT exhaustive.",
   "_keying": "Each record is keyed on the tuple (book, start_chapter, start_verse, end_chapter, end_verse) exactly as it appears in ReadingsRefs -- never on the citation string, which a composite citation shares across two refs of which only one is flagged.",
   "_evidence": "Every record was confirmed by reading the Armenian text against the English text, NOT by trusting an automated label: an unannotated arak29 row is not proof of identity (Hosea 14 is annotation-free and shifted by one). Two Armenian witnesses were compared for every record -- the Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and Nor Ejmiatsin 1994 -- because they do not always agree (for Esther 10.4-9, which arak29 does not carry, the Grabar witness is shavigh.am's Grabar text instead), and where they disagree NE is the better witness for what a Tonats'oyts citation means. Luke 8.22-56, Luke 8.49-56 and Mark 4.35-41 look divergent in the 1895 edition and are plain identity in NE; they carry no record for that reason.",
   "target": "kjv",
@@ -139,10 +139,16 @@
       "start_verse": 1,
       "end_chapter": 1,
       "end_verse": 68,
-      "status": "misaligned",
+      "status": "realigned",
       "kind": "composite",
-      "note": "The Armenian embeds the Prayer of Azariah in Daniel 3:24-90 (67 verses) against KJV's 68 (USFM S3Y): KJV 34, 45 and 46 have no Armenian counterpart, KJV 66 is split across three Armenian verses, and one pair is reordered. Half of the composite citation \"Daniel 3.1-23, Azariah. 1-68\"; the Daniel half is identity and carries no record.",
-      "evidence": "arak29.org tDan_3 (Classical Armenian Bible, 1895 Constantinople) -- content-verified",
+      "mapped": {
+        "start_chapter": 1,
+        "start_verse": 1,
+        "end_chapter": 1,
+        "end_verse": 68
+      },
+      "note": "APPROXIMATE: mapped serves the whole Prayer of Azariah / Song of the Three Young Men in KJV numbering (USFM S3Y 1:1-68), which contains all of the Armenian reading but is not verse-for-verse identical to it. The Armenian embeds the text in Daniel 3:24-90 (67 verses) against KJV's 68: KJV 34, 45 and 46 have no Armenian counterpart (so mapped serves three verses the Armenian does not read), KJV 66 is split across three Armenian verses, and one pair is reordered. Half of the composite citation \"Daniel 3.1-23, Azariah. 1-68\"; the Daniel half is identity and carries no record.",
+      "evidence": "arak29.org tDan_3 (Classical Armenian Bible, 1895 Constantinople) -- content-verified; KJV/RSV numbering checked against catenabible.com rsv/prazar/1 (68 verses; v1 'walked about in the midst of the flames', v34 'Blessed art thou upon the throne of thy kingdom', v45-46 'winter cold and summer heat' / 'dews and snows')",
       "confirmed": true
     },
     {

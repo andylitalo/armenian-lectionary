@@ -1109,8 +1109,14 @@ put 1,051 of 1,126 sub-references on positively verified identity. It is not omn
 pure reordering leaves both the verse counts and the word order intact and is invisible to it,
 so the honest claim remains *unflagged*, never *verified*.
 
-Scope is deliberately narrow: only a whole-range endpoint shift is corrected, and only where
-the content stays contiguous and in order in the target (an internal merge or split is fine —
-`Joel 3.9-22` has one). Relocations, reordering, omissions and composite books are flagged
-and served unchanged. There are no `hy`-target records: the Armenian corpus downstream is
+What gets corrected (`"realigned"`, with `mapped`): a whole-range endpoint shift where the
+content stays contiguous and in order (an internal merge or split is fine — `Joel 3.9-22` has
+one); a relocation to another book (`mapped.book_usfm`, present only then — Greek Esther →
+`ESG`); a **partial** map of the contiguous part when the rest lives elsewhere (note begins
+`PARTIAL` and names the omitted verses — `Romans 13.11-14.26`, whose doxology is KJV
+16:25-27); and an **approximate** map to the closest span containing the whole reading when
+none matches verse for verse (note begins `APPROXIMATE` and says how it differs — Azariah).
+Serving similar verses beats serving none, but the note must say so; tests enforce both
+prefixes. Only `Romans 16.17-27`'s reordering is still flagged and served unchanged.
+Multi-span mappings (e.g. a `segments` list) are deferred. There are no `hy`-target records: the Armenian corpus downstream is
 keyed to Grabar numbering already, and re-keying it is separate work.

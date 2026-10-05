@@ -30,7 +30,7 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   ```
 
   **Thirty-seven divergences ship**, from `armenian_lectionary/data/verse_alignment.json`.
-  **Thirty-five are `"realigned"`** — the whole range maps onto a contiguous, in-order KJV
+  **Thirty-six are `"realigned"`** — the whole range maps onto a contiguous, in-order KJV
   span, given as `mapped`. Among them:
 
   | citation | served as | actually |
@@ -51,8 +51,11 @@ based on [Keep a Changelog](https://keepachangelog.com/), and this project adher
   numbering, so KJVAIC's renumbered `ESG 1:4-9` is the consumer's offset to apply) — and,
   **partially**, `Romans 13.11-14.26`: Grabar 14:24-26 is the doxology, KJV/NKJV 16:25-27, so
   `mapped` is the contiguous 13:11-14:23 and **omits the doxology**; its note begins `PARTIAL`
-  and says so. **Two are `"misaligned"`** and served unchanged: Grabar Romans 16:24-27's
-  reordered closing verses, and the Prayer of Azariah (67 Armenian verses against KJV's 68).
+  and says so — and, **approximately**, the Prayer of Azariah: `Azariah 1-68` maps to the whole
+  of KJV `S3Y` 1:1-68, which contains all 67 Armenian verses but adds KJV 34, 45 and 46 (no
+  Armenian counterpart) and differs in one split and one reordering; its note begins
+  `APPROXIMATE` and says so. **One is `"misaligned"`** and served unchanged: Grabar Romans
+  16:24-27's reordered closing verses.
 
   **How the set was derived.** All 1,126 distinct served sub-references were swept. For the 58
   books with a public-domain KJV, arak29's English column — which *is* KJV text, chopped at the

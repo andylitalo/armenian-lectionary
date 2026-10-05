@@ -225,9 +225,9 @@ divergence carries an `"alignment"` block inside its `ReadingsRefs` entry:
 ```
 
 - `status` is `"realigned"` — the whole range maps onto a contiguous, in-order span in the
-  target, given as `mapped` (or, for a partial mapping, its contiguous part — see below) —
-  or `"misaligned"`, a divergence this pass does **not** correct (a reordering, a composite
-  book). `mapped` is present
+  target, given as `mapped` (or, for a partial or approximate mapping, see below) — or
+  `"misaligned"`, a divergence this pass does **not** correct (today only the reordered
+  Romans 16:24-27). `mapped` is present
   only on a realigned record.
 - `mapped.book_usfm` appears only when the target files the range under a different book.
   Today that is Greek Esther: `Esther 10.4-9` is KJV `ESG` 10:4-9 in the Copenhagen
@@ -239,6 +239,11 @@ divergence carries an `"alignment"` block inside its `ReadingsRefs` entry:
   that is only `Romans 13.11-14.26`: Grabar 14:24-26 is the doxology, KJV/NKJV 16:25-27, so
   `mapped` is 13:11-14:23 and **the doxology is missing**. Non-contiguous mappings are
   deferred to a later pass.
+- An **approximate** mapping is the closest span that contains the whole reading where none
+  matches verse for verse — serving similar verses beats serving none. Its `note` begins
+  `APPROXIMATE` and says how the target differs. Today that is only the Prayer of Azariah
+  (`Azariah 1-68`, KJV `S3Y` 1:1-68): the Armenian has 67 verses, KJV 34, 45 and 46 have no
+  Armenian counterpart, KJV 66 is split three ways and one pair is reordered.
 - **The original `start_*`/`end_*` are never rewritten.** The corrected span is offered
   alongside; the consumer decides which to retrieve against.
 - `alignment` and `VersificationNotice` stay English under `language="hy"`, like every other
@@ -252,7 +257,7 @@ verse boundaries **by text**, so each mapping is derived rather than inferred fr
 That puts **1,051 sub-references on positively verified identity**, not merely "unflagged".
 Every non-identity result was then cross-checked against Nor Ejmiatsin verse by verse, and the
 deuterocanonical books (no machine-readable KJV) were resolved by reading both witnesses.
-**37 records ship: 35 corrected, 2 flagged and served unchanged.**
+**37 records ship: 36 corrected, 1 flagged and served unchanged.**
 
 **Two Armenian witnesses, because they disagree.** Every record was checked against both the
 Grabar 1895 Constantinople edition (arak29.org, which carries an inline KJV concordance) and

@@ -85,10 +85,17 @@ PARTIAL = {
         ("ROM-13-11-14-26-relocation", (13, 11, 14, 23), "16:25-27"),
 }
 
+# Realigned onto the closest span that contains the whole reading, though not verse for
+# verse: serving similar verses beats serving none. The note must begin APPROXIMATE and say
+# how the target differs. The Armenian Azariah has 67 verses against KJV's 68 -- KJV 34, 45
+# and 46 have no Armenian counterpart.
+APPROXIMATE = {
+    ("Azariah", 1, 1, 1, 68): ("AZA-1-1-68-composite", (1, 1, 1, 68), ("34", "45", "46")),
+}
+
 MISALIGNED = {
     ("St. Paul's Epistle to the Romans", 16, 17, 16, 27):
         ("ROM-16-17-27-reordering", "reordering"),
-    ("Azariah", 1, 1, 1, 68): ("AZA-1-1-68-composite", "composite"),
 }
 
 # Readings a detector flagged that reading the text cleared. Pinned so a future sweep cannot
@@ -123,7 +130,8 @@ CLEARED = {
     ("Wisdom", 5, 1, 5, 8),
 }
 
-ALL_FLAGGED = set(REALIGNED) | set(RELOCATED) | set(PARTIAL) | set(MISALIGNED)
+ALL_FLAGGED = (set(REALIGNED) | set(RELOCATED) | set(PARTIAL) | set(APPROXIMATE)
+               | set(MISALIGNED))
 
 
 class TestAlignmentDataFile(unittest.TestCase):
@@ -136,8 +144,8 @@ class TestAlignmentDataFile(unittest.TestCase):
         for r in records:
             by_status.setdefault(r["status"], []).append(r)
         self.assertEqual(sorted(by_status), ["misaligned", "realigned"])
-        self.assertEqual(len(by_status["realigned"]), 35)
-        self.assertEqual(len(by_status["misaligned"]), 2)
+        self.assertEqual(len(by_status["realigned"]), 36)
+        self.assertEqual(len(by_status["misaligned"]), 1)
 
     def test_status_vocabulary_excludes_aligned(self):
         """``"aligned"`` is never a stored status -- it is the absence of a record."""
@@ -192,6 +200,7 @@ class TestMappedSpansExistInKjv(unittest.TestCase):
         "St. Paul's Second Epistle to the Corinthians": {13: 14},
         "Wisdom": {5: 23, 6: 25},
         "St. Paul's Epistle to the Romans": {13: 14, 14: 23},
+        "Azariah": {1: 68},  # S3Y
         # Keyed by USFM code: a relocated record's target book has no English head here.
         "ESG": {10: 13},
     }
@@ -273,6 +282,25 @@ class TestAlignmentBlockShape(unittest.TestCase):
             key = engine._span_key(r)
             self.assertEqual(r["note"].startswith("PARTIAL"), key in PARTIAL, r["id"])
 
+    def test_approximate_blocks_say_how_they_differ(self):
+        for key, (rid, mapped, differing) in APPROXIMATE.items():
+            block = self._block(key)
+            self.assertEqual(block["status"], "realigned", rid)
+            self.assertEqual(block["id"], rid)
+            self.assertEqual(
+                (block["mapped"]["start_chapter"], block["mapped"]["start_verse"],
+                 block["mapped"]["end_chapter"], block["mapped"]["end_verse"]),
+                mapped, rid)
+            self.assertTrue(block["note"].startswith("APPROXIMATE"), rid)
+            for verse in differing:
+                self.assertIn(verse, block["note"], rid)
+
+    def test_only_approximate_records_say_approximate(self):
+        for r in engine._VERSE_ALIGNMENT["records"]:
+            key = engine._span_key(r)
+            self.assertEqual(r["note"].startswith("APPROXIMATE"), key in APPROXIMATE,
+                             r["id"])
+
     def test_same_book_blocks_carry_no_book_usfm(self):
         """``book_usfm`` is the signal that the book changed, so it must be absent whenever
         it did not -- which also keeps every endpoint-shift block's shape unchanged."""
@@ -328,6 +356,7 @@ class TestAlignmentOnServedRefs(unittest.TestCase):
         self.assertEqual([r["book"] for r in refs], ["Daniel", "Azariah"])
         self.assertNotIn("alignment", refs[0])
         self.assertEqual(refs[1]["alignment"]["id"], "AZA-1-1-68-composite")
+        self.assertEqual(refs[1]["alignment"]["status"], "realigned")
 
     def test_greek_esther_maps_to_esg(self):
         ref = engine._build_readings_refs(["Esther 10.4-9"])[0]
