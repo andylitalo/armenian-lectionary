@@ -1,0 +1,21 @@
+The contents of this docs/sources/ directory are licensed under the Creative
+Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0):
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+The Apache License 2.0 in the repository root covers this project's code and
+configuration and does not apply to this directory.
+
+Copyright (c) 2026 Andy Litalo.
+
+Why a separate licence. These source records quote the digitized Տօնացոյց
+(Tonatsoyts, Jerusalem, 1915; the 1915 text is in the public domain) from the
+grabar-ocr corpus: its Grabar transcription and its English machine
+translation. That corpus is CC BY-NC 4.0 because its OCR was produced with
+Calfa's models (hye-calfa-n, paddle-calfa-tiny; CC BY-NC 4.0), so material
+quoting it carries the same terms. Grabar quotations are OCR by Calfa; English
+quotations are machine translation by Google Gemini, not a human translation.
+
+The armenian-lectionary package does not include this directory: the engine
+cites the corpus by reference only and ships no corpus text.
+
+When reusing this material, credit armenian-lectionary (Andy Litalo), the
+grabar-ocr corpus, and Calfa for the OCR.
