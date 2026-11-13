@@ -435,3 +435,8 @@ Code and configuration in this repository are licensed under the
 underlying liturgical calendar and scripture readings are traditional works of the
 Armenian Church and are not claimed as original authorship here; see *Data
 provenance & attribution* above.
+
+The source records in [`docs/sources/`](docs/sources/) are licensed separately, under
+**CC BY-NC 4.0** (see [`docs/sources/LICENSE`](docs/sources/LICENSE)), because they quote
+the digitized Տօնացոյց from the grabar-ocr corpus, whose OCR was produced with Calfa's
+CC BY-NC models. That directory is not part of the published package.
