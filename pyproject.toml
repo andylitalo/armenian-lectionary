@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
-authors = [{ name = "Andy Litalo", email = "ylitaand@gmail.com" }]
+authors = [{ name = "Andy Ylitalo", email = "ylitaand@gmail.com" }]
 keywords = [
     "armenian",
     "lectionary",
