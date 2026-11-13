@@ -4,7 +4,7 @@ https://creativecommons.org/licenses/by-nc/4.0/legalcode
 The Apache License 2.0 in the repository root covers this project's code and
 configuration and does not apply to this directory.
 
-Copyright (c) 2026 Andy Litalo.
+Copyright (c) 2026 Andy Ylitalo.
 
 Why a separate licence. These source records quote the digitized Տօնացոյց
 (Tonatsoyts, Jerusalem, 1915; the 1915 text is in the public domain) from the
@@ -17,5 +17,5 @@ quotations are machine translation by Google Gemini, not a human translation.
 The armenian-lectionary package does not include this directory: the engine
 cites the corpus by reference only and ships no corpus text.
 
-When reusing this material, credit armenian-lectionary (Andy Litalo), the
+When reusing this material, credit armenian-lectionary (Andy Ylitalo), the
 grabar-ocr corpus, and Calfa for the OCR.
